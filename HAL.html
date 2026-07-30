@@ -1,0 +1,537 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; HAL</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>HAL</h2>
+
+<pre>#include "oslib/hal.h"</pre>
+
+<h3 id="hal_device">hal_device</h3>
+<pre>typedef int hal_device;</pre>
+
+<h3 id="hal_timer">hal_timer</h3>
+<pre>typedef int hal_timer;</pre>
+
+<h3 id="xhal_irq_enable">xhal_irq_enable</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhal_irq_enable (<a href="#hal_device">hal_device</a> device,
+      osbool *was_enabled);</pre>
+<p>Unmasks the specified IRQ source - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>was_enabled</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hal_irq_enable">hal_irq_enable</h3>
+<pre>extern osbool hal_irq_enable (<a href="#hal_device">hal_device</a> device);</pre>
+<p>Unmasks the specified IRQ source - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>was_enabled</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xhal_irq_disable">xhal_irq_disable</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhal_irq_disable (<a href="#hal_device">hal_device</a> device,
+      osbool *was_enabled);</pre>
+<p>Masks the specified IRQ source - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>was_enabled</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hal_irq_disable">hal_irq_disable</h3>
+<pre>extern osbool hal_irq_disable (<a href="#hal_device">hal_device</a> device);</pre>
+<p>Masks the specified IRQ source - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>was_enabled</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xhal_irq_clear">xhal_irq_clear</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhal_irq_clear (<a href="#hal_device">hal_device</a> device);</pre>
+<p>Clears the specified IRQ source - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hal_irq_clear">hal_irq_clear</h3>
+<pre>extern void hal_irq_clear (<a href="#hal_device">hal_device</a> device);</pre>
+<p>Clears the specified IRQ source - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xhal_irq_source">xhal_irq_source</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhal_irq_source (<a href="#hal_device">hal_device</a> *device);</pre>
+<p>Returns the number of the highest priority asserted IRQ - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hal_irq_source">hal_irq_source</h3>
+<pre>extern <a href="#hal_device">hal_device</a> hal_irq_source (void);
+</pre><p>Returns the number of the highest priority asserted IRQ - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>device</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xhal_irq_status">xhal_irq_status</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhal_irq_status (<a href="#hal_device">hal_device</a> device,
+      osbool *requested);</pre>
+<p>Returns non-zero if the specified device is requesting an IRQ - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>requested</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hal_irq_status">hal_irq_status</h3>
+<pre>extern osbool hal_irq_status (<a href="#hal_device">hal_device</a> device);</pre>
+<p>Returns non-zero if the specified device is requesting an IRQ - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>requested</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xhal_fiq_enable">xhal_fiq_enable</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhal_fiq_enable (<a href="#hal_device">hal_device</a> device,
+      osbool *was_enabled);</pre>
+<p>Unmasks the specified FIQ source - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>was_enabled</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hal_fiq_enable">hal_fiq_enable</h3>
+<pre>extern osbool hal_fiq_enable (<a href="#hal_device">hal_device</a> device);</pre>
+<p>Unmasks the specified FIQ source - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>was_enabled</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xhal_fiq_disable">xhal_fiq_disable</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhal_fiq_disable (<a href="#hal_device">hal_device</a> device,
+      osbool *was_enabled);</pre>
+<p>Masks the specified FIQ source - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>was_enabled</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hal_fiq_disable">hal_fiq_disable</h3>
+<pre>extern osbool hal_fiq_disable (<a href="#hal_device">hal_device</a> device);</pre>
+<p>Masks the specified FIQ source - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>was_enabled</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xhal_fiq_disable_all">xhal_fiq_disable_all</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhal_fiq_disable_all (<a href="#hal_device">hal_device</a> device);</pre>
+<p>Masks all FIQ sources - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hal_fiq_disable_all">hal_fiq_disable_all</h3>
+<pre>extern void hal_fiq_disable_all (<a href="#hal_device">hal_device</a> device);</pre>
+<p>Masks all FIQ sources - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xhal_fiq_clear">xhal_fiq_clear</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhal_fiq_clear (<a href="#hal_device">hal_device</a> device);</pre>
+<p>Clears the specified FIQ source - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hal_fiq_clear">hal_fiq_clear</h3>
+<pre>extern void hal_fiq_clear (<a href="#hal_device">hal_device</a> device);</pre>
+<p>Clears the specified FIQ source - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xhal_fiq_source">xhal_fiq_source</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhal_fiq_source (<a href="#hal_device">hal_device</a> *device);</pre>
+<p>Returns the number of the highest priority asserted FIQ - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hal_fiq_source">hal_fiq_source</h3>
+<pre>extern <a href="#hal_device">hal_device</a> hal_fiq_source (void);
+</pre><p>Returns the number of the highest priority asserted FIQ - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>device</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xhal_fiq_status">xhal_fiq_status</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhal_fiq_status (<a href="#hal_device">hal_device</a> device,
+      osbool *requested);</pre>
+<p>Returns non-zero if the specified device is requesting an FIQ - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>requested</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hal_fiq_status">hal_fiq_status</h3>
+<pre>extern osbool hal_fiq_status (<a href="#hal_device">hal_device</a> device);</pre>
+<p>Returns non-zero if the specified device is requesting an FIQ - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>requested</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xhal_timers">xhal_timers</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhal_timers (int *timers);</pre>
+<p>Returns number of timers - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>timers</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hal_timers">hal_timers</h3>
+<pre>extern int hal_timers (void);
+</pre><p>Returns number of timers - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>timers</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xhal_timer_device">xhal_timer_device</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhal_timer_device (<a href="#hal_timer">hal_timer</a> timer,
+      <a href="#hal_device">hal_device</a> *device);</pre>
+<p>Returns IRQ device number of the specified timer - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>timer</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hal_timer_device">hal_timer_device</h3>
+<pre>extern <a href="#hal_device">hal_device</a> hal_timer_device (<a href="#hal_timer">hal_timer</a> timer);</pre>
+<p>Returns IRQ device number of the specified timer - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>timer</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>device</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xhal_timer_granularity">xhal_timer_granularity</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhal_timer_granularity (<a href="#hal_timer">hal_timer</a> timer,
+      int *granularity);</pre>
+<p>Returns basic granularity of the specified timer in ticks per second - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>timer</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>granularity</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hal_timer_granularity">hal_timer_granularity</h3>
+<pre>extern int hal_timer_granularity (<a href="#hal_timer">hal_timer</a> timer);</pre>
+<p>Returns basic granularity of the specified timer in ticks per second - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>timer</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>granularity</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xhal_timer_max_period">xhal_timer_max_period</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhal_timer_max_period (<a href="#hal_timer">hal_timer</a> timer,
+      int *max_period);</pre>
+<p>Returns maximum period of the specified timer - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>timer</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>max_period</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hal_timer_max_period">hal_timer_max_period</h3>
+<pre>extern int hal_timer_max_period (<a href="#hal_timer">hal_timer</a> timer);</pre>
+<p>Returns maximum period of the specified timer - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>timer</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>max_period</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xhal_timer_set_period">xhal_timer_set_period</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhal_timer_set_period (<a href="#hal_timer">hal_timer</a> timer,
+      int period);</pre>
+<p>Sets period of the specified timer - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>timer</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>period</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="hal_timer_set_period">hal_timer_set_period</h3>
+<pre>extern void hal_timer_set_period (<a href="#hal_timer">hal_timer</a> timer,
+      int period);</pre>
+<p>Sets period of the specified timer - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>timer</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>period</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xhal_timer_period">xhal_timer_period</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhal_timer_period (<a href="#hal_timer">hal_timer</a> timer,
+      int *period);</pre>
+<p>Reads period of the specified timer - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>timer</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>period</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hal_timer_period">hal_timer_period</h3>
+<pre>extern int hal_timer_period (<a href="#hal_timer">hal_timer</a> timer);</pre>
+<p>Reads period of the specified timer - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>timer</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>period</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xhal_timer_read_countdown">xhal_timer_read_countdown</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhal_timer_read_countdown (<a href="#hal_timer">hal_timer</a> timer,
+      int *time_remaining);</pre>
+<p>Returns the time until the next interrupt for the specified timer - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>timer</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>time_remaining</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hal_timer_read_countdown">hal_timer_read_countdown</h3>
+<pre>extern int hal_timer_read_countdown (<a href="#hal_timer">hal_timer</a> timer);</pre>
+<p>Returns the time until the next interrupt for the specified timer - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>timer</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>time_remaining</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xhal_counter_rate">xhal_counter_rate</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhal_counter_rate (int *rate);</pre>
+<p>Returns the rate of the counter in ticks per second - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>rate</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hal_counter_rate">hal_counter_rate</h3>
+<pre>extern int hal_counter_rate (void);
+</pre><p>Returns the rate of the counter in ticks per second - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>rate</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xhal_counter_period">xhal_counter_period</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhal_counter_period (int *period);</pre>
+<p>Returns the period of the counter in ticks - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>period</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hal_counter_period">hal_counter_period</h3>
+<pre>extern int hal_counter_period (void);
+</pre><p>Returns the period of the counter in ticks - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>period</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xhal_counter_read">xhal_counter_read</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhal_counter_read (int *period);</pre>
+<p>Reads the current counter value - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>period</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hal_counter_read">hal_counter_read</h3>
+<pre>extern int hal_counter_read (void);
+</pre><p>Reads the current counter value - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>period</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xhal_counter_delay">xhal_counter_delay</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhal_counter_delay (int delay);</pre>
+<p>Delay for at least the specified number of microseconds - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>delay</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hal_counter_delay">hal_counter_delay</h3>
+<pre>extern void hal_counter_delay (int delay);</pre>
+<p>Delay for at least the specified number of microseconds - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>delay</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

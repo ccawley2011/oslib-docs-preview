@@ -1,0 +1,291 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ActionButton</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ActionButton</h2>
+
+<pre>#include "oslib/actionbutton.h"</pre>
+
+<h3 id="actionbutton_gadget">actionbutton_gadget</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> text;
+      int text_limit;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> click_show;
+      bits action;
+   }
+   actionbutton_gadget;</pre>
+
+<h3 id="actionbutton_object">actionbutton_object</h3>
+<pre>typedef struct
+   {  <a href="#gadget_OBJECT_MEMBERS">gadget_OBJECT_MEMBERS</a>
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> text;
+      int text_limit;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> click_show;
+      bits action;
+   }
+   actionbutton_object;</pre>
+
+<h3 id="actionbutton_action_selected_block">actionbutton_action_selected_block</h3>
+<pre>typedef <a href="toolbox.html#toolbox_action_header_base">toolbox_action_header_base</a> actionbutton_action_selected_block;</pre>
+
+<h3 id="class_ACTION_BUTTON">class_ACTION_BUTTON</h3>
+<pre>#define class_ACTION_BUTTON ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x80u)</pre>
+
+<h3 id="actionbutton_IS_DEFAULT">actionbutton_IS_DEFAULT</h3>
+<pre>#define actionbutton_IS_DEFAULT ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x1u)</pre>
+
+<h3 id="actionbutton_IS_CANCEL">actionbutton_IS_CANCEL</h3>
+<pre>#define actionbutton_IS_CANCEL ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x2u)</pre>
+
+<h3 id="actionbutton_IS_LOCAL">actionbutton_IS_LOCAL</h3>
+<pre>#define actionbutton_IS_LOCAL ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x4u)</pre>
+
+<h3 id="actionbutton_IS_MENU">actionbutton_IS_MENU</h3>
+<pre>#define actionbutton_IS_MENU ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x8u)</pre>
+
+<h3 id="actionbutton_SHOW_AS_MENU">actionbutton_SHOW_AS_MENU</h3>
+<pre>#define actionbutton_SHOW_AS_MENU ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x8u)</pre>
+
+<h3 id="actionbutton_SHOW_AT_CENTRE">actionbutton_SHOW_AT_CENTRE</h3>
+<pre>#define actionbutton_SHOW_AT_CENTRE ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x10u)</pre>
+
+<h3 id="actionbutton_SHOW_AT_POINTER">actionbutton_SHOW_AT_POINTER</h3>
+<pre>#define actionbutton_SHOW_AT_POINTER ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x20u)</pre>
+
+<h3 id="action_ACTION_BUTTON_SELECTED">action_ACTION_BUTTON_SELECTED</h3>
+<pre>#define action_ACTION_BUTTON_SELECTED 0x82881u</pre>
+
+<h3 id="actionbutton_SELECTED_ADJUST">actionbutton_SELECTED_ADJUST</h3>
+<pre>#define actionbutton_SELECTED_ADJUST 0x1u</pre>
+
+<h3 id="actionbutton_SELECTED_SELECT">actionbutton_SELECTED_SELECT</h3>
+<pre>#define actionbutton_SELECTED_SELECT 0x4u</pre>
+
+<h3 id="actionbutton_SELECTED_DEFAULT">actionbutton_SELECTED_DEFAULT</h3>
+<pre>#define actionbutton_SELECTED_DEFAULT 0x8u</pre>
+
+<h3 id="actionbutton_SELECTED_CANCEL">actionbutton_SELECTED_CANCEL</h3>
+<pre>#define actionbutton_SELECTED_CANCEL 0x10u</pre>
+
+<h3 id="actionbutton_SELECTED_LOCAL">actionbutton_SELECTED_LOCAL</h3>
+<pre>#define actionbutton_SELECTED_LOCAL 0x20u</pre>
+
+<h3 id="xactionbutton_set_text">xactionbutton_set_text</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xactionbutton_set_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> action_button,
+      char const *text);</pre>
+<p>Sets the text that will be displayed in the specified action button</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>action_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>text</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="actionbutton_set_text">actionbutton_set_text</h3>
+<pre>extern void actionbutton_set_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> action_button,
+      char const *text);</pre>
+<p>Sets the text that will be displayed in the specified action button</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>action_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>text</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xactionbutton_get_text">xactionbutton_get_text</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xactionbutton_get_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> action_button,
+      char *text,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>action_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>text</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="actionbutton_get_text">actionbutton_get_text</h3>
+<pre>extern int actionbutton_get_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> action_button,
+      char *text,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>action_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>text</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xactionbutton_set_action">xactionbutton_set_action</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xactionbutton_set_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> action_button,
+      bits action);</pre>
+<p>Sets the action that is raised when the button is clicked</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>action_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="actionbutton_set_action">actionbutton_set_action</h3>
+<pre>extern void actionbutton_set_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> action_button,
+      bits action);</pre>
+<p>Sets the action that is raised when the button is clicked</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>action_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xactionbutton_get_action">xactionbutton_get_action</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xactionbutton_get_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> action_button,
+      bits *action);</pre>
+<p>Gets the action that is raised when the button is clicked</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>action_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>action</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="actionbutton_get_action">actionbutton_get_action</h3>
+<pre>extern bits actionbutton_get_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> action_button);</pre>
+<p>Gets the action that is raised when the button is clicked</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>action_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>action</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xactionbutton_set_click_show">xactionbutton_set_click_show</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xactionbutton_set_click_show (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> action_button,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> obj,
+      bits show_flags);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>action_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>show_flags</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="actionbutton_set_click_show">actionbutton_set_click_show</h3>
+<pre>extern void actionbutton_set_click_show (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> action_button,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> obj,
+      bits show_flags);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>action_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>show_flags</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xactionbutton_get_click_show">xactionbutton_get_click_show</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xactionbutton_get_click_show (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> action_button,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *obj);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>action_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="actionbutton_get_click_show">actionbutton_get_click_show</h3>
+<pre>extern <a href="toolbox.html#toolbox_o">toolbox_o</a> actionbutton_get_click_show (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> action_button);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>action_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

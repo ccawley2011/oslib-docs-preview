@@ -1,0 +1,562 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ProgInfo</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ProgInfo</h2>
+
+<pre>#include "oslib/proginfo.h"</pre>
+
+<h3 id="proginfo_flags">proginfo_flags</h3>
+<pre>typedef bits proginfo_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#proginfo_GENERATE_ABOUT_TO_BE_SHOWN">proginfo_GENERATE_ABOUT_TO_BE_SHOWN</a></dd>
+<dd><a href="#proginfo_GENERATE_DIALOGUE_COMPLETED">proginfo_GENERATE_DIALOGUE_COMPLETED</a></dd>
+<dd><a href="#proginfo_INCLUDE_LICENCE_TYPE">proginfo_INCLUDE_LICENCE_TYPE</a></dd>
+<dd><a href="#proginfo_INCLUDE_WEB_PAGE_BUTTON">proginfo_INCLUDE_WEB_PAGE_BUTTON</a></dd>
+<dd><a href="#proginfo_GENERATE_WEB_PAGE_CLICKED">proginfo_GENERATE_WEB_PAGE_CLICKED</a></dd>
+</dl>
+
+<h3 id="proginfo_licence">proginfo_licence</h3>
+<pre>typedef int proginfo_licence;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#proginfo_LICENCE_PUBLIC_DOMAIN">proginfo_LICENCE_PUBLIC_DOMAIN</a></dd>
+<dd><a href="#proginfo_LICENCE_SINGLE_USER">proginfo_LICENCE_SINGLE_USER</a></dd>
+<dd><a href="#proginfo_LICENCE_SINGLE_MACHINE">proginfo_LICENCE_SINGLE_MACHINE</a></dd>
+<dd><a href="#proginfo_LICENCE_SITE">proginfo_LICENCE_SITE</a></dd>
+<dd><a href="#proginfo_LICENCE_NETWORK">proginfo_LICENCE_NETWORK</a></dd>
+<dd><a href="#proginfo_LICENCE_AUTHORITY">proginfo_LICENCE_AUTHORITY</a></dd>
+</dl>
+
+<h3 id="proginfo_object">proginfo_object</h3>
+<pre>typedef struct
+   {  <a href="#proginfo_flags">proginfo_flags</a> flags;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> title;
+      int title_limit;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> purpose;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> author;
+      <a href="#proginfo_licence">proginfo_licence</a> licence_type;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> version;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> alternative_window_name;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> uri;
+      bits uri_action;
+   }
+   proginfo_object;</pre>
+
+<p>Structure to describe Object for in-memory construction - referenced from Toolbox_Template</p>
+
+
+Fields:	uri - Added in ProgInfo 1.01
+ 	uri_action - Added in ProgInfo 1.01<h3 id="proginfo_object_template">proginfo_object_template</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_RESOURCE_FILE_OBJECT_MEMBERS">toolbox_RESOURCE_FILE_OBJECT_MEMBERS</a>
+      <a href="#proginfo_flags">proginfo_flags</a> objectflags;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> title;
+      int title_limit;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> purpose;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> author;
+      <a href="#proginfo_licence">proginfo_licence</a> licence_type;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> prog_version;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> alternative_window_name;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> uri;
+      bits uri_action;
+   }
+   proginfo_object_template;</pre>
+
+
+Fields:	uri - Added in ProgInfo 1.01
+ 	uri_action - Added in ProgInfo 1.01<h3 id="proginfo_full">proginfo_full</h3>
+<pre>typedef <a href="toolbox.html#toolbox_full">toolbox_full</a> proginfo_full;</pre>
+
+<h3 id="proginfo_action_about_to_be_shown">proginfo_action_about_to_be_shown</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#proginfo_full">proginfo_full</a> full;
+      }
+      position;
+   }
+   proginfo_action_about_to_be_shown;</pre>
+
+<p>Prefer ProgInfo_ActionAboutToBeShownBlock</p>
+
+<h3 id="proginfo_action_about_to_be_shown_block">proginfo_action_about_to_be_shown_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#proginfo_full">proginfo_full</a> full;
+      }
+      position;
+   }
+   proginfo_action_about_to_be_shown_block;</pre>
+
+<h3 id="proginfo_action_dialogue_completed_block">proginfo_action_dialogue_completed_block</h3>
+<pre>typedef <a href="toolbox.html#toolbox_action_header_base">toolbox_action_header_base</a> proginfo_action_dialogue_completed_block;</pre>
+
+<h3 id="proginfo_action_launch_web_page_block">proginfo_action_launch_web_page_block</h3>
+<pre>typedef <a href="toolbox.html#toolbox_action_header_base">toolbox_action_header_base</a> proginfo_action_launch_web_page_block;</pre>
+
+<h3 id="class_PROG_INFO">class_PROG_INFO</h3>
+<pre>#define class_PROG_INFO ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x82B40u)</pre>
+
+<h3 id="proginfo_GENERATE_ABOUT_TO_BE_SHOWN">proginfo_GENERATE_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define proginfo_GENERATE_ABOUT_TO_BE_SHOWN ((<a href="#proginfo_flags">proginfo_flags</a>) 0x1u)</pre>
+
+<h3 id="proginfo_GENERATE_DIALOGUE_COMPLETED">proginfo_GENERATE_DIALOGUE_COMPLETED</h3>
+<pre>#define proginfo_GENERATE_DIALOGUE_COMPLETED ((<a href="#proginfo_flags">proginfo_flags</a>) 0x2u)</pre>
+
+<h3 id="proginfo_INCLUDE_LICENCE_TYPE">proginfo_INCLUDE_LICENCE_TYPE</h3>
+<pre>#define proginfo_INCLUDE_LICENCE_TYPE ((<a href="#proginfo_flags">proginfo_flags</a>) 0x4u)</pre>
+
+<h3 id="proginfo_INCLUDE_WEB_PAGE_BUTTON">proginfo_INCLUDE_WEB_PAGE_BUTTON</h3>
+<pre>#define proginfo_INCLUDE_WEB_PAGE_BUTTON ((<a href="#proginfo_flags">proginfo_flags</a>) 0x8u)</pre>
+
+<h3 id="proginfo_GENERATE_WEB_PAGE_CLICKED">proginfo_GENERATE_WEB_PAGE_CLICKED</h3>
+<pre>#define proginfo_GENERATE_WEB_PAGE_CLICKED ((<a href="#proginfo_flags">proginfo_flags</a>) 0x10u)</pre>
+
+<h3 id="proginfo_NAME">proginfo_NAME</h3>
+<pre>#define proginfo_NAME ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B400u)</pre>
+
+<h3 id="proginfo_PURPOSE">proginfo_PURPOSE</h3>
+<pre>#define proginfo_PURPOSE ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B401u)</pre>
+
+<h3 id="proginfo_AUTHOR">proginfo_AUTHOR</h3>
+<pre>#define proginfo_AUTHOR ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B402u)</pre>
+
+<h3 id="proginfo_LICENCE_TYPE">proginfo_LICENCE_TYPE</h3>
+<pre>#define proginfo_LICENCE_TYPE ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B403u)</pre>
+
+<h3 id="proginfo_VERSION">proginfo_VERSION</h3>
+<pre>#define proginfo_VERSION ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B404u)</pre>
+
+<h3 id="proginfo_NAME_LABEL">proginfo_NAME_LABEL</h3>
+<pre>#define proginfo_NAME_LABEL ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B405u)</pre>
+
+<h3 id="proginfo_PURPOSE_LABEL">proginfo_PURPOSE_LABEL</h3>
+<pre>#define proginfo_PURPOSE_LABEL ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B406u)</pre>
+
+<h3 id="proginfo_AUTHOR_LABEL">proginfo_AUTHOR_LABEL</h3>
+<pre>#define proginfo_AUTHOR_LABEL ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B407u)</pre>
+
+<h3 id="proginfo_LICENCE_LABEL">proginfo_LICENCE_LABEL</h3>
+<pre>#define proginfo_LICENCE_LABEL ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B408u)</pre>
+
+<h3 id="proginfo_VERSION_LABEL">proginfo_VERSION_LABEL</h3>
+<pre>#define proginfo_VERSION_LABEL ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B409u)</pre>
+
+<h3 id="proginfo_WEB_SITE">proginfo_WEB_SITE</h3>
+<pre>#define proginfo_WEB_SITE ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x80B40Au)</pre>
+
+<h3 id="proginfo_LICENCE_PUBLIC_DOMAIN">proginfo_LICENCE_PUBLIC_DOMAIN</h3>
+<pre>#define proginfo_LICENCE_PUBLIC_DOMAIN ((<a href="#proginfo_licence">proginfo_licence</a>) 0x0u)</pre>
+
+<h3 id="proginfo_LICENCE_SINGLE_USER">proginfo_LICENCE_SINGLE_USER</h3>
+<pre>#define proginfo_LICENCE_SINGLE_USER ((<a href="#proginfo_licence">proginfo_licence</a>) 0x1u)</pre>
+
+<h3 id="proginfo_LICENCE_SINGLE_MACHINE">proginfo_LICENCE_SINGLE_MACHINE</h3>
+<pre>#define proginfo_LICENCE_SINGLE_MACHINE ((<a href="#proginfo_licence">proginfo_licence</a>) 0x2u)</pre>
+
+<h3 id="proginfo_LICENCE_SITE">proginfo_LICENCE_SITE</h3>
+<pre>#define proginfo_LICENCE_SITE ((<a href="#proginfo_licence">proginfo_licence</a>) 0x3u)</pre>
+
+<h3 id="proginfo_LICENCE_NETWORK">proginfo_LICENCE_NETWORK</h3>
+<pre>#define proginfo_LICENCE_NETWORK ((<a href="#proginfo_licence">proginfo_licence</a>) 0x4u)</pre>
+
+<h3 id="proginfo_LICENCE_AUTHORITY">proginfo_LICENCE_AUTHORITY</h3>
+<pre>#define proginfo_LICENCE_AUTHORITY ((<a href="#proginfo_licence">proginfo_licence</a>) 0x5u)</pre>
+
+<h3 id="action_PROG_INFO_ABOUT_TO_BE_SHOWN">action_PROG_INFO_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define action_PROG_INFO_ABOUT_TO_BE_SHOWN 0x82B40u</pre>
+
+<h3 id="action_PROG_INFO_DIALOGUE_COMPLETED">action_PROG_INFO_DIALOGUE_COMPLETED</h3>
+<pre>#define action_PROG_INFO_DIALOGUE_COMPLETED 0x82B41u</pre>
+
+<h3 id="action_PROG_INFO_LAUNCH_WEB_PAGE">action_PROG_INFO_LAUNCH_WEB_PAGE</h3>
+<pre>#define action_PROG_INFO_LAUNCH_WEB_PAGE 0x82B42u</pre>
+
+<h3 id="error_PROG_INFO_TASKS_ACTIVE">error_PROG_INFO_TASKS_ACTIVE</h3>
+<pre>#define error_PROG_INFO_TASKS_ACTIVE 0x80B400u</pre>
+
+<h3 id="error_PROG_INFO_ALLOC_FAILED">error_PROG_INFO_ALLOC_FAILED</h3>
+<pre>#define error_PROG_INFO_ALLOC_FAILED 0x80B401u</pre>
+
+<h3 id="error_PROG_INFO_SHORT_BUFFER">error_PROG_INFO_SHORT_BUFFER</h3>
+<pre>#define error_PROG_INFO_SHORT_BUFFER 0x80B402u</pre>
+
+<h3 id="error_PROG_INFO_NO_SUCH_TASK">error_PROG_INFO_NO_SUCH_TASK</h3>
+<pre>#define error_PROG_INFO_NO_SUCH_TASK 0x80B411u</pre>
+
+<h3 id="error_PROG_INFO_NO_SUCH_METHOD">error_PROG_INFO_NO_SUCH_METHOD</h3>
+<pre>#define error_PROG_INFO_NO_SUCH_METHOD 0x80B412u</pre>
+
+<h3 id="error_PROG_INFO_NO_SUCH_MISC_OP_METHOD">error_PROG_INFO_NO_SUCH_MISC_OP_METHOD</h3>
+<pre>#define error_PROG_INFO_NO_SUCH_MISC_OP_METHOD 0x80B413u</pre>
+
+<h3 id="xproginfo_get_window_id">xproginfo_get_window_id</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xproginfo_get_window_id (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> prog_info,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *window);</pre>
+<p>Gets the ID of the underlying window object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>prog_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>window</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="proginfo_get_window_id">proginfo_get_window_id</h3>
+<pre>extern <a href="toolbox.html#toolbox_o">toolbox_o</a> proginfo_get_window_id (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> prog_info);</pre>
+<p>Gets the ID of the underlying window object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>prog_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>window</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xproginfo_set_version">xproginfo_set_version</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xproginfo_set_version (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> prog_info,
+      char const *version);</pre>
+<p>Sets the version string displayed in the ProgInfo window</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>prog_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>version</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="proginfo_set_version">proginfo_set_version</h3>
+<pre>extern void proginfo_set_version (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> prog_info,
+      char const *version);</pre>
+<p>Sets the version string displayed in the ProgInfo window</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>prog_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>version</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xproginfo_get_version">xproginfo_get_version</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xproginfo_get_version (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> prog_info,
+      char *buffer,
+      int size,
+      int *used);</pre>
+<p>Gets the version string displayed in the ProgInfo window</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>prog_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="proginfo_get_version">proginfo_get_version</h3>
+<pre>extern int proginfo_get_version (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> prog_info,
+      char *buffer,
+      int size);</pre>
+<p>Gets the version string displayed in the ProgInfo window</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>prog_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xproginfo_set_licence_type">xproginfo_set_licence_type</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xproginfo_set_licence_type (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> prog_info,
+      <a href="#proginfo_licence">proginfo_licence</a> licence_type);</pre>
+<p>Sets the licence type displayed in the ProgInfo window</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>prog_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>licence_type</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="proginfo_set_licence_type">proginfo_set_licence_type</h3>
+<pre>extern void proginfo_set_licence_type (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> prog_info,
+      <a href="#proginfo_licence">proginfo_licence</a> licence_type);</pre>
+<p>Sets the licence type displayed in the ProgInfo window</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>prog_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>licence_type</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xproginfo_get_licence_type">xproginfo_get_licence_type</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xproginfo_get_licence_type (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> prog_info,
+      <a href="#proginfo_licence">proginfo_licence</a> *licence_type);</pre>
+<p>Gets the licence type displayed in the ProgInfo window</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>prog_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>licence_type</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="proginfo_get_licence_type">proginfo_get_licence_type</h3>
+<pre>extern <a href="#proginfo_licence">proginfo_licence</a> proginfo_get_licence_type (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> prog_info);</pre>
+<p>Gets the licence type displayed in the ProgInfo window</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>prog_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>licence_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xproginfo_set_title">xproginfo_set_title</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xproginfo_set_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> prog_info,
+      char const *title);</pre>
+<p>Sets the title of the ProgInfo window</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>prog_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="proginfo_set_title">proginfo_set_title</h3>
+<pre>extern void proginfo_set_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> prog_info,
+      char const *title);</pre>
+<p>Sets the title of the ProgInfo window</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>prog_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xproginfo_get_title">xproginfo_get_title</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xproginfo_get_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> prog_info,
+      char *buffer,
+      int size,
+      int *used);</pre>
+<p>Gets the title of the ProgInfo window</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>prog_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="proginfo_get_title">proginfo_get_title</h3>
+<pre>extern int proginfo_get_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> prog_info,
+      char *buffer,
+      int size);</pre>
+<p>Gets the title of the ProgInfo window</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>prog_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xproginfo_set_uri">xproginfo_set_uri</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xproginfo_set_uri (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> prog_info,
+      char const *uri);</pre>
+<p>Sets the URI to be launched after a click on the Web Page button</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>prog_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>uri</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="proginfo_set_uri">proginfo_set_uri</h3>
+<pre>extern void proginfo_set_uri (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> prog_info,
+      char const *uri);</pre>
+<p>Sets the URI to be launched after a click on the Web Page button</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>prog_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>uri</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xproginfo_get_uri">xproginfo_get_uri</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xproginfo_get_uri (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> prog_info,
+      char *buffer,
+      int size,
+      int *used);</pre>
+<p>Gets the URI to be launched after a click on the Web Page button</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>prog_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="proginfo_get_uri">proginfo_get_uri</h3>
+<pre>extern int proginfo_get_uri (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> prog_info,
+      char *buffer,
+      int size);</pre>
+<p>Gets the URI to be launched after a click on the Web Page button</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>prog_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xproginfo_get_web_event">xproginfo_get_web_event</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xproginfo_get_web_event (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> prog_info,
+      bits *action);</pre>
+<p>Gets the event number returned for a click on the Web Page button</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>prog_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>action</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="proginfo_get_web_event">proginfo_get_web_event</h3>
+<pre>extern bits proginfo_get_web_event (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> prog_info);</pre>
+<p>Gets the event number returned for a click on the Web Page button</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>prog_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>action</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xproginfo_set_web_event">xproginfo_set_web_event</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xproginfo_set_web_event (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> prog_info,
+      bits action);</pre>
+<p>Sets the event number returned for a click on the Web Page button</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>prog_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="proginfo_set_web_event">proginfo_set_web_event</h3>
+<pre>extern void proginfo_set_web_event (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> prog_info,
+      bits action);</pre>
+<p>Sets the event number returned for a click on the Web Page button</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>prog_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

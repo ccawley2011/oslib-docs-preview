@@ -1,0 +1,316 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; DMA</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>DMA</h2>
+
+<pre>#include "oslib/dma.h"</pre>
+
+<h3 id="dma_c">dma_c</h3>
+<pre>typedef struct {...} *dma_c;</pre>
+
+<h3 id="dma_tag">dma_tag</h3>
+<pre>typedef struct {...} *dma_tag;</pre>
+
+<h3 id="dma_routines">dma_routines</h3>
+<pre>typedef struct
+   {  asm_routine enable;
+      asm_routine disable;
+      asm_routine start;
+      asm_routine completed;
+      asm_routine sync;
+   }
+   dma_routines;</pre>
+
+<h3 id="dma_scatter">dma_scatter</h3>
+<pre>typedef struct
+   {  byte *address;
+      int size;
+   }
+   dma_scatter;</pre>
+
+<h3 id="dma_scatter_list">dma_scatter_list</h3>
+<pre>typedef struct
+   {  <a href="#dma_scatter">dma_scatter</a> s [...];
+   }
+   dma_scatter_list;</pre>
+
+<h3 id="dma_register_channel_flags">dma_register_channel_flags</h3>
+<pre>typedef bits dma_register_channel_flags;</pre>
+
+<h3 id="dma_queue_flags">dma_queue_flags</h3>
+<pre>typedef bits dma_queue_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#dma_QUEUE_WRITE">dma_QUEUE_WRITE</a></dd>
+<dd><a href="#dma_QUEUE_CIRCULAR_LIST">dma_QUEUE_CIRCULAR_LIST</a></dd>
+<dd><a href="#dma_QUEUE_USE_SYNC">dma_QUEUE_USE_SYNC</a></dd>
+</dl>
+
+<h3 id="dma_suspend_flags">dma_suspend_flags</h3>
+<pre>typedef bits dma_suspend_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#dma_SUSPEND_START_NEXT">dma_SUSPEND_START_NEXT</a></dd>
+</dl>
+
+<h3 id="dma_resume_flags">dma_resume_flags</h3>
+<pre>typedef bits dma_resume_flags;</pre>
+
+<h3 id="dma_examine_flags">dma_examine_flags</h3>
+<pre>typedef bits dma_examine_flags;</pre>
+
+<h3 id="dma_QUEUE_WRITE">dma_QUEUE_WRITE</h3>
+<pre>#define dma_QUEUE_WRITE ((<a href="#dma_queue_flags">dma_queue_flags</a>) 0x1u)</pre>
+
+<h3 id="dma_QUEUE_CIRCULAR_LIST">dma_QUEUE_CIRCULAR_LIST</h3>
+<pre>#define dma_QUEUE_CIRCULAR_LIST ((<a href="#dma_queue_flags">dma_queue_flags</a>) 0x2u)</pre>
+
+<h3 id="dma_QUEUE_USE_SYNC">dma_QUEUE_USE_SYNC</h3>
+<pre>#define dma_QUEUE_USE_SYNC ((<a href="#dma_queue_flags">dma_queue_flags</a>) 0x4u)</pre>
+
+<h3 id="dma_SUSPEND_START_NEXT">dma_SUSPEND_START_NEXT</h3>
+<pre>#define dma_SUSPEND_START_NEXT ((<a href="#dma_suspend_flags">dma_suspend_flags</a>) 0x1u)</pre>
+
+<h3 id="xdma_register_channel">xdma_register_channel</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdma_register_channel (<a href="#dma_register_channel_flags">dma_register_channel_flags</a> flags,
+      int log_channel,
+      int cycle_speed,
+      int transfer_size,
+      <a href="#dma_routines">dma_routines</a> const *control_routines,
+      void *workspace,
+      <a href="#dma_c">dma_c</a> *channel);</pre>
+<p>Registers a client device as the controller of a logical channel - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>log_channel</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>cycle_speed</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>transfer_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>control_routines</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>channel</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="dma_register_channel">dma_register_channel</h3>
+<pre>extern <a href="#dma_c">dma_c</a> dma_register_channel (<a href="#dma_register_channel_flags">dma_register_channel_flags</a> flags,
+      int log_channel,
+      int cycle_speed,
+      int transfer_size,
+      <a href="#dma_routines">dma_routines</a> const *control_routines,
+      void *workspace);</pre>
+<p>Registers a client device as the controller of a logical channel - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>log_channel</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>cycle_speed</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>transfer_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>control_routines</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>channel</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xdma_deregister_channel">xdma_deregister_channel</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdma_deregister_channel (<a href="#dma_c">dma_c</a> channel);</pre>
+<p>Deregisters a client device previously registered by DMA_RegisterChannel - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>channel</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="dma_deregister_channel">dma_deregister_channel</h3>
+<pre>extern void dma_deregister_channel (<a href="#dma_c">dma_c</a> channel);</pre>
+<p>Deregisters a client device previously registered by DMA_RegisterChannel - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>channel</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xdma_queue_transfer">xdma_queue_transfer</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdma_queue_transfer (<a href="#dma_queue_flags">dma_queue_flags</a> flags,
+      <a href="#dma_c">dma_c</a> channel,
+      void *workspace,
+      <a href="#dma_scatter_list">dma_scatter_list</a> const *scatter_list,
+      int transfer_size,
+      int buffer_size,
+      int sync_size,
+      <a href="#dma_tag">dma_tag</a> *tag);</pre>
+<p>Queues a DMA transfer request for a logical channel - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>channel</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>scatter_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>transfer_size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>buffer_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>sync_size</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>tag</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="dma_queue_transfer">dma_queue_transfer</h3>
+<pre>extern <a href="#dma_tag">dma_tag</a> dma_queue_transfer (<a href="#dma_queue_flags">dma_queue_flags</a> flags,
+      <a href="#dma_c">dma_c</a> channel,
+      void *workspace,
+      <a href="#dma_scatter_list">dma_scatter_list</a> const *scatter_list,
+      int transfer_size,
+      int buffer_size,
+      int sync_size);</pre>
+<p>Queues a DMA transfer request for a logical channel - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>channel</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>scatter_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>transfer_size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>buffer_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>sync_size</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>tag</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xdma_terminate_transfer">xdma_terminate_transfer</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdma_terminate_transfer (<a href="os.html#os_error">os_error</a> const *error,
+      <a href="#dma_tag">dma_tag</a> tag);</pre>
+<p>Terminates a DMA transfer - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>error</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>tag</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="dma_terminate_transfer">dma_terminate_transfer</h3>
+<pre>extern void dma_terminate_transfer (<a href="os.html#os_error">os_error</a> const *error,
+      <a href="#dma_tag">dma_tag</a> tag);</pre>
+<p>Terminates a DMA transfer - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>error</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>tag</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xdma_suspend_transfer">xdma_suspend_transfer</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdma_suspend_transfer (<a href="#dma_suspend_flags">dma_suspend_flags</a> flags,
+      <a href="#dma_tag">dma_tag</a> tag);</pre>
+<p>Suspends a DMA transfer - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>tag</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="dma_suspend_transfer">dma_suspend_transfer</h3>
+<pre>extern void dma_suspend_transfer (<a href="#dma_suspend_flags">dma_suspend_flags</a> flags,
+      <a href="#dma_tag">dma_tag</a> tag);</pre>
+<p>Suspends a DMA transfer - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>tag</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xdma_resume_transfer">xdma_resume_transfer</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdma_resume_transfer (<a href="#dma_resume_flags">dma_resume_flags</a> flags,
+      <a href="#dma_tag">dma_tag</a> tag);</pre>
+<p>Resumes a previously suspended DMA transfer - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>tag</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="dma_resume_transfer">dma_resume_transfer</h3>
+<pre>extern void dma_resume_transfer (<a href="#dma_resume_flags">dma_resume_flags</a> flags,
+      <a href="#dma_tag">dma_tag</a> tag);</pre>
+<p>Resumes a previously suspended DMA transfer - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>tag</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xdma_examine_transfer">xdma_examine_transfer</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdma_examine_transfer (<a href="#dma_examine_flags">dma_examine_flags</a> flags,
+      <a href="#dma_tag">dma_tag</a> tag,
+      int *transferred_size);</pre>
+<p>Returns the progress of a DMA transfer - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>tag</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>transferred_size</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="dma_examine_transfer">dma_examine_transfer</h3>
+<pre>extern void dma_examine_transfer (<a href="#dma_examine_flags">dma_examine_flags</a> flags,
+      <a href="#dma_tag">dma_tag</a> tag,
+      int *transferred_size);</pre>
+<p>Returns the progress of a DMA transfer - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>tag</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>transferred_size</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

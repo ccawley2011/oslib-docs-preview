@@ -1,0 +1,427 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ColourMap</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ColourMap</h2>
+
+<pre>#include "oslib/colourmap.h"</pre>
+
+<h3 id="xcolourmap_start">xcolourmap_start</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourmap_start (bits flags,
+      byte *workspace,
+      int size,
+      int *size_used);</pre>
+<p>Initialise a block of memory for use as a ColourMap workspace - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size_used</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourmap_start">colourmap_start</h3>
+<pre>extern int colourmap_start (bits flags,
+      byte *workspace,
+      int size);</pre>
+<p>Initialise a block of memory for use as a ColourMap workspace - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size_used</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xcolourmapapplymapping_blend">xcolourmapapplymapping_blend</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourmapapplymapping_blend (bits flags,
+      byte *workspace,
+      int size,
+      <a href="os.html#os_colour">os_colour</a> colour,
+      int factor,
+      int *size_required);</pre>
+<p>Apply colour blend colour mapping to a workspace - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>colour</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>factor</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size_required</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourmapapplymapping_blend">colourmapapplymapping_blend</h3>
+<pre>extern int colourmapapplymapping_blend (bits flags,
+      byte *workspace,
+      int size,
+      <a href="os.html#os_colour">os_colour</a> colour,
+      int factor);</pre>
+<p>Apply colour blend colour mapping to a workspace - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>colour</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>factor</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size_required</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xcolourmapapplymapping_user">xcolourmapapplymapping_user</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourmapapplymapping_user (bits flags,
+      byte *workspace,
+      int size,
+      <a href="osspriteop.html#osspriteop_colour_mapping">osspriteop_colour_mapping</a> const *mapping,
+      int *size_required);</pre>
+<p>Apply a user colour mapping to a workspace - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>mapping</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size_required</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourmapapplymapping_user">colourmapapplymapping_user</h3>
+<pre>extern int colourmapapplymapping_user (bits flags,
+      byte *workspace,
+      int size,
+      <a href="osspriteop.html#osspriteop_colour_mapping">osspriteop_colour_mapping</a> const *mapping);</pre>
+<p>Apply a user colour mapping to a workspace - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>mapping</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size_required</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xcolourmapapplymapping_identity">xcolourmapapplymapping_identity</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourmapapplymapping_identity (bits flags,
+      byte *workspace,
+      int size,
+      int *size_required);</pre>
+<p>Apply an identity colour mapping to a workspace - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size_required</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourmapapplymapping_identity">colourmapapplymapping_identity</h3>
+<pre>extern int colourmapapplymapping_identity (bits flags,
+      byte *workspace,
+      int size);</pre>
+<p>Apply an identity colour mapping to a workspace - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size_required</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xcolourmapapplymapping_invert">xcolourmapapplymapping_invert</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourmapapplymapping_invert (bits flags,
+      byte *workspace,
+      int size,
+      int *size_required);</pre>
+<p>Apply an inversion colour mapping to a workspace - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size_required</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourmapapplymapping_invert">colourmapapplymapping_invert</h3>
+<pre>extern int colourmapapplymapping_invert (bits flags,
+      byte *workspace,
+      int size);</pre>
+<p>Apply an inversion colour mapping to a workspace - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size_required</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xcolourmapapplymapping_monochrome">xcolourmapapplymapping_monochrome</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourmapapplymapping_monochrome (bits flags,
+      byte *workspace,
+      int size,
+      int *size_required);</pre>
+<p>Apply grey scale colour mapping to a workspace - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size_required</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourmapapplymapping_monochrome">colourmapapplymapping_monochrome</h3>
+<pre>extern int colourmapapplymapping_monochrome (bits flags,
+      byte *workspace,
+      int size);</pre>
+<p>Apply grey scale colour mapping to a workspace - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size_required</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xcolourmapapplymapping_monochrome_and_scale">xcolourmapapplymapping_monochrome_and_scale</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourmapapplymapping_monochrome_and_scale (bits flags,
+      byte *workspace,
+      int size,
+      <a href="os.html#os_colour">os_colour</a> black,
+      <a href="os.html#os_colour">os_colour</a> white,
+      int *size_required);</pre>
+<p>Apply grey scale colour mapping to a workspace - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>black</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>white</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size_required</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourmapapplymapping_monochrome_and_scale">colourmapapplymapping_monochrome_and_scale</h3>
+<pre>extern int colourmapapplymapping_monochrome_and_scale (bits flags,
+      byte *workspace,
+      int size,
+      <a href="os.html#os_colour">os_colour</a> black,
+      <a href="os.html#os_colour">os_colour</a> white);</pre>
+<p>Apply grey scale colour mapping to a workspace - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>black</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>white</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size_required</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xcolourmapapplymapping_gamma">xcolourmapapplymapping_gamma</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourmapapplymapping_gamma (bits flags,
+      byte *workspace,
+      int size,
+      int gamma_level,
+      int *size_required);</pre>
+<p>Apply gamma correction colour mapping to a workspace - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>gamma_level</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size_required</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourmapapplymapping_gamma">colourmapapplymapping_gamma</h3>
+<pre>extern int colourmapapplymapping_gamma (bits flags,
+      byte *workspace,
+      int size,
+      int gamma_level);</pre>
+<p>Apply gamma correction colour mapping to a workspace - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>gamma_level</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size_required</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xcolourmapapplymapping_contrast">xcolourmapapplymapping_contrast</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourmapapplymapping_contrast (bits flags,
+      byte *workspace,
+      int size,
+      int factor,
+      int *size_required);</pre>
+<p>Apply contrast adjustment colour mapping to a workspace - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>factor</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size_required</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourmapapplymapping_contrast">colourmapapplymapping_contrast</h3>
+<pre>extern int colourmapapplymapping_contrast (bits flags,
+      byte *workspace,
+      int size,
+      int factor);</pre>
+<p>Apply contrast adjustment colour mapping to a workspace - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>factor</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size_required</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xcolourmapapplymapping_brightness">xcolourmapapplymapping_brightness</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourmapapplymapping_brightness (bits flags,
+      byte *workspace,
+      int size,
+      int offset,
+      int *size_required);</pre>
+<p>Apply brightness adjustment colour mapping to a workspace - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size_required</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourmapapplymapping_brightness">colourmapapplymapping_brightness</h3>
+<pre>extern int colourmapapplymapping_brightness (bits flags,
+      byte *workspace,
+      int size,
+      int offset);</pre>
+<p>Apply brightness adjustment colour mapping to a workspace - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size_required</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xcolourmap_end">xcolourmap_end</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourmap_end (bits flags,
+      byte *workspace,
+      int size,
+      <a href="osspriteop.html#osspriteop_colour_mapping">osspriteop_colour_mapping</a> **mapping);</pre>
+<p>Build a colour mapping descriptor from a workspace - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>mapping</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="colourmap_end">colourmap_end</h3>
+<pre>extern <a href="osspriteop.html#osspriteop_colour_mapping">osspriteop_colour_mapping</a> *colourmap_end (bits flags,
+      byte *workspace,
+      int size);</pre>
+<p>Build a colour mapping descriptor from a workspace - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>mapping</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

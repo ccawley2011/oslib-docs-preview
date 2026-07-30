@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; InverseTable</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>InverseTable</h2>
+
+<pre>#include "oslib/inversetable.h"</pre>
+
+<h3 id="inversetable_colour">inversetable_colour</h3>
+<pre>typedef bits inversetable_colour;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#inversetable_R">inversetable_R</a></dd>
+<dd><a href="#inversetable_G">inversetable_G</a></dd>
+<dd><a href="#inversetable_B">inversetable_B</a></dd>
+</dl>
+
+<h3 id="inversetable_RSHIFT">inversetable_RSHIFT</h3>
+<pre>#define inversetable_RSHIFT 0</pre>
+
+<h3 id="inversetable_GSHIFT">inversetable_GSHIFT</h3>
+<pre>#define inversetable_GSHIFT 5</pre>
+
+<h3 id="inversetable_BSHIFT">inversetable_BSHIFT</h3>
+<pre>#define inversetable_BSHIFT 10</pre>
+
+<h3 id="inversetable_R">inversetable_R</h3>
+<pre>#define inversetable_R ((<a href="#inversetable_colour">inversetable_colour</a>) 0x1Fu)</pre>
+
+<h3 id="inversetable_G">inversetable_G</h3>
+<pre>#define inversetable_G ((<a href="#inversetable_colour">inversetable_colour</a>) 0x3E0u)</pre>
+
+<h3 id="inversetable_B">inversetable_B</h3>
+<pre>#define inversetable_B ((<a href="#inversetable_colour">inversetable_colour</a>) 0x7C00u)</pre>
+
+<h3 id="xinversetable_calculate">xinversetable_calculate</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xinversetable_calculate (<a href="#inversetable_colour">inversetable_colour</a> **gcol_to_colour,
+      <a href="os.html#os_gcol">os_gcol</a> **colour_to_gcol);</pre>
+<p>Calculates inverse tables for the current destination - RISC OS 4.32+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>gcol_to_colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_to_gcol</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="inversetable_calculate">inversetable_calculate</h3>
+<pre>extern void inversetable_calculate (<a href="#inversetable_colour">inversetable_colour</a> **gcol_to_colour,
+      <a href="os.html#os_gcol">os_gcol</a> **colour_to_gcol);</pre>
+<p>Calculates inverse tables for the current destination - RISC OS 4.32+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>gcol_to_colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_to_gcol</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xinversetable_sprite_table_for_sprite">xinversetable_sprite_table_for_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xinversetable_sprite_table_for_sprite (<a href="#inversetable_colour">inversetable_colour</a> *gcol_to_colour_in,
+      <a href="os.html#os_gcol">os_gcol</a> *colour_to_gcol_in,
+      <a href="osspriteop.html#osspriteop_area">osspriteop_area</a> area,
+      <a href="osspriteop.html#osspriteop_id">osspriteop_id</a> id,
+      <a href="#inversetable_colour">inversetable_colour</a> **gcol_to_colour_out,
+      <a href="os.html#os_gcol">os_gcol</a> **colour_to_gcol_out);</pre>
+<p>Calculates inverse tables for the given sprite - RISC OS 4.32+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>gcol_to_colour_in</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_to_gcol_in</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>gcol_to_colour_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_to_gcol_out</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="inversetable_sprite_table_for_sprite">inversetable_sprite_table_for_sprite</h3>
+<pre>extern void inversetable_sprite_table_for_sprite (<a href="#inversetable_colour">inversetable_colour</a> *gcol_to_colour_in,
+      <a href="os.html#os_gcol">os_gcol</a> *colour_to_gcol_in,
+      <a href="osspriteop.html#osspriteop_area">osspriteop_area</a> area,
+      <a href="osspriteop.html#osspriteop_id">osspriteop_id</a> id,
+      <a href="#inversetable_colour">inversetable_colour</a> **gcol_to_colour_out,
+      <a href="os.html#os_gcol">os_gcol</a> **colour_to_gcol_out);</pre>
+<p>Calculates inverse tables for the given sprite - RISC OS 4.32+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>gcol_to_colour_in</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_to_gcol_in</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>gcol_to_colour_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_to_gcol_out</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xinversetable_sprite_table_for_mode">xinversetable_sprite_table_for_mode</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xinversetable_sprite_table_for_mode (<a href="#inversetable_colour">inversetable_colour</a> *gcol_to_colour_in,
+      <a href="os.html#os_gcol">os_gcol</a> *colour_to_gcol_in,
+      <a href="os.html#os_mode">os_mode</a> mode,
+      <a href="#inversetable_colour">inversetable_colour</a> **gcol_to_colour_out,
+      <a href="os.html#os_gcol">os_gcol</a> **colour_to_gcol_out);</pre>
+<p>Calculates inverse tables for the given mode - RISC OS 4.32+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>gcol_to_colour_in</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_to_gcol_in</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>gcol_to_colour_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_to_gcol_out</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="inversetable_sprite_table_for_mode">inversetable_sprite_table_for_mode</h3>
+<pre>extern void inversetable_sprite_table_for_mode (<a href="#inversetable_colour">inversetable_colour</a> *gcol_to_colour_in,
+      <a href="os.html#os_gcol">os_gcol</a> *colour_to_gcol_in,
+      <a href="os.html#os_mode">os_mode</a> mode,
+      <a href="#inversetable_colour">inversetable_colour</a> **gcol_to_colour_out,
+      <a href="os.html#os_gcol">os_gcol</a> **colour_to_gcol_out);</pre>
+<p>Calculates inverse tables for the given mode - RISC OS 4.32+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>gcol_to_colour_in</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_to_gcol_in</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>gcol_to_colour_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_to_gcol_out</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

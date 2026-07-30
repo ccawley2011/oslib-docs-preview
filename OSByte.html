@@ -1,0 +1,2389 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; OSByte</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>OSByte</h2>
+
+<pre>#include "oslib/osbyte.h"</pre>
+
+<h3 id="osbyte_op">osbyte_op</h3>
+<pre>typedef byte osbyte_op;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osbyte_VERSION">osbyte_VERSION</a></dd>
+<dd><a href="#osbyte_USER_FLAG">osbyte_USER_FLAG</a></dd>
+<dd><a href="#osbyte_INPUT_STREAM">osbyte_INPUT_STREAM</a></dd>
+<dd><a href="#osbyte_OUTPUT_STREAMS">osbyte_OUTPUT_STREAMS</a></dd>
+<dd><a href="#osbyte_INTERPRETATION_ARROWS">osbyte_INTERPRETATION_ARROWS</a></dd>
+<dd><a href="#osbyte_PRINTER">osbyte_PRINTER</a></dd>
+<dd><a href="#osbyte_IGNORE_CHAR">osbyte_IGNORE_CHAR</a></dd>
+<dd><a href="#osbyte_SERIAL_RECEIVE_RATE">osbyte_SERIAL_RECEIVE_RATE</a></dd>
+<dd><a href="#osbyte_SERIAL_TRANSMIT_RATE">osbyte_SERIAL_TRANSMIT_RATE</a></dd>
+<dd><a href="#osbyte_ON_DURATION">osbyte_ON_DURATION</a></dd>
+<dd><a href="#osbyte_OFF_DURATION">osbyte_OFF_DURATION</a></dd>
+<dd><a href="#osbyte_KEYBOARD_DELAY">osbyte_KEYBOARD_DELAY</a></dd>
+<dd><a href="#osbyte_KEYBOARD_RATE">osbyte_KEYBOARD_RATE</a></dd>
+<dd><a href="#osbyte_DISABLE_EVENT">osbyte_DISABLE_EVENT</a></dd>
+<dd><a href="#osbyte_ENABLE_EVENT">osbyte_ENABLE_EVENT</a></dd>
+<dd><a href="#osbyte_FLUSH_BUFFERS">osbyte_FLUSH_BUFFERS</a></dd>
+<dd><a href="#osbyte_CHANNEL_COUNT">osbyte_CHANNEL_COUNT</a></dd>
+<dd><a href="#osbyte_CONVERT_CHANNEL">osbyte_CONVERT_CHANNEL</a></dd>
+<dd><a href="#osbyte_RESET_FUNCTION_KEYS">osbyte_RESET_FUNCTION_KEYS</a></dd>
+<dd><a href="#osbyte_AWAIT_VSYNC">osbyte_AWAIT_VSYNC</a></dd>
+<dd><a href="#osbyte_RESET_SYSTEM_FONT">osbyte_RESET_SYSTEM_FONT</a></dd>
+<dd><a href="#osbyte_FLUSH_BUFFER">osbyte_FLUSH_BUFFER</a></dd>
+<dd><a href="#osbyte_INCREMENT_ROM_SEMAPHORE">osbyte_INCREMENT_ROM_SEMAPHORE</a></dd>
+<dd><a href="#osbyte_DECREMENT_ROM_SEMAPHORE">osbyte_DECREMENT_ROM_SEMAPHORE</a></dd>
+<dd><a href="#osbyte_RESET_SYSTEM_CHARS">osbyte_RESET_SYSTEM_CHARS</a></dd>
+<dd><a href="#osbyte_ECONET_POLL_TRANSMIT">osbyte_ECONET_POLL_TRANSMIT</a></dd>
+<dd><a href="#osbyte_ECONET_POLL_RECEIVE">osbyte_ECONET_POLL_RECEIVE</a></dd>
+<dd><a href="#osbyte_ECONET_ABANDON_RECEIVE">osbyte_ECONET_ABANDON_RECEIVE</a></dd>
+<dd><a href="#osbyte_ECONET_ROFF">osbyte_ECONET_ROFF</a></dd>
+<dd><a href="#osbyte_BANKED_RAM_PRESENCE">osbyte_BANKED_RAM_PRESENCE</a></dd>
+<dd><a href="#osbyte_BANKED_RAM_USE">osbyte_BANKED_RAM_USE</a></dd>
+<dd><a href="#osbyte_COUNTRY_NUMBER">osbyte_COUNTRY_NUMBER</a></dd>
+<dd><a href="#osbyte_ALPHABET_NUMBER">osbyte_ALPHABET_NUMBER</a></dd>
+<dd><a href="#osbyte_SELECT_POINTER">osbyte_SELECT_POINTER</a></dd>
+<dd><a href="#osbyte_WRITE_BUS_STATE">osbyte_WRITE_BUS_STATE</a></dd>
+<dd><a href="#osbyte_WRITE_SHADOW_STATE">osbyte_WRITE_SHADOW_STATE</a></dd>
+<dd><a href="#osbyte_SELECT_TEMPORARY_FS">osbyte_SELECT_TEMPORARY_FS</a></dd>
+<dd><a href="#osbyte_OUTPUT_SCREEN_BANK">osbyte_OUTPUT_SCREEN_BANK</a></dd>
+<dd><a href="#osbyte_DISPLAY_SCREEN_BANK">osbyte_DISPLAY_SCREEN_BANK</a></dd>
+<dd><a href="#osbyte_SHADOW_STATE">osbyte_SHADOW_STATE</a></dd>
+<dd><a href="#osbyte_VDU_STATE">osbyte_VDU_STATE</a></dd>
+<dd><a href="#osbyte_UPDATE_KEYBOARD">osbyte_UPDATE_KEYBOARD</a></dd>
+<dd><a href="#osbyte_CLOSE_SPOOL_AND_EXEC">osbyte_CLOSE_SPOOL_AND_EXEC</a></dd>
+<dd><a href="#osbyte_LOCK_REPEAT">osbyte_LOCK_REPEAT</a></dd>
+<dd><a href="#osbyte_SCAN_KEYBOARD">osbyte_SCAN_KEYBOARD</a></dd>
+<dd><a href="#osbyte_SCAN_KEYBOARD_LIMITED">osbyte_SCAN_KEYBOARD_LIMITED</a></dd>
+<dd><a href="#osbyte_PRINTER_DORMANT">osbyte_PRINTER_DORMANT</a></dd>
+<dd><a href="#osbyte_CLEAR_ESCAPE">osbyte_CLEAR_ESCAPE</a></dd>
+<dd><a href="#osbyte_SET_ESCAPE">osbyte_SET_ESCAPE</a></dd>
+<dd><a href="#osbyte_ACKNOWLEDGE_ESCAPE">osbyte_ACKNOWLEDGE_ESCAPE</a></dd>
+<dd><a href="#osbyte_READ_EOF_STATUS">osbyte_READ_EOF_STATUS</a></dd>
+<dd><a href="#osbyte_BUFFER_OP">osbyte_BUFFER_OP</a></dd>
+<dd><a href="#osbyte_IN_KEY">osbyte_IN_KEY</a></dd>
+<dd><a href="#osbyte_READ_HIGH_ORDER_ADDRESS">osbyte_READ_HIGH_ORDER_ADDRESS</a></dd>
+<dd><a href="#osbyte_READ_HWM">osbyte_READ_HWM</a></dd>
+<dd><a href="#osbyte_READ_TOP">osbyte_READ_TOP</a></dd>
+<dd><a href="#osbyte_READ_TOP_FOR_MODE">osbyte_READ_TOP_FOR_MODE</a></dd>
+<dd><a href="#osbyte_TEXT_CURSOR_POSITION">osbyte_TEXT_CURSOR_POSITION</a></dd>
+<dd><a href="#osbyte_SCREEN_CHAR">osbyte_SCREEN_CHAR</a></dd>
+<dd><a href="#osbyte_RUN">osbyte_RUN</a></dd>
+<dd><a href="#osbyte_CASSETTE_MOTOR">osbyte_CASSETTE_MOTOR</a></dd>
+<dd><a href="#osbyte_BUFFER_INSERT">osbyte_BUFFER_INSERT</a></dd>
+<dd><a href="#osbyte_OPT">osbyte_OPT</a></dd>
+<dd><a href="#osbyte_SELECT_CFS">osbyte_SELECT_CFS</a></dd>
+<dd><a href="#osbyte_SELECT_ROMFS">osbyte_SELECT_ROMFS</a></dd>
+<dd><a href="#osbyte_ROM_ENTER">osbyte_ROM_ENTER</a></dd>
+<dd><a href="#osbyte_SERVICE_CALL">osbyte_SERVICE_CALL</a></dd>
+<dd><a href="#osbyte_TV">osbyte_TV</a></dd>
+<dd><a href="#osbyte_BUFFER_REMOVE">osbyte_BUFFER_REMOVE</a></dd>
+<dd><a href="#osbyte_READ_FRED">osbyte_READ_FRED</a></dd>
+<dd><a href="#osbyte_WRITE_FRED">osbyte_WRITE_FRED</a></dd>
+<dd><a href="#osbyte_READ_JIM">osbyte_READ_JIM</a></dd>
+<dd><a href="#osbyte_WRITE_JIM">osbyte_WRITE_JIM</a></dd>
+<dd><a href="#osbyte_READ_SHEILA">osbyte_READ_SHEILA</a></dd>
+<dd><a href="#osbyte_WRITE_SHEILA">osbyte_WRITE_SHEILA</a></dd>
+<dd><a href="#osbyte_BUFFER_STATUS">osbyte_BUFFER_STATUS</a></dd>
+<dd><a href="#osbyte_TYPE_CHAR">osbyte_TYPE_CHAR</a></dd>
+<dd><a href="#osbyte_WRITE_VDU_CONTROL">osbyte_WRITE_VDU_CONTROL</a></dd>
+<dd><a href="#osbyte_WRITE_VDU_PALETTE">osbyte_WRITE_VDU_PALETTE</a></dd>
+<dd><a href="#osbyte_SERIAL_STATE">osbyte_SERIAL_STATE</a></dd>
+<dd><a href="#osbyte_WRITE_TUBE">osbyte_WRITE_TUBE</a></dd>
+<dd><a href="#osbyte_READ_VDU_VARIABLE">osbyte_READ_VDU_VARIABLE</a></dd>
+<dd><a href="#osbyte_READ_CMOS">osbyte_READ_CMOS</a></dd>
+<dd><a href="#osbyte_WRITE_CMOS">osbyte_WRITE_CMOS</a></dd>
+<dd><a href="#osbyte_GRAPHICS_INFO">osbyte_GRAPHICS_INFO</a></dd>
+<dd><a href="#osbyte_CPU_TYPE">osbyte_CPU_TYPE</a></dd>
+<dd><a href="#osbyte_OUTPUT_CURSOR_POSITION">osbyte_OUTPUT_CURSOR_POSITION</a></dd>
+<dd><a href="#osbyte_READ_VARIABLE_START">osbyte_READ_VARIABLE_START</a></dd>
+<dd><a href="#osbyte_READ_ROM_POINTER_TABLE">osbyte_READ_ROM_POINTER_TABLE</a></dd>
+<dd><a href="#osbyte_READ_ROM_INFO_TABLE">osbyte_READ_ROM_INFO_TABLE</a></dd>
+<dd><a href="#osbyte_READ_KEYBOARD_TABLE">osbyte_READ_KEYBOARD_TABLE</a></dd>
+<dd><a href="#osbyte_READ_VDU_VARIABLE_START">osbyte_READ_VDU_VARIABLE_START</a></dd>
+</dl>
+
+<h3 id="osbyte_var">osbyte_var</h3>
+<pre>typedef byte osbyte_var;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osbyte_VAR_VSYNC_TIMER">osbyte_VAR_VSYNC_TIMER</a></dd>
+<dd><a href="#osbyte_VAR_INPUT_STREAM">osbyte_VAR_INPUT_STREAM</a></dd>
+<dd><a href="#osbyte_VAR_KEYBOARD_SEMAPHORE">osbyte_VAR_KEYBOARD_SEMAPHORE</a></dd>
+<dd><a href="#osbyte_VAR_ROM_SEMAPHORE">osbyte_VAR_ROM_SEMAPHORE</a></dd>
+<dd><a href="#osbyte_VAR_HWM">osbyte_VAR_HWM</a></dd>
+<dd><a href="#osbyte_VAR_SERIAL_INTERPRETATION">osbyte_VAR_SERIAL_INTERPRETATION</a></dd>
+<dd><a href="#osbyte_VAR_IGNORE_STATE">osbyte_VAR_IGNORE_STATE</a></dd>
+<dd><a href="#osbyte_VAR_CASSETTE_ROM_SWITCH">osbyte_VAR_CASSETTE_ROM_SWITCH</a></dd>
+<dd><a href="#osbyte_VAR_VDU_CONTROL">osbyte_VAR_VDU_CONTROL</a></dd>
+<dd><a href="#osbyte_VAR_VDU_PALETTE">osbyte_VAR_VDU_PALETTE</a></dd>
+<dd><a href="#osbyte_VAR_ROM_LAST_RESET">osbyte_VAR_ROM_LAST_RESET</a></dd>
+<dd><a href="#osbyte_VAR_ROM_BASIC">osbyte_VAR_ROM_BASIC</a></dd>
+<dd><a href="#osbyte_VAR_CURRENT_CHANNEL">osbyte_VAR_CURRENT_CHANNEL</a></dd>
+<dd><a href="#osbyte_VAR_CHANNEL_COUNT">osbyte_VAR_CHANNEL_COUNT</a></dd>
+<dd><a href="#osbyte_VAR_CONVERSION_RESOLUTION">osbyte_VAR_CONVERSION_RESOLUTION</a></dd>
+<dd><a href="#osbyte_VAR_SERIAL_BUSY">osbyte_VAR_SERIAL_BUSY</a></dd>
+<dd><a href="#osbyte_VAR_SERIAL_STATE">osbyte_VAR_SERIAL_STATE</a></dd>
+<dd><a href="#osbyte_VAR_FLASH_COUNTER">osbyte_VAR_FLASH_COUNTER</a></dd>
+<dd><a href="#osbyte_VAR_OFF_DURATION">osbyte_VAR_OFF_DURATION</a></dd>
+<dd><a href="#osbyte_VAR_ON_DURATION">osbyte_VAR_ON_DURATION</a></dd>
+<dd><a href="#osbyte_VAR_KEYBOARD_DELAY">osbyte_VAR_KEYBOARD_DELAY</a></dd>
+<dd><a href="#osbyte_VAR_KEYBOARD_RATE">osbyte_VAR_KEYBOARD_RATE</a></dd>
+<dd><a href="#osbyte_VAR_EXEC_HANDLE">osbyte_VAR_EXEC_HANDLE</a></dd>
+<dd><a href="#osbyte_VAR_SPOOL_HANDLE">osbyte_VAR_SPOOL_HANDLE</a></dd>
+<dd><a href="#osbyte_VAR_RESET_EFFECTS">osbyte_VAR_RESET_EFFECTS</a></dd>
+<dd><a href="#osbyte_VAR_KEYBOARD_DISABLE">osbyte_VAR_KEYBOARD_DISABLE</a></dd>
+<dd><a href="#osbyte_VAR_KEYBOARD_STATE">osbyte_VAR_KEYBOARD_STATE</a></dd>
+<dd><a href="#osbyte_VAR_SERIAL_THRESHOLD">osbyte_VAR_SERIAL_THRESHOLD</a></dd>
+<dd><a href="#osbyte_VAR_SERIAL_BUFFER_STATE">osbyte_VAR_SERIAL_BUFFER_STATE</a></dd>
+<dd><a href="#osbyte_VAR_SERIAL_DESTINATION">osbyte_VAR_SERIAL_DESTINATION</a></dd>
+<dd><a href="#osbyte_VAR_ECONET_OS_CALL_STATUS">osbyte_VAR_ECONET_OS_CALL_STATUS</a></dd>
+<dd><a href="#osbyte_VAR_ECONET_INPUT_STATUS">osbyte_VAR_ECONET_INPUT_STATUS</a></dd>
+<dd><a href="#osbyte_VAR_ECONET_OUTPUT_STATUS">osbyte_VAR_ECONET_OUTPUT_STATUS</a></dd>
+<dd><a href="#osbyte_VAR_SOUND_SUPPRESSION">osbyte_VAR_SOUND_SUPPRESSION</a></dd>
+<dd><a href="#osbyte_VAR_BELL_CHANNEL">osbyte_VAR_BELL_CHANNEL</a></dd>
+<dd><a href="#osbyte_VAR_BELL_VOLUME">osbyte_VAR_BELL_VOLUME</a></dd>
+<dd><a href="#osbyte_VAR_BELL_FREQUENCY">osbyte_VAR_BELL_FREQUENCY</a></dd>
+<dd><a href="#osbyte_VAR_BELL_DURATION">osbyte_VAR_BELL_DURATION</a></dd>
+<dd><a href="#osbyte_VAR_BANNER_SUPPRESS">osbyte_VAR_BANNER_SUPPRESS</a></dd>
+<dd><a href="#osbyte_VAR_PENDING_KEY_LENGTH">osbyte_VAR_PENDING_KEY_LENGTH</a></dd>
+<dd><a href="#osbyte_VAR_PAGE_LENGTH">osbyte_VAR_PAGE_LENGTH</a></dd>
+<dd><a href="#osbyte_VAR_VDU_QUEUE_LENGTH">osbyte_VAR_VDU_QUEUE_LENGTH</a></dd>
+<dd><a href="#osbyte_VAR_TAB_CHAR">osbyte_VAR_TAB_CHAR</a></dd>
+<dd><a href="#osbyte_VAR_ESCAPE_CHAR">osbyte_VAR_ESCAPE_CHAR</a></dd>
+<dd><a href="#osbyte_VAR_INTERPRETATION_GROUP4">osbyte_VAR_INTERPRETATION_GROUP4</a></dd>
+<dd><a href="#osbyte_VAR_INTERPRETATION_GROUP5">osbyte_VAR_INTERPRETATION_GROUP5</a></dd>
+<dd><a href="#osbyte_VAR_INTERPRETATION_GROUP6">osbyte_VAR_INTERPRETATION_GROUP6</a></dd>
+<dd><a href="#osbyte_VAR_INTERPRETATION_GROUP7">osbyte_VAR_INTERPRETATION_GROUP7</a></dd>
+<dd><a href="#osbyte_VAR_INTERPRETATION_GROUP0">osbyte_VAR_INTERPRETATION_GROUP0</a></dd>
+<dd><a href="#osbyte_VAR_INTERPRETATION_GROUP1">osbyte_VAR_INTERPRETATION_GROUP1</a></dd>
+<dd><a href="#osbyte_VAR_INTERPRETATION_GROUP2">osbyte_VAR_INTERPRETATION_GROUP2</a></dd>
+<dd><a href="#osbyte_VAR_INTERPRETATION_GROUP3">osbyte_VAR_INTERPRETATION_GROUP3</a></dd>
+<dd><a href="#osbyte_VAR_ESCAPE_STATE">osbyte_VAR_ESCAPE_STATE</a></dd>
+<dd><a href="#osbyte_VAR_ESCAPE_EFFECTS">osbyte_VAR_ESCAPE_EFFECTS</a></dd>
+<dd><a href="#osbyte_VAR_IRQ_MASK_USER">osbyte_VAR_IRQ_MASK_USER</a></dd>
+<dd><a href="#osbyte_VAR_IRQ_MASK_SERIAL">osbyte_VAR_IRQ_MASK_SERIAL</a></dd>
+<dd><a href="#osbyte_VAR_IRQ_MASK_SYSTEM">osbyte_VAR_IRQ_MASK_SYSTEM</a></dd>
+<dd><a href="#osbyte_VAR_TUBE">osbyte_VAR_TUBE</a></dd>
+<dd><a href="#osbyte_VAR_OUTPUT_STREAMS">osbyte_VAR_OUTPUT_STREAMS</a></dd>
+<dd><a href="#osbyte_VAR_INTERPRETATION_ARROWS">osbyte_VAR_INTERPRETATION_ARROWS</a></dd>
+<dd><a href="#osbyte_VAR_INTERPRETATION_KEYPAD">osbyte_VAR_INTERPRETATION_KEYPAD</a></dd>
+<dd><a href="#osbyte_VAR_SHADOW_STATE">osbyte_VAR_SHADOW_STATE</a></dd>
+<dd><a href="#osbyte_VAR_COUNTRY_NUMBER">osbyte_VAR_COUNTRY_NUMBER</a></dd>
+<dd><a href="#osbyte_VAR_USER_FLAG">osbyte_VAR_USER_FLAG</a></dd>
+<dd><a href="#osbyte_VAR_SERIAL_RATE">osbyte_VAR_SERIAL_RATE</a></dd>
+<dd><a href="#osbyte_VAR_INTERVAL_TIMER_STATE">osbyte_VAR_INTERVAL_TIMER_STATE</a></dd>
+<dd><a href="#osbyte_VAR_SOFT_KEY_STATE">osbyte_VAR_SOFT_KEY_STATE</a></dd>
+<dd><a href="#osbyte_VAR_PRINTER">osbyte_VAR_PRINTER</a></dd>
+<dd><a href="#osbyte_VAR_IGNORE_CHAR">osbyte_VAR_IGNORE_CHAR</a></dd>
+<dd><a href="#osbyte_VAR_INTERPRETATION_BREAK">osbyte_VAR_INTERPRETATION_BREAK</a></dd>
+<dd><a href="#osbyte_VAR_INTERPRETATION_BREAK1">osbyte_VAR_INTERPRETATION_BREAK1</a></dd>
+<dd><a href="#osbyte_VAR_INTERPRETATION_BREAK2">osbyte_VAR_INTERPRETATION_BREAK2</a></dd>
+<dd><a href="#osbyte_VAR_OUTPUT_SCREEN_BANK">osbyte_VAR_OUTPUT_SCREEN_BANK</a></dd>
+<dd><a href="#osbyte_VAR_DISPLAY_SCREEN_BANK">osbyte_VAR_DISPLAY_SCREEN_BANK</a></dd>
+<dd><a href="#osbyte_VAR_ROM_CURRENT">osbyte_VAR_ROM_CURRENT</a></dd>
+<dd><a href="#osbyte_VAR_LAST_RESET">osbyte_VAR_LAST_RESET</a></dd>
+<dd><a href="#osbyte_VAR_INTERPRETATION_SHIFTING">osbyte_VAR_INTERPRETATION_SHIFTING</a></dd>
+<dd><a href="#osbyte_VAR_BOOT_OPTION">osbyte_VAR_BOOT_OPTION</a></dd>
+</dl>
+
+<h3 id="osbyte_VERSION">osbyte_VERSION</h3>
+<pre>#define osbyte_VERSION ((<a href="#osbyte_op">osbyte_op</a>) 0x0u)</pre>
+
+<h3 id="osbyte_USER_FLAG">osbyte_USER_FLAG</h3>
+<pre>#define osbyte_USER_FLAG ((<a href="#osbyte_op">osbyte_op</a>) 0x1u)</pre>
+
+<p>Has associated variable</p>
+
+<h3 id="osbyte_INPUT_STREAM">osbyte_INPUT_STREAM</h3>
+<pre>#define osbyte_INPUT_STREAM ((<a href="#osbyte_op">osbyte_op</a>) 0x2u)</pre>
+
+<p>Has associated variable</p>
+
+<h3 id="osbyte_OUTPUT_STREAMS">osbyte_OUTPUT_STREAMS</h3>
+<pre>#define osbyte_OUTPUT_STREAMS ((<a href="#osbyte_op">osbyte_op</a>) 0x3u)</pre>
+
+<p>Has associated variable</p>
+
+<h3 id="osbyte_INTERPRETATION_ARROWS">osbyte_INTERPRETATION_ARROWS</h3>
+<pre>#define osbyte_INTERPRETATION_ARROWS ((<a href="#osbyte_op">osbyte_op</a>) 0x4u)</pre>
+
+<p>Has associated variable</p>
+
+<h3 id="osbyte_PRINTER">osbyte_PRINTER</h3>
+<pre>#define osbyte_PRINTER ((<a href="#osbyte_op">osbyte_op</a>) 0x5u)</pre>
+
+<p>Has associated variable</p>
+
+<h3 id="osbyte_IGNORE_CHAR">osbyte_IGNORE_CHAR</h3>
+<pre>#define osbyte_IGNORE_CHAR ((<a href="#osbyte_op">osbyte_op</a>) 0x6u)</pre>
+
+<p>Has associated variable</p>
+
+<h3 id="osbyte_SERIAL_RECEIVE_RATE">osbyte_SERIAL_RECEIVE_RATE</h3>
+<pre>#define osbyte_SERIAL_RECEIVE_RATE ((<a href="#osbyte_op">osbyte_op</a>) 0x7u)</pre>
+
+<p>Has associated variable - prefer OS_SerialOp</p>
+
+<h3 id="osbyte_SERIAL_TRANSMIT_RATE">osbyte_SERIAL_TRANSMIT_RATE</h3>
+<pre>#define osbyte_SERIAL_TRANSMIT_RATE ((<a href="#osbyte_op">osbyte_op</a>) 0x8u)</pre>
+
+<p>Has associated variable - Prefer OS_SerialOp</p>
+
+<h3 id="osbyte_ON_DURATION">osbyte_ON_DURATION</h3>
+<pre>#define osbyte_ON_DURATION ((<a href="#osbyte_op">osbyte_op</a>) 0x9u)</pre>
+
+<p>Has associated variable</p>
+
+<h3 id="osbyte_OFF_DURATION">osbyte_OFF_DURATION</h3>
+<pre>#define osbyte_OFF_DURATION ((<a href="#osbyte_op">osbyte_op</a>) 0xAu)</pre>
+
+<p>Has associated variable</p>
+
+<h3 id="osbyte_KEYBOARD_DELAY">osbyte_KEYBOARD_DELAY</h3>
+<pre>#define osbyte_KEYBOARD_DELAY ((<a href="#osbyte_op">osbyte_op</a>) 0xBu)</pre>
+
+<p>Has associated variable</p>
+
+<h3 id="osbyte_KEYBOARD_RATE">osbyte_KEYBOARD_RATE</h3>
+<pre>#define osbyte_KEYBOARD_RATE ((<a href="#osbyte_op">osbyte_op</a>) 0xCu)</pre>
+
+<p>Has associated variable</p>
+
+<h3 id="osbyte_DISABLE_EVENT">osbyte_DISABLE_EVENT</h3>
+<pre>#define osbyte_DISABLE_EVENT ((<a href="#osbyte_op">osbyte_op</a>) 0xDu)</pre>
+
+<h3 id="osbyte_ENABLE_EVENT">osbyte_ENABLE_EVENT</h3>
+<pre>#define osbyte_ENABLE_EVENT ((<a href="#osbyte_op">osbyte_op</a>) 0xEu)</pre>
+
+<h3 id="osbyte_FLUSH_BUFFERS">osbyte_FLUSH_BUFFERS</h3>
+<pre>#define osbyte_FLUSH_BUFFERS ((<a href="#osbyte_op">osbyte_op</a>) 0xFu)</pre>
+
+<p>Prefer Buffer</p>
+
+<h3 id="osbyte_CHANNEL_COUNT">osbyte_CHANNEL_COUNT</h3>
+<pre>#define osbyte_CHANNEL_COUNT ((<a href="#osbyte_op">osbyte_op</a>) 0x10u)</pre>
+
+<p>Has associated variable</p>
+
+<h3 id="osbyte_CONVERT_CHANNEL">osbyte_CONVERT_CHANNEL</h3>
+<pre>#define osbyte_CONVERT_CHANNEL ((<a href="#osbyte_op">osbyte_op</a>) 0x11u)</pre>
+
+<h3 id="osbyte_RESET_FUNCTION_KEYS">osbyte_RESET_FUNCTION_KEYS</h3>
+<pre>#define osbyte_RESET_FUNCTION_KEYS ((<a href="#osbyte_op">osbyte_op</a>) 0x12u)</pre>
+
+<h3 id="osbyte_AWAIT_VSYNC">osbyte_AWAIT_VSYNC</h3>
+<pre>#define osbyte_AWAIT_VSYNC ((<a href="#osbyte_op">osbyte_op</a>) 0x13u)</pre>
+
+<h3 id="osbyte_RESET_SYSTEM_FONT">osbyte_RESET_SYSTEM_FONT</h3>
+<pre>#define osbyte_RESET_SYSTEM_FONT ((<a href="#osbyte_op">osbyte_op</a>) 0x14u)</pre>
+
+<h3 id="osbyte_FLUSH_BUFFER">osbyte_FLUSH_BUFFER</h3>
+<pre>#define osbyte_FLUSH_BUFFER ((<a href="#osbyte_op">osbyte_op</a>) 0x15u)</pre>
+
+<p>Prefer Buffer</p>
+
+<h3 id="osbyte_INCREMENT_ROM_SEMAPHORE">osbyte_INCREMENT_ROM_SEMAPHORE</h3>
+<pre>#define osbyte_INCREMENT_ROM_SEMAPHORE ((<a href="#osbyte_op">osbyte_op</a>) 0x16u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_DECREMENT_ROM_SEMAPHORE">osbyte_DECREMENT_ROM_SEMAPHORE</h3>
+<pre>#define osbyte_DECREMENT_ROM_SEMAPHORE ((<a href="#osbyte_op">osbyte_op</a>) 0x17u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_RESET_SYSTEM_CHARS">osbyte_RESET_SYSTEM_CHARS</h3>
+<pre>#define osbyte_RESET_SYSTEM_CHARS ((<a href="#osbyte_op">osbyte_op</a>) 0x19u)</pre>
+
+<h3 id="osbyte_ECONET_POLL_TRANSMIT">osbyte_ECONET_POLL_TRANSMIT</h3>
+<pre>#define osbyte_ECONET_POLL_TRANSMIT ((<a href="#osbyte_op">osbyte_op</a>) 0x32u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_ECONET_POLL_RECEIVE">osbyte_ECONET_POLL_RECEIVE</h3>
+<pre>#define osbyte_ECONET_POLL_RECEIVE ((<a href="#osbyte_op">osbyte_op</a>) 0x33u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_ECONET_ABANDON_RECEIVE">osbyte_ECONET_ABANDON_RECEIVE</h3>
+<pre>#define osbyte_ECONET_ABANDON_RECEIVE ((<a href="#osbyte_op">osbyte_op</a>) 0x34u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_ECONET_ROFF">osbyte_ECONET_ROFF</h3>
+<pre>#define osbyte_ECONET_ROFF ((<a href="#osbyte_op">osbyte_op</a>) 0x35u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_BANKED_RAM_PRESENCE">osbyte_BANKED_RAM_PRESENCE</h3>
+<pre>#define osbyte_BANKED_RAM_PRESENCE ((<a href="#osbyte_op">osbyte_op</a>) 0x44u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_BANKED_RAM_USE">osbyte_BANKED_RAM_USE</h3>
+<pre>#define osbyte_BANKED_RAM_USE ((<a href="#osbyte_op">osbyte_op</a>) 0x45u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_COUNTRY_NUMBER">osbyte_COUNTRY_NUMBER</h3>
+<pre>#define osbyte_COUNTRY_NUMBER ((<a href="#osbyte_op">osbyte_op</a>) 0x46u)</pre>
+
+<p>Has associated variable</p>
+
+<h3 id="osbyte_ALPHABET_NUMBER">osbyte_ALPHABET_NUMBER</h3>
+<pre>#define osbyte_ALPHABET_NUMBER ((<a href="#osbyte_op">osbyte_op</a>) 0x47u)</pre>
+
+<p>Prefer Territory</p>
+
+<h3 id="osbyte_SELECT_POINTER">osbyte_SELECT_POINTER</h3>
+<pre>#define osbyte_SELECT_POINTER ((<a href="#osbyte_op">osbyte_op</a>) 0x6Au)</pre>
+
+<h3 id="osbyte_WRITE_BUS_STATE">osbyte_WRITE_BUS_STATE</h3>
+<pre>#define osbyte_WRITE_BUS_STATE ((<a href="#osbyte_op">osbyte_op</a>) 0x6Bu)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_WRITE_SHADOW_STATE">osbyte_WRITE_SHADOW_STATE</h3>
+<pre>#define osbyte_WRITE_SHADOW_STATE ((<a href="#osbyte_op">osbyte_op</a>) 0x6Cu)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_SELECT_TEMPORARY_FS">osbyte_SELECT_TEMPORARY_FS</h3>
+<pre>#define osbyte_SELECT_TEMPORARY_FS ((<a href="#osbyte_op">osbyte_op</a>) 0x6Du)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_OUTPUT_SCREEN_BANK">osbyte_OUTPUT_SCREEN_BANK</h3>
+<pre>#define osbyte_OUTPUT_SCREEN_BANK ((<a href="#osbyte_op">osbyte_op</a>) 0x70u)</pre>
+
+<p>Has associated variable, consider using OS_ScreenMode 8 or 9</p>
+
+<h3 id="osbyte_DISPLAY_SCREEN_BANK">osbyte_DISPLAY_SCREEN_BANK</h3>
+<pre>#define osbyte_DISPLAY_SCREEN_BANK ((<a href="#osbyte_op">osbyte_op</a>) 0x71u)</pre>
+
+<p>Has associated variable, consider using OS_ScreenMode 8 or 9</p>
+
+<h3 id="osbyte_SHADOW_STATE">osbyte_SHADOW_STATE</h3>
+<pre>#define osbyte_SHADOW_STATE ((<a href="#osbyte_op">osbyte_op</a>) 0x72u)</pre>
+
+<h3 id="osbyte_VDU_STATE">osbyte_VDU_STATE</h3>
+<pre>#define osbyte_VDU_STATE ((<a href="#osbyte_op">osbyte_op</a>) 0x75u)</pre>
+
+<h3 id="osbyte_UPDATE_KEYBOARD">osbyte_UPDATE_KEYBOARD</h3>
+<pre>#define osbyte_UPDATE_KEYBOARD ((<a href="#osbyte_op">osbyte_op</a>) 0x76u)</pre>
+
+<h3 id="osbyte_CLOSE_SPOOL_AND_EXEC">osbyte_CLOSE_SPOOL_AND_EXEC</h3>
+<pre>#define osbyte_CLOSE_SPOOL_AND_EXEC ((<a href="#osbyte_op">osbyte_op</a>) 0x77u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_LOCK_REPEAT">osbyte_LOCK_REPEAT</h3>
+<pre>#define osbyte_LOCK_REPEAT ((<a href="#osbyte_op">osbyte_op</a>) 0x78u)</pre>
+
+<h3 id="osbyte_SCAN_KEYBOARD">osbyte_SCAN_KEYBOARD</h3>
+<pre>#define osbyte_SCAN_KEYBOARD ((<a href="#osbyte_op">osbyte_op</a>) 0x79u)</pre>
+
+<h3 id="osbyte_SCAN_KEYBOARD_LIMITED">osbyte_SCAN_KEYBOARD_LIMITED</h3>
+<pre>#define osbyte_SCAN_KEYBOARD_LIMITED ((<a href="#osbyte_op">osbyte_op</a>) 0x7Au)</pre>
+
+<h3 id="osbyte_PRINTER_DORMANT">osbyte_PRINTER_DORMANT</h3>
+<pre>#define osbyte_PRINTER_DORMANT ((<a href="#osbyte_op">osbyte_op</a>) 0x7Bu)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_CLEAR_ESCAPE">osbyte_CLEAR_ESCAPE</h3>
+<pre>#define osbyte_CLEAR_ESCAPE ((<a href="#osbyte_op">osbyte_op</a>) 0x7Cu)</pre>
+
+<h3 id="osbyte_SET_ESCAPE">osbyte_SET_ESCAPE</h3>
+<pre>#define osbyte_SET_ESCAPE ((<a href="#osbyte_op">osbyte_op</a>) 0x7Du)</pre>
+
+<h3 id="osbyte_ACKNOWLEDGE_ESCAPE">osbyte_ACKNOWLEDGE_ESCAPE</h3>
+<pre>#define osbyte_ACKNOWLEDGE_ESCAPE ((<a href="#osbyte_op">osbyte_op</a>) 0x7Eu)</pre>
+
+<h3 id="osbyte_READ_EOF_STATUS">osbyte_READ_EOF_STATUS</h3>
+<pre>#define osbyte_READ_EOF_STATUS ((<a href="#osbyte_op">osbyte_op</a>) 0x7Fu)</pre>
+
+<p>Prefer OSArgs_ReadEOFStatus</p>
+
+<h3 id="osbyte_BUFFER_OP">osbyte_BUFFER_OP</h3>
+<pre>#define osbyte_BUFFER_OP ((<a href="#osbyte_op">osbyte_op</a>) 0x80u)</pre>
+
+<h3 id="osbyte_OP_JOYSTICK_STATE">osbyte_OP_JOYSTICK_STATE</h3>
+<pre>#define osbyte_OP_JOYSTICK_STATE 0</pre>
+
+<h3 id="osbyte_OP_CHANNEL_POSITION1">osbyte_OP_CHANNEL_POSITION1</h3>
+<pre>#define osbyte_OP_CHANNEL_POSITION1 1</pre>
+
+<h3 id="osbyte_OP_CHANNEL_POSITION2">osbyte_OP_CHANNEL_POSITION2</h3>
+<pre>#define osbyte_OP_CHANNEL_POSITION2 2</pre>
+
+<h3 id="osbyte_OP_CHANNEL_POSITION3">osbyte_OP_CHANNEL_POSITION3</h3>
+<pre>#define osbyte_OP_CHANNEL_POSITION3 3</pre>
+
+<h3 id="osbyte_OP_CHANNEL_POSITION4">osbyte_OP_CHANNEL_POSITION4</h3>
+<pre>#define osbyte_OP_CHANNEL_POSITION4 4</pre>
+
+<h3 id="osbyte_OP_POINTER_XPOSITION">osbyte_OP_POINTER_XPOSITION</h3>
+<pre>#define osbyte_OP_POINTER_XPOSITION 7</pre>
+
+<p>Prefer OS_Mouse</p>
+
+<h3 id="osbyte_OP_POINTER_YPOSITION">osbyte_OP_POINTER_YPOSITION</h3>
+<pre>#define osbyte_OP_POINTER_YPOSITION 8</pre>
+
+<p>Prefer OS_Mouse</p>
+
+<h3 id="osbyte_OP_MOUSE_BUFFER_USED">osbyte_OP_MOUSE_BUFFER_USED</h3>
+<pre>#define osbyte_OP_MOUSE_BUFFER_USED 246</pre>
+
+<h3 id="osbyte_OP_PRINTER_BUFFER_FREE">osbyte_OP_PRINTER_BUFFER_FREE</h3>
+<pre>#define osbyte_OP_PRINTER_BUFFER_FREE 252</pre>
+
+<h3 id="osbyte_OP_SERIAL_OUTPUT_BUFFER_FREE">osbyte_OP_SERIAL_OUTPUT_BUFFER_FREE</h3>
+<pre>#define osbyte_OP_SERIAL_OUTPUT_BUFFER_FREE 253</pre>
+
+<h3 id="osbyte_OP_SERIAL_INPUT_BUFFER_USED">osbyte_OP_SERIAL_INPUT_BUFFER_USED</h3>
+<pre>#define osbyte_OP_SERIAL_INPUT_BUFFER_USED 254</pre>
+
+<h3 id="osbyte_OP_KEYBOARD_BUFFER_USED">osbyte_OP_KEYBOARD_BUFFER_USED</h3>
+<pre>#define osbyte_OP_KEYBOARD_BUFFER_USED 255</pre>
+
+<h3 id="osbyte_IN_KEY">osbyte_IN_KEY</h3>
+<pre>#define osbyte_IN_KEY ((<a href="#osbyte_op">osbyte_op</a>) 0x81u)</pre>
+
+<h3 id="osbyte_READ_HIGH_ORDER_ADDRESS">osbyte_READ_HIGH_ORDER_ADDRESS</h3>
+<pre>#define osbyte_READ_HIGH_ORDER_ADDRESS ((<a href="#osbyte_op">osbyte_op</a>) 0x82u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_READ_HWM">osbyte_READ_HWM</h3>
+<pre>#define osbyte_READ_HWM ((<a href="#osbyte_op">osbyte_op</a>) 0x83u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_READ_TOP">osbyte_READ_TOP</h3>
+<pre>#define osbyte_READ_TOP ((<a href="#osbyte_op">osbyte_op</a>) 0x84u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_READ_TOP_FOR_MODE">osbyte_READ_TOP_FOR_MODE</h3>
+<pre>#define osbyte_READ_TOP_FOR_MODE ((<a href="#osbyte_op">osbyte_op</a>) 0x85u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_TEXT_CURSOR_POSITION">osbyte_TEXT_CURSOR_POSITION</h3>
+<pre>#define osbyte_TEXT_CURSOR_POSITION ((<a href="#osbyte_op">osbyte_op</a>) 0x86u)</pre>
+
+<h3 id="osbyte_SCREEN_CHAR">osbyte_SCREEN_CHAR</h3>
+<pre>#define osbyte_SCREEN_CHAR ((<a href="#osbyte_op">osbyte_op</a>) 0x87u)</pre>
+
+<h3 id="osbyte_RUN">osbyte_RUN</h3>
+<pre>#define osbyte_RUN ((<a href="#osbyte_op">osbyte_op</a>) 0x88u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_CASSETTE_MOTOR">osbyte_CASSETTE_MOTOR</h3>
+<pre>#define osbyte_CASSETTE_MOTOR ((<a href="#osbyte_op">osbyte_op</a>) 0x89u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_BUFFER_INSERT">osbyte_BUFFER_INSERT</h3>
+<pre>#define osbyte_BUFFER_INSERT ((<a href="#osbyte_op">osbyte_op</a>) 0x8Au)</pre>
+
+<p>Prefer Buffer</p>
+
+<h3 id="osbyte_OPT">osbyte_OPT</h3>
+<pre>#define osbyte_OPT ((<a href="#osbyte_op">osbyte_op</a>) 0x8Bu)</pre>
+
+<p>Prefer OSFSControl_WriteBootOption</p>
+
+<h3 id="osbyte_SELECT_CFS">osbyte_SELECT_CFS</h3>
+<pre>#define osbyte_SELECT_CFS ((<a href="#osbyte_op">osbyte_op</a>) 0x8Cu)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_SELECT_ROMFS">osbyte_SELECT_ROMFS</h3>
+<pre>#define osbyte_SELECT_ROMFS ((<a href="#osbyte_op">osbyte_op</a>) 0x8Du)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_ROM_ENTER">osbyte_ROM_ENTER</h3>
+<pre>#define osbyte_ROM_ENTER ((<a href="#osbyte_op">osbyte_op</a>) 0x8Eu)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_SERVICE_CALL">osbyte_SERVICE_CALL</h3>
+<pre>#define osbyte_SERVICE_CALL ((<a href="#osbyte_op">osbyte_op</a>) 0x8Fu)</pre>
+
+<p>Prefer OS_ServiceCall</p>
+
+<h3 id="osbyte_TV">osbyte_TV</h3>
+<pre>#define osbyte_TV ((<a href="#osbyte_op">osbyte_op</a>) 0x90u)</pre>
+
+<h3 id="osbyte_BUFFER_REMOVE">osbyte_BUFFER_REMOVE</h3>
+<pre>#define osbyte_BUFFER_REMOVE ((<a href="#osbyte_op">osbyte_op</a>) 0x91u)</pre>
+
+<p>Prefer Buffer</p>
+
+<h3 id="osbyte_READ_FRED">osbyte_READ_FRED</h3>
+<pre>#define osbyte_READ_FRED ((<a href="#osbyte_op">osbyte_op</a>) 0x92u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_WRITE_FRED">osbyte_WRITE_FRED</h3>
+<pre>#define osbyte_WRITE_FRED ((<a href="#osbyte_op">osbyte_op</a>) 0x93u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_READ_JIM">osbyte_READ_JIM</h3>
+<pre>#define osbyte_READ_JIM ((<a href="#osbyte_op">osbyte_op</a>) 0x94u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_WRITE_JIM">osbyte_WRITE_JIM</h3>
+<pre>#define osbyte_WRITE_JIM ((<a href="#osbyte_op">osbyte_op</a>) 0x95u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_READ_SHEILA">osbyte_READ_SHEILA</h3>
+<pre>#define osbyte_READ_SHEILA ((<a href="#osbyte_op">osbyte_op</a>) 0x96u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_WRITE_SHEILA">osbyte_WRITE_SHEILA</h3>
+<pre>#define osbyte_WRITE_SHEILA ((<a href="#osbyte_op">osbyte_op</a>) 0x97u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_BUFFER_STATUS">osbyte_BUFFER_STATUS</h3>
+<pre>#define osbyte_BUFFER_STATUS ((<a href="#osbyte_op">osbyte_op</a>) 0x98u)</pre>
+
+<p>Prefer Buffer</p>
+
+<h3 id="osbyte_TYPE_CHAR">osbyte_TYPE_CHAR</h3>
+<pre>#define osbyte_TYPE_CHAR ((<a href="#osbyte_op">osbyte_op</a>) 0x99u)</pre>
+
+<h3 id="osbyte_WRITE_VDU_CONTROL">osbyte_WRITE_VDU_CONTROL</h3>
+<pre>#define osbyte_WRITE_VDU_CONTROL ((<a href="#osbyte_op">osbyte_op</a>) 0x9Au)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_WRITE_VDU_PALETTE">osbyte_WRITE_VDU_PALETTE</h3>
+<pre>#define osbyte_WRITE_VDU_PALETTE ((<a href="#osbyte_op">osbyte_op</a>) 0x9Bu)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_SERIAL_STATE">osbyte_SERIAL_STATE</h3>
+<pre>#define osbyte_SERIAL_STATE ((<a href="#osbyte_op">osbyte_op</a>) 0x9Cu)</pre>
+
+<p>Has associated variable</p>
+
+<h3 id="osbyte_WRITE_TUBE">osbyte_WRITE_TUBE</h3>
+<pre>#define osbyte_WRITE_TUBE ((<a href="#osbyte_op">osbyte_op</a>) 0x9Du)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_READ_VDU_VARIABLE">osbyte_READ_VDU_VARIABLE</h3>
+<pre>#define osbyte_READ_VDU_VARIABLE ((<a href="#osbyte_op">osbyte_op</a>) 0xA0u)</pre>
+
+<p>Prefer OS_ReadVDUVariable</p>
+
+<h3 id="osbyte_READ_CMOS">osbyte_READ_CMOS</h3>
+<pre>#define osbyte_READ_CMOS ((<a href="#osbyte_op">osbyte_op</a>) 0xA1u)</pre>
+
+<h3 id="osbyte_WRITE_CMOS">osbyte_WRITE_CMOS</h3>
+<pre>#define osbyte_WRITE_CMOS ((<a href="#osbyte_op">osbyte_op</a>) 0xA2u)</pre>
+
+<h3 id="osbyte_GRAPHICS_INFO">osbyte_GRAPHICS_INFO</h3>
+<pre>#define osbyte_GRAPHICS_INFO ((<a href="#osbyte_op">osbyte_op</a>) 0xA3u)</pre>
+
+<h3 id="osbyte_CPU_TYPE">osbyte_CPU_TYPE</h3>
+<pre>#define osbyte_CPU_TYPE ((<a href="#osbyte_op">osbyte_op</a>) 0xA4u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_OUTPUT_CURSOR_POSITION">osbyte_OUTPUT_CURSOR_POSITION</h3>
+<pre>#define osbyte_OUTPUT_CURSOR_POSITION ((<a href="#osbyte_op">osbyte_op</a>) 0xA5u)</pre>
+
+<h3 id="osbyte_READ_VARIABLE_START">osbyte_READ_VARIABLE_START</h3>
+<pre>#define osbyte_READ_VARIABLE_START ((<a href="#osbyte_op">osbyte_op</a>) 0xA6u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_READ_ROM_POINTER_TABLE">osbyte_READ_ROM_POINTER_TABLE</h3>
+<pre>#define osbyte_READ_ROM_POINTER_TABLE ((<a href="#osbyte_op">osbyte_op</a>) 0xA8u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_READ_ROM_INFO_TABLE">osbyte_READ_ROM_INFO_TABLE</h3>
+<pre>#define osbyte_READ_ROM_INFO_TABLE ((<a href="#osbyte_op">osbyte_op</a>) 0xAAu)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_READ_KEYBOARD_TABLE">osbyte_READ_KEYBOARD_TABLE</h3>
+<pre>#define osbyte_READ_KEYBOARD_TABLE ((<a href="#osbyte_op">osbyte_op</a>) 0xACu)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_READ_VDU_VARIABLE_START">osbyte_READ_VDU_VARIABLE_START</h3>
+<pre>#define osbyte_READ_VDU_VARIABLE_START ((<a href="#osbyte_op">osbyte_op</a>) 0xAEu)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_VSYNC_TIMER">osbyte_VAR_VSYNC_TIMER</h3>
+<pre>#define osbyte_VAR_VSYNC_TIMER ((<a href="#osbyte_var">osbyte_var</a>) 0xB0u)</pre>
+
+<h3 id="osbyte_VAR_INPUT_STREAM">osbyte_VAR_INPUT_STREAM</h3>
+<pre>#define osbyte_VAR_INPUT_STREAM ((<a href="#osbyte_var">osbyte_var</a>) 0xB1u)</pre>
+
+<h3 id="osbyte_VAR_KEYBOARD_SEMAPHORE">osbyte_VAR_KEYBOARD_SEMAPHORE</h3>
+<pre>#define osbyte_VAR_KEYBOARD_SEMAPHORE ((<a href="#osbyte_var">osbyte_var</a>) 0xB2u)</pre>
+
+<h3 id="osbyte_VAR_ROM_SEMAPHORE">osbyte_VAR_ROM_SEMAPHORE</h3>
+<pre>#define osbyte_VAR_ROM_SEMAPHORE ((<a href="#osbyte_var">osbyte_var</a>) 0xB3u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_HWM">osbyte_VAR_HWM</h3>
+<pre>#define osbyte_VAR_HWM ((<a href="#osbyte_var">osbyte_var</a>) 0xB4u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_SERIAL_INTERPRETATION">osbyte_VAR_SERIAL_INTERPRETATION</h3>
+<pre>#define osbyte_VAR_SERIAL_INTERPRETATION ((<a href="#osbyte_var">osbyte_var</a>) 0xB5u)</pre>
+
+<h3 id="osbyte_VAR_IGNORE_STATE">osbyte_VAR_IGNORE_STATE</h3>
+<pre>#define osbyte_VAR_IGNORE_STATE ((<a href="#osbyte_var">osbyte_var</a>) 0xB6u)</pre>
+
+<h3 id="osbyte_VAR_CASSETTE_ROM_SWITCH">osbyte_VAR_CASSETTE_ROM_SWITCH</h3>
+<pre>#define osbyte_VAR_CASSETTE_ROM_SWITCH ((<a href="#osbyte_var">osbyte_var</a>) 0xB7u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_VDU_CONTROL">osbyte_VAR_VDU_CONTROL</h3>
+<pre>#define osbyte_VAR_VDU_CONTROL ((<a href="#osbyte_var">osbyte_var</a>) 0xB8u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_VDU_PALETTE">osbyte_VAR_VDU_PALETTE</h3>
+<pre>#define osbyte_VAR_VDU_PALETTE ((<a href="#osbyte_var">osbyte_var</a>) 0xB9u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_ROM_LAST_RESET">osbyte_VAR_ROM_LAST_RESET</h3>
+<pre>#define osbyte_VAR_ROM_LAST_RESET ((<a href="#osbyte_var">osbyte_var</a>) 0xBAu)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_ROM_BASIC">osbyte_VAR_ROM_BASIC</h3>
+<pre>#define osbyte_VAR_ROM_BASIC ((<a href="#osbyte_var">osbyte_var</a>) 0xBBu)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_CURRENT_CHANNEL">osbyte_VAR_CURRENT_CHANNEL</h3>
+<pre>#define osbyte_VAR_CURRENT_CHANNEL ((<a href="#osbyte_var">osbyte_var</a>) 0xBCu)</pre>
+
+<h3 id="osbyte_VAR_CHANNEL_COUNT">osbyte_VAR_CHANNEL_COUNT</h3>
+<pre>#define osbyte_VAR_CHANNEL_COUNT ((<a href="#osbyte_var">osbyte_var</a>) 0xBDu)</pre>
+
+<h3 id="osbyte_VAR_CONVERSION_RESOLUTION">osbyte_VAR_CONVERSION_RESOLUTION</h3>
+<pre>#define osbyte_VAR_CONVERSION_RESOLUTION ((<a href="#osbyte_var">osbyte_var</a>) 0xBEu)</pre>
+
+<h3 id="osbyte_VAR_SERIAL_BUSY">osbyte_VAR_SERIAL_BUSY</h3>
+<pre>#define osbyte_VAR_SERIAL_BUSY ((<a href="#osbyte_var">osbyte_var</a>) 0xBFu)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_SERIAL_STATE">osbyte_VAR_SERIAL_STATE</h3>
+<pre>#define osbyte_VAR_SERIAL_STATE ((<a href="#osbyte_var">osbyte_var</a>) 0xC0u)</pre>
+
+<h3 id="osbyte_VAR_FLASH_COUNTER">osbyte_VAR_FLASH_COUNTER</h3>
+<pre>#define osbyte_VAR_FLASH_COUNTER ((<a href="#osbyte_var">osbyte_var</a>) 0xC1u)</pre>
+
+<h3 id="osbyte_VAR_OFF_DURATION">osbyte_VAR_OFF_DURATION</h3>
+<pre>#define osbyte_VAR_OFF_DURATION ((<a href="#osbyte_var">osbyte_var</a>) 0xC2u)</pre>
+
+<h3 id="osbyte_VAR_ON_DURATION">osbyte_VAR_ON_DURATION</h3>
+<pre>#define osbyte_VAR_ON_DURATION ((<a href="#osbyte_var">osbyte_var</a>) 0xC3u)</pre>
+
+<h3 id="osbyte_VAR_KEYBOARD_DELAY">osbyte_VAR_KEYBOARD_DELAY</h3>
+<pre>#define osbyte_VAR_KEYBOARD_DELAY ((<a href="#osbyte_var">osbyte_var</a>) 0xC4u)</pre>
+
+<h3 id="osbyte_VAR_KEYBOARD_RATE">osbyte_VAR_KEYBOARD_RATE</h3>
+<pre>#define osbyte_VAR_KEYBOARD_RATE ((<a href="#osbyte_var">osbyte_var</a>) 0xC5u)</pre>
+
+<h3 id="osbyte_VAR_EXEC_HANDLE">osbyte_VAR_EXEC_HANDLE</h3>
+<pre>#define osbyte_VAR_EXEC_HANDLE ((<a href="#osbyte_var">osbyte_var</a>) 0xC6u)</pre>
+
+<h3 id="osbyte_VAR_SPOOL_HANDLE">osbyte_VAR_SPOOL_HANDLE</h3>
+<pre>#define osbyte_VAR_SPOOL_HANDLE ((<a href="#osbyte_var">osbyte_var</a>) 0xC7u)</pre>
+
+<h3 id="osbyte_VAR_RESET_EFFECTS">osbyte_VAR_RESET_EFFECTS</h3>
+<pre>#define osbyte_VAR_RESET_EFFECTS ((<a href="#osbyte_var">osbyte_var</a>) 0xC8u)</pre>
+
+<h3 id="osbyte_VAR_KEYBOARD_DISABLE">osbyte_VAR_KEYBOARD_DISABLE</h3>
+<pre>#define osbyte_VAR_KEYBOARD_DISABLE ((<a href="#osbyte_var">osbyte_var</a>) 0xC9u)</pre>
+
+<h3 id="osbyte_VAR_KEYBOARD_STATE">osbyte_VAR_KEYBOARD_STATE</h3>
+<pre>#define osbyte_VAR_KEYBOARD_STATE ((<a href="#osbyte_var">osbyte_var</a>) 0xCAu)</pre>
+
+<h3 id="osbyte_VAR_SERIAL_THRESHOLD">osbyte_VAR_SERIAL_THRESHOLD</h3>
+<pre>#define osbyte_VAR_SERIAL_THRESHOLD ((<a href="#osbyte_var">osbyte_var</a>) 0xCBu)</pre>
+
+<p>Prefer OSSerialOp_RxThreshold</p>
+
+<h3 id="osbyte_VAR_SERIAL_BUFFER_STATE">osbyte_VAR_SERIAL_BUFFER_STATE</h3>
+<pre>#define osbyte_VAR_SERIAL_BUFFER_STATE ((<a href="#osbyte_var">osbyte_var</a>) 0xCCu)</pre>
+
+<p>Prefer Buffer</p>
+
+<h3 id="osbyte_VAR_SERIAL_DESTINATION">osbyte_VAR_SERIAL_DESTINATION</h3>
+<pre>#define osbyte_VAR_SERIAL_DESTINATION ((<a href="#osbyte_var">osbyte_var</a>) 0xCDu)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_ECONET_OS_CALL_STATUS">osbyte_VAR_ECONET_OS_CALL_STATUS</h3>
+<pre>#define osbyte_VAR_ECONET_OS_CALL_STATUS ((<a href="#osbyte_var">osbyte_var</a>) 0xCEu)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_ECONET_INPUT_STATUS">osbyte_VAR_ECONET_INPUT_STATUS</h3>
+<pre>#define osbyte_VAR_ECONET_INPUT_STATUS ((<a href="#osbyte_var">osbyte_var</a>) 0xCFu)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_ECONET_OUTPUT_STATUS">osbyte_VAR_ECONET_OUTPUT_STATUS</h3>
+<pre>#define osbyte_VAR_ECONET_OUTPUT_STATUS ((<a href="#osbyte_var">osbyte_var</a>) 0xD0u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_SOUND_SUPPRESSION">osbyte_VAR_SOUND_SUPPRESSION</h3>
+<pre>#define osbyte_VAR_SOUND_SUPPRESSION ((<a href="#osbyte_var">osbyte_var</a>) 0xD2u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_BELL_CHANNEL">osbyte_VAR_BELL_CHANNEL</h3>
+<pre>#define osbyte_VAR_BELL_CHANNEL ((<a href="#osbyte_var">osbyte_var</a>) 0xD3u)</pre>
+
+<h3 id="osbyte_VAR_BELL_VOLUME">osbyte_VAR_BELL_VOLUME</h3>
+<pre>#define osbyte_VAR_BELL_VOLUME ((<a href="#osbyte_var">osbyte_var</a>) 0xD4u)</pre>
+
+<h3 id="osbyte_VAR_BELL_FREQUENCY">osbyte_VAR_BELL_FREQUENCY</h3>
+<pre>#define osbyte_VAR_BELL_FREQUENCY ((<a href="#osbyte_var">osbyte_var</a>) 0xD5u)</pre>
+
+<h3 id="osbyte_VAR_BELL_DURATION">osbyte_VAR_BELL_DURATION</h3>
+<pre>#define osbyte_VAR_BELL_DURATION ((<a href="#osbyte_var">osbyte_var</a>) 0xD6u)</pre>
+
+<h3 id="osbyte_VAR_BANNER_SUPPRESS">osbyte_VAR_BANNER_SUPPRESS</h3>
+<pre>#define osbyte_VAR_BANNER_SUPPRESS ((<a href="#osbyte_var">osbyte_var</a>) 0xD7u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_PENDING_KEY_LENGTH">osbyte_VAR_PENDING_KEY_LENGTH</h3>
+<pre>#define osbyte_VAR_PENDING_KEY_LENGTH ((<a href="#osbyte_var">osbyte_var</a>) 0xD8u)</pre>
+
+<h3 id="osbyte_VAR_PAGE_LENGTH">osbyte_VAR_PAGE_LENGTH</h3>
+<pre>#define osbyte_VAR_PAGE_LENGTH ((<a href="#osbyte_var">osbyte_var</a>) 0xD9u)</pre>
+
+<h3 id="osbyte_VAR_VDU_QUEUE_LENGTH">osbyte_VAR_VDU_QUEUE_LENGTH</h3>
+<pre>#define osbyte_VAR_VDU_QUEUE_LENGTH ((<a href="#osbyte_var">osbyte_var</a>) 0xDAu)</pre>
+
+<h3 id="osbyte_VAR_TAB_CHAR">osbyte_VAR_TAB_CHAR</h3>
+<pre>#define osbyte_VAR_TAB_CHAR ((<a href="#osbyte_var">osbyte_var</a>) 0xDBu)</pre>
+
+<h3 id="osbyte_VAR_ESCAPE_CHAR">osbyte_VAR_ESCAPE_CHAR</h3>
+<pre>#define osbyte_VAR_ESCAPE_CHAR ((<a href="#osbyte_var">osbyte_var</a>) 0xDCu)</pre>
+
+<h3 id="osbyte_VAR_INTERPRETATION_GROUP4">osbyte_VAR_INTERPRETATION_GROUP4</h3>
+<pre>#define osbyte_VAR_INTERPRETATION_GROUP4 ((<a href="#osbyte_var">osbyte_var</a>) 0xDDu)</pre>
+
+<h3 id="osbyte_VAR_INTERPRETATION_GROUP5">osbyte_VAR_INTERPRETATION_GROUP5</h3>
+<pre>#define osbyte_VAR_INTERPRETATION_GROUP5 ((<a href="#osbyte_var">osbyte_var</a>) 0xDEu)</pre>
+
+<h3 id="osbyte_VAR_INTERPRETATION_GROUP6">osbyte_VAR_INTERPRETATION_GROUP6</h3>
+<pre>#define osbyte_VAR_INTERPRETATION_GROUP6 ((<a href="#osbyte_var">osbyte_var</a>) 0xDFu)</pre>
+
+<h3 id="osbyte_VAR_INTERPRETATION_GROUP7">osbyte_VAR_INTERPRETATION_GROUP7</h3>
+<pre>#define osbyte_VAR_INTERPRETATION_GROUP7 ((<a href="#osbyte_var">osbyte_var</a>) 0xE0u)</pre>
+
+<h3 id="osbyte_VAR_INTERPRETATION_GROUP0">osbyte_VAR_INTERPRETATION_GROUP0</h3>
+<pre>#define osbyte_VAR_INTERPRETATION_GROUP0 ((<a href="#osbyte_var">osbyte_var</a>) 0xE1u)</pre>
+
+<h3 id="osbyte_VAR_INTERPRETATION_GROUP1">osbyte_VAR_INTERPRETATION_GROUP1</h3>
+<pre>#define osbyte_VAR_INTERPRETATION_GROUP1 ((<a href="#osbyte_var">osbyte_var</a>) 0xE2u)</pre>
+
+<h3 id="osbyte_VAR_INTERPRETATION_GROUP2">osbyte_VAR_INTERPRETATION_GROUP2</h3>
+<pre>#define osbyte_VAR_INTERPRETATION_GROUP2 ((<a href="#osbyte_var">osbyte_var</a>) 0xE3u)</pre>
+
+<h3 id="osbyte_VAR_INTERPRETATION_GROUP3">osbyte_VAR_INTERPRETATION_GROUP3</h3>
+<pre>#define osbyte_VAR_INTERPRETATION_GROUP3 ((<a href="#osbyte_var">osbyte_var</a>) 0xE4u)</pre>
+
+<h3 id="osbyte_VAR_ESCAPE_STATE">osbyte_VAR_ESCAPE_STATE</h3>
+<pre>#define osbyte_VAR_ESCAPE_STATE ((<a href="#osbyte_var">osbyte_var</a>) 0xE5u)</pre>
+
+<h3 id="osbyte_VAR_ESCAPE_EFFECTS">osbyte_VAR_ESCAPE_EFFECTS</h3>
+<pre>#define osbyte_VAR_ESCAPE_EFFECTS ((<a href="#osbyte_var">osbyte_var</a>) 0xE6u)</pre>
+
+<h3 id="osbyte_VAR_IRQ_MASK_USER">osbyte_VAR_IRQ_MASK_USER</h3>
+<pre>#define osbyte_VAR_IRQ_MASK_USER ((<a href="#osbyte_var">osbyte_var</a>) 0xE7u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_IRQ_MASK_SERIAL">osbyte_VAR_IRQ_MASK_SERIAL</h3>
+<pre>#define osbyte_VAR_IRQ_MASK_SERIAL ((<a href="#osbyte_var">osbyte_var</a>) 0xE8u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_IRQ_MASK_SYSTEM">osbyte_VAR_IRQ_MASK_SYSTEM</h3>
+<pre>#define osbyte_VAR_IRQ_MASK_SYSTEM ((<a href="#osbyte_var">osbyte_var</a>) 0xE9u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_TUBE">osbyte_VAR_TUBE</h3>
+<pre>#define osbyte_VAR_TUBE ((<a href="#osbyte_var">osbyte_var</a>) 0xEAu)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_OUTPUT_STREAMS">osbyte_VAR_OUTPUT_STREAMS</h3>
+<pre>#define osbyte_VAR_OUTPUT_STREAMS ((<a href="#osbyte_var">osbyte_var</a>) 0xECu)</pre>
+
+<h3 id="osbyte_VAR_INTERPRETATION_ARROWS">osbyte_VAR_INTERPRETATION_ARROWS</h3>
+<pre>#define osbyte_VAR_INTERPRETATION_ARROWS ((<a href="#osbyte_var">osbyte_var</a>) 0xEDu)</pre>
+
+<h3 id="osbyte_VAR_INTERPRETATION_KEYPAD">osbyte_VAR_INTERPRETATION_KEYPAD</h3>
+<pre>#define osbyte_VAR_INTERPRETATION_KEYPAD ((<a href="#osbyte_var">osbyte_var</a>) 0xEEu)</pre>
+
+<h3 id="osbyte_VAR_SHADOW_STATE">osbyte_VAR_SHADOW_STATE</h3>
+<pre>#define osbyte_VAR_SHADOW_STATE ((<a href="#osbyte_var">osbyte_var</a>) 0xEFu)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_COUNTRY_NUMBER">osbyte_VAR_COUNTRY_NUMBER</h3>
+<pre>#define osbyte_VAR_COUNTRY_NUMBER ((<a href="#osbyte_var">osbyte_var</a>) 0xF0u)</pre>
+
+<h3 id="osbyte_VAR_USER_FLAG">osbyte_VAR_USER_FLAG</h3>
+<pre>#define osbyte_VAR_USER_FLAG ((<a href="#osbyte_var">osbyte_var</a>) 0xF1u)</pre>
+
+<h3 id="osbyte_VAR_SERIAL_RATE">osbyte_VAR_SERIAL_RATE</h3>
+<pre>#define osbyte_VAR_SERIAL_RATE ((<a href="#osbyte_var">osbyte_var</a>) 0xF2u)</pre>
+
+<h3 id="osbyte_VAR_INTERVAL_TIMER_STATE">osbyte_VAR_INTERVAL_TIMER_STATE</h3>
+<pre>#define osbyte_VAR_INTERVAL_TIMER_STATE ((<a href="#osbyte_var">osbyte_var</a>) 0xF3u)</pre>
+
+<h3 id="osbyte_VAR_SOFT_KEY_STATE">osbyte_VAR_SOFT_KEY_STATE</h3>
+<pre>#define osbyte_VAR_SOFT_KEY_STATE ((<a href="#osbyte_var">osbyte_var</a>) 0xF4u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_PRINTER">osbyte_VAR_PRINTER</h3>
+<pre>#define osbyte_VAR_PRINTER ((<a href="#osbyte_var">osbyte_var</a>) 0xF5u)</pre>
+
+<h3 id="osbyte_VAR_IGNORE_CHAR">osbyte_VAR_IGNORE_CHAR</h3>
+<pre>#define osbyte_VAR_IGNORE_CHAR ((<a href="#osbyte_var">osbyte_var</a>) 0xF6u)</pre>
+
+<h3 id="osbyte_VAR_INTERPRETATION_BREAK">osbyte_VAR_INTERPRETATION_BREAK</h3>
+<pre>#define osbyte_VAR_INTERPRETATION_BREAK ((<a href="#osbyte_var">osbyte_var</a>) 0xF7u)</pre>
+
+<h3 id="osbyte_VAR_INTERPRETATION_BREAK1">osbyte_VAR_INTERPRETATION_BREAK1</h3>
+<pre>#define osbyte_VAR_INTERPRETATION_BREAK1 ((<a href="#osbyte_var">osbyte_var</a>) 0xF8u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_INTERPRETATION_BREAK2">osbyte_VAR_INTERPRETATION_BREAK2</h3>
+<pre>#define osbyte_VAR_INTERPRETATION_BREAK2 ((<a href="#osbyte_var">osbyte_var</a>) 0xF9u)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_OUTPUT_SCREEN_BANK">osbyte_VAR_OUTPUT_SCREEN_BANK</h3>
+<pre>#define osbyte_VAR_OUTPUT_SCREEN_BANK ((<a href="#osbyte_var">osbyte_var</a>) 0xFAu)</pre>
+
+<h3 id="osbyte_VAR_DISPLAY_SCREEN_BANK">osbyte_VAR_DISPLAY_SCREEN_BANK</h3>
+<pre>#define osbyte_VAR_DISPLAY_SCREEN_BANK ((<a href="#osbyte_var">osbyte_var</a>) 0xFBu)</pre>
+
+<h3 id="osbyte_VAR_ROM_CURRENT">osbyte_VAR_ROM_CURRENT</h3>
+<pre>#define osbyte_VAR_ROM_CURRENT ((<a href="#osbyte_var">osbyte_var</a>) 0xFCu)</pre>
+
+<p>Obsolete </p>
+
+<h3 id="osbyte_VAR_LAST_RESET">osbyte_VAR_LAST_RESET</h3>
+<pre>#define osbyte_VAR_LAST_RESET ((<a href="#osbyte_var">osbyte_var</a>) 0xFDu)</pre>
+
+<h3 id="osbyte_VAR_INTERPRETATION_SHIFTING">osbyte_VAR_INTERPRETATION_SHIFTING</h3>
+<pre>#define osbyte_VAR_INTERPRETATION_SHIFTING ((<a href="#osbyte_var">osbyte_var</a>) 0xFEu)</pre>
+
+<h3 id="osbyte_VAR_BOOT_OPTION">osbyte_VAR_BOOT_OPTION</h3>
+<pre>#define osbyte_VAR_BOOT_OPTION ((<a href="#osbyte_var">osbyte_var</a>) 0xFFu)</pre>
+
+<h3 id="os_RESET_SOFT">os_RESET_SOFT</h3>
+<pre>#define os_RESET_SOFT 0</pre>
+
+<h3 id="os_RESET_POWER_ON">os_RESET_POWER_ON</h3>
+<pre>#define os_RESET_POWER_ON 1</pre>
+
+<h3 id="os_RESET_HARD">os_RESET_HARD</h3>
+<pre>#define os_RESET_HARD 2</pre>
+
+<h3 id="osbyte_CONFIGURE_STATION">osbyte_CONFIGURE_STATION</h3>
+<pre>#define osbyte_CONFIGURE_STATION 0</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_STATION">osbyte_CONFIGURE_FS_STATION</h3>
+<pre>#define osbyte_CONFIGURE_FS_STATION 1</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_NET">osbyte_CONFIGURE_FS_NET</h3>
+<pre>#define osbyte_CONFIGURE_FS_NET 2</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_NAME0">osbyte_CONFIGURE_FS_NAME0</h3>
+<pre>#define osbyte_CONFIGURE_FS_NAME0 2</pre>
+
+<p>if FSStation = 0</p>
+
+<h3 id="osbyte_CONFIGURE_PS_STATION">osbyte_CONFIGURE_PS_STATION</h3>
+<pre>#define osbyte_CONFIGURE_PS_STATION 3</pre>
+
+<h3 id="osbyte_CONFIGURE_PS_NET">osbyte_CONFIGURE_PS_NET</h3>
+<pre>#define osbyte_CONFIGURE_PS_NET 4</pre>
+
+<h3 id="osbyte_CONFIGURE_PS_NAME0">osbyte_CONFIGURE_PS_NAME0</h3>
+<pre>#define osbyte_CONFIGURE_PS_NAME0 4</pre>
+
+<p>if PSStation = 0</p>
+
+<h3 id="osbyte_CONFIGURE_FILE_SYSTEM">osbyte_CONFIGURE_FILE_SYSTEM</h3>
+<pre>#define osbyte_CONFIGURE_FILE_SYSTEM 5</pre>
+
+<h3 id="osbyte_CONFIGURE_UNPLUG0">osbyte_CONFIGURE_UNPLUG0</h3>
+<pre>#define osbyte_CONFIGURE_UNPLUG0 6</pre>
+
+<h3 id="osbyte_CONFIGURE_UNPLUG1">osbyte_CONFIGURE_UNPLUG1</h3>
+<pre>#define osbyte_CONFIGURE_UNPLUG1 7</pre>
+
+<h3 id="osbyte_CONFIGURE_UNPLUG8">osbyte_CONFIGURE_UNPLUG8</h3>
+<pre>#define osbyte_CONFIGURE_UNPLUG8 9</pre>
+
+<p>RO360 </p>
+
+<h3 id="osbyte_CONFIGURE_MODE">osbyte_CONFIGURE_MODE</h3>
+<pre>#define osbyte_CONFIGURE_MODE 10</pre>
+
+<h3 id="osbyte_CONFIGURE_MODE_SHIFT">osbyte_CONFIGURE_MODE_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_MODE_SHIFT 0</pre>
+
+<h3 id="osbyte_CONFIGURE_MODE_MASK">osbyte_CONFIGURE_MODE_MASK</h3>
+<pre>#define osbyte_CONFIGURE_MODE_MASK 0xFu</pre>
+
+<h3 id="osbyte_CONFIGURE_TV_INTERLACE">osbyte_CONFIGURE_TV_INTERLACE</h3>
+<pre>#define osbyte_CONFIGURE_TV_INTERLACE 10</pre>
+
+<h3 id="osbyte_CONFIGURE_TV_INTERLACE_MASK">osbyte_CONFIGURE_TV_INTERLACE_MASK</h3>
+<pre>#define osbyte_CONFIGURE_TV_INTERLACE_MASK 0x10u</pre>
+
+<h3 id="osbyte_CONFIGURE_TV_VERTICAL_ADJUST">osbyte_CONFIGURE_TV_VERTICAL_ADJUST</h3>
+<pre>#define osbyte_CONFIGURE_TV_VERTICAL_ADJUST 10</pre>
+
+<h3 id="osbyte_CONFIGURE_TV_VERTICAL_ADJUST_SHIFT">osbyte_CONFIGURE_TV_VERTICAL_ADJUST_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_TV_VERTICAL_ADJUST_SHIFT 5</pre>
+
+<h3 id="osbyte_CONFIGURE_TV_VERTICAL_ADJUST_MASK">osbyte_CONFIGURE_TV_VERTICAL_ADJUST_MASK</h3>
+<pre>#define osbyte_CONFIGURE_TV_VERTICAL_ADJUST_MASK 0xE0u</pre>
+
+<h3 id="osbyte_CONFIGURE_DRIVE">osbyte_CONFIGURE_DRIVE</h3>
+<pre>#define osbyte_CONFIGURE_DRIVE 11</pre>
+
+<h3 id="osbyte_CONFIGURE_DRIVE_SHIFT">osbyte_CONFIGURE_DRIVE_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_DRIVE_SHIFT 0</pre>
+
+<h3 id="osbyte_CONFIGURE_DRIVE_MASK">osbyte_CONFIGURE_DRIVE_MASK</h3>
+<pre>#define osbyte_CONFIGURE_DRIVE_MASK 0x7u</pre>
+
+<h3 id="osbyte_CONFIGURE_CAPS">osbyte_CONFIGURE_CAPS</h3>
+<pre>#define osbyte_CONFIGURE_CAPS 11</pre>
+
+<h3 id="osbyte_CONFIGURE_CAPS_SHIFT">osbyte_CONFIGURE_CAPS_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_CAPS_SHIFT 3</pre>
+
+<h3 id="osbyte_CONFIGURE_CAPS_MASK">osbyte_CONFIGURE_CAPS_MASK</h3>
+<pre>#define osbyte_CONFIGURE_CAPS_MASK 0x38u</pre>
+
+<h3 id="osbyte_CONFIGURE_DIR">osbyte_CONFIGURE_DIR</h3>
+<pre>#define osbyte_CONFIGURE_DIR 11</pre>
+
+<h3 id="osbyte_CONFIGURE_DIR_MASK">osbyte_CONFIGURE_DIR_MASK</h3>
+<pre>#define osbyte_CONFIGURE_DIR_MASK 0x40u</pre>
+
+<h3 id="osbyte_CONFIGURE_DELAY">osbyte_CONFIGURE_DELAY</h3>
+<pre>#define osbyte_CONFIGURE_DELAY 12</pre>
+
+<h3 id="osbyte_CONFIGURE_REPEAT">osbyte_CONFIGURE_REPEAT</h3>
+<pre>#define osbyte_CONFIGURE_REPEAT 13</pre>
+
+<h3 id="osbyte_CONFIGURE_IGNORE">osbyte_CONFIGURE_IGNORE</h3>
+<pre>#define osbyte_CONFIGURE_IGNORE 14</pre>
+
+<h3 id="osbyte_CONFIGURE_NO_IGNORE">osbyte_CONFIGURE_NO_IGNORE</h3>
+<pre>#define osbyte_CONFIGURE_NO_IGNORE 15</pre>
+
+<h3 id="osbyte_CONFIGURE_NO_IGNORE_MASK">osbyte_CONFIGURE_NO_IGNORE_MASK</h3>
+<pre>#define osbyte_CONFIGURE_NO_IGNORE_MASK 0x2u</pre>
+
+<h3 id="osbyte_CONFIGURE_BAUD">osbyte_CONFIGURE_BAUD</h3>
+<pre>#define osbyte_CONFIGURE_BAUD 15</pre>
+
+<h3 id="osbyte_CONFIGURE_BAUD_SHIFT">osbyte_CONFIGURE_BAUD_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_BAUD_SHIFT 2</pre>
+
+<h3 id="osbyte_CONFIGURE_BAUD_MASK">osbyte_CONFIGURE_BAUD_MASK</h3>
+<pre>#define osbyte_CONFIGURE_BAUD_MASK 0x1Cu</pre>
+
+<h3 id="osbyte_CONFIGURE_PRINT">osbyte_CONFIGURE_PRINT</h3>
+<pre>#define osbyte_CONFIGURE_PRINT 15</pre>
+
+<h3 id="osbyte_CONFIGURE_PRINT_SHIFT">osbyte_CONFIGURE_PRINT_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_PRINT_SHIFT 5</pre>
+
+<h3 id="osbyte_CONFIGURE_PRINT_MASK">osbyte_CONFIGURE_PRINT_MASK</h3>
+<pre>#define osbyte_CONFIGURE_PRINT_MASK 0xE0u</pre>
+
+<h3 id="osbyte_CONFIGURE_LOUD">osbyte_CONFIGURE_LOUD</h3>
+<pre>#define osbyte_CONFIGURE_LOUD 16</pre>
+
+<h3 id="osbyte_CONFIGURE_LOUD_MASK">osbyte_CONFIGURE_LOUD_MASK</h3>
+<pre>#define osbyte_CONFIGURE_LOUD_MASK 0x2u</pre>
+
+<h3 id="osbyte_CONFIGURE_NO_SCROLL">osbyte_CONFIGURE_NO_SCROLL</h3>
+<pre>#define osbyte_CONFIGURE_NO_SCROLL 16</pre>
+
+<h3 id="osbyte_CONFIGURE_NO_SCROLL_MASK">osbyte_CONFIGURE_NO_SCROLL_MASK</h3>
+<pre>#define osbyte_CONFIGURE_NO_SCROLL_MASK 0x8u</pre>
+
+<h3 id="osbyte_CONFIGURE_BOOT">osbyte_CONFIGURE_BOOT</h3>
+<pre>#define osbyte_CONFIGURE_BOOT 16</pre>
+
+<h3 id="osbyte_CONFIGURE_BOOT_MASK">osbyte_CONFIGURE_BOOT_MASK</h3>
+<pre>#define osbyte_CONFIGURE_BOOT_MASK 0x10u</pre>
+
+<h3 id="osbyte_CONFIGURE_DATA">osbyte_CONFIGURE_DATA</h3>
+<pre>#define osbyte_CONFIGURE_DATA 16</pre>
+
+<h3 id="osbyte_CONFIGURE_DATA_SHIFT">osbyte_CONFIGURE_DATA_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_DATA_SHIFT 5</pre>
+
+<h3 id="osbyte_CONFIGURE_DATA_MASK">osbyte_CONFIGURE_DATA_MASK</h3>
+<pre>#define osbyte_CONFIGURE_DATA_MASK 0xE0u</pre>
+
+<h3 id="osbyte_CONFIGURE_NET_FILER_SORT">osbyte_CONFIGURE_NET_FILER_SORT</h3>
+<pre>#define osbyte_CONFIGURE_NET_FILER_SORT 17</pre>
+
+<h3 id="osbyte_CONFIGURE_NET_FILER_SORT_MASK">osbyte_CONFIGURE_NET_FILER_SORT_MASK</h3>
+<pre>#define osbyte_CONFIGURE_NET_FILER_SORT_MASK 0x1u</pre>
+
+<h3 id="osbyte_CONFIGURE_LIBRARY">osbyte_CONFIGURE_LIBRARY</h3>
+<pre>#define osbyte_CONFIGURE_LIBRARY 17</pre>
+
+<h3 id="osbyte_CONFIGURE_LIBRARY_MASK">osbyte_CONFIGURE_LIBRARY_MASK</h3>
+<pre>#define osbyte_CONFIGURE_LIBRARY_MASK 0x2u</pre>
+
+<h3 id="osbyte_CONFIGURE_NET_FILER_DISPLAY">osbyte_CONFIGURE_NET_FILER_DISPLAY</h3>
+<pre>#define osbyte_CONFIGURE_NET_FILER_DISPLAY 17</pre>
+
+<h3 id="osbyte_CONFIGURE_NET_FILER_DISPLAY_SHIFT">osbyte_CONFIGURE_NET_FILER_DISPLAY_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_NET_FILER_DISPLAY_SHIFT 2</pre>
+
+<h3 id="osbyte_CONFIGURE_NET_FILER_DISPLAY_MASK">osbyte_CONFIGURE_NET_FILER_DISPLAY_MASK</h3>
+<pre>#define osbyte_CONFIGURE_NET_FILER_DISPLAY_MASK 0xCu</pre>
+
+<h3 id="osbyte_CONFIGURE_UNPLUG2">osbyte_CONFIGURE_UNPLUG2</h3>
+<pre>#define osbyte_CONFIGURE_UNPLUG2 18</pre>
+
+<h3 id="osbyte_CONFIGURE_UNPLUG3">osbyte_CONFIGURE_UNPLUG3</h3>
+<pre>#define osbyte_CONFIGURE_UNPLUG3 19</pre>
+
+<h3 id="osbyte_CONFIGURE_UNPLUG_EXTENSION0">osbyte_CONFIGURE_UNPLUG_EXTENSION0</h3>
+<pre>#define osbyte_CONFIGURE_UNPLUG_EXTENSION0 20</pre>
+
+<h3 id="osbyte_CONFIGURE_UNPLUG_EXTENSION1">osbyte_CONFIGURE_UNPLUG_EXTENSION1</h3>
+<pre>#define osbyte_CONFIGURE_UNPLUG_EXTENSION1 21</pre>
+
+<h3 id="osbyte_CONFIGURE_WIMP_DOUBLE_CLICK_MOVE">osbyte_CONFIGURE_WIMP_DOUBLE_CLICK_MOVE</h3>
+<pre>#define osbyte_CONFIGURE_WIMP_DOUBLE_CLICK_MOVE 22</pre>
+
+<h3 id="osbyte_CONFIGURE_WIMP_AUTO_MENU_DELAY">osbyte_CONFIGURE_WIMP_AUTO_MENU_DELAY</h3>
+<pre>#define osbyte_CONFIGURE_WIMP_AUTO_MENU_DELAY 23</pre>
+
+<h3 id="osbyte_CONFIGURE_TERRITORY">osbyte_CONFIGURE_TERRITORY</h3>
+<pre>#define osbyte_CONFIGURE_TERRITORY 24</pre>
+
+<h3 id="osbyte_CONFIGURE_PRINTER_BUFFER_SIZE">osbyte_CONFIGURE_PRINTER_BUFFER_SIZE</h3>
+<pre>#define osbyte_CONFIGURE_PRINTER_BUFFER_SIZE 25</pre>
+
+<p>Prefer Buffer</p>
+
+<h3 id="osbyte_CONFIGURE_ADFS_SPINDOWN">osbyte_CONFIGURE_ADFS_SPINDOWN</h3>
+<pre>#define osbyte_CONFIGURE_ADFS_SPINDOWN 26</pre>
+
+<h3 id="osbyte_CONFIGURE_WIMP_MENU_DRAG_DELAY">osbyte_CONFIGURE_WIMP_MENU_DRAG_DELAY</h3>
+<pre>#define osbyte_CONFIGURE_WIMP_MENU_DRAG_DELAY 27</pre>
+
+<h3 id="osbyte_CONFIGURE_TRUNCATE">osbyte_CONFIGURE_TRUNCATE</h3>
+<pre>#define osbyte_CONFIGURE_TRUNCATE 28</pre>
+
+<h3 id="osbyte_CONFIGURE_TRUNCATE_MASK">osbyte_CONFIGURE_TRUNCATE_MASK</h3>
+<pre>#define osbyte_CONFIGURE_TRUNCATE_MASK 0x1u</pre>
+
+<h3 id="osbyte_CONFIGURE_DRAG_ASPRITE">osbyte_CONFIGURE_DRAG_ASPRITE</h3>
+<pre>#define osbyte_CONFIGURE_DRAG_ASPRITE 28</pre>
+
+<h3 id="osbyte_CONFIGURE_DRAG_ASPRITE_MASK">osbyte_CONFIGURE_DRAG_ASPRITE_MASK</h3>
+<pre>#define osbyte_CONFIGURE_DRAG_ASPRITE_MASK 0x2u</pre>
+
+<h3 id="osbyte_CONFIGURE_NO_FILER_ACTION">osbyte_CONFIGURE_NO_FILER_ACTION</h3>
+<pre>#define osbyte_CONFIGURE_NO_FILER_ACTION 28</pre>
+
+<h3 id="osbyte_CONFIGURE_NO_FILER_ACTION_MASK">osbyte_CONFIGURE_NO_FILER_ACTION_MASK</h3>
+<pre>#define osbyte_CONFIGURE_NO_FILER_ACTION_MASK 0x4u</pre>
+
+<h3 id="osbyte_CONFIGURE_DESKTOP_DITHER">osbyte_CONFIGURE_DESKTOP_DITHER</h3>
+<pre>#define osbyte_CONFIGURE_DESKTOP_DITHER 28</pre>
+
+<h3 id="osbyte_CONFIGURE_DESKTOP_DITHER_MASK">osbyte_CONFIGURE_DESKTOP_DITHER_MASK</h3>
+<pre>#define osbyte_CONFIGURE_DESKTOP_DITHER_MASK 0x8u</pre>
+
+<h3 id="osbyte_CONFIGURE_NO_OBSCURE_ICON_BAR">osbyte_CONFIGURE_NO_OBSCURE_ICON_BAR</h3>
+<pre>#define osbyte_CONFIGURE_NO_OBSCURE_ICON_BAR 28</pre>
+
+<h3 id="osbyte_CONFIGURE_NO_OBSCURE_ICON_BAR_MASK">osbyte_CONFIGURE_NO_OBSCURE_ICON_BAR_MASK</h3>
+<pre>#define osbyte_CONFIGURE_NO_OBSCURE_ICON_BAR_MASK 0x10u</pre>
+
+<h3 id="osbyte_CONFIGURE_SHUTDOWN_TYPE">osbyte_CONFIGURE_SHUTDOWN_TYPE</h3>
+<pre>#define osbyte_CONFIGURE_SHUTDOWN_TYPE 28</pre>
+
+<h3 id="osbyte_CONFIGURE_SHUTDOWN_TYPE_SHIFT">osbyte_CONFIGURE_SHUTDOWN_TYPE_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_SHUTDOWN_TYPE_SHIFT 6</pre>
+
+<h3 id="osbyte_CONFIGURE_SHUTDOWN_TYPE_MASK">osbyte_CONFIGURE_SHUTDOWN_TYPE_MASK</h3>
+<pre>#define osbyte_CONFIGURE_SHUTDOWN_TYPE_MASK 0xC0u</pre>
+
+<h3 id="osbyte_CONFIGURE_MOUSE_TYPE">osbyte_CONFIGURE_MOUSE_TYPE</h3>
+<pre>#define osbyte_CONFIGURE_MOUSE_TYPE 29</pre>
+
+<h3 id="osbyte_CONFIGURE_USER0">osbyte_CONFIGURE_USER0</h3>
+<pre>#define osbyte_CONFIGURE_USER0 30</pre>
+
+<p>16 bytes</p>
+
+<h3 id="osbyte_CONFIGURE_THIRD_PARTY0">osbyte_CONFIGURE_THIRD_PARTY0</h3>
+<pre>#define osbyte_CONFIGURE_THIRD_PARTY0 46</pre>
+
+<p>14 bytes</p>
+
+<h3 id="osbyte_CONFIGURE_PODULE_EXTRA0">osbyte_CONFIGURE_PODULE_EXTRA0</h3>
+<pre>#define osbyte_CONFIGURE_PODULE_EXTRA0 60</pre>
+
+<p>20 bytes</p>
+
+<h3 id="osbyte_CONFIGURE_RISCIX">osbyte_CONFIGURE_RISCIX</h3>
+<pre>#define osbyte_CONFIGURE_RISCIX 80</pre>
+
+<p>32 bytes</p>
+
+<h3 id="osbyte_CONFIGURE_SHARE_NET">osbyte_CONFIGURE_SHARE_NET</h3>
+<pre>#define osbyte_CONFIGURE_SHARE_NET 80</pre>
+
+<h3 id="osbyte_CONFIGURE_SHARE_MARKER">osbyte_CONFIGURE_SHARE_MARKER</h3>
+<pre>#define osbyte_CONFIGURE_SHARE_MARKER 81</pre>
+
+<h3 id="osbyte_CONFIGURE_SHARE_DISCS">osbyte_CONFIGURE_SHARE_DISCS</h3>
+<pre>#define osbyte_CONFIGURE_SHARE_DISCS 82</pre>
+
+<p>24 bytes</p>
+
+<h3 id="osbyte_CONFIGURE_SHARE_DRIVE4">osbyte_CONFIGURE_SHARE_DRIVE4</h3>
+<pre>#define osbyte_CONFIGURE_SHARE_DRIVE4 106</pre>
+
+<h3 id="osbyte_CONFIGURE_SHARE_DRIVE4_MASK">osbyte_CONFIGURE_SHARE_DRIVE4_MASK</h3>
+<pre>#define osbyte_CONFIGURE_SHARE_DRIVE4_MASK 0x1u</pre>
+
+<h3 id="osbyte_CONFIGURE_PROTECT_DRIVE4">osbyte_CONFIGURE_PROTECT_DRIVE4</h3>
+<pre>#define osbyte_CONFIGURE_PROTECT_DRIVE4 106</pre>
+
+<h3 id="osbyte_CONFIGURE_PROTECT_DRIVE4_MASK">osbyte_CONFIGURE_PROTECT_DRIVE4_MASK</h3>
+<pre>#define osbyte_CONFIGURE_PROTECT_DRIVE4_MASK 0x2u</pre>
+
+<h3 id="osbyte_CONFIGURE_SHARE_DRIVE5">osbyte_CONFIGURE_SHARE_DRIVE5</h3>
+<pre>#define osbyte_CONFIGURE_SHARE_DRIVE5 106</pre>
+
+<h3 id="osbyte_CONFIGURE_SHARE_DRIVE5_MASK">osbyte_CONFIGURE_SHARE_DRIVE5_MASK</h3>
+<pre>#define osbyte_CONFIGURE_SHARE_DRIVE5_MASK 0x4u</pre>
+
+<h3 id="osbyte_CONFIGURE_PROTECT_DRIVE5">osbyte_CONFIGURE_PROTECT_DRIVE5</h3>
+<pre>#define osbyte_CONFIGURE_PROTECT_DRIVE5 106</pre>
+
+<h3 id="osbyte_CONFIGURE_PROTECT_DRIVE5_MASK">osbyte_CONFIGURE_PROTECT_DRIVE5_MASK</h3>
+<pre>#define osbyte_CONFIGURE_PROTECT_DRIVE5_MASK 0x8u</pre>
+
+<h3 id="osbyte_CONFIGURE_SHARE_DRIVE6">osbyte_CONFIGURE_SHARE_DRIVE6</h3>
+<pre>#define osbyte_CONFIGURE_SHARE_DRIVE6 106</pre>
+
+<h3 id="osbyte_CONFIGURE_SHARE_DRIVE6_MASK">osbyte_CONFIGURE_SHARE_DRIVE6_MASK</h3>
+<pre>#define osbyte_CONFIGURE_SHARE_DRIVE6_MASK 0x10u</pre>
+
+<h3 id="osbyte_CONFIGURE_PROTECT_DRIVE6">osbyte_CONFIGURE_PROTECT_DRIVE6</h3>
+<pre>#define osbyte_CONFIGURE_PROTECT_DRIVE6 106</pre>
+
+<h3 id="osbyte_CONFIGURE_PROTECT_DRIVE6_MASK">osbyte_CONFIGURE_PROTECT_DRIVE6_MASK</h3>
+<pre>#define osbyte_CONFIGURE_PROTECT_DRIVE6_MASK 0x20u</pre>
+
+<h3 id="osbyte_CONFIGURE_SHARE_DRIVE7">osbyte_CONFIGURE_SHARE_DRIVE7</h3>
+<pre>#define osbyte_CONFIGURE_SHARE_DRIVE7 106</pre>
+
+<h3 id="osbyte_CONFIGURE_SHARE_DRIVE7_MASK">osbyte_CONFIGURE_SHARE_DRIVE7_MASK</h3>
+<pre>#define osbyte_CONFIGURE_SHARE_DRIVE7_MASK 0x40u</pre>
+
+<h3 id="osbyte_CONFIGURE_PROTECT_DRIVE7">osbyte_CONFIGURE_PROTECT_DRIVE7</h3>
+<pre>#define osbyte_CONFIGURE_PROTECT_DRIVE7 106</pre>
+
+<h3 id="osbyte_CONFIGURE_PROTECT_DRIVE7_MASK">osbyte_CONFIGURE_PROTECT_DRIVE7_MASK</h3>
+<pre>#define osbyte_CONFIGURE_PROTECT_DRIVE7_MASK 0x80u</pre>
+
+<h3 id="osbyte_CONFIGURE_SHARE_DISCS_LIMIT">osbyte_CONFIGURE_SHARE_DISCS_LIMIT</h3>
+<pre>#define osbyte_CONFIGURE_SHARE_DISCS_LIMIT 24</pre>
+
+<h3 id="osbyte_CONFIGURE_PODULE0">osbyte_CONFIGURE_PODULE0</h3>
+<pre>#define osbyte_CONFIGURE_PODULE0 112</pre>
+
+<p>4 bytes</p>
+
+<h3 id="osbyte_CONFIGURE_PODULE1">osbyte_CONFIGURE_PODULE1</h3>
+<pre>#define osbyte_CONFIGURE_PODULE1 116</pre>
+
+<p>4 bytes</p>
+
+<h3 id="osbyte_CONFIGURE_PODULE2">osbyte_CONFIGURE_PODULE2</h3>
+<pre>#define osbyte_CONFIGURE_PODULE2 120</pre>
+
+<p>4 bytes</p>
+
+<h3 id="osbyte_CONFIGURE_PODULE3">osbyte_CONFIGURE_PODULE3</h3>
+<pre>#define osbyte_CONFIGURE_PODULE3 124</pre>
+
+<p>4 bytes</p>
+
+<h3 id="osbyte_CONFIGURE_YEAR0">osbyte_CONFIGURE_YEAR0</h3>
+<pre>#define osbyte_CONFIGURE_YEAR0 128</pre>
+
+<h3 id="osbyte_CONFIGURE_YEAR1">osbyte_CONFIGURE_YEAR1</h3>
+<pre>#define osbyte_CONFIGURE_YEAR1 129</pre>
+
+<h3 id="osbyte_CONFIGURE_UNPLUG9">osbyte_CONFIGURE_UNPLUG9</h3>
+<pre>#define osbyte_CONFIGURE_UNPLUG9 130</pre>
+
+<p>RISC OS 3.60+</p>
+
+<h3 id="osbyte_CONFIGURE_UNPLUG10">osbyte_CONFIGURE_UNPLUG10</h3>
+<pre>#define osbyte_CONFIGURE_UNPLUG10 131</pre>
+
+<p>RISC OS 3.60+</p>
+
+<h3 id="osbyte_CONFIGURE_DUMP_FORMAT">osbyte_CONFIGURE_DUMP_FORMAT</h3>
+<pre>#define osbyte_CONFIGURE_DUMP_FORMAT 132</pre>
+
+<h3 id="osbyte_CONFIGURE_DUMP_FORMAT_SHIFT">osbyte_CONFIGURE_DUMP_FORMAT_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_DUMP_FORMAT_SHIFT 0</pre>
+
+<h3 id="osbyte_CONFIGURE_DUMP_FORMAT_MASK">osbyte_CONFIGURE_DUMP_FORMAT_MASK</h3>
+<pre>#define osbyte_CONFIGURE_DUMP_FORMAT_MASK 0x1Fu</pre>
+
+<h3 id="osbyte_CONFIGURE_TUBE">osbyte_CONFIGURE_TUBE</h3>
+<pre>#define osbyte_CONFIGURE_TUBE 132</pre>
+
+<h3 id="osbyte_CONFIGURE_TUBE_MASK">osbyte_CONFIGURE_TUBE_MASK</h3>
+<pre>#define osbyte_CONFIGURE_TUBE_MASK 0x20u</pre>
+
+<h3 id="osbyte_CONFIGURE_HOST_PODULE">osbyte_CONFIGURE_HOST_PODULE</h3>
+<pre>#define osbyte_CONFIGURE_HOST_PODULE 132</pre>
+
+<h3 id="osbyte_CONFIGURE_HOST_PODULE_SHIFT">osbyte_CONFIGURE_HOST_PODULE_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_HOST_PODULE_SHIFT 6</pre>
+
+<h3 id="osbyte_CONFIGURE_HOST_PODULE_MASK">osbyte_CONFIGURE_HOST_PODULE_MASK</h3>
+<pre>#define osbyte_CONFIGURE_HOST_PODULE_MASK 0xC0u</pre>
+
+<h3 id="osbyte_CONFIGURE_SOUND">osbyte_CONFIGURE_SOUND</h3>
+<pre>#define osbyte_CONFIGURE_SOUND 132</pre>
+
+<p>RISC OS 3.60+</p>
+
+<h3 id="osbyte_CONFIGURE_SOUND_SHIFT">osbyte_CONFIGURE_SOUND_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_SOUND_SHIFT 5</pre>
+
+<h3 id="osbyte_CONFIGURE_SOUND_MASK">osbyte_CONFIGURE_SOUND_MASK</h3>
+<pre>#define osbyte_CONFIGURE_SOUND_MASK 0x60u</pre>
+
+<h3 id="osbyte_CONFIGURE_SOUND_QUALITY">osbyte_CONFIGURE_SOUND_QUALITY</h3>
+<pre>#define osbyte_CONFIGURE_SOUND_QUALITY 132</pre>
+
+<p>RISC OS 3.60+</p>
+
+<h3 id="osbyte_CONFIGURE_SOUND_QUALITY_MASK">osbyte_CONFIGURE_SOUND_QUALITY_MASK</h3>
+<pre>#define osbyte_CONFIGURE_SOUND_QUALITY_MASK 0x80u</pre>
+
+<h3 id="osbyte_CONFIGURE_SYNC">osbyte_CONFIGURE_SYNC</h3>
+<pre>#define osbyte_CONFIGURE_SYNC 133</pre>
+
+<h3 id="osbyte_CONFIGURE_SYNC_SHIFT">osbyte_CONFIGURE_SYNC_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_SYNC_SHIFT 0</pre>
+
+<h3 id="osbyte_CONFIGURE_SYNC_MASK">osbyte_CONFIGURE_SYNC_MASK</h3>
+<pre>#define osbyte_CONFIGURE_SYNC_MASK 0x81u</pre>
+
+<h3 id="osbyte_CONFIGURE_MODE_TOP_BIT">osbyte_CONFIGURE_MODE_TOP_BIT</h3>
+<pre>#define osbyte_CONFIGURE_MODE_TOP_BIT 133</pre>
+
+<h3 id="osbyte_CONFIGURE_MODE_TOP_BIT_MASK">osbyte_CONFIGURE_MODE_TOP_BIT_MASK</h3>
+<pre>#define osbyte_CONFIGURE_MODE_TOP_BIT_MASK 0x2u</pre>
+
+<h3 id="osbyte_CONFIGURE_MONITOR_NOT_CONFIGURED">osbyte_CONFIGURE_MONITOR_NOT_CONFIGURED</h3>
+<pre>#define osbyte_CONFIGURE_MONITOR_NOT_CONFIGURED 133</pre>
+
+<h3 id="osbyte_CONFIGURE_MONITOR_NOT_CONFIGURED_MASK">osbyte_CONFIGURE_MONITOR_NOT_CONFIGURED_MASK</h3>
+<pre>#define osbyte_CONFIGURE_MONITOR_NOT_CONFIGURED_MASK 0x2u</pre>
+
+<h3 id="osbyte_CONFIGURE_MONITOR_TYPE">osbyte_CONFIGURE_MONITOR_TYPE</h3>
+<pre>#define osbyte_CONFIGURE_MONITOR_TYPE 133</pre>
+
+<h3 id="osbyte_CONFIGURE_MONITOR_TYPE_SHIFT">osbyte_CONFIGURE_MONITOR_TYPE_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_MONITOR_TYPE_SHIFT 2</pre>
+
+<h3 id="osbyte_CONFIGURE_MONITOR_TYPE_MASK">osbyte_CONFIGURE_MONITOR_TYPE_MASK</h3>
+<pre>#define osbyte_CONFIGURE_MONITOR_TYPE_MASK 0x7Cu</pre>
+
+<h3 id="osbyte_CONFIGURE_FONT_SIZE">osbyte_CONFIGURE_FONT_SIZE</h3>
+<pre>#define osbyte_CONFIGURE_FONT_SIZE 134</pre>
+
+<p>Font cache/4K</p>
+
+<h3 id="osbyte_CONFIGURE_FLOPPIES">osbyte_CONFIGURE_FLOPPIES</h3>
+<pre>#define osbyte_CONFIGURE_FLOPPIES 135</pre>
+
+<h3 id="osbyte_CONFIGURE_FLOPPIES_SHIFT">osbyte_CONFIGURE_FLOPPIES_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_FLOPPIES_SHIFT 0</pre>
+
+<h3 id="osbyte_CONFIGURE_FLOPPIES_MASK">osbyte_CONFIGURE_FLOPPIES_MASK</h3>
+<pre>#define osbyte_CONFIGURE_FLOPPIES_MASK 0x7u</pre>
+
+<h3 id="osbyte_CONFIGURE_HARD_DISCS">osbyte_CONFIGURE_HARD_DISCS</h3>
+<pre>#define osbyte_CONFIGURE_HARD_DISCS 135</pre>
+
+<h3 id="osbyte_CONFIGURE_HARD_DISCS_SHIFT">osbyte_CONFIGURE_HARD_DISCS_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_HARD_DISCS_SHIFT 3</pre>
+
+<h3 id="osbyte_CONFIGURE_HARD_DISCS_MASK">osbyte_CONFIGURE_HARD_DISCS_MASK</h3>
+<pre>#define osbyte_CONFIGURE_HARD_DISCS_MASK 0x38u</pre>
+
+<h3 id="osbyte_CONFIGURE_IDE_DISCS">osbyte_CONFIGURE_IDE_DISCS</h3>
+<pre>#define osbyte_CONFIGURE_IDE_DISCS 135</pre>
+
+<h3 id="osbyte_CONFIGURE_IDE_DISCS_SHIFT">osbyte_CONFIGURE_IDE_DISCS_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_IDE_DISCS_SHIFT 6</pre>
+
+<h3 id="osbyte_CONFIGURE_IDE_DISCS_MASK">osbyte_CONFIGURE_IDE_DISCS_MASK</h3>
+<pre>#define osbyte_CONFIGURE_IDE_DISCS_MASK 0xC0u</pre>
+
+<h3 id="osbyte_CONFIGURE_STEP0">osbyte_CONFIGURE_STEP0</h3>
+<pre>#define osbyte_CONFIGURE_STEP0 136</pre>
+
+<h3 id="osbyte_CONFIGURE_STEP0_SHIFT">osbyte_CONFIGURE_STEP0_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_STEP0_SHIFT 0</pre>
+
+<h3 id="osbyte_CONFIGURE_STEP0_MASK">osbyte_CONFIGURE_STEP0_MASK</h3>
+<pre>#define osbyte_CONFIGURE_STEP0_MASK 0x3u</pre>
+
+<h3 id="osbyte_CONFIGURE_STEP1">osbyte_CONFIGURE_STEP1</h3>
+<pre>#define osbyte_CONFIGURE_STEP1 136</pre>
+
+<h3 id="osbyte_CONFIGURE_STEP1_SHIFT">osbyte_CONFIGURE_STEP1_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_STEP1_SHIFT 2</pre>
+
+<h3 id="osbyte_CONFIGURE_STEP1_MASK">osbyte_CONFIGURE_STEP1_MASK</h3>
+<pre>#define osbyte_CONFIGURE_STEP1_MASK 0xCu</pre>
+
+<h3 id="osbyte_CONFIGURE_STEP2">osbyte_CONFIGURE_STEP2</h3>
+<pre>#define osbyte_CONFIGURE_STEP2 136</pre>
+
+<h3 id="osbyte_CONFIGURE_STEP2_SHIFT">osbyte_CONFIGURE_STEP2_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_STEP2_SHIFT 4</pre>
+
+<h3 id="osbyte_CONFIGURE_STEP2_MASK">osbyte_CONFIGURE_STEP2_MASK</h3>
+<pre>#define osbyte_CONFIGURE_STEP2_MASK 0x30u</pre>
+
+<h3 id="osbyte_CONFIGURE_STEP3">osbyte_CONFIGURE_STEP3</h3>
+<pre>#define osbyte_CONFIGURE_STEP3 136</pre>
+
+<h3 id="osbyte_CONFIGURE_STEP3_SHIFT">osbyte_CONFIGURE_STEP3_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_STEP3_SHIFT 6</pre>
+
+<h3 id="osbyte_CONFIGURE_STEP3_MASK">osbyte_CONFIGURE_STEP3_MASK</h3>
+<pre>#define osbyte_CONFIGURE_STEP3_MASK 0xC0u</pre>
+
+<h3 id="osbyte_CONFIGURE_ADFS_BUFFERS">osbyte_CONFIGURE_ADFS_BUFFERS</h3>
+<pre>#define osbyte_CONFIGURE_ADFS_BUFFERS 137</pre>
+
+<h3 id="osbyte_CONFIGURE_CDFS_FLAGS">osbyte_CONFIGURE_CDFS_FLAGS</h3>
+<pre>#define osbyte_CONFIGURE_CDFS_FLAGS 138</pre>
+
+<h3 id="osbyte_CONFIGURE_TIME_ZONE">osbyte_CONFIGURE_TIME_ZONE</h3>
+<pre>#define osbyte_CONFIGURE_TIME_ZONE 139</pre>
+
+<h3 id="osbyte_CONFIGURE_NEW_LOOK">osbyte_CONFIGURE_NEW_LOOK</h3>
+<pre>#define osbyte_CONFIGURE_NEW_LOOK 140</pre>
+
+<h3 id="osbyte_CONFIGURE_NEW_LOOK_MASK">osbyte_CONFIGURE_NEW_LOOK_MASK</h3>
+<pre>#define osbyte_CONFIGURE_NEW_LOOK_MASK 0x1u</pre>
+
+<h3 id="osbyte_CONFIGURE_WIMP_FONT">osbyte_CONFIGURE_WIMP_FONT</h3>
+<pre>#define osbyte_CONFIGURE_WIMP_FONT 140</pre>
+
+<h3 id="osbyte_CONFIGURE_WIMP_FONT_SHIFT">osbyte_CONFIGURE_WIMP_FONT_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_WIMP_FONT_SHIFT 1</pre>
+
+<h3 id="osbyte_CONFIGURE_WIMP_FONT_MASK">osbyte_CONFIGURE_WIMP_FONT_MASK</h3>
+<pre>#define osbyte_CONFIGURE_WIMP_FONT_MASK 0x1Eu</pre>
+
+<h3 id="osbyte_CONFIGURE_NO_TILE">osbyte_CONFIGURE_NO_TILE</h3>
+<pre>#define osbyte_CONFIGURE_NO_TILE 140</pre>
+
+<h3 id="osbyte_CONFIGURE_NO_TILE_MASK">osbyte_CONFIGURE_NO_TILE_MASK</h3>
+<pre>#define osbyte_CONFIGURE_NO_TILE_MASK 0x80u</pre>
+
+<h3 id="osbyte_CONFIGURE_PRINTER">osbyte_CONFIGURE_PRINTER</h3>
+<pre>#define osbyte_CONFIGURE_PRINTER 141</pre>
+
+<h3 id="osbyte_CONFIGURE_UNPLUG11">osbyte_CONFIGURE_UNPLUG11</h3>
+<pre>#define osbyte_CONFIGURE_UNPLUG11 141</pre>
+
+<p>RISC OS 3.60+</p>
+
+<h3 id="osbyte_CONFIGURE_TWIN_FLAGS">osbyte_CONFIGURE_TWIN_FLAGS</h3>
+<pre>#define osbyte_CONFIGURE_TWIN_FLAGS 142</pre>
+
+<h3 id="osbyte_CONFIGURE_UNPLUG12">osbyte_CONFIGURE_UNPLUG12</h3>
+<pre>#define osbyte_CONFIGURE_UNPLUG12 142</pre>
+
+<p>RISC OS 3.60+</p>
+
+<h3 id="osbyte_CONFIGURE_SCREEN_SIZE">osbyte_CONFIGURE_SCREEN_SIZE</h3>
+<pre>#define osbyte_CONFIGURE_SCREEN_SIZE 143</pre>
+
+<h3 id="osbyte_CONFIGURE_RAMFS_SIZE">osbyte_CONFIGURE_RAMFS_SIZE</h3>
+<pre>#define osbyte_CONFIGURE_RAMFS_SIZE 144</pre>
+
+<h3 id="osbyte_CONFIGURE_SYSTEM_SIZE">osbyte_CONFIGURE_SYSTEM_SIZE</h3>
+<pre>#define osbyte_CONFIGURE_SYSTEM_SIZE 145</pre>
+
+<h3 id="osbyte_CONFIGURE_RMA_SIZE">osbyte_CONFIGURE_RMA_SIZE</h3>
+<pre>#define osbyte_CONFIGURE_RMA_SIZE 146</pre>
+
+<h3 id="osbyte_CONFIGURE_SPRITE_SIZE">osbyte_CONFIGURE_SPRITE_SIZE</h3>
+<pre>#define osbyte_CONFIGURE_SPRITE_SIZE 147</pre>
+
+<h3 id="osbyte_CONFIGURE_SOUND_DEFAULT">osbyte_CONFIGURE_SOUND_DEFAULT</h3>
+<pre>#define osbyte_CONFIGURE_SOUND_DEFAULT 148</pre>
+
+<h3 id="osbyte_CONFIGURE_SOUND_DEFAULT_SHIFT">osbyte_CONFIGURE_SOUND_DEFAULT_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_SOUND_DEFAULT_SHIFT 0</pre>
+
+<h3 id="osbyte_CONFIGURE_SOUND_DEFAULT_MASK">osbyte_CONFIGURE_SOUND_DEFAULT_MASK</h3>
+<pre>#define osbyte_CONFIGURE_SOUND_DEFAULT_MASK 0xFu</pre>
+
+<h3 id="osbyte_CONFIGURE_SOUND_LOUDNESS">osbyte_CONFIGURE_SOUND_LOUDNESS</h3>
+<pre>#define osbyte_CONFIGURE_SOUND_LOUDNESS 148</pre>
+
+<h3 id="osbyte_CONFIGURE_SOUND_LOUDNESS_SHIFT">osbyte_CONFIGURE_SOUND_LOUDNESS_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_SOUND_LOUDNESS_SHIFT 4</pre>
+
+<h3 id="osbyte_CONFIGURE_SOUND_LOUDNESS_MASK">osbyte_CONFIGURE_SOUND_LOUDNESS_MASK</h3>
+<pre>#define osbyte_CONFIGURE_SOUND_LOUDNESS_MASK 0x70u</pre>
+
+<h3 id="osbyte_CONFIGURE_SOUND_ON">osbyte_CONFIGURE_SOUND_ON</h3>
+<pre>#define osbyte_CONFIGURE_SOUND_ON 148</pre>
+
+<h3 id="osbyte_CONFIGURE_SOUND_ON_MASK">osbyte_CONFIGURE_SOUND_ON_MASK</h3>
+<pre>#define osbyte_CONFIGURE_SOUND_ON_MASK 0x80u</pre>
+
+<h3 id="osbyte_CONFIGURE_BASIC_EDITOR_FLAGS0">osbyte_CONFIGURE_BASIC_EDITOR_FLAGS0</h3>
+<pre>#define osbyte_CONFIGURE_BASIC_EDITOR_FLAGS0 149</pre>
+
+<h3 id="osbyte_CONFIGURE_BASIC_EDITOR_FLAGS1">osbyte_CONFIGURE_BASIC_EDITOR_FLAGS1</h3>
+<pre>#define osbyte_CONFIGURE_BASIC_EDITOR_FLAGS1 150</pre>
+
+<h3 id="osbyte_CONFIGURE_BASIC_EDITOR_FLAGS2">osbyte_CONFIGURE_BASIC_EDITOR_FLAGS2</h3>
+<pre>#define osbyte_CONFIGURE_BASIC_EDITOR_FLAGS2 151</pre>
+
+<h3 id="osbyte_CONFIGURE_BASIC_EDITOR_FLAGS3">osbyte_CONFIGURE_BASIC_EDITOR_FLAGS3</h3>
+<pre>#define osbyte_CONFIGURE_BASIC_EDITOR_FLAGS3 152</pre>
+
+<h3 id="osbyte_CONFIGURE_PS_NAME1">osbyte_CONFIGURE_PS_NAME1</h3>
+<pre>#define osbyte_CONFIGURE_PS_NAME1 153</pre>
+
+<h3 id="osbyte_CONFIGURE_PS_NAME2">osbyte_CONFIGURE_PS_NAME2</h3>
+<pre>#define osbyte_CONFIGURE_PS_NAME2 154</pre>
+
+<h3 id="osbyte_CONFIGURE_PS_NAME3">osbyte_CONFIGURE_PS_NAME3</h3>
+<pre>#define osbyte_CONFIGURE_PS_NAME3 155</pre>
+
+<h3 id="osbyte_CONFIGURE_PS_NAME4">osbyte_CONFIGURE_PS_NAME4</h3>
+<pre>#define osbyte_CONFIGURE_PS_NAME4 156</pre>
+
+<h3 id="osbyte_CONFIGURE_PS_NAME5">osbyte_CONFIGURE_PS_NAME5</h3>
+<pre>#define osbyte_CONFIGURE_PS_NAME5 157</pre>
+
+<h3 id="osbyte_CONFIGURE_PS_NAME_LIMIT">osbyte_CONFIGURE_PS_NAME_LIMIT</h3>
+<pre>#define osbyte_CONFIGURE_PS_NAME_LIMIT 6</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_NAME1">osbyte_CONFIGURE_FS_NAME1</h3>
+<pre>#define osbyte_CONFIGURE_FS_NAME1 158</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_NAME2">osbyte_CONFIGURE_FS_NAME2</h3>
+<pre>#define osbyte_CONFIGURE_FS_NAME2 159</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_NAME3">osbyte_CONFIGURE_FS_NAME3</h3>
+<pre>#define osbyte_CONFIGURE_FS_NAME3 160</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_NAME4">osbyte_CONFIGURE_FS_NAME4</h3>
+<pre>#define osbyte_CONFIGURE_FS_NAME4 161</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_NAME5">osbyte_CONFIGURE_FS_NAME5</h3>
+<pre>#define osbyte_CONFIGURE_FS_NAME5 162</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_NAME6">osbyte_CONFIGURE_FS_NAME6</h3>
+<pre>#define osbyte_CONFIGURE_FS_NAME6 163</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_NAME7">osbyte_CONFIGURE_FS_NAME7</h3>
+<pre>#define osbyte_CONFIGURE_FS_NAME7 164</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_NAME8">osbyte_CONFIGURE_FS_NAME8</h3>
+<pre>#define osbyte_CONFIGURE_FS_NAME8 165</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_NAME9">osbyte_CONFIGURE_FS_NAME9</h3>
+<pre>#define osbyte_CONFIGURE_FS_NAME9 166</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_NAME10">osbyte_CONFIGURE_FS_NAME10</h3>
+<pre>#define osbyte_CONFIGURE_FS_NAME10 167</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_NAME11">osbyte_CONFIGURE_FS_NAME11</h3>
+<pre>#define osbyte_CONFIGURE_FS_NAME11 168</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_NAME12">osbyte_CONFIGURE_FS_NAME12</h3>
+<pre>#define osbyte_CONFIGURE_FS_NAME12 169</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_NAME13">osbyte_CONFIGURE_FS_NAME13</h3>
+<pre>#define osbyte_CONFIGURE_FS_NAME13 170</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_NAME14">osbyte_CONFIGURE_FS_NAME14</h3>
+<pre>#define osbyte_CONFIGURE_FS_NAME14 171</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_NAME15">osbyte_CONFIGURE_FS_NAME15</h3>
+<pre>#define osbyte_CONFIGURE_FS_NAME15 172</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_NAME_LIMIT">osbyte_CONFIGURE_FS_NAME_LIMIT</h3>
+<pre>#define osbyte_CONFIGURE_FS_NAME_LIMIT 16</pre>
+
+<h3 id="osbyte_CONFIGURE_UNPLUG4">osbyte_CONFIGURE_UNPLUG4</h3>
+<pre>#define osbyte_CONFIGURE_UNPLUG4 173</pre>
+
+<h3 id="osbyte_CONFIGURE_UNPLUG5">osbyte_CONFIGURE_UNPLUG5</h3>
+<pre>#define osbyte_CONFIGURE_UNPLUG5 174</pre>
+
+<h3 id="osbyte_CONFIGURE_UNPLUG6">osbyte_CONFIGURE_UNPLUG6</h3>
+<pre>#define osbyte_CONFIGURE_UNPLUG6 175</pre>
+
+<h3 id="osbyte_CONFIGURE_UNPLUG7">osbyte_CONFIGURE_UNPLUG7</h3>
+<pre>#define osbyte_CONFIGURE_UNPLUG7 176</pre>
+
+<h3 id="osbyte_CONFIGURE_UNPLUG_EXPANSION_CARD0">osbyte_CONFIGURE_UNPLUG_EXPANSION_CARD0</h3>
+<pre>#define osbyte_CONFIGURE_UNPLUG_EXPANSION_CARD0 177</pre>
+
+<h3 id="osbyte_CONFIGURE_UNPLUG_EXPANSION_CARD1">osbyte_CONFIGURE_UNPLUG_EXPANSION_CARD1</h3>
+<pre>#define osbyte_CONFIGURE_UNPLUG_EXPANSION_CARD1 178</pre>
+
+<h3 id="osbyte_CONFIGURE_UNPLUG_EXPANSION_CARD2">osbyte_CONFIGURE_UNPLUG_EXPANSION_CARD2</h3>
+<pre>#define osbyte_CONFIGURE_UNPLUG_EXPANSION_CARD2 179</pre>
+
+<h3 id="osbyte_CONFIGURE_UNPLUG_EXPANSION_CARD3">osbyte_CONFIGURE_UNPLUG_EXPANSION_CARD3</h3>
+<pre>#define osbyte_CONFIGURE_UNPLUG_EXPANSION_CARD3 180</pre>
+
+<h3 id="osbyte_CONFIGURE_BASIC_EDITOR_WILD_CARD0">osbyte_CONFIGURE_BASIC_EDITOR_WILD_CARD0</h3>
+<pre>#define osbyte_CONFIGURE_BASIC_EDITOR_WILD_CARD0 181</pre>
+
+<h3 id="osbyte_CONFIGURE_BASIC_EDITOR_WILD_CARD1">osbyte_CONFIGURE_BASIC_EDITOR_WILD_CARD1</h3>
+<pre>#define osbyte_CONFIGURE_BASIC_EDITOR_WILD_CARD1 182</pre>
+
+<h3 id="osbyte_CONFIGURE_BASIC_EDITOR_WILD_CARD2">osbyte_CONFIGURE_BASIC_EDITOR_WILD_CARD2</h3>
+<pre>#define osbyte_CONFIGURE_BASIC_EDITOR_WILD_CARD2 183</pre>
+
+<h3 id="osbyte_CONFIGURE_BASIC_EDITOR_WILD_CARD3">osbyte_CONFIGURE_BASIC_EDITOR_WILD_CARD3</h3>
+<pre>#define osbyte_CONFIGURE_BASIC_EDITOR_WILD_CARD3 184</pre>
+
+<h3 id="osbyte_CONFIGURE_LANGUAGE">osbyte_CONFIGURE_LANGUAGE</h3>
+<pre>#define osbyte_CONFIGURE_LANGUAGE 185</pre>
+
+<h3 id="osbyte_CONFIGURE_COUNTRY">osbyte_CONFIGURE_COUNTRY</h3>
+<pre>#define osbyte_CONFIGURE_COUNTRY 186</pre>
+
+<h3 id="osbyte_CONFIGURE_VFS">osbyte_CONFIGURE_VFS</h3>
+<pre>#define osbyte_CONFIGURE_VFS 187</pre>
+
+<h3 id="osbyte_CONFIGURE_ROMFS_OPT">osbyte_CONFIGURE_ROMFS_OPT</h3>
+<pre>#define osbyte_CONFIGURE_ROMFS_OPT 188</pre>
+
+<h3 id="osbyte_CONFIGURE_ROMFS_OPT_SHIFT">osbyte_CONFIGURE_ROMFS_OPT_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_ROMFS_OPT_SHIFT 0</pre>
+
+<h3 id="osbyte_CONFIGURE_ROMFS_OPT_MASK">osbyte_CONFIGURE_ROMFS_OPT_MASK</h3>
+<pre>#define osbyte_CONFIGURE_ROMFS_OPT_MASK 0x3u</pre>
+
+<h3 id="osbyte_CONFIGURE_ICON_CACHE">osbyte_CONFIGURE_ICON_CACHE</h3>
+<pre>#define osbyte_CONFIGURE_ICON_CACHE 188</pre>
+
+<h3 id="osbyte_CONFIGURE_ICON_CACHE_MASK">osbyte_CONFIGURE_ICON_CACHE_MASK</h3>
+<pre>#define osbyte_CONFIGURE_ICON_CACHE_MASK 0x4u</pre>
+
+<h3 id="osbyte_CONFIGURE_BLANK_TIME">osbyte_CONFIGURE_BLANK_TIME</h3>
+<pre>#define osbyte_CONFIGURE_BLANK_TIME 188</pre>
+
+<h3 id="osbyte_CONFIGURE_BLANK_TIME_SHIFT">osbyte_CONFIGURE_BLANK_TIME_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_BLANK_TIME_SHIFT 3</pre>
+
+<h3 id="osbyte_CONFIGURE_BLANK_TIME_MASK">osbyte_CONFIGURE_BLANK_TIME_MASK</h3>
+<pre>#define osbyte_CONFIGURE_BLANK_TIME_MASK 0x38u</pre>
+
+<h3 id="osbyte_CONFIGURE_UNBLANK_ON_WRITE">osbyte_CONFIGURE_UNBLANK_ON_WRITE</h3>
+<pre>#define osbyte_CONFIGURE_UNBLANK_ON_WRITE 188</pre>
+
+<h3 id="osbyte_CONFIGURE_UNBLANK_ON_WRITE_MASK">osbyte_CONFIGURE_UNBLANK_ON_WRITE_MASK</h3>
+<pre>#define osbyte_CONFIGURE_UNBLANK_ON_WRITE_MASK 0x40u</pre>
+
+<h3 id="osbyte_CONFIGURE_NO_LONG_TEST">osbyte_CONFIGURE_NO_LONG_TEST</h3>
+<pre>#define osbyte_CONFIGURE_NO_LONG_TEST 188</pre>
+
+<h3 id="osbyte_CONFIGURE_NO_LONG_TEST_MASK">osbyte_CONFIGURE_NO_LONG_TEST_MASK</h3>
+<pre>#define osbyte_CONFIGURE_NO_LONG_TEST_MASK 0x80u</pre>
+
+<h3 id="osbyte_CONFIGURE_ADFS_DISC_SIZE0">osbyte_CONFIGURE_ADFS_DISC_SIZE0</h3>
+<pre>#define osbyte_CONFIGURE_ADFS_DISC_SIZE0 189</pre>
+
+<h3 id="osbyte_CONFIGURE_ADFS_DISC_SIZE1">osbyte_CONFIGURE_ADFS_DISC_SIZE1</h3>
+<pre>#define osbyte_CONFIGURE_ADFS_DISC_SIZE1 190</pre>
+
+<h3 id="osbyte_CONFIGURE_ADFS_DISC_SIZE2">osbyte_CONFIGURE_ADFS_DISC_SIZE2</h3>
+<pre>#define osbyte_CONFIGURE_ADFS_DISC_SIZE2 191</pre>
+
+<h3 id="osbyte_CONFIGURE_ADFS_DISC_SIZE3">osbyte_CONFIGURE_ADFS_DISC_SIZE3</h3>
+<pre>#define osbyte_CONFIGURE_ADFS_DISC_SIZE3 192</pre>
+
+<h3 id="osbyte_CONFIGURE_PROTECTION_PEEK">osbyte_CONFIGURE_PROTECTION_PEEK</h3>
+<pre>#define osbyte_CONFIGURE_PROTECTION_PEEK 193</pre>
+
+<h3 id="osbyte_CONFIGURE_PROTECTION_PEEK_MASK">osbyte_CONFIGURE_PROTECTION_PEEK_MASK</h3>
+<pre>#define osbyte_CONFIGURE_PROTECTION_PEEK_MASK 0x1u</pre>
+
+<h3 id="osbyte_CONFIGURE_PROTECTION_POKE">osbyte_CONFIGURE_PROTECTION_POKE</h3>
+<pre>#define osbyte_CONFIGURE_PROTECTION_POKE 193</pre>
+
+<h3 id="osbyte_CONFIGURE_PROTECTION_POKE_MASK">osbyte_CONFIGURE_PROTECTION_POKE_MASK</h3>
+<pre>#define osbyte_CONFIGURE_PROTECTION_POKE_MASK 0x2u</pre>
+
+<h3 id="osbyte_CONFIGURE_PROTECTION_JSR">osbyte_CONFIGURE_PROTECTION_JSR</h3>
+<pre>#define osbyte_CONFIGURE_PROTECTION_JSR 193</pre>
+
+<h3 id="osbyte_CONFIGURE_PROTECTION_JSR_MASK">osbyte_CONFIGURE_PROTECTION_JSR_MASK</h3>
+<pre>#define osbyte_CONFIGURE_PROTECTION_JSR_MASK 0x4u</pre>
+
+<h3 id="osbyte_CONFIGURE_PROTECTION_USER_RPC">osbyte_CONFIGURE_PROTECTION_USER_RPC</h3>
+<pre>#define osbyte_CONFIGURE_PROTECTION_USER_RPC 193</pre>
+
+<h3 id="osbyte_CONFIGURE_PROTECTION_USER_RPC_MASK">osbyte_CONFIGURE_PROTECTION_USER_RPC_MASK</h3>
+<pre>#define osbyte_CONFIGURE_PROTECTION_USER_RPC_MASK 0x8u</pre>
+
+<h3 id="osbyte_CONFIGURE_PROTECTION_OS_PROC">osbyte_CONFIGURE_PROTECTION_OS_PROC</h3>
+<pre>#define osbyte_CONFIGURE_PROTECTION_OS_PROC 193</pre>
+
+<h3 id="osbyte_CONFIGURE_PROTECTION_OS_PROC_MASK">osbyte_CONFIGURE_PROTECTION_OS_PROC_MASK</h3>
+<pre>#define osbyte_CONFIGURE_PROTECTION_OS_PROC_MASK 0x10u</pre>
+
+<h3 id="osbyte_CONFIGURE_PROTECTION_HALT">osbyte_CONFIGURE_PROTECTION_HALT</h3>
+<pre>#define osbyte_CONFIGURE_PROTECTION_HALT 193</pre>
+
+<h3 id="osbyte_CONFIGURE_PROTECTION_HALT_MASK">osbyte_CONFIGURE_PROTECTION_HALT_MASK</h3>
+<pre>#define osbyte_CONFIGURE_PROTECTION_HALT_MASK 0x20u</pre>
+
+<h3 id="osbyte_CONFIGURE_PROTECTION_GET_REGS">osbyte_CONFIGURE_PROTECTION_GET_REGS</h3>
+<pre>#define osbyte_CONFIGURE_PROTECTION_GET_REGS 193</pre>
+
+<h3 id="osbyte_CONFIGURE_PROTECTION_GET_REGS_MASK">osbyte_CONFIGURE_PROTECTION_GET_REGS_MASK</h3>
+<pre>#define osbyte_CONFIGURE_PROTECTION_GET_REGS_MASK 0x40u</pre>
+
+<h3 id="osbyte_CONFIGURE_MOUSE_STEP">osbyte_CONFIGURE_MOUSE_STEP</h3>
+<pre>#define osbyte_CONFIGURE_MOUSE_STEP 194</pre>
+
+<h3 id="osbyte_CONFIGURE_BOOT_NET">osbyte_CONFIGURE_BOOT_NET</h3>
+<pre>#define osbyte_CONFIGURE_BOOT_NET 195</pre>
+
+<h3 id="osbyte_CONFIGURE_BOOT_NET_MASK">osbyte_CONFIGURE_BOOT_NET_MASK</h3>
+<pre>#define osbyte_CONFIGURE_BOOT_NET_MASK 0x1u</pre>
+
+<h3 id="osbyte_CONFIGURE_DYNAMIC_STATION">osbyte_CONFIGURE_DYNAMIC_STATION</h3>
+<pre>#define osbyte_CONFIGURE_DYNAMIC_STATION 195</pre>
+
+<h3 id="osbyte_CONFIGURE_DYNAMIC_STATION_MASK">osbyte_CONFIGURE_DYNAMIC_STATION_MASK</h3>
+<pre>#define osbyte_CONFIGURE_DYNAMIC_STATION_MASK 0x2u</pre>
+
+<h3 id="osbyte_CONFIGURE_CMOS_RESET">osbyte_CONFIGURE_CMOS_RESET</h3>
+<pre>#define osbyte_CONFIGURE_CMOS_RESET 195</pre>
+
+<h3 id="osbyte_CONFIGURE_CMOS_RESET_MASK">osbyte_CONFIGURE_CMOS_RESET_MASK</h3>
+<pre>#define osbyte_CONFIGURE_CMOS_RESET_MASK 0x4u</pre>
+
+<h3 id="osbyte_CONFIGURE_POWER_SAVE">osbyte_CONFIGURE_POWER_SAVE</h3>
+<pre>#define osbyte_CONFIGURE_POWER_SAVE 195</pre>
+
+<h3 id="osbyte_CONFIGURE_POWER_SAVE_MASK">osbyte_CONFIGURE_POWER_SAVE_MASK</h3>
+<pre>#define osbyte_CONFIGURE_POWER_SAVE_MASK 0x8u</pre>
+
+<h3 id="osbyte_CONFIGURE_AUTO_WIMP_MODE">osbyte_CONFIGURE_AUTO_WIMP_MODE</h3>
+<pre>#define osbyte_CONFIGURE_AUTO_WIMP_MODE 195</pre>
+
+<h3 id="osbyte_CONFIGURE_AUTO_WIMP_MODE_MASK">osbyte_CONFIGURE_AUTO_WIMP_MODE_MASK</h3>
+<pre>#define osbyte_CONFIGURE_AUTO_WIMP_MODE_MASK 0x10u</pre>
+
+<h3 id="osbyte_CONFIGURE_NO_CACHE">osbyte_CONFIGURE_NO_CACHE</h3>
+<pre>#define osbyte_CONFIGURE_NO_CACHE 195</pre>
+
+<h3 id="osbyte_CONFIGURE_NO_CACHE_MASK">osbyte_CONFIGURE_NO_CACHE_MASK</h3>
+<pre>#define osbyte_CONFIGURE_NO_CACHE_MASK 0x20u</pre>
+
+<h3 id="osbyte_CONFIGURE_BROADCAST_LOADER">osbyte_CONFIGURE_BROADCAST_LOADER</h3>
+<pre>#define osbyte_CONFIGURE_BROADCAST_LOADER 195</pre>
+
+<h3 id="osbyte_CONFIGURE_BROADCAST_LOADER_MASK">osbyte_CONFIGURE_BROADCAST_LOADER_MASK</h3>
+<pre>#define osbyte_CONFIGURE_BROADCAST_LOADER_MASK 0x40u</pre>
+
+<h3 id="osbyte_CONFIGURE_HOURGLASS_COLOUR">osbyte_CONFIGURE_HOURGLASS_COLOUR</h3>
+<pre>#define osbyte_CONFIGURE_HOURGLASS_COLOUR 195</pre>
+
+<h3 id="osbyte_CONFIGURE_HOURGLASS_COLOUR_MASK">osbyte_CONFIGURE_HOURGLASS_COLOUR_MASK</h3>
+<pre>#define osbyte_CONFIGURE_HOURGLASS_COLOUR_MASK 0x80u</pre>
+
+<h3 id="osbyte_CONFIGURE_WIMP_MODE">osbyte_CONFIGURE_WIMP_MODE</h3>
+<pre>#define osbyte_CONFIGURE_WIMP_MODE 196</pre>
+
+<h3 id="osbyte_CONFIGURE_WIMP_FLAGS">osbyte_CONFIGURE_WIMP_FLAGS</h3>
+<pre>#define osbyte_CONFIGURE_WIMP_FLAGS 197</pre>
+
+<h3 id="osbyte_CONFIGURE_FILER_DISPLAY">osbyte_CONFIGURE_FILER_DISPLAY</h3>
+<pre>#define osbyte_CONFIGURE_FILER_DISPLAY 198</pre>
+
+<h3 id="osbyte_CONFIGURE_FILER_DISPLAY_SHIFT">osbyte_CONFIGURE_FILER_DISPLAY_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_FILER_DISPLAY_SHIFT 0</pre>
+
+<h3 id="osbyte_CONFIGURE_FILER_DISPLAY_MASK">osbyte_CONFIGURE_FILER_DISPLAY_MASK</h3>
+<pre>#define osbyte_CONFIGURE_FILER_DISPLAY_MASK 0x3u</pre>
+
+<h3 id="osbyte_CONFIGURE_FILER_SORT">osbyte_CONFIGURE_FILER_SORT</h3>
+<pre>#define osbyte_CONFIGURE_FILER_SORT 198</pre>
+
+<h3 id="osbyte_CONFIGURE_FILER_SORT_SHIFT">osbyte_CONFIGURE_FILER_SORT_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_FILER_SORT_SHIFT 2</pre>
+
+<h3 id="osbyte_CONFIGURE_FILER_SORT_MASK">osbyte_CONFIGURE_FILER_SORT_MASK</h3>
+<pre>#define osbyte_CONFIGURE_FILER_SORT_MASK 0xCu</pre>
+
+<h3 id="osbyte_CONFIGURE_FILER_FORCE">osbyte_CONFIGURE_FILER_FORCE</h3>
+<pre>#define osbyte_CONFIGURE_FILER_FORCE 198</pre>
+
+<h3 id="osbyte_CONFIGURE_FILER_FORCE_MASK">osbyte_CONFIGURE_FILER_FORCE_MASK</h3>
+<pre>#define osbyte_CONFIGURE_FILER_FORCE_MASK 0x10u</pre>
+
+<h3 id="osbyte_CONFIGURE_FILER_CONFIRM">osbyte_CONFIGURE_FILER_CONFIRM</h3>
+<pre>#define osbyte_CONFIGURE_FILER_CONFIRM 198</pre>
+
+<h3 id="osbyte_CONFIGURE_FILER_CONFIRM_MASK">osbyte_CONFIGURE_FILER_CONFIRM_MASK</h3>
+<pre>#define osbyte_CONFIGURE_FILER_CONFIRM_MASK 0x20u</pre>
+
+<h3 id="osbyte_CONFIGURE_FILER_VERBOSE">osbyte_CONFIGURE_FILER_VERBOSE</h3>
+<pre>#define osbyte_CONFIGURE_FILER_VERBOSE 198</pre>
+
+<h3 id="osbyte_CONFIGURE_FILER_VERBOSE_MASK">osbyte_CONFIGURE_FILER_VERBOSE_MASK</h3>
+<pre>#define osbyte_CONFIGURE_FILER_VERBOSE_MASK 0x40u</pre>
+
+<h3 id="osbyte_CONFIGURE_FILER_NEWER">osbyte_CONFIGURE_FILER_NEWER</h3>
+<pre>#define osbyte_CONFIGURE_FILER_NEWER 198</pre>
+
+<h3 id="osbyte_CONFIGURE_FILER_NEWER_MASK">osbyte_CONFIGURE_FILER_NEWER_MASK</h3>
+<pre>#define osbyte_CONFIGURE_FILER_NEWER_MASK 0x80u</pre>
+
+<h3 id="osbyte_CONFIGURE_ADFS_DIR_CACHE">osbyte_CONFIGURE_ADFS_DIR_CACHE</h3>
+<pre>#define osbyte_CONFIGURE_ADFS_DIR_CACHE 199</pre>
+
+<h3 id="osbyte_CONFIGURE_FONT_MAX">osbyte_CONFIGURE_FONT_MAX</h3>
+<pre>#define osbyte_CONFIGURE_FONT_MAX 200</pre>
+
+<h3 id="osbyte_CONFIGURE_FONT_MAX1">osbyte_CONFIGURE_FONT_MAX1</h3>
+<pre>#define osbyte_CONFIGURE_FONT_MAX1 201</pre>
+
+<h3 id="osbyte_CONFIGURE_FONT_MAX2">osbyte_CONFIGURE_FONT_MAX2</h3>
+<pre>#define osbyte_CONFIGURE_FONT_MAX2 202</pre>
+
+<h3 id="osbyte_CONFIGURE_FONT_MAX3">osbyte_CONFIGURE_FONT_MAX3</h3>
+<pre>#define osbyte_CONFIGURE_FONT_MAX3 203</pre>
+
+<h3 id="osbyte_CONFIGURE_FONT_MAX4">osbyte_CONFIGURE_FONT_MAX4</h3>
+<pre>#define osbyte_CONFIGURE_FONT_MAX4 204</pre>
+
+<h3 id="osbyte_CONFIGURE_FONT_MAX5">osbyte_CONFIGURE_FONT_MAX5</h3>
+<pre>#define osbyte_CONFIGURE_FONT_MAX5 205</pre>
+
+<h3 id="osbyte_CONFIGURE_FONT_MAX6">osbyte_CONFIGURE_FONT_MAX6</h3>
+<pre>#define osbyte_CONFIGURE_FONT_MAX6 206</pre>
+
+<p>From RISC OS 3.6 no longer used</p>
+
+<h3 id="osbyte_CONFIGURE_FONT_MAX7">osbyte_CONFIGURE_FONT_MAX7</h3>
+<pre>#define osbyte_CONFIGURE_FONT_MAX7 207</pre>
+
+<p>From RISC OS 3.6 no longer used</p>
+
+<h3 id="osbyte_CONFIGURE_SCSIFS_DISCS">osbyte_CONFIGURE_SCSIFS_DISCS</h3>
+<pre>#define osbyte_CONFIGURE_SCSIFS_DISCS 208</pre>
+
+<h3 id="osbyte_CONFIGURE_SCSIFS_DISCS_SHIFT">osbyte_CONFIGURE_SCSIFS_DISCS_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_SCSIFS_DISCS_SHIFT 0</pre>
+
+<h3 id="osbyte_CONFIGURE_SCSIFS_DISCS_MASK">osbyte_CONFIGURE_SCSIFS_DISCS_MASK</h3>
+<pre>#define osbyte_CONFIGURE_SCSIFS_DISCS_MASK 0x7u</pre>
+
+<h3 id="osbyte_CONFIGURE_SCSIFS_DRIVE">osbyte_CONFIGURE_SCSIFS_DRIVE</h3>
+<pre>#define osbyte_CONFIGURE_SCSIFS_DRIVE 208</pre>
+
+<h3 id="osbyte_CONFIGURE_SCSIFS_DRIVE_SHIFT">osbyte_CONFIGURE_SCSIFS_DRIVE_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_SCSIFS_DRIVE_SHIFT 3</pre>
+
+<h3 id="osbyte_CONFIGURE_SCSIFS_DRIVE_MASK">osbyte_CONFIGURE_SCSIFS_DRIVE_MASK</h3>
+<pre>#define osbyte_CONFIGURE_SCSIFS_DRIVE_MASK 0x38u</pre>
+
+<h3 id="osbyte_CONFIGURE_SCSIFS_BUFFERS">osbyte_CONFIGURE_SCSIFS_BUFFERS</h3>
+<pre>#define osbyte_CONFIGURE_SCSIFS_BUFFERS 209</pre>
+
+<h3 id="osbyte_CONFIGURE_SCSIFS_DIR_CACHE">osbyte_CONFIGURE_SCSIFS_DIR_CACHE</h3>
+<pre>#define osbyte_CONFIGURE_SCSIFS_DIR_CACHE 210</pre>
+
+<h3 id="osbyte_CONFIGURE_SCSIFS_DISC_SIZE0">osbyte_CONFIGURE_SCSIFS_DISC_SIZE0</h3>
+<pre>#define osbyte_CONFIGURE_SCSIFS_DISC_SIZE0 211</pre>
+
+<h3 id="osbyte_CONFIGURE_SCSIFS_DISC_SIZE1">osbyte_CONFIGURE_SCSIFS_DISC_SIZE1</h3>
+<pre>#define osbyte_CONFIGURE_SCSIFS_DISC_SIZE1 212</pre>
+
+<h3 id="osbyte_CONFIGURE_SCSIFS_DISC_SIZE2">osbyte_CONFIGURE_SCSIFS_DISC_SIZE2</h3>
+<pre>#define osbyte_CONFIGURE_SCSIFS_DISC_SIZE2 213</pre>
+
+<h3 id="osbyte_CONFIGURE_SCSIFS_DISC_SIZE3">osbyte_CONFIGURE_SCSIFS_DISC_SIZE3</h3>
+<pre>#define osbyte_CONFIGURE_SCSIFS_DISC_SIZE3 214</pre>
+
+<h3 id="osbyte_CONFIGURE_ROM_ALARM">osbyte_CONFIGURE_ROM_ALARM</h3>
+<pre>#define osbyte_CONFIGURE_ROM_ALARM 215</pre>
+
+<h3 id="osbyte_CONFIGURE_ROM_ALARM_MASK">osbyte_CONFIGURE_ROM_ALARM_MASK</h3>
+<pre>#define osbyte_CONFIGURE_ROM_ALARM_MASK 0x1u</pre>
+
+<h3 id="osbyte_CONFIGURE_ROM_CALC">osbyte_CONFIGURE_ROM_CALC</h3>
+<pre>#define osbyte_CONFIGURE_ROM_CALC 215</pre>
+
+<h3 id="osbyte_CONFIGURE_ROM_CALC_MASK">osbyte_CONFIGURE_ROM_CALC_MASK</h3>
+<pre>#define osbyte_CONFIGURE_ROM_CALC_MASK 0x2u</pre>
+
+<h3 id="osbyte_CONFIGURE_ROM_CHARS">osbyte_CONFIGURE_ROM_CHARS</h3>
+<pre>#define osbyte_CONFIGURE_ROM_CHARS 215</pre>
+
+<h3 id="osbyte_CONFIGURE_ROM_CHARS_MASK">osbyte_CONFIGURE_ROM_CHARS_MASK</h3>
+<pre>#define osbyte_CONFIGURE_ROM_CHARS_MASK 0x4u</pre>
+
+<h3 id="osbyte_CONFIGURE_ROM_CONFIGURE">osbyte_CONFIGURE_ROM_CONFIGURE</h3>
+<pre>#define osbyte_CONFIGURE_ROM_CONFIGURE 215</pre>
+
+<h3 id="osbyte_CONFIGURE_ROM_CONFIGURE_MASK">osbyte_CONFIGURE_ROM_CONFIGURE_MASK</h3>
+<pre>#define osbyte_CONFIGURE_ROM_CONFIGURE_MASK 0x8u</pre>
+
+<h3 id="osbyte_CONFIGURE_ROM_DRAW">osbyte_CONFIGURE_ROM_DRAW</h3>
+<pre>#define osbyte_CONFIGURE_ROM_DRAW 215</pre>
+
+<h3 id="osbyte_CONFIGURE_ROM_DRAW_MASK">osbyte_CONFIGURE_ROM_DRAW_MASK</h3>
+<pre>#define osbyte_CONFIGURE_ROM_DRAW_MASK 0x10u</pre>
+
+<h3 id="osbyte_CONFIGURE_ROM_EDIT">osbyte_CONFIGURE_ROM_EDIT</h3>
+<pre>#define osbyte_CONFIGURE_ROM_EDIT 215</pre>
+
+<h3 id="osbyte_CONFIGURE_ROM_EDIT_MASK">osbyte_CONFIGURE_ROM_EDIT_MASK</h3>
+<pre>#define osbyte_CONFIGURE_ROM_EDIT_MASK 0x20u</pre>
+
+<h3 id="osbyte_CONFIGURE_ROM_HELP">osbyte_CONFIGURE_ROM_HELP</h3>
+<pre>#define osbyte_CONFIGURE_ROM_HELP 215</pre>
+
+<h3 id="osbyte_CONFIGURE_ROM_HELP_MASK">osbyte_CONFIGURE_ROM_HELP_MASK</h3>
+<pre>#define osbyte_CONFIGURE_ROM_HELP_MASK 0x40u</pre>
+
+<h3 id="osbyte_CONFIGURE_ROM_PAINT">osbyte_CONFIGURE_ROM_PAINT</h3>
+<pre>#define osbyte_CONFIGURE_ROM_PAINT 215</pre>
+
+<h3 id="osbyte_CONFIGURE_ROM_PAINT_MASK">osbyte_CONFIGURE_ROM_PAINT_MASK</h3>
+<pre>#define osbyte_CONFIGURE_ROM_PAINT_MASK 0x80u</pre>
+
+<h3 id="osbyte_CONFIGURE_ROM_BAT_MAN">osbyte_CONFIGURE_ROM_BAT_MAN</h3>
+<pre>#define osbyte_CONFIGURE_ROM_BAT_MAN 216</pre>
+
+<h3 id="osbyte_CONFIGURE_ROM_BAT_MAN_MASK">osbyte_CONFIGURE_ROM_BAT_MAN_MASK</h3>
+<pre>#define osbyte_CONFIGURE_ROM_BAT_MAN_MASK 0x1u</pre>
+
+<h3 id="osbyte_CONFIGURE_UNPLUG13">osbyte_CONFIGURE_UNPLUG13</h3>
+<pre>#define osbyte_CONFIGURE_UNPLUG13 217</pre>
+
+<p>RISC OS 3.60+</p>
+
+<h3 id="osbyte_CONFIGURE_UNPLUG14">osbyte_CONFIGURE_UNPLUG14</h3>
+<pre>#define osbyte_CONFIGURE_UNPLUG14 218</pre>
+
+<p>RISC OS 3.60+</p>
+
+<h3 id="osbyte_CONFIGURE_UNPLUG15">osbyte_CONFIGURE_UNPLUG15</h3>
+<pre>#define osbyte_CONFIGURE_UNPLUG15 219</pre>
+
+<p>RISC OS 3.60+</p>
+
+<h3 id="osbyte_CONFIGURE_ALARM_FORMAT">osbyte_CONFIGURE_ALARM_FORMAT</h3>
+<pre>#define osbyte_CONFIGURE_ALARM_FORMAT 220</pre>
+
+<h3 id="osbyte_CONFIGURE_ALARM_FORMAT_SHIFT">osbyte_CONFIGURE_ALARM_FORMAT_SHIFT</h3>
+<pre>#define osbyte_CONFIGURE_ALARM_FORMAT_SHIFT 0</pre>
+
+<h3 id="osbyte_CONFIGURE_ALARM_FORMAT_MASK">osbyte_CONFIGURE_ALARM_FORMAT_MASK</h3>
+<pre>#define osbyte_CONFIGURE_ALARM_FORMAT_MASK 0x7u</pre>
+
+<h3 id="osbyte_CONFIGURE_ALARM_CONFIRM">osbyte_CONFIGURE_ALARM_CONFIRM</h3>
+<pre>#define osbyte_CONFIGURE_ALARM_CONFIRM 220</pre>
+
+<h3 id="osbyte_CONFIGURE_ALARM_CONFIRM_MASK">osbyte_CONFIGURE_ALARM_CONFIRM_MASK</h3>
+<pre>#define osbyte_CONFIGURE_ALARM_CONFIRM_MASK 0x8u</pre>
+
+<h3 id="osbyte_CONFIGURE_ALARM_AUTO_SAVE">osbyte_CONFIGURE_ALARM_AUTO_SAVE</h3>
+<pre>#define osbyte_CONFIGURE_ALARM_AUTO_SAVE 220</pre>
+
+<h3 id="osbyte_CONFIGURE_ALARM_AUTO_SAVE_MASK">osbyte_CONFIGURE_ALARM_AUTO_SAVE_MASK</h3>
+<pre>#define osbyte_CONFIGURE_ALARM_AUTO_SAVE_MASK 0x10u</pre>
+
+<h3 id="osbyte_CONFIGURE_ALARM_WORKING_WEEK">osbyte_CONFIGURE_ALARM_WORKING_WEEK</h3>
+<pre>#define osbyte_CONFIGURE_ALARM_WORKING_WEEK 220</pre>
+
+<h3 id="osbyte_CONFIGURE_ALARM_WORKING_WEEK_MASK">osbyte_CONFIGURE_ALARM_WORKING_WEEK_MASK</h3>
+<pre>#define osbyte_CONFIGURE_ALARM_WORKING_WEEK_MASK 0x20u</pre>
+
+<h3 id="osbyte_CONFIGURE_ALARM_SILENT">osbyte_CONFIGURE_ALARM_SILENT</h3>
+<pre>#define osbyte_CONFIGURE_ALARM_SILENT 220</pre>
+
+<h3 id="osbyte_CONFIGURE_ALARM_SILENT_MASK">osbyte_CONFIGURE_ALARM_SILENT_MASK</h3>
+<pre>#define osbyte_CONFIGURE_ALARM_SILENT_MASK 0x40u</pre>
+
+<h3 id="osbyte_CONFIGURE_DST">osbyte_CONFIGURE_DST</h3>
+<pre>#define osbyte_CONFIGURE_DST 220</pre>
+
+<h3 id="osbyte_CONFIGURE_DST_MASK">osbyte_CONFIGURE_DST_MASK</h3>
+<pre>#define osbyte_CONFIGURE_DST_MASK 0x80u</pre>
+
+<h3 id="osbyte_CONFIGURE_WIMP_DRAG_DELAY">osbyte_CONFIGURE_WIMP_DRAG_DELAY</h3>
+<pre>#define osbyte_CONFIGURE_WIMP_DRAG_DELAY 221</pre>
+
+<h3 id="osbyte_CONFIGURE_WIMP_DRAG_MOVE">osbyte_CONFIGURE_WIMP_DRAG_MOVE</h3>
+<pre>#define osbyte_CONFIGURE_WIMP_DRAG_MOVE 222</pre>
+
+<h3 id="osbyte_CONFIGURE_WIMP_DOUBLE_CLICK_DELAY">osbyte_CONFIGURE_WIMP_DOUBLE_CLICK_DELAY</h3>
+<pre>#define osbyte_CONFIGURE_WIMP_DOUBLE_CLICK_DELAY 223</pre>
+
+<h3 id="osbyte_CONFIGURE_RISCIX32">osbyte_CONFIGURE_RISCIX32</h3>
+<pre>#define osbyte_CONFIGURE_RISCIX32 224</pre>
+
+<p>For 7 bytes</p>
+
+<h3 id="osbyte_CONFIGURE_PRINTER_NAME">osbyte_CONFIGURE_PRINTER_NAME</h3>
+<pre>#define osbyte_CONFIGURE_PRINTER_NAME 224</pre>
+
+<p>For 6 bytes</p>
+
+<h3 id="osbyte_CONFIGURE_LCD">osbyte_CONFIGURE_LCD</h3>
+<pre>#define osbyte_CONFIGURE_LCD 230</pre>
+
+<h3 id="osbyte_CONFIGURE_UNPLUG16">osbyte_CONFIGURE_UNPLUG16</h3>
+<pre>#define osbyte_CONFIGURE_UNPLUG16 231</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_LOCK0">osbyte_CONFIGURE_FS_LOCK0</h3>
+<pre>#define osbyte_CONFIGURE_FS_LOCK0 233</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_LOCK1">osbyte_CONFIGURE_FS_LOCK1</h3>
+<pre>#define osbyte_CONFIGURE_FS_LOCK1 234</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_LOCK2">osbyte_CONFIGURE_FS_LOCK2</h3>
+<pre>#define osbyte_CONFIGURE_FS_LOCK2 235</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_LOCK3">osbyte_CONFIGURE_FS_LOCK3</h3>
+<pre>#define osbyte_CONFIGURE_FS_LOCK3 236</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_LOCK4">osbyte_CONFIGURE_FS_LOCK4</h3>
+<pre>#define osbyte_CONFIGURE_FS_LOCK4 237</pre>
+
+<h3 id="osbyte_CONFIGURE_FS_LOCK5">osbyte_CONFIGURE_FS_LOCK5</h3>
+<pre>#define osbyte_CONFIGURE_FS_LOCK5 238</pre>
+
+<h3 id="osbyte_CONFIGURE_CHECKSUM">osbyte_CONFIGURE_CHECKSUM</h3>
+<pre>#define osbyte_CONFIGURE_CHECKSUM 239</pre>
+
+<h3 id="osbyte_CAPS_SHIFT">osbyte_CAPS_SHIFT</h3>
+<pre>#define osbyte_CAPS_SHIFT 0x1u</pre>
+
+<h3 id="osbyte_CAPS_NONE">osbyte_CAPS_NONE</h3>
+<pre>#define osbyte_CAPS_NONE 0x2u</pre>
+
+<h3 id="osbyte_CAPS_LOCK">osbyte_CAPS_LOCK</h3>
+<pre>#define osbyte_CAPS_LOCK 0x4u</pre>
+
+<h3 id="osbyte_SHUTDOWN_UNKNOWN">osbyte_SHUTDOWN_UNKNOWN</h3>
+<pre>#define osbyte_SHUTDOWN_UNKNOWN 0x0u</pre>
+
+<h3 id="osbyte_SHUTDOWN_FAILED">osbyte_SHUTDOWN_FAILED</h3>
+<pre>#define osbyte_SHUTDOWN_FAILED 0x1u</pre>
+
+<h3 id="osbyte_SHUTDOWN_POWER_LOST">osbyte_SHUTDOWN_POWER_LOST</h3>
+<pre>#define osbyte_SHUTDOWN_POWER_LOST 0x2u</pre>
+
+<h3 id="osbyte_SHUTDOWN_UNDEFINED">osbyte_SHUTDOWN_UNDEFINED</h3>
+<pre>#define osbyte_SHUTDOWN_UNDEFINED 0x3u</pre>
+
+<h3 id="osbyte_MOUSE_QUADRATURE">osbyte_MOUSE_QUADRATURE</h3>
+<pre>#define osbyte_MOUSE_QUADRATURE 0x0u</pre>
+
+<h3 id="osbyte_MOUSE_MICROSOFT_SERIAL">osbyte_MOUSE_MICROSOFT_SERIAL</h3>
+<pre>#define osbyte_MOUSE_MICROSOFT_SERIAL 0x1u</pre>
+
+<h3 id="osbyte_MOUSE_MSC_SERIAL">osbyte_MOUSE_MSC_SERIAL</h3>
+<pre>#define osbyte_MOUSE_MSC_SERIAL 0x2u</pre>
+
+<h3 id="osbyte_SYNC_VERTICAL">osbyte_SYNC_VERTICAL</h3>
+<pre>#define osbyte_SYNC_VERTICAL 0x0u</pre>
+
+<h3 id="osbyte_SYNC_COMPOSITE">osbyte_SYNC_COMPOSITE</h3>
+<pre>#define osbyte_SYNC_COMPOSITE 0x1u</pre>
+
+<h3 id="osbyte_SYNC_AUTO">osbyte_SYNC_AUTO</h3>
+<pre>#define osbyte_SYNC_AUTO 0x81u</pre>
+
+<h3 id="osbyte_MONITOR_TYPE_AUTO">osbyte_MONITOR_TYPE_AUTO</h3>
+<pre>#define osbyte_MONITOR_TYPE_AUTO 0x1Fu</pre>
+
+<h3 id="osbyte_BLANK_OFF">osbyte_BLANK_OFF</h3>
+<pre>#define osbyte_BLANK_OFF 0x0u</pre>
+
+<h3 id="osbyte_BLANK30S">osbyte_BLANK30S</h3>
+<pre>#define osbyte_BLANK30S 0x1u</pre>
+
+<h3 id="osbyte_BLANK1MIN">osbyte_BLANK1MIN</h3>
+<pre>#define osbyte_BLANK1MIN 0x2u</pre>
+
+<h3 id="osbyte_BLANK2MIN">osbyte_BLANK2MIN</h3>
+<pre>#define osbyte_BLANK2MIN 0x3u</pre>
+
+<h3 id="osbyte_BLANK5MIN">osbyte_BLANK5MIN</h3>
+<pre>#define osbyte_BLANK5MIN 0x4u</pre>
+
+<h3 id="osbyte_BLANK10MIN">osbyte_BLANK10MIN</h3>
+<pre>#define osbyte_BLANK10MIN 0x5u</pre>
+
+<h3 id="osbyte_BLANK15MIN">osbyte_BLANK15MIN</h3>
+<pre>#define osbyte_BLANK15MIN 0x6u</pre>
+
+<h3 id="osbyte_BLANK30MIN">osbyte_BLANK30MIN</h3>
+<pre>#define osbyte_BLANK30MIN 0x7u</pre>
+
+<h3 id="osbyte_DISPLAY_LARGE_ICONS">osbyte_DISPLAY_LARGE_ICONS</h3>
+<pre>#define osbyte_DISPLAY_LARGE_ICONS 0x0u</pre>
+
+<h3 id="osbyte_DISPLAY_SMALL_ICONS">osbyte_DISPLAY_SMALL_ICONS</h3>
+<pre>#define osbyte_DISPLAY_SMALL_ICONS 0x1u</pre>
+
+<h3 id="osbyte_DISPLAY_FULL_INFO">osbyte_DISPLAY_FULL_INFO</h3>
+<pre>#define osbyte_DISPLAY_FULL_INFO 0x2u</pre>
+
+<h3 id="osbyte_SORT_BY_NAME">osbyte_SORT_BY_NAME</h3>
+<pre>#define osbyte_SORT_BY_NAME 0x0u</pre>
+
+<h3 id="osbyte_SORT_BY_NUMBER">osbyte_SORT_BY_NUMBER</h3>
+<pre>#define osbyte_SORT_BY_NUMBER 0x1u</pre>
+
+<p>NetFiler only</p>
+
+<h3 id="osbyte_SORT_BY_TYPE">osbyte_SORT_BY_TYPE</h3>
+<pre>#define osbyte_SORT_BY_TYPE 0x1u</pre>
+
+<p>Filer only</p>
+
+<h3 id="osbyte_SORT_BY_SIZE">osbyte_SORT_BY_SIZE</h3>
+<pre>#define osbyte_SORT_BY_SIZE 0x2u</pre>
+
+<p>Filer only</p>
+
+<h3 id="osbyte_SORT_BY_DATE">osbyte_SORT_BY_DATE</h3>
+<pre>#define osbyte_SORT_BY_DATE 0x3u</pre>
+
+<p>Filer only</p>
+
+<h3 id="xos_byte">xos_byte</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xos_byte (<a href="#osbyte_op">osbyte_op</a> op,
+      int r1,
+      int r2,
+      int *r1_out,
+      int *r2_out);</pre>
+<p>General purpose call to alter status variables and perform other actions</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>op</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>r1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>r2</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>r1_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>r2_out</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="os_byte">os_byte</h3>
+<pre>extern void os_byte (<a href="#osbyte_op">osbyte_op</a> op,
+      int r1,
+      int r2,
+      int *r1_out,
+      int *r2_out);</pre>
+<p>General purpose call to alter status variables and perform other actions</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>op</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>r1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>r2</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>r1_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>r2_out</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xbytev">xbytev</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xbytev (<a href="#osbyte_op">osbyte_op</a> op,
+      int r1,
+      int r2,
+      int *r1_out,
+      int *r2_out);</pre>
+<p>Calls ByteV vector directly</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>op</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>r1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>r2</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>r1_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>r2_out</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="bytev">bytev</h3>
+<pre>extern void bytev (<a href="#osbyte_op">osbyte_op</a> op,
+      int r1,
+      int r2,
+      int *r1_out,
+      int *r2_out);</pre>
+<p>Calls ByteV vector directly</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>op</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>r1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>r2</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>r1_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>r2_out</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosbyte">xosbyte</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosbyte (<a href="#osbyte_op">osbyte_op</a> op,
+      int r1,
+      int r2);</pre>
+<p>Special case of call to perform OS_Byte actions with no result</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>op</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>r1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>r2</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osbyte">osbyte</h3>
+<pre>extern void osbyte (<a href="#osbyte_op">osbyte_op</a> op,
+      int r1,
+      int r2);</pre>
+<p>Special case of call to perform OS_Byte actions with no result</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>op</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>r1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>r2</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosbyte1">xosbyte1</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosbyte1 (<a href="#osbyte_op">osbyte_op</a> op,
+      int r1,
+      int r2,
+      int *r1_out);</pre>
+<p>First special case of call to perform OS_Byte actions returning a result</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>op</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>r1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>r2</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>r1_out</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osbyte1">osbyte1</h3>
+<pre>extern int osbyte1 (<a href="#osbyte_op">osbyte_op</a> op,
+      int r1,
+      int r2);</pre>
+<p>First special case of call to perform OS_Byte actions returning a result</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>op</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>r1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>r2</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>r1_out</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xosbyte2">xosbyte2</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosbyte2 (<a href="#osbyte_op">osbyte_op</a> op,
+      int r1,
+      int r2,
+      int *r2_out);</pre>
+<p>Second special case of call to perform OS_Byte actions returning a result</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>op</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>r1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>r2</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>r2_out</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osbyte2">osbyte2</h3>
+<pre>extern int osbyte2 (<a href="#osbyte_op">osbyte_op</a> op,
+      int r1,
+      int r2);</pre>
+<p>Second special case of call to perform OS_Byte actions returning a result</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>op</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>r1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>r2</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>r2_out</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosbyte_read">xosbyte_read</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosbyte_read (<a href="#osbyte_var">osbyte_var</a> var,
+      int *value);</pre>
+<p>Reads an OS_Byte status variable</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>var</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>value</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osbyte_read">osbyte_read</h3>
+<pre>extern int osbyte_read (<a href="#osbyte_var">osbyte_var</a> var);</pre>
+<p>Reads an OS_Byte status variable</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>var</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>value</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xosbyte_write">xosbyte_write</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosbyte_write (<a href="#osbyte_var">osbyte_var</a> var,
+      int value);</pre>
+<p>Writes an OS_Byte status variable</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>var</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>value</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osbyte_write">osbyte_write</h3>
+<pre>extern void osbyte_write (<a href="#osbyte_var">osbyte_var</a> var,
+      int value);</pre>
+<p>Writes an OS_Byte status variable</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>var</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>value</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

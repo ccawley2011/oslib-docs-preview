@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Label</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Label</h2>
+
+<pre>#include "oslib/label.h"</pre>
+
+<h3 id="label_gadget">label_gadget</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> label;
+   }
+   label_gadget;</pre>
+
+<h3 id="label_object">label_object</h3>
+<pre>typedef struct
+   {  <a href="#gadget_OBJECT_MEMBERS">gadget_OBJECT_MEMBERS</a>
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> label;
+   }
+   label_object;</pre>
+
+<h3 id="class_LABEL">class_LABEL</h3>
+<pre>#define class_LABEL ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x140u)</pre>
+
+<h3 id="label_NO_BOX">label_NO_BOX</h3>
+<pre>#define label_NO_BOX 0x1u</pre>
+
+<h3 id="label_RJUSTIFIED">label_RJUSTIFIED</h3>
+<pre>#define label_RJUSTIFIED 0x2u</pre>
+
+<h3 id="label_HCENTRED">label_HCENTRED</h3>
+<pre>#define label_HCENTRED 0x4u</pre>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

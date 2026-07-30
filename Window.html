@@ -1,0 +1,1213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Window</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Window</h2>
+
+<pre>#include "oslib/window.h"</pre>
+
+<h3 id="window_flags">window_flags</h3>
+<pre>typedef bits window_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#window_GENERATE_ABOUT_TO_BE_SHOWN">window_GENERATE_ABOUT_TO_BE_SHOWN</a></dd>
+<dd><a href="#window_AUTO_OPEN">window_AUTO_OPEN</a></dd>
+<dd><a href="#window_AUTO_CLOSE">window_AUTO_CLOSE</a></dd>
+<dd><a href="#window_GENERATE_DIALOGUE_COMPLETED">window_GENERATE_DIALOGUE_COMPLETED</a></dd>
+<dd><a href="#window_IS_TOOL_BAR">window_IS_TOOL_BAR</a></dd>
+</dl>
+
+<h3 id="window_gadget_flags">window_gadget_flags</h3>
+<pre>typedef bits window_gadget_flags;</pre>
+
+<h3 id="window_icon_data">window_icon_data</h3>
+<pre>typedef union
+   {  struct
+      {  <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> text;
+         <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> validation;
+         int size;
+      }
+      indirected_text;
+   }
+   window_icon_data;</pre>
+
+<h3 id="window_window">window_window</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> visible;
+      int xscroll;
+      int yscroll;
+      <a href="wimp.html#wimp_w">wimp_w</a> next;
+      <a href="wimp.html#wimp_window_flags">wimp_window_flags</a> flags;
+      <a href="wimp.html#wimp_colour">wimp_colour</a> title_fg;
+      <a href="wimp.html#wimp_colour">wimp_colour</a> title_bg;
+      <a href="wimp.html#wimp_colour">wimp_colour</a> work_fg;
+      <a href="wimp.html#wimp_colour">wimp_colour</a> work_bg;
+      <a href="wimp.html#wimp_colour">wimp_colour</a> scroll_outer;
+      <a href="wimp.html#wimp_colour">wimp_colour</a> scroll_inner;
+      <a href="wimp.html#wimp_colour">wimp_colour</a> highlight_bg;
+      <a href="wimp.html#wimp_extra_window_flags">wimp_extra_window_flags</a> extra_flags;
+      <a href="os.html#os_box">os_box</a> extent;
+      <a href="wimp.html#wimp_icon_flags">wimp_icon_flags</a> title_flags;
+      <a href="wimp.html#wimp_icon_flags">wimp_icon_flags</a> work_flags;
+      <a href="toolbox.html#toolbox_sprite_area_reference">toolbox_sprite_area_reference</a> sprite_area;
+      short xmin;
+      short ymin;
+      <a href="#window_icon_data">window_icon_data</a> title_data;
+      int icon_count;
+   }
+   window_window;</pre>
+
+<p>A Wimp window structure with no icons and specialised title data</p>
+
+
+Fields:	extra_flags - RISC OS 4+
+ 	title_flags - must always be Indirected Text
+ 	icon_count - Must be 0<h3 id="window_OBJECT_MEMBERS">window_OBJECT_MEMBERS</h3>
+<pre>#define window_OBJECT_MEMBERS \
+   <a href="#window_flags">window_flags</a> flags; \
+   <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> help_message; \
+   int help_limit; \
+   <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> sprite_name; \
+   int pointer_limit; \
+   <a href="os.html#os_coord">os_coord</a> hotspot; \
+   <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> menu_name; \
+   int shortcut_count; \
+   <a href="toolbox.html#toolbox_object_offset">toolbox_object_offset</a> shortcuts; \
+   int gadget_count; \
+   <a href="toolbox.html#toolbox_object_offset">toolbox_object_offset</a> gadgets; \
+   <a href="toolbox.html#toolbox_c">toolbox_c</a> default_focus; \
+   bits show_action; \
+   bits hide_action; \
+   <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_ibl; \
+   <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_itl; \
+   <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_ebl; \
+   <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_etl; \
+   <a href="#window_window">window_window</a> window;
+</pre>
+
+<h3 id="window_object_base">window_object_base</h3>
+<pre>typedef struct
+   {  <a href="#window_flags">window_flags</a> flags;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> help_message;
+      int help_limit;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> sprite_name;
+      int pointer_limit;
+      <a href="os.html#os_coord">os_coord</a> hotspot;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> menu_name;
+      int shortcut_count;
+      <a href="toolbox.html#toolbox_object_offset">toolbox_object_offset</a> shortcuts;
+      int gadget_count;
+      <a href="toolbox.html#toolbox_object_offset">toolbox_object_offset</a> gadgets;
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> default_focus;
+      bits show_action;
+      bits hide_action;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_ibl;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_itl;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_ebl;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_etl;
+      <a href="#window_window">window_window</a> window;
+   }
+   window_object_base;</pre>
+
+<p>Structure to describe Window Object for in-memory construction - to be referenced from Toolbox_Template</p>
+
+
+Fields:	shortcuts - cast to KeyboardShortcut_Object pointer
+ 	gadgets - cast to Gadget_Object pointer<h3 id="window_object">window_object</h3>
+<pre>typedef struct
+   {  <a href="#window_flags">window_flags</a> flags;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> help_message;
+      int help_limit;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> sprite_name;
+      int pointer_limit;
+      <a href="os.html#os_coord">os_coord</a> hotspot;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> menu_name;
+      int shortcut_count;
+      <a href="toolbox.html#toolbox_object_offset">toolbox_object_offset</a> shortcuts;
+      int gadget_count;
+      <a href="toolbox.html#toolbox_object_offset">toolbox_object_offset</a> gadgets;
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> default_focus;
+      bits show_action;
+      bits hide_action;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_ibl;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_itl;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_ebl;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_etl;
+      <a href="#window_window">window_window</a> window;
+      int data [...];
+   }
+   window_object;</pre>
+
+<p>Structure to describe Window Object for in-memory construction - to be referenced from Toolbox_Template</p>
+
+
+Fields:	shortcuts - cast to KeyboardShortcut_Object pointer
+ 	gadgets - cast to Gadget_Object pointer<h3 id="window_OBJECT_TEMPLATE_MEMBERS">window_OBJECT_TEMPLATE_MEMBERS</h3>
+<pre>#define window_OBJECT_TEMPLATE_MEMBERS \
+   toolbox_RESOURCE_FILE_OBJECT_MEMBERS \
+   <a href="#window_flags">window_flags</a> objectflags; \
+   <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> help_message; \
+   int help_limit; \
+   <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> sprite_name; \
+   int pointer_limit; \
+   <a href="os.html#os_coord">os_coord</a> hotspot; \
+   <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> menu_name; \
+   int shortcut_count; \
+   <a href="toolbox.html#toolbox_object_offset">toolbox_object_offset</a> shortcuts; \
+   int gadget_count; \
+   <a href="toolbox.html#toolbox_object_offset">toolbox_object_offset</a> gadgets; \
+   <a href="toolbox.html#toolbox_c">toolbox_c</a> default_focus; \
+   bits show_action; \
+   bits hide_action; \
+   <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_ibl; \
+   <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_itl; \
+   <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_ebl; \
+   <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_etl; \
+   <a href="#window_window">window_window</a> window;
+</pre>
+
+<h3 id="window_object_template_base">window_object_template_base</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_RESOURCE_FILE_OBJECT_MEMBERS">toolbox_RESOURCE_FILE_OBJECT_MEMBERS</a>
+      <a href="#window_flags">window_flags</a> objectflags;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> help_message;
+      int help_limit;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> sprite_name;
+      int pointer_limit;
+      <a href="os.html#os_coord">os_coord</a> hotspot;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> menu_name;
+      int shortcut_count;
+      <a href="toolbox.html#toolbox_object_offset">toolbox_object_offset</a> shortcuts;
+      int gadget_count;
+      <a href="toolbox.html#toolbox_object_offset">toolbox_object_offset</a> gadgets;
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> default_focus;
+      bits show_action;
+      bits hide_action;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_ibl;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_itl;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_ebl;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_etl;
+      <a href="#window_window">window_window</a> window;
+   }
+   window_object_template_base;</pre>
+
+<p>Structure Describing Window Object in Resource file</p>
+
+
+Fields:	shortcuts - cast to KeyboardShortcut_Object pointer
+ 	gadgets - cast to Gadget_Object pointer<h3 id="window_object_template">window_object_template</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_RESOURCE_FILE_OBJECT_MEMBERS">toolbox_RESOURCE_FILE_OBJECT_MEMBERS</a>
+      <a href="#window_flags">window_flags</a> objectflags;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> help_message;
+      int help_limit;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> sprite_name;
+      int pointer_limit;
+      <a href="os.html#os_coord">os_coord</a> hotspot;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> menu_name;
+      int shortcut_count;
+      <a href="toolbox.html#toolbox_object_offset">toolbox_object_offset</a> shortcuts;
+      int gadget_count;
+      <a href="toolbox.html#toolbox_object_offset">toolbox_object_offset</a> gadgets;
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> default_focus;
+      bits show_action;
+      bits hide_action;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_ibl;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_itl;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_ebl;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> toolbar_etl;
+      <a href="#window_window">window_window</a> window;
+      int data [...];
+   }
+   window_object_template;</pre>
+
+<p>Structure Describing Window Object in Resource file</p>
+
+
+Fields:	shortcuts - cast to KeyboardShortcut_Object pointer
+ 	gadgets - cast to Gadget_Object pointer<h3 id="window_full">window_full</h3>
+<pre>typedef <a href="toolbox.html#toolbox_full">toolbox_full</a> window_full;</pre>
+
+<h3 id="window_action_show_object">window_action_show_object</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> visible;
+      int xscroll;
+      int yscroll;
+      <a href="wimp.html#wimp_w">wimp_w</a> next;
+   }
+   window_action_show_object;</pre>
+
+<h3 id="window_action_about_to_be_shown">window_action_about_to_be_shown</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#window_full">window_full</a> full;
+      }
+      position;
+   }
+   window_action_about_to_be_shown;</pre>
+
+<p>Prefer Window_ActionAboutToBeShownBlock</p>
+
+<h3 id="window_action_about_to_be_shown_block">window_action_about_to_be_shown_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#window_full">window_full</a> full;
+      }
+      position;
+   }
+   window_action_about_to_be_shown_block;</pre>
+
+<h3 id="window_action_dialogue_completed_block">window_action_dialogue_completed_block</h3>
+<pre>typedef <a href="toolbox.html#toolbox_action_header_base">toolbox_action_header_base</a> window_action_dialogue_completed_block;</pre>
+
+<h3 id="window_tool_bar_flags">window_tool_bar_flags</h3>
+<pre>typedef bits window_tool_bar_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#window_TOOL_BAR_IBL">window_TOOL_BAR_IBL</a></dd>
+<dd><a href="#window_TOOL_BAR_ITL">window_TOOL_BAR_ITL</a></dd>
+<dd><a href="#window_TOOL_BAR_EBL">window_TOOL_BAR_EBL</a></dd>
+<dd><a href="#window_TOOL_BAR_ETL">window_TOOL_BAR_ETL</a></dd>
+</dl>
+
+<h3 id="window_mouse_state">window_mouse_state</h3>
+<pre>typedef bits window_mouse_state;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#window_CLICK_ADJUST">window_CLICK_ADJUST</a></dd>
+<dd><a href="#window_CLICK_MENU">window_CLICK_MENU</a></dd>
+<dd><a href="#window_CLICK_SELECT">window_CLICK_SELECT</a></dd>
+<dd><a href="#window_CLICK_NOT_TOOLBOX">window_CLICK_NOT_TOOLBOX</a></dd>
+</dl>
+
+<h3 id="class_WINDOW">class_WINDOW</h3>
+<pre>#define class_WINDOW ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x82880u)</pre>
+
+<h3 id="error_WINDOW_ALLOC_FAILED">error_WINDOW_ALLOC_FAILED</h3>
+<pre>#define error_WINDOW_ALLOC_FAILED 0x80A901u</pre>
+
+<h3 id="error_WINDOW_SHORT_BUFFER">error_WINDOW_SHORT_BUFFER</h3>
+<pre>#define error_WINDOW_SHORT_BUFFER 0x80A902u</pre>
+
+<h3 id="error_WINDOW_BAD_VERSION">error_WINDOW_BAD_VERSION</h3>
+<pre>#define error_WINDOW_BAD_VERSION 0x80A903u</pre>
+
+<h3 id="error_WINDOW_INVALID_FLAGS">error_WINDOW_INVALID_FLAGS</h3>
+<pre>#define error_WINDOW_INVALID_FLAGS 0x80A904u</pre>
+
+<h3 id="error_WINDOW_TASKS_ACTIVE">error_WINDOW_TASKS_ACTIVE</h3>
+<pre>#define error_WINDOW_TASKS_ACTIVE 0x80A905u</pre>
+
+<h3 id="error_WINDOW_NO_SUCH_TASK">error_WINDOW_NO_SUCH_TASK</h3>
+<pre>#define error_WINDOW_NO_SUCH_TASK 0x80A911u</pre>
+
+<h3 id="error_WINDOW_NO_SUCH_METHOD">error_WINDOW_NO_SUCH_METHOD</h3>
+<pre>#define error_WINDOW_NO_SUCH_METHOD 0x80A912u</pre>
+
+<h3 id="error_WINDOW_NO_SUCH_MISC_OP_METHOD">error_WINDOW_NO_SUCH_MISC_OP_METHOD</h3>
+<pre>#define error_WINDOW_NO_SUCH_MISC_OP_METHOD 0x80A913u</pre>
+
+<h3 id="error_WINDOW_INVALID_COMPONENT_ID">error_WINDOW_INVALID_COMPONENT_ID</h3>
+<pre>#define error_WINDOW_INVALID_COMPONENT_ID 0x80A914u</pre>
+
+<h3 id="error_WINDOW_DUPLICATE_COMPONENT_ID">error_WINDOW_DUPLICATE_COMPONENT_ID</h3>
+<pre>#define error_WINDOW_DUPLICATE_COMPONENT_ID 0x80A915u</pre>
+
+<h3 id="error_WINDOW_INVALID_GADGET_TYPE">error_WINDOW_INVALID_GADGET_TYPE</h3>
+<pre>#define error_WINDOW_INVALID_GADGET_TYPE 0x80A920u</pre>
+
+<h3 id="window_GENERATE_ABOUT_TO_BE_SHOWN">window_GENERATE_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define window_GENERATE_ABOUT_TO_BE_SHOWN ((<a href="#window_flags">window_flags</a>) 0x1u)</pre>
+
+<h3 id="window_AUTO_OPEN">window_AUTO_OPEN</h3>
+<pre>#define window_AUTO_OPEN ((<a href="#window_flags">window_flags</a>) 0x2u)</pre>
+
+<h3 id="window_AUTO_CLOSE">window_AUTO_CLOSE</h3>
+<pre>#define window_AUTO_CLOSE ((<a href="#window_flags">window_flags</a>) 0x4u)</pre>
+
+<h3 id="window_GENERATE_DIALOGUE_COMPLETED">window_GENERATE_DIALOGUE_COMPLETED</h3>
+<pre>#define window_GENERATE_DIALOGUE_COMPLETED ((<a href="#window_flags">window_flags</a>) 0x8u)</pre>
+
+<h3 id="window_IS_TOOL_BAR">window_IS_TOOL_BAR</h3>
+<pre>#define window_IS_TOOL_BAR ((<a href="#window_flags">window_flags</a>) 0x10u)</pre>
+
+<h3 id="window_NO_FOCUS">window_NO_FOCUS</h3>
+<pre>#define window_NO_FOCUS (-1)</pre>
+
+<h3 id="window_SET_FOCUS_TO_WINDOW">window_SET_FOCUS_TO_WINDOW</h3>
+<pre>#define window_SET_FOCUS_TO_WINDOW (-2)</pre>
+
+<h3 id="action_WINDOW_ABOUT_TO_BE_SHOWN">action_WINDOW_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define action_WINDOW_ABOUT_TO_BE_SHOWN 0x82880u</pre>
+
+<h3 id="action_WINDOW_DIALOGUE_COMPLETED">action_WINDOW_DIALOGUE_COMPLETED</h3>
+<pre>#define action_WINDOW_DIALOGUE_COMPLETED 0x82890u</pre>
+
+<h3 id="window_TOOL_BAR_IBL">window_TOOL_BAR_IBL</h3>
+<pre>#define window_TOOL_BAR_IBL ((<a href="#window_tool_bar_flags">window_tool_bar_flags</a>) 0x1u)</pre>
+
+<h3 id="window_TOOL_BAR_ITL">window_TOOL_BAR_ITL</h3>
+<pre>#define window_TOOL_BAR_ITL ((<a href="#window_tool_bar_flags">window_tool_bar_flags</a>) 0x2u)</pre>
+
+<h3 id="window_TOOL_BAR_EBL">window_TOOL_BAR_EBL</h3>
+<pre>#define window_TOOL_BAR_EBL ((<a href="#window_tool_bar_flags">window_tool_bar_flags</a>) 0x4u)</pre>
+
+<h3 id="window_TOOL_BAR_ETL">window_TOOL_BAR_ETL</h3>
+<pre>#define window_TOOL_BAR_ETL ((<a href="#window_tool_bar_flags">window_tool_bar_flags</a>) 0x8u)</pre>
+
+<h3 id="window_CLICK_ADJUST">window_CLICK_ADJUST</h3>
+<pre>#define window_CLICK_ADJUST ((<a href="#window_mouse_state">window_mouse_state</a>) 0x1u)</pre>
+
+<h3 id="window_CLICK_MENU">window_CLICK_MENU</h3>
+<pre>#define window_CLICK_MENU ((<a href="#window_mouse_state">window_mouse_state</a>) 0x2u)</pre>
+
+<h3 id="window_CLICK_SELECT">window_CLICK_SELECT</h3>
+<pre>#define window_CLICK_SELECT ((<a href="#window_mouse_state">window_mouse_state</a>) 0x4u)</pre>
+
+<h3 id="window_CLICK_NOT_TOOLBOX">window_CLICK_NOT_TOOLBOX</h3>
+<pre>#define window_CLICK_NOT_TOOLBOX ((<a href="#window_mouse_state">window_mouse_state</a>) 0x100u)</pre>
+
+<h3 id="xwindow_get_pointer_info">xwindow_get_pointer_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_get_pointer_info (bits flags,
+      int *x,
+      int *y,
+      <a href="#window_mouse_state">window_mouse_state</a> *state,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *obj,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> *cmp);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>x</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>state</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>cmp</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="window_get_pointer_info">window_get_pointer_info</h3>
+<pre>extern void window_get_pointer_info (bits flags,
+      int *x,
+      int *y,
+      <a href="#window_mouse_state">window_mouse_state</a> *state,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *obj,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> *cmp);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>x</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>state</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>cmp</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xwindow_wimp_to_toolbox">xwindow_wimp_to_toolbox</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_wimp_to_toolbox (bits flags,
+      <a href="wimp.html#wimp_w">wimp_w</a> w,
+      <a href="wimp.html#wimp_i">wimp_i</a> i,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *obj,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> *cmp);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>w</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>i</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>cmp</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="window_wimp_to_toolbox">window_wimp_to_toolbox</h3>
+<pre>extern void window_wimp_to_toolbox (bits flags,
+      <a href="wimp.html#wimp_w">wimp_w</a> w,
+      <a href="wimp.html#wimp_i">wimp_i</a> i,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *obj,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> *cmp);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>w</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>i</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>cmp</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xwindow_register_external">xwindow_register_external</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_register_external (bits flags,
+      <a href="gadget.html#gadget_extension_list">gadget_extension_list</a> const *types,
+      int handler_swi_number);</pre>
+<p>Registers one or more gadgets with the window module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>types</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handler_swi_number</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="window_register_external">window_register_external</h3>
+<pre>extern void window_register_external (bits flags,
+      <a href="gadget.html#gadget_extension_list">gadget_extension_list</a> const *types,
+      int handler_swi_number);</pre>
+<p>Registers one or more gadgets with the window module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>types</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handler_swi_number</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xwindow_deregister_external">xwindow_deregister_external</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_deregister_external (bits flags,
+      int type,
+      int handler_swi_number);</pre>
+<p>Deregisters a gadget from the window module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handler_swi_number</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="window_deregister_external">window_deregister_external</h3>
+<pre>extern void window_deregister_external (bits flags,
+      int type,
+      int handler_swi_number);</pre>
+<p>Deregisters a gadget from the window module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handler_swi_number</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xwindow_extract_gadget_info">xwindow_extract_gadget_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_extract_gadget_info (bits flags,
+      <a href="toolbox.html#toolbox_resource_file_object">toolbox_resource_file_object</a> const *object,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> cmp,
+      <a href="gadget.html#gadget_object">gadget_object</a> **gadget,
+      int *size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>object</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>cmp</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="window_extract_gadget_info">window_extract_gadget_info</h3>
+<pre>extern <a href="gadget.html#gadget_object">gadget_object</a> *window_extract_gadget_info (bits flags,
+      <a href="toolbox.html#toolbox_resource_file_object">toolbox_resource_file_object</a> const *object,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> cmp,
+      int *size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>object</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>cmp</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>gadget</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwindow_get_wimp_handle">xwindow_get_wimp_handle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_get_wimp_handle (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="wimp.html#wimp_w">wimp_w</a> *w);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>w</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="window_get_wimp_handle">window_get_wimp_handle</h3>
+<pre>extern <a href="wimp.html#wimp_w">wimp_w</a> window_get_wimp_handle (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>w</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwindow_add_gadget">xwindow_add_gadget</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_add_gadget (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="gadget.html#gadget_object">gadget_object</a> const *object,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> *gadget);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>object</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="window_add_gadget">window_add_gadget</h3>
+<pre>extern <a href="toolbox.html#toolbox_c">toolbox_c</a> window_add_gadget (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="gadget.html#gadget_object">gadget_object</a> const *object);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>object</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>gadget</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwindow_remove_gadget">xwindow_remove_gadget</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_remove_gadget (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> gadget);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="window_remove_gadget">window_remove_gadget</h3>
+<pre>extern void window_remove_gadget (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> gadget);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xwindow_set_menu">xwindow_set_menu</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_set_menu (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="window_set_menu">window_set_menu</h3>
+<pre>extern void window_set_menu (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xwindow_get_menu">xwindow_get_menu</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_get_menu (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *menu);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>menu</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="window_get_menu">window_get_menu</h3>
+<pre>extern <a href="toolbox.html#toolbox_o">toolbox_o</a> window_get_menu (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>menu</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwindow_set_pointer">xwindow_set_pointer</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_set_pointer (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      char const *sprite_name,
+      int xhotspot,
+      int yhotspot);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xhotspot</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>yhotspot</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="window_set_pointer">window_set_pointer</h3>
+<pre>extern void window_set_pointer (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      char const *sprite_name,
+      int xhotspot,
+      int yhotspot);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xhotspot</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>yhotspot</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xwindow_get_pointer">xwindow_get_pointer</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_get_pointer (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      char *buffer,
+      int size,
+      int *used,
+      int *xhotspot,
+      int *yhotspot);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>xhotspot</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>yhotspot</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="window_get_pointer">window_get_pointer</h3>
+<pre>extern int window_get_pointer (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      char *buffer,
+      int size,
+      int *xhotspot,
+      int *yhotspot);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>xhotspot</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>yhotspot</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xwindow_set_help_message">xwindow_set_help_message</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_set_help_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      char const *help);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>help</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="window_set_help_message">window_set_help_message</h3>
+<pre>extern void window_set_help_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      char const *help);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>help</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xwindow_get_help_message">xwindow_get_help_message</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_get_help_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      char *buffer,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="window_get_help_message">window_get_help_message</h3>
+<pre>extern int window_get_help_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      char *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xwindow_add_keyboard_shortcuts">xwindow_add_keyboard_shortcuts</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_add_keyboard_shortcuts (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      int add_count,
+      <a href="keyboardshortcut.html#keyboardshortcut_object">keyboardshortcut_object</a> const *shortcuts);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>add_count</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>shortcuts</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="window_add_keyboard_shortcuts">window_add_keyboard_shortcuts</h3>
+<pre>extern void window_add_keyboard_shortcuts (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      int add_count,
+      <a href="keyboardshortcut.html#keyboardshortcut_object">keyboardshortcut_object</a> const *shortcuts);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>add_count</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>shortcuts</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xwindow_remove_keyboard_shortcuts">xwindow_remove_keyboard_shortcuts</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_remove_keyboard_shortcuts (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      int remove_count,
+      <a href="keyboardshortcut.html#keyboardshortcut_object">keyboardshortcut_object</a> const *shortcuts);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>remove_count</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>shortcuts</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="window_remove_keyboard_shortcuts">window_remove_keyboard_shortcuts</h3>
+<pre>extern void window_remove_keyboard_shortcuts (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      int remove_count,
+      <a href="keyboardshortcut.html#keyboardshortcut_object">keyboardshortcut_object</a> const *shortcuts);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>remove_count</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>shortcuts</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xwindow_set_title">xwindow_set_title</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_set_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      char const *title);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="window_set_title">window_set_title</h3>
+<pre>extern void window_set_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      char const *title);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xwindow_get_title">xwindow_get_title</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_get_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      char *buffer,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="window_get_title">window_get_title</h3>
+<pre>extern int window_get_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      char *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xwindow_set_default_focus">xwindow_set_default_focus</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_set_default_focus (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> focus);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>focus</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="window_set_default_focus">window_set_default_focus</h3>
+<pre>extern void window_set_default_focus (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> focus);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>focus</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xwindow_get_default_focus">xwindow_get_default_focus</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_get_default_focus (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> *focus);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>focus</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="window_get_default_focus">window_get_default_focus</h3>
+<pre>extern <a href="toolbox.html#toolbox_c">toolbox_c</a> window_get_default_focus (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>focus</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwindow_set_extent">xwindow_set_extent</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_set_extent (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="os.html#os_box">os_box</a> const *extent);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>extent</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="window_set_extent">window_set_extent</h3>
+<pre>extern void window_set_extent (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="os.html#os_box">os_box</a> const *extent);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>extent</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xwindow_get_extent">xwindow_get_extent</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_get_extent (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="os.html#os_box">os_box</a> *extent);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>extent</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="window_get_extent">window_get_extent</h3>
+<pre>extern void window_get_extent (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="os.html#os_box">os_box</a> *extent);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>extent</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xwindow_force_redraw">xwindow_force_redraw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_force_redraw (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="os.html#os_box">os_box</a> const *redraw);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>redraw</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="window_force_redraw">window_force_redraw</h3>
+<pre>extern void window_force_redraw (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="os.html#os_box">os_box</a> const *redraw);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>redraw</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xwindow_set_tool_bars">xwindow_set_tool_bars</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_set_tool_bars (<a href="#window_tool_bar_flags">window_tool_bar_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> ibl,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> itl,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> ebl,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> etl);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ibl</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>itl</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>ebl</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>etl</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="window_set_tool_bars">window_set_tool_bars</h3>
+<pre>extern void window_set_tool_bars (<a href="#window_tool_bar_flags">window_tool_bar_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> ibl,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> itl,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> ebl,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> etl);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ibl</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>itl</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>ebl</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>etl</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xwindow_get_tool_bars">xwindow_get_tool_bars</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindow_get_tool_bars (<a href="#window_tool_bar_flags">window_tool_bar_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *ibl,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *itl,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *ebl,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *etl);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>ibl</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>itl</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ebl</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>etl</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="window_get_tool_bars">window_get_tool_bars</h3>
+<pre>extern void window_get_tool_bars (<a href="#window_tool_bar_flags">window_tool_bar_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *ibl,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *itl,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *ebl,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *etl);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>ibl</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>itl</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ebl</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>etl</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xservice_window_module_starting">xservice_window_module_starting</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_window_module_starting (void);
+</pre><p>Window module has started and is ready to receive SWI calls</p>
+
+
+<table>
+</table>
+
+<h3 id="service_window_module_starting">service_window_module_starting</h3>
+<pre>extern void service_window_module_starting (void);
+</pre><p>Window module has started and is ready to receive SWI calls</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_window_module_dying">xservice_window_module_dying</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_window_module_dying (void);
+</pre><p>Window module is closing down</p>
+
+
+<table>
+</table>
+
+<h3 id="service_window_module_dying">service_window_module_dying</h3>
+<pre>extern void service_window_module_dying (void);
+</pre><p>Window module is closing down</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_gadget_registered">xservice_gadget_registered</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_gadget_registered (int type,
+      int handler_swi_number,
+      bits feature_mask);</pre>
+<p>Gadget type has been registered</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handler_swi_number</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>feature_mask</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="service_gadget_registered">service_gadget_registered</h3>
+<pre>extern void service_gadget_registered (int type,
+      int handler_swi_number,
+      bits feature_mask);</pre>
+<p>Gadget type has been registered</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handler_swi_number</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>feature_mask</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xservice_gadget_deregistered">xservice_gadget_deregistered</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_gadget_deregistered (int type,
+      int handler_swi_number);</pre>
+<p>Gadget type has been deregistered</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handler_swi_number</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="service_gadget_deregistered">service_gadget_deregistered</h3>
+<pre>extern void service_gadget_deregistered (int type,
+      int handler_swi_number);</pre>
+<p>Gadget type has been deregistered</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handler_swi_number</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

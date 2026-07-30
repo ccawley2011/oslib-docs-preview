@@ -1,0 +1,1780 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; OSFile</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>OSFile</h2>
+
+<pre>#include "oslib/osfile.h"</pre>
+
+<h3 id="osfile_load_flags">osfile_load_flags</h3>
+<pre>typedef bits osfile_load_flags;</pre>
+
+<p>For use in OS_File 12, 14, 16 and 255 - RISC OS 3.7+</p>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osfile_LOAD_FLAGS_IS_CODE">osfile_LOAD_FLAGS_IS_CODE</a></dd>
+</dl>
+
+<h3 id="osfile_NOT_FOUND">osfile_NOT_FOUND</h3>
+<pre>#define osfile_NOT_FOUND ((<a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a>) 0x0u)</pre>
+
+<h3 id="osfile_IS_FILE">osfile_IS_FILE</h3>
+<pre>#define osfile_IS_FILE ((<a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a>) 0x1u)</pre>
+
+<h3 id="osfile_IS_DIR">osfile_IS_DIR</h3>
+<pre>#define osfile_IS_DIR ((<a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a>) 0x2u)</pre>
+
+<h3 id="osfile_IS_IMAGE">osfile_IS_IMAGE</h3>
+<pre>#define osfile_IS_IMAGE ((<a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a>) 0x3u)</pre>
+
+<h3 id="osfile_FILE_TYPE">osfile_FILE_TYPE</h3>
+<pre>#define osfile_FILE_TYPE 0xFFF00u</pre>
+
+<h3 id="osfile_FILE_TYPE_SHIFT">osfile_FILE_TYPE_SHIFT</h3>
+<pre>#define osfile_FILE_TYPE_SHIFT 8</pre>
+
+<h3 id="osfile_TYPE_DRAW">osfile_TYPE_DRAW</h3>
+<pre>#define osfile_TYPE_DRAW 0xAFFu</pre>
+
+<h3 id="osfile_TYPE_BBCROM">osfile_TYPE_BBCROM</h3>
+<pre>#define osfile_TYPE_BBCROM 0xBBCu</pre>
+
+<h3 id="osfile_TYPE_CODE">osfile_TYPE_CODE</h3>
+<pre>#define osfile_TYPE_CODE 0xF95u</pre>
+
+<h3 id="osfile_TYPE_RESOURCE">osfile_TYPE_RESOURCE</h3>
+<pre>#define osfile_TYPE_RESOURCE 0xFAEu</pre>
+
+<h3 id="osfile_TYPE_DOS_DISC">osfile_TYPE_DOS_DISC</h3>
+<pre>#define osfile_TYPE_DOS_DISC 0xFC8u</pre>
+
+<h3 id="osfile_TYPE_DEVICE">osfile_TYPE_DEVICE</h3>
+<pre>#define osfile_TYPE_DEVICE 0xFCCu</pre>
+
+<h3 id="osfile_TYPE_CACHE">osfile_TYPE_CACHE</h3>
+<pre>#define osfile_TYPE_CACHE 0xFCFu</pre>
+
+<h3 id="osfile_TYPE_TASK_EXEC">osfile_TYPE_TASK_EXEC</h3>
+<pre>#define osfile_TYPE_TASK_EXEC 0xFD6u</pre>
+
+<h3 id="osfile_TYPE_TASK_OBEY">osfile_TYPE_TASK_OBEY</h3>
+<pre>#define osfile_TYPE_TASK_OBEY 0xFD7u</pre>
+
+<h3 id="osfile_TYPE_DOS">osfile_TYPE_DOS</h3>
+<pre>#define osfile_TYPE_DOS 0xFE4u</pre>
+
+<h3 id="osfile_TYPE_DESKTOP">osfile_TYPE_DESKTOP</h3>
+<pre>#define osfile_TYPE_DESKTOP 0xFEAu</pre>
+
+<h3 id="osfile_TYPE_OBEY">osfile_TYPE_OBEY</h3>
+<pre>#define osfile_TYPE_OBEY 0xFEBu</pre>
+
+<h3 id="osfile_TYPE_TEMPLATE">osfile_TYPE_TEMPLATE</h3>
+<pre>#define osfile_TYPE_TEMPLATE 0xFECu</pre>
+
+<h3 id="osfile_TYPE_PALETTE">osfile_TYPE_PALETTE</h3>
+<pre>#define osfile_TYPE_PALETTE 0xFEDu</pre>
+
+<h3 id="osfile_TYPE_CONFIG">osfile_TYPE_CONFIG</h3>
+<pre>#define osfile_TYPE_CONFIG 0xFF2u</pre>
+
+<h3 id="osfile_TYPE_PRINTOUT">osfile_TYPE_PRINTOUT</h3>
+<pre>#define osfile_TYPE_PRINTOUT 0xFF4u</pre>
+
+<h3 id="osfile_TYPE_POSTSCRIPT">osfile_TYPE_POSTSCRIPT</h3>
+<pre>#define osfile_TYPE_POSTSCRIPT 0xFF5u</pre>
+
+<h3 id="osfile_TYPE_FONT">osfile_TYPE_FONT</h3>
+<pre>#define osfile_TYPE_FONT 0xFF6u</pre>
+
+<h3 id="osfile_TYPE_BBC_FONT">osfile_TYPE_BBC_FONT</h3>
+<pre>#define osfile_TYPE_BBC_FONT 0xFF7u</pre>
+
+<h3 id="osfile_TYPE_ABSOLUTE">osfile_TYPE_ABSOLUTE</h3>
+<pre>#define osfile_TYPE_ABSOLUTE 0xFF8u</pre>
+
+<h3 id="osfile_TYPE_SPRITE">osfile_TYPE_SPRITE</h3>
+<pre>#define osfile_TYPE_SPRITE 0xFF9u</pre>
+
+<h3 id="osfile_TYPE_MODULE">osfile_TYPE_MODULE</h3>
+<pre>#define osfile_TYPE_MODULE 0xFFAu</pre>
+
+<h3 id="osfile_TYPE_BASIC">osfile_TYPE_BASIC</h3>
+<pre>#define osfile_TYPE_BASIC 0xFFBu</pre>
+
+<h3 id="osfile_TYPE_UTILITY">osfile_TYPE_UTILITY</h3>
+<pre>#define osfile_TYPE_UTILITY 0xFFCu</pre>
+
+<h3 id="osfile_TYPE_DATA">osfile_TYPE_DATA</h3>
+<pre>#define osfile_TYPE_DATA 0xFFDu</pre>
+
+<h3 id="osfile_TYPE_COMMAND">osfile_TYPE_COMMAND</h3>
+<pre>#define osfile_TYPE_COMMAND 0xFFEu</pre>
+
+<h3 id="osfile_TYPE_TEXT">osfile_TYPE_TEXT</h3>
+<pre>#define osfile_TYPE_TEXT 0xFFFu</pre>
+
+<h3 id="osfile_TYPE_DIR">osfile_TYPE_DIR</h3>
+<pre>#define osfile_TYPE_DIR 0x1000u</pre>
+
+<h3 id="osfile_TYPE_APPLICATION">osfile_TYPE_APPLICATION</h3>
+<pre>#define osfile_TYPE_APPLICATION 0x2000u</pre>
+
+<h3 id="osfile_TYPE_UNTYPED">osfile_TYPE_UNTYPED</h3>
+<pre>#define osfile_TYPE_UNTYPED 0xFFFFFFFFu</pre>
+
+<h3 id="osfile_LOAD_FLAGS_IS_CODE">osfile_LOAD_FLAGS_IS_CODE</h3>
+<pre>#define osfile_LOAD_FLAGS_IS_CODE ((<a href="#osfile_load_flags">osfile_load_flags</a>) 0x80000000u)</pre>
+
+<h3 id="xosfile_save_stamped">xosfile_save_stamped</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_save_stamped (char const *file_name,
+      bits file_type,
+      byte const *data,
+      byte const *end);</pre>
+<p>Calls OS_File 10 to save a block of memory as a file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>end</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfile_save_stamped">osfile_save_stamped</h3>
+<pre>extern void osfile_save_stamped (char const *file_name,
+      bits file_type,
+      byte const *data,
+      byte const *end);</pre>
+<p>Calls OS_File 10 to save a block of memory as a file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>end</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xosfile_write">xosfile_write</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_write (char const *file_name,
+      bits load_addr,
+      bits exec_addr,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr);</pre>
+<p>Calls OS_File 1 to write the load and execution addresses and attributes for an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfile_write">osfile_write</h3>
+<pre>extern void osfile_write (char const *file_name,
+      bits load_addr,
+      bits exec_addr,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr);</pre>
+<p>Calls OS_File 1 to write the load and execution addresses and attributes for an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xosfile_write_load">xosfile_write_load</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_write_load (char const *file_name,
+      bits load_addr);</pre>
+<p>Calls OS_File 2 to write the load address for an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osfile_write_load">osfile_write_load</h3>
+<pre>extern void osfile_write_load (char const *file_name,
+      bits load_addr);</pre>
+<p>Calls OS_File 2 to write the load address for an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosfile_write_exec">xosfile_write_exec</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_write_exec (char const *file_name,
+      bits exec_addr);</pre>
+<p>Calls OS_File 3 to write the execution address for an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osfile_write_exec">osfile_write_exec</h3>
+<pre>extern void osfile_write_exec (char const *file_name,
+      bits exec_addr);</pre>
+<p>Calls OS_File 3 to write the execution address for an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosfile_write_attr">xosfile_write_attr</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_write_attr (char const *file_name,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr);</pre>
+<p>Calls OS_File 4 to write the attributes for an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfile_write_attr">osfile_write_attr</h3>
+<pre>extern void osfile_write_attr (char const *file_name,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr);</pre>
+<p>Calls OS_File 4 to write the attributes for an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xosfile_stamp">xosfile_stamp</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_stamp (char const *file_name);</pre>
+<p>Calls OS_File 9 to write the date stamp for an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osfile_stamp">osfile_stamp</h3>
+<pre>extern void osfile_stamp (char const *file_name);</pre>
+<p>Calls OS_File 9 to write the date stamp for an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosfile_set_type">xosfile_set_type</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_set_type (char const *file_name,
+      bits file_type);</pre>
+<p>Calls OS_File 18 to write the file type for an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osfile_set_type">osfile_set_type</h3>
+<pre>extern void osfile_set_type (char const *file_name,
+      bits file_type);</pre>
+<p>Calls OS_File 18 to write the file type for an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosfile_delete">xosfile_delete</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_delete (char const *file_name,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 6 to delete an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfile_delete">osfile_delete</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> osfile_delete (char const *file_name,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 6 to delete an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfile_create_stamped">xosfile_create_stamped</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_create_stamped (char const *file_name,
+      bits file_type,
+      int size);</pre>
+<p>Calls OS_File to create an empty file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfile_create_stamped">osfile_create_stamped</h3>
+<pre>extern void osfile_create_stamped (char const *file_name,
+      bits file_type,
+      int size);</pre>
+<p>Calls OS_File to create an empty file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xosfile_create_dir">xosfile_create_dir</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_create_dir (char const *dir_name,
+      int entry_count);</pre>
+<p>Calls OS_File 8 to create a directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry_count</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="osfile_create_dir">osfile_create_dir</h3>
+<pre>extern void osfile_create_dir (char const *dir_name,
+      int entry_count);</pre>
+<p>Calls OS_File 8 to create a directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry_count</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xosfile_load_stamped_path">xosfile_load_stamped_path</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_load_stamped_path (char const *file_name,
+      byte *addr,
+      char const *path,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 12 to load a file using a specified directory list</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfile_load_stamped_path">osfile_load_stamped_path</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> osfile_load_stamped_path (char const *file_name,
+      byte *addr,
+      char const *path,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 12 to load a file using a specified directory list</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfile_load_stamped_path_with_flags">xosfile_load_stamped_path_with_flags</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_load_stamped_path_with_flags (char const *file_name,
+      byte *addr,
+      <a href="#osfile_load_flags">osfile_load_flags</a> flags,
+      char const *path,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 12 to load a file using a specified directory list</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfile_load_stamped_path_with_flags">osfile_load_stamped_path_with_flags</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> osfile_load_stamped_path_with_flags (char const *file_name,
+      byte *addr,
+      <a href="#osfile_load_flags">osfile_load_flags</a> flags,
+      char const *path,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 12 to load a file using a specified directory list</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfile_load_stamped_path_var">xosfile_load_stamped_path_var</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_load_stamped_path_var (char const *file_name,
+      byte *addr,
+      char const *var,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 14 to load a file using the directory list in a specified variable</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>var</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfile_load_stamped_path_var">osfile_load_stamped_path_var</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> osfile_load_stamped_path_var (char const *file_name,
+      byte *addr,
+      char const *var,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 14 to load a file using the directory list in a specified variable</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>var</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfile_load_stamped_path_var_with_flags">xosfile_load_stamped_path_var_with_flags</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_load_stamped_path_var_with_flags (char const *file_name,
+      byte *addr,
+      <a href="#osfile_load_flags">osfile_load_flags</a> flags,
+      char const *var,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 14 to load a file using the directory list in a specified variable</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>var</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfile_load_stamped_path_var_with_flags">osfile_load_stamped_path_var_with_flags</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> osfile_load_stamped_path_var_with_flags (char const *file_name,
+      byte *addr,
+      <a href="#osfile_load_flags">osfile_load_flags</a> flags,
+      char const *var,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 14 to load a file using the directory list in a specified variable</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>var</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfile_load_stamped_no_path">xosfile_load_stamped_no_path</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_load_stamped_no_path (char const *file_name,
+      byte *addr,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 16 to load a file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfile_load_stamped_no_path">osfile_load_stamped_no_path</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> osfile_load_stamped_no_path (char const *file_name,
+      byte *addr,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 16 to load a file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfile_load_stamped_no_path_with_flags">xosfile_load_stamped_no_path_with_flags</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_load_stamped_no_path_with_flags (char const *file_name,
+      byte *addr,
+      <a href="#osfile_load_flags">osfile_load_flags</a> flags,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 16 to load a file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfile_load_stamped_no_path_with_flags">osfile_load_stamped_no_path_with_flags</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> osfile_load_stamped_no_path_with_flags (char const *file_name,
+      byte *addr,
+      <a href="#osfile_load_flags">osfile_load_flags</a> flags,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 16 to load a file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfile_load_stamped">xosfile_load_stamped</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_load_stamped (char const *file_name,
+      byte *addr,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 255 to load a file using the directory list in File$Path</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfile_load_stamped">osfile_load_stamped</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> osfile_load_stamped (char const *file_name,
+      byte *addr,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 255 to load a file using the directory list in File$Path</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfile_load_stamped_with_flags">xosfile_load_stamped_with_flags</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_load_stamped_with_flags (char const *file_name,
+      byte *addr,
+      <a href="#osfile_load_flags">osfile_load_flags</a> flags,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 255 to load a file using the directory list in File$Path</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfile_load_stamped_with_flags">osfile_load_stamped_with_flags</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> osfile_load_stamped_with_flags (char const *file_name,
+      byte *addr,
+      <a href="#osfile_load_flags">osfile_load_flags</a> flags,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 255 to load a file using the directory list in File$Path</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfile_make_error">xosfile_make_error</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_make_error (char const *file_name,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> obj_type);</pre>
+<p>Calls OS_File 19 to generate an error message</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osfile_make_error">osfile_make_error</h3>
+<pre>extern void osfile_make_error (char const *file_name,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> obj_type);</pre>
+<p>Calls OS_File 19 to generate an error message</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosfile_read_stamped">xosfile_read_stamped</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_read_stamped (char const *file_name,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr,
+      bits *file_type);</pre>
+<p>Calls OS_File 20 to read catalogue information and file type for an object using the directory list in File$Path</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="osfile_read_stamped">osfile_read_stamped</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> osfile_read_stamped (char const *file_name,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr,
+      bits *file_type);</pre>
+<p>Calls OS_File 20 to read catalogue information and file type for an object using the directory list in File$Path</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfile_read_stamped_path">xosfile_read_stamped_path</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_read_stamped_path (char const *file_name,
+      char const *path,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr,
+      bits *file_type);</pre>
+<p>Calls OS_File 21 to read catalogue information and file type for an object using a specified directory list</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="osfile_read_stamped_path">osfile_read_stamped_path</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> osfile_read_stamped_path (char const *file_name,
+      char const *path,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr,
+      bits *file_type);</pre>
+<p>Calls OS_File 21 to read catalogue information and file type for an object using a specified directory list</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfile_read_stamped_path_var">xosfile_read_stamped_path_var</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_read_stamped_path_var (char const *file_name,
+      char const *var,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr,
+      bits *file_type);</pre>
+<p>Calls OS_File 22 to read catalogue information and file type for an object using the directory list in a specified variable</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>var</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="osfile_read_stamped_path_var">osfile_read_stamped_path_var</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> osfile_read_stamped_path_var (char const *file_name,
+      char const *var,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr,
+      bits *file_type);</pre>
+<p>Calls OS_File 22 to read catalogue information and file type for an object using the directory list in a specified variable</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>var</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfile_read_stamped_no_path">xosfile_read_stamped_no_path</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_read_stamped_no_path (char const *file_name,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr,
+      bits *file_type);</pre>
+<p>Calls OS_File 23 to read catalogue information and file type for an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="osfile_read_stamped_no_path">osfile_read_stamped_no_path</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> osfile_read_stamped_no_path (char const *file_name,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr,
+      bits *file_type);</pre>
+<p>Calls OS_File 23 to read catalogue information and file type for an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfile_read_block_size">xosfile_read_block_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_read_block_size (char const *file_name,
+      int *block_size);</pre>
+<p>Calls OS_File 24 to read the natural block size of a file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>block_size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osfile_read_block_size">osfile_read_block_size</h3>
+<pre>extern int osfile_read_block_size (char const *file_name);</pre>
+<p>Calls OS_File 24 to read the natural block size of a file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>block_size</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosfile_save">xosfile_save</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_save (char const *file_name,
+      bits load_addr,
+      bits exec_addr,
+      byte const *data,
+      byte const *end);</pre>
+<p>Calls OS_File 0 to save a block of memory as an untyped file - prefer OSFile_SaveStamped</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>end</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfile_save">osfile_save</h3>
+<pre>extern void osfile_save (char const *file_name,
+      bits load_addr,
+      bits exec_addr,
+      byte const *data,
+      byte const *end);</pre>
+<p>Calls OS_File 0 to save a block of memory as an untyped file - prefer OSFile_SaveStamped</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>end</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xosfile_read">xosfile_read</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_read (char const *file_name,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 5 to read catalogue information for an object using the directory list in File$Path - prefer OSFile_ReadStamped</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfile_read">osfile_read</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> osfile_read (char const *file_name,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 5 to read catalogue information for an object using the directory list in File$Path - prefer OSFile_ReadStamped</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfile_read_path">xosfile_read_path</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_read_path (char const *file_name,
+      char const *path,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 13 to read catalogue information for an object using a specified directory list - prefer OSFile_ReadStampedPath</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfile_read_path">osfile_read_path</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> osfile_read_path (char const *file_name,
+      char const *path,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 13 to read catalogue information for an object using a specified directory list - prefer OSFile_ReadStampedPath</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfile_read_path_var">xosfile_read_path_var</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_read_path_var (char const *file_name,
+      char const *var,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 15 to read catalogue information for an object using the directory list in a specified variable - prefer OSFile_ReadStampedPathVar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>var</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfile_read_path_var">osfile_read_path_var</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> osfile_read_path_var (char const *file_name,
+      char const *var,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 15 to read catalogue information for an object using the directory list in a specified variable - prefer OSFile_ReadStampedPathVar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>var</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfile_read_no_path">xosfile_read_no_path</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_read_no_path (char const *file_name,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 17 to read catalogue information for an object - prefer OSFile_ReadStampedNoPath</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfile_read_no_path">osfile_read_no_path</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> osfile_read_no_path (char const *file_name,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 17 to read catalogue information for an object - prefer OSFile_ReadStampedNoPath</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfile_create">xosfile_create</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_create (char const *file_name,
+      bits load_addr,
+      bits exec_addr,
+      int size);</pre>
+<p>Calls OS_File 7 to create an empty untyped file - prefer OSFile_CreateStamped</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfile_create">osfile_create</h3>
+<pre>extern void osfile_create (char const *file_name,
+      bits load_addr,
+      bits exec_addr,
+      int size);</pre>
+<p>Calls OS_File 7 to create an empty untyped file - prefer OSFile_CreateStamped</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xosfile_load_path">xosfile_load_path</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_load_path (char const *file_name,
+      char const *path,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 12 to load an untyped file using a specified directory list - prefer OSFile_LoadStampedPath</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfile_load_path">osfile_load_path</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> osfile_load_path (char const *file_name,
+      char const *path,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 12 to load an untyped file using a specified directory list - prefer OSFile_LoadStampedPath</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfile_load_path_var">xosfile_load_path_var</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_load_path_var (char const *file_name,
+      char const *var,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 14 to load an untyped file using the directory list in a specified variable - prefer OSFile_LoadStampedPathVar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>var</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfile_load_path_var">osfile_load_path_var</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> osfile_load_path_var (char const *file_name,
+      char const *var,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 14 to load an untyped file using the directory list in a specified variable - prefer OSFile_LoadStampedPathVar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>var</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfile_load_no_path">xosfile_load_no_path</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_load_no_path (char const *file_name,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 16 to load an untyped file - prefer OSFile_LoadStampedNoPath</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfile_load_no_path">osfile_load_no_path</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> osfile_load_no_path (char const *file_name,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 16 to load an untyped file - prefer OSFile_LoadStampedNoPath</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfile_load">xosfile_load</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfile_load (char const *file_name,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 255 to load an untyped file using the directory list in File$Path - prefer OSFile_LoadStamped</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfile_load">osfile_load</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> osfile_load (char const *file_name,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Calls OS_File 255 to load an untyped file using the directory list in File$Path - prefer OSFile_LoadStamped</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xupcallfile_save">xupcallfile_save</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcallfile_save (char const *file_name,
+      bits load_addr,
+      bits exec_addr,
+      byte const *data,
+      byte const *end,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file is being saved</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>end</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="upcallfile_save">upcallfile_save</h3>
+<pre>extern void upcallfile_save (char const *file_name,
+      bits load_addr,
+      bits exec_addr,
+      byte const *data,
+      byte const *end,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file is being saved</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>end</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xupcallfile_set_args">xupcallfile_set_args</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcallfile_set_args (char const *file_name,
+      bits load_addr,
+      bits exec_addr,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file's catalogue information is being written</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="upcallfile_set_args">upcallfile_set_args</h3>
+<pre>extern void upcallfile_set_args (char const *file_name,
+      bits load_addr,
+      bits exec_addr,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file's catalogue information is being written</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xupcallfile_set_load_addr">xupcallfile_set_load_addr</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcallfile_set_load_addr (char const *file_name,
+      bits load_addr,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file's load address is being written</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="upcallfile_set_load_addr">upcallfile_set_load_addr</h3>
+<pre>extern void upcallfile_set_load_addr (char const *file_name,
+      bits load_addr,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file's load address is being written</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xupcallfile_set_exec_addr">xupcallfile_set_exec_addr</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcallfile_set_exec_addr (char const *file_name,
+      bits exec_addr,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file's execution address is being written</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="upcallfile_set_exec_addr">upcallfile_set_exec_addr</h3>
+<pre>extern void upcallfile_set_exec_addr (char const *file_name,
+      bits exec_addr,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file's execution address is being written</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xupcallfile_set_attr">xupcallfile_set_attr</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcallfile_set_attr (char const *file_name,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file's attributes are being written</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="upcallfile_set_attr">upcallfile_set_attr</h3>
+<pre>extern void upcallfile_set_attr (char const *file_name,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file's attributes are being written</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xupcallfile_delete">xupcallfile_delete</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcallfile_delete (char const *file_name,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file is being deleted</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="upcallfile_delete">upcallfile_delete</h3>
+<pre>extern void upcallfile_delete (char const *file_name,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file is being deleted</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xupcallfile_create">xupcallfile_create</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcallfile_create (char const *file_name,
+      bits load_addr,
+      bits exec_addr,
+      byte const *data,
+      byte const *end,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file is being created</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>end</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="upcallfile_create">upcallfile_create</h3>
+<pre>extern void upcallfile_create (char const *file_name,
+      bits load_addr,
+      bits exec_addr,
+      byte const *data,
+      byte const *end,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file is being created</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>end</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xupcallfile_create_dir">xupcallfile_create_dir</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcallfile_create_dir (char const *file_name,
+      bits load_addr,
+      bits exec_addr,
+      int entry_count,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a directory is being created</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>entry_count</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="upcallfile_create_dir">upcallfile_create_dir</h3>
+<pre>extern void upcallfile_create_dir (char const *file_name,
+      bits load_addr,
+      bits exec_addr,
+      int entry_count,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a directory is being created</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>entry_count</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

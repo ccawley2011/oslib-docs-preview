@@ -1,0 +1,1772 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ZapRedraw</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ZapRedraw</h2>
+
+<pre>#include "oslib/zapredraw.h"</pre>
+
+<h3 id="zapredraw_flags">zapredraw_flags</h3>
+<pre>typedef bits zapredraw_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#zapredraw_DSA">zapredraw_DSA</a></dd>
+<dd><a href="#zapredraw_VDU">zapredraw_VDU</a></dd>
+<dd><a href="#zapredraw_DOUBLE_HEIGHT">zapredraw_DOUBLE_HEIGHT</a></dd>
+<dd><a href="#zapredraw_GIVEN_EXTENSION_ROUTINE">zapredraw_GIVEN_EXTENSION_ROUTINE</a></dd>
+<dd><a href="#zapredraw_SUBSTYLES">zapredraw_SUBSTYLES</a></dd>
+<dd><a href="#zapredraw_FAST_RECTANGLES">zapredraw_FAST_RECTANGLES</a></dd>
+<dd><a href="#zapredraw_AUTO_SCALE">zapredraw_AUTO_SCALE</a></dd>
+<dd><a href="#zapredraw_EXTEND">zapredraw_EXTEND</a></dd>
+<dd><a href="#zapredraw_RTOL">zapredraw_RTOL</a></dd>
+<dd><a href="#zapredraw_TRANSPARENT">zapredraw_TRANSPARENT</a></dd>
+<dd><a href="#zapredraw_AA_SUPPRESS">zapredraw_AA_SUPPRESS</a></dd>
+<dd><a href="#zapredraw_16_BIT">zapredraw_16_BIT</a></dd>
+<dd><a href="#zapredraw_32_BIT">zapredraw_32_BIT</a></dd>
+<dd><a href="#zapredraw_SMALL_COLOURS">zapredraw_SMALL_COLOURS</a></dd>
+</dl>
+
+<h3 id="zapredraw_f">zapredraw_f</h3>
+<pre>typedef struct {...} *zapredraw_f;</pre>
+
+<h3 id="zapredraw_e">zapredraw_e</h3>
+<pre>typedef struct {...} *zapredraw_e;</pre>
+
+<h3 id="zapredraw_char_cache">zapredraw_char_cache</h3>
+<pre>typedef byte *zapredraw_char_cache;</pre>
+
+<h3 id="zapredraw_colour">zapredraw_colour</h3>
+<pre>typedef byte zapredraw_colour;</pre>
+
+<h3 id="zapredraw_substyle">zapredraw_substyle</h3>
+<pre>typedef char zapredraw_substyle;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#zapredraw_NORMAL">zapredraw_NORMAL</a></dd>
+<dd><a href="#zapredraw_STRIKETHROUGH">zapredraw_STRIKETHROUGH</a></dd>
+<dd><a href="#zapredraw_INVERSE">zapredraw_INVERSE</a></dd>
+<dd><a href="#zapredraw_BOLD">zapredraw_BOLD</a></dd>
+<dd><a href="#zapredraw_ITALIC">zapredraw_ITALIC</a></dd>
+<dd><a href="#zapredraw_UNDERLINED">zapredraw_UNDERLINED</a></dd>
+</dl>
+
+<h3 id="zapredraw_encoding_table">zapredraw_encoding_table</h3>
+<pre>typedef bits zapredraw_encoding_table [256];</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#zapredrawecoding_UTF8">zapredrawecoding_UTF8</a></dd>
+<dd><a href="#zapredrawecoding_UTF16">zapredrawecoding_UTF16</a></dd>
+</dl>
+
+<h3 id="zapredraw_dsa_block">zapredraw_dsa_block</h3>
+<pre>typedef struct
+   {  <a href="#zapredraw_flags">zapredraw_flags</a> flags;
+      <a href="os.html#os_box">os_box</a> box;
+      byte *screen;
+      int bpl;
+      int log2_bpp;
+      int charw;
+      int charh;
+      <a href="#zapredraw_char_cache">zapredraw_char_cache</a> *caddr;
+      int cbpl;
+      int cbpc;
+      int linesp;
+      char **data;
+      int scrollx;
+      int scrolly;
+      <a href="#zapredraw_palette">zapredraw_palette</a> *palette;
+      int fg;
+      int bg;
+      void *workarea;
+      int magx;
+      int magy;
+      int xsize;
+      int ysize;
+      <a href="os.html#os_mode">os_mode</a> mode;
+      int length;
+      int lmargin;
+      int tmargin;
+      <a href="#zapredraw_e">zapredraw_e</a> encoding;
+   }
+   zapredraw_dsa_block;</pre>
+
+
+Fields:	box - redraw box (pixels)
+ 	bpl - bits per raster line of screen
+ 	charw - (in pixels)
+ 	charh - (in pixels)
+ 	cbpl - bytes per cached character line
+ 	cbpc - bytes per cached character
+ 	linesp - line spacing (pixels)
+ 	scrollx - horizontal scroll offset in 'data' of top left of redraw rectangle (pixels)
+ 	scrolly - vertical scroll offset in 'data' of top left of redraw rectangle (pixels)
+ 	fg - index of foreground colour
+ 	bg - index of background colour
+ 	workarea - word-aligned workspace (SWI-dependent)
+ 	magx - log2 of x pixel size (O S units)
+ 	magy - log2 of y pixel size (O S units)
+ 	xsize - x screen size (pixels)
+ 	ysize - y screen size (pixels)
+ 	length - offset of last entry in the redraw block (optional)
+ 	lmargin - width of left margin (pixels)
+ 	tmargin - height of top margin (pixels)
+ 	encoding - encoding handle / 0<h3 id="zapredraw_vdu_block">zapredraw_vdu_block</h3>
+<pre>typedef struct
+   {  <a href="#zapredraw_flags">zapredraw_flags</a> flags;
+      <a href="os.html#os_box">os_box</a> box;
+      byte *reserved0;
+      int reserved1;
+      int log2_bpp;
+      int charw;
+      int charh;
+      char *caddr;
+      int offsetx;
+      int offsety;
+      int linesp;
+      char **data;
+      int scrollx;
+      int scrolly;
+      <a href="#zapredraw_palette">zapredraw_palette</a> *palette;
+      int fg;
+      int bg;
+      void *workarea;
+      int magx;
+      int magy;
+      int xsize;
+      int ysize;
+      <a href="os.html#os_mode">os_mode</a> mode;
+      int length;
+      int lmargin;
+      int tmargin;
+      <a href="#zapredraw_e">zapredraw_e</a> encoding;
+   }
+   zapredraw_vdu_block;</pre>
+
+
+Fields:	box - redraw box (pixels)
+ 	charw - (in pixels)
+ 	charh - (in pixels)
+ 	caddr - font name
+ 	offsetx - x offset of character in bbox
+ 	offsety - y offset of character in bbox
+ 	linesp - line spacing (pixels)
+ 	scrollx - x scroll offset of redraw rectangle (pixels)
+ 	scrolly - y scroll offset of redraw rectangle (pixels)
+ 	fg - index of foreground colour
+ 	bg - index of background colour
+ 	workarea - word-aligned workspace (SWI-dependent)
+ 	magx - log2 of x pixel size (O S units)
+ 	magy - log2 of y pixel size (O S units)
+ 	xsize - x screen size (pixels)
+ 	ysize - y screen size (pixels)
+ 	length - offset of last entry in the redraw block (optional)
+ 	lmargin - width of left margin (pixels)
+ 	tmargin - height of top margin (pixels)
+ 	encoding - encoding handle / 0<h3 id="zapredraw_font_block">zapredraw_font_block</h3>
+<pre>typedef struct
+   {  <a href="#zapredraw_flags">zapredraw_flags</a> flags;
+      <a href="os.html#os_box">os_box</a> box;
+      byte *screen;
+      int bpl;
+      int log2_bpp;
+      int charw;
+      int charh;
+      <a href="#zapredraw_f">zapredraw_f</a> font;
+      int cbpl;
+      int cbpc;
+      int linesp;
+      char **data;
+      int scrollx;
+      int scrolly;
+      <a href="#zapredraw_palette">zapredraw_palette</a> *palette;
+      int fg;
+      int bg;
+      void *workarea;
+      int magx;
+      int magy;
+      int xsize;
+      int ysize;
+      <a href="os.html#os_mode">os_mode</a> mode;
+      int length;
+      int lmargin;
+      int tmargin;
+      <a href="#zapredraw_e">zapredraw_e</a> encoding;
+   }
+   zapredraw_font_block;</pre>
+
+
+Fields:	box - redraw box (pixels)
+ 	bpl - bits per raster line of screen
+ 	charw - unused 
+ 	charh - unused 
+ 	cbpl - unused 
+ 	cbpc - unused 
+ 	linesp - line spacing (pixels)
+ 	scrollx - horizontal scroll offset in 'data' of top left of redraw rectangle (pixels)
+ 	scrolly - vertical scroll offset in 'data' of top left of redraw rectangle (pixels)
+ 	fg - index of foreground colour
+ 	bg - index of background colour
+ 	workarea - Should be set to 0
+ 	magx - log2 of x pixel size (OS units)
+ 	magy - log2 of y pixel size (OS units)
+ 	xsize - x screen size (pixels)
+ 	ysize - y screen size (pixels)
+ 	length - offset of last entry in the redraw block (optional)
+ 	lmargin - width of left margin (pixels)
+ 	tmargin - height of top margin (pixels)
+ 	encoding - encoding handle / 0<h3 id="zapredraw_block">zapredraw_block</h3>
+<pre>typedef union
+   {  <a href="#zapredraw_vdu_block">zapredraw_vdu_block</a> vdu;
+      <a href="#zapredraw_dsa_block">zapredraw_dsa_block</a> dsa;
+      <a href="#zapredraw_font_block">zapredraw_font_block</a> font;
+   }
+   zapredraw_block;</pre>
+
+<h3 id="zapredraw_dsa_palette">zapredraw_dsa_palette</h3>
+<pre>typedef struct
+   {  bits dup_colour [...];
+   }
+   zapredraw_dsa_palette;</pre>
+
+<h3 id="zapredraw_vdu_palette">zapredraw_vdu_palette</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_colour">os_colour</a> colour [...];
+   }
+   zapredraw_vdu_palette;</pre>
+
+<h3 id="zapredraw_palette">zapredraw_palette</h3>
+<pre>typedef union
+   {  <a href="#zapredraw_vdu_palette">zapredraw_vdu_palette</a> vdu;
+      <a href="#zapredraw_dsa_palette">zapredraw_dsa_palette</a> dsa;
+   }
+   zapredraw_palette;</pre>
+
+<h3 id="zapredraw_reason">zapredraw_reason</h3>
+<pre>typedef int zapredraw_reason;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#zapredraw_NEW_RASTER">zapredraw_NEW_RASTER</a></dd>
+<dd><a href="#zapredraw_SET_COLOURS">zapredraw_SET_COLOURS</a></dd>
+<dd><a href="#zapredraw_MERGE">zapredraw_MERGE</a></dd>
+<dd><a href="#zapredraw_SET_FG">zapredraw_SET_FG</a></dd>
+<dd><a href="#zapredraw_SET_BG">zapredraw_SET_BG</a></dd>
+<dd><a href="#zapredraw_CURSOR_MERGE">zapredraw_CURSOR_MERGE</a></dd>
+<dd><a href="#zapredraw_SET_STYLE">zapredraw_SET_STYLE</a></dd>
+<dd><a href="#zapredraw_SET_STYLE_COLOURS">zapredraw_SET_STYLE_COLOURS</a></dd>
+<dd><a href="#zapredraw_SET_CHUNK">zapredraw_SET_CHUNK</a></dd>
+<dd><a href="#zapredraw_SET_LARGE_CHUNK">zapredraw_SET_LARGE_CHUNK</a></dd>
+</dl>
+
+<h3 id="zapredrawcreatepalette_flags">zapredrawcreatepalette_flags</h3>
+<pre>typedef bits zapredrawcreatepalette_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#zapredrawcreatepalette_WIMP_TO_VDU">zapredrawcreatepalette_WIMP_TO_VDU</a></dd>
+<dd><a href="#zapredrawcreatepalette_VDU_TO_DSA">zapredrawcreatepalette_VDU_TO_DSA</a></dd>
+</dl>
+
+<h3 id="zapredrawspritesize_reason">zapredrawspritesize_reason</h3>
+<pre>typedef bits zapredrawspritesize_reason;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#zapredrawspritesizereason_PASS_ONE">zapredrawspritesizereason_PASS_ONE</a></dd>
+<dd><a href="#zapredrawspritesizereason_PASS_TWO">zapredrawspritesizereason_PASS_TWO</a></dd>
+</dl>
+
+<h3 id="zapredraw_add_cursor_match">zapredraw_add_cursor_match</h3>
+<pre>typedef bits zapredraw_add_cursor_match;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#zapredraw_MATCH_FOR">zapredraw_MATCH_FOR</a></dd>
+<dd><a href="#zapredraw_MATCH_BAC">zapredraw_MATCH_BAC</a></dd>
+</dl>
+
+<h3 id="zapredraw_add_cursor_cursor">zapredraw_add_cursor_cursor</h3>
+<pre>typedef bits zapredraw_add_cursor_cursor;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#zapredraw_CURSOR_MERGE_CHARACTER">zapredraw_CURSOR_MERGE_CHARACTER</a></dd>
+<dd><a href="#zapredraw_CURSOR_MERGE_CURSOR">zapredraw_CURSOR_MERGE_CURSOR</a></dd>
+</dl>
+
+<h3 id="zapredrawfindfont_flags">zapredrawfindfont_flags</h3>
+<pre>typedef bits zapredrawfindfont_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#zapredrawfindfont_DSA">zapredrawfindfont_DSA</a></dd>
+<dd><a href="#zapredrawfindfont_VDU">zapredrawfindfont_VDU</a></dd>
+<dd><a href="#zapredrawfindfont_REDUCTION_BLOCK">zapredrawfindfont_REDUCTION_BLOCK</a></dd>
+</dl>
+
+<h3 id="zapredraw_reduction_block">zapredraw_reduction_block</h3>
+<pre>typedef <a href="os.html#os_box">os_box</a> zapredraw_reduction_block;</pre>
+
+<h3 id="zapredrawreadcharsize_flags">zapredrawreadcharsize_flags</h3>
+<pre>typedef bits zapredrawreadcharsize_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#zapredrawreadcharsize_PIXELS">zapredrawreadcharsize_PIXELS</a></dd>
+<dd><a href="#zapredrawreadcharsize_OS">zapredrawreadcharsize_OS</a></dd>
+<dd><a href="#zapredrawreadcharsize_LINESP">zapredrawreadcharsize_LINESP</a></dd>
+<dd><a href="#zapredrawreadcharsize_SCALE">zapredrawreadcharsize_SCALE</a></dd>
+</dl>
+
+<h3 id="zapredraw_DSA">zapredraw_DSA</h3>
+<pre>#define zapredraw_DSA ((<a href="#zapredraw_flags">zapredraw_flags</a>) 0x0u)</pre>
+
+<h3 id="zapredraw_VDU">zapredraw_VDU</h3>
+<pre>#define zapredraw_VDU ((<a href="#zapredraw_flags">zapredraw_flags</a>) 0x1u)</pre>
+
+<h3 id="zapredraw_DOUBLE_HEIGHT">zapredraw_DOUBLE_HEIGHT</h3>
+<pre>#define zapredraw_DOUBLE_HEIGHT ((<a href="#zapredraw_flags">zapredraw_flags</a>) 0x2u)</pre>
+
+<p>(DSA mode)</p>
+
+<h3 id="zapredraw_GIVEN_EXTENSION_ROUTINE">zapredraw_GIVEN_EXTENSION_ROUTINE</h3>
+<pre>#define zapredraw_GIVEN_EXTENSION_ROUTINE ((<a href="#zapredraw_flags">zapredraw_flags</a>) 0x4u)</pre>
+
+<p>(DSA mode)</p>
+
+<h3 id="zapredraw_SUBSTYLES">zapredraw_SUBSTYLES</h3>
+<pre>#define zapredraw_SUBSTYLES ((<a href="#zapredraw_flags">zapredraw_flags</a>) 0x8u)</pre>
+
+<h3 id="zapredraw_FAST_RECTANGLES">zapredraw_FAST_RECTANGLES</h3>
+<pre>#define zapredraw_FAST_RECTANGLES ((<a href="#zapredraw_flags">zapredraw_flags</a>) 0x10u)</pre>
+
+<p>(DSA mode)</p>
+
+<h3 id="zapredraw_AUTO_SCALE">zapredraw_AUTO_SCALE</h3>
+<pre>#define zapredraw_AUTO_SCALE ((<a href="#zapredraw_flags">zapredraw_flags</a>) 0x20u)</pre>
+
+<h3 id="zapredraw_EXTEND">zapredraw_EXTEND</h3>
+<pre>#define zapredraw_EXTEND ((<a href="#zapredraw_flags">zapredraw_flags</a>) 0x40u)</pre>
+
+<h3 id="zapredraw_RTOL">zapredraw_RTOL</h3>
+<pre>#define zapredraw_RTOL ((<a href="#zapredraw_flags">zapredraw_flags</a>) 0x80u)</pre>
+
+<p>(VDU mode)</p>
+
+<h3 id="zapredraw_TRANSPARENT">zapredraw_TRANSPARENT</h3>
+<pre>#define zapredraw_TRANSPARENT ((<a href="#zapredraw_flags">zapredraw_flags</a>) 0x100u)</pre>
+
+<p>(VDU mode)</p>
+
+<h3 id="zapredraw_AA_SUPPRESS">zapredraw_AA_SUPPRESS</h3>
+<pre>#define zapredraw_AA_SUPPRESS ((<a href="#zapredraw_flags">zapredraw_flags</a>) 0x200u)</pre>
+
+<p>(DSAVDU mode)</p>
+
+<h3 id="zapredraw_16_BIT">zapredraw_16_BIT</h3>
+<pre>#define zapredraw_16_BIT ((<a href="#zapredraw_flags">zapredraw_flags</a>) 0x400u)</pre>
+
+<p>(PrepareDataLine) </p>
+
+<h3 id="zapredraw_32_BIT">zapredraw_32_BIT</h3>
+<pre>#define zapredraw_32_BIT ((<a href="#zapredraw_flags">zapredraw_flags</a>) 0x800u)</pre>
+
+<p>(PrepareDataLine) </p>
+
+<h3 id="zapredraw_SMALL_COLOURS">zapredraw_SMALL_COLOURS</h3>
+<pre>#define zapredraw_SMALL_COLOURS ((<a href="#zapredraw_flags">zapredraw_flags</a>) 0x1000u)</pre>
+
+<p>(PrepareDataLine) </p>
+
+<h3 id="zapredraw_NORMAL">zapredraw_NORMAL</h3>
+<pre>#define zapredraw_NORMAL ((<a href="#zapredraw_substyle">zapredraw_substyle</a>) 0x0u)</pre>
+
+<h3 id="zapredraw_STRIKETHROUGH">zapredraw_STRIKETHROUGH</h3>
+<pre>#define zapredraw_STRIKETHROUGH ((<a href="#zapredraw_substyle">zapredraw_substyle</a>) 0x1u)</pre>
+
+<h3 id="zapredraw_INVERSE">zapredraw_INVERSE</h3>
+<pre>#define zapredraw_INVERSE ((<a href="#zapredraw_substyle">zapredraw_substyle</a>) 0x8u)</pre>
+
+<p>PrepareDataLine only</p>
+
+<h3 id="zapredraw_BOLD">zapredraw_BOLD</h3>
+<pre>#define zapredraw_BOLD ((<a href="#zapredraw_substyle">zapredraw_substyle</a>) 0x20u)</pre>
+
+<h3 id="zapredraw_ITALIC">zapredraw_ITALIC</h3>
+<pre>#define zapredraw_ITALIC ((<a href="#zapredraw_substyle">zapredraw_substyle</a>) 0x40u)</pre>
+
+<h3 id="zapredraw_UNDERLINED">zapredraw_UNDERLINED</h3>
+<pre>#define zapredraw_UNDERLINED ((<a href="#zapredraw_substyle">zapredraw_substyle</a>) 0x80u)</pre>
+
+<h3 id="zapredrawecoding_UTF8">zapredrawecoding_UTF8</h3>
+<pre>#define zapredrawecoding_UTF8 ((<a href="#zapredraw_encoding_table">zapredraw_encoding_table</a>) 0x1u)</pre>
+
+<h3 id="zapredrawecoding_UTF16">zapredrawecoding_UTF16</h3>
+<pre>#define zapredrawecoding_UTF16 ((<a href="#zapredraw_encoding_table">zapredraw_encoding_table</a>) 0x2u)</pre>
+
+<h3 id="zapredraw_COMMAND">zapredraw_COMMAND</h3>
+<pre>#define zapredraw_COMMAND ((char) '\x00')</pre>
+
+<p>followed by command number</p>
+
+<h3 id="zapredraw_COMMAND_NULL">zapredraw_COMMAND_NULL</h3>
+<pre>#define zapredraw_COMMAND_NULL ((char) '\x00')</pre>
+
+<p>followed by 'c'</p>
+
+<h3 id="zapredraw_COMMAND_SET_COLOURS">zapredraw_COMMAND_SET_COLOURS</h3>
+<pre>#define zapredraw_COMMAND_SET_COLOURS ((char) '\x01')</pre>
+
+<p>followed by 'f', 'b'</p>
+
+<h3 id="zapredraw_COMMAND_EOL">zapredraw_COMMAND_EOL</h3>
+<pre>#define zapredraw_COMMAND_EOL ((char) '\x02')</pre>
+
+<h3 id="zapredraw_COMMAND16BIT_CHAR">zapredraw_COMMAND16BIT_CHAR</h3>
+<pre>#define zapredraw_COMMAND16BIT_CHAR ((char) '\x03')</pre>
+
+<p>followed by 'l', 'h'</p>
+
+<h3 id="zapredraw_COMMAND_MERGE">zapredraw_COMMAND_MERGE</h3>
+<pre>#define zapredraw_COMMAND_MERGE ((char) '\x04')</pre>
+
+<p>followed by 'f', 'b', 'c0', 'c1'</p>
+
+<h3 id="zapredraw_COMMAND_RESERVED">zapredraw_COMMAND_RESERVED</h3>
+<pre>#define zapredraw_COMMAND_RESERVED ((char) '\x05')</pre>
+
+<p>reserved </p>
+
+<h3 id="zapredraw_COMMAND_SET_FG">zapredraw_COMMAND_SET_FG</h3>
+<pre>#define zapredraw_COMMAND_SET_FG ((char) '\x06')</pre>
+
+<p>followed by 'f'</p>
+
+<h3 id="zapredraw_COMMAND_SET_BG">zapredraw_COMMAND_SET_BG</h3>
+<pre>#define zapredraw_COMMAND_SET_BG ((char) '\x07')</pre>
+
+<p>followed by 'b'</p>
+
+<h3 id="zapredraw_COMMAND_CURSOR_MERGE">zapredraw_COMMAND_CURSOR_MERGE</h3>
+<pre>#define zapredraw_COMMAND_CURSOR_MERGE ((char) '\x08')</pre>
+
+<p>followed by 'f', 'b', 'x', 'y'</p>
+
+<h3 id="zapredraw_COMMAND_SET_STYLE">zapredraw_COMMAND_SET_STYLE</h3>
+<pre>#define zapredraw_COMMAND_SET_STYLE ((char) '\x09')</pre>
+
+<p>followed by 's'</p>
+
+<h3 id="zapredraw_COMMAND_SET_STYLE_COL">zapredraw_COMMAND_SET_STYLE_COL</h3>
+<pre>#define zapredraw_COMMAND_SET_STYLE_COL ((char) '\x0A')</pre>
+
+<p>followed by 'f', 'b', 's'</p>
+
+<h3 id="zapredraw_COMMAND_SET_CHUNK">zapredraw_COMMAND_SET_CHUNK</h3>
+<pre>#define zapredraw_COMMAND_SET_CHUNK ((char) '\x0B')</pre>
+
+<p>followed by chunk bits 8-15</p>
+
+<h3 id="zapredraw_COMMAND_SET_CHUNK_LONG">zapredraw_COMMAND_SET_CHUNK_LONG</h3>
+<pre>#define zapredraw_COMMAND_SET_CHUNK_LONG ((char) '\x0C')</pre>
+
+<p>followed by chunk bits 8-15, then bits 16-23</p>
+
+<h3 id="zapredraw_COMMAND_DELETE">zapredraw_COMMAND_DELETE</h3>
+<pre>#define zapredraw_COMMAND_DELETE ((char) '\x7F')</pre>
+
+<h3 id="zapredraw_NEW_RASTER">zapredraw_NEW_RASTER</h3>
+<pre>#define zapredraw_NEW_RASTER ((<a href="#zapredraw_reason">zapredraw_reason</a>) 0x0u)</pre>
+
+<h3 id="zapredraw_SET_COLOURS">zapredraw_SET_COLOURS</h3>
+<pre>#define zapredraw_SET_COLOURS ((<a href="#zapredraw_reason">zapredraw_reason</a>) 0x1u)</pre>
+
+<h3 id="zapredraw_MERGE">zapredraw_MERGE</h3>
+<pre>#define zapredraw_MERGE ((<a href="#zapredraw_reason">zapredraw_reason</a>) 0x4u)</pre>
+
+<h3 id="zapredraw_SET_FG">zapredraw_SET_FG</h3>
+<pre>#define zapredraw_SET_FG ((<a href="#zapredraw_reason">zapredraw_reason</a>) 0x6u)</pre>
+
+<h3 id="zapredraw_SET_BG">zapredraw_SET_BG</h3>
+<pre>#define zapredraw_SET_BG ((<a href="#zapredraw_reason">zapredraw_reason</a>) 0x7u)</pre>
+
+<h3 id="zapredraw_CURSOR_MERGE">zapredraw_CURSOR_MERGE</h3>
+<pre>#define zapredraw_CURSOR_MERGE ((<a href="#zapredraw_reason">zapredraw_reason</a>) 0x8u)</pre>
+
+<h3 id="zapredraw_SET_STYLE">zapredraw_SET_STYLE</h3>
+<pre>#define zapredraw_SET_STYLE ((<a href="#zapredraw_reason">zapredraw_reason</a>) 0x9u)</pre>
+
+<h3 id="zapredraw_SET_STYLE_COLOURS">zapredraw_SET_STYLE_COLOURS</h3>
+<pre>#define zapredraw_SET_STYLE_COLOURS ((<a href="#zapredraw_reason">zapredraw_reason</a>) 0xAu)</pre>
+
+<h3 id="zapredraw_SET_CHUNK">zapredraw_SET_CHUNK</h3>
+<pre>#define zapredraw_SET_CHUNK ((<a href="#zapredraw_reason">zapredraw_reason</a>) 0xBu)</pre>
+
+<h3 id="zapredraw_SET_LARGE_CHUNK">zapredraw_SET_LARGE_CHUNK</h3>
+<pre>#define zapredraw_SET_LARGE_CHUNK ((<a href="#zapredraw_reason">zapredraw_reason</a>) 0xCu)</pre>
+
+<h3 id="zapredrawcreatepalette_WIMP_TO_VDU">zapredrawcreatepalette_WIMP_TO_VDU</h3>
+<pre>#define zapredrawcreatepalette_WIMP_TO_VDU ((<a href="#zapredrawcreatepalette_flags">zapredrawcreatepalette_flags</a>) 0x1u)</pre>
+
+<h3 id="zapredrawcreatepalette_VDU_TO_DSA">zapredrawcreatepalette_VDU_TO_DSA</h3>
+<pre>#define zapredrawcreatepalette_VDU_TO_DSA ((<a href="#zapredrawcreatepalette_flags">zapredrawcreatepalette_flags</a>) 0x2u)</pre>
+
+<h3 id="zapredrawspritesizereason_PASS_ONE">zapredrawspritesizereason_PASS_ONE</h3>
+<pre>#define zapredrawspritesizereason_PASS_ONE ((<a href="#zapredrawspritesize_reason">zapredrawspritesize_reason</a>) 0x0u)</pre>
+
+<h3 id="zapredrawspritesizereason_PASS_TWO">zapredrawspritesizereason_PASS_TWO</h3>
+<pre>#define zapredrawspritesizereason_PASS_TWO ((<a href="#zapredrawspritesize_reason">zapredrawspritesize_reason</a>) 0x80u)</pre>
+
+<h3 id="zapredraw_MATCH_FOR_COLOUR_SHIFT">zapredraw_MATCH_FOR_COLOUR_SHIFT</h3>
+<pre>#define zapredraw_MATCH_FOR_COLOUR_SHIFT 8</pre>
+
+<p>shift for background colour to match</p>
+
+<h3 id="zapredraw_MATCH_FOR">zapredraw_MATCH_FOR</h3>
+<pre>#define zapredraw_MATCH_FOR ((<a href="#zapredraw_add_cursor_match">zapredraw_add_cursor_match</a>) 0x40000000u)</pre>
+
+<p>match foreground</p>
+
+<h3 id="zapredraw_MATCH_BAC">zapredraw_MATCH_BAC</h3>
+<pre>#define zapredraw_MATCH_BAC ((<a href="#zapredraw_add_cursor_match">zapredraw_add_cursor_match</a>) 0x80000000u)</pre>
+
+<p>match background</p>
+
+<h3 id="zapredraw_CURSOR_HIGH_BYTE_SHIFT">zapredraw_CURSOR_HIGH_BYTE_SHIFT</h3>
+<pre>#define zapredraw_CURSOR_HIGH_BYTE_SHIFT 0</pre>
+
+<p>shift for cursor high byte</p>
+
+<h3 id="zapredraw_CURSOR_FOR_SHIFT">zapredraw_CURSOR_FOR_SHIFT</h3>
+<pre>#define zapredraw_CURSOR_FOR_SHIFT 24</pre>
+
+<p>shift for cursor background colour</p>
+
+<h3 id="zapredraw_CURSOR_MERGE_CHARACTER">zapredraw_CURSOR_MERGE_CHARACTER</h3>
+<pre>#define zapredraw_CURSOR_MERGE_CHARACTER ((<a href="#zapredraw_add_cursor_cursor">zapredraw_add_cursor_cursor</a>) 0x400u)</pre>
+
+<p>use merge character sequence</p>
+
+<h3 id="zapredraw_CURSOR_MERGE_CURSOR">zapredraw_CURSOR_MERGE_CURSOR</h3>
+<pre>#define zapredraw_CURSOR_MERGE_CURSOR ((<a href="#zapredraw_add_cursor_cursor">zapredraw_add_cursor_cursor</a>) 0x800u)</pre>
+
+<p>use merge cursor sequence</p>
+
+<h3 id="zapredrawfindfont_DSA">zapredrawfindfont_DSA</h3>
+<pre>#define zapredrawfindfont_DSA ((<a href="#zapredrawfindfont_flags">zapredrawfindfont_flags</a>) 0x0u)</pre>
+
+<h3 id="zapredrawfindfont_VDU">zapredrawfindfont_VDU</h3>
+<pre>#define zapredrawfindfont_VDU ((<a href="#zapredrawfindfont_flags">zapredrawfindfont_flags</a>) 0x1u)</pre>
+
+<h3 id="zapredrawfindfont_REDUCTION_BLOCK">zapredrawfindfont_REDUCTION_BLOCK</h3>
+<pre>#define zapredrawfindfont_REDUCTION_BLOCK ((<a href="#zapredrawfindfont_flags">zapredrawfindfont_flags</a>) 0x2u)</pre>
+
+<h3 id="zapredrawreadcharsize_PIXELS">zapredrawreadcharsize_PIXELS</h3>
+<pre>#define zapredrawreadcharsize_PIXELS ((<a href="#zapredrawreadcharsize_flags">zapredrawreadcharsize_flags</a>) 0x0u)</pre>
+
+<h3 id="zapredrawreadcharsize_OS">zapredrawreadcharsize_OS</h3>
+<pre>#define zapredrawreadcharsize_OS ((<a href="#zapredrawreadcharsize_flags">zapredrawreadcharsize_flags</a>) 0x1u)</pre>
+
+<h3 id="zapredrawreadcharsize_LINESP">zapredrawreadcharsize_LINESP</h3>
+<pre>#define zapredrawreadcharsize_LINESP ((<a href="#zapredrawreadcharsize_flags">zapredrawreadcharsize_flags</a>) 0x2u)</pre>
+
+<h3 id="zapredrawreadcharsize_SCALE">zapredrawreadcharsize_SCALE</h3>
+<pre>#define zapredrawreadcharsize_SCALE ((<a href="#zapredrawreadcharsize_flags">zapredrawreadcharsize_flags</a>) 0x4u)</pre>
+
+<h3 id="xzapredraw_redraw_area">xzapredraw_redraw_area</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_redraw_area (<a href="#zapredraw_block">zapredraw_block</a> const *redraw_block,
+      asm_routine extension_fn,
+      void *extension_handle);</pre>
+<p>Redraws a rectangle of characters on the screen</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>extension_fn</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>extension_handle</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="zapredraw_redraw_area">zapredraw_redraw_area</h3>
+<pre>extern void zapredraw_redraw_area (<a href="#zapredraw_block">zapredraw_block</a> const *redraw_block,
+      asm_routine extension_fn,
+      void *extension_handle);</pre>
+<p>Redraws a rectangle of characters on the screen</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>extension_fn</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>extension_handle</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xzapredraw_get_palette_entry">xzapredraw_get_palette_entry</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_get_palette_entry (<a href="os.html#os_colour_number">os_colour_number</a> colour_number,
+      int bpp,
+      int *dup_colour);</pre>
+<p>Takes a colour bitmap and duplicates it to create a DSA colour mask</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour_number</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>bpp</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>dup_colour</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zapredraw_get_palette_entry">zapredraw_get_palette_entry</h3>
+<pre>extern int zapredraw_get_palette_entry (<a href="os.html#os_colour_number">os_colour_number</a> colour_number,
+      int bpp);</pre>
+<p>Takes a colour bitmap and duplicates it to create a DSA colour mask</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour_number</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>bpp</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>dup_colour</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzapredraw_convert_bitmap">xzapredraw_convert_bitmap</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_convert_bitmap (<a href="#zapredraw_block">zapredraw_block</a> const *redraw_block,
+      int first,
+      int last,
+      <a href="#zapredraw_char_cache">zapredraw_char_cache</a> bitmaps);</pre>
+<p>Converts a 1bpp bitmap for use by ZapRedraw_RedrawArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>first</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>last</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bitmaps</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="zapredraw_convert_bitmap">zapredraw_convert_bitmap</h3>
+<pre>extern void zapredraw_convert_bitmap (<a href="#zapredraw_block">zapredraw_block</a> const *redraw_block,
+      int first,
+      int last,
+      <a href="#zapredraw_char_cache">zapredraw_char_cache</a> bitmaps);</pre>
+<p>Converts a 1bpp bitmap for use by ZapRedraw_RedrawArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>first</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>last</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bitmaps</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xzapredraw_prepare_data_line">xzapredraw_prepare_data_line</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_prepare_data_line (<a href="#zapredraw_colour">zapredraw_colour</a> ctrl_colour,
+      <a href="#zapredraw_block">zapredraw_block</a> const *redraw_block,
+      char const *input,
+      <a href="#zapredraw_colour">zapredraw_colour</a> const *fg,
+      <a href="#zapredraw_colour">zapredraw_colour</a> const *bg,
+      int length,
+      char *output,
+      <a href="#zapredraw_substyle">zapredraw_substyle</a> const *substyles,
+      int *highest,
+      int *length_out);</pre>
+<p>Helps prepare the 'r_data' field of the redraw block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>ctrl_colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>input</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>fg</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bg</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>output</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>substyles</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>highest</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>length_out</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="zapredraw_prepare_data_line">zapredraw_prepare_data_line</h3>
+<pre>extern int zapredraw_prepare_data_line (<a href="#zapredraw_colour">zapredraw_colour</a> ctrl_colour,
+      <a href="#zapredraw_block">zapredraw_block</a> const *redraw_block,
+      char const *input,
+      <a href="#zapredraw_colour">zapredraw_colour</a> const *fg,
+      <a href="#zapredraw_colour">zapredraw_colour</a> const *bg,
+      int length,
+      char *output,
+      <a href="#zapredraw_substyle">zapredraw_substyle</a> const *substyles,
+      int *highest);</pre>
+<p>Helps prepare the 'r_data' field of the redraw block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>ctrl_colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>input</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>fg</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bg</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>output</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>substyles</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>highest</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>length_out</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xzapredraw_find_character">xzapredraw_find_character</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_find_character (int count,
+      char const *input,
+      <a href="#zapredraw_colour">zapredraw_colour</a> fg,
+      <a href="#zapredraw_colour">zapredraw_colour</a> bg,
+      <a href="#zapredraw_substyle">zapredraw_substyle</a> style,
+      char **something,
+      char **next_char,
+      <a href="#zapredraw_colour">zapredraw_colour</a> *fg_out,
+      <a href="#zapredraw_colour">zapredraw_colour</a> *bg_out,
+      <a href="#zapredraw_substyle">zapredraw_substyle</a> *style_out);</pre>
+<p>Finds the (n + 1)th printable character within a line</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>count</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>input</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fg</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>bg</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>style</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>something</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>next_char</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fg_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>bg_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>style_out</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="zapredraw_find_character">zapredraw_find_character</h3>
+<pre>extern char *zapredraw_find_character (int count,
+      char const *input,
+      <a href="#zapredraw_colour">zapredraw_colour</a> fg,
+      <a href="#zapredraw_colour">zapredraw_colour</a> bg,
+      <a href="#zapredraw_substyle">zapredraw_substyle</a> style,
+      char **something,
+      <a href="#zapredraw_colour">zapredraw_colour</a> *fg_out,
+      <a href="#zapredraw_colour">zapredraw_colour</a> *bg_out,
+      <a href="#zapredraw_substyle">zapredraw_substyle</a> *style_out);</pre>
+<p>Finds the (n + 1)th printable character within a line</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>count</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>input</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fg</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>bg</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>style</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>something</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fg_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>bg_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>style_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>next_char</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xzapredraw_move_bytes">xzapredraw_move_bytes</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_move_bytes (byte const *source,
+      byte *dest,
+      int length);</pre>
+<p>Fast byte shifting</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>source</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="zapredraw_move_bytes">zapredraw_move_bytes</h3>
+<pre>extern void zapredraw_move_bytes (byte const *source,
+      byte *dest,
+      int length);</pre>
+<p>Fast byte shifting</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>source</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xzapredraw_cached_char_size">xzapredraw_cached_char_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_cached_char_size (int bpp,
+      int charw,
+      int charh,
+      int *cbpl,
+      int *cbpc);</pre>
+<p>Calculates cbpl, cbpc from charw, charh, bpp</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>bpp</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>charw</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>charh</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>cbpl</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>cbpc</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="zapredraw_cached_char_size">zapredraw_cached_char_size</h3>
+<pre>extern void zapredraw_cached_char_size (int bpp,
+      int charw,
+      int charh,
+      int *cbpl,
+      int *cbpc);</pre>
+<p>Calculates cbpl, cbpc from charw, charh, bpp</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>bpp</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>charw</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>charh</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>cbpl</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>cbpc</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xzapredraw_conv_bitmap_char">xzapredraw_conv_bitmap_char</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_conv_bitmap_char (<a href="#zapredraw_block">zapredraw_block</a> const *redraw_block,
+      int source_bpl,
+      int dest_bpl,
+      <a href="#zapredraw_char_cache">zapredraw_char_cache</a> source_bitmap,
+      <a href="#zapredraw_char_cache">zapredraw_char_cache</a> dest_bitmap,
+      bits bit_mask,
+      int bpp,
+      <a href="#zapredraw_char_cache">zapredraw_char_cache</a> *next_source,
+      <a href="#zapredraw_char_cache">zapredraw_char_cache</a> *next_dest);</pre>
+<p>Performs the bitmap conversion for one character</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>source_bpl</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dest_bpl</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>source_bitmap</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>dest_bitmap</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>bit_mask</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>bpp</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_source</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>next_dest</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="zapredraw_conv_bitmap_char">zapredraw_conv_bitmap_char</h3>
+<pre>extern <a href="#zapredraw_char_cache">zapredraw_char_cache</a> zapredraw_conv_bitmap_char (<a href="#zapredraw_block">zapredraw_block</a> const *redraw_block,
+      int source_bpl,
+      int dest_bpl,
+      <a href="#zapredraw_char_cache">zapredraw_char_cache</a> source_bitmap,
+      <a href="#zapredraw_char_cache">zapredraw_char_cache</a> dest_bitmap,
+      bits bit_mask,
+      int bpp,
+      <a href="#zapredraw_char_cache">zapredraw_char_cache</a> *next_source);</pre>
+<p>Performs the bitmap conversion for one character</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>source_bpl</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dest_bpl</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>source_bitmap</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>dest_bitmap</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>bit_mask</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>bpp</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_source</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>next_dest</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xzapredraw_create_palette">xzapredraw_create_palette</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_create_palette (<a href="#zapredrawcreatepalette_flags">zapredrawcreatepalette_flags</a> flags,
+      <a href="#zapredraw_block">zapredraw_block</a> const *redraw_block,
+      <a href="#zapredraw_palette">zapredraw_palette</a> const *in,
+      <a href="#zapredraw_palette">zapredraw_palette</a> *out,
+      int number);</pre>
+<p>Performs various operations on palette data</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>in</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>number</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="zapredraw_create_palette">zapredraw_create_palette</h3>
+<pre>extern void zapredraw_create_palette (<a href="#zapredrawcreatepalette_flags">zapredrawcreatepalette_flags</a> flags,
+      <a href="#zapredraw_block">zapredraw_block</a> const *redraw_block,
+      <a href="#zapredraw_palette">zapredraw_palette</a> const *in,
+      <a href="#zapredraw_palette">zapredraw_palette</a> *out,
+      int number);</pre>
+<p>Performs various operations on palette data</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>in</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>number</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xzapredraw_insert_char">xzapredraw_insert_char</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_insert_char (int c,
+      char *address,
+      char **address_out);</pre>
+<p>Inserts a single character into a string of 'data' format</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>address_out</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="zapredraw_insert_char">zapredraw_insert_char</h3>
+<pre>extern char *zapredraw_insert_char (int c,
+      char *address);</pre>
+<p>Inserts a single character into a string of 'data' format</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>address_out</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xzapredraw_read_system_chars">xzapredraw_read_system_chars</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_read_system_chars (<a href="#zapredraw_char_cache">zapredraw_char_cache</a> buffer,
+      <a href="#zapredraw_block">zapredraw_block</a> const *redraw_block);</pre>
+<p>Converts the system characters to a form usable for ZapRedraw_RedrawArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="zapredraw_read_system_chars">zapredraw_read_system_chars</h3>
+<pre>extern void zapredraw_read_system_chars (<a href="#zapredraw_char_cache">zapredraw_char_cache</a> buffer,
+      <a href="#zapredraw_block">zapredraw_block</a> const *redraw_block);</pre>
+<p>Converts the system characters to a form usable for ZapRedraw_RedrawArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xzapredraw_reverse_bitmaps">xzapredraw_reverse_bitmaps</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_reverse_bitmaps (<a href="#zapredraw_char_cache">zapredraw_char_cache</a> source,
+      <a href="#zapredraw_char_cache">zapredraw_char_cache</a> dest,
+      int number);</pre>
+<p>Reverses the bits of each byte</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>source</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>number</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="zapredraw_reverse_bitmaps">zapredraw_reverse_bitmaps</h3>
+<pre>extern void zapredraw_reverse_bitmaps (<a href="#zapredraw_char_cache">zapredraw_char_cache</a> source,
+      <a href="#zapredraw_char_cache">zapredraw_char_cache</a> dest,
+      int number);</pre>
+<p>Reverses the bits of each byte</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>source</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>number</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xzapredraw_read_vdu_vars">xzapredraw_read_vdu_vars</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_read_vdu_vars (<a href="#zapredraw_block">zapredraw_block</a> *redraw_block);</pre>
+<p>Fills in bpl, bpp, magx, magy, xsize, ysize, mode</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="zapredraw_read_vdu_vars">zapredraw_read_vdu_vars</h3>
+<pre>extern void zapredraw_read_vdu_vars (<a href="#zapredraw_block">zapredraw_block</a> *redraw_block);</pre>
+<p>Fills in bpl, bpp, magx, magy, xsize, ysize, mode</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xzapredraw_get_rectangle">xzapredraw_get_rectangle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_get_rectangle (<a href="wimp.html#wimp_draw">wimp_draw</a> const *wimp_block,
+      <a href="#zapredraw_block">zapredraw_block</a> *redraw_block);</pre>
+<p>Takes the redraw rectangle block as returned by Wimp_RedrawWindow or Wimp_GetRectangle and uses it to fill in the ZapRedraw block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>wimp_block</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="zapredraw_get_rectangle">zapredraw_get_rectangle</h3>
+<pre>extern void zapredraw_get_rectangle (<a href="wimp.html#wimp_draw">wimp_draw</a> const *wimp_block,
+      <a href="#zapredraw_block">zapredraw_block</a> *redraw_block);</pre>
+<p>Takes the redraw rectangle block as returned by Wimp_RedrawWindow or Wimp_GetRectangle and uses it to fill in the ZapRedraw block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>wimp_block</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xzapredraw_add_vdu_bitmaps">xzapredraw_add_vdu_bitmaps</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_add_vdu_bitmaps (<a href="#zapredraw_block">zapredraw_block</a> const *redraw_block,
+      int first,
+      int last,
+      <a href="#zapredraw_char_cache">zapredraw_char_cache</a> address);</pre>
+<p>Creates bitmaps for extra characters from a standard bitmap of the normal characters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>first</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>last</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>address</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="zapredraw_add_vdu_bitmaps">zapredraw_add_vdu_bitmaps</h3>
+<pre>extern void zapredraw_add_vdu_bitmaps (<a href="#zapredraw_block">zapredraw_block</a> const *redraw_block,
+      int first,
+      int last,
+      <a href="#zapredraw_char_cache">zapredraw_char_cache</a> address);</pre>
+<p>Creates bitmaps for extra characters from a standard bitmap of the normal characters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>first</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>last</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>address</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xzapredrawcachefontchars_current_mode">xzapredrawcachefontchars_current_mode</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredrawcachefontchars_current_mode (<a href="#zapredraw_block">zapredraw_block</a> const *redraw_block,
+      char const *font_name,
+      int size,
+      int xoff,
+      int yoff,
+      int first,
+      int last);</pre>
+<p>Caches a range of characters as bitmaps in the curent mode</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xoff</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>yoff</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>first</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>last</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="zapredrawcachefontchars_current_mode">zapredrawcachefontchars_current_mode</h3>
+<pre>extern void zapredrawcachefontchars_current_mode (<a href="#zapredraw_block">zapredraw_block</a> const *redraw_block,
+      char const *font_name,
+      int size,
+      int xoff,
+      int yoff,
+      int first,
+      int last);</pre>
+<p>Caches a range of characters as bitmaps in the curent mode</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xoff</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>yoff</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>first</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>last</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xzapredrawcachefontchars_1bpp">xzapredrawcachefontchars_1bpp</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredrawcachefontchars_1bpp (<a href="#zapredraw_block">zapredraw_block</a> const *redraw_block,
+      char const *font_name,
+      int size,
+      int xoff,
+      int yoff,
+      int first,
+      int last);</pre>
+<p>Caches a range of characters as bitmaps in 1bpp</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xoff</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>yoff</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>first</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>last</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="zapredrawcachefontchars_1bpp">zapredrawcachefontchars_1bpp</h3>
+<pre>extern void zapredrawcachefontchars_1bpp (<a href="#zapredraw_block">zapredraw_block</a> const *redraw_block,
+      char const *font_name,
+      int size,
+      int xoff,
+      int yoff,
+      int first,
+      int last);</pre>
+<p>Caches a range of characters as bitmaps in 1bpp</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xoff</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>yoff</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>first</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>last</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xzapredrawspritesize_current_mode">xzapredrawspritesize_current_mode</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredrawspritesize_current_mode (<a href="#zapredrawspritesize_reason">zapredrawspritesize_reason</a> pass,
+      <a href="#zapredraw_block">zapredraw_block</a> const *redraw_block,
+      int *size);</pre>
+<p>Returns the size required for the sprite area in the current mode</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pass</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zapredrawspritesize_current_mode">zapredrawspritesize_current_mode</h3>
+<pre>extern int zapredrawspritesize_current_mode (<a href="#zapredrawspritesize_reason">zapredrawspritesize_reason</a> pass,
+      <a href="#zapredraw_block">zapredraw_block</a> const *redraw_block);</pre>
+<p>Returns the size required for the sprite area in the current mode</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pass</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzapredrawspritesize_1bpp">xzapredrawspritesize_1bpp</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredrawspritesize_1bpp (<a href="#zapredrawspritesize_reason">zapredrawspritesize_reason</a> pass,
+      <a href="#zapredraw_block">zapredraw_block</a> const *redraw_block,
+      int *size);</pre>
+<p>Returns the size required for the sprite area in a 1bpp mode</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pass</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zapredrawspritesize_1bpp">zapredrawspritesize_1bpp</h3>
+<pre>extern int zapredrawspritesize_1bpp (<a href="#zapredrawspritesize_reason">zapredrawspritesize_reason</a> pass,
+      <a href="#zapredraw_block">zapredraw_block</a> const *redraw_block);</pre>
+<p>Returns the size required for the sprite area in a 1bpp mode</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pass</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzapredraw_redraw_window">xzapredraw_redraw_window</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_redraw_window (<a href="wimp.html#wimp_draw">wimp_draw</a> const *wimp_block,
+      <a href="#zapredraw_block">zapredraw_block</a> const *redraw_block);</pre>
+<p>The whole Wimp_RedrawWindowRequest event handler</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>wimp_block</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="zapredraw_redraw_window">zapredraw_redraw_window</h3>
+<pre>extern void zapredraw_redraw_window (<a href="wimp.html#wimp_draw">wimp_draw</a> const *wimp_block,
+      <a href="#zapredraw_block">zapredraw_block</a> const *redraw_block);</pre>
+<p>The whole Wimp_RedrawWindowRequest event handler</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>wimp_block</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xzapredraw_divide">xzapredraw_divide</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_divide (bits numerator,
+      bits denominator,
+      bits *div,
+      bits *mod);</pre>
+<p>Fast unsigned integer division / modulus</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>numerator</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>denominator</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>div</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>mod</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="zapredraw_divide">zapredraw_divide</h3>
+<pre>extern bits zapredraw_divide (bits numerator,
+      bits denominator,
+      bits *mod);</pre>
+<p>Fast unsigned integer division / modulus</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>numerator</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>denominator</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>mod</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>div</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzapredraw_plot_rectangle">xzapredraw_plot_rectangle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_plot_rectangle (int x0,
+      int y0,
+      int x1,
+      int y1,
+      <a href="os.html#os_colour_number">os_colour_number</a> colour);</pre>
+<p>Fast rectangle fill routine using DSA</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>x0</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>y0</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>x1</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>y1</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>colour</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="zapredraw_plot_rectangle">zapredraw_plot_rectangle</h3>
+<pre>extern void zapredraw_plot_rectangle (int x0,
+      int y0,
+      int x1,
+      int y1,
+      <a href="os.html#os_colour_number">os_colour_number</a> colour);</pre>
+<p>Fast rectangle fill routine using DSA</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>x0</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>y0</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>x1</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>y1</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>colour</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xzapredraw_add_cursor_smart">xzapredraw_add_cursor_smart</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_add_cursor_smart (char *dest,
+      <a href="#zapredraw_block">zapredraw_block</a> const *redraw_block,
+      int offset,
+      int length,
+      char const *cursors,
+      char const *source,
+      <a href="#zapredraw_add_cursor_match">zapredraw_add_cursor_match</a> match,
+      <a href="#zapredraw_add_cursor_cursor">zapredraw_add_cursor_cursor</a> cursor,
+      char **end);</pre>
+<p>Adds in the codes to place 'cursors' over some of the text</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dest</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>offset</code></td><td>offset in characters of start of cursor</td><td><code>R2</code></td></tr>
+<tr><td><code>length</code></td><td>length in characters of cursor string</td><td><code>R3</code></td></tr>
+<tr><td><code>cursors</code></td><td>string of low bytes of cursor characters</td><td><code>R4</code></td></tr>
+<tr><td><code>source</code></td><td>0,2 terminated</td><td><code>R5</code></td></tr>
+<tr><td><code>match</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>cursor</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zapredraw_add_cursor_smart">zapredraw_add_cursor_smart</h3>
+<pre>extern void zapredraw_add_cursor_smart (char *dest,
+      <a href="#zapredraw_block">zapredraw_block</a> const *redraw_block,
+      int offset,
+      int length,
+      char const *cursors,
+      char const *source,
+      <a href="#zapredraw_add_cursor_match">zapredraw_add_cursor_match</a> match,
+      <a href="#zapredraw_add_cursor_cursor">zapredraw_add_cursor_cursor</a> cursor,
+      char **end);</pre>
+<p>Adds in the codes to place 'cursors' over some of the text</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dest</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>offset</code></td><td>offset in characters of start of cursor</td><td><code>R2</code></td></tr>
+<tr><td><code>length</code></td><td>length in characters of cursor string</td><td><code>R3</code></td></tr>
+<tr><td><code>cursors</code></td><td>string of low bytes of cursor characters</td><td><code>R4</code></td></tr>
+<tr><td><code>source</code></td><td>0,2 terminated</td><td><code>R5</code></td></tr>
+<tr><td><code>match</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>cursor</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xzapredraw_find_font">xzapredraw_find_font</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_find_font (char const *name,
+      <a href="#zapredrawfindfont_flags">zapredrawfindfont_flags</a> flags,
+      int size,
+      int aspect,
+      <a href="#zapredraw_reduction_block">zapredraw_reduction_block</a> const *block,
+      <a href="#zapredraw_f">zapredraw_f</a> *handle);</pre>
+<p>Opens a font and returns a font handle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>aspect</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zapredraw_find_font">zapredraw_find_font</h3>
+<pre>extern <a href="#zapredraw_f">zapredraw_f</a> zapredraw_find_font (char const *name,
+      <a href="#zapredrawfindfont_flags">zapredrawfindfont_flags</a> flags,
+      int size,
+      int aspect,
+      <a href="#zapredraw_reduction_block">zapredraw_reduction_block</a> const *block);</pre>
+<p>Opens a font and returns a font handle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>aspect</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>handle</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzapredraw_lose_font">xzapredraw_lose_font</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_lose_font (<a href="#zapredraw_f">zapredraw_f</a> handle);</pre>
+<p>Closes a font</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zapredraw_lose_font">zapredraw_lose_font</h3>
+<pre>extern void zapredraw_lose_font (<a href="#zapredraw_f">zapredraw_f</a> handle);</pre>
+<p>Closes a font</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xzapredraw_read_char_size">xzapredraw_read_char_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_read_char_size (<a href="#zapredraw_f">zapredraw_f</a> handle,
+      <a href="#zapredraw_block">zapredraw_block</a> const *redraw_block,
+      <a href="#zapredrawreadcharsize_flags">zapredrawreadcharsize_flags</a> flags,
+      int *charw,
+      int *charh);</pre>
+<p>Reads the character size of an opened font</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>charw</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>charh</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="zapredraw_read_char_size">zapredraw_read_char_size</h3>
+<pre>extern void zapredraw_read_char_size (<a href="#zapredraw_f">zapredraw_f</a> handle,
+      <a href="#zapredraw_block">zapredraw_block</a> const *redraw_block,
+      <a href="#zapredrawreadcharsize_flags">zapredrawreadcharsize_flags</a> flags,
+      int *charw,
+      int *charh);</pre>
+<p>Reads the character size of an opened font</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>charw</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>charh</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xzapredraw_version">xzapredraw_version</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_version (int *Version);</pre>
+<p>Reads the version of ZapRedraw</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>Version</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zapredraw_version">zapredraw_version</h3>
+<pre>extern int zapredraw_version (void);
+</pre><p>Reads the version of ZapRedraw</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>Version</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzapredraw_list_fonts">xzapredraw_list_fonts</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_list_fonts (byte *buffer1,
+      <a href="font.html#font_list_context">font_list_context</a> context,
+      int size1,
+      byte *buffer2,
+      int size2,
+      char const *tick_font,
+      <a href="font.html#font_list_context">font_list_context</a> *context_out,
+      int *used1,
+      int *used2);</pre>
+<p>Scans for fonts, returning their identifiers one at a time, or or builds a menu of fonts</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size1</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer2</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size2</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>tick_font</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>used1</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>used2</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="zapredraw_list_fonts">zapredraw_list_fonts</h3>
+<pre>extern <a href="font.html#font_list_context">font_list_context</a> zapredraw_list_fonts (byte *buffer1,
+      <a href="font.html#font_list_context">font_list_context</a> context,
+      int size1,
+      byte *buffer2,
+      int size2,
+      char const *tick_font,
+      int *used1,
+      int *used2);</pre>
+<p>Scans for fonts, returning their identifiers one at a time, or or builds a menu of fonts</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size1</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer2</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size2</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>tick_font</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used1</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>used2</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_out</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xzapredraw_update_window">xzapredraw_update_window</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_update_window (<a href="wimp.html#wimp_draw">wimp_draw</a> const *update,
+      <a href="#zapredraw_block">zapredraw_block</a> const *redraw_block);</pre>
+<p>Updates a wimpdow by calling Wimp_UpdateWindow and ZapRedraw_RedrawWindow</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>update</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="zapredraw_update_window">zapredraw_update_window</h3>
+<pre>extern void zapredraw_update_window (<a href="wimp.html#wimp_draw">wimp_draw</a> const *update,
+      <a href="#zapredraw_block">zapredraw_block</a> const *redraw_block);</pre>
+<p>Updates a wimpdow by calling Wimp_UpdateWindow and ZapRedraw_RedrawWindow</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>update</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>redraw_block</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xzapredraw_read_font_name">xzapredraw_read_font_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_read_font_name (<a href="#zapredraw_f">zapredraw_f</a> handle,
+      char **name);</pre>
+<p>Read the font name of an open font</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>name</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zapredraw_read_font_name">zapredraw_read_font_name</h3>
+<pre>extern char *zapredraw_read_font_name (<a href="#zapredraw_f">zapredraw_f</a> handle);</pre>
+<p>Read the font name of an open font</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>name</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzapredraw_read_mode_bpp">xzapredraw_read_mode_bpp</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_read_mode_bpp (int *bpp);</pre>
+<p>Read the Log2 BPP for the current mode, adjusted for ViewFinder</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>bpp</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zapredraw_read_mode_bpp">zapredraw_read_mode_bpp</h3>
+<pre>extern int zapredraw_read_mode_bpp (void);
+</pre><p>Read the Log2 BPP for the current mode, adjusted for ViewFinder</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>bpp</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzapredraw_decode_menu">xzapredraw_decode_menu</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredraw_decode_menu (<a href="font.html#font_decode_flags">font_decode_flags</a> flags,
+      byte const *menu,
+      byte const *block,
+      byte *buffer,
+      int size,
+      int **next_selection,
+      int *used);</pre>
+<p>Decode a selection made from a font menu</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_selection</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="zapredraw_decode_menu">zapredraw_decode_menu</h3>
+<pre>extern void zapredraw_decode_menu (<a href="font.html#font_decode_flags">font_decode_flags</a> flags,
+      byte const *menu,
+      byte const *block,
+      byte *buffer,
+      int size,
+      int **next_selection,
+      int *used);</pre>
+<p>Decode a selection made from a font menu</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_selection</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xzapredrawencoding_find">xzapredrawencoding_find</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredrawencoding_find (char const *name,
+      <a href="#zapredraw_e">zapredraw_e</a> *handle);</pre>
+<p>Opens an encoding for later use</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zapredrawencoding_find">zapredrawencoding_find</h3>
+<pre>extern <a href="#zapredraw_e">zapredraw_e</a> zapredrawencoding_find (char const *name);</pre>
+<p>Opens an encoding for later use</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>handle</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzapredrawencoding_lose">xzapredrawencoding_lose</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredrawencoding_lose (<a href="#zapredraw_e">zapredraw_e</a> handle);</pre>
+<p>Closes an encoding</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="zapredrawencoding_lose">zapredrawencoding_lose</h3>
+<pre>extern void zapredrawencoding_lose (<a href="#zapredraw_e">zapredraw_e</a> handle);</pre>
+<p>Closes an encoding</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xzapredrawencoding_table">xzapredrawencoding_table</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapredrawencoding_table (<a href="#zapredraw_e">zapredraw_e</a> handle,
+      <a href="#zapredraw_encoding_table">zapredraw_encoding_table</a> **table);</pre>
+<p>Returns the encoding table for an open encoding file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>table</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zapredrawencoding_table">zapredrawencoding_table</h3>
+<pre>extern <a href="#zapredraw_encoding_table">zapredraw_encoding_table</a> *zapredrawencoding_table (<a href="#zapredraw_e">zapredraw_e</a> handle);</pre>
+<p>Returns the encoding table for an open encoding file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>table</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

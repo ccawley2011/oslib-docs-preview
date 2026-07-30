@@ -1,0 +1,478 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Gadget</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Gadget</h2>
+
+<pre>#include "oslib/gadget.h"</pre>
+
+<h3 id="gadget_flags">gadget_flags</h3>
+<pre>typedef bits gadget_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#gadget_FADED">gadget_FADED</a></dd>
+<dd><a href="#gadget_AT_BACK">gadget_AT_BACK</a></dd>
+</dl>
+
+<h3 id="gadget_OBJECT_MEMBERS">gadget_OBJECT_MEMBERS</h3>
+<pre>#define gadget_OBJECT_MEMBERS \
+   <a href="#gadget_flags">gadget_flags</a> flags; \
+   bits class_no_and_size; \
+   <a href="os.html#os_box">os_box</a> bbox; \
+   <a href="toolbox.html#toolbox_c">toolbox_c</a> cmp; \
+   <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> help_message; \
+   int help_limit;
+</pre>
+
+<h3 id="gadget_object_base">gadget_object_base</h3>
+<pre>typedef struct
+   {  <a href="#gadget_flags">gadget_flags</a> flags;
+      bits class_no_and_size;
+      <a href="os.html#os_box">os_box</a> bbox;
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> cmp;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> help_message;
+      int help_limit;
+   }
+   gadget_object_base;</pre>
+
+<h3 id="gadget_object">gadget_object</h3>
+<pre>typedef struct
+   {  <a href="#gadget_flags">gadget_flags</a> flags;
+      bits class_no_and_size;
+      <a href="os.html#os_box">os_box</a> bbox;
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> cmp;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> help_message;
+      int help_limit;
+      int gadget [...];
+   }
+   gadget_object;</pre>
+
+<h3 id="gadget_feature">gadget_feature</h3>
+<pre>typedef bits gadget_feature;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#gadget_FEATURE_ADD">gadget_FEATURE_ADD</a></dd>
+<dd><a href="#gadget_FEATURE_REMOVE">gadget_FEATURE_REMOVE</a></dd>
+<dd><a href="#gadget_FEATURE_POST_ADD">gadget_FEATURE_POST_ADD</a></dd>
+<dd><a href="#gadget_FEATURE_METHOD">gadget_FEATURE_METHOD</a></dd>
+<dd><a href="#gadget_FEATURE_CLICK">gadget_FEATURE_CLICK</a></dd>
+<dd><a href="#gadget_FEATURE_PLOT">gadget_FEATURE_PLOT</a></dd>
+<dd><a href="#gadget_FEATURE_SET_FOCUS">gadget_FEATURE_SET_FOCUS</a></dd>
+<dd><a href="#gadget_FEATURE_MOVE">gadget_FEATURE_MOVE</a></dd>
+<dd><a href="#gadget_FEATURE_FADE">gadget_FEATURE_FADE</a></dd>
+</dl>
+
+<h3 id="gadget_extension">gadget_extension</h3>
+<pre>typedef struct
+   {  int type;
+      <a href="#gadget_flags">gadget_flags</a> valid_flags;
+      <a href="#gadget_feature">gadget_feature</a> features;
+   }
+   gadget_extension;</pre>
+
+<h3 id="gadget_extension_list">gadget_extension_list</h3>
+<pre>typedef struct
+   {  <a href="#gadget_extension">gadget_extension</a> gadget [...];
+   }
+   gadget_extension_list;</pre>
+
+
+Fields:	gadget - List of gadgets, terminated by -1<h3 id="gadget_FADED">gadget_FADED</h3>
+<pre>#define gadget_FADED ((<a href="#gadget_flags">gadget_flags</a>) 0x80000000u)</pre>
+
+<h3 id="gadget_AT_BACK">gadget_AT_BACK</h3>
+<pre>#define gadget_AT_BACK ((<a href="#gadget_flags">gadget_flags</a>) 0x40000000u)</pre>
+
+<h3 id="gadget_NO_HANDLER">gadget_NO_HANDLER</h3>
+<pre>#define gadget_NO_HANDLER 0x0u</pre>
+
+<h3 id="gadget_DEFAULT_HANDLER">gadget_DEFAULT_HANDLER</h3>
+<pre>#define gadget_DEFAULT_HANDLER 0x1u</pre>
+
+<h3 id="gadget_PRIVATE_HANDLER">gadget_PRIVATE_HANDLER</h3>
+<pre>#define gadget_PRIVATE_HANDLER 0x2u</pre>
+
+<h3 id="gadget_FEATURE_ADD_SHIFT">gadget_FEATURE_ADD_SHIFT</h3>
+<pre>#define gadget_FEATURE_ADD_SHIFT 0</pre>
+
+<h3 id="gadget_FEATURE_ADD">gadget_FEATURE_ADD</h3>
+<pre>#define gadget_FEATURE_ADD ((<a href="#gadget_feature">gadget_feature</a>) 0x3u)</pre>
+
+<h3 id="gadget_FEATURE_REMOVE_SHIFT">gadget_FEATURE_REMOVE_SHIFT</h3>
+<pre>#define gadget_FEATURE_REMOVE_SHIFT 2</pre>
+
+<h3 id="gadget_FEATURE_REMOVE">gadget_FEATURE_REMOVE</h3>
+<pre>#define gadget_FEATURE_REMOVE ((<a href="#gadget_feature">gadget_feature</a>) 0xCu)</pre>
+
+<h3 id="gadget_FEATURE_POST_ADD_SHIFT">gadget_FEATURE_POST_ADD_SHIFT</h3>
+<pre>#define gadget_FEATURE_POST_ADD_SHIFT 4</pre>
+
+<h3 id="gadget_FEATURE_POST_ADD">gadget_FEATURE_POST_ADD</h3>
+<pre>#define gadget_FEATURE_POST_ADD ((<a href="#gadget_feature">gadget_feature</a>) 0x30u)</pre>
+
+<h3 id="gadget_FEATURE_METHOD_SHIFT">gadget_FEATURE_METHOD_SHIFT</h3>
+<pre>#define gadget_FEATURE_METHOD_SHIFT 6</pre>
+
+<h3 id="gadget_FEATURE_METHOD">gadget_FEATURE_METHOD</h3>
+<pre>#define gadget_FEATURE_METHOD ((<a href="#gadget_feature">gadget_feature</a>) 0xC0u)</pre>
+
+<h3 id="gadget_FEATURE_CLICK_SHIFT">gadget_FEATURE_CLICK_SHIFT</h3>
+<pre>#define gadget_FEATURE_CLICK_SHIFT 10</pre>
+
+<h3 id="gadget_FEATURE_CLICK">gadget_FEATURE_CLICK</h3>
+<pre>#define gadget_FEATURE_CLICK ((<a href="#gadget_feature">gadget_feature</a>) 0xC00u)</pre>
+
+<h3 id="gadget_FEATURE_PLOT_SHIFT">gadget_FEATURE_PLOT_SHIFT</h3>
+<pre>#define gadget_FEATURE_PLOT_SHIFT 16</pre>
+
+<h3 id="gadget_FEATURE_PLOT">gadget_FEATURE_PLOT</h3>
+<pre>#define gadget_FEATURE_PLOT ((<a href="#gadget_feature">gadget_feature</a>) 0x30000u)</pre>
+
+<h3 id="gadget_FEATURE_SET_FOCUS_SHIFT">gadget_FEATURE_SET_FOCUS_SHIFT</h3>
+<pre>#define gadget_FEATURE_SET_FOCUS_SHIFT 18</pre>
+
+<h3 id="gadget_FEATURE_SET_FOCUS">gadget_FEATURE_SET_FOCUS</h3>
+<pre>#define gadget_FEATURE_SET_FOCUS ((<a href="#gadget_feature">gadget_feature</a>) 0xC0000u)</pre>
+
+<h3 id="gadget_FEATURE_MOVE_SHIFT">gadget_FEATURE_MOVE_SHIFT</h3>
+<pre>#define gadget_FEATURE_MOVE_SHIFT 20</pre>
+
+<h3 id="gadget_FEATURE_MOVE">gadget_FEATURE_MOVE</h3>
+<pre>#define gadget_FEATURE_MOVE ((<a href="#gadget_feature">gadget_feature</a>) 0x300000u)</pre>
+
+<h3 id="gadget_FEATURE_FADE_SHIFT">gadget_FEATURE_FADE_SHIFT</h3>
+<pre>#define gadget_FEATURE_FADE_SHIFT 22</pre>
+
+<h3 id="gadget_FEATURE_FADE">gadget_FEATURE_FADE</h3>
+<pre>#define gadget_FEATURE_FADE ((<a href="#gadget_feature">gadget_feature</a>) 0xC00000u)</pre>
+
+<h3 id="xgadget_get_flags">xgadget_get_flags</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xgadget_get_flags (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> gadget,
+      <a href="#gadget_flags">gadget_flags</a> *flags_out);</pre>
+<p>Gets the flags for a particular gadget</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags_out</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="gadget_get_flags">gadget_get_flags</h3>
+<pre>extern <a href="#gadget_flags">gadget_flags</a> gadget_get_flags (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> gadget);</pre>
+<p>Gets the flags for a particular gadget</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>flags_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xgadget_set_flags">xgadget_set_flags</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xgadget_set_flags (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> gadget,
+      <a href="#gadget_flags">gadget_flags</a> flags_in);</pre>
+<p>Sets the flags for a particular gadget</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>flags_in</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="gadget_set_flags">gadget_set_flags</h3>
+<pre>extern void gadget_set_flags (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> gadget,
+      <a href="#gadget_flags">gadget_flags</a> flags_in);</pre>
+<p>Sets the flags for a particular gadget</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>flags_in</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xgadget_set_help_message">xgadget_set_help_message</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xgadget_set_help_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> gadget,
+      char const *help_message);</pre>
+<p>Sets the help message for a particular gadget</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>help_message</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="gadget_set_help_message">gadget_set_help_message</h3>
+<pre>extern void gadget_set_help_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> gadget,
+      char const *help_message);</pre>
+<p>Sets the help message for a particular gadget</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>help_message</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xgadget_get_help_message">xgadget_get_help_message</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xgadget_get_help_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> gadget,
+      char *help_message,
+      int size,
+      int *used);</pre>
+<p>Gets the help message that is associated with a particular gadget</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>help_message</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="gadget_get_help_message">gadget_get_help_message</h3>
+<pre>extern int gadget_get_help_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> gadget,
+      char *help_message,
+      int size);</pre>
+<p>Gets the help message that is associated with a particular gadget</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>help_message</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xgadget_get_icon_list">xgadget_get_icon_list</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xgadget_get_icon_list (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> gadget,
+      <a href="wimp.html#wimp_i">wimp_i</a> *buffer,
+      int size,
+      int *used);</pre>
+<p>Gets the list of icon handles that are associated with a gadget</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="gadget_get_icon_list">gadget_get_icon_list</h3>
+<pre>extern int gadget_get_icon_list (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> gadget,
+      <a href="wimp.html#wimp_i">wimp_i</a> *buffer,
+      int size);</pre>
+<p>Gets the list of icon handles that are associated with a gadget</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xgadget_set_focus">xgadget_set_focus</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xgadget_set_focus (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> gadget);</pre>
+<p>Sets the type for the specified gadget</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="gadget_set_focus">gadget_set_focus</h3>
+<pre>extern void gadget_set_focus (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> gadget);</pre>
+<p>Sets the type for the specified gadget</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xgadget_get_type">xgadget_get_type</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xgadget_get_type (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> gadget,
+      int *type);</pre>
+<p>Gets the type for the specified gadget</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>type</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="gadget_get_type">gadget_get_type</h3>
+<pre>extern int gadget_get_type (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> gadget);</pre>
+<p>Gets the type for the specified gadget</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xgadget_move_gadget">xgadget_move_gadget</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xgadget_move_gadget (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> gadget,
+      <a href="os.html#os_box">os_box</a> const *bbox);</pre>
+<p>Moves an already created gadget in the specified window</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bbox</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="gadget_move_gadget">gadget_move_gadget</h3>
+<pre>extern void gadget_move_gadget (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> gadget,
+      <a href="os.html#os_box">os_box</a> const *bbox);</pre>
+<p>Moves an already created gadget in the specified window</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bbox</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xgadget_get_bbox">xgadget_get_bbox</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xgadget_get_bbox (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> gadget,
+      <a href="os.html#os_box">os_box</a> *bbox);</pre>
+<p>Gets the bounding box of a gadget</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bbox</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="gadget_get_bbox">gadget_get_bbox</h3>
+<pre>extern void gadget_get_bbox (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> gadget,
+      <a href="os.html#os_box">os_box</a> *bbox);</pre>
+<p>Gets the bounding box of a gadget</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bbox</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,453 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; URI</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>URI</h2>
+
+<pre>#include "oslib/uri.h"</pre>
+
+<h3 id="uri_h">uri_h</h3>
+<pre>typedef struct {...} *uri_h;</pre>
+
+<p>Abstract type for URI handles</p>
+
+<h3 id="uri_process_flags">uri_process_flags</h3>
+<pre>typedef bits uri_process_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#uri_PROCESS_CHECK_ONLY">uri_PROCESS_CHECK_ONLY</a></dd>
+</dl>
+
+<h3 id="uri_return_result_flags">uri_return_result_flags</h3>
+<pre>typedef bits uri_return_result_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#uri_RETURN_RESULT_NOT_CLAIMED">uri_RETURN_RESULT_NOT_CLAIMED</a></dd>
+</dl>
+
+<h3 id="uri_message_handler_started">uri_message_handler_started</h3>
+<pre>typedef struct
+   {  bits flags;
+   }
+   uri_message_handler_started;</pre>
+
+<h3 id="uri_message_handler_dying">uri_message_handler_dying</h3>
+<pre>typedef struct
+   {  bits flags;
+   }
+   uri_message_handler_dying;</pre>
+
+<h3 id="uri_message_process">uri_message_process</h3>
+<pre>typedef struct
+   {  <a href="#uri_process_flags">uri_process_flags</a> flags;
+      char *uri;
+      <a href="#uri_h">uri_h</a> handle;
+   }
+   uri_message_process;</pre>
+
+<h3 id="uri_message_return_result">uri_message_return_result</h3>
+<pre>typedef struct
+   {  <a href="#uri_return_result_flags">uri_return_result_flags</a> flags;
+      <a href="#uri_h">uri_h</a> handle;
+   }
+   uri_message_return_result;</pre>
+
+<h3 id="uri_message_process_ack">uri_message_process_ack</h3>
+<pre>typedef struct
+   {  <a href="#uri_process_flags">uri_process_flags</a> flags;
+      char *uri;
+      <a href="#uri_h">uri_h</a> handle;
+   }
+   uri_message_process_ack;</pre>
+
+<h3 id="uri_full_message_handler_started">uri_full_message_handler_started</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      bits flags;
+   }
+   uri_full_message_handler_started;</pre>
+
+<h3 id="uri_full_message_handler_dying">uri_full_message_handler_dying</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      bits flags;
+   }
+   uri_full_message_handler_dying;</pre>
+
+<h3 id="uri_full_message_process">uri_full_message_process</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#uri_process_flags">uri_process_flags</a> flags;
+      char *uri;
+      <a href="#uri_h">uri_h</a> handle;
+   }
+   uri_full_message_process;</pre>
+
+<h3 id="uri_full_message_return_result">uri_full_message_return_result</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#uri_return_result_flags">uri_return_result_flags</a> flags;
+      <a href="#uri_h">uri_h</a> handle;
+   }
+   uri_full_message_return_result;</pre>
+
+<h3 id="uri_full_message_process_ack">uri_full_message_process_ack</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#uri_process_flags">uri_process_flags</a> flags;
+      char *uri;
+      <a href="#uri_h">uri_h</a> handle;
+   }
+   uri_full_message_process_ack;</pre>
+
+<h3 id="uri_dispatch_flags">uri_dispatch_flags</h3>
+<pre>typedef bits uri_dispatch_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#uri_DISPATCH_INFORM_CALLER">uri_DISPATCH_INFORM_CALLER</a></dd>
+<dd><a href="#uri_DISPATCH_CHECK_ONLY">uri_DISPATCH_CHECK_ONLY</a></dd>
+<dd><a href="#uri_DISPATCH_NO_EXTERNAL_STARTUP">uri_DISPATCH_NO_EXTERNAL_STARTUP</a></dd>
+</dl>
+
+<h3 id="uri_dispatch_result_flags">uri_dispatch_result_flags</h3>
+<pre>typedef bits uri_dispatch_result_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#uri_DISPATCH_REQUEST_REJECTED">uri_DISPATCH_REQUEST_REJECTED</a></dd>
+</dl>
+
+<h3 id="uri_FILE_TYPE">uri_FILE_TYPE</h3>
+<pre>#define uri_FILE_TYPE 0xF91u</pre>
+
+<h3 id="message_URI_HANDLER_STARTED">message_URI_HANDLER_STARTED</h3>
+<pre>#define message_URI_HANDLER_STARTED 0x4E380u</pre>
+
+<h3 id="message_URI_HANDLER_DYING">message_URI_HANDLER_DYING</h3>
+<pre>#define message_URI_HANDLER_DYING 0x4E381u</pre>
+
+<h3 id="message_URI_PROCESS">message_URI_PROCESS</h3>
+<pre>#define message_URI_PROCESS 0x4E382u</pre>
+
+<h3 id="message_URI_RETURN_RESULT">message_URI_RETURN_RESULT</h3>
+<pre>#define message_URI_RETURN_RESULT 0x4E383u</pre>
+
+<h3 id="message_URI_PROCESS_ACK">message_URI_PROCESS_ACK</h3>
+<pre>#define message_URI_PROCESS_ACK 0x4E384u</pre>
+
+<h3 id="uri_PROCESS_CHECK_ONLY">uri_PROCESS_CHECK_ONLY</h3>
+<pre>#define uri_PROCESS_CHECK_ONLY ((<a href="#uri_process_flags">uri_process_flags</a>) 0x1u)</pre>
+
+<h3 id="uri_RETURN_RESULT_NOT_CLAIMED">uri_RETURN_RESULT_NOT_CLAIMED</h3>
+<pre>#define uri_RETURN_RESULT_NOT_CLAIMED ((<a href="#uri_return_result_flags">uri_return_result_flags</a>) 0x1u)</pre>
+
+<h3 id="uri_DISPATCH_INFORM_CALLER">uri_DISPATCH_INFORM_CALLER</h3>
+<pre>#define uri_DISPATCH_INFORM_CALLER ((<a href="#uri_dispatch_flags">uri_dispatch_flags</a>) 0x1u)</pre>
+
+<h3 id="uri_DISPATCH_CHECK_ONLY">uri_DISPATCH_CHECK_ONLY</h3>
+<pre>#define uri_DISPATCH_CHECK_ONLY ((<a href="#uri_dispatch_flags">uri_dispatch_flags</a>) 0x2u)</pre>
+
+<h3 id="uri_DISPATCH_NO_EXTERNAL_STARTUP">uri_DISPATCH_NO_EXTERNAL_STARTUP</h3>
+<pre>#define uri_DISPATCH_NO_EXTERNAL_STARTUP ((<a href="#uri_dispatch_flags">uri_dispatch_flags</a>) 0x4u)</pre>
+
+<h3 id="uri_DISPATCH_REQUEST_REJECTED">uri_DISPATCH_REQUEST_REJECTED</h3>
+<pre>#define uri_DISPATCH_REQUEST_REJECTED ((<a href="#uri_dispatch_result_flags">uri_dispatch_result_flags</a>) 0x1u)</pre>
+
+<h3 id="error_URI_NO_MEMORY">error_URI_NO_MEMORY</h3>
+<pre>#define error_URI_NO_MEMORY 0x810A01u</pre>
+
+<p>There was insufficient memory to complete an operation</p>
+
+<h3 id="error_URI_BAD_URI">error_URI_BAD_URI</h3>
+<pre>#define error_URI_BAD_URI 0x810A02u</pre>
+
+<p>An empty URI string was supplied</p>
+
+<h3 id="error_URI_BAD_HANDLE">error_URI_BAD_HANDLE</h3>
+<pre>#define error_URI_BAD_HANDLE 0x810A03u</pre>
+
+<p>A bad URI handle was supplied</p>
+
+<h3 id="error_URI_BAD_FILE">error_URI_BAD_FILE</h3>
+<pre>#define error_URI_BAD_FILE 0x810A04u</pre>
+
+<p>An error occurred accessing a URI file</p>
+
+<h3 id="xuri_version">xuri_version</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xuri_version (bits flags,
+      int *version);</pre>
+<p>Returns the current version of the URI handler module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>version</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="uri_version">uri_version</h3>
+<pre>extern int uri_version (bits flags);</pre>
+<p>Returns the current version of the URI handler module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>version</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xuri_dispatch">xuri_dispatch</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xuri_dispatch (<a href="#uri_dispatch_flags">uri_dispatch_flags</a> flags,
+      char const *uri,
+      <a href="wimp.html#wimp_t">wimp_t</a> source_task,
+      <a href="#uri_dispatch_result_flags">uri_dispatch_result_flags</a> *flags_out,
+      <a href="wimp.html#wimp_t">wimp_t</a> *handler_task,
+      <a href="#uri_h">uri_h</a> *handle);</pre>
+<p>Dispatches a URI to an appropriate application for handling</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>uri</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>source_task</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handler_task</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="uri_dispatch">uri_dispatch</h3>
+<pre>extern <a href="#uri_h">uri_h</a> uri_dispatch (<a href="#uri_dispatch_flags">uri_dispatch_flags</a> flags,
+      char const *uri,
+      <a href="wimp.html#wimp_t">wimp_t</a> source_task,
+      <a href="#uri_dispatch_result_flags">uri_dispatch_result_flags</a> *flags_out,
+      <a href="wimp.html#wimp_t">wimp_t</a> *handler_task);</pre>
+<p>Dispatches a URI to an appropriate application for handling</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>uri</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>source_task</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handler_task</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>handle</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xuri_request_uri_size">xuri_request_uri_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xuri_request_uri_size (bits flags,
+      <a href="#uri_h">uri_h</a> handle,
+      int *buffer_size);</pre>
+<p>Finds the size of the buffer needed for a URI</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>buffer_size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="uri_request_uri_size">uri_request_uri_size</h3>
+<pre>extern int uri_request_uri_size (bits flags,
+      <a href="#uri_h">uri_h</a> handle);</pre>
+<p>Finds the size of the buffer needed for a URI</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>buffer_size</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xuri_request_uri">xuri_request_uri</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xuri_request_uri (bits flags,
+      char *buffer,
+      int buffer_size,
+      <a href="#uri_h">uri_h</a> handle,
+      int *length);</pre>
+<p>Requests a copy of the text of a URI</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>length</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="uri_request_uri">uri_request_uri</h3>
+<pre>extern int uri_request_uri (bits flags,
+      char *buffer,
+      int buffer_size,
+      <a href="#uri_h">uri_h</a> handle);</pre>
+<p>Requests a copy of the text of a URI</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>length</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xuri_invalidate_uri">xuri_invalidate_uri</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xuri_invalidate_uri (bits flags,
+      <a href="#uri_h">uri_h</a> handle);</pre>
+<p>Marks a URI as invalid</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="uri_invalidate_uri">uri_invalidate_uri</h3>
+<pre>extern void uri_invalidate_uri (bits flags,
+      <a href="#uri_h">uri_h</a> handle);</pre>
+<p>Marks a URI as invalid</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xservice_uri_handler_started">xservice_uri_handler_started</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_uri_handler_started (void);
+</pre><p>URI handler started</p>
+
+
+<table>
+</table>
+
+<h3 id="service_uri_handler_started">service_uri_handler_started</h3>
+<pre>extern void service_uri_handler_started (void);
+</pre><p>URI handler started</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_uri_handler_dying">xservice_uri_handler_dying</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_uri_handler_dying (void);
+</pre><p>URI handler dying</p>
+
+
+<table>
+</table>
+
+<h3 id="service_uri_handler_dying">service_uri_handler_dying</h3>
+<pre>extern void service_uri_handler_dying (void);
+</pre><p>URI handler dying</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_uri_process">xservice_uri_process</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_uri_process (<a href="#uri_process_flags">uri_process_flags</a> flags,
+      char const *uri,
+      <a href="#uri_h">uri_h</a> handle,
+      osbool *unclaimed);</pre>
+<p>Requests that a URI is processed or checked</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>uri</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="service_uri_process">service_uri_process</h3>
+<pre>extern osbool service_uri_process (<a href="#uri_process_flags">uri_process_flags</a> flags,
+      char const *uri,
+      <a href="#uri_h">uri_h</a> handle);</pre>
+<p>Requests that a URI is processed or checked</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>uri</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_uri_return_result">xservice_uri_return_result</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_uri_return_result (<a href="#uri_return_result_flags">uri_return_result_flags</a> flags,
+      <a href="#uri_h">uri_h</a> handle,
+      osbool *unclaimed);</pre>
+<p>Returns the result of a URI dispatch</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="service_uri_return_result">service_uri_return_result</h3>
+<pre>extern osbool service_uri_return_result (<a href="#uri_return_result_flags">uri_return_result_flags</a> flags,
+      <a href="#uri_h">uri_h</a> handle);</pre>
+<p>Returns the result of a URI dispatch</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

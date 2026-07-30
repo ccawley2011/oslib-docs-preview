@@ -1,0 +1,1641 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Toolbox</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Toolbox</h2>
+
+<pre>#include "oslib/toolbox.h"</pre>
+
+<h3 id="toolbox_o">toolbox_o</h3>
+<pre>typedef struct {...} *toolbox_o;</pre>
+
+<p>Abstract type for Toolbox objects</p>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#toolbox_NULL_OBJECT">toolbox_NULL_OBJECT</a></dd>
+</dl>
+
+<h3 id="toolbox_c">toolbox_c</h3>
+<pre>typedef int toolbox_c;</pre>
+
+<p>Type for Toolbox components</p>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#toolbox_NULL_COMPONENT">toolbox_NULL_COMPONENT</a></dd>
+<dd><a href="#toolbox_WINDOW_FOCUS">toolbox_WINDOW_FOCUS</a></dd>
+</dl>
+
+<h3 id="toolbox_class">toolbox_class</h3>
+<pre>typedef bits toolbox_class;</pre>
+
+<p>Toolbox class identification number</p>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#toolbox_WIMP_OBJECTS">toolbox_WIMP_OBJECTS</a></dd>
+<dd><a href="#toolbox_ALL">toolbox_ALL</a></dd>
+<dd><a href="#toolbox_WIMP_OBJECT_POST_FILTER">toolbox_WIMP_OBJECT_POST_FILTER</a></dd>
+<dd><a href="#toolbox_ANY_POST_FILTER">toolbox_ANY_POST_FILTER</a></dd>
+</dl>
+
+<h3 id="toolbox_id">toolbox_id</h3>
+<pre>typedef struct {...} *toolbox_id;</pre>
+
+<p>Should be union of string and various object definition types, but that's inconvenient because the list is subject to later extension, and you can't project into unions by cast</p>
+
+<h3 id="toolbox_position_tag">toolbox_position_tag</h3>
+<pre>typedef int toolbox_position_tag;</pre>
+
+<p>Discriminates between the ways of specifying a position</p>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#toolbox_POSITION_DEFAULT">toolbox_POSITION_DEFAULT</a></dd>
+<dd><a href="#toolbox_POSITION_FULL">toolbox_POSITION_FULL</a></dd>
+<dd><a href="#toolbox_POSITION_TOP_LEFT">toolbox_POSITION_TOP_LEFT</a></dd>
+<dd><a href="#toolbox_POSITION_CENTRED">toolbox_POSITION_CENTRED</a></dd>
+<dd><a href="#toolbox_POSITION_AT_POINTER">toolbox_POSITION_AT_POINTER</a></dd>
+</dl>
+
+<h3 id="toolbox_full">toolbox_full</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> visible;
+      int xscroll;
+      int yscroll;
+      <a href="wimp.html#wimp_w">wimp_w</a> next;
+   }
+   toolbox_full;</pre>
+
+<p>One way of specifying a position</p>
+
+<h3 id="toolbox_child">toolbox_child</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> visible;
+      int xscroll;
+      int yscroll;
+      <a href="wimp.html#wimp_w">wimp_w</a> next;
+      <a href="wimp.html#wimp_window_flags">wimp_window_flags</a> flags;
+      <a href="wimp.html#wimp_w">wimp_w</a> parent;
+      <a href="wimp.html#wimp_window_nesting_flags">wimp_window_nesting_flags</a> linkage;
+   }
+   toolbox_child;</pre>
+
+<p>One way of specifying a position</p>
+
+<h3 id="toolbox_position">toolbox_position</h3>
+<pre>typedef union
+   {  <a href="os.html#os_coord">os_coord</a> top_left;
+      <a href="#toolbox_full">toolbox_full</a> full;
+      <a href="#toolbox_child">toolbox_child</a> child;
+   }
+   toolbox_position;</pre>
+
+<p>One way of specifying a position</p>
+
+
+Fields:	full - A distributed union for each object type<h3 id="toolbox_object_flags">toolbox_object_flags</h3>
+<pre>typedef bits toolbox_object_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#toolbox_OBJECT_CREATE_ON_LOAD">toolbox_OBJECT_CREATE_ON_LOAD</a></dd>
+<dd><a href="#toolbox_OBJECT_SHOW_ON_CREATE">toolbox_OBJECT_SHOW_ON_CREATE</a></dd>
+<dd><a href="#toolbox_OBJECT_SHARED">toolbox_OBJECT_SHARED</a></dd>
+<dd><a href="#toolbox_OBJECT_ANCESTOR">toolbox_OBJECT_ANCESTOR</a></dd>
+</dl>
+
+<h3 id="toolbox_block">toolbox_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_o">toolbox_o</a> ancestor_obj;
+      <a href="#toolbox_c">toolbox_c</a> ancestor_cmp;
+      <a href="#toolbox_o">toolbox_o</a> parent_obj;
+      <a href="#toolbox_c">toolbox_c</a> parent_cmp;
+      <a href="#toolbox_o">toolbox_o</a> this_obj;
+      <a href="#toolbox_c">toolbox_c</a> this_cmp;
+   }
+   toolbox_block;</pre>
+
+<h3 id="toolbox_RESOURCE_FILE_OBJECT_MEMBERS">toolbox_RESOURCE_FILE_OBJECT_MEMBERS</h3>
+<pre>#define toolbox_RESOURCE_FILE_OBJECT_MEMBERS \
+   <a href="#toolbox_class">toolbox_class</a> class_no; \
+   bits flags; \
+   int version; \
+   char name [12]; \
+   int size; \
+   int header_size; \
+   int body_size;
+</pre>
+
+<h3 id="toolbox_resource_file_object_base">toolbox_resource_file_object_base</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_class">toolbox_class</a> class_no;
+      bits flags;
+      int version;
+      char name [12];
+      int size;
+      int header_size;
+      int body_size;
+   }
+   toolbox_resource_file_object_base;</pre>
+
+<h3 id="toolbox_resource_file_object">toolbox_resource_file_object</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_class">toolbox_class</a> class_no;
+      bits flags;
+      int version;
+      char name [12];
+      int size;
+      int header_size;
+      int body_size;
+      int object [...];
+   }
+   toolbox_resource_file_object;</pre>
+
+<h3 id="toolbox_object_template_header">toolbox_object_template_header</h3>
+<pre>typedef <a href="#toolbox_resource_file_object_base">toolbox_resource_file_object_base</a> toolbox_object_template_header;</pre>
+
+<h3 id="toolbox_object_descriptor">toolbox_object_descriptor</h3>
+<pre>typedef struct {...} *toolbox_object_descriptor;</pre>
+
+<p>Pointer to the object descriptor - Cast from <xxx>_object or <xxx>_object_base as appropriate</p>
+
+<h3 id="toolbox_template">toolbox_template</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_class">toolbox_class</a> class_no;
+      bits flags;
+      int version;
+      char name [12];
+      int reserved;
+      <a href="#toolbox_object_descriptor">toolbox_object_descriptor</a> class_template;
+      int body_size;
+   }
+   toolbox_template;</pre>
+
+<p>Header structure for in-memory construction of a toolbox object</p>
+
+<h3 id="toolbox_string_reference">toolbox_string_reference</h3>
+<pre>typedef char *toolbox_string_reference;</pre>
+
+<p>Type of a string reference after relocation</p>
+
+<h3 id="toolbox_msg_reference">toolbox_msg_reference</h3>
+<pre>typedef char *toolbox_msg_reference;</pre>
+
+<p>Type of a message reference after relocation</p>
+
+<h3 id="toolbox_sprite_area_reference">toolbox_sprite_area_reference</h3>
+<pre>typedef <a href="osspriteop.html#osspriteop_area">osspriteop_area</a> *toolbox_sprite_area_reference;</pre>
+
+<p>Type of a sprite area reference after relocation</p>
+
+<h3 id="toolbox_object_offset">toolbox_object_offset</h3>
+<pre>typedef int *toolbox_object_offset;</pre>
+
+<p>Type of an object offset after relocation</p>
+
+<h3 id="toolbox_relocation_directive">toolbox_relocation_directive</h3>
+<pre>typedef int toolbox_relocation_directive;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#toolbox_RELOCATE_STRING_REFERENCE">toolbox_RELOCATE_STRING_REFERENCE</a></dd>
+<dd><a href="#toolbox_RELOCATE_MSG_REFERENCE">toolbox_RELOCATE_MSG_REFERENCE</a></dd>
+<dd><a href="#toolbox_RELOCATE_SPRITE_AREA_REFERENCE">toolbox_RELOCATE_SPRITE_AREA_REFERENCE</a></dd>
+<dd><a href="#toolbox_RELOCATE_OBJECT_OFFSET">toolbox_RELOCATE_OBJECT_OFFSET</a></dd>
+</dl>
+
+<h3 id="toolbox_relocation">toolbox_relocation</h3>
+<pre>typedef struct
+   {  int word;
+      <a href="#toolbox_relocation_directive">toolbox_relocation_directive</a> relocation;
+   }
+   toolbox_relocation;</pre>
+
+<h3 id="toolbox_RELOCATION_TABLE_MEMBERS">toolbox_RELOCATION_TABLE_MEMBERS</h3>
+<pre>#define toolbox_RELOCATION_TABLE_MEMBERS \
+   int relocation_count;
+</pre>
+
+<h3 id="toolbox_relocation_table_base">toolbox_relocation_table_base</h3>
+<pre>typedef struct
+   {  int relocation_count;
+   }
+   toolbox_relocation_table_base;</pre>
+
+<h3 id="toolbox_relocation_table">toolbox_relocation_table</h3>
+<pre>typedef struct
+   {  int relocation_count;
+      <a href="#toolbox_relocation">toolbox_relocation</a> relocations [...];
+   }
+   toolbox_relocation_table;</pre>
+
+<h3 id="toolbox_relocatable_object">toolbox_relocatable_object</h3>
+<pre>typedef struct
+   {  int string_table_offset;
+      int message_table_offset;
+      int relocation_table_offset;
+      <a href="#toolbox_resource_file_object">toolbox_resource_file_object</a> rf_obj;
+   }
+   toolbox_relocatable_object;</pre>
+
+<h3 id="toolbox_RESOURCE_FILE_MEMBERS">toolbox_RESOURCE_FILE_MEMBERS</h3>
+<pre>#define toolbox_RESOURCE_FILE_MEMBERS \
+   int file_id; \
+   int version; \
+   int header_size;
+</pre>
+
+<h3 id="toolbox_resource_file_base">toolbox_resource_file_base</h3>
+<pre>typedef struct
+   {  int file_id;
+      int version;
+      int header_size;
+   }
+   toolbox_resource_file_base;</pre>
+
+
+Fields:	file_id - RESF <h3 id="toolbox_resource_file">toolbox_resource_file</h3>
+<pre>typedef struct
+   {  int file_id;
+      int version;
+      int header_size;
+      <a href="#toolbox_relocatable_object">toolbox_relocatable_object</a> rel_obj [...];
+   }
+   toolbox_resource_file;</pre>
+
+
+Fields:	file_id - RESF <h3 id="toolbox_action_list">toolbox_action_list</h3>
+<pre>typedef struct
+   {  bits action_nos [...];
+   }
+   toolbox_action_list;</pre>
+
+<h3 id="toolbox_create_flags">toolbox_create_flags</h3>
+<pre>typedef bits toolbox_create_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#toolbox_CREATE_GIVEN_OBJECT">toolbox_CREATE_GIVEN_OBJECT</a></dd>
+</dl>
+
+<h3 id="toolbox_delete_flags">toolbox_delete_flags</h3>
+<pre>typedef bits toolbox_delete_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#toolbox_DELETE_NO_RECURSE">toolbox_DELETE_NO_RECURSE</a></dd>
+</dl>
+
+<h3 id="toolbox_show_flags">toolbox_show_flags</h3>
+<pre>typedef bits toolbox_show_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#toolbox_SHOW_AS_MENU">toolbox_SHOW_AS_MENU</a></dd>
+<dd><a href="#toolbox_SHOW_AS_SUB_MENU">toolbox_SHOW_AS_SUB_MENU</a></dd>
+<dd><a href="#toolbox_SHOW_AS_CHILD_WINDOW">toolbox_SHOW_AS_CHILD_WINDOW</a></dd>
+</dl>
+
+<h3 id="toolbox_hide_flags">toolbox_hide_flags</h3>
+<pre>typedef bits toolbox_hide_flags;</pre>
+
+<h3 id="toolbox_get_info_flags">toolbox_get_info_flags</h3>
+<pre>typedef bits toolbox_get_info_flags;</pre>
+
+<h3 id="toolbox_info">toolbox_info</h3>
+<pre>typedef bits toolbox_info;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#toolbox_INFO_SHOWING">toolbox_INFO_SHOWING</a></dd>
+</dl>
+
+<h3 id="toolbox_misc_op_flags">toolbox_misc_op_flags</h3>
+<pre>typedef bits toolbox_misc_op_flags;</pre>
+
+<h3 id="toolbox_handle_flags">toolbox_handle_flags</h3>
+<pre>typedef bits toolbox_handle_flags;</pre>
+
+<h3 id="toolbox_get_class_flags">toolbox_get_class_flags</h3>
+<pre>typedef bits toolbox_get_class_flags;</pre>
+
+<h3 id="toolbox_get_parent_flags">toolbox_get_parent_flags</h3>
+<pre>typedef bits toolbox_get_parent_flags;</pre>
+
+<h3 id="toolbox_get_ancestor_flags">toolbox_get_ancestor_flags</h3>
+<pre>typedef bits toolbox_get_ancestor_flags;</pre>
+
+<h3 id="toolbox_get_template_flags">toolbox_get_template_flags</h3>
+<pre>typedef bits toolbox_get_template_flags;</pre>
+
+<h3 id="toolbox_event_flags">toolbox_event_flags</h3>
+<pre>typedef bits toolbox_event_flags;</pre>
+
+<h3 id="toolbox_initialise_flags">toolbox_initialise_flags</h3>
+<pre>typedef bits toolbox_initialise_flags;</pre>
+
+<h3 id="toolbox_load_flags">toolbox_load_flags</h3>
+<pre>typedef bits toolbox_load_flags;</pre>
+
+<h3 id="toolbox_look_up_flags">toolbox_look_up_flags</h3>
+<pre>typedef bits toolbox_look_up_flags;</pre>
+
+<h3 id="toolbox_filter_type">toolbox_filter_type</h3>
+<pre>typedef int toolbox_filter_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#toolbox_REGISTER_EVENT_FILTER">toolbox_REGISTER_EVENT_FILTER</a></dd>
+<dd><a href="#toolbox_REGISTER_MESSAGE_FILTER">toolbox_REGISTER_MESSAGE_FILTER</a></dd>
+<dd><a href="#toolbox_REGISTER_ACTION_FILTER">toolbox_REGISTER_ACTION_FILTER</a></dd>
+</dl>
+
+<h3 id="toolbox_event_pair">toolbox_event_pair</h3>
+<pre>typedef struct
+   {  int event;
+      <a href="#toolbox_class">toolbox_class</a> class_no;
+   }
+   toolbox_event_pair;</pre>
+
+<h3 id="toolbox_event_pair_list">toolbox_event_pair_list</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_event_pair">toolbox_event_pair</a> pair [...];
+   }
+   toolbox_event_pair_list;</pre>
+
+<h3 id="toolbox_message_pair">toolbox_message_pair</h3>
+<pre>typedef struct
+   {  bits message;
+      <a href="#toolbox_class">toolbox_class</a> class_no;
+   }
+   toolbox_message_pair;</pre>
+
+<h3 id="toolbox_message_pair_list">toolbox_message_pair_list</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_message_pair">toolbox_message_pair</a> pair [...];
+   }
+   toolbox_message_pair_list;</pre>
+
+<h3 id="toolbox_action_pair">toolbox_action_pair</h3>
+<pre>typedef struct
+   {  bits action_no;
+      <a href="#toolbox_class">toolbox_class</a> class_no;
+   }
+   toolbox_action_pair;</pre>
+
+<h3 id="toolbox_action_pair_list">toolbox_action_pair_list</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_action_pair">toolbox_action_pair</a> pair [...];
+   }
+   toolbox_action_pair_list;</pre>
+
+<h3 id="toolbox_pair_list">toolbox_pair_list</h3>
+<pre>typedef union
+   {  <a href="#toolbox_event_pair_list">toolbox_event_pair_list</a> events;
+      <a href="#toolbox_message_pair_list">toolbox_message_pair_list</a> messages;
+      <a href="#toolbox_action_pair_list">toolbox_action_pair_list</a> action_pairs;
+   }
+   toolbox_pair_list;</pre>
+
+<h3 id="toolbox_register_flags">toolbox_register_flags</h3>
+<pre>typedef bits toolbox_register_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#toolbox_DE_REGISTER_FILTER">toolbox_DE_REGISTER_FILTER</a></dd>
+</dl>
+
+<h3 id="toolbox_action_interest">toolbox_action_interest</h3>
+<pre>typedef struct
+   {  bits action_no;
+      <a href="#toolbox_class">toolbox_class</a> class_no;
+   }
+   toolbox_action_interest;</pre>
+
+<h3 id="toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</h3>
+<pre>#define toolbox_ACTION_HEADER_MEMBERS \
+   int size; \
+   int ref_no; \
+   bits action_no; \
+   bits flags;
+</pre>
+
+<h3 id="toolbox_action_header_base">toolbox_action_header_base</h3>
+<pre>typedef struct
+   {  int size;
+      int ref_no;
+      bits action_no;
+      bits flags;
+   }
+   toolbox_action_header_base;</pre>
+
+<h3 id="toolbox_action_header">toolbox_action_header</h3>
+<pre>typedef struct
+   {  int size;
+      int ref_no;
+      bits action_no;
+      bits flags;
+      byte action [...];
+   }
+   toolbox_action_header;</pre>
+
+<h3 id="toolbox_action_error">toolbox_action_error</h3>
+<pre>typedef struct
+   {  bits errnum;
+      char errmess [208];
+   }
+   toolbox_action_error;</pre>
+
+<p>Prefer Toolbox_ActionErrorBlock</p>
+
+<h3 id="toolbox_action_error_block">toolbox_action_error_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      bits errnum;
+      char errmess [208];
+   }
+   toolbox_action_error_block;</pre>
+
+<h3 id="toolbox_action_object_auto_created">toolbox_action_object_auto_created</h3>
+<pre>typedef struct
+   {  char name [212];
+   }
+   toolbox_action_object_auto_created;</pre>
+
+<p>Prefer Toolbox_ActionObjectAutoCreatedBlock</p>
+
+<h3 id="toolbox_action_object_auto_created_block">toolbox_action_object_auto_created_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      char name [212];
+   }
+   toolbox_action_object_auto_created_block;</pre>
+
+<h3 id="toolbox_action_object_deleted">toolbox_action_object_deleted</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_class">toolbox_class</a> class_no;
+      void *client_handle;
+   }
+   toolbox_action_object_deleted;</pre>
+
+<p>Prefer Toolbox_ActionObjectDeletedBlock</p>
+
+<h3 id="toolbox_action_object_deleted_block">toolbox_action_object_deleted_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      <a href="#toolbox_class">toolbox_class</a> class_no;
+      void *client_handle;
+   }
+   toolbox_action_object_deleted_block;</pre>
+
+<h3 id="toolbox_action">toolbox_action</h3>
+<pre>typedef struct
+   {  int size;
+      int ref_no;
+      bits action_no;
+      bits flags;
+      union
+      {  <a href="#toolbox_action_error">toolbox_action_error</a> error;
+         <a href="#toolbox_action_object_auto_created">toolbox_action_object_auto_created</a> created;
+         <a href="#toolbox_action_object_deleted">toolbox_action_object_deleted</a> deleted;
+         byte reserved [212];
+      }
+      data;
+   }
+   toolbox_action;</pre>
+
+<h3 id="toolbox_message">toolbox_message</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_o">toolbox_o</a> o;
+      <a href="#toolbox_c">toolbox_c</a> c;
+      <a href="#toolbox_action">toolbox_action</a> action_no;
+   }
+   toolbox_message;</pre>
+
+<h3 id="toolbox_full_message">toolbox_full_message</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#toolbox_o">toolbox_o</a> o;
+      <a href="#toolbox_c">toolbox_c</a> c;
+      <a href="#toolbox_action">toolbox_action</a> action_no;
+   }
+   toolbox_full_message;</pre>
+
+<h3 id="toolbox_NULL_OBJECT">toolbox_NULL_OBJECT</h3>
+<pre>#define toolbox_NULL_OBJECT ((<a href="#toolbox_o">toolbox_o</a>) 0x0u)</pre>
+
+<h3 id="toolbox_NULL_COMPONENT">toolbox_NULL_COMPONENT</h3>
+<pre>#define toolbox_NULL_COMPONENT ((<a href="#toolbox_c">toolbox_c</a>) 0xFFFFFFFFu)</pre>
+
+<h3 id="toolbox_WINDOW_FOCUS">toolbox_WINDOW_FOCUS</h3>
+<pre>#define toolbox_WINDOW_FOCUS ((<a href="#toolbox_c">toolbox_c</a>) 0xFFFFFFFEu)</pre>
+
+<h3 id="toolbox_NAME_LIMIT">toolbox_NAME_LIMIT</h3>
+<pre>#define toolbox_NAME_LIMIT 12</pre>
+
+<h3 id="toolbox_WIMP_OBJECTS">toolbox_WIMP_OBJECTS</h3>
+<pre>#define toolbox_WIMP_OBJECTS ((<a href="#toolbox_class">toolbox_class</a>) 0x0u)</pre>
+
+<h3 id="toolbox_ALL">toolbox_ALL</h3>
+<pre>#define toolbox_ALL ((<a href="#toolbox_class">toolbox_class</a>) 0xFFFFFFFFu)</pre>
+
+<h3 id="toolbox_EVENT">toolbox_EVENT</h3>
+<pre>#define toolbox_EVENT 0x200u</pre>
+
+<p>Wimp event number of a Toolbox action</p>
+
+<h3 id="error_TOOLBOX_NO_MEM">error_TOOLBOX_NO_MEM</h3>
+<pre>#define error_TOOLBOX_NO_MEM 0x80CB00u</pre>
+
+<h3 id="error_TOOLBOX_BAD_SWI">error_TOOLBOX_BAD_SWI</h3>
+<pre>#define error_TOOLBOX_BAD_SWI 0x80CB01u</pre>
+
+<h3 id="error_TOOLBOX_INVALID_OBJECT_ID">error_TOOLBOX_INVALID_OBJECT_ID</h3>
+<pre>#define error_TOOLBOX_INVALID_OBJECT_ID 0x80CB02u</pre>
+
+<h3 id="error_TOOLBOX_NOT_ATOOLBOX_TASK">error_TOOLBOX_NOT_ATOOLBOX_TASK</h3>
+<pre>#define error_TOOLBOX_NOT_ATOOLBOX_TASK 0x80CB03u</pre>
+
+<h3 id="error_TOOLBOX_NO_DIR_NAME">error_TOOLBOX_NO_DIR_NAME</h3>
+<pre>#define error_TOOLBOX_NO_DIR_NAME 0x80CB04u</pre>
+
+<h3 id="error_TOOLBOX_NO_MSGS_FD">error_TOOLBOX_NO_MSGS_FD</h3>
+<pre>#define error_TOOLBOX_NO_MSGS_FD 0x80CB05u</pre>
+
+<h3 id="error_TOOLBOX_NO_ID_BLOCK">error_TOOLBOX_NO_ID_BLOCK</h3>
+<pre>#define error_TOOLBOX_NO_ID_BLOCK 0x80CB06u</pre>
+
+<h3 id="error_TOOLBOX_BAD_RES_FILE">error_TOOLBOX_BAD_RES_FILE</h3>
+<pre>#define error_TOOLBOX_BAD_RES_FILE 0x80CB07u</pre>
+
+<h3 id="error_TOOLBOX_TASKS_ACTIVE">error_TOOLBOX_TASKS_ACTIVE</h3>
+<pre>#define error_TOOLBOX_TASKS_ACTIVE 0x80CB08u</pre>
+
+<h3 id="error_TOOLBOX_TEMPLATE_NOT_FOUND">error_TOOLBOX_TEMPLATE_NOT_FOUND</h3>
+<pre>#define error_TOOLBOX_TEMPLATE_NOT_FOUND 0x80CB09u</pre>
+
+<h3 id="error_TOOLBOX_NO_SUCH_PRE_FILTER">error_TOOLBOX_NO_SUCH_PRE_FILTER</h3>
+<pre>#define error_TOOLBOX_NO_SUCH_PRE_FILTER 0x80CB0Au</pre>
+
+<h3 id="error_TOOLBOX_NOT_ARES_FILE">error_TOOLBOX_NOT_ARES_FILE</h3>
+<pre>#define error_TOOLBOX_NOT_ARES_FILE 0x80CB0Bu</pre>
+
+<h3 id="error_TOOLBOX_BAD_RES_FILE_VERSION">error_TOOLBOX_BAD_RES_FILE_VERSION</h3>
+<pre>#define error_TOOLBOX_BAD_RES_FILE_VERSION 0x80CB0Cu</pre>
+
+<h3 id="error_TOOLBOX_BAD_FLAGS">error_TOOLBOX_BAD_FLAGS</h3>
+<pre>#define error_TOOLBOX_BAD_FLAGS 0x80CB0Du</pre>
+
+<h3 id="toolbox_OBJECT_CREATE_ON_LOAD">toolbox_OBJECT_CREATE_ON_LOAD</h3>
+<pre>#define toolbox_OBJECT_CREATE_ON_LOAD ((<a href="#toolbox_object_flags">toolbox_object_flags</a>) 0x1u)</pre>
+
+<h3 id="toolbox_OBJECT_SHOW_ON_CREATE">toolbox_OBJECT_SHOW_ON_CREATE</h3>
+<pre>#define toolbox_OBJECT_SHOW_ON_CREATE ((<a href="#toolbox_object_flags">toolbox_object_flags</a>) 0x2u)</pre>
+
+<h3 id="toolbox_OBJECT_SHARED">toolbox_OBJECT_SHARED</h3>
+<pre>#define toolbox_OBJECT_SHARED ((<a href="#toolbox_object_flags">toolbox_object_flags</a>) 0x4u)</pre>
+
+<h3 id="toolbox_OBJECT_ANCESTOR">toolbox_OBJECT_ANCESTOR</h3>
+<pre>#define toolbox_OBJECT_ANCESTOR ((<a href="#toolbox_object_flags">toolbox_object_flags</a>) 0x8u)</pre>
+
+<h3 id="toolbox_RESOURCE_FILE_VERSION">toolbox_RESOURCE_FILE_VERSION</h3>
+<pre>#define toolbox_RESOURCE_FILE_VERSION 101</pre>
+
+<h3 id="toolbox_RELOCATE_STRING_REFERENCE">toolbox_RELOCATE_STRING_REFERENCE</h3>
+<pre>#define toolbox_RELOCATE_STRING_REFERENCE ((<a href="#toolbox_relocation_directive">toolbox_relocation_directive</a>) 0x1u)</pre>
+
+<h3 id="toolbox_RELOCATE_MSG_REFERENCE">toolbox_RELOCATE_MSG_REFERENCE</h3>
+<pre>#define toolbox_RELOCATE_MSG_REFERENCE ((<a href="#toolbox_relocation_directive">toolbox_relocation_directive</a>) 0x2u)</pre>
+
+<h3 id="toolbox_RELOCATE_SPRITE_AREA_REFERENCE">toolbox_RELOCATE_SPRITE_AREA_REFERENCE</h3>
+<pre>#define toolbox_RELOCATE_SPRITE_AREA_REFERENCE ((<a href="#toolbox_relocation_directive">toolbox_relocation_directive</a>) 0x3u)</pre>
+
+<h3 id="toolbox_RELOCATE_OBJECT_OFFSET">toolbox_RELOCATE_OBJECT_OFFSET</h3>
+<pre>#define toolbox_RELOCATE_OBJECT_OFFSET ((<a href="#toolbox_relocation_directive">toolbox_relocation_directive</a>) 0x4u)</pre>
+
+<h3 id="toolbox_CREATE_GIVEN_OBJECT">toolbox_CREATE_GIVEN_OBJECT</h3>
+<pre>#define toolbox_CREATE_GIVEN_OBJECT ((<a href="#toolbox_create_flags">toolbox_create_flags</a>) 0x1u)</pre>
+
+<h3 id="toolbox_DELETE_NO_RECURSE">toolbox_DELETE_NO_RECURSE</h3>
+<pre>#define toolbox_DELETE_NO_RECURSE ((<a href="#toolbox_delete_flags">toolbox_delete_flags</a>) 0x1u)</pre>
+
+<h3 id="toolbox_SHOW_AS_MENU">toolbox_SHOW_AS_MENU</h3>
+<pre>#define toolbox_SHOW_AS_MENU ((<a href="#toolbox_show_flags">toolbox_show_flags</a>) 0x1u)</pre>
+
+<h3 id="toolbox_SHOW_AS_SUB_MENU">toolbox_SHOW_AS_SUB_MENU</h3>
+<pre>#define toolbox_SHOW_AS_SUB_MENU ((<a href="#toolbox_show_flags">toolbox_show_flags</a>) 0x2u)</pre>
+
+<h3 id="toolbox_SHOW_AS_CHILD_WINDOW">toolbox_SHOW_AS_CHILD_WINDOW</h3>
+<pre>#define toolbox_SHOW_AS_CHILD_WINDOW ((<a href="#toolbox_show_flags">toolbox_show_flags</a>) 0x4u)</pre>
+
+<h3 id="toolbox_INFO_SHOWING">toolbox_INFO_SHOWING</h3>
+<pre>#define toolbox_INFO_SHOWING ((<a href="#toolbox_info">toolbox_info</a>) 0x1u)</pre>
+
+<h3 id="toolbox_REGISTER_EVENT_FILTER">toolbox_REGISTER_EVENT_FILTER</h3>
+<pre>#define toolbox_REGISTER_EVENT_FILTER ((<a href="#toolbox_filter_type">toolbox_filter_type</a>) 0x1u)</pre>
+
+<h3 id="toolbox_REGISTER_MESSAGE_FILTER">toolbox_REGISTER_MESSAGE_FILTER</h3>
+<pre>#define toolbox_REGISTER_MESSAGE_FILTER ((<a href="#toolbox_filter_type">toolbox_filter_type</a>) 0x2u)</pre>
+
+<h3 id="toolbox_REGISTER_ACTION_FILTER">toolbox_REGISTER_ACTION_FILTER</h3>
+<pre>#define toolbox_REGISTER_ACTION_FILTER ((<a href="#toolbox_filter_type">toolbox_filter_type</a>) 0x3u)</pre>
+
+<h3 id="toolbox_DE_REGISTER_FILTER">toolbox_DE_REGISTER_FILTER</h3>
+<pre>#define toolbox_DE_REGISTER_FILTER ((<a href="#toolbox_register_flags">toolbox_register_flags</a>) 0x1u)</pre>
+
+<h3 id="toolbox_POSITION_DEFAULT">toolbox_POSITION_DEFAULT</h3>
+<pre>#define toolbox_POSITION_DEFAULT ((<a href="#toolbox_position_tag">toolbox_position_tag</a>) 0x0u)</pre>
+
+<h3 id="toolbox_POSITION_FULL">toolbox_POSITION_FULL</h3>
+<pre>#define toolbox_POSITION_FULL ((<a href="#toolbox_position_tag">toolbox_position_tag</a>) 0x1u)</pre>
+
+<h3 id="toolbox_POSITION_TOP_LEFT">toolbox_POSITION_TOP_LEFT</h3>
+<pre>#define toolbox_POSITION_TOP_LEFT ((<a href="#toolbox_position_tag">toolbox_position_tag</a>) 0x2u)</pre>
+
+<h3 id="toolbox_POSITION_CENTRED">toolbox_POSITION_CENTRED</h3>
+<pre>#define toolbox_POSITION_CENTRED ((<a href="#toolbox_position_tag">toolbox_position_tag</a>) 0x3u)</pre>
+
+<h3 id="toolbox_POSITION_AT_POINTER">toolbox_POSITION_AT_POINTER</h3>
+<pre>#define toolbox_POSITION_AT_POINTER ((<a href="#toolbox_position_tag">toolbox_position_tag</a>) 0x4u)</pre>
+
+<h3 id="toolbox_WIMP_OBJECT_POST_FILTER">toolbox_WIMP_OBJECT_POST_FILTER</h3>
+<pre>#define toolbox_WIMP_OBJECT_POST_FILTER ((<a href="#toolbox_class">toolbox_class</a>) 0x0u)</pre>
+
+<h3 id="toolbox_ANY_POST_FILTER">toolbox_ANY_POST_FILTER</h3>
+<pre>#define toolbox_ANY_POST_FILTER ((<a href="#toolbox_class">toolbox_class</a>) 0xFFFFFFFFu)</pre>
+
+<h3 id="action_ERROR">action_ERROR</h3>
+<pre>#define action_ERROR 0x44EC0u</pre>
+
+<h3 id="action_OBJECT_AUTO_CREATED">action_OBJECT_AUTO_CREATED</h3>
+<pre>#define action_OBJECT_AUTO_CREATED 0x44EC1u</pre>
+
+<h3 id="action_OBJECT_DELETED">action_OBJECT_DELETED</h3>
+<pre>#define action_OBJECT_DELETED 0x44EC2u</pre>
+
+<h3 id="toolbox_ACTION_OBJECT_DELETED_EXTENDED_INFORMATION">toolbox_ACTION_OBJECT_DELETED_EXTENDED_INFORMATION</h3>
+<pre>#define toolbox_ACTION_OBJECT_DELETED_EXTENDED_INFORMATION 0x1u</pre>
+
+<h3 id="xtoolbox_create_object">xtoolbox_create_object</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolbox_create_object (<a href="#toolbox_create_flags">toolbox_create_flags</a> flags,
+      <a href="#toolbox_id">toolbox_id</a> id,
+      <a href="#toolbox_o">toolbox_o</a> *obj);</pre>
+<p>Creates an object from a named resource or an object structure</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="toolbox_create_object">toolbox_create_object</h3>
+<pre>extern <a href="#toolbox_o">toolbox_o</a> toolbox_create_object (<a href="#toolbox_create_flags">toolbox_create_flags</a> flags,
+      <a href="#toolbox_id">toolbox_id</a> id);</pre>
+<p>Creates an object from a named resource or an object structure</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xtoolbox_create_object_from_template">xtoolbox_create_object_from_template</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolbox_create_object_from_template (<a href="#toolbox_create_flags">toolbox_create_flags</a> flags,
+      <a href="#toolbox_template">toolbox_template</a> const *toolbox_template,
+      <a href="#toolbox_o">toolbox_o</a> *obj);</pre>
+<p>Creates an object from a memory template structure by calling Toolbox_CreateObject with flags = Toolbox_CreateGivenObject</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>toolbox_template</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="toolbox_create_object_from_template">toolbox_create_object_from_template</h3>
+<pre>extern <a href="#toolbox_o">toolbox_o</a> toolbox_create_object_from_template (<a href="#toolbox_create_flags">toolbox_create_flags</a> flags,
+      <a href="#toolbox_template">toolbox_template</a> const *toolbox_template);</pre>
+<p>Creates an object from a memory template structure by calling Toolbox_CreateObject with flags = Toolbox_CreateGivenObject</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>toolbox_template</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xtoolbox_delete_object">xtoolbox_delete_object</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolbox_delete_object (<a href="#toolbox_delete_flags">toolbox_delete_flags</a> flags,
+      <a href="#toolbox_o">toolbox_o</a> obj);</pre>
+<p>Deletes an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="toolbox_delete_object">toolbox_delete_object</h3>
+<pre>extern void toolbox_delete_object (<a href="#toolbox_delete_flags">toolbox_delete_flags</a> flags,
+      <a href="#toolbox_o">toolbox_o</a> obj);</pre>
+<p>Deletes an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xtoolbox_show_object">xtoolbox_show_object</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolbox_show_object (<a href="#toolbox_show_flags">toolbox_show_flags</a> flags,
+      <a href="#toolbox_o">toolbox_o</a> obj,
+      <a href="#toolbox_position_tag">toolbox_position_tag</a> tag,
+      <a href="#toolbox_position">toolbox_position</a> const *position,
+      <a href="#toolbox_o">toolbox_o</a> parent_obj,
+      <a href="#toolbox_c">toolbox_c</a> parent_cmp);</pre>
+<p>Shows an object on the screen</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>tag</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>position</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>parent_obj</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>parent_cmp</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="toolbox_show_object">toolbox_show_object</h3>
+<pre>extern void toolbox_show_object (<a href="#toolbox_show_flags">toolbox_show_flags</a> flags,
+      <a href="#toolbox_o">toolbox_o</a> obj,
+      <a href="#toolbox_position_tag">toolbox_position_tag</a> tag,
+      <a href="#toolbox_position">toolbox_position</a> const *position,
+      <a href="#toolbox_o">toolbox_o</a> parent_obj,
+      <a href="#toolbox_c">toolbox_c</a> parent_cmp);</pre>
+<p>Shows an object on the screen</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>tag</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>position</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>parent_obj</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>parent_cmp</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xtoolbox_hide_object">xtoolbox_hide_object</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolbox_hide_object (<a href="#toolbox_hide_flags">toolbox_hide_flags</a> flags,
+      <a href="#toolbox_o">toolbox_o</a> obj);</pre>
+<p>Removes an object from the screen, if it is being shown</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="toolbox_hide_object">toolbox_hide_object</h3>
+<pre>extern void toolbox_hide_object (<a href="#toolbox_hide_flags">toolbox_hide_flags</a> flags,
+      <a href="#toolbox_o">toolbox_o</a> obj);</pre>
+<p>Removes an object from the screen, if it is being shown</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xtoolbox_get_object_info">xtoolbox_get_object_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolbox_get_object_info (<a href="#toolbox_get_info_flags">toolbox_get_info_flags</a> flags,
+      <a href="#toolbox_o">toolbox_o</a> obj,
+      <a href="#toolbox_info">toolbox_info</a> *info);</pre>
+<p>Returns current information for an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>info</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="toolbox_get_object_info">toolbox_get_object_info</h3>
+<pre>extern <a href="#toolbox_info">toolbox_info</a> toolbox_get_object_info (<a href="#toolbox_get_info_flags">toolbox_get_info_flags</a> flags,
+      <a href="#toolbox_o">toolbox_o</a> obj);</pre>
+<p>Returns current information for an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>info</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xtoolbox_set_client_handle">xtoolbox_set_client_handle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolbox_set_client_handle (<a href="#toolbox_handle_flags">toolbox_handle_flags</a> flags,
+      <a href="#toolbox_o">toolbox_o</a> obj,
+      void *handle);</pre>
+<p>Sets the value of a handle associated with an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="toolbox_set_client_handle">toolbox_set_client_handle</h3>
+<pre>extern void toolbox_set_client_handle (<a href="#toolbox_handle_flags">toolbox_handle_flags</a> flags,
+      <a href="#toolbox_o">toolbox_o</a> obj,
+      void *handle);</pre>
+<p>Sets the value of a handle associated with an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xtoolbox_get_client_handle">xtoolbox_get_client_handle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolbox_get_client_handle (<a href="#toolbox_handle_flags">toolbox_handle_flags</a> flags,
+      <a href="#toolbox_o">toolbox_o</a> obj,
+      void **handle);</pre>
+<p>Returns the handle associated with an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="toolbox_get_client_handle">toolbox_get_client_handle</h3>
+<pre>extern void *toolbox_get_client_handle (<a href="#toolbox_handle_flags">toolbox_handle_flags</a> flags,
+      <a href="#toolbox_o">toolbox_o</a> obj);</pre>
+<p>Returns the handle associated with an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>handle</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xtoolbox_get_object_class">xtoolbox_get_object_class</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolbox_get_object_class (<a href="#toolbox_get_class_flags">toolbox_get_class_flags</a> flags,
+      <a href="#toolbox_o">toolbox_o</a> obj,
+      <a href="#toolbox_class">toolbox_class</a> *class_no);</pre>
+<p>Returns the class of the specified object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>class_no</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="toolbox_get_object_class">toolbox_get_object_class</h3>
+<pre>extern <a href="#toolbox_class">toolbox_class</a> toolbox_get_object_class (<a href="#toolbox_get_class_flags">toolbox_get_class_flags</a> flags,
+      <a href="#toolbox_o">toolbox_o</a> obj);</pre>
+<p>Returns the class of the specified object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>class_no</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xtoolbox_get_parent">xtoolbox_get_parent</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolbox_get_parent (<a href="#toolbox_get_parent_flags">toolbox_get_parent_flags</a> flags,
+      <a href="#toolbox_o">toolbox_o</a> obj,
+      <a href="#toolbox_o">toolbox_o</a> *parent_obj,
+      <a href="#toolbox_c">toolbox_c</a> *parent_cmp);</pre>
+<p>Returns the parent of an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>parent_obj</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>parent_cmp</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="toolbox_get_parent">toolbox_get_parent</h3>
+<pre>extern void toolbox_get_parent (<a href="#toolbox_get_parent_flags">toolbox_get_parent_flags</a> flags,
+      <a href="#toolbox_o">toolbox_o</a> obj,
+      <a href="#toolbox_o">toolbox_o</a> *parent_obj,
+      <a href="#toolbox_c">toolbox_c</a> *parent_cmp);</pre>
+<p>Returns the parent of an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>parent_obj</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>parent_cmp</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xtoolbox_get_ancestor">xtoolbox_get_ancestor</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolbox_get_ancestor (<a href="#toolbox_get_ancestor_flags">toolbox_get_ancestor_flags</a> flags,
+      <a href="#toolbox_o">toolbox_o</a> obj,
+      <a href="#toolbox_o">toolbox_o</a> *ancestor_obj,
+      <a href="#toolbox_c">toolbox_c</a> *ancestor_cmp);</pre>
+<p>Returns the ancestor of an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>ancestor_obj</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>ancestor_cmp</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="toolbox_get_ancestor">toolbox_get_ancestor</h3>
+<pre>extern void toolbox_get_ancestor (<a href="#toolbox_get_ancestor_flags">toolbox_get_ancestor_flags</a> flags,
+      <a href="#toolbox_o">toolbox_o</a> obj,
+      <a href="#toolbox_o">toolbox_o</a> *ancestor_obj,
+      <a href="#toolbox_c">toolbox_c</a> *ancestor_cmp);</pre>
+<p>Returns the ancestor of an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>ancestor_obj</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>ancestor_cmp</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xtoolbox_get_template_name">xtoolbox_get_template_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolbox_get_template_name (<a href="#toolbox_get_template_flags">toolbox_get_template_flags</a> flags,
+      <a href="#toolbox_o">toolbox_o</a> obj,
+      char *buffer,
+      int size,
+      int *used);</pre>
+<p>Gets the name of the resource used to create an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="toolbox_get_template_name">toolbox_get_template_name</h3>
+<pre>extern int toolbox_get_template_name (<a href="#toolbox_get_template_flags">toolbox_get_template_flags</a> flags,
+      <a href="#toolbox_o">toolbox_o</a> obj,
+      char *buffer,
+      int size);</pre>
+<p>Gets the name of the resource used to create an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xtoolbox_raise_toolbox_event">xtoolbox_raise_toolbox_event</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolbox_raise_toolbox_event (<a href="#toolbox_event_flags">toolbox_event_flags</a> flags,
+      <a href="#toolbox_o">toolbox_o</a> obj,
+      <a href="#toolbox_c">toolbox_c</a> cmp,
+      <a href="#toolbox_action">toolbox_action</a> const *action);</pre>
+<p>Raises a toolbox action</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>cmp</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="toolbox_raise_toolbox_event">toolbox_raise_toolbox_event</h3>
+<pre>extern void toolbox_raise_toolbox_event (<a href="#toolbox_event_flags">toolbox_event_flags</a> flags,
+      <a href="#toolbox_o">toolbox_o</a> obj,
+      <a href="#toolbox_c">toolbox_c</a> cmp,
+      <a href="#toolbox_action">toolbox_action</a> const *action);</pre>
+<p>Raises a toolbox action</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>cmp</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xtoolboxgetsysinfo_task_name">xtoolboxgetsysinfo_task_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolboxgetsysinfo_task_name (char *buffer,
+      int size,
+      int *used);</pre>
+<p>Returns the task name</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="toolboxgetsysinfo_task_name">toolboxgetsysinfo_task_name</h3>
+<pre>extern int toolboxgetsysinfo_task_name (char *buffer,
+      int size);</pre>
+<p>Returns the task name</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xtoolboxgetsysinfo_message_trans_control_block">xtoolboxgetsysinfo_message_trans_control_block</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolboxgetsysinfo_message_trans_control_block (<a href="messagetrans.html#messagetrans_control_block">messagetrans_control_block</a> *cb);</pre>
+<p>Returns the message file control block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>cb</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="toolboxgetsysinfo_message_trans_control_block">toolboxgetsysinfo_message_trans_control_block</h3>
+<pre>extern void toolboxgetsysinfo_message_trans_control_block (<a href="messagetrans.html#messagetrans_control_block">messagetrans_control_block</a> *cb);</pre>
+<p>Returns the message file control block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>cb</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xtoolboxgetsysinfo_dir_name">xtoolboxgetsysinfo_dir_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolboxgetsysinfo_dir_name (char *buffer,
+      int size,
+      int *used);</pre>
+<p>Returns the 'home directory'</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="toolboxgetsysinfo_dir_name">toolboxgetsysinfo_dir_name</h3>
+<pre>extern int toolboxgetsysinfo_dir_name (char *buffer,
+      int size);</pre>
+<p>Returns the 'home directory'</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xtoolboxgetsysinfo_task">xtoolboxgetsysinfo_task</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolboxgetsysinfo_task (<a href="wimp.html#wimp_t">wimp_t</a> *task);</pre>
+<p>Returns the task handle</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="toolboxgetsysinfo_task">toolboxgetsysinfo_task</h3>
+<pre>extern <a href="wimp.html#wimp_t">wimp_t</a> toolboxgetsysinfo_task (void);
+</pre><p>Returns the task handle</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>task</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xtoolboxgetsysinfo_sprite_area">xtoolboxgetsysinfo_sprite_area</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolboxgetsysinfo_sprite_area (<a href="osspriteop.html#osspriteop_area">osspriteop_area</a> **area);</pre>
+<p>Returns a pointer to the sprite area</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>area</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="toolboxgetsysinfo_sprite_area">toolboxgetsysinfo_sprite_area</h3>
+<pre>extern <a href="osspriteop.html#osspriteop_area">osspriteop_area</a> *toolboxgetsysinfo_sprite_area (void);
+</pre><p>Returns a pointer to the sprite area</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>area</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xtoolbox_initialise">xtoolbox_initialise</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolbox_initialise (<a href="#toolbox_initialise_flags">toolbox_initialise_flags</a> flags,
+      int version,
+      <a href="wimp.html#wimp_message_list">wimp_message_list</a> const *messages,
+      <a href="#toolbox_action_list">toolbox_action_list</a> const *action_nos,
+      char const *resource_dir_name,
+      <a href="messagetrans.html#messagetrans_control_block">messagetrans_control_block</a> *cb,
+      <a href="#toolbox_block">toolbox_block</a> *block,
+      int *version_out,
+      <a href="wimp.html#wimp_t">wimp_t</a> *task_out,
+      <a href="osspriteop.html#osspriteop_area">osspriteop_area</a> **area);</pre>
+<p>Initialises the Toolbox</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>version</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>messages</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>action_nos</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>resource_dir_name</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>cb</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>version_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>task_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="toolbox_initialise">toolbox_initialise</h3>
+<pre>extern <a href="wimp.html#wimp_t">wimp_t</a> toolbox_initialise (<a href="#toolbox_initialise_flags">toolbox_initialise_flags</a> flags,
+      int version,
+      <a href="wimp.html#wimp_message_list">wimp_message_list</a> const *messages,
+      <a href="#toolbox_action_list">toolbox_action_list</a> const *action_nos,
+      char const *resource_dir_name,
+      <a href="messagetrans.html#messagetrans_control_block">messagetrans_control_block</a> *cb,
+      <a href="#toolbox_block">toolbox_block</a> *block,
+      int *version_out,
+      <a href="osspriteop.html#osspriteop_area">osspriteop_area</a> **area);</pre>
+<p>Initialises the Toolbox</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>version</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>messages</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>action_nos</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>resource_dir_name</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>cb</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>version_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>task_out</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xtoolbox_load_resources">xtoolbox_load_resources</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolbox_load_resources (<a href="#toolbox_load_flags">toolbox_load_flags</a> flags,
+      char const *resource_file_name);</pre>
+<p>Loads a resource file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>resource_file_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="toolbox_load_resources">toolbox_load_resources</h3>
+<pre>extern void toolbox_load_resources (<a href="#toolbox_load_flags">toolbox_load_flags</a> flags,
+      char const *resource_file_name);</pre>
+<p>Loads a resource file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>resource_file_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xtoolboxmemory_allocate">xtoolboxmemory_allocate</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolboxmemory_allocate (int size,
+      void **blk);</pre>
+<p>Gets a block of memory for use by object modules or gadgets - Toolbox 1.40+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>blk</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="toolboxmemory_allocate">toolboxmemory_allocate</h3>
+<pre>extern void *toolboxmemory_allocate (int size);</pre>
+<p>Gets a block of memory for use by object modules or gadgets - Toolbox 1.40+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>blk</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xtoolboxmemory_free">xtoolboxmemory_free</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolboxmemory_free (void *blk);</pre>
+<p>Frees a block of memory for use by object modules or gadgets - Toolbox 1.40+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>blk</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="toolboxmemory_free">toolboxmemory_free</h3>
+<pre>extern void toolboxmemory_free (void *blk);</pre>
+<p>Frees a block of memory for use by object modules or gadgets - Toolbox 1.40+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>blk</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xtoolboxmemory_extend">xtoolboxmemory_extend</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolboxmemory_extend (void *blk,
+      int change_by,
+      void **blk_out);</pre>
+<p>Extends or shrinks a block of memory for use by object modules or gadgets - Toolbox 1.40+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>blk</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>change_by</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>blk_out</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="toolboxmemory_extend">toolboxmemory_extend</h3>
+<pre>extern void *toolboxmemory_extend (void *blk,
+      int change_by);</pre>
+<p>Extends or shrinks a block of memory for use by object modules or gadgets - Toolbox 1.40+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>blk</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>change_by</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>blk_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xtoolbox_de_register_object_module">xtoolbox_de_register_object_module</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolbox_de_register_object_module (bits flags,
+      <a href="#toolbox_class">toolbox_class</a> class_no);</pre>
+<p>Deregisters an object module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>class_no</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="toolbox_de_register_object_module">toolbox_de_register_object_module</h3>
+<pre>extern void toolbox_de_register_object_module (bits flags,
+      <a href="#toolbox_class">toolbox_class</a> class_no);</pre>
+<p>Deregisters an object module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>class_no</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xtoolbox_template_look_up">xtoolbox_template_look_up</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolbox_template_look_up (<a href="#toolbox_look_up_flags">toolbox_look_up_flags</a> flags,
+      char const *object_name,
+      <a href="#toolbox_id">toolbox_id</a> *id);</pre>
+<p>Returns the object pointer for a named resource</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>object_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>id</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="toolbox_template_look_up">toolbox_template_look_up</h3>
+<pre>extern <a href="#toolbox_id">toolbox_id</a> toolbox_template_look_up (<a href="#toolbox_look_up_flags">toolbox_look_up_flags</a> flags,
+      char const *object_name);</pre>
+<p>Returns the object pointer for a named resource</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>object_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>id</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xtoolbox_register_object_module">xtoolbox_register_object_module</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolbox_register_object_module (bits flags,
+      <a href="#toolbox_class">toolbox_class</a> class_no,
+      bits swi_base,
+      char const *resource_file_name);</pre>
+<p>Registers an object module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>class_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>swi_base</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>resource_file_name</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="toolbox_register_object_module">toolbox_register_object_module</h3>
+<pre>extern void toolbox_register_object_module (bits flags,
+      <a href="#toolbox_class">toolbox_class</a> class_no,
+      bits swi_base,
+      char const *resource_file_name);</pre>
+<p>Registers an object module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>class_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>swi_base</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>resource_file_name</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xtoolbox_register_pre_filter">xtoolbox_register_pre_filter</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolbox_register_pre_filter (<a href="#toolbox_register_flags">toolbox_register_flags</a> flags,
+      bits swi_no,
+      void *handle);</pre>
+<p>Registers an object module's pre-filter</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>swi_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="toolbox_register_pre_filter">toolbox_register_pre_filter</h3>
+<pre>extern void toolbox_register_pre_filter (<a href="#toolbox_register_flags">toolbox_register_flags</a> flags,
+      bits swi_no,
+      void *handle);</pre>
+<p>Registers an object module's pre-filter</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>swi_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xtoolbox_register_post_filter">xtoolbox_register_post_filter</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolbox_register_post_filter (<a href="#toolbox_register_flags">toolbox_register_flags</a> flags,
+      bits swi_no,
+      void *handle,
+      <a href="#toolbox_filter_type">toolbox_filter_type</a> filter_type,
+      <a href="#toolbox_pair_list">toolbox_pair_list</a> const *pairs);</pre>
+<p>Registers an object module's post-filter</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>swi_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>filter_type</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>pairs</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="toolbox_register_post_filter">toolbox_register_post_filter</h3>
+<pre>extern void toolbox_register_post_filter (<a href="#toolbox_register_flags">toolbox_register_flags</a> flags,
+      bits swi_no,
+      void *handle,
+      <a href="#toolbox_filter_type">toolbox_filter_type</a> filter_type,
+      <a href="#toolbox_pair_list">toolbox_pair_list</a> const *pairs);</pre>
+<p>Registers an object module's post-filter</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>swi_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>filter_type</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>pairs</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xservice_toolbox_starting">xservice_toolbox_starting</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_toolbox_starting (void);
+</pre><p>Toolbox starting</p>
+
+
+<table>
+</table>
+
+<h3 id="service_toolbox_starting">service_toolbox_starting</h3>
+<pre>extern void service_toolbox_starting (void);
+</pre><p>Toolbox starting</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_toolbox_task_born">xservice_toolbox_task_born</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_toolbox_task_born (<a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>New Toolbox task started</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="service_toolbox_task_born">service_toolbox_task_born</h3>
+<pre>extern void service_toolbox_task_born (<a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>New Toolbox task started</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xservice_toolbox_task_died">xservice_toolbox_task_died</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_toolbox_task_died (<a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>Toolbox task died</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="service_toolbox_task_died">service_toolbox_task_died</h3>
+<pre>extern void service_toolbox_task_died (<a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>Toolbox task died</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xservice_toolbox_dying">xservice_toolbox_dying</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_toolbox_dying (void);
+</pre><p>Toolbox dying - Toolbox 1.40+</p>
+
+
+<table>
+</table>
+
+<h3 id="service_toolbox_dying">service_toolbox_dying</h3>
+<pre>extern void service_toolbox_dying (void);
+</pre><p>Toolbox dying - Toolbox 1.40+</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_window_deleted">xservice_window_deleted</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_window_deleted (<a href="wimp.html#wimp_w">wimp_w</a> w,
+      <a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>Window deleted</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>w</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="service_window_deleted">service_window_deleted</h3>
+<pre>extern void service_window_deleted (<a href="wimp.html#wimp_w">wimp_w</a> w,
+      <a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>Window deleted</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>w</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xservice_redrawing_window">xservice_redrawing_window</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_redrawing_window (int type);</pre>
+<p>Window is being redrawn</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>type</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="service_redrawing_window">service_redrawing_window</h3>
+<pre>extern void service_redrawing_window (int type);</pre>
+<p>Window is being redrawn</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>type</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

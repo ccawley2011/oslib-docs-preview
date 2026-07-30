@@ -1,0 +1,1609 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ColourTrans</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ColourTrans</h2>
+
+<pre>#include "oslib/colourtrans.h"</pre>
+
+<h3 id="colourtrans_gcol_flags">colourtrans_gcol_flags</h3>
+<pre>typedef bits colourtrans_gcol_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#colourtrans_SET_FG_GCOL">colourtrans_SET_FG_GCOL</a></dd>
+<dd><a href="#colourtrans_SET_BG_GCOL">colourtrans_SET_BG_GCOL</a></dd>
+<dd><a href="#colourtrans_USE_ECFS_GCOL">colourtrans_USE_ECFS_GCOL</a></dd>
+<dd><a href="#colourtrans_SET_TEXT_GCOL">colourtrans_SET_TEXT_GCOL</a></dd>
+</dl>
+
+<h3 id="colourtrans_table_flags">colourtrans_table_flags</h3>
+<pre>typedef bits colourtrans_table_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#colourtrans_GIVEN_SPRITE">colourtrans_GIVEN_SPRITE</a></dd>
+<dd><a href="#colourtrans_CURRENT_IF_ABSENT">colourtrans_CURRENT_IF_ABSENT</a></dd>
+<dd><a href="#colourtrans_GIVEN_TRANSFER_FN">colourtrans_GIVEN_TRANSFER_FN</a></dd>
+<dd><a href="#colourtrans_RETURN_GCOL_LIST">colourtrans_RETURN_GCOL_LIST</a></dd>
+<dd><a href="#colourtrans_RETURN_WIDE_ENTRIES">colourtrans_RETURN_WIDE_ENTRIES</a></dd>
+<dd><a href="#colourtrans_RETURN_PALETTE_TABLE">colourtrans_RETURN_PALETTE_TABLE</a></dd>
+</dl>
+
+<h3 id="colourtrans_calibration_flags">colourtrans_calibration_flags</h3>
+<pre>typedef bits colourtrans_calibration_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#colourtrans_WRITE_DEFAULT_CALIBRATION">colourtrans_WRITE_DEFAULT_CALIBRATION</a></dd>
+</dl>
+
+<h3 id="colourtrans_palette_flags">colourtrans_palette_flags</h3>
+<pre>typedef bits colourtrans_palette_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#colourtrans_PALETTE_FOR_SPRITE">colourtrans_PALETTE_FOR_SPRITE</a></dd>
+<dd><a href="#colourtrans_FLASHING_PALETTE">colourtrans_FLASHING_PALETTE</a></dd>
+</dl>
+
+<h3 id="colourtrans_colour_flags">colourtrans_colour_flags</h3>
+<pre>typedef bits colourtrans_colour_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#colourtrans_SET_FG_COL">colourtrans_SET_FG_COL</a></dd>
+<dd><a href="#colourtrans_SET_BG_COL">colourtrans_SET_BG_COL</a></dd>
+<dd><a href="#colourtrans_SET_TEXT_COL">colourtrans_SET_TEXT_COL</a></dd>
+</dl>
+
+<h3 id="colourtrans_text_colour_flags">colourtrans_text_colour_flags</h3>
+<pre>typedef bits colourtrans_text_colour_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#colourtrans_SET_FG_TEXT_COL">colourtrans_SET_FG_TEXT_COL</a></dd>
+<dd><a href="#colourtrans_SET_BG_TEXT_COL">colourtrans_SET_BG_TEXT_COL</a></dd>
+</dl>
+
+<h3 id="colourtrans_gcol_list">colourtrans_gcol_list</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_gcol">os_gcol</a> gcol [...];
+   }
+   colourtrans_gcol_list;</pre>
+
+<h3 id="colourtrans_CALIBRATION_TABLE_MEMBERS">colourtrans_CALIBRATION_TABLE_MEMBERS</h3>
+<pre>#define colourtrans_CALIBRATION_TABLE_MEMBERS \
+   int rcount; \
+   int gcount; \
+   int bcount;
+</pre>
+
+<h3 id="colourtrans_calibration_table_base">colourtrans_calibration_table_base</h3>
+<pre>typedef struct
+   {  int rcount;
+      int gcount;
+      int bcount;
+   }
+   colourtrans_calibration_table_base;</pre>
+
+<h3 id="colourtrans_calibration_table">colourtrans_calibration_table</h3>
+<pre>typedef struct
+   {  int rcount;
+      int gcount;
+      int bcount;
+      <a href="os.html#os_colour">os_colour</a> standard_colour [...];
+   }
+   colourtrans_calibration_table;</pre>
+
+<h3 id="colourtrans_COLOUR_RANGE">colourtrans_COLOUR_RANGE</h3>
+<pre>#define colourtrans_COLOUR_RANGE 65536</pre>
+
+<h3 id="colourtrans_SET_FG_GCOL">colourtrans_SET_FG_GCOL</h3>
+<pre>#define colourtrans_SET_FG_GCOL ((<a href="#colourtrans_gcol_flags">colourtrans_gcol_flags</a>) 0x0u)</pre>
+
+<h3 id="colourtrans_SET_BG_GCOL">colourtrans_SET_BG_GCOL</h3>
+<pre>#define colourtrans_SET_BG_GCOL ((<a href="#colourtrans_gcol_flags">colourtrans_gcol_flags</a>) 0x80u)</pre>
+
+<h3 id="colourtrans_USE_ECFS_GCOL">colourtrans_USE_ECFS_GCOL</h3>
+<pre>#define colourtrans_USE_ECFS_GCOL ((<a href="#colourtrans_gcol_flags">colourtrans_gcol_flags</a>) 0x100u)</pre>
+
+<h3 id="colourtrans_SET_TEXT_GCOL">colourtrans_SET_TEXT_GCOL</h3>
+<pre>#define colourtrans_SET_TEXT_GCOL ((<a href="#colourtrans_gcol_flags">colourtrans_gcol_flags</a>) 0x200u)</pre>
+
+<h3 id="colourtrans_GIVEN_SPRITE">colourtrans_GIVEN_SPRITE</h3>
+<pre>#define colourtrans_GIVEN_SPRITE ((<a href="#colourtrans_table_flags">colourtrans_table_flags</a>) 0x1u)</pre>
+
+<h3 id="colourtrans_CURRENT_IF_ABSENT">colourtrans_CURRENT_IF_ABSENT</h3>
+<pre>#define colourtrans_CURRENT_IF_ABSENT ((<a href="#colourtrans_table_flags">colourtrans_table_flags</a>) 0x2u)</pre>
+
+<h3 id="colourtrans_GIVEN_TRANSFER_FN">colourtrans_GIVEN_TRANSFER_FN</h3>
+<pre>#define colourtrans_GIVEN_TRANSFER_FN ((<a href="#colourtrans_table_flags">colourtrans_table_flags</a>) 0x4u)</pre>
+
+<h3 id="colourtrans_RETURN_GCOL_LIST">colourtrans_RETURN_GCOL_LIST</h3>
+<pre>#define colourtrans_RETURN_GCOL_LIST ((<a href="#colourtrans_table_flags">colourtrans_table_flags</a>) 0x8u)</pre>
+
+<h3 id="colourtrans_RETURN_WIDE_ENTRIES">colourtrans_RETURN_WIDE_ENTRIES</h3>
+<pre>#define colourtrans_RETURN_WIDE_ENTRIES ((<a href="#colourtrans_table_flags">colourtrans_table_flags</a>) 0x10u)</pre>
+
+<h3 id="colourtrans_RETURN_PALETTE_TABLE">colourtrans_RETURN_PALETTE_TABLE</h3>
+<pre>#define colourtrans_RETURN_PALETTE_TABLE ((<a href="#colourtrans_table_flags">colourtrans_table_flags</a>) 0x1000000u)</pre>
+
+<h3 id="colourtrans_WRITE_DEFAULT_CALIBRATION">colourtrans_WRITE_DEFAULT_CALIBRATION</h3>
+<pre>#define colourtrans_WRITE_DEFAULT_CALIBRATION ((<a href="#colourtrans_calibration_flags">colourtrans_calibration_flags</a>) 0x1u)</pre>
+
+<h3 id="colourtrans_PALETTE_FOR_SPRITE">colourtrans_PALETTE_FOR_SPRITE</h3>
+<pre>#define colourtrans_PALETTE_FOR_SPRITE ((<a href="#colourtrans_palette_flags">colourtrans_palette_flags</a>) 0x1u)</pre>
+
+<h3 id="colourtrans_FLASHING_PALETTE">colourtrans_FLASHING_PALETTE</h3>
+<pre>#define colourtrans_FLASHING_PALETTE ((<a href="#colourtrans_palette_flags">colourtrans_palette_flags</a>) 0x2u)</pre>
+
+<h3 id="colourtrans_SET_FG_COL">colourtrans_SET_FG_COL</h3>
+<pre>#define colourtrans_SET_FG_COL ((<a href="#colourtrans_colour_flags">colourtrans_colour_flags</a>) 0x0u)</pre>
+
+<h3 id="colourtrans_SET_BG_COL">colourtrans_SET_BG_COL</h3>
+<pre>#define colourtrans_SET_BG_COL ((<a href="#colourtrans_colour_flags">colourtrans_colour_flags</a>) 0x80u)</pre>
+
+<h3 id="colourtrans_SET_TEXT_COL">colourtrans_SET_TEXT_COL</h3>
+<pre>#define colourtrans_SET_TEXT_COL ((<a href="#colourtrans_colour_flags">colourtrans_colour_flags</a>) 0x200u)</pre>
+
+<h3 id="colourtrans_SET_FG_TEXT_COL">colourtrans_SET_FG_TEXT_COL</h3>
+<pre>#define colourtrans_SET_FG_TEXT_COL ((<a href="#colourtrans_text_colour_flags">colourtrans_text_colour_flags</a>) 0x0u)</pre>
+
+<h3 id="colourtrans_SET_BG_TEXT_COL">colourtrans_SET_BG_TEXT_COL</h3>
+<pre>#define colourtrans_SET_BG_TEXT_COL ((<a href="#colourtrans_text_colour_flags">colourtrans_text_colour_flags</a>) 0x80u)</pre>
+
+<h3 id="colourtrans_CURRENT_PALETTE">colourtrans_CURRENT_PALETTE</h3>
+<pre>#define colourtrans_CURRENT_PALETTE ((<a href="os.html#os_palette">os_palette</a> *) 0xFFFFFFFFu)</pre>
+
+<h3 id="colourtrans_DEFAULT_PALETTE">colourtrans_DEFAULT_PALETTE</h3>
+<pre>#define colourtrans_DEFAULT_PALETTE ((<a href="os.html#os_palette">os_palette</a> *) 0x0u)</pre>
+
+<h3 id="colourtrans_CURRENT_FONT">colourtrans_CURRENT_FONT</h3>
+<pre>#define colourtrans_CURRENT_FONT ((<a href="font.html#font_f">font_f</a>) 0x0u)</pre>
+
+<h3 id="error_COLOUR_TRANS_BAD_CALIB">error_COLOUR_TRANS_BAD_CALIB</h3>
+<pre>#define error_COLOUR_TRANS_BAD_CALIB 0xA00u</pre>
+
+<h3 id="error_COLOUR_TRANS_CONV_OVER">error_COLOUR_TRANS_CONV_OVER</h3>
+<pre>#define error_COLOUR_TRANS_CONV_OVER 0xA01u</pre>
+
+<h3 id="error_COLOUR_TRANS_BAD_HSV">error_COLOUR_TRANS_BAD_HSV</h3>
+<pre>#define error_COLOUR_TRANS_BAD_HSV 0xA02u</pre>
+
+<h3 id="error_COLOUR_TRANS_SWITCHED">error_COLOUR_TRANS_SWITCHED</h3>
+<pre>#define error_COLOUR_TRANS_SWITCHED 0xA03u</pre>
+
+<h3 id="error_COLOUR_TRANS_BAD_MISC_OP">error_COLOUR_TRANS_BAD_MISC_OP</h3>
+<pre>#define error_COLOUR_TRANS_BAD_MISC_OP 0xA04u</pre>
+
+<h3 id="error_COLOUR_TRANS_BAD_FLAGS">error_COLOUR_TRANS_BAD_FLAGS</h3>
+<pre>#define error_COLOUR_TRANS_BAD_FLAGS 0xA05u</pre>
+
+<h3 id="error_COLOUR_TRANS_BUFF_OVER">error_COLOUR_TRANS_BUFF_OVER</h3>
+<pre>#define error_COLOUR_TRANS_BUFF_OVER 0xA06u</pre>
+
+<h3 id="error_COLOUR_TRANS_BAD_DEPTH">error_COLOUR_TRANS_BAD_DEPTH</h3>
+<pre>#define error_COLOUR_TRANS_BAD_DEPTH 0xA07u</pre>
+
+<h3 id="xcolourtrans_select_table">xcolourtrans_select_table</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_select_table (<a href="os.html#os_mode">os_mode</a> source_mode,
+      <a href="os.html#os_palette">os_palette</a> const *source_palette,
+      <a href="os.html#os_mode">os_mode</a> dest_mode,
+      <a href="os.html#os_palette">os_palette</a> const *dest_palette,
+      <a href="osspriteop.html#osspriteop_trans_tab">osspriteop_trans_tab</a> *trans_tab);</pre>
+<p>Sets up a translation table in a buffer (PRM 3-346, 5a-119, 5a-668) - Prefer ColourTrans_GenerateTable</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>source_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>source_palette</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest_mode</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dest_palette</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="colourtrans_select_table">colourtrans_select_table</h3>
+<pre>extern void colourtrans_select_table (<a href="os.html#os_mode">os_mode</a> source_mode,
+      <a href="os.html#os_palette">os_palette</a> const *source_palette,
+      <a href="os.html#os_mode">os_mode</a> dest_mode,
+      <a href="os.html#os_palette">os_palette</a> const *dest_palette,
+      <a href="osspriteop.html#osspriteop_trans_tab">osspriteop_trans_tab</a> *trans_tab);</pre>
+<p>Sets up a translation table in a buffer (PRM 3-346, 5a-119, 5a-668) - Prefer ColourTrans_GenerateTable</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>source_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>source_palette</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest_mode</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dest_palette</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_select_table_for_sprite">xcolourtrans_select_table_for_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_select_table_for_sprite (<a href="osspriteop.html#osspriteop_area">osspriteop_area</a> const *source_area,
+      <a href="osspriteop.html#osspriteop_id">osspriteop_id</a> source_id,
+      <a href="os.html#os_mode">os_mode</a> dest_mode,
+      <a href="os.html#os_palette">os_palette</a> const *dest_palette,
+      <a href="osspriteop.html#osspriteop_trans_tab">osspriteop_trans_tab</a> *trans_tab,
+      <a href="#colourtrans_table_flags">colourtrans_table_flags</a> flags);</pre>
+<p>Sets up a translation table for a sprite in a buffer (PRM 3-346, 5a-119, 5a-668) - Prefer ColourTrans_GenerateTableForSprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>source_area</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>source_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest_mode</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dest_palette</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="colourtrans_select_table_for_sprite">colourtrans_select_table_for_sprite</h3>
+<pre>extern void colourtrans_select_table_for_sprite (<a href="osspriteop.html#osspriteop_area">osspriteop_area</a> const *source_area,
+      <a href="osspriteop.html#osspriteop_id">osspriteop_id</a> source_id,
+      <a href="os.html#os_mode">os_mode</a> dest_mode,
+      <a href="os.html#os_palette">os_palette</a> const *dest_palette,
+      <a href="osspriteop.html#osspriteop_trans_tab">osspriteop_trans_tab</a> *trans_tab,
+      <a href="#colourtrans_table_flags">colourtrans_table_flags</a> flags);</pre>
+<p>Sets up a translation table for a sprite in a buffer (PRM 3-346, 5a-119, 5a-668) - Prefer ColourTrans_GenerateTableForSprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>source_area</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>source_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest_mode</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dest_palette</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_select_gcol_table">xcolourtrans_select_gcol_table</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_select_gcol_table (<a href="os.html#os_mode">os_mode</a> source_mode,
+      <a href="os.html#os_palette">os_palette</a> const *source_palette,
+      <a href="os.html#os_mode">os_mode</a> dest_mode,
+      <a href="os.html#os_palette">os_palette</a> const *dest_palette,
+      <a href="#colourtrans_gcol_list">colourtrans_gcol_list</a> *gcol_list);</pre>
+<p>Sets up a list of GCOL's in a buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>source_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>source_palette</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest_mode</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dest_palette</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>gcol_list</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="colourtrans_select_gcol_table">colourtrans_select_gcol_table</h3>
+<pre>extern void colourtrans_select_gcol_table (<a href="os.html#os_mode">os_mode</a> source_mode,
+      <a href="os.html#os_palette">os_palette</a> const *source_palette,
+      <a href="os.html#os_mode">os_mode</a> dest_mode,
+      <a href="os.html#os_palette">os_palette</a> const *dest_palette,
+      <a href="#colourtrans_gcol_list">colourtrans_gcol_list</a> *gcol_list);</pre>
+<p>Sets up a list of GCOL's in a buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>source_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>source_palette</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest_mode</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dest_palette</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>gcol_list</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_select_gcol_table_for_sprite">xcolourtrans_select_gcol_table_for_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_select_gcol_table_for_sprite (<a href="osspriteop.html#osspriteop_area">osspriteop_area</a> const *source_area,
+      <a href="osspriteop.html#osspriteop_id">osspriteop_id</a> source_id,
+      <a href="os.html#os_mode">os_mode</a> dest_mode,
+      <a href="os.html#os_palette">os_palette</a> const *dest_palette,
+      <a href="#colourtrans_gcol_list">colourtrans_gcol_list</a> *gcol_list,
+      <a href="#colourtrans_table_flags">colourtrans_table_flags</a> flags);</pre>
+<p>Sets up a list of GCOL's for a sprite in a buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>source_area</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>source_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest_mode</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dest_palette</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>gcol_list</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="colourtrans_select_gcol_table_for_sprite">colourtrans_select_gcol_table_for_sprite</h3>
+<pre>extern void colourtrans_select_gcol_table_for_sprite (<a href="osspriteop.html#osspriteop_area">osspriteop_area</a> const *source_area,
+      <a href="osspriteop.html#osspriteop_id">osspriteop_id</a> source_id,
+      <a href="os.html#os_mode">os_mode</a> dest_mode,
+      <a href="os.html#os_palette">os_palette</a> const *dest_palette,
+      <a href="#colourtrans_gcol_list">colourtrans_gcol_list</a> *gcol_list,
+      <a href="#colourtrans_table_flags">colourtrans_table_flags</a> flags);</pre>
+<p>Sets up a list of GCOL's for a sprite in a buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>source_area</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>source_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest_mode</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dest_palette</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>gcol_list</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_return_gcol">xcolourtrans_return_gcol</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_return_gcol (<a href="os.html#os_colour">os_colour</a> colour,
+      <a href="os.html#os_gcol">os_gcol</a> *gcol);</pre>
+<p>Gets the closest GCOL for a palette entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>gcol</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="colourtrans_return_gcol">colourtrans_return_gcol</h3>
+<pre>extern <a href="os.html#os_gcol">os_gcol</a> colourtrans_return_gcol (<a href="os.html#os_colour">os_colour</a> colour);</pre>
+<p>Gets the closest GCOL for a palette entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>gcol</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_set_gcol">xcolourtrans_set_gcol</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_set_gcol (<a href="os.html#os_colour">os_colour</a> colour,
+      <a href="#colourtrans_gcol_flags">colourtrans_gcol_flags</a> flags,
+      <a href="os.html#os_action">os_action</a> action,
+      <a href="os.html#os_gcol">os_gcol</a> *gcol,
+      int *log2_bpp);</pre>
+<p>Sets the closest GCOL for a palette entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>gcol</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>log2_bpp</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourtrans_set_gcol">colourtrans_set_gcol</h3>
+<pre>extern <a href="os.html#os_gcol">os_gcol</a> colourtrans_set_gcol (<a href="os.html#os_colour">os_colour</a> colour,
+      <a href="#colourtrans_gcol_flags">colourtrans_gcol_flags</a> flags,
+      <a href="os.html#os_action">os_action</a> action,
+      int *log2_bpp);</pre>
+<p>Sets the closest GCOL for a palette entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>log2_bpp</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>gcol</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_return_colour_number">xcolourtrans_return_colour_number</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_return_colour_number (<a href="os.html#os_colour">os_colour</a> colour,
+      <a href="os.html#os_colour_number">os_colour_number</a> *colour_number);</pre>
+<p>Gets the closest colour for a palette entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>colour_number</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="colourtrans_return_colour_number">colourtrans_return_colour_number</h3>
+<pre>extern <a href="os.html#os_colour_number">os_colour_number</a> colourtrans_return_colour_number (<a href="os.html#os_colour">os_colour</a> colour);</pre>
+<p>Gets the closest colour for a palette entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>colour_number</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_return_gcol_for_mode">xcolourtrans_return_gcol_for_mode</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_return_gcol_for_mode (<a href="os.html#os_colour">os_colour</a> colour,
+      <a href="os.html#os_mode">os_mode</a> mode,
+      <a href="os.html#os_palette">os_palette</a> const *dest_palette,
+      <a href="os.html#os_gcol">os_gcol</a> *gcol);</pre>
+<p>Sets the closest GCOL for a palette entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest_palette</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>gcol</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="colourtrans_return_gcol_for_mode">colourtrans_return_gcol_for_mode</h3>
+<pre>extern <a href="os.html#os_gcol">os_gcol</a> colourtrans_return_gcol_for_mode (<a href="os.html#os_colour">os_colour</a> colour,
+      <a href="os.html#os_mode">os_mode</a> mode,
+      <a href="os.html#os_palette">os_palette</a> const *dest_palette);</pre>
+<p>Sets the closest GCOL for a palette entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest_palette</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>gcol</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_return_colour_number_for_mode">xcolourtrans_return_colour_number_for_mode</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_return_colour_number_for_mode (<a href="os.html#os_colour">os_colour</a> colour,
+      <a href="os.html#os_mode">os_mode</a> mode,
+      <a href="os.html#os_palette">os_palette</a> const *dest_palette,
+      <a href="os.html#os_colour_number">os_colour_number</a> *colour_number);</pre>
+<p>Gets the closest colour for a palette entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest_palette</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>colour_number</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="colourtrans_return_colour_number_for_mode">colourtrans_return_colour_number_for_mode</h3>
+<pre>extern <a href="os.html#os_colour_number">os_colour_number</a> colourtrans_return_colour_number_for_mode (<a href="os.html#os_colour">os_colour</a> colour,
+      <a href="os.html#os_mode">os_mode</a> mode,
+      <a href="os.html#os_palette">os_palette</a> const *dest_palette);</pre>
+<p>Gets the closest colour for a palette entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest_palette</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>colour_number</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_return_opp_gcol">xcolourtrans_return_opp_gcol</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_return_opp_gcol (<a href="os.html#os_colour">os_colour</a> colour,
+      <a href="os.html#os_gcol">os_gcol</a> *gcol);</pre>
+<p>Gets the furthest GCOL for a palette entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>gcol</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="colourtrans_return_opp_gcol">colourtrans_return_opp_gcol</h3>
+<pre>extern <a href="os.html#os_gcol">os_gcol</a> colourtrans_return_opp_gcol (<a href="os.html#os_colour">os_colour</a> colour);</pre>
+<p>Gets the furthest GCOL for a palette entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>gcol</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_set_opp_gcol">xcolourtrans_set_opp_gcol</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_set_opp_gcol (<a href="os.html#os_colour">os_colour</a> colour,
+      <a href="#colourtrans_gcol_flags">colourtrans_gcol_flags</a> flags,
+      <a href="os.html#os_action">os_action</a> action,
+      <a href="os.html#os_gcol">os_gcol</a> *gcol,
+      int *log2_bpp);</pre>
+<p>Sets the furthest GCOL for a palette entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>gcol</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>log2_bpp</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourtrans_set_opp_gcol">colourtrans_set_opp_gcol</h3>
+<pre>extern <a href="os.html#os_gcol">os_gcol</a> colourtrans_set_opp_gcol (<a href="os.html#os_colour">os_colour</a> colour,
+      <a href="#colourtrans_gcol_flags">colourtrans_gcol_flags</a> flags,
+      <a href="os.html#os_action">os_action</a> action,
+      int *log2_bpp);</pre>
+<p>Sets the furthest GCOL for a palette entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>log2_bpp</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>gcol</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_return_opp_colour_number">xcolourtrans_return_opp_colour_number</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_return_opp_colour_number (<a href="os.html#os_colour">os_colour</a> colour,
+      <a href="os.html#os_colour_number">os_colour_number</a> *colour_number);</pre>
+<p>Gets the furthest colour for a palette entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>colour_number</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="colourtrans_return_opp_colour_number">colourtrans_return_opp_colour_number</h3>
+<pre>extern <a href="os.html#os_colour_number">os_colour_number</a> colourtrans_return_opp_colour_number (<a href="os.html#os_colour">os_colour</a> colour);</pre>
+<p>Gets the furthest colour for a palette entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>colour_number</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_return_opp_gcol_for_mode">xcolourtrans_return_opp_gcol_for_mode</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_return_opp_gcol_for_mode (<a href="os.html#os_colour">os_colour</a> colour,
+      <a href="os.html#os_mode">os_mode</a> mode,
+      <a href="os.html#os_palette">os_palette</a> const *dest_palette,
+      <a href="os.html#os_gcol">os_gcol</a> *gcol);</pre>
+<p>Gets the furthest GCOL for a palette entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest_palette</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>gcol</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="colourtrans_return_opp_gcol_for_mode">colourtrans_return_opp_gcol_for_mode</h3>
+<pre>extern <a href="os.html#os_gcol">os_gcol</a> colourtrans_return_opp_gcol_for_mode (<a href="os.html#os_colour">os_colour</a> colour,
+      <a href="os.html#os_mode">os_mode</a> mode,
+      <a href="os.html#os_palette">os_palette</a> const *dest_palette);</pre>
+<p>Gets the furthest GCOL for a palette entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest_palette</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>gcol</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_return_opp_colour_number_for_mode">xcolourtrans_return_opp_colour_number_for_mode</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_return_opp_colour_number_for_mode (<a href="os.html#os_colour">os_colour</a> colour,
+      <a href="os.html#os_mode">os_mode</a> mode,
+      <a href="os.html#os_palette">os_palette</a> const *dest_palette,
+      <a href="os.html#os_colour_number">os_colour_number</a> *colour_number);</pre>
+<p>Gets the furthest colour for a palette entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest_palette</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>colour_number</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="colourtrans_return_opp_colour_number_for_mode">colourtrans_return_opp_colour_number_for_mode</h3>
+<pre>extern <a href="os.html#os_colour_number">os_colour_number</a> colourtrans_return_opp_colour_number_for_mode (<a href="os.html#os_colour">os_colour</a> colour,
+      <a href="os.html#os_mode">os_mode</a> mode,
+      <a href="os.html#os_palette">os_palette</a> const *dest_palette);</pre>
+<p>Gets the furthest colour for a palette entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest_palette</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>colour_number</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_gcol_to_colour_number">xcolourtrans_gcol_to_colour_number</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_gcol_to_colour_number (<a href="os.html#os_gcol">os_gcol</a> gcol,
+      <a href="os.html#os_colour_number">os_colour_number</a> *colour_number);</pre>
+<p>Translates a GCOL to a colour number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>gcol</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>colour_number</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="colourtrans_gcol_to_colour_number">colourtrans_gcol_to_colour_number</h3>
+<pre>extern <a href="os.html#os_colour_number">os_colour_number</a> colourtrans_gcol_to_colour_number (<a href="os.html#os_gcol">os_gcol</a> gcol);</pre>
+<p>Translates a GCOL to a colour number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>gcol</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>colour_number</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_colour_number_to_gcol">xcolourtrans_colour_number_to_gcol</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_colour_number_to_gcol (<a href="os.html#os_colour_number">os_colour_number</a> colour_number,
+      <a href="os.html#os_gcol">os_gcol</a> *gcol);</pre>
+<p>Translates a colour number to a GCOL</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour_number</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>gcol</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="colourtrans_colour_number_to_gcol">colourtrans_colour_number_to_gcol</h3>
+<pre>extern <a href="os.html#os_gcol">os_gcol</a> colourtrans_colour_number_to_gcol (<a href="os.html#os_colour_number">os_colour_number</a> colour_number);</pre>
+<p>Translates a colour number to a GCOL</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour_number</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>gcol</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_return_font_colours">xcolourtrans_return_font_colours</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_return_font_colours (<a href="font.html#font_f">font_f</a> font,
+      <a href="os.html#os_colour">os_colour</a> bg_hint,
+      <a href="os.html#os_colour">os_colour</a> fill,
+      int offset,
+      <a href="os.html#os_colour">os_colour</a> *bg_hint_out,
+      <a href="os.html#os_colour">os_colour</a> *fill_out,
+      int *offset_out);</pre>
+<p>Finds the best range of anti-alias colours to match a pair of palette entries</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>bg_hint</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fill</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>bg_hint_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fill_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset_out</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="colourtrans_return_font_colours">colourtrans_return_font_colours</h3>
+<pre>extern void colourtrans_return_font_colours (<a href="font.html#font_f">font_f</a> font,
+      <a href="os.html#os_colour">os_colour</a> bg_hint,
+      <a href="os.html#os_colour">os_colour</a> fill,
+      int offset,
+      <a href="os.html#os_colour">os_colour</a> *bg_hint_out,
+      <a href="os.html#os_colour">os_colour</a> *fill_out,
+      int *offset_out);</pre>
+<p>Finds the best range of anti-alias colours to match a pair of palette entries</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>bg_hint</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fill</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>bg_hint_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fill_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset_out</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_set_font_colours">xcolourtrans_set_font_colours</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_set_font_colours (<a href="font.html#font_f">font_f</a> font,
+      <a href="os.html#os_colour">os_colour</a> bg_hint,
+      <a href="os.html#os_colour">os_colour</a> fill,
+      int offset,
+      <a href="os.html#os_colour">os_colour</a> *bg_hint_out,
+      <a href="os.html#os_colour">os_colour</a> *fill_out,
+      int *offset_out);</pre>
+<p>Sets the best range of anti-alias colours to match a pair of palette entries</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>bg_hint</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fill</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>bg_hint_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fill_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset_out</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="colourtrans_set_font_colours">colourtrans_set_font_colours</h3>
+<pre>extern void colourtrans_set_font_colours (<a href="font.html#font_f">font_f</a> font,
+      <a href="os.html#os_colour">os_colour</a> bg_hint,
+      <a href="os.html#os_colour">os_colour</a> fill,
+      int offset,
+      <a href="os.html#os_colour">os_colour</a> *bg_hint_out,
+      <a href="os.html#os_colour">os_colour</a> *fill_out,
+      int *offset_out);</pre>
+<p>Sets the best range of anti-alias colours to match a pair of palette entries</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>bg_hint</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fill</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>bg_hint_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fill_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset_out</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_invalidate_cache">xcolourtrans_invalidate_cache</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_invalidate_cache (void);
+</pre><p>Informs ColourTrans that the palette has been changed by some other means</p>
+
+
+<table>
+</table>
+
+<h3 id="colourtrans_invalidate_cache">colourtrans_invalidate_cache</h3>
+<pre>extern void colourtrans_invalidate_cache (void);
+</pre><p>Informs ColourTrans that the palette has been changed by some other means</p>
+
+
+<table>
+</table>
+
+<h3 id="xcolourtrans_set_calibration">xcolourtrans_set_calibration</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_set_calibration (<a href="#colourtrans_calibration_table">colourtrans_calibration_table</a> const *calibration_table);</pre>
+<p>Sets the calibration table for the screen</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>calibration_table</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="colourtrans_set_calibration">colourtrans_set_calibration</h3>
+<pre>extern void colourtrans_set_calibration (<a href="#colourtrans_calibration_table">colourtrans_calibration_table</a> const *calibration_table);</pre>
+<p>Sets the calibration table for the screen</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>calibration_table</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_read_calibration">xcolourtrans_read_calibration</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_read_calibration (<a href="#colourtrans_calibration_table">colourtrans_calibration_table</a> *calibration_table,
+      int *size);</pre>
+<p>Reads the calibration table for the screen</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>calibration_table</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="colourtrans_read_calibration">colourtrans_read_calibration</h3>
+<pre>extern int colourtrans_read_calibration (<a href="#colourtrans_calibration_table">colourtrans_calibration_table</a> *calibration_table);</pre>
+<p>Reads the calibration table for the screen</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>calibration_table</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_convert_device_colour">xcolourtrans_convert_device_colour</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_convert_device_colour (<a href="os.html#os_colour">os_colour</a> colour,
+      <a href="#colourtrans_calibration_table">colourtrans_calibration_table</a> const *calibration_table,
+      <a href="os.html#os_colour">os_colour</a> *colour_out);</pre>
+<p>Converts a device colour to a standard colour</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>calibration_table</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>colour_out</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourtrans_convert_device_colour">colourtrans_convert_device_colour</h3>
+<pre>extern <a href="os.html#os_colour">os_colour</a> colourtrans_convert_device_colour (<a href="os.html#os_colour">os_colour</a> colour,
+      <a href="#colourtrans_calibration_table">colourtrans_calibration_table</a> const *calibration_table);</pre>
+<p>Converts a device colour to a standard colour</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>calibration_table</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>colour_out</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_convert_device_palette">xcolourtrans_convert_device_palette</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_convert_device_palette (int colour_count,
+      <a href="os.html#os_colour">os_colour</a> const *list,
+      <a href="os.html#os_colour">os_colour</a> *buffer,
+      <a href="#colourtrans_calibration_table">colourtrans_calibration_table</a> const *calibration_table);</pre>
+<p>Converts a device palette to standard colours</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour_count</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>list</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>calibration_table</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="colourtrans_convert_device_palette">colourtrans_convert_device_palette</h3>
+<pre>extern void colourtrans_convert_device_palette (int colour_count,
+      <a href="os.html#os_colour">os_colour</a> const *list,
+      <a href="os.html#os_colour">os_colour</a> *buffer,
+      <a href="#colourtrans_calibration_table">colourtrans_calibration_table</a> const *calibration_table);</pre>
+<p>Converts a device palette to standard colours</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour_count</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>list</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>calibration_table</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_convert_rgb_to_cie">xcolourtrans_convert_rgb_to_cie</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_convert_rgb_to_cie (int r,
+      int g,
+      int b,
+      int *x,
+      int *y,
+      int *z);</pre>
+<p>Converts an RGB colour to CIE representation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>r</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>g</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>b</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>x</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>z</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourtrans_convert_rgb_to_cie">colourtrans_convert_rgb_to_cie</h3>
+<pre>extern void colourtrans_convert_rgb_to_cie (int r,
+      int g,
+      int b,
+      int *x,
+      int *y,
+      int *z);</pre>
+<p>Converts an RGB colour to CIE representation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>r</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>g</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>b</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>x</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>z</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_convert_cie_to_rgb">xcolourtrans_convert_cie_to_rgb</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_convert_cie_to_rgb (int x,
+      int y,
+      int z,
+      int *r,
+      int *g,
+      int *b);</pre>
+<p>Converts a CIE colour to RGB representation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>x</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>z</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>r</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>g</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>b</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourtrans_convert_cie_to_rgb">colourtrans_convert_cie_to_rgb</h3>
+<pre>extern void colourtrans_convert_cie_to_rgb (int x,
+      int y,
+      int z,
+      int *r,
+      int *g,
+      int *b);</pre>
+<p>Converts a CIE colour to RGB representation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>x</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>z</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>r</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>g</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>b</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_write_calibration_to_file">xcolourtrans_write_calibration_to_file</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_write_calibration_to_file (<a href="#colourtrans_calibration_flags">colourtrans_calibration_flags</a> flags,
+      <a href="os.html#os_f">os_f</a> file);</pre>
+<p>Saves the current calibration to a file. Prefer ColourTrans_WriteCalibrationToFileW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="colourtrans_write_calibration_to_file">colourtrans_write_calibration_to_file</h3>
+<pre>extern void colourtrans_write_calibration_to_file (<a href="#colourtrans_calibration_flags">colourtrans_calibration_flags</a> flags,
+      <a href="os.html#os_f">os_f</a> file);</pre>
+<p>Saves the current calibration to a file. Prefer ColourTrans_WriteCalibrationToFileW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_write_calibration_to_filew">xcolourtrans_write_calibration_to_filew</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_write_calibration_to_filew (<a href="#colourtrans_calibration_flags">colourtrans_calibration_flags</a> flags,
+      <a href="os.html#os_fw">os_fw</a> file);</pre>
+<p>Saves the current calibration to a file using a wide file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="colourtrans_write_calibration_to_filew">colourtrans_write_calibration_to_filew</h3>
+<pre>extern void colourtrans_write_calibration_to_filew (<a href="#colourtrans_calibration_flags">colourtrans_calibration_flags</a> flags,
+      <a href="os.html#os_fw">os_fw</a> file);</pre>
+<p>Saves the current calibration to a file using a wide file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_convert_rgb_to_hsv">xcolourtrans_convert_rgb_to_hsv</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_convert_rgb_to_hsv (int r,
+      int g,
+      int b,
+      int *h,
+      int *s,
+      int *v);</pre>
+<p>Converts an RGB colour to HSV representation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>r</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>g</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>b</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>h</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>s</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>v</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourtrans_convert_rgb_to_hsv">colourtrans_convert_rgb_to_hsv</h3>
+<pre>extern void colourtrans_convert_rgb_to_hsv (int r,
+      int g,
+      int b,
+      int *h,
+      int *s,
+      int *v);</pre>
+<p>Converts an RGB colour to HSV representation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>r</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>g</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>b</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>h</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>s</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>v</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_convert_hsv_to_rgb">xcolourtrans_convert_hsv_to_rgb</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_convert_hsv_to_rgb (int h,
+      int s,
+      int v,
+      int *r,
+      int *g,
+      int *b);</pre>
+<p>Converts an HSV colour to RGB representation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>h</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>s</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>v</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>r</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>g</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>b</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourtrans_convert_hsv_to_rgb">colourtrans_convert_hsv_to_rgb</h3>
+<pre>extern void colourtrans_convert_hsv_to_rgb (int h,
+      int s,
+      int v,
+      int *r,
+      int *g,
+      int *b);</pre>
+<p>Converts an HSV colour to RGB representation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>h</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>s</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>v</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>r</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>g</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>b</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_convert_rgb_to_cmyk">xcolourtrans_convert_rgb_to_cmyk</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_convert_rgb_to_cmyk (int r,
+      int g,
+      int b,
+      int *c,
+      int *m,
+      int *y,
+      int *k);</pre>
+<p>Converts an RGB colour to CMYK representation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>r</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>g</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>b</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>m</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>k</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="colourtrans_convert_rgb_to_cmyk">colourtrans_convert_rgb_to_cmyk</h3>
+<pre>extern void colourtrans_convert_rgb_to_cmyk (int r,
+      int g,
+      int b,
+      int *c,
+      int *m,
+      int *y,
+      int *k);</pre>
+<p>Converts an RGB colour to CMYK representation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>r</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>g</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>b</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>m</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>k</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_convert_cmyk_to_rgb">xcolourtrans_convert_cmyk_to_rgb</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_convert_cmyk_to_rgb (int c,
+      int m,
+      int y,
+      int k,
+      int *r,
+      int *g,
+      int *b);</pre>
+<p>Converts a CMYK colour to RGB representation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>m</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>k</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>r</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>g</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>b</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourtrans_convert_cmyk_to_rgb">colourtrans_convert_cmyk_to_rgb</h3>
+<pre>extern void colourtrans_convert_cmyk_to_rgb (int c,
+      int m,
+      int y,
+      int k,
+      int *r,
+      int *g,
+      int *b);</pre>
+<p>Converts a CMYK colour to RGB representation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>m</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>k</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>r</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>g</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>b</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_read_palette">xcolourtrans_read_palette</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_read_palette (<a href="osspriteop.html#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="osspriteop.html#osspriteop_id">osspriteop_id</a> id,
+      <a href="os.html#os_palette">os_palette</a> *palette,
+      int size,
+      <a href="#colourtrans_palette_flags">colourtrans_palette_flags</a> flags,
+      int *spare);</pre>
+<p>Reads either the screen's palette, or a sprite's palette</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>area</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>palette</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>spare</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="colourtrans_read_palette">colourtrans_read_palette</h3>
+<pre>extern int colourtrans_read_palette (<a href="osspriteop.html#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="osspriteop.html#osspriteop_id">osspriteop_id</a> id,
+      <a href="os.html#os_palette">os_palette</a> *palette,
+      int size,
+      <a href="#colourtrans_palette_flags">colourtrans_palette_flags</a> flags);</pre>
+<p>Reads either the screen's palette, or a sprite's palette</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>area</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>palette</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>spare</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_write_palette">xcolourtrans_write_palette</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_write_palette (<a href="osspriteop.html#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="osspriteop.html#osspriteop_id">osspriteop_id</a> id,
+      <a href="os.html#os_palette">os_palette</a> const *palette,
+      <a href="#colourtrans_palette_flags">colourtrans_palette_flags</a> flags);</pre>
+<p>Writes to either the screen's palette, or to a sprite's palette</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>area</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>palette</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="colourtrans_write_palette">colourtrans_write_palette</h3>
+<pre>extern void colourtrans_write_palette (<a href="osspriteop.html#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="osspriteop.html#osspriteop_id">osspriteop_id</a> id,
+      <a href="os.html#os_palette">os_palette</a> const *palette,
+      <a href="#colourtrans_palette_flags">colourtrans_palette_flags</a> flags);</pre>
+<p>Writes to either the screen's palette, or to a sprite's palette</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>area</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>palette</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_set_colour">xcolourtrans_set_colour</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_set_colour (<a href="os.html#os_gcol">os_gcol</a> gcol,
+      <a href="#colourtrans_colour_flags">colourtrans_colour_flags</a> flags,
+      <a href="os.html#os_action">os_action</a> action);</pre>
+<p>Changes the foreground or background colour to a GCOL number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>gcol</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="colourtrans_set_colour">colourtrans_set_colour</h3>
+<pre>extern void colourtrans_set_colour (<a href="os.html#os_gcol">os_gcol</a> gcol,
+      <a href="#colourtrans_colour_flags">colourtrans_colour_flags</a> flags,
+      <a href="os.html#os_action">os_action</a> action);</pre>
+<p>Changes the foreground or background colour to a GCOL number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>gcol</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xcolourtransmiscop_set_weights">xcolourtransmiscop_set_weights</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtransmiscop_set_weights (int rweight,
+      int gweight,
+      int bweight);</pre>
+<p>This call is for internal use only</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rweight</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>gweight</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>bweight</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="colourtransmiscop_set_weights">colourtransmiscop_set_weights</h3>
+<pre>extern void colourtransmiscop_set_weights (int rweight,
+      int gweight,
+      int bweight);</pre>
+<p>This call is for internal use only</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rweight</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>gweight</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>bweight</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_write_loadings_to_file">xcolourtrans_write_loadings_to_file</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_write_loadings_to_file (<a href="os.html#os_f">os_f</a> file);</pre>
+<p>Writes to a file a *command that would set the ColourTrans error loadings. Prefer ColourTrans_WriteLoadingsToFileW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="colourtrans_write_loadings_to_file">colourtrans_write_loadings_to_file</h3>
+<pre>extern void colourtrans_write_loadings_to_file (<a href="os.html#os_f">os_f</a> file);</pre>
+<p>Writes to a file a *command that would set the ColourTrans error loadings. Prefer ColourTrans_WriteLoadingsToFileW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_write_loadings_to_filew">xcolourtrans_write_loadings_to_filew</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_write_loadings_to_filew (<a href="os.html#os_fw">os_fw</a> file);</pre>
+<p>Writes to a file, using a wide file handle, a *command that would set the ColourTrans error loadings</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="colourtrans_write_loadings_to_filew">colourtrans_write_loadings_to_filew</h3>
+<pre>extern void colourtrans_write_loadings_to_filew (<a href="os.html#os_fw">os_fw</a> file);</pre>
+<p>Writes to a file, using a wide file handle, a *command that would set the ColourTrans error loadings</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_set_text_colour">xcolourtrans_set_text_colour</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_set_text_colour (<a href="os.html#os_colour">os_colour</a> colour,
+      <a href="#colourtrans_text_colour_flags">colourtrans_text_colour_flags</a> flags,
+      <a href="os.html#os_gcol">os_gcol</a> *gcol);</pre>
+<p>Changes the text foreground or background colour to a GCOL number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>gcol</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="colourtrans_set_text_colour">colourtrans_set_text_colour</h3>
+<pre>extern <a href="os.html#os_gcol">os_gcol</a> colourtrans_set_text_colour (<a href="os.html#os_colour">os_colour</a> colour,
+      <a href="#colourtrans_text_colour_flags">colourtrans_text_colour_flags</a> flags);</pre>
+<p>Changes the text foreground or background colour to a GCOL number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>gcol</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_set_opp_text_colour">xcolourtrans_set_opp_text_colour</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_set_opp_text_colour (<a href="os.html#os_colour">os_colour</a> colour,
+      <a href="#colourtrans_text_colour_flags">colourtrans_text_colour_flags</a> flags,
+      <a href="os.html#os_gcol">os_gcol</a> *gcol);</pre>
+<p>Changes the text foreground or background colour to a GCOL number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>gcol</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="colourtrans_set_opp_text_colour">colourtrans_set_opp_text_colour</h3>
+<pre>extern <a href="os.html#os_gcol">os_gcol</a> colourtrans_set_opp_text_colour (<a href="os.html#os_colour">os_colour</a> colour,
+      <a href="#colourtrans_text_colour_flags">colourtrans_text_colour_flags</a> flags);</pre>
+<p>Changes the text foreground or background colour to a GCOL number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>gcol</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_generate_table">xcolourtrans_generate_table</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_generate_table (<a href="os.html#os_mode">os_mode</a> source_mode,
+      <a href="os.html#os_palette">os_palette</a> const *source_palette,
+      <a href="os.html#os_mode">os_mode</a> dest_mode,
+      <a href="os.html#os_palette">os_palette</a> const *dest_palette,
+      <a href="osspriteop.html#osspriteop_trans_tab">osspriteop_trans_tab</a> *trans_tab,
+      <a href="#colourtrans_table_flags">colourtrans_table_flags</a> flags,
+      void *workspace,
+      asm_routine transfer_fn,
+      int *size);</pre>
+<p>Sets up a translation table in a buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>source_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>source_palette</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest_mode</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dest_palette</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>transfer_fn</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="colourtrans_generate_table">colourtrans_generate_table</h3>
+<pre>extern int colourtrans_generate_table (<a href="os.html#os_mode">os_mode</a> source_mode,
+      <a href="os.html#os_palette">os_palette</a> const *source_palette,
+      <a href="os.html#os_mode">os_mode</a> dest_mode,
+      <a href="os.html#os_palette">os_palette</a> const *dest_palette,
+      <a href="osspriteop.html#osspriteop_trans_tab">osspriteop_trans_tab</a> *trans_tab,
+      <a href="#colourtrans_table_flags">colourtrans_table_flags</a> flags,
+      void *workspace,
+      asm_routine transfer_fn);</pre>
+<p>Sets up a translation table in a buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>source_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>source_palette</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest_mode</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dest_palette</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>transfer_fn</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xcolourtrans_generate_table_for_sprite">xcolourtrans_generate_table_for_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourtrans_generate_table_for_sprite (<a href="osspriteop.html#osspriteop_area">osspriteop_area</a> const *source_area,
+      <a href="osspriteop.html#osspriteop_id">osspriteop_id</a> source_id,
+      <a href="os.html#os_mode">os_mode</a> dest_mode,
+      <a href="os.html#os_palette">os_palette</a> const *dest_palette,
+      <a href="osspriteop.html#osspriteop_trans_tab">osspriteop_trans_tab</a> *trans_tab,
+      <a href="#colourtrans_table_flags">colourtrans_table_flags</a> flags,
+      void *workspace,
+      asm_routine transfer_fn,
+      int *size);</pre>
+<p>Sets up a translation table for a sprite in a buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>source_area</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>source_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest_mode</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dest_palette</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>transfer_fn</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="colourtrans_generate_table_for_sprite">colourtrans_generate_table_for_sprite</h3>
+<pre>extern int colourtrans_generate_table_for_sprite (<a href="osspriteop.html#osspriteop_area">osspriteop_area</a> const *source_area,
+      <a href="osspriteop.html#osspriteop_id">osspriteop_id</a> source_id,
+      <a href="os.html#os_mode">os_mode</a> dest_mode,
+      <a href="os.html#os_palette">os_palette</a> const *dest_palette,
+      <a href="osspriteop.html#osspriteop_trans_tab">osspriteop_trans_tab</a> *trans_tab,
+      <a href="#colourtrans_table_flags">colourtrans_table_flags</a> flags,
+      void *workspace,
+      asm_routine transfer_fn);</pre>
+<p>Sets up a translation table for a sprite in a buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>source_area</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>source_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dest_mode</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dest_palette</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>transfer_fn</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xservice_calibration_changed">xservice_calibration_changed</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_calibration_changed (void);
+</pre><p>Screen calibration has changed</p>
+
+
+<table>
+</table>
+
+<h3 id="service_calibration_changed">service_calibration_changed</h3>
+<pre>extern void service_calibration_changed (void);
+</pre><p>Screen calibration has changed</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_invalidate_cache">xservice_invalidate_cache</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_invalidate_cache (void);
+</pre><p>Broadcast whenever the cache is flushed within ColourTrans</p>
+
+
+<table>
+</table>
+
+<h3 id="service_invalidate_cache">service_invalidate_cache</h3>
+<pre>extern void service_invalidate_cache (void);
+</pre><p>Broadcast whenever the cache is flushed within ColourTrans</p>
+
+
+<table>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

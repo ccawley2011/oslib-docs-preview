@@ -1,0 +1,491 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; NetPrint</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>NetPrint</h2>
+
+<pre>#include "oslib/netprint.h"</pre>
+
+<h3 id="netprint_status">netprint_status</h3>
+<pre>typedef byte netprint_status;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#netprint_STATUS_READY">netprint_STATUS_READY</a></dd>
+<dd><a href="#netprint_STATUS_BUSY">netprint_STATUS_BUSY</a></dd>
+<dd><a href="#netprint_STATUS_JAMMED">netprint_STATUS_JAMMED</a></dd>
+<dd><a href="#netprint_STATUS_OFFLINE">netprint_STATUS_OFFLINE</a></dd>
+<dd><a href="#netprint_STATUS_OPEN">netprint_STATUS_OPEN</a></dd>
+</dl>
+
+<h3 id="netprint_brief_entry">netprint_brief_entry</h3>
+<pre>typedef struct
+   {  byte station_no;
+      byte net_no;
+      char ps_name [256];
+   }
+   netprint_brief_entry;</pre>
+
+<h3 id="netprint_name_entry">netprint_name_entry</h3>
+<pre>typedef struct
+   {  char ps_name [256];
+   }
+   netprint_name_entry;</pre>
+
+<h3 id="netprint_full_entry">netprint_full_entry</h3>
+<pre>typedef struct
+   {  byte station_no;
+      byte net_no;
+      <a href="#netprint_status">netprint_status</a> status;
+      byte status_station_no;
+      byte status_net_no;
+      char ps_name [256];
+   }
+   netprint_full_entry;</pre>
+
+<h3 id="netprint_PS_NAME_LIMIT">netprint_PS_NAME_LIMIT</h3>
+<pre>#define netprint_PS_NAME_LIMIT 256</pre>
+
+<h3 id="netprint_STATUS_READY">netprint_STATUS_READY</h3>
+<pre>#define netprint_STATUS_READY ((<a href="#netprint_status">netprint_status</a>) 0x0u)</pre>
+
+<h3 id="netprint_STATUS_BUSY">netprint_STATUS_BUSY</h3>
+<pre>#define netprint_STATUS_BUSY ((<a href="#netprint_status">netprint_status</a>) 0x1u)</pre>
+
+<h3 id="netprint_STATUS_JAMMED">netprint_STATUS_JAMMED</h3>
+<pre>#define netprint_STATUS_JAMMED ((<a href="#netprint_status">netprint_status</a>) 0x2u)</pre>
+
+<h3 id="netprint_STATUS_OFFLINE">netprint_STATUS_OFFLINE</h3>
+<pre>#define netprint_STATUS_OFFLINE ((<a href="#netprint_status">netprint_status</a>) 0x6u)</pre>
+
+<h3 id="netprint_STATUS_OPEN">netprint_STATUS_OPEN</h3>
+<pre>#define netprint_STATUS_OPEN ((<a href="#netprint_status">netprint_status</a>) 0x7u)</pre>
+
+<h3 id="error_NET_PRINT_NAME_TOO_LONG">error_NET_PRINT_NAME_TOO_LONG</h3>
+<pre>#define error_NET_PRINT_NAME_TOO_LONG 0x10C00u</pre>
+
+<p>Printer name too long</p>
+
+<h3 id="error_NET_PRINT_SINGLE_STREAM">error_NET_PRINT_SINGLE_STREAM</h3>
+<pre>#define error_NET_PRINT_SINGLE_STREAM 0x10C01u</pre>
+
+<p>Printer in use</p>
+
+<h3 id="error_NET_PRINT_ALL_PRINTERS_BUSY">error_NET_PRINT_ALL_PRINTERS_BUSY</h3>
+<pre>#define error_NET_PRINT_ALL_PRINTERS_BUSY 0x10C02u</pre>
+
+<p>No free printer of this type</p>
+
+<h3 id="error_NET_PRINT_OFF_LINE">error_NET_PRINT_OFF_LINE</h3>
+<pre>#define error_NET_PRINT_OFF_LINE 0x10C09u</pre>
+
+<p>Printer offline</p>
+
+<h3 id="error_NET_PRINT_NOT_FOUND">error_NET_PRINT_NOT_FOUND</h3>
+<pre>#define error_NET_PRINT_NOT_FOUND 0x10C0Au</pre>
+
+<p>Printer server not found</p>
+
+<h3 id="error_NET_PRINT_INTERNAL_ERROR">error_NET_PRINT_INTERNAL_ERROR</h3>
+<pre>#define error_NET_PRINT_INTERNAL_ERROR 0x10C0Bu</pre>
+
+<p>Fatal internal error</p>
+
+<h3 id="xnetprint_read_ps_number">xnetprint_read_ps_number</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetprint_read_ps_number (byte *station_no,
+      byte *net_no);</pre>
+<p>Returns the full station number of your current printer server</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>station_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net_no</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="netprint_read_ps_number">netprint_read_ps_number</h3>
+<pre>extern void netprint_read_ps_number (byte *station_no,
+      byte *net_no);</pre>
+<p>Returns the full station number of your current printer server</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>station_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net_no</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xnetprint_set_ps_number">xnetprint_set_ps_number</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetprint_set_ps_number (byte station_no,
+      byte net_no);</pre>
+<p>Sets the full station number used as the current printer server</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>station_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net_no</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="netprint_set_ps_number">netprint_set_ps_number</h3>
+<pre>extern void netprint_set_ps_number (byte station_no,
+      byte net_no);</pre>
+<p>Sets the full station number used as the current printer server</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>station_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net_no</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xnetprint_read_ps_name">xnetprint_read_ps_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetprint_read_ps_name (char *buffer,
+      int size,
+      char **end);</pre>
+<p>Reads the name of your current printer server</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="netprint_read_ps_name">netprint_read_ps_name</h3>
+<pre>extern char *netprint_read_ps_name (char *buffer,
+      int size);</pre>
+<p>Reads the name of your current printer server</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>end</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xnetprint_set_ps_name">xnetprint_set_ps_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetprint_set_ps_name (char const *ps_name);</pre>
+<p>Sets by name the printer server used as your current one</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>ps_name</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="netprint_set_ps_name">netprint_set_ps_name</h3>
+<pre>extern void netprint_set_ps_name (char const *ps_name);</pre>
+<p>Sets by name the printer server used as your current one</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>ps_name</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xnetprint_read_ps_timeouts">xnetprint_read_ps_timeouts</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetprint_read_ps_timeouts (int *transmit_count,
+      int *transmit_delay,
+      int *peek_count,
+      int *peek_delay,
+      int *receive_delay,
+      int *broadcast_delay);</pre>
+<p>Reads the current values for timeouts used by NetPrint</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>transmit_count</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>transmit_delay</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>peek_count</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>peek_delay</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>receive_delay</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>broadcast_delay</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="netprint_read_ps_timeouts">netprint_read_ps_timeouts</h3>
+<pre>extern void netprint_read_ps_timeouts (int *transmit_count,
+      int *transmit_delay,
+      int *peek_count,
+      int *peek_delay,
+      int *receive_delay,
+      int *broadcast_delay);</pre>
+<p>Reads the current values for timeouts used by NetPrint</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>transmit_count</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>transmit_delay</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>peek_count</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>peek_delay</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>receive_delay</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>broadcast_delay</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xnetprint_set_ps_timeouts">xnetprint_set_ps_timeouts</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetprint_set_ps_timeouts (int transmit_count,
+      int transmit_delay,
+      int peek_count,
+      int peek_delay,
+      int receive_delay,
+      int broadcast_delay);</pre>
+<p>Sets the current values for timeouts used by NetPrint</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>transmit_count</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>transmit_delay</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>peek_count</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>peek_delay</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>receive_delay</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>broadcast_delay</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="netprint_set_ps_timeouts">netprint_set_ps_timeouts</h3>
+<pre>extern void netprint_set_ps_timeouts (int transmit_count,
+      int transmit_delay,
+      int peek_count,
+      int peek_delay,
+      int receive_delay,
+      int broadcast_delay);</pre>
+<p>Sets the current values for timeouts used by NetPrint</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>transmit_count</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>transmit_delay</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>peek_count</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>peek_delay</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>receive_delay</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>broadcast_delay</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xnetprint_bind_ps_name">xnetprint_bind_ps_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetprint_bind_ps_name (char const *ps_name,
+      byte *station_no,
+      byte *net_no);</pre>
+<p>Converts a printer server's name to its address, providing it is free</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>ps_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>station_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net_no</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="netprint_bind_ps_name">netprint_bind_ps_name</h3>
+<pre>extern void netprint_bind_ps_name (char const *ps_name,
+      byte *station_no,
+      byte *net_no);</pre>
+<p>Converts a printer server's name to its address, providing it is free</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>ps_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>station_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net_no</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xnetprintlistservers_brief">xnetprintlistservers_brief</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetprintlistservers_brief (<a href="#netprint_brief_entry">netprint_brief_entry</a> *entries,
+      int size,
+      int timeout,
+      int *entry_count,
+      osbool *no_more);</pre>
+<p>Returns the names and numbers of all printer servers</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>entries</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>timeout</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>entry_count</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>no_more</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="netprintlistservers_brief">netprintlistservers_brief</h3>
+<pre>extern osbool netprintlistservers_brief (<a href="#netprint_brief_entry">netprint_brief_entry</a> *entries,
+      int size,
+      int timeout,
+      int *entry_count);</pre>
+<p>Returns the names and numbers of all printer servers</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>entries</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>timeout</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>entry_count</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>no_more</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xnetprintlistservers_name">xnetprintlistservers_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetprintlistservers_name (<a href="#netprint_name_entry">netprint_name_entry</a> *entries,
+      int size,
+      int timeout,
+      int *entry_count,
+      osbool *no_more);</pre>
+<p>Returns the names of all printer servers, sorted, with duplicates removed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>entries</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>timeout</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>entry_count</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>no_more</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="netprintlistservers_name">netprintlistservers_name</h3>
+<pre>extern osbool netprintlistservers_name (<a href="#netprint_name_entry">netprint_name_entry</a> *entries,
+      int size,
+      int timeout,
+      int *entry_count);</pre>
+<p>Returns the names of all printer servers, sorted, with duplicates removed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>entries</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>timeout</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>entry_count</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>no_more</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xnetprintlistservers_full">xnetprintlistservers_full</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetprintlistservers_full (<a href="#netprint_full_entry">netprint_full_entry</a> *entries,
+      int size,
+      int timeout,
+      int *entry_count,
+      osbool *no_more);</pre>
+<p>Returns the names, numbers and status of all printer servers</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>entries</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>timeout</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>entry_count</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>no_more</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="netprintlistservers_full">netprintlistservers_full</h3>
+<pre>extern osbool netprintlistservers_full (<a href="#netprint_full_entry">netprint_full_entry</a> *entries,
+      int size,
+      int timeout,
+      int *entry_count);</pre>
+<p>Returns the names, numbers and status of all printer servers</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>entries</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>timeout</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>entry_count</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>no_more</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xnetprint_convert_status_to_string">xnetprint_convert_status_to_string</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetprint_convert_status_to_string (bits const *status_station_net,
+      char *buffer,
+      int size,
+      char **end);</pre>
+<p>Translates a status value returned by NetPrint_ListServers into the local language</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>status_station_net</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="netprint_convert_status_to_string">netprint_convert_status_to_string</h3>
+<pre>extern char *netprint_convert_status_to_string (bits const *status_station_net,
+      char *buffer,
+      int size);</pre>
+<p>Translates a status value returned by NetPrint_ListServers into the local language</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>status_station_net</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>end</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_net_print_check_d1">xservice_net_print_check_d1</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_net_print_check_d1 (osbool *unclaimed);</pre>
+<p>Issued by NetPrint to determine if there is a local printer running</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="service_net_print_check_d1">service_net_print_check_d1</h3>
+<pre>extern void service_net_print_check_d1 (osbool *unclaimed);</pre>
+<p>Issued by NetPrint to determine if there is a local printer running</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

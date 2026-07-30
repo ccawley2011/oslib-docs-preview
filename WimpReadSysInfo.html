@@ -1,0 +1,609 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; WimpReadSysInfo</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>WimpReadSysInfo</h2>
+
+<pre>#include "oslib/wimpreadsysinfo.h"</pre>
+
+<h3 id="wimpreadsysinfo_state">wimpreadsysinfo_state</h3>
+<pre>typedef int wimpreadsysinfo_state;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#wimpreadsysinfo_STATE_COMMANDS">wimpreadsysinfo_STATE_COMMANDS</a></dd>
+<dd><a href="#wimpreadsysinfo_STATE_DESKTOP">wimpreadsysinfo_STATE_DESKTOP</a></dd>
+</dl>
+
+<h3 id="wimpreadsysinfo_direction">wimpreadsysinfo_direction</h3>
+<pre>typedef int wimpreadsysinfo_direction;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#wimpreadsysinfo_DIR_LEFT_TO_RIGHT">wimpreadsysinfo_DIR_LEFT_TO_RIGHT</a></dd>
+<dd><a href="#wimpreadsysinfo_DIR_RIGHT_TO_LEFT">wimpreadsysinfo_DIR_RIGHT_TO_LEFT</a></dd>
+</dl>
+
+<h3 id="wimpreadsysinfotextselection_flags">wimpreadsysinfotextselection_flags</h3>
+<pre>typedef bits wimpreadsysinfotextselection_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#wimpreadsysinfotextselectionflags_ENABLED">wimpreadsysinfotextselectionflags_ENABLED</a></dd>
+<dd><a href="#wimpreadsysinfotextselectionflags_INSERT_OP_MASK">wimpreadsysinfotextselectionflags_INSERT_OP_MASK</a></dd>
+<dd><a href="#wimpreadsysinfotextselectionflags_INSERT_OP_NOP">wimpreadsysinfotextselectionflags_INSERT_OP_NOP</a></dd>
+<dd><a href="#wimpreadsysinfotextselectionflags_INSERT_OP_DEL">wimpreadsysinfotextselectionflags_INSERT_OP_DEL</a></dd>
+<dd><a href="#wimpreadsysinfotextselectionflags_INSERT_OP_CLEAR">wimpreadsysinfotextselectionflags_INSERT_OP_CLEAR</a></dd>
+<dd><a href="#wimpreadsysinfotextselectionflags_INSERT_OP_CUT">wimpreadsysinfotextselectionflags_INSERT_OP_CUT</a></dd>
+<dd><a href="#wimpreadsysinfotextselectionflags_DEL_OP_MASK">wimpreadsysinfotextselectionflags_DEL_OP_MASK</a></dd>
+<dd><a href="#wimpreadsysinfotextselectionflags_DEL_OP_NOP">wimpreadsysinfotextselectionflags_DEL_OP_NOP</a></dd>
+<dd><a href="#wimpreadsysinfotextselectionflags_DEL_OP_DEL">wimpreadsysinfotextselectionflags_DEL_OP_DEL</a></dd>
+<dd><a href="#wimpreadsysinfotextselectionflags_DEL_OP_CLEAR">wimpreadsysinfotextselectionflags_DEL_OP_CLEAR</a></dd>
+<dd><a href="#wimpreadsysinfotextselectionflags_DEL_OP_CUT">wimpreadsysinfotextselectionflags_DEL_OP_CUT</a></dd>
+<dd><a href="#wimpreadsysinfotextselectionflags_MOVE_OP_MASK">wimpreadsysinfotextselectionflags_MOVE_OP_MASK</a></dd>
+<dd><a href="#wimpreadsysinfotextselectionflags_MOVE_OP_NOP">wimpreadsysinfotextselectionflags_MOVE_OP_NOP</a></dd>
+<dd><a href="#wimpreadsysinfotextselectionflags_MOVE_OP_DEL">wimpreadsysinfotextselectionflags_MOVE_OP_DEL</a></dd>
+<dd><a href="#wimpreadsysinfotextselectionflags_MOVE_OP_CLEAR">wimpreadsysinfotextselectionflags_MOVE_OP_CLEAR</a></dd>
+<dd><a href="#wimpreadsysinfotextselectionflags_MOVE_OP_CUT">wimpreadsysinfotextselectionflags_MOVE_OP_CUT</a></dd>
+<dd><a href="#wimpreadsysinfotextselectionflags_AUTO_SELECT">wimpreadsysinfotextselectionflags_AUTO_SELECT</a></dd>
+</dl>
+
+<h3 id="wimpreadsysinfo_STATE_COMMANDS">wimpreadsysinfo_STATE_COMMANDS</h3>
+<pre>#define wimpreadsysinfo_STATE_COMMANDS ((<a href="#wimpreadsysinfo_state">wimpreadsysinfo_state</a>) 0x0u)</pre>
+
+<h3 id="wimpreadsysinfo_STATE_DESKTOP">wimpreadsysinfo_STATE_DESKTOP</h3>
+<pre>#define wimpreadsysinfo_STATE_DESKTOP ((<a href="#wimpreadsysinfo_state">wimpreadsysinfo_state</a>) 0x1u)</pre>
+
+<h3 id="wimpreadsysinfo_DIR_LEFT_TO_RIGHT">wimpreadsysinfo_DIR_LEFT_TO_RIGHT</h3>
+<pre>#define wimpreadsysinfo_DIR_LEFT_TO_RIGHT ((<a href="#wimpreadsysinfo_direction">wimpreadsysinfo_direction</a>) 0x0u)</pre>
+
+<h3 id="wimpreadsysinfo_DIR_RIGHT_TO_LEFT">wimpreadsysinfo_DIR_RIGHT_TO_LEFT</h3>
+<pre>#define wimpreadsysinfo_DIR_RIGHT_TO_LEFT ((<a href="#wimpreadsysinfo_direction">wimpreadsysinfo_direction</a>) 0x1u)</pre>
+
+<h3 id="wimpreadsysinfotextselectionflags_ENABLED">wimpreadsysinfotextselectionflags_ENABLED</h3>
+<pre>#define wimpreadsysinfotextselectionflags_ENABLED ((<a href="#wimpreadsysinfotextselection_flags">wimpreadsysinfotextselection_flags</a>) 0x1u)</pre>
+
+<h3 id="wimpreadsysinfotextselectionflags_INSERT_OP_MASK">wimpreadsysinfotextselectionflags_INSERT_OP_MASK</h3>
+<pre>#define wimpreadsysinfotextselectionflags_INSERT_OP_MASK ((<a href="#wimpreadsysinfotextselection_flags">wimpreadsysinfotextselection_flags</a>) 0x6u)</pre>
+
+<h3 id="wimpreadsysinfotextselectionflags_INSERT_OP_NOP">wimpreadsysinfotextselectionflags_INSERT_OP_NOP</h3>
+<pre>#define wimpreadsysinfotextselectionflags_INSERT_OP_NOP ((<a href="#wimpreadsysinfotextselection_flags">wimpreadsysinfotextselection_flags</a>) 0x0u)</pre>
+
+<h3 id="wimpreadsysinfotextselectionflags_INSERT_OP_DEL">wimpreadsysinfotextselectionflags_INSERT_OP_DEL</h3>
+<pre>#define wimpreadsysinfotextselectionflags_INSERT_OP_DEL ((<a href="#wimpreadsysinfotextselection_flags">wimpreadsysinfotextselection_flags</a>) 0x2u)</pre>
+
+<h3 id="wimpreadsysinfotextselectionflags_INSERT_OP_CLEAR">wimpreadsysinfotextselectionflags_INSERT_OP_CLEAR</h3>
+<pre>#define wimpreadsysinfotextselectionflags_INSERT_OP_CLEAR ((<a href="#wimpreadsysinfotextselection_flags">wimpreadsysinfotextselection_flags</a>) 0x4u)</pre>
+
+<h3 id="wimpreadsysinfotextselectionflags_INSERT_OP_CUT">wimpreadsysinfotextselectionflags_INSERT_OP_CUT</h3>
+<pre>#define wimpreadsysinfotextselectionflags_INSERT_OP_CUT ((<a href="#wimpreadsysinfotextselection_flags">wimpreadsysinfotextselection_flags</a>) 0x6u)</pre>
+
+<h3 id="wimpreadsysinfotextselectionflags_DEL_OP_MASK">wimpreadsysinfotextselectionflags_DEL_OP_MASK</h3>
+<pre>#define wimpreadsysinfotextselectionflags_DEL_OP_MASK ((<a href="#wimpreadsysinfotextselection_flags">wimpreadsysinfotextselection_flags</a>) 0x18u)</pre>
+
+<h3 id="wimpreadsysinfotextselectionflags_DEL_OP_NOP">wimpreadsysinfotextselectionflags_DEL_OP_NOP</h3>
+<pre>#define wimpreadsysinfotextselectionflags_DEL_OP_NOP ((<a href="#wimpreadsysinfotextselection_flags">wimpreadsysinfotextselection_flags</a>) 0x0u)</pre>
+
+<h3 id="wimpreadsysinfotextselectionflags_DEL_OP_DEL">wimpreadsysinfotextselectionflags_DEL_OP_DEL</h3>
+<pre>#define wimpreadsysinfotextselectionflags_DEL_OP_DEL ((<a href="#wimpreadsysinfotextselection_flags">wimpreadsysinfotextselection_flags</a>) 0x8u)</pre>
+
+<h3 id="wimpreadsysinfotextselectionflags_DEL_OP_CLEAR">wimpreadsysinfotextselectionflags_DEL_OP_CLEAR</h3>
+<pre>#define wimpreadsysinfotextselectionflags_DEL_OP_CLEAR ((<a href="#wimpreadsysinfotextselection_flags">wimpreadsysinfotextselection_flags</a>) 0x10u)</pre>
+
+<h3 id="wimpreadsysinfotextselectionflags_DEL_OP_CUT">wimpreadsysinfotextselectionflags_DEL_OP_CUT</h3>
+<pre>#define wimpreadsysinfotextselectionflags_DEL_OP_CUT ((<a href="#wimpreadsysinfotextselection_flags">wimpreadsysinfotextselection_flags</a>) 0x18u)</pre>
+
+<h3 id="wimpreadsysinfotextselectionflags_MOVE_OP_MASK">wimpreadsysinfotextselectionflags_MOVE_OP_MASK</h3>
+<pre>#define wimpreadsysinfotextselectionflags_MOVE_OP_MASK ((<a href="#wimpreadsysinfotextselection_flags">wimpreadsysinfotextselection_flags</a>) 0x60u)</pre>
+
+<h3 id="wimpreadsysinfotextselectionflags_MOVE_OP_NOP">wimpreadsysinfotextselectionflags_MOVE_OP_NOP</h3>
+<pre>#define wimpreadsysinfotextselectionflags_MOVE_OP_NOP ((<a href="#wimpreadsysinfotextselection_flags">wimpreadsysinfotextselection_flags</a>) 0x0u)</pre>
+
+<h3 id="wimpreadsysinfotextselectionflags_MOVE_OP_DEL">wimpreadsysinfotextselectionflags_MOVE_OP_DEL</h3>
+<pre>#define wimpreadsysinfotextselectionflags_MOVE_OP_DEL ((<a href="#wimpreadsysinfotextselection_flags">wimpreadsysinfotextselection_flags</a>) 0x20u)</pre>
+
+<h3 id="wimpreadsysinfotextselectionflags_MOVE_OP_CLEAR">wimpreadsysinfotextselectionflags_MOVE_OP_CLEAR</h3>
+<pre>#define wimpreadsysinfotextselectionflags_MOVE_OP_CLEAR ((<a href="#wimpreadsysinfotextselection_flags">wimpreadsysinfotextselection_flags</a>) 0x40u)</pre>
+
+<h3 id="wimpreadsysinfotextselectionflags_MOVE_OP_CUT">wimpreadsysinfotextselectionflags_MOVE_OP_CUT</h3>
+<pre>#define wimpreadsysinfotextselectionflags_MOVE_OP_CUT ((<a href="#wimpreadsysinfotextselection_flags">wimpreadsysinfotextselection_flags</a>) 0x60u)</pre>
+
+<h3 id="wimpreadsysinfotextselectionflags_AUTO_SELECT">wimpreadsysinfotextselectionflags_AUTO_SELECT</h3>
+<pre>#define wimpreadsysinfotextselectionflags_AUTO_SELECT ((<a href="#wimpreadsysinfotextselection_flags">wimpreadsysinfotextselection_flags</a>) 0x80u)</pre>
+
+<h3 id="xwimpreadsysinfo_task_count">xwimpreadsysinfo_task_count</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpreadsysinfo_task_count (int *task_count);</pre>
+<p>Reads the number of active tasks</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>task_count</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="wimpreadsysinfo_task_count">wimpreadsysinfo_task_count</h3>
+<pre>extern int wimpreadsysinfo_task_count (void);
+</pre><p>Reads the number of active tasks</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>task_count</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwimpreadsysinfo_wimp_mode">xwimpreadsysinfo_wimp_mode</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpreadsysinfo_wimp_mode (<a href="os.html#os_mode">os_mode</a> *mode);</pre>
+<p>Reads the current Wimp mode</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>mode</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="wimpreadsysinfo_wimp_mode">wimpreadsysinfo_wimp_mode</h3>
+<pre>extern <a href="os.html#os_mode">os_mode</a> wimpreadsysinfo_wimp_mode (void);
+</pre><p>Reads the current Wimp mode</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>mode</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwimpreadsysinfo_sprite_suffix">xwimpreadsysinfo_sprite_suffix</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpreadsysinfo_sprite_suffix (char **suffix);</pre>
+<p>Reads the *IconSprites file name suffix for the configured mode</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>suffix</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="wimpreadsysinfo_sprite_suffix">wimpreadsysinfo_sprite_suffix</h3>
+<pre>extern char *wimpreadsysinfo_sprite_suffix (void);
+</pre><p>Reads the *IconSprites file name suffix for the configured mode</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>suffix</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwimpreadsysinfo_desktop_state">xwimpreadsysinfo_desktop_state</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpreadsysinfo_desktop_state (<a href="#wimpreadsysinfo_state">wimpreadsysinfo_state</a> *state);</pre>
+<p>Reads the Wimp state</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>state</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="wimpreadsysinfo_desktop_state">wimpreadsysinfo_desktop_state</h3>
+<pre>extern <a href="#wimpreadsysinfo_state">wimpreadsysinfo_state</a> wimpreadsysinfo_desktop_state (void);
+</pre><p>Reads the Wimp state</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>state</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwimpreadsysinfo_write_dir">xwimpreadsysinfo_write_dir</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpreadsysinfo_write_dir (<a href="#wimpreadsysinfo_direction">wimpreadsysinfo_direction</a> *write_dir);</pre>
+<p>Reads the current writing direction</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>write_dir</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="wimpreadsysinfo_write_dir">wimpreadsysinfo_write_dir</h3>
+<pre>extern <a href="#wimpreadsysinfo_direction">wimpreadsysinfo_direction</a> wimpreadsysinfo_write_dir (void);
+</pre><p>Reads the current writing direction</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>write_dir</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwimpreadsysinfo_task">xwimpreadsysinfo_task</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpreadsysinfo_task (<a href="wimp.html#wimp_t">wimp_t</a> *task,
+      <a href="wimp.html#wimp_version_no">wimp_version_no</a> *version);</pre>
+<p>Reads the current task handle</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>version</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="wimpreadsysinfo_task">wimpreadsysinfo_task</h3>
+<pre>extern <a href="wimp.html#wimp_t">wimp_t</a> wimpreadsysinfo_task (<a href="wimp.html#wimp_version_no">wimp_version_no</a> *version);</pre>
+<p>Reads the current task handle</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>version</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>task</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwimpreadsysinfo_version">xwimpreadsysinfo_version</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpreadsysinfo_version (<a href="wimp.html#wimp_version_no">wimp_version_no</a> *version);</pre>
+<p>Reads the Wimp version</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>version</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="wimpreadsysinfo_version">wimpreadsysinfo_version</h3>
+<pre>extern <a href="wimp.html#wimp_version_no">wimp_version_no</a> wimpreadsysinfo_version (void);
+</pre><p>Reads the Wimp version</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>version</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwimpreadsysinfo_font">xwimpreadsysinfo_font</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpreadsysinfo_font (<a href="font.html#font_f">font_f</a> *font,
+      <a href="font.html#font_f">font_f</a> *symbol_font);</pre>
+<p>Reads the desktop and symbol font handles</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>symbol_font</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="wimpreadsysinfo_font">wimpreadsysinfo_font</h3>
+<pre>extern <a href="font.html#font_f">font_f</a> wimpreadsysinfo_font (<a href="font.html#font_f">font_f</a> *symbol_font);</pre>
+<p>Reads the desktop and symbol font handles</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>symbol_font</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>font</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwimpreadsysinfo_tool_sprites">xwimpreadsysinfo_tool_sprites</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpreadsysinfo_tool_sprites (<a href="osspriteop.html#osspriteop_area">osspriteop_area</a> **toolsprites);</pre>
+<p>Reads the toolsprite control block pointer</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>toolsprites</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="wimpreadsysinfo_tool_sprites">wimpreadsysinfo_tool_sprites</h3>
+<pre>extern <a href="osspriteop.html#osspriteop_area">osspriteop_area</a> *wimpreadsysinfo_tool_sprites (void);
+</pre><p>Reads the toolsprite control block pointer</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>toolsprites</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwimpreadsysinfo_application_limit">xwimpreadsysinfo_application_limit</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpreadsysinfo_application_limit (int *size_limit);</pre>
+<p>Reads the maximum size of application space</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size_limit</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="wimpreadsysinfo_application_limit">wimpreadsysinfo_application_limit</h3>
+<pre>extern int wimpreadsysinfo_application_limit (void);
+</pre><p>Reads the maximum size of application space</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size_limit</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwimpreadsysinfo_sprite_pools">xwimpreadsysinfo_sprite_pools</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpreadsysinfo_sprite_pools (<a href="osspriteop.html#osspriteop_area">osspriteop_area</a> **low_priority,
+      <a href="osspriteop.html#osspriteop_area">osspriteop_area</a> **high_priority);</pre>
+<p>Reads both the WIMP sprite pools' control block pointers, see WimpReadSysInfo_SpritePoolsExtended as well - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>low_priority</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>high_priority</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="wimpreadsysinfo_sprite_pools">wimpreadsysinfo_sprite_pools</h3>
+<pre>extern void wimpreadsysinfo_sprite_pools (<a href="osspriteop.html#osspriteop_area">osspriteop_area</a> **low_priority,
+      <a href="osspriteop.html#osspriteop_area">osspriteop_area</a> **high_priority);</pre>
+<p>Reads both the WIMP sprite pools' control block pointers, see WimpReadSysInfo_SpritePoolsExtended as well - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>low_priority</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>high_priority</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xwimpreadsysinfo_auto_scroll_pause_delay">xwimpreadsysinfo_auto_scroll_pause_delay</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpreadsysinfo_auto_scroll_pause_delay (int *delay);</pre>
+<p>Reads the configured auto-scroll pause delay, measured in centiseconds - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>delay</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="wimpreadsysinfo_auto_scroll_pause_delay">wimpreadsysinfo_auto_scroll_pause_delay</h3>
+<pre>extern int wimpreadsysinfo_auto_scroll_pause_delay (void);
+</pre><p>Reads the configured auto-scroll pause delay, measured in centiseconds - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>delay</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwimpreadsysinfo_sprite_pools_extended">xwimpreadsysinfo_sprite_pools_extended</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpreadsysinfo_sprite_pools_extended (<a href="osspriteop.html#osspriteop_area">osspriteop_area</a> **priority,
+      <a href="osspriteop.html#osspriteop_area">osspriteop_area</a> **high_priority,
+      <a href="osspriteop.html#osspriteop_area">osspriteop_area</a> **low_priority);</pre>
+<p>Reads the WIMP sprite pools' control block pointers - RISC OS Select</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>priority</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>high_priority</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>low_priority</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="wimpreadsysinfo_sprite_pools_extended">wimpreadsysinfo_sprite_pools_extended</h3>
+<pre>extern void wimpreadsysinfo_sprite_pools_extended (<a href="osspriteop.html#osspriteop_area">osspriteop_area</a> **priority,
+      <a href="osspriteop.html#osspriteop_area">osspriteop_area</a> **high_priority,
+      <a href="osspriteop.html#osspriteop_area">osspriteop_area</a> **low_priority);</pre>
+<p>Reads the WIMP sprite pools' control block pointers - RISC OS Select</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>priority</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>high_priority</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>low_priority</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xwimpreadsysinfo_special_highlighting_colours">xwimpreadsysinfo_special_highlighting_colours</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpreadsysinfo_special_highlighting_colours (<a href="wimp.html#wimp_colour">wimp_colour</a> *bg,
+      <a href="wimp.html#wimp_colour">wimp_colour</a> *fg);</pre>
+<p>Reads the 'special' highlighting colours defined with *WimpVisualFlags - RISC OS Select</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>bg</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fg</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="wimpreadsysinfo_special_highlighting_colours">wimpreadsysinfo_special_highlighting_colours</h3>
+<pre>extern void wimpreadsysinfo_special_highlighting_colours (<a href="wimp.html#wimp_colour">wimp_colour</a> *bg,
+      <a href="wimp.html#wimp_colour">wimp_colour</a> *fg);</pre>
+<p>Reads the 'special' highlighting colours defined with *WimpVisualFlags - RISC OS Select</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>bg</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fg</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xwimpreadsysinfo_text_selection">xwimpreadsysinfo_text_selection</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpreadsysinfo_text_selection (<a href="wimp.html#wimp_colour">wimp_colour</a> *bg,
+      <a href="wimp.html#wimp_colour">wimp_colour</a> *fg,
+      <a href="#wimpreadsysinfotextselection_flags">wimpreadsysinfotextselection_flags</a> *flags);</pre>
+<p>Reads the text selection colours and flags - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>bg</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fg</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="wimpreadsysinfo_text_selection">wimpreadsysinfo_text_selection</h3>
+<pre>extern void wimpreadsysinfo_text_selection (<a href="wimp.html#wimp_colour">wimp_colour</a> *bg,
+      <a href="wimp.html#wimp_colour">wimp_colour</a> *fg,
+      <a href="#wimpreadsysinfotextselection_flags">wimpreadsysinfotextselection_flags</a> *flags);</pre>
+<p>Reads the text selection colours and flags - RISC OS 4.36+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>bg</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fg</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xwimpreadsysinfo_caret_colour">xwimpreadsysinfo_caret_colour</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpreadsysinfo_caret_colour (<a href="wimp.html#wimp_colour">wimp_colour</a> *def,
+      <a href="wimp.html#wimp_colour">wimp_colour</a> *actual);</pre>
+<p>Read the default caret colour - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>def</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>actual</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="wimpreadsysinfo_caret_colour">wimpreadsysinfo_caret_colour</h3>
+<pre>extern void wimpreadsysinfo_caret_colour (<a href="wimp.html#wimp_colour">wimp_colour</a> *def,
+      <a href="wimp.html#wimp_colour">wimp_colour</a> *actual);</pre>
+<p>Read the default caret colour - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>def</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>actual</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xwimpreadsysinfo_drag_settings">xwimpreadsysinfo_drag_settings</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpreadsysinfo_drag_settings (int *os_units_move,
+      int *delay);</pre>
+<p>Read the settings used to detect a drag - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>os_units_move</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>delay</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="wimpreadsysinfo_drag_settings">wimpreadsysinfo_drag_settings</h3>
+<pre>extern void wimpreadsysinfo_drag_settings (int *os_units_move,
+      int *delay);</pre>
+<p>Read the settings used to detect a drag - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>os_units_move</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>delay</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xwimpreadsysinfo_dbl_click_settings">xwimpreadsysinfo_dbl_click_settings</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpreadsysinfo_dbl_click_settings (int *os_units_move,
+      int *delay);</pre>
+<p>Read the settings used to detect a double click - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>os_units_move</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>delay</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="wimpreadsysinfo_dbl_click_settings">wimpreadsysinfo_dbl_click_settings</h3>
+<pre>extern void wimpreadsysinfo_dbl_click_settings (int *os_units_move,
+      int *delay);</pre>
+<p>Read the settings used to detect a double click - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>os_units_move</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>delay</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xwimpreadsysinfo_sub_menu_open_settings">xwimpreadsysinfo_sub_menu_open_settings</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpreadsysinfo_sub_menu_open_settings (int *delay_for_open,
+      int *delay_mouse_ignore);</pre>
+<p>Read the settings used to detect whether a submenu entry should be opened automatically - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>delay_for_open</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>delay_mouse_ignore</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="wimpreadsysinfo_sub_menu_open_settings">wimpreadsysinfo_sub_menu_open_settings</h3>
+<pre>extern void wimpreadsysinfo_sub_menu_open_settings (int *delay_for_open,
+      int *delay_mouse_ignore);</pre>
+<p>Read the settings used to detect whether a submenu entry should be opened automatically - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>delay_for_open</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>delay_mouse_ignore</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xwimpreadsysinfo_icon_bar_scroll_settings">xwimpreadsysinfo_icon_bar_scroll_settings</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpreadsysinfo_icon_bar_scroll_settings (int *speed,
+      int *acceleration);</pre>
+<p>Read the settings used to scroll the iconbar when the mouse is at its edge - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>speed</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>acceleration</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="wimpreadsysinfo_icon_bar_scroll_settings">wimpreadsysinfo_icon_bar_scroll_settings</h3>
+<pre>extern void wimpreadsysinfo_icon_bar_scroll_settings (int *speed,
+      int *acceleration);</pre>
+<p>Read the settings used to scroll the iconbar when the mouse is at its edge - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>speed</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>acceleration</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xwimpreadsysinfo_edge_settings">xwimpreadsysinfo_edge_settings</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpreadsysinfo_edge_settings (int *delay);</pre>
+<p>Read the settings used to notify applications that the mouse has idled at the edge of the screen - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>delay</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="wimpreadsysinfo_edge_settings">wimpreadsysinfo_edge_settings</h3>
+<pre>extern void wimpreadsysinfo_edge_settings (int *delay);</pre>
+<p>Read the settings used to notify applications that the mouse has idled at the edge of the screen - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>delay</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

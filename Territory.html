@@ -1,0 +1,1528 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Territory</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Territory</h2>
+
+<pre>#include "oslib/territory.h"</pre>
+
+<h3 id="territory_t">territory_t</h3>
+<pre>typedef int territory_t;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#territory_CURRENT">territory_CURRENT</a></dd>
+<dd><a href="#territory_UK">territory_UK</a></dd>
+<dd><a href="#territory_MASTER">territory_MASTER</a></dd>
+<dd><a href="#territory_COMPACT">territory_COMPACT</a></dd>
+<dd><a href="#territory_ITALY">territory_ITALY</a></dd>
+<dd><a href="#territory_SPAIN">territory_SPAIN</a></dd>
+<dd><a href="#territory_FRANCE">territory_FRANCE</a></dd>
+<dd><a href="#territory_GERMANY">territory_GERMANY</a></dd>
+<dd><a href="#territory_PORTUGAL">territory_PORTUGAL</a></dd>
+<dd><a href="#territory_ESPERANTO">territory_ESPERANTO</a></dd>
+<dd><a href="#territory_GREECE">territory_GREECE</a></dd>
+<dd><a href="#territory_SWEDEN">territory_SWEDEN</a></dd>
+<dd><a href="#territory_FINLAND">territory_FINLAND</a></dd>
+<dd><a href="#territory_DENMARK">territory_DENMARK</a></dd>
+<dd><a href="#territory_NORWAY">territory_NORWAY</a></dd>
+<dd><a href="#territory_ICELAND">territory_ICELAND</a></dd>
+<dd><a href="#territory_CANADA1">territory_CANADA1</a></dd>
+<dd><a href="#territory_CANADA2">territory_CANADA2</a></dd>
+<dd><a href="#territory_CANADA">territory_CANADA</a></dd>
+<dd><a href="#territory_TURKEY">territory_TURKEY</a></dd>
+<dd><a href="#territory_ARABIC">territory_ARABIC</a></dd>
+<dd><a href="#territory_IRELAND">territory_IRELAND</a></dd>
+<dd><a href="#territory_HONG_KONG">territory_HONG_KONG</a></dd>
+<dd><a href="#territory_RUSSIA">territory_RUSSIA</a></dd>
+<dd><a href="#territory_RUSSIA2">territory_RUSSIA2</a></dd>
+<dd><a href="#territory_ISRAEL">territory_ISRAEL</a></dd>
+<dd><a href="#territory_MEXICO">territory_MEXICO</a></dd>
+<dd><a href="#territory_LATIM_AM">territory_LATIM_AM</a></dd>
+<dd><a href="#territory_USA">territory_USA</a></dd>
+</dl>
+
+<h3 id="territory_collate_flags">territory_collate_flags</h3>
+<pre>typedef bits territory_collate_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#territory_IGNORE_CASE">territory_IGNORE_CASE</a></dd>
+<dd><a href="#territory_IGNORE_ACCENT">territory_IGNORE_ACCENT</a></dd>
+</dl>
+
+<h3 id="territory_alphabet_number">territory_alphabet_number</h3>
+<pre>typedef int territory_alphabet_number;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#territory_ALPHABET_BFONT">territory_ALPHABET_BFONT</a></dd>
+<dd><a href="#territory_ALPHABET_LATIN1">territory_ALPHABET_LATIN1</a></dd>
+<dd><a href="#territory_ALPHABET_LATIN2">territory_ALPHABET_LATIN2</a></dd>
+<dd><a href="#territory_ALPHABET_LATIN3">territory_ALPHABET_LATIN3</a></dd>
+<dd><a href="#territory_ALPHABET_LATIN4">territory_ALPHABET_LATIN4</a></dd>
+<dd><a href="#territory_ALPHABET_CYRILLIC">territory_ALPHABET_CYRILLIC</a></dd>
+<dd><a href="#territory_ALPHABET_ARABIC">territory_ALPHABET_ARABIC</a></dd>
+<dd><a href="#territory_ALPHABET_GREEK">territory_ALPHABET_GREEK</a></dd>
+<dd><a href="#territory_ALPHABET_HEBREW">territory_ALPHABET_HEBREW</a></dd>
+<dd><a href="#territory_ALPHABET_LATIN5">territory_ALPHABET_LATIN5</a></dd>
+<dd><a href="#territory_ALPHABET_WELSH">territory_ALPHABET_WELSH</a></dd>
+<dd><a href="#territory_ALPHABET_UTF8">territory_ALPHABET_UTF8</a></dd>
+<dd><a href="#territory_ALPHABET_LATIN9">territory_ALPHABET_LATIN9</a></dd>
+<dd><a href="#territory_ALPHABET_LATIN6">territory_ALPHABET_LATIN6</a></dd>
+<dd><a href="#territory_ALPHABET_CYRILLIC2">territory_ALPHABET_CYRILLIC2</a></dd>
+</dl>
+
+<h3 id="territory_data">territory_data</h3>
+<pre>typedef struct
+   {  asm_routine e [43];
+   }
+   territory_data;</pre>
+
+<h3 id="territory_ordinals">territory_ordinals</h3>
+<pre>typedef struct
+   {  int centisecond;
+      int second;
+      int minute;
+      int hour;
+      int date;
+      int month;
+      int year;
+      int weekday;
+      int yearday;
+   }
+   territory_ordinals;</pre>
+
+<h3 id="territory_property_table">territory_property_table</h3>
+<pre>typedef struct
+   {  bits p [8];
+   }
+   territory_property_table;</pre>
+
+<h3 id="territory_calendar">territory_calendar</h3>
+<pre>typedef struct
+   {  int first_working_day;
+      int last_working_day;
+      int month_count;
+      int day_count;
+      int pm_limit;
+      int we_limit;
+      int w3_limit;
+      int dy_limit;
+      int st_limit;
+      int mo_limit;
+      int m3_limit;
+      int tz_limit;
+   }
+   territory_calendar;</pre>
+
+<h3 id="territory_time_string_flags">territory_time_string_flags</h3>
+<pre>typedef bits territory_time_string_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#territory_GIVEN_TIME">territory_GIVEN_TIME</a></dd>
+<dd><a href="#territory_GIVEN_DATE">territory_GIVEN_DATE</a></dd>
+<dd><a href="#territory_GIVEN_DATE_AND_TIME">territory_GIVEN_DATE_AND_TIME</a></dd>
+</dl>
+
+<h3 id="territory_write_flags">territory_write_flags</h3>
+<pre>typedef bits territory_write_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#territory_WRITE_RIGHT_TO_LEFT">territory_WRITE_RIGHT_TO_LEFT</a></dd>
+<dd><a href="#territory_WRITE_BOTTOM_TO_TOP">territory_WRITE_BOTTOM_TO_TOP</a></dd>
+<dd><a href="#territory_WRITE_VERTICAL">territory_WRITE_VERTICAL</a></dd>
+</dl>
+
+<h3 id="territory_character_property">territory_character_property</h3>
+<pre>typedef int territory_character_property;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#territory_PROPERTY_CONTROL">territory_PROPERTY_CONTROL</a></dd>
+<dd><a href="#territory_PROPERTY_UPPERCASE">territory_PROPERTY_UPPERCASE</a></dd>
+<dd><a href="#territory_PROPERTY_LOWERCASE">territory_PROPERTY_LOWERCASE</a></dd>
+<dd><a href="#territory_PROPERTY_ALPHABETIC">territory_PROPERTY_ALPHABETIC</a></dd>
+<dd><a href="#territory_PROPERTY_PUNCTUATION">territory_PROPERTY_PUNCTUATION</a></dd>
+<dd><a href="#territory_PROPERTY_WHITESPACE">territory_PROPERTY_WHITESPACE</a></dd>
+<dd><a href="#territory_PROPERTY_DIGIT">territory_PROPERTY_DIGIT</a></dd>
+<dd><a href="#territory_PROPERTY_HEX_DIGIT">territory_PROPERTY_HEX_DIGIT</a></dd>
+<dd><a href="#territory_PROPERTY_ACCENTED">territory_PROPERTY_ACCENTED</a></dd>
+<dd><a href="#territory_PROPERTY_FORWARD">territory_PROPERTY_FORWARD</a></dd>
+<dd><a href="#territory_PROPERTY_REVERSE">territory_PROPERTY_REVERSE</a></dd>
+</dl>
+
+<h3 id="territory_symbol_no">territory_symbol_no</h3>
+<pre>typedef int territory_symbol_no;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#territory_SYMBOL_DECIMAL_POINT">territory_SYMBOL_DECIMAL_POINT</a></dd>
+<dd><a href="#territory_SYMBOL_GROUP_SEPARATOR">territory_SYMBOL_GROUP_SEPARATOR</a></dd>
+<dd><a href="#territory_SYMBOL_GROUPING_LIST">territory_SYMBOL_GROUPING_LIST</a></dd>
+<dd><a href="#territory_SYMBOL_INTERNATIONAL_CURRENCY_SYMBOL">territory_SYMBOL_INTERNATIONAL_CURRENCY_SYMBOL</a></dd>
+<dd><a href="#territory_SYMBOL_CURRENCY_SYMBOL">territory_SYMBOL_CURRENCY_SYMBOL</a></dd>
+<dd><a href="#territory_SYMBOL_CURRENCY_POINT">territory_SYMBOL_CURRENCY_POINT</a></dd>
+<dd><a href="#territory_SYMBOL_CURRENCY_GROUP_SEPARATOR">territory_SYMBOL_CURRENCY_GROUP_SEPARATOR</a></dd>
+<dd><a href="#territory_SYMBOL_CURRENCY_GROUP_LIST">territory_SYMBOL_CURRENCY_GROUP_LIST</a></dd>
+<dd><a href="#territory_SYMBOL_CURRENCY_PLUS_SIGN">territory_SYMBOL_CURRENCY_PLUS_SIGN</a></dd>
+<dd><a href="#territory_SYMBOL_CURRENCY_MINUS_SIGN">territory_SYMBOL_CURRENCY_MINUS_SIGN</a></dd>
+<dd><a href="#territory_SYMBOL_INTERNATIONAL_CURRENCY_PRECISION">territory_SYMBOL_INTERNATIONAL_CURRENCY_PRECISION</a></dd>
+<dd><a href="#territory_SYMBOL_CURRENCY_PRECISION">territory_SYMBOL_CURRENCY_PRECISION</a></dd>
+<dd><a href="#territory_SYMBOL_CURRENCY_SYMBOL_PRECEDES_NON_NEGATIVE_VALUE">territory_SYMBOL_CURRENCY_SYMBOL_PRECEDES_NON_NEGATIVE_VALUE</a></dd>
+<dd><a href="#territory_SYMBOL_CURRENCY_SYMBOL_SEPARATED_FROM_NON_NEGATIVE_VALUE">territory_SYMBOL_CURRENCY_SYMBOL_SEPARATED_FROM_NON_NEGATIVE_VALUE</a></dd>
+<dd><a href="#territory_SYMBOL_CURRENCY_SYMBOL_PRECEDES_NEGATIVE_VALUE">territory_SYMBOL_CURRENCY_SYMBOL_PRECEDES_NEGATIVE_VALUE</a></dd>
+<dd><a href="#territory_SYMBOL_CURRENCY_SYMBOL_SEPARATED_FROM_NEGATIVE_VALUE">territory_SYMBOL_CURRENCY_SYMBOL_SEPARATED_FROM_NEGATIVE_VALUE</a></dd>
+<dd><a href="#territory_SYMBOL_CURRENCY_NON_NEGATIVE_FORMAT">territory_SYMBOL_CURRENCY_NON_NEGATIVE_FORMAT</a></dd>
+<dd><a href="#territory_SYMBOL_CURRENCY_NEGATIVE_FORMAT">territory_SYMBOL_CURRENCY_NEGATIVE_FORMAT</a></dd>
+<dd><a href="#territory_SYMBOL_LIST_SEPARATOR">territory_SYMBOL_LIST_SEPARATOR</a></dd>
+</dl>
+
+<h3 id="territory_symbol_currency_no">territory_symbol_currency_no</h3>
+<pre>typedef int territory_symbol_currency_no;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#territory_SYMBOL_PARENTHESISED">territory_SYMBOL_PARENTHESISED</a></dd>
+<dd><a href="#territory_SYMBOL_SIGN_PRECEDES">territory_SYMBOL_SIGN_PRECEDES</a></dd>
+<dd><a href="#territory_SYMBOL_SIGN_SUCCEEDS">territory_SYMBOL_SIGN_SUCCEEDS</a></dd>
+<dd><a href="#territory_SYMBOL_SIGN_IMMEDIATELY_PRECEDES">territory_SYMBOL_SIGN_IMMEDIATELY_PRECEDES</a></dd>
+<dd><a href="#territory_SYMBOL_SIGN_IMMEDIATELY_SUCCEEDS">territory_SYMBOL_SIGN_IMMEDIATELY_SUCCEEDS</a></dd>
+</dl>
+
+<h3 id="territory_CURRENT">territory_CURRENT</h3>
+<pre>#define territory_CURRENT ((<a href="#territory_t">territory_t</a>) 0xFFFFFFFFu)</pre>
+
+<h3 id="territory_UK">territory_UK</h3>
+<pre>#define territory_UK ((<a href="#territory_t">territory_t</a>) 0x1u)</pre>
+
+<h3 id="territory_MASTER">territory_MASTER</h3>
+<pre>#define territory_MASTER ((<a href="#territory_t">territory_t</a>) 0x2u)</pre>
+
+<h3 id="territory_COMPACT">territory_COMPACT</h3>
+<pre>#define territory_COMPACT ((<a href="#territory_t">territory_t</a>) 0x3u)</pre>
+
+<h3 id="territory_ITALY">territory_ITALY</h3>
+<pre>#define territory_ITALY ((<a href="#territory_t">territory_t</a>) 0x4u)</pre>
+
+<h3 id="territory_SPAIN">territory_SPAIN</h3>
+<pre>#define territory_SPAIN ((<a href="#territory_t">territory_t</a>) 0x5u)</pre>
+
+<h3 id="territory_FRANCE">territory_FRANCE</h3>
+<pre>#define territory_FRANCE ((<a href="#territory_t">territory_t</a>) 0x6u)</pre>
+
+<h3 id="territory_GERMANY">territory_GERMANY</h3>
+<pre>#define territory_GERMANY ((<a href="#territory_t">territory_t</a>) 0x7u)</pre>
+
+<h3 id="territory_PORTUGAL">territory_PORTUGAL</h3>
+<pre>#define territory_PORTUGAL ((<a href="#territory_t">territory_t</a>) 0x8u)</pre>
+
+<h3 id="territory_ESPERANTO">territory_ESPERANTO</h3>
+<pre>#define territory_ESPERANTO ((<a href="#territory_t">territory_t</a>) 0x9u)</pre>
+
+<h3 id="territory_GREECE">territory_GREECE</h3>
+<pre>#define territory_GREECE ((<a href="#territory_t">territory_t</a>) 0xAu)</pre>
+
+<h3 id="territory_SWEDEN">territory_SWEDEN</h3>
+<pre>#define territory_SWEDEN ((<a href="#territory_t">territory_t</a>) 0xBu)</pre>
+
+<h3 id="territory_FINLAND">territory_FINLAND</h3>
+<pre>#define territory_FINLAND ((<a href="#territory_t">territory_t</a>) 0xCu)</pre>
+
+<h3 id="territory_DENMARK">territory_DENMARK</h3>
+<pre>#define territory_DENMARK ((<a href="#territory_t">territory_t</a>) 0xEu)</pre>
+
+<h3 id="territory_NORWAY">territory_NORWAY</h3>
+<pre>#define territory_NORWAY ((<a href="#territory_t">territory_t</a>) 0xFu)</pre>
+
+<h3 id="territory_ICELAND">territory_ICELAND</h3>
+<pre>#define territory_ICELAND ((<a href="#territory_t">territory_t</a>) 0x10u)</pre>
+
+<h3 id="territory_CANADA1">territory_CANADA1</h3>
+<pre>#define territory_CANADA1 ((<a href="#territory_t">territory_t</a>) 0x11u)</pre>
+
+<h3 id="territory_CANADA2">territory_CANADA2</h3>
+<pre>#define territory_CANADA2 ((<a href="#territory_t">territory_t</a>) 0x12u)</pre>
+
+<h3 id="territory_CANADA">territory_CANADA</h3>
+<pre>#define territory_CANADA ((<a href="#territory_t">territory_t</a>) 0x13u)</pre>
+
+<h3 id="territory_TURKEY">territory_TURKEY</h3>
+<pre>#define territory_TURKEY ((<a href="#territory_t">territory_t</a>) 0x14u)</pre>
+
+<h3 id="territory_ARABIC">territory_ARABIC</h3>
+<pre>#define territory_ARABIC ((<a href="#territory_t">territory_t</a>) 0x15u)</pre>
+
+<h3 id="territory_IRELAND">territory_IRELAND</h3>
+<pre>#define territory_IRELAND ((<a href="#territory_t">territory_t</a>) 0x16u)</pre>
+
+<h3 id="territory_HONG_KONG">territory_HONG_KONG</h3>
+<pre>#define territory_HONG_KONG ((<a href="#territory_t">territory_t</a>) 0x17u)</pre>
+
+<h3 id="territory_RUSSIA">territory_RUSSIA</h3>
+<pre>#define territory_RUSSIA ((<a href="#territory_t">territory_t</a>) 0x18u)</pre>
+
+<h3 id="territory_RUSSIA2">territory_RUSSIA2</h3>
+<pre>#define territory_RUSSIA2 ((<a href="#territory_t">territory_t</a>) 0x19u)</pre>
+
+<h3 id="territory_ISRAEL">territory_ISRAEL</h3>
+<pre>#define territory_ISRAEL ((<a href="#territory_t">territory_t</a>) 0x1Au)</pre>
+
+<h3 id="territory_MEXICO">territory_MEXICO</h3>
+<pre>#define territory_MEXICO ((<a href="#territory_t">territory_t</a>) 0x1Bu)</pre>
+
+<h3 id="territory_LATIM_AM">territory_LATIM_AM</h3>
+<pre>#define territory_LATIM_AM ((<a href="#territory_t">territory_t</a>) 0x1Cu)</pre>
+
+<h3 id="territory_USA">territory_USA</h3>
+<pre>#define territory_USA ((<a href="#territory_t">territory_t</a>) 0x30u)</pre>
+
+<h3 id="territory_IGNORE_CASE">territory_IGNORE_CASE</h3>
+<pre>#define territory_IGNORE_CASE ((<a href="#territory_collate_flags">territory_collate_flags</a>) 0x1u)</pre>
+
+<h3 id="territory_IGNORE_ACCENT">territory_IGNORE_ACCENT</h3>
+<pre>#define territory_IGNORE_ACCENT ((<a href="#territory_collate_flags">territory_collate_flags</a>) 0x2u)</pre>
+
+<h3 id="territory_ALPHABET_BFONT">territory_ALPHABET_BFONT</h3>
+<pre>#define territory_ALPHABET_BFONT ((<a href="#territory_alphabet_number">territory_alphabet_number</a>) 0x64u)</pre>
+
+<h3 id="territory_ALPHABET_LATIN1">territory_ALPHABET_LATIN1</h3>
+<pre>#define territory_ALPHABET_LATIN1 ((<a href="#territory_alphabet_number">territory_alphabet_number</a>) 0x65u)</pre>
+
+<h3 id="territory_ALPHABET_LATIN2">territory_ALPHABET_LATIN2</h3>
+<pre>#define territory_ALPHABET_LATIN2 ((<a href="#territory_alphabet_number">territory_alphabet_number</a>) 0x66u)</pre>
+
+<h3 id="territory_ALPHABET_LATIN3">territory_ALPHABET_LATIN3</h3>
+<pre>#define territory_ALPHABET_LATIN3 ((<a href="#territory_alphabet_number">territory_alphabet_number</a>) 0x67u)</pre>
+
+<h3 id="territory_ALPHABET_LATIN4">territory_ALPHABET_LATIN4</h3>
+<pre>#define territory_ALPHABET_LATIN4 ((<a href="#territory_alphabet_number">territory_alphabet_number</a>) 0x68u)</pre>
+
+<h3 id="territory_ALPHABET_CYRILLIC">territory_ALPHABET_CYRILLIC</h3>
+<pre>#define territory_ALPHABET_CYRILLIC ((<a href="#territory_alphabet_number">territory_alphabet_number</a>) 0x69u)</pre>
+
+<h3 id="territory_ALPHABET_ARABIC">territory_ALPHABET_ARABIC</h3>
+<pre>#define territory_ALPHABET_ARABIC ((<a href="#territory_alphabet_number">territory_alphabet_number</a>) 0x6Au)</pre>
+
+<h3 id="territory_ALPHABET_GREEK">territory_ALPHABET_GREEK</h3>
+<pre>#define territory_ALPHABET_GREEK ((<a href="#territory_alphabet_number">territory_alphabet_number</a>) 0x6Bu)</pre>
+
+<h3 id="territory_ALPHABET_HEBREW">territory_ALPHABET_HEBREW</h3>
+<pre>#define territory_ALPHABET_HEBREW ((<a href="#territory_alphabet_number">territory_alphabet_number</a>) 0x6Cu)</pre>
+
+<h3 id="territory_ALPHABET_LATIN5">territory_ALPHABET_LATIN5</h3>
+<pre>#define territory_ALPHABET_LATIN5 ((<a href="#territory_alphabet_number">territory_alphabet_number</a>) 0x6Du)</pre>
+
+<h3 id="territory_ALPHABET_WELSH">territory_ALPHABET_WELSH</h3>
+<pre>#define territory_ALPHABET_WELSH ((<a href="#territory_alphabet_number">territory_alphabet_number</a>) 0x6Eu)</pre>
+
+<h3 id="territory_ALPHABET_UTF8">territory_ALPHABET_UTF8</h3>
+<pre>#define territory_ALPHABET_UTF8 ((<a href="#territory_alphabet_number">territory_alphabet_number</a>) 0x6Fu)</pre>
+
+<h3 id="territory_ALPHABET_LATIN9">territory_ALPHABET_LATIN9</h3>
+<pre>#define territory_ALPHABET_LATIN9 ((<a href="#territory_alphabet_number">territory_alphabet_number</a>) 0x70u)</pre>
+
+<h3 id="territory_ALPHABET_LATIN6">territory_ALPHABET_LATIN6</h3>
+<pre>#define territory_ALPHABET_LATIN6 ((<a href="#territory_alphabet_number">territory_alphabet_number</a>) 0x71u)</pre>
+
+<h3 id="territory_ALPHABET_CYRILLIC2">territory_ALPHABET_CYRILLIC2</h3>
+<pre>#define territory_ALPHABET_CYRILLIC2 ((<a href="#territory_alphabet_number">territory_alphabet_number</a>) 0x78u)</pre>
+
+<h3 id="error_TERRITORY_BAD_SWI">error_TERRITORY_BAD_SWI</h3>
+<pre>#define error_TERRITORY_BAD_SWI 0x43062u</pre>
+
+<h3 id="error_TERRITORY_UNKNOWN">error_TERRITORY_UNKNOWN</h3>
+<pre>#define error_TERRITORY_UNKNOWN 0x190u</pre>
+
+<h3 id="error_TERRITORY_UNKNOWN_ALPHABET">error_TERRITORY_UNKNOWN_ALPHABET</h3>
+<pre>#define error_TERRITORY_UNKNOWN_ALPHABET 0x191u</pre>
+
+<h3 id="error_NO_TERRITORY">error_NO_TERRITORY</h3>
+<pre>#define error_NO_TERRITORY 0x192u</pre>
+
+<h3 id="territory_GIVEN_TIME">territory_GIVEN_TIME</h3>
+<pre>#define territory_GIVEN_TIME ((<a href="#territory_time_string_flags">territory_time_string_flags</a>) 0x1u)</pre>
+
+<h3 id="territory_GIVEN_DATE">territory_GIVEN_DATE</h3>
+<pre>#define territory_GIVEN_DATE ((<a href="#territory_time_string_flags">territory_time_string_flags</a>) 0x2u)</pre>
+
+<h3 id="territory_GIVEN_DATE_AND_TIME">territory_GIVEN_DATE_AND_TIME</h3>
+<pre>#define territory_GIVEN_DATE_AND_TIME ((<a href="#territory_time_string_flags">territory_time_string_flags</a>) 0x3u)</pre>
+
+<h3 id="territory_WRITE_RIGHT_TO_LEFT">territory_WRITE_RIGHT_TO_LEFT</h3>
+<pre>#define territory_WRITE_RIGHT_TO_LEFT ((<a href="#territory_write_flags">territory_write_flags</a>) 0x1u)</pre>
+
+<h3 id="territory_WRITE_BOTTOM_TO_TOP">territory_WRITE_BOTTOM_TO_TOP</h3>
+<pre>#define territory_WRITE_BOTTOM_TO_TOP ((<a href="#territory_write_flags">territory_write_flags</a>) 0x2u)</pre>
+
+<h3 id="territory_WRITE_VERTICAL">territory_WRITE_VERTICAL</h3>
+<pre>#define territory_WRITE_VERTICAL ((<a href="#territory_write_flags">territory_write_flags</a>) 0x4u)</pre>
+
+<h3 id="territory_PROPERTY_CONTROL">territory_PROPERTY_CONTROL</h3>
+<pre>#define territory_PROPERTY_CONTROL ((<a href="#territory_character_property">territory_character_property</a>) 0x0u)</pre>
+
+<h3 id="territory_PROPERTY_UPPERCASE">territory_PROPERTY_UPPERCASE</h3>
+<pre>#define territory_PROPERTY_UPPERCASE ((<a href="#territory_character_property">territory_character_property</a>) 0x1u)</pre>
+
+<h3 id="territory_PROPERTY_LOWERCASE">territory_PROPERTY_LOWERCASE</h3>
+<pre>#define territory_PROPERTY_LOWERCASE ((<a href="#territory_character_property">territory_character_property</a>) 0x2u)</pre>
+
+<h3 id="territory_PROPERTY_ALPHABETIC">territory_PROPERTY_ALPHABETIC</h3>
+<pre>#define territory_PROPERTY_ALPHABETIC ((<a href="#territory_character_property">territory_character_property</a>) 0x3u)</pre>
+
+<h3 id="territory_PROPERTY_PUNCTUATION">territory_PROPERTY_PUNCTUATION</h3>
+<pre>#define territory_PROPERTY_PUNCTUATION ((<a href="#territory_character_property">territory_character_property</a>) 0x4u)</pre>
+
+<h3 id="territory_PROPERTY_WHITESPACE">territory_PROPERTY_WHITESPACE</h3>
+<pre>#define territory_PROPERTY_WHITESPACE ((<a href="#territory_character_property">territory_character_property</a>) 0x5u)</pre>
+
+<h3 id="territory_PROPERTY_DIGIT">territory_PROPERTY_DIGIT</h3>
+<pre>#define territory_PROPERTY_DIGIT ((<a href="#territory_character_property">territory_character_property</a>) 0x6u)</pre>
+
+<h3 id="territory_PROPERTY_HEX_DIGIT">territory_PROPERTY_HEX_DIGIT</h3>
+<pre>#define territory_PROPERTY_HEX_DIGIT ((<a href="#territory_character_property">territory_character_property</a>) 0x7u)</pre>
+
+<h3 id="territory_PROPERTY_ACCENTED">territory_PROPERTY_ACCENTED</h3>
+<pre>#define territory_PROPERTY_ACCENTED ((<a href="#territory_character_property">territory_character_property</a>) 0x8u)</pre>
+
+<h3 id="territory_PROPERTY_FORWARD">territory_PROPERTY_FORWARD</h3>
+<pre>#define territory_PROPERTY_FORWARD ((<a href="#territory_character_property">territory_character_property</a>) 0x9u)</pre>
+
+<h3 id="territory_PROPERTY_REVERSE">territory_PROPERTY_REVERSE</h3>
+<pre>#define territory_PROPERTY_REVERSE ((<a href="#territory_character_property">territory_character_property</a>) 0xAu)</pre>
+
+<h3 id="territory_SYMBOL_DECIMAL_POINT">territory_SYMBOL_DECIMAL_POINT</h3>
+<pre>#define territory_SYMBOL_DECIMAL_POINT ((<a href="#territory_symbol_no">territory_symbol_no</a>) 0x0u)</pre>
+
+<h3 id="territory_SYMBOL_GROUP_SEPARATOR">territory_SYMBOL_GROUP_SEPARATOR</h3>
+<pre>#define territory_SYMBOL_GROUP_SEPARATOR ((<a href="#territory_symbol_no">territory_symbol_no</a>) 0x1u)</pre>
+
+<h3 id="territory_SYMBOL_GROUPING_LIST">territory_SYMBOL_GROUPING_LIST</h3>
+<pre>#define territory_SYMBOL_GROUPING_LIST ((<a href="#territory_symbol_no">territory_symbol_no</a>) 0x2u)</pre>
+
+<h3 id="territory_SYMBOL_INTERNATIONAL_CURRENCY_SYMBOL">territory_SYMBOL_INTERNATIONAL_CURRENCY_SYMBOL</h3>
+<pre>#define territory_SYMBOL_INTERNATIONAL_CURRENCY_SYMBOL ((<a href="#territory_symbol_no">territory_symbol_no</a>) 0x3u)</pre>
+
+<h3 id="territory_SYMBOL_CURRENCY_SYMBOL">territory_SYMBOL_CURRENCY_SYMBOL</h3>
+<pre>#define territory_SYMBOL_CURRENCY_SYMBOL ((<a href="#territory_symbol_no">territory_symbol_no</a>) 0x4u)</pre>
+
+<h3 id="territory_SYMBOL_CURRENCY_POINT">territory_SYMBOL_CURRENCY_POINT</h3>
+<pre>#define territory_SYMBOL_CURRENCY_POINT ((<a href="#territory_symbol_no">territory_symbol_no</a>) 0x5u)</pre>
+
+<h3 id="territory_SYMBOL_CURRENCY_GROUP_SEPARATOR">territory_SYMBOL_CURRENCY_GROUP_SEPARATOR</h3>
+<pre>#define territory_SYMBOL_CURRENCY_GROUP_SEPARATOR ((<a href="#territory_symbol_no">territory_symbol_no</a>) 0x6u)</pre>
+
+<h3 id="territory_SYMBOL_CURRENCY_GROUP_LIST">territory_SYMBOL_CURRENCY_GROUP_LIST</h3>
+<pre>#define territory_SYMBOL_CURRENCY_GROUP_LIST ((<a href="#territory_symbol_no">territory_symbol_no</a>) 0x7u)</pre>
+
+<h3 id="territory_SYMBOL_CURRENCY_PLUS_SIGN">territory_SYMBOL_CURRENCY_PLUS_SIGN</h3>
+<pre>#define territory_SYMBOL_CURRENCY_PLUS_SIGN ((<a href="#territory_symbol_no">territory_symbol_no</a>) 0x8u)</pre>
+
+<h3 id="territory_SYMBOL_CURRENCY_MINUS_SIGN">territory_SYMBOL_CURRENCY_MINUS_SIGN</h3>
+<pre>#define territory_SYMBOL_CURRENCY_MINUS_SIGN ((<a href="#territory_symbol_no">territory_symbol_no</a>) 0x9u)</pre>
+
+<h3 id="territory_SYMBOL_INTERNATIONAL_CURRENCY_PRECISION">territory_SYMBOL_INTERNATIONAL_CURRENCY_PRECISION</h3>
+<pre>#define territory_SYMBOL_INTERNATIONAL_CURRENCY_PRECISION ((<a href="#territory_symbol_no">territory_symbol_no</a>) 0xAu)</pre>
+
+<h3 id="territory_SYMBOL_CURRENCY_PRECISION">territory_SYMBOL_CURRENCY_PRECISION</h3>
+<pre>#define territory_SYMBOL_CURRENCY_PRECISION ((<a href="#territory_symbol_no">territory_symbol_no</a>) 0xBu)</pre>
+
+<h3 id="territory_SYMBOL_CURRENCY_SYMBOL_PRECEDES_NON_NEGATIVE_VALUE">territory_SYMBOL_CURRENCY_SYMBOL_PRECEDES_NON_NEGATIVE_VALUE</h3>
+<pre>#define territory_SYMBOL_CURRENCY_SYMBOL_PRECEDES_NON_NEGATIVE_VALUE ((<a href="#territory_symbol_no">territory_symbol_no</a>) 0xCu)</pre>
+
+<h3 id="territory_SYMBOL_CURRENCY_SYMBOL_SEPARATED_FROM_NON_NEGATIVE_VALUE">territory_SYMBOL_CURRENCY_SYMBOL_SEPARATED_FROM_NON_NEGATIVE_VALUE</h3>
+<pre>#define territory_SYMBOL_CURRENCY_SYMBOL_SEPARATED_FROM_NON_NEGATIVE_VALUE ((<a href="#territory_symbol_no">territory_symbol_no</a>) 0xDu)</pre>
+
+<h3 id="territory_SYMBOL_CURRENCY_SYMBOL_PRECEDES_NEGATIVE_VALUE">territory_SYMBOL_CURRENCY_SYMBOL_PRECEDES_NEGATIVE_VALUE</h3>
+<pre>#define territory_SYMBOL_CURRENCY_SYMBOL_PRECEDES_NEGATIVE_VALUE ((<a href="#territory_symbol_no">territory_symbol_no</a>) 0xEu)</pre>
+
+<h3 id="territory_SYMBOL_CURRENCY_SYMBOL_SEPARATED_FROM_NEGATIVE_VALUE">territory_SYMBOL_CURRENCY_SYMBOL_SEPARATED_FROM_NEGATIVE_VALUE</h3>
+<pre>#define territory_SYMBOL_CURRENCY_SYMBOL_SEPARATED_FROM_NEGATIVE_VALUE ((<a href="#territory_symbol_no">territory_symbol_no</a>) 0xFu)</pre>
+
+<h3 id="territory_SYMBOL_CURRENCY_NON_NEGATIVE_FORMAT">territory_SYMBOL_CURRENCY_NON_NEGATIVE_FORMAT</h3>
+<pre>#define territory_SYMBOL_CURRENCY_NON_NEGATIVE_FORMAT ((<a href="#territory_symbol_no">territory_symbol_no</a>) 0x10u)</pre>
+
+<h3 id="territory_SYMBOL_CURRENCY_NEGATIVE_FORMAT">territory_SYMBOL_CURRENCY_NEGATIVE_FORMAT</h3>
+<pre>#define territory_SYMBOL_CURRENCY_NEGATIVE_FORMAT ((<a href="#territory_symbol_no">territory_symbol_no</a>) 0x11u)</pre>
+
+<h3 id="territory_SYMBOL_LIST_SEPARATOR">territory_SYMBOL_LIST_SEPARATOR</h3>
+<pre>#define territory_SYMBOL_LIST_SEPARATOR ((<a href="#territory_symbol_no">territory_symbol_no</a>) 0x12u)</pre>
+
+<h3 id="territory_SYMBOL_PARENTHESISED">territory_SYMBOL_PARENTHESISED</h3>
+<pre>#define territory_SYMBOL_PARENTHESISED ((<a href="#territory_symbol_currency_no">territory_symbol_currency_no</a>) 0x0u)</pre>
+
+<h3 id="territory_SYMBOL_SIGN_PRECEDES">territory_SYMBOL_SIGN_PRECEDES</h3>
+<pre>#define territory_SYMBOL_SIGN_PRECEDES ((<a href="#territory_symbol_currency_no">territory_symbol_currency_no</a>) 0x1u)</pre>
+
+<h3 id="territory_SYMBOL_SIGN_SUCCEEDS">territory_SYMBOL_SIGN_SUCCEEDS</h3>
+<pre>#define territory_SYMBOL_SIGN_SUCCEEDS ((<a href="#territory_symbol_currency_no">territory_symbol_currency_no</a>) 0x2u)</pre>
+
+<h3 id="territory_SYMBOL_SIGN_IMMEDIATELY_PRECEDES">territory_SYMBOL_SIGN_IMMEDIATELY_PRECEDES</h3>
+<pre>#define territory_SYMBOL_SIGN_IMMEDIATELY_PRECEDES ((<a href="#territory_symbol_currency_no">territory_symbol_currency_no</a>) 0x3u)</pre>
+
+<h3 id="territory_SYMBOL_SIGN_IMMEDIATELY_SUCCEEDS">territory_SYMBOL_SIGN_IMMEDIATELY_SUCCEEDS</h3>
+<pre>#define territory_SYMBOL_SIGN_IMMEDIATELY_SUCCEEDS ((<a href="#territory_symbol_currency_no">territory_symbol_currency_no</a>) 0x4u)</pre>
+
+<h3 id="xterritory_number">xterritory_number</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_number (<a href="#territory_t">territory_t</a> *territory);</pre>
+<p>Returns the territory number of the current territory</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="territory_number">territory_number</h3>
+<pre>extern <a href="#territory_t">territory_t</a> territory_number (void);
+</pre><p>Returns the territory number of the current territory</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>territory</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xterritory_register">xterritory_register</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_register (<a href="#territory_t">territory_t</a> territory,
+      <a href="#territory_data">territory_data</a> const *entries,
+      void *workspace);</pre>
+<p>Adds the given territory to the list of active territories</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>entries</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="territory_register">territory_register</h3>
+<pre>extern void territory_register (<a href="#territory_t">territory_t</a> territory,
+      <a href="#territory_data">territory_data</a> const *entries,
+      void *workspace);</pre>
+<p>Adds the given territory to the list of active territories</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>entries</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xterritory_deregister">xterritory_deregister</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_deregister (<a href="#territory_t">territory_t</a> territory);</pre>
+<p>Removes the given territory from the list of active territories</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="territory_deregister">territory_deregister</h3>
+<pre>extern void territory_deregister (<a href="#territory_t">territory_t</a> territory);</pre>
+<p>Removes the given territory from the list of active territories</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xterritory_number_to_name">xterritory_number_to_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_number_to_name (<a href="#territory_t">territory_t</a> territory,
+      char *name,
+      int size);</pre>
+<p>Returns the name of a given territory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="territory_number_to_name">territory_number_to_name</h3>
+<pre>extern void territory_number_to_name (<a href="#territory_t">territory_t</a> territory,
+      char *name,
+      int size);</pre>
+<p>Returns the name of a given territory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xterritory_exists">xterritory_exists</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_exists (<a href="#territory_t">territory_t</a> territory,
+      bits *psr);</pre>
+<p>Checks if the given territory is currently present in the machine</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="territory_exists">territory_exists</h3>
+<pre>extern bits territory_exists (<a href="#territory_t">territory_t</a> territory);</pre>
+<p>Checks if the given territory is currently present in the machine</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td colspan="3">processor status register</td></tr>
+</table>
+
+<h3 id="xterritory_alphabet_number_to_name">xterritory_alphabet_number_to_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_alphabet_number_to_name (<a href="#territory_alphabet_number">territory_alphabet_number</a> alphabet,
+      char *name,
+      int size);</pre>
+<p>Returns the name of the given alphabet</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>alphabet</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="territory_alphabet_number_to_name">territory_alphabet_number_to_name</h3>
+<pre>extern void territory_alphabet_number_to_name (<a href="#territory_alphabet_number">territory_alphabet_number</a> alphabet,
+      char *name,
+      int size);</pre>
+<p>Returns the name of the given alphabet</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>alphabet</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xterritory_select_alphabet">xterritory_select_alphabet</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_select_alphabet (<a href="#territory_t">territory_t</a> territory);</pre>
+<p>Selects the correct alphabet for the given territory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="territory_select_alphabet">territory_select_alphabet</h3>
+<pre>extern void territory_select_alphabet (<a href="#territory_t">territory_t</a> territory);</pre>
+<p>Selects the correct alphabet for the given territory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xterritory_set_time">xterritory_set_time</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_set_time (<a href="os.html#os_date_and_time">os_date_and_time</a> const *date_and_time);</pre>
+<p>Sets the clock to a given 5-byte UTC time</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>date_and_time</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="territory_set_time">territory_set_time</h3>
+<pre>extern void territory_set_time (<a href="os.html#os_date_and_time">os_date_and_time</a> const *date_and_time);</pre>
+<p>Sets the clock to a given 5-byte UTC time</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>date_and_time</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xterritory_read_current_time_zone">xterritory_read_current_time_zone</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_read_current_time_zone (char **timezone,
+      int *offset);</pre>
+<p>Returns information on the current time zone</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>timezone</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="territory_read_current_time_zone">territory_read_current_time_zone</h3>
+<pre>extern void territory_read_current_time_zone (char **timezone,
+      int *offset);</pre>
+<p>Returns information on the current time zone</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>timezone</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xterritory_convert_time_to_utc_ordinals">xterritory_convert_time_to_utc_ordinals</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_convert_time_to_utc_ordinals (<a href="os.html#os_date_and_time">os_date_and_time</a> const *date_and_time,
+      <a href="#territory_ordinals">territory_ordinals</a> *ordinals);</pre>
+<p>Converts a 5-byte UTC time to UTC time ordinals</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>date_and_time</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ordinals</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="territory_convert_time_to_utc_ordinals">territory_convert_time_to_utc_ordinals</h3>
+<pre>extern void territory_convert_time_to_utc_ordinals (<a href="os.html#os_date_and_time">os_date_and_time</a> const *date_and_time,
+      <a href="#territory_ordinals">territory_ordinals</a> *ordinals);</pre>
+<p>Converts a 5-byte UTC time to UTC time ordinals</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>date_and_time</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ordinals</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xterritory_read_time_zones">xterritory_read_time_zones</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_read_time_zones (<a href="#territory_t">territory_t</a> territory,
+      char **timezone,
+      char **dst_timezone,
+      int *offset,
+      int *dst_offset);</pre>
+<p>Returns information on the time zones for the given territory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>timezone</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>dst_timezone</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dst_offset</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="territory_read_time_zones">territory_read_time_zones</h3>
+<pre>extern void territory_read_time_zones (<a href="#territory_t">territory_t</a> territory,
+      char **timezone,
+      char **dst_timezone,
+      int *offset,
+      int *dst_offset);</pre>
+<p>Returns information on the time zones for the given territory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>timezone</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>dst_timezone</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dst_offset</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xterritory_convert_date_and_time">xterritory_convert_date_and_time</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_convert_date_and_time (<a href="#territory_t">territory_t</a> territory,
+      <a href="os.html#os_date_and_time">os_date_and_time</a> const *date_and_time,
+      char *buffer,
+      int size,
+      char const *format,
+      char **end);</pre>
+<p>Converts a 5-byte UTC time into a string giving the date and time using a supplied format string</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>date_and_time</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>format</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="territory_convert_date_and_time">territory_convert_date_and_time</h3>
+<pre>extern char *territory_convert_date_and_time (<a href="#territory_t">territory_t</a> territory,
+      <a href="os.html#os_date_and_time">os_date_and_time</a> const *date_and_time,
+      char *buffer,
+      int size,
+      char const *format);</pre>
+<p>Converts a 5-byte UTC time into a string giving the date and time using a supplied format string</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>date_and_time</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>format</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>end</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xterritory_convert_standard_date_and_time">xterritory_convert_standard_date_and_time</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_convert_standard_date_and_time (<a href="#territory_t">territory_t</a> territory,
+      <a href="os.html#os_date_and_time">os_date_and_time</a> const *date_and_time,
+      char *buffer,
+      int size,
+      char **end);</pre>
+<p>Converts a 5-byte UTC time into a string giving the date and time</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>date_and_time</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="territory_convert_standard_date_and_time">territory_convert_standard_date_and_time</h3>
+<pre>extern char *territory_convert_standard_date_and_time (<a href="#territory_t">territory_t</a> territory,
+      <a href="os.html#os_date_and_time">os_date_and_time</a> const *date_and_time,
+      char *buffer,
+      int size);</pre>
+<p>Converts a 5-byte UTC time into a string giving the date and time</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>date_and_time</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>end</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xterritory_convert_standard_date">xterritory_convert_standard_date</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_convert_standard_date (<a href="#territory_t">territory_t</a> territory,
+      <a href="os.html#os_date_and_time">os_date_and_time</a> const *date,
+      char *buffer,
+      int size,
+      char **end);</pre>
+<p>Converts a 5-byte UTC time into a string giving the date only</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>date</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="territory_convert_standard_date">territory_convert_standard_date</h3>
+<pre>extern char *territory_convert_standard_date (<a href="#territory_t">territory_t</a> territory,
+      <a href="os.html#os_date_and_time">os_date_and_time</a> const *date,
+      char *buffer,
+      int size);</pre>
+<p>Converts a 5-byte UTC time into a string giving the date only</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>date</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>end</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xterritory_convert_standard_time">xterritory_convert_standard_time</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_convert_standard_time (<a href="#territory_t">territory_t</a> territory,
+      <a href="os.html#os_date_and_time">os_date_and_time</a> const *time,
+      char *buffer,
+      int size,
+      char **end);</pre>
+<p>Converts a 5-byte UTC time into a string giving the time only</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>time</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="territory_convert_standard_time">territory_convert_standard_time</h3>
+<pre>extern char *territory_convert_standard_time (<a href="#territory_t">territory_t</a> territory,
+      <a href="os.html#os_date_and_time">os_date_and_time</a> const *time,
+      char *buffer,
+      int size);</pre>
+<p>Converts a 5-byte UTC time into a string giving the time only</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>time</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>end</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xterritory_convert_time_to_ordinals">xterritory_convert_time_to_ordinals</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_convert_time_to_ordinals (<a href="#territory_t">territory_t</a> territory,
+      <a href="os.html#os_date_and_time">os_date_and_time</a> const *date_and_time,
+      <a href="#territory_ordinals">territory_ordinals</a> *ordinals);</pre>
+<p>Converts a 5-byte UTC time to local time ordinals for the given territory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>date_and_time</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ordinals</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="territory_convert_time_to_ordinals">territory_convert_time_to_ordinals</h3>
+<pre>extern void territory_convert_time_to_ordinals (<a href="#territory_t">territory_t</a> territory,
+      <a href="os.html#os_date_and_time">os_date_and_time</a> const *date_and_time,
+      <a href="#territory_ordinals">territory_ordinals</a> *ordinals);</pre>
+<p>Converts a 5-byte UTC time to local time ordinals for the given territory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>date_and_time</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ordinals</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xterritory_convert_time_string_to_ordinals">xterritory_convert_time_string_to_ordinals</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_convert_time_string_to_ordinals (<a href="#territory_t">territory_t</a> territory,
+      <a href="#territory_time_string_flags">territory_time_string_flags</a> format,
+      char const *t,
+      <a href="#territory_ordinals">territory_ordinals</a> *ordinals);</pre>
+<p>Converts a time string to time ordinals</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>format</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>t</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ordinals</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="territory_convert_time_string_to_ordinals">territory_convert_time_string_to_ordinals</h3>
+<pre>extern void territory_convert_time_string_to_ordinals (<a href="#territory_t">territory_t</a> territory,
+      <a href="#territory_time_string_flags">territory_time_string_flags</a> format,
+      char const *t,
+      <a href="#territory_ordinals">territory_ordinals</a> *ordinals);</pre>
+<p>Converts a time string to time ordinals</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>format</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>t</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ordinals</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xterritory_convert_ordinals_to_time">xterritory_convert_ordinals_to_time</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_convert_ordinals_to_time (<a href="#territory_t">territory_t</a> territory,
+      <a href="os.html#os_date_and_time">os_date_and_time</a> *buffer,
+      <a href="#territory_ordinals">territory_ordinals</a> const *ordinals);</pre>
+<p>Converts local time ordinals for the given territory to a 5-byte UTC time</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ordinals</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="territory_convert_ordinals_to_time">territory_convert_ordinals_to_time</h3>
+<pre>extern void territory_convert_ordinals_to_time (<a href="#territory_t">territory_t</a> territory,
+      <a href="os.html#os_date_and_time">os_date_and_time</a> *buffer,
+      <a href="#territory_ordinals">territory_ordinals</a> const *ordinals);</pre>
+<p>Converts local time ordinals for the given territory to a 5-byte UTC time</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ordinals</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xterritory_alphabet">xterritory_alphabet</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_alphabet (<a href="#territory_t">territory_t</a> territory,
+      <a href="#territory_alphabet_number">territory_alphabet_number</a> *alphabet);</pre>
+<p>Returns the alphabet number that should be selected for the given territory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>alphabet</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="territory_alphabet">territory_alphabet</h3>
+<pre>extern <a href="#territory_alphabet_number">territory_alphabet_number</a> territory_alphabet (<a href="#territory_t">territory_t</a> territory);</pre>
+<p>Returns the alphabet number that should be selected for the given territory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>alphabet</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xterritory_alphabet_identifier">xterritory_alphabet_identifier</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_alphabet_identifier (<a href="#territory_t">territory_t</a> territory,
+      char **alphabet_name);</pre>
+<p>Returns an identifier string for the alphabet that should be used for the given territory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>alphabet_name</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="territory_alphabet_identifier">territory_alphabet_identifier</h3>
+<pre>extern char *territory_alphabet_identifier (<a href="#territory_t">territory_t</a> territory);</pre>
+<p>Returns an identifier string for the alphabet that should be used for the given territory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>alphabet_name</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xterritory_select_keyboard_handler">xterritory_select_keyboard_handler</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_select_keyboard_handler (<a href="#territory_t">territory_t</a> territory);</pre>
+<p>Selects the keyboard handler for the given territory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="territory_select_keyboard_handler">territory_select_keyboard_handler</h3>
+<pre>extern void territory_select_keyboard_handler (<a href="#territory_t">territory_t</a> territory);</pre>
+<p>Selects the keyboard handler for the given territory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xterritory_write_direction">xterritory_write_direction</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_write_direction (<a href="#territory_t">territory_t</a> territory,
+      <a href="#territory_write_flags">territory_write_flags</a> *flags);</pre>
+<p>Returns the direction of writing in the given territory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="territory_write_direction">territory_write_direction</h3>
+<pre>extern <a href="#territory_write_flags">territory_write_flags</a> territory_write_direction (<a href="#territory_t">territory_t</a> territory);</pre>
+<p>Returns the direction of writing in the given territory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>flags</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xterritory_character_property_table">xterritory_character_property_table</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_character_property_table (<a href="#territory_t">territory_t</a> territory,
+      <a href="#territory_character_property">territory_character_property</a> property,
+      <a href="#territory_property_table">territory_property_table</a> **table);</pre>
+<p>Returns a pointer to a character property table</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>property</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>table</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="territory_character_property_table">territory_character_property_table</h3>
+<pre>extern <a href="#territory_property_table">territory_property_table</a> *territory_character_property_table (<a href="#territory_t">territory_t</a> territory,
+      <a href="#territory_character_property">territory_character_property</a> property);</pre>
+<p>Returns a pointer to a character property table</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>property</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>table</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xterritory_lower_case_table">xterritory_lower_case_table</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_lower_case_table (<a href="#territory_t">territory_t</a> territory,
+      char **table);</pre>
+<p>Returns a pointer to a lower case table</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>table</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="territory_lower_case_table">territory_lower_case_table</h3>
+<pre>extern char *territory_lower_case_table (<a href="#territory_t">territory_t</a> territory);</pre>
+<p>Returns a pointer to a lower case table</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>table</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xterritory_upper_case_table">xterritory_upper_case_table</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_upper_case_table (<a href="#territory_t">territory_t</a> territory,
+      char **table);</pre>
+<p>Returns a pointer to an upper case table</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>table</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="territory_upper_case_table">territory_upper_case_table</h3>
+<pre>extern char *territory_upper_case_table (<a href="#territory_t">territory_t</a> territory);</pre>
+<p>Returns a pointer to an upper case table</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>table</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xterritory_control_table">xterritory_control_table</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_control_table (<a href="#territory_t">territory_t</a> territory,
+      char **table);</pre>
+<p>Returns a pointer to a control character table</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>table</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="territory_control_table">territory_control_table</h3>
+<pre>extern char *territory_control_table (<a href="#territory_t">territory_t</a> territory);</pre>
+<p>Returns a pointer to a control character table</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>table</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xterritory_plain_table">xterritory_plain_table</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_plain_table (<a href="#territory_t">territory_t</a> territory,
+      char **table);</pre>
+<p>Returns a pointer to a an unaccented character table</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>table</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="territory_plain_table">territory_plain_table</h3>
+<pre>extern char *territory_plain_table (<a href="#territory_t">territory_t</a> territory);</pre>
+<p>Returns a pointer to a an unaccented character table</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>table</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xterritory_value_table">xterritory_value_table</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_value_table (<a href="#territory_t">territory_t</a> territory,
+      char **table);</pre>
+<p>Returns a pointer to a numeric value table</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>table</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="territory_value_table">territory_value_table</h3>
+<pre>extern char *territory_value_table (<a href="#territory_t">territory_t</a> territory);</pre>
+<p>Returns a pointer to a numeric value table</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>table</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xterritory_representation_table">xterritory_representation_table</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_representation_table (<a href="#territory_t">territory_t</a> territory,
+      char **table);</pre>
+<p>Returns a pointer to a numeric representation table</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>table</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="territory_representation_table">territory_representation_table</h3>
+<pre>extern char *territory_representation_table (<a href="#territory_t">territory_t</a> territory);</pre>
+<p>Returns a pointer to a numeric representation table</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>table</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xterritory_collate">xterritory_collate</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_collate (<a href="#territory_t">territory_t</a> territory,
+      char const *s1,
+      char const *s2,
+      <a href="#territory_collate_flags">territory_collate_flags</a> flags,
+      int *collate);</pre>
+<p>Compares two strings in the given territory's alphabet</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>s1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>s2</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>collate</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="territory_collate">territory_collate</h3>
+<pre>extern int territory_collate (<a href="#territory_t">territory_t</a> territory,
+      char const *s1,
+      char const *s2,
+      <a href="#territory_collate_flags">territory_collate_flags</a> flags);</pre>
+<p>Compares two strings in the given territory's alphabet</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>s1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>s2</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>collate</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xterritory_read_boolean_symbols">xterritory_read_boolean_symbols</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_read_boolean_symbols (<a href="#territory_t">territory_t</a> territory,
+      <a href="#territory_symbol_no">territory_symbol_no</a> symbol_no,
+      osbool *symbol);</pre>
+<p>Returns various boolean information telling you how to format numbers</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>symbol_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>symbol</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="territory_read_boolean_symbols">territory_read_boolean_symbols</h3>
+<pre>extern osbool territory_read_boolean_symbols (<a href="#territory_t">territory_t</a> territory,
+      <a href="#territory_symbol_no">territory_symbol_no</a> symbol_no);</pre>
+<p>Returns various boolean information telling you how to format numbers</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>symbol_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>symbol</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xterritory_read_integer_symbols">xterritory_read_integer_symbols</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_read_integer_symbols (<a href="#territory_t">territory_t</a> territory,
+      <a href="#territory_symbol_no">territory_symbol_no</a> symbol_no,
+      int *symbol);</pre>
+<p>Returns various integer information telling you how to format numbers</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>symbol_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>symbol</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="territory_read_integer_symbols">territory_read_integer_symbols</h3>
+<pre>extern int territory_read_integer_symbols (<a href="#territory_t">territory_t</a> territory,
+      <a href="#territory_symbol_no">territory_symbol_no</a> symbol_no);</pre>
+<p>Returns various integer information telling you how to format numbers</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>symbol_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>symbol</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xterritory_read_string_symbols">xterritory_read_string_symbols</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_read_string_symbols (<a href="#territory_t">territory_t</a> territory,
+      <a href="#territory_symbol_no">territory_symbol_no</a> symbol_no,
+      char **symbol);</pre>
+<p>Returns various string information telling you how to format numbers</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>symbol_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>symbol</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="territory_read_string_symbols">territory_read_string_symbols</h3>
+<pre>extern char *territory_read_string_symbols (<a href="#territory_t">territory_t</a> territory,
+      <a href="#territory_symbol_no">territory_symbol_no</a> symbol_no);</pre>
+<p>Returns various string information telling you how to format numbers</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>symbol_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>symbol</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xterritory_read_calendar_information">xterritory_read_calendar_information</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_read_calendar_information (<a href="#territory_t">territory_t</a> territory,
+      <a href="os.html#os_date_and_time">os_date_and_time</a> const *date_and_time,
+      <a href="#territory_calendar">territory_calendar</a> *calendar);</pre>
+<p>Returns various information about the given territory's calendar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>date_and_time</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>calendar</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="territory_read_calendar_information">territory_read_calendar_information</h3>
+<pre>extern void territory_read_calendar_information (<a href="#territory_t">territory_t</a> territory,
+      <a href="os.html#os_date_and_time">os_date_and_time</a> const *date_and_time,
+      <a href="#territory_calendar">territory_calendar</a> *calendar);</pre>
+<p>Returns various information about the given territory's calendar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>date_and_time</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>calendar</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xterritory_name_to_number">xterritory_name_to_number</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_name_to_number (<a href="#territory_t">territory_t</a> territory,
+      char const *name,
+      <a href="#territory_t">territory_t</a> *territory_out);</pre>
+<p>Returns the number of the given territory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>territory_out</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="territory_name_to_number">territory_name_to_number</h3>
+<pre>extern <a href="#territory_t">territory_t</a> territory_name_to_number (<a href="#territory_t">territory_t</a> territory,
+      char const *name);</pre>
+<p>Returns the number of the given territory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>territory_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xterritory_transform_string">xterritory_transform_string</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xterritory_transform_string (<a href="#territory_t">territory_t</a> territory,
+      char *buffer,
+      char const *s,
+      int size,
+      int *used);</pre>
+<p>Transforms a string to allow direct territory-independent string comparison</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>s</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="territory_transform_string">territory_transform_string</h3>
+<pre>extern int territory_transform_string (<a href="#territory_t">territory_t</a> territory,
+      char *buffer,
+      char const *s,
+      int size);</pre>
+<p>Transforms a string to allow direct territory-independent string comparison</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>territory</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>s</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xservice_territory_manager_loaded">xservice_territory_manager_loaded</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_territory_manager_loaded (void);
+</pre><p>Tells territory modules to register themselves</p>
+
+
+<table>
+</table>
+
+<h3 id="service_territory_manager_loaded">service_territory_manager_loaded</h3>
+<pre>extern void service_territory_manager_loaded (void);
+</pre><p>Tells territory modules to register themselves</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_territory_started">xservice_territory_started</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_territory_started (void);
+</pre><p>New territory starting</p>
+
+
+<table>
+</table>
+
+<h3 id="service_territory_started">service_territory_started</h3>
+<pre>extern void service_territory_started (void);
+</pre><p>New territory starting</p>
+
+
+<table>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

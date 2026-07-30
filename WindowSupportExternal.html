@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; WindowSupportExternal</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>WindowSupportExternal</h2>
+
+<pre>#include "oslib/windowsupportexternal.h"</pre>
+
+<h3 id="windowsupportexternal_HANDLER_ADD">windowsupportexternal_HANDLER_ADD</h3>
+<pre>#define windowsupportexternal_HANDLER_ADD 1</pre>
+
+<h3 id="windowsupportexternal_HANDLER_REMOVE">windowsupportexternal_HANDLER_REMOVE</h3>
+<pre>#define windowsupportexternal_HANDLER_REMOVE 2</pre>
+
+<h3 id="windowsupportexternal_HANDLER_FADE">windowsupportexternal_HANDLER_FADE</h3>
+<pre>#define windowsupportexternal_HANDLER_FADE 3</pre>
+
+<h3 id="windowsupportexternal_HANDLER_METHOD">windowsupportexternal_HANDLER_METHOD</h3>
+<pre>#define windowsupportexternal_HANDLER_METHOD 4</pre>
+
+<h3 id="windowsupportexternal_HANDLER_CLICK">windowsupportexternal_HANDLER_CLICK</h3>
+<pre>#define windowsupportexternal_HANDLER_CLICK 6</pre>
+
+<h3 id="windowsupportexternal_HANDLER_PLOT">windowsupportexternal_HANDLER_PLOT</h3>
+<pre>#define windowsupportexternal_HANDLER_PLOT 9</pre>
+
+<h3 id="windowsupportexternal_HANDLER_SET_FOCUS">windowsupportexternal_HANDLER_SET_FOCUS</h3>
+<pre>#define windowsupportexternal_HANDLER_SET_FOCUS 10</pre>
+
+<h3 id="windowsupportexternal_HANDLER_MOVE">windowsupportexternal_HANDLER_MOVE</h3>
+<pre>#define windowsupportexternal_HANDLER_MOVE 11</pre>
+
+<h3 id="windowsupportexternal_HANDLER_POST_ADD">windowsupportexternal_HANDLER_POST_ADD</h3>
+<pre>#define windowsupportexternal_HANDLER_POST_ADD 12</pre>
+
+<h3 id="xwindowsupportexternal_create_icon">xwindowsupportexternal_create_icon</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindowsupportexternal_create_icon (bits flags,
+      <a href="wimp.html#wimp_icon_create">wimp_icon_create</a> const *icon,
+      <a href="wimp.html#wimp_i">wimp_i</a> *i);</pre>
+<p>Creates an icon, handling window module plotting mode</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>icon</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>i</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="windowsupportexternal_create_icon">windowsupportexternal_create_icon</h3>
+<pre>extern <a href="wimp.html#wimp_i">wimp_i</a> windowsupportexternal_create_icon (bits flags,
+      <a href="wimp.html#wimp_icon_create">wimp_icon_create</a> const *icon);</pre>
+<p>Creates an icon, handling window module plotting mode</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>icon</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>i</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwindowsupportexternal_create_object">xwindowsupportexternal_create_object</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindowsupportexternal_create_object (<a href="toolbox.html#toolbox_create_flags">toolbox_create_flags</a> flags,
+      <a href="toolbox.html#toolbox_id">toolbox_id</a> id,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *obj);</pre>
+<p>Creates an object, handling window module plotting mode</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="windowsupportexternal_create_object">windowsupportexternal_create_object</h3>
+<pre>extern <a href="toolbox.html#toolbox_o">toolbox_o</a> windowsupportexternal_create_object (<a href="toolbox.html#toolbox_create_flags">toolbox_create_flags</a> flags,
+      <a href="toolbox.html#toolbox_id">toolbox_id</a> id);</pre>
+<p>Creates an object, handling window module plotting mode</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwindowsupportexternal_create_gadget">xwindowsupportexternal_create_gadget</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindowsupportexternal_create_gadget (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> obj,
+      <a href="gadget.html#gadget_object">gadget_object</a> const *gadget,
+      int tag,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> *cmp);</pre>
+<p>Creates a gadget</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>tag</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>cmp</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="windowsupportexternal_create_gadget">windowsupportexternal_create_gadget</h3>
+<pre>extern <a href="toolbox.html#toolbox_c">toolbox_c</a> windowsupportexternal_create_gadget (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> obj,
+      <a href="gadget.html#gadget_object">gadget_object</a> const *gadget,
+      int tag);</pre>
+<p>Creates a gadget</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>gadget</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>tag</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>cmp</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwindowsupportexternal_alloc">xwindowsupportexternal_alloc</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindowsupportexternal_alloc (bits flags,
+      int size,
+      void **data);</pre>
+<p>Allocates memory via window module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>data</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="windowsupportexternal_alloc">windowsupportexternal_alloc</h3>
+<pre>extern void *windowsupportexternal_alloc (bits flags,
+      int size);</pre>
+<p>Allocates memory via window module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>data</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwindowsupportexternal_free">xwindowsupportexternal_free</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindowsupportexternal_free (bits flags,
+      void *data);</pre>
+<p>Frees memory via window module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="windowsupportexternal_free">windowsupportexternal_free</h3>
+<pre>extern void windowsupportexternal_free (bits flags,
+      void *data);</pre>
+<p>Frees memory via window module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xwindowsupportexternal_realloc">xwindowsupportexternal_realloc</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwindowsupportexternal_realloc (bits flags,
+      void *data,
+      int size_increase,
+      void **data_out);</pre>
+<p>Extends memory allocated via window module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size_increase</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>data_out</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="windowsupportexternal_realloc">windowsupportexternal_realloc</h3>
+<pre>extern void *windowsupportexternal_realloc (bits flags,
+      void *data,
+      int size_increase);</pre>
+<p>Extends memory allocated via window module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size_increase</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>data_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

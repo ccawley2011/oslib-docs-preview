@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; TaskWindow</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>TaskWindow</h2>
+
+<pre>#include "oslib/taskwindow.h"</pre>
+
+<h3 id="taskwindow_message_data">taskwindow_message_data</h3>
+<pre>typedef struct
+   {  int size;
+      char data [232];
+   }
+   taskwindow_message_data;</pre>
+
+<h3 id="taskwindow_message_ego">taskwindow_message_ego</h3>
+<pre>typedef struct
+   {  int txt;
+   }
+   taskwindow_message_ego;</pre>
+
+<h3 id="taskwindow_message_new_task">taskwindow_message_new_task</h3>
+<pre>typedef struct
+   {  char command [236];
+   }
+   taskwindow_message_new_task;</pre>
+
+<h3 id="taskwindow_full_message_data">taskwindow_full_message_data</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      int data_size;
+      char data [232];
+   }
+   taskwindow_full_message_data;</pre>
+
+<h3 id="taskwindow_full_message_ego">taskwindow_full_message_ego</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      int txt;
+   }
+   taskwindow_full_message_ego;</pre>
+
+<h3 id="taskwindow_full_message_new_task">taskwindow_full_message_new_task</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      char command [236];
+   }
+   taskwindow_full_message_new_task;</pre>
+
+<h3 id="error_TASK_WINDOW_CANT_KILL">error_TASK_WINDOW_CANT_KILL</h3>
+<pre>#define error_TASK_WINDOW_CANT_KILL 0xA80u</pre>
+
+<h3 id="error_TASK_WINDOW_BAD_SWI_ENTRY">error_TASK_WINDOW_BAD_SWI_ENTRY</h3>
+<pre>#define error_TASK_WINDOW_BAD_SWI_ENTRY 0xA81u</pre>
+
+<h3 id="error_TASK_WINDOW_BAD_TASK_HANDLE">error_TASK_WINDOW_BAD_TASK_HANDLE</h3>
+<pre>#define error_TASK_WINDOW_BAD_TASK_HANDLE 0xA82u</pre>
+
+<h3 id="error_TASK_WINDOW_DYING">error_TASK_WINDOW_DYING</h3>
+<pre>#define error_TASK_WINDOW_DYING 0xA83u</pre>
+
+<h3 id="error_TASK_WINDOW_FILE_SLEEP">error_TASK_WINDOW_FILE_SLEEP</h3>
+<pre>#define error_TASK_WINDOW_FILE_SLEEP 0xA84u</pre>
+
+<h3 id="error_TASK_WINDOW_NO_EDITOR">error_TASK_WINDOW_NO_EDITOR</h3>
+<pre>#define error_TASK_WINDOW_NO_EDITOR 0xA85u</pre>
+
+<h3 id="error_TASK_WINDOW_NO_REDIRECTION">error_TASK_WINDOW_NO_REDIRECTION</h3>
+<pre>#define error_TASK_WINDOW_NO_REDIRECTION 0xA86u</pre>
+
+<h3 id="message_TASK_WINDOW_INPUT">message_TASK_WINDOW_INPUT</h3>
+<pre>#define message_TASK_WINDOW_INPUT 0x808C0u</pre>
+
+<h3 id="message_TASK_WINDOW_OUTPUT">message_TASK_WINDOW_OUTPUT</h3>
+<pre>#define message_TASK_WINDOW_OUTPUT 0x808C1u</pre>
+
+<h3 id="message_TASK_WINDOW_EGO">message_TASK_WINDOW_EGO</h3>
+<pre>#define message_TASK_WINDOW_EGO 0x808C2u</pre>
+
+<h3 id="message_TASK_WINDOW_MORIO">message_TASK_WINDOW_MORIO</h3>
+<pre>#define message_TASK_WINDOW_MORIO 0x808C3u</pre>
+
+<h3 id="message_TASK_WINDOW_MORITE">message_TASK_WINDOW_MORITE</h3>
+<pre>#define message_TASK_WINDOW_MORITE 0x808C4u</pre>
+
+<h3 id="message_TASK_WINDOW_NEW_TASK">message_TASK_WINDOW_NEW_TASK</h3>
+<pre>#define message_TASK_WINDOW_NEW_TASK 0x808C5u</pre>
+
+<h3 id="message_TASK_WINDOW_SUSPEND">message_TASK_WINDOW_SUSPEND</h3>
+<pre>#define message_TASK_WINDOW_SUSPEND 0x808C6u</pre>
+
+<h3 id="message_TASK_WINDOW_RESUME">message_TASK_WINDOW_RESUME</h3>
+<pre>#define message_TASK_WINDOW_RESUME 0x808C7u</pre>
+
+<h3 id="xtaskwindowtaskinfo_window_task">xtaskwindowtaskinfo_window_task</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtaskwindowtaskinfo_window_task (osbool *window_task);</pre>
+<p>Obtains whether the calling task is running in a task window</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>window_task</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="taskwindowtaskinfo_window_task">taskwindowtaskinfo_window_task</h3>
+<pre>extern osbool taskwindowtaskinfo_window_task (void);
+</pre><p>Obtains whether the calling task is running in a task window</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>window_task</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xupcall_sleep">xupcall_sleep</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcall_sleep (int *pollword,
+      osbool *claimed);</pre>
+<p>Informs the TaskWindow module that a task wants to sleep until some termination condition is met</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pollword</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>claimed</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="upcall_sleep">upcall_sleep</h3>
+<pre>extern osbool upcall_sleep (int *pollword);</pre>
+<p>Informs the TaskWindow module that a task wants to sleep until some termination condition is met</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pollword</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>claimed</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

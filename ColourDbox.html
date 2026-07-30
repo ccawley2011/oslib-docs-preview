@@ -1,0 +1,424 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ColourDbox</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ColourDbox</h2>
+
+<pre>#include "oslib/colourdbox.h"</pre>
+
+<h3 id="colourdbox_flags">colourdbox_flags</h3>
+<pre>typedef bits colourdbox_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#colourdbox_GENERATE_ABOUT_TO_BE_SHOWN">colourdbox_GENERATE_ABOUT_TO_BE_SHOWN</a></dd>
+<dd><a href="#colourdbox_GENERATE_DIALOGUE_COMPLETED">colourdbox_GENERATE_DIALOGUE_COMPLETED</a></dd>
+<dd><a href="#colourdbox_INCLUDE_NONE_BUTTON">colourdbox_INCLUDE_NONE_BUTTON</a></dd>
+<dd><a href="#colourdbox_SELECT_NONE_BUTTON">colourdbox_SELECT_NONE_BUTTON</a></dd>
+</dl>
+
+<h3 id="colourdbox_colour_flags">colourdbox_colour_flags</h3>
+<pre>typedef bits colourdbox_colour_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#colourdbox_COLOUR_TRANSPARENT">colourdbox_COLOUR_TRANSPARENT</a></dd>
+</dl>
+
+<h3 id="colourdbox_object">colourdbox_object</h3>
+<pre>typedef struct
+   {  <a href="#colourdbox_flags">colourdbox_flags</a> flags;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> title;
+      int title_limit;
+      <a href="os.html#os_colour">os_colour</a> colour;
+   }
+   colourdbox_object;</pre>
+
+<p>Structure to describe Object for in-memory construction - referenced from Toolbox_Template</p>
+
+<h3 id="colourdbox_object_template">colourdbox_object_template</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_RESOURCE_FILE_OBJECT_MEMBERS">toolbox_RESOURCE_FILE_OBJECT_MEMBERS</a>
+      <a href="#colourdbox_flags">colourdbox_flags</a> objectflags;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> title;
+      int title_limit;
+      <a href="os.html#os_colour">os_colour</a> colour;
+   }
+   colourdbox_object_template;</pre>
+
+<h3 id="colourdbox_full">colourdbox_full</h3>
+<pre>typedef <a href="toolbox.html#toolbox_full">toolbox_full</a> colourdbox_full;</pre>
+
+<h3 id="colourdbox_action_about_to_be_shown">colourdbox_action_about_to_be_shown</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#colourdbox_full">colourdbox_full</a> full;
+      }
+      position;
+   }
+   colourdbox_action_about_to_be_shown;</pre>
+
+<h3 id="colourdbox_action_about_to_be_shown_block">colourdbox_action_about_to_be_shown_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#colourdbox_full">colourdbox_full</a> full;
+      }
+      position;
+   }
+   colourdbox_action_about_to_be_shown_block;</pre>
+
+<h3 id="colourdbox_action_dialogue_completed_block">colourdbox_action_dialogue_completed_block</h3>
+<pre>typedef <a href="toolbox.html#toolbox_action_header_base">toolbox_action_header_base</a> colourdbox_action_dialogue_completed_block;</pre>
+
+<h3 id="colourdbox_action_colour_selected_block">colourdbox_action_colour_selected_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      <a href="os.html#os_colour">os_colour</a> colour;
+      int block_size;
+      int info [50];
+   }
+   colourdbox_action_colour_selected_block;</pre>
+
+<h3 id="colourdbox_COLOUR_MODEL_MEMBERS">colourdbox_COLOUR_MODEL_MEMBERS</h3>
+<pre>#define colourdbox_COLOUR_MODEL_MEMBERS \
+   int size;
+</pre>
+
+<h3 id="colourdbox_colour_model_base">colourdbox_colour_model_base</h3>
+<pre>typedef struct
+   {  int size;
+   }
+   colourdbox_colour_model_base;</pre>
+
+<h3 id="colourdbox_colour_model">colourdbox_colour_model</h3>
+<pre>typedef struct
+   {  int size;
+      int info [...];
+   }
+   colourdbox_colour_model;</pre>
+
+<h3 id="colourdbox_dialogue_completed_flags">colourdbox_dialogue_completed_flags</h3>
+<pre>typedef bits colourdbox_dialogue_completed_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#colourdbox_DIALOGUE_COMPLETED_COLOUR_CHOICE">colourdbox_DIALOGUE_COMPLETED_COLOUR_CHOICE</a></dd>
+</dl>
+
+<h3 id="colourdbox_action_dialogue_completed">colourdbox_action_dialogue_completed</h3>
+<pre>typedef struct
+   {  <a href="#colourdbox_dialogue_completed_flags">colourdbox_dialogue_completed_flags</a> flags;
+   }
+   colourdbox_action_dialogue_completed;</pre>
+
+<h3 id="colourdbox_action_colour_selected">colourdbox_action_colour_selected</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_colour">os_colour</a> colour;
+      int size;
+      int info [50];
+   }
+   colourdbox_action_colour_selected;</pre>
+
+<h3 id="class_COLOUR_DBOX">class_COLOUR_DBOX</h3>
+<pre>#define class_COLOUR_DBOX ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x829C0u)</pre>
+
+<h3 id="error_COLOUR_DBOX_TASKS_ACTIVE">error_COLOUR_DBOX_TASKS_ACTIVE</h3>
+<pre>#define error_COLOUR_DBOX_TASKS_ACTIVE 0x80AE00u</pre>
+
+<h3 id="error_COLOUR_DBOX_ALLOC_FAILED">error_COLOUR_DBOX_ALLOC_FAILED</h3>
+<pre>#define error_COLOUR_DBOX_ALLOC_FAILED 0x80AE01u</pre>
+
+<h3 id="error_COLOUR_DBOX_SHORT_BUFFER">error_COLOUR_DBOX_SHORT_BUFFER</h3>
+<pre>#define error_COLOUR_DBOX_SHORT_BUFFER 0x80AE02u</pre>
+
+<h3 id="error_COLOUR_DBOX_NO_SUCH_TASK">error_COLOUR_DBOX_NO_SUCH_TASK</h3>
+<pre>#define error_COLOUR_DBOX_NO_SUCH_TASK 0x80AE11u</pre>
+
+<h3 id="error_COLOUR_DBOX_NO_SUCH_METHOD">error_COLOUR_DBOX_NO_SUCH_METHOD</h3>
+<pre>#define error_COLOUR_DBOX_NO_SUCH_METHOD 0x80AE12u</pre>
+
+<h3 id="error_COLOUR_DBOX_NO_SUCH_MISC_OP_METHOD">error_COLOUR_DBOX_NO_SUCH_MISC_OP_METHOD</h3>
+<pre>#define error_COLOUR_DBOX_NO_SUCH_MISC_OP_METHOD 0x80AE13u</pre>
+
+<h3 id="colourdbox_GENERATE_ABOUT_TO_BE_SHOWN">colourdbox_GENERATE_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define colourdbox_GENERATE_ABOUT_TO_BE_SHOWN ((<a href="#colourdbox_flags">colourdbox_flags</a>) 0x1u)</pre>
+
+<h3 id="colourdbox_GENERATE_DIALOGUE_COMPLETED">colourdbox_GENERATE_DIALOGUE_COMPLETED</h3>
+<pre>#define colourdbox_GENERATE_DIALOGUE_COMPLETED ((<a href="#colourdbox_flags">colourdbox_flags</a>) 0x2u)</pre>
+
+<h3 id="colourdbox_INCLUDE_NONE_BUTTON">colourdbox_INCLUDE_NONE_BUTTON</h3>
+<pre>#define colourdbox_INCLUDE_NONE_BUTTON ((<a href="#colourdbox_flags">colourdbox_flags</a>) 0x4u)</pre>
+
+<h3 id="colourdbox_SELECT_NONE_BUTTON">colourdbox_SELECT_NONE_BUTTON</h3>
+<pre>#define colourdbox_SELECT_NONE_BUTTON ((<a href="#colourdbox_flags">colourdbox_flags</a>) 0x8u)</pre>
+
+<h3 id="colourdbox_COLOUR_TRANSPARENT">colourdbox_COLOUR_TRANSPARENT</h3>
+<pre>#define colourdbox_COLOUR_TRANSPARENT ((<a href="#colourdbox_colour_flags">colourdbox_colour_flags</a>) 0x1u)</pre>
+
+<h3 id="action_COLOUR_DBOX_ABOUT_TO_BE_SHOWN">action_COLOUR_DBOX_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define action_COLOUR_DBOX_ABOUT_TO_BE_SHOWN 0x829C0u</pre>
+
+<h3 id="action_COLOUR_DBOX_DIALOGUE_COMPLETED">action_COLOUR_DBOX_DIALOGUE_COMPLETED</h3>
+<pre>#define action_COLOUR_DBOX_DIALOGUE_COMPLETED 0x829C1u</pre>
+
+<h3 id="action_COLOUR_DBOX_COLOUR_SELECTED">action_COLOUR_DBOX_COLOUR_SELECTED</h3>
+<pre>#define action_COLOUR_DBOX_COLOUR_SELECTED 0x829C2u</pre>
+
+<h3 id="colourdbox_DIALOGUE_COMPLETED_COLOUR_CHOICE">colourdbox_DIALOGUE_COMPLETED_COLOUR_CHOICE</h3>
+<pre>#define colourdbox_DIALOGUE_COMPLETED_COLOUR_CHOICE ((<a href="#colourdbox_dialogue_completed_flags">colourdbox_dialogue_completed_flags</a>) 0x1u)</pre>
+
+<h3 id="xcolourdbox_get_wimp_handle">xcolourdbox_get_wimp_handle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourdbox_get_wimp_handle (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_dbox,
+      <a href="wimp.html#wimp_w">wimp_w</a> *w);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>w</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="colourdbox_get_wimp_handle">colourdbox_get_wimp_handle</h3>
+<pre>extern <a href="wimp.html#wimp_w">wimp_w</a> colourdbox_get_wimp_handle (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_dbox);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>w</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcolourdbox_get_dialogue_handle">xcolourdbox_get_dialogue_handle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourdbox_get_dialogue_handle (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_dbox,
+      <a href="colourpicker.html#colourpicker_d">colourpicker_d</a> *d);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>d</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="colourdbox_get_dialogue_handle">colourdbox_get_dialogue_handle</h3>
+<pre>extern <a href="colourpicker.html#colourpicker_d">colourpicker_d</a> colourdbox_get_dialogue_handle (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_dbox);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>d</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcolourdbox_set_colour">xcolourdbox_set_colour</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourdbox_set_colour (<a href="#colourdbox_colour_flags">colourdbox_colour_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_dbox,
+      <a href="colourpicker.html#colourpicker_colour">colourpicker_colour</a> const *colour);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>colour</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="colourdbox_set_colour">colourdbox_set_colour</h3>
+<pre>extern void colourdbox_set_colour (<a href="#colourdbox_colour_flags">colourdbox_colour_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_dbox,
+      <a href="colourpicker.html#colourpicker_colour">colourpicker_colour</a> const *colour);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>colour</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xcolourdbox_get_colour">xcolourdbox_get_colour</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourdbox_get_colour (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_dbox,
+      <a href="colourpicker.html#colourpicker_colour">colourpicker_colour</a> *buffer,
+      int size,
+      <a href="#colourdbox_colour_flags">colourdbox_colour_flags</a> *flags_out,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="colourdbox_get_colour">colourdbox_get_colour</h3>
+<pre>extern int colourdbox_get_colour (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_dbox,
+      <a href="colourpicker.html#colourpicker_colour">colourpicker_colour</a> *buffer,
+      int size,
+      <a href="#colourdbox_colour_flags">colourdbox_colour_flags</a> *flags_out);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xcolourdbox_set_colour_model">xcolourdbox_set_colour_model</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourdbox_set_colour_model (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_dbox,
+      <a href="#colourdbox_colour_model">colourdbox_colour_model</a> const *model);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>model</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="colourdbox_set_colour_model">colourdbox_set_colour_model</h3>
+<pre>extern void colourdbox_set_colour_model (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_dbox,
+      <a href="#colourdbox_colour_model">colourdbox_colour_model</a> const *model);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>model</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xcolourdbox_get_colour_model">xcolourdbox_get_colour_model</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourdbox_get_colour_model (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_dbox,
+      <a href="#colourdbox_colour_model">colourdbox_colour_model</a> *buffer,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="colourdbox_get_colour_model">colourdbox_get_colour_model</h3>
+<pre>extern int colourdbox_get_colour_model (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_dbox,
+      <a href="#colourdbox_colour_model">colourdbox_colour_model</a> *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xcolourdbox_set_none_available">xcolourdbox_set_none_available</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourdbox_set_none_available (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_dbox,
+      osbool none);</pre>
+<p>Sets whether a 'None' option appears in the specified ColourDbox</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>none</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="colourdbox_set_none_available">colourdbox_set_none_available</h3>
+<pre>extern void colourdbox_set_none_available (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_dbox,
+      osbool none);</pre>
+<p>Sets whether a 'None' option appears in the specified ColourDbox</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>none</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xcolourdbox_get_none_available">xcolourdbox_get_none_available</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourdbox_get_none_available (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_dbox,
+      osbool *none);</pre>
+<p>Gets whether the 'None' option is available for the specified ColourDbox</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>none</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="colourdbox_get_none_available">colourdbox_get_none_available</h3>
+<pre>extern osbool colourdbox_get_none_available (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_dbox);</pre>
+<p>Gets whether the 'None' option is available for the specified ColourDbox</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>none</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Debugger</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Debugger</h2>
+
+<pre>#include "oslib/debugger.h"</pre>
+
+<h3 id="error_DEBUG_BREAK_NOT_FOUND">error_DEBUG_BREAK_NOT_FOUND</h3>
+<pre>#define error_DEBUG_BREAK_NOT_FOUND 0x800u</pre>
+
+<p>Breakpoint not found</p>
+
+<h3 id="error_DEBUG_INVALID_VALUE">error_DEBUG_INVALID_VALUE</h3>
+<pre>#define error_DEBUG_INVALID_VALUE 0x801u</pre>
+
+<p>Invalid value</p>
+
+<h3 id="error_DEBUG_RESETTING">error_DEBUG_RESETTING</h3>
+<pre>#define error_DEBUG_RESETTING 0x802u</pre>
+
+<p>Resetting breakpoint</p>
+
+<h3 id="error_DEBUG_NO_ROOM">error_DEBUG_NO_ROOM</h3>
+<pre>#define error_DEBUG_NO_ROOM 0x803u</pre>
+
+<p>No room in breakpoint table</p>
+
+<h3 id="error_DEBUG_NO_BREAKPOINTS">error_DEBUG_NO_BREAKPOINTS</h3>
+<pre>#define error_DEBUG_NO_BREAKPOINTS 0x804u</pre>
+
+<p>No breakpoints set</p>
+
+<h3 id="error_DEBUG_BAD_BREAKPOINT">error_DEBUG_BAD_BREAKPOINT</h3>
+<pre>#define error_DEBUG_BAD_BREAKPOINT 0x805u</pre>
+
+<p>Bad breakpoint</p>
+
+<h3 id="error_DEBUG_UNDEFINED">error_DEBUG_UNDEFINED</h3>
+<pre>#define error_DEBUG_UNDEFINED 0x806u</pre>
+
+<p>Undefined breakpoint</p>
+
+<h3 id="error_DEBUG_NON_ALIGNED">error_DEBUG_NON_ALIGNED</h3>
+<pre>#define error_DEBUG_NON_ALIGNED 0x807u</pre>
+
+<p>Unaligned address</p>
+
+<h3 id="error_DEBUG_NO_WORKSPACE">error_DEBUG_NO_WORKSPACE</h3>
+<pre>#define error_DEBUG_NO_WORKSPACE 0x808u</pre>
+
+<p>No room for debug module workspace</p>
+
+<h3 id="xdebugger_disassemble">xdebugger_disassemble</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdebugger_disassemble (int instruction,
+      int *address,
+      char **disassembly,
+      int *used);</pre>
+<p>Disassembles an instruction</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>instruction</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>disassembly</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>used</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="debugger_disassemble">debugger_disassemble</h3>
+<pre>extern void debugger_disassemble (int instruction,
+      int *address,
+      char **disassembly,
+      int *used);</pre>
+<p>Disassembles an instruction</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>instruction</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>disassembly</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>used</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xdebugger_disassemble_thumb">xdebugger_disassemble_thumb</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdebugger_disassemble_thumb (int instruction,
+      int *address,
+      char **disassembly,
+      int *used);</pre>
+<p>Disassembles a thumb instruction - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>instruction</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>disassembly</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>used</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="debugger_disassemble_thumb">debugger_disassemble_thumb</h3>
+<pre>extern void debugger_disassemble_thumb (int instruction,
+      int *address,
+      char **disassembly,
+      int *used);</pre>
+<p>Disassembles a thumb instruction - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>instruction</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>disassembly</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>used</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

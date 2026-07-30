@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; RouterDiscovery</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>RouterDiscovery</h2>
+
+<pre>#include "oslib/routerdiscovery.h"</pre>
+
+<h3 id="routerdiscoverycontrol_operation">routerdiscoverycontrol_operation</h3>
+<pre>typedef int routerdiscoverycontrol_operation;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#routerdiscoverycontroloperation_ACTIVATE_HOST_MODE">routerdiscoverycontroloperation_ACTIVATE_HOST_MODE</a></dd>
+<dd><a href="#routerdiscoverycontroloperation_ACTIVATE_ROUTER_MODE">routerdiscoverycontroloperation_ACTIVATE_ROUTER_MODE</a></dd>
+<dd><a href="#routerdiscoverycontroloperation_DEACTIVATE">routerdiscoverycontroloperation_DEACTIVATE</a></dd>
+</dl>
+
+<h3 id="routerdiscovery_router_preference">routerdiscovery_router_preference</h3>
+<pre>typedef struct
+   {  int router_address;
+      int preference;
+   }
+   routerdiscovery_router_preference;</pre>
+
+<h3 id="serviceinternetservice40_state">serviceinternetservice40_state</h3>
+<pre>typedef int serviceinternetservice40_state;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#serviceinternetservice40state_END_MONITORING">serviceinternetservice40state_END_MONITORING</a></dd>
+<dd><a href="#serviceinternetservice40state_START_SOLICITING">serviceinternetservice40state_START_SOLICITING</a></dd>
+<dd><a href="#serviceinternetservice40state_START_MONITORING">serviceinternetservice40state_START_MONITORING</a></dd>
+</dl>
+
+<h3 id="serviceinternetservice41_state">serviceinternetservice41_state</h3>
+<pre>typedef int serviceinternetservice41_state;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#serviceinternetservice41state_END_ADVERTISEMENTS">serviceinternetservice41state_END_ADVERTISEMENTS</a></dd>
+<dd><a href="#serviceinternetservice41state_START_ADVERTISEMENTS">serviceinternetservice41state_START_ADVERTISEMENTS</a></dd>
+</dl>
+
+<h3 id="routerdiscoverycontroloperation_ACTIVATE_HOST_MODE">routerdiscoverycontroloperation_ACTIVATE_HOST_MODE</h3>
+<pre>#define routerdiscoverycontroloperation_ACTIVATE_HOST_MODE ((<a href="#routerdiscoverycontrol_operation">routerdiscoverycontrol_operation</a>) 0x0u)</pre>
+
+<h3 id="routerdiscoverycontroloperation_ACTIVATE_ROUTER_MODE">routerdiscoverycontroloperation_ACTIVATE_ROUTER_MODE</h3>
+<pre>#define routerdiscoverycontroloperation_ACTIVATE_ROUTER_MODE ((<a href="#routerdiscoverycontrol_operation">routerdiscoverycontrol_operation</a>) 0x1u)</pre>
+
+<h3 id="routerdiscoverycontroloperation_DEACTIVATE">routerdiscoverycontroloperation_DEACTIVATE</h3>
+<pre>#define routerdiscoverycontroloperation_DEACTIVATE ((<a href="#routerdiscoverycontrol_operation">routerdiscoverycontrol_operation</a>) 0x2u)</pre>
+
+<h3 id="serviceinternetservice40state_END_MONITORING">serviceinternetservice40state_END_MONITORING</h3>
+<pre>#define serviceinternetservice40state_END_MONITORING ((<a href="serviceinternetservice40.html#serviceinternetservice40_state">serviceinternetservice40_state</a>) 0x0u)</pre>
+
+<h3 id="serviceinternetservice40state_START_SOLICITING">serviceinternetservice40state_START_SOLICITING</h3>
+<pre>#define serviceinternetservice40state_START_SOLICITING ((<a href="serviceinternetservice40.html#serviceinternetservice40_state">serviceinternetservice40_state</a>) 0x1u)</pre>
+
+<h3 id="serviceinternetservice40state_START_MONITORING">serviceinternetservice40state_START_MONITORING</h3>
+<pre>#define serviceinternetservice40state_START_MONITORING ((<a href="serviceinternetservice40.html#serviceinternetservice40_state">serviceinternetservice40_state</a>) 0x2u)</pre>
+
+<h3 id="serviceinternetservice41state_END_ADVERTISEMENTS">serviceinternetservice41state_END_ADVERTISEMENTS</h3>
+<pre>#define serviceinternetservice41state_END_ADVERTISEMENTS ((<a href="serviceinternetservice41.html#serviceinternetservice41_state">serviceinternetservice41_state</a>) 0x0u)</pre>
+
+<h3 id="serviceinternetservice41state_START_ADVERTISEMENTS">serviceinternetservice41state_START_ADVERTISEMENTS</h3>
+<pre>#define serviceinternetservice41state_START_ADVERTISEMENTS ((<a href="serviceinternetservice41.html#serviceinternetservice41_state">serviceinternetservice41_state</a>) 0x1u)</pre>
+
+<h3 id="xrouterdiscoverycontrol_activate_host_mode">xrouterdiscoverycontrol_activate_host_mode</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xrouterdiscoverycontrol_activate_host_mode (char const *interface,
+      int solicitations_address);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>interface</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>solicitations_address</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="routerdiscoverycontrol_activate_host_mode">routerdiscoverycontrol_activate_host_mode</h3>
+<pre>extern void routerdiscoverycontrol_activate_host_mode (char const *interface,
+      int solicitations_address);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>interface</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>solicitations_address</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xrouterdiscoverycontrol_activate_router_mode">xrouterdiscoverycontrol_activate_router_mode</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xrouterdiscoverycontrol_activate_router_mode (char const *interface,
+      int advertisements_address,
+      int min_adv_interval,
+      int max_adv_interval,
+      <a href="#routerdiscovery_router_preference">routerdiscovery_router_preference</a> const *preference);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>interface</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>advertisements_address</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>min_adv_interval</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>max_adv_interval</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>preference</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="routerdiscoverycontrol_activate_router_mode">routerdiscoverycontrol_activate_router_mode</h3>
+<pre>extern void routerdiscoverycontrol_activate_router_mode (char const *interface,
+      int advertisements_address,
+      int min_adv_interval,
+      int max_adv_interval,
+      <a href="#routerdiscovery_router_preference">routerdiscovery_router_preference</a> const *preference);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>interface</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>advertisements_address</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>min_adv_interval</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>max_adv_interval</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>preference</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xrouterdiscoverycontrol_deactivate">xrouterdiscoverycontrol_deactivate</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xrouterdiscoverycontrol_deactivate (char const *interface);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>interface</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="routerdiscoverycontrol_deactivate">routerdiscoverycontrol_deactivate</h3>
+<pre>extern void routerdiscoverycontrol_deactivate (char const *interface);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>interface</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xservice_internet_service40">xservice_internet_service40</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_internet_service40 (<a href="serviceinternetservice40.html#serviceinternetservice40_state">serviceinternetservice40_state</a> state,
+      char const *interface);</pre>
+<p>RouterDiscovery module starts monitoring an interface for router advertisement packets</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>state</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>interface</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="service_internet_service40">service_internet_service40</h3>
+<pre>extern void service_internet_service40 (<a href="serviceinternetservice40.html#serviceinternetservice40_state">serviceinternetservice40_state</a> state,
+      char const *interface);</pre>
+<p>RouterDiscovery module starts monitoring an interface for router advertisement packets</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>state</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>interface</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xservice_internet_service41">xservice_internet_service41</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_internet_service41 (<a href="serviceinternetservice41.html#serviceinternetservice41_state">serviceinternetservice41_state</a> state,
+      char const *interface,
+      int num_routers,
+      <a href="#routerdiscovery_router_preference">routerdiscovery_router_preference</a> const *preference);</pre>
+<p>RouterDiscovery module starts issuing advertisements on an interface</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>state</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>interface</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>num_routers</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>preference</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="service_internet_service41">service_internet_service41</h3>
+<pre>extern void service_internet_service41 (<a href="serviceinternetservice41.html#serviceinternetservice41_state">serviceinternetservice41_state</a> state,
+      char const *interface,
+      int num_routers,
+      <a href="#routerdiscovery_router_preference">routerdiscovery_router_preference</a> const *preference);</pre>
+<p>RouterDiscovery module starts issuing advertisements on an interface</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>state</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>interface</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>num_routers</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>preference</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xservice_internet_service42">xservice_internet_service42</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_internet_service42 (char const *interface,
+      int gateway);</pre>
+<p>RouterDiscovery module changes the default route</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>interface</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>gateway</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="service_internet_service42">service_internet_service42</h3>
+<pre>extern void service_internet_service42 (char const *interface,
+      int gateway);</pre>
+<p>RouterDiscovery module changes the default route</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>interface</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>gateway</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

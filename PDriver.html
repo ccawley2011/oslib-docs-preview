@@ -1,0 +1,2202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; PDriver</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>PDriver</h2>
+
+<pre>#include "oslib/pdriver.h"</pre>
+
+<h3 id="pdriver_type">pdriver_type</h3>
+<pre>typedef int pdriver_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#pdriver_TYPE_PS">pdriver_TYPE_PS</a></dd>
+<dd><a href="#pdriver_TYPE_DM">pdriver_TYPE_DM</a></dd>
+<dd><a href="#pdriver_TYPE_LJ">pdriver_TYPE_LJ</a></dd>
+<dd><a href="#pdriver_TYPE_IX">pdriver_TYPE_IX</a></dd>
+<dd><a href="#pdriver_TYPE_FX">pdriver_TYPE_FX</a></dd>
+<dd><a href="#pdriver_TYPE_LZ">pdriver_TYPE_LZ</a></dd>
+<dd><a href="#pdriver_TYPE_LB">pdriver_TYPE_LB</a></dd>
+<dd><a href="#pdriver_TYPE_UF">pdriver_TYPE_UF</a></dd>
+<dd><a href="#pdriver_TYPE_JX">pdriver_TYPE_JX</a></dd>
+<dd><a href="#pdriver_TYPE_PJ">pdriver_TYPE_PJ</a></dd>
+</dl>
+
+<h3 id="pdriver_features">pdriver_features</h3>
+<pre>typedef bits pdriver_features;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#pdriver_FEATURE_COLOUR">pdriver_FEATURE_COLOUR</a></dd>
+<dd><a href="#pdriver_FEATURE_LIMITED_COLOURS">pdriver_FEATURE_LIMITED_COLOURS</a></dd>
+<dd><a href="#pdriver_FEATURE_DISCRETE_COLOURS">pdriver_FEATURE_DISCRETE_COLOURS</a></dd>
+<dd><a href="#pdriver_FEATURE_OUTLINES_ONLY">pdriver_FEATURE_OUTLINES_ONLY</a></dd>
+<dd><a href="#pdriver_FEATURE_THIN_LINES_ONLY">pdriver_FEATURE_THIN_LINES_ONLY</a></dd>
+<dd><a href="#pdriver_FEATURE_NO_OVERWRITE">pdriver_FEATURE_NO_OVERWRITE</a></dd>
+<dd><a href="#pdriver_FEATURE_TRFM_SPRITE">pdriver_FEATURE_TRFM_SPRITE</a></dd>
+<dd><a href="#pdriver_FEATURE_TRFM_FONT">pdriver_FEATURE_TRFM_FONT</a></dd>
+<dd><a href="#pdriver_FEATURE_DRAW_PAGE_FLAGS">pdriver_FEATURE_DRAW_PAGE_FLAGS</a></dd>
+<dd><a href="#pdriver_FEATURE_SCREEN_DUMP">pdriver_FEATURE_SCREEN_DUMP</a></dd>
+<dd><a href="#pdriver_FEATURE_GENERAL_TRFM">pdriver_FEATURE_GENERAL_TRFM</a></dd>
+<dd><a href="#pdriver_FEATURE_INSERT_ILLUSTRATION">pdriver_FEATURE_INSERT_ILLUSTRATION</a></dd>
+<dd><a href="#pdriver_FEATURE_MISC_OP">pdriver_FEATURE_MISC_OP</a></dd>
+<dd><a href="#pdriver_FEATURE_SET_DRIVER">pdriver_FEATURE_SET_DRIVER</a></dd>
+<dd><a href="#pdriver_FEATURE_DECLARE_FONT">pdriver_FEATURE_DECLARE_FONT</a></dd>
+</dl>
+
+<h3 id="pdriver_font_flags">pdriver_font_flags</h3>
+<pre>typedef bits pdriver_font_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#pdriver_NO_DOWNLOAD">pdriver_NO_DOWNLOAD</a></dd>
+<dd><a href="#pdriver_KERNED">pdriver_KERNED</a></dd>
+</dl>
+
+<h3 id="pdriver_font_map_flags">pdriver_font_map_flags</h3>
+<pre>typedef bits pdriver_font_map_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#pdriver_FONT_RESIDENT">pdriver_FONT_RESIDENT</a></dd>
+<dd><a href="#pdriver_FONT_DOWNLOAD">pdriver_FONT_DOWNLOAD</a></dd>
+<dd><a href="#pdriver_FONT_DOWNLOADED">pdriver_FONT_DOWNLOADED</a></dd>
+</dl>
+
+<h3 id="pdriver_font_add_flags">pdriver_font_add_flags</h3>
+<pre>typedef bits pdriver_font_add_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#pdriver_FONT_OVERWRITE">pdriver_FONT_OVERWRITE</a></dd>
+</dl>
+
+<h3 id="pdriver_enumerate_flags">pdriver_enumerate_flags</h3>
+<pre>typedef bits pdriver_enumerate_flags;</pre>
+
+<h3 id="pdriver_configure_reason">pdriver_configure_reason</h3>
+<pre>typedef int pdriver_configure_reason;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#pdriver_CONFIGURE_PAPER_SIZES">pdriver_CONFIGURE_PAPER_SIZES</a></dd>
+</dl>
+
+<h3 id="pdriver_interrogate_reason">pdriver_interrogate_reason</h3>
+<pre>typedef int pdriver_interrogate_reason;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#pdriver_INTERROGATE_SETTINGS">pdriver_INTERROGATE_SETTINGS</a></dd>
+</dl>
+
+<h3 id="pdriver_message_print_error">pdriver_message_print_error</h3>
+<pre>typedef struct
+   {  int errnum;
+      char errmess [232];
+   }
+   pdriver_message_print_error;</pre>
+
+<h3 id="pdriver_message_print_type_odd">pdriver_message_print_type_odd</h3>
+<pre>typedef struct
+   {  byte pad [20];
+      bits file_type;
+      char file_name [212];
+   }
+   pdriver_message_print_type_odd;</pre>
+
+<h3 id="pdriver_message_print_configure">pdriver_message_print_configure</h3>
+<pre>typedef struct
+   {  <a href="#pdriver_configure_reason">pdriver_configure_reason</a> reason;
+      union
+      {  char *filename;
+      }
+      data;
+   }
+   pdriver_message_print_configure;</pre>
+
+<h3 id="pdriver_message_print_interrogate">pdriver_message_print_interrogate</h3>
+<pre>typedef struct
+   {  <a href="#pdriver_interrogate_reason">pdriver_interrogate_reason</a> reason;
+      union
+      {  struct
+         {  int printer_id;
+            int palette_number;
+            int options;
+            <a href="os.html#os_coord">os_coord</a> resolution;
+            bits flags;
+            char mode_name [208];
+         }
+         settings;
+      }
+      data;
+   }
+   pdriver_message_print_interrogate;</pre>
+
+<h3 id="pdriver_message_ps_printer_query">pdriver_message_ps_printer_query</h3>
+<pre>typedef struct
+   {  byte *buffer;
+      int size;
+   }
+   pdriver_message_ps_printer_query;</pre>
+
+<h3 id="pdriver_full_message_print_error">pdriver_full_message_print_error</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      int errnum;
+      char errmess [232];
+   }
+   pdriver_full_message_print_error;</pre>
+
+<h3 id="pdriver_full_message_print_type_odd">pdriver_full_message_print_type_odd</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      byte pad [20];
+      bits file_type;
+      char file_name [212];
+   }
+   pdriver_full_message_print_type_odd;</pre>
+
+<h3 id="pdriver_full_message_print_configure">pdriver_full_message_print_configure</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#pdriver_configure_reason">pdriver_configure_reason</a> reason;
+      union
+      {  char *filename;
+      }
+      data;
+   }
+   pdriver_full_message_print_configure;</pre>
+
+<h3 id="pdriver_full_message_print_interrogate">pdriver_full_message_print_interrogate</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#pdriver_interrogate_reason">pdriver_interrogate_reason</a> reason;
+      union
+      {  struct
+         {  int printer_id;
+            int palette_number;
+            int options;
+            <a href="os.html#os_coord">os_coord</a> resolution;
+            bits flags;
+            char mode_name [208];
+         }
+         settings;
+      }
+      data;
+   }
+   pdriver_full_message_print_interrogate;</pre>
+
+<h3 id="pdriver_full_message_ps_printer_query">pdriver_full_message_ps_printer_query</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      byte *buffer;
+      int buffer_size;
+   }
+   pdriver_full_message_ps_printer_query;</pre>
+
+<h3 id="pdriver_info_type">pdriver_info_type</h3>
+<pre>typedef bits pdriver_info_type;</pre>
+
+<h3 id="pdriver_draw_flags">pdriver_draw_flags</h3>
+<pre>typedef bits pdriver_draw_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#pdriver_DRAW_COPY_COUNT">pdriver_DRAW_COPY_COUNT</a></dd>
+<dd><a href="#pdriver_DRAW_MAY_PRESCAN">pdriver_DRAW_MAY_PRESCAN</a></dd>
+</dl>
+
+<h3 id="pdriver_CONFIGURATION_INFO_MEMBERS">pdriver_CONFIGURATION_INFO_MEMBERS</h3>
+<pre>#define pdriver_CONFIGURATION_INFO_MEMBERS \
+   int entry_count; \
+   int block_size; \
+   int entry_offsets [20];
+</pre>
+
+<h3 id="pdriver_configuration_info_base">pdriver_configuration_info_base</h3>
+<pre>typedef struct
+   {  int entry_count;
+      int block_size;
+      int entry_offsets [20];
+   }
+   pdriver_configuration_info_base;</pre>
+
+<h3 id="pdriver_configuration_info">pdriver_configuration_info</h3>
+<pre>typedef struct
+   {  int entry_count;
+      int block_size;
+      int entry_offsets [20];
+      char data [...];
+   }
+   pdriver_configuration_info;</pre>
+
+<h3 id="pdriver_OS_UNIT">pdriver_OS_UNIT</h3>
+<pre>#define pdriver_OS_UNIT 400</pre>
+
+<p>1 OS unit in millipoints</p>
+
+<h3 id="pdriver_INCH">pdriver_INCH</h3>
+<pre>#define pdriver_INCH 72000</pre>
+
+<p>1in in millipoints</p>
+
+<h3 id="pdriver_POINT">pdriver_POINT</h3>
+<pre>#define pdriver_POINT 1000</pre>
+
+<p>1pt in millipoints</p>
+
+<h3 id="pdriver_TYPE_PS">pdriver_TYPE_PS</h3>
+<pre>#define pdriver_TYPE_PS ((<a href="#pdriver_type">pdriver_type</a>) 0x0u)</pre>
+
+<h3 id="pdriver_TYPE_DM">pdriver_TYPE_DM</h3>
+<pre>#define pdriver_TYPE_DM ((<a href="#pdriver_type">pdriver_type</a>) 0x1u)</pre>
+
+<h3 id="pdriver_TYPE_LJ">pdriver_TYPE_LJ</h3>
+<pre>#define pdriver_TYPE_LJ ((<a href="#pdriver_type">pdriver_type</a>) 0x2u)</pre>
+
+<h3 id="pdriver_TYPE_IX">pdriver_TYPE_IX</h3>
+<pre>#define pdriver_TYPE_IX ((<a href="#pdriver_type">pdriver_type</a>) 0x3u)</pre>
+
+<h3 id="pdriver_TYPE_FX">pdriver_TYPE_FX</h3>
+<pre>#define pdriver_TYPE_FX ((<a href="#pdriver_type">pdriver_type</a>) 0x4u)</pre>
+
+<h3 id="pdriver_TYPE_LZ">pdriver_TYPE_LZ</h3>
+<pre>#define pdriver_TYPE_LZ ((<a href="#pdriver_type">pdriver_type</a>) 0x5u)</pre>
+
+<h3 id="pdriver_TYPE_LB">pdriver_TYPE_LB</h3>
+<pre>#define pdriver_TYPE_LB ((<a href="#pdriver_type">pdriver_type</a>) 0x6u)</pre>
+
+<h3 id="pdriver_TYPE_UF">pdriver_TYPE_UF</h3>
+<pre>#define pdriver_TYPE_UF ((<a href="#pdriver_type">pdriver_type</a>) 0x7u)</pre>
+
+<h3 id="pdriver_TYPE_JX">pdriver_TYPE_JX</h3>
+<pre>#define pdriver_TYPE_JX ((<a href="#pdriver_type">pdriver_type</a>) 0x63u)</pre>
+
+<h3 id="pdriver_TYPE_PJ">pdriver_TYPE_PJ</h3>
+<pre>#define pdriver_TYPE_PJ ((<a href="#pdriver_type">pdriver_type</a>) 0x63u)</pre>
+
+<h3 id="pdriver_FEATURE_COLOUR">pdriver_FEATURE_COLOUR</h3>
+<pre>#define pdriver_FEATURE_COLOUR ((<a href="#pdriver_features">pdriver_features</a>) 0x1u)</pre>
+
+<h3 id="pdriver_FEATURE_LIMITED_COLOURS">pdriver_FEATURE_LIMITED_COLOURS</h3>
+<pre>#define pdriver_FEATURE_LIMITED_COLOURS ((<a href="#pdriver_features">pdriver_features</a>) 0x2u)</pre>
+
+<h3 id="pdriver_FEATURE_DISCRETE_COLOURS">pdriver_FEATURE_DISCRETE_COLOURS</h3>
+<pre>#define pdriver_FEATURE_DISCRETE_COLOURS ((<a href="#pdriver_features">pdriver_features</a>) 0x4u)</pre>
+
+<h3 id="pdriver_FEATURE_OUTLINES_ONLY">pdriver_FEATURE_OUTLINES_ONLY</h3>
+<pre>#define pdriver_FEATURE_OUTLINES_ONLY ((<a href="#pdriver_features">pdriver_features</a>) 0x100u)</pre>
+
+<h3 id="pdriver_FEATURE_THIN_LINES_ONLY">pdriver_FEATURE_THIN_LINES_ONLY</h3>
+<pre>#define pdriver_FEATURE_THIN_LINES_ONLY ((<a href="#pdriver_features">pdriver_features</a>) 0x200u)</pre>
+
+<h3 id="pdriver_FEATURE_NO_OVERWRITE">pdriver_FEATURE_NO_OVERWRITE</h3>
+<pre>#define pdriver_FEATURE_NO_OVERWRITE ((<a href="#pdriver_features">pdriver_features</a>) 0x400u)</pre>
+
+<h3 id="pdriver_FEATURE_TRFM_SPRITE">pdriver_FEATURE_TRFM_SPRITE</h3>
+<pre>#define pdriver_FEATURE_TRFM_SPRITE ((<a href="#pdriver_features">pdriver_features</a>) 0x800u)</pre>
+
+<h3 id="pdriver_FEATURE_TRFM_FONT">pdriver_FEATURE_TRFM_FONT</h3>
+<pre>#define pdriver_FEATURE_TRFM_FONT ((<a href="#pdriver_features">pdriver_features</a>) 0x1000u)</pre>
+
+<h3 id="pdriver_FEATURE_DRAW_PAGE_FLAGS">pdriver_FEATURE_DRAW_PAGE_FLAGS</h3>
+<pre>#define pdriver_FEATURE_DRAW_PAGE_FLAGS ((<a href="#pdriver_features">pdriver_features</a>) 0x2000u)</pre>
+
+<h3 id="pdriver_FEATURE_SCREEN_DUMP">pdriver_FEATURE_SCREEN_DUMP</h3>
+<pre>#define pdriver_FEATURE_SCREEN_DUMP ((<a href="#pdriver_features">pdriver_features</a>) 0x1000000u)</pre>
+
+<h3 id="pdriver_FEATURE_GENERAL_TRFM">pdriver_FEATURE_GENERAL_TRFM</h3>
+<pre>#define pdriver_FEATURE_GENERAL_TRFM ((<a href="#pdriver_features">pdriver_features</a>) 0x2000000u)</pre>
+
+<h3 id="pdriver_FEATURE_INSERT_ILLUSTRATION">pdriver_FEATURE_INSERT_ILLUSTRATION</h3>
+<pre>#define pdriver_FEATURE_INSERT_ILLUSTRATION ((<a href="#pdriver_features">pdriver_features</a>) 0x4000000u)</pre>
+
+<h3 id="pdriver_FEATURE_MISC_OP">pdriver_FEATURE_MISC_OP</h3>
+<pre>#define pdriver_FEATURE_MISC_OP ((<a href="#pdriver_features">pdriver_features</a>) 0x8000000u)</pre>
+
+<h3 id="pdriver_FEATURE_SET_DRIVER">pdriver_FEATURE_SET_DRIVER</h3>
+<pre>#define pdriver_FEATURE_SET_DRIVER ((<a href="#pdriver_features">pdriver_features</a>) 0x10000000u)</pre>
+
+<h3 id="pdriver_FEATURE_DECLARE_FONT">pdriver_FEATURE_DECLARE_FONT</h3>
+<pre>#define pdriver_FEATURE_DECLARE_FONT ((<a href="#pdriver_features">pdriver_features</a>) 0x20000000u)</pre>
+
+<h3 id="pdriver_NO_DOWNLOAD">pdriver_NO_DOWNLOAD</h3>
+<pre>#define pdriver_NO_DOWNLOAD ((<a href="#pdriver_font_flags">pdriver_font_flags</a>) 0x1u)</pre>
+
+<h3 id="pdriver_KERNED">pdriver_KERNED</h3>
+<pre>#define pdriver_KERNED ((<a href="#pdriver_font_flags">pdriver_font_flags</a>) 0x2u)</pre>
+
+<h3 id="pdriver_FONT_RESIDENT">pdriver_FONT_RESIDENT</h3>
+<pre>#define pdriver_FONT_RESIDENT ((<a href="#pdriver_font_map_flags">pdriver_font_map_flags</a>) 0x1u)</pre>
+
+<h3 id="pdriver_FONT_DOWNLOAD">pdriver_FONT_DOWNLOAD</h3>
+<pre>#define pdriver_FONT_DOWNLOAD ((<a href="#pdriver_font_map_flags">pdriver_font_map_flags</a>) 0x2u)</pre>
+
+<h3 id="pdriver_FONT_DOWNLOADED">pdriver_FONT_DOWNLOADED</h3>
+<pre>#define pdriver_FONT_DOWNLOADED ((<a href="#pdriver_font_map_flags">pdriver_font_map_flags</a>) 0x4u)</pre>
+
+<h3 id="pdriver_FONT_OVERWRITE">pdriver_FONT_OVERWRITE</h3>
+<pre>#define pdriver_FONT_OVERWRITE ((<a href="#pdriver_font_add_flags">pdriver_font_add_flags</a>) 0x1u)</pre>
+
+<h3 id="error_PDRIVER_BAD_FEATURES">error_PDRIVER_BAD_FEATURES</h3>
+<pre>#define error_PDRIVER_BAD_FEATURES 0x5C0u</pre>
+
+<h3 id="error_PDRIVER_NO_CURRENT_SPRITE">error_PDRIVER_NO_CURRENT_SPRITE</h3>
+<pre>#define error_PDRIVER_NO_CURRENT_SPRITE 0x5C1u</pre>
+
+<h3 id="error_PDRIVER_NO_JOB_SELECTED">error_PDRIVER_NO_JOB_SELECTED</h3>
+<pre>#define error_PDRIVER_NO_JOB_SELECTED 0x5C2u</pre>
+
+<h3 id="error_PDRIVER_NO_SUCH_JOB">error_PDRIVER_NO_SUCH_JOB</h3>
+<pre>#define error_PDRIVER_NO_SUCH_JOB 0x5C3u</pre>
+
+<h3 id="error_PDRIVER_NO_CURRENT_PAGE">error_PDRIVER_NO_CURRENT_PAGE</h3>
+<pre>#define error_PDRIVER_NO_CURRENT_PAGE 0x5C4u</pre>
+
+<h3 id="error_PDRIVER_PRINTING_PAGE">error_PDRIVER_PRINTING_PAGE</h3>
+<pre>#define error_PDRIVER_PRINTING_PAGE 0x5C5u</pre>
+
+<h3 id="error_PDRIVER_INVALID_COPIES">error_PDRIVER_INVALID_COPIES</h3>
+<pre>#define error_PDRIVER_INVALID_COPIES 0x5C6u</pre>
+
+<h3 id="error_PDRIVER_CANNOT_HANDLE">error_PDRIVER_CANNOT_HANDLE</h3>
+<pre>#define error_PDRIVER_CANNOT_HANDLE 0x5C7u</pre>
+
+<h3 id="error_PDRIVER_BAD_HALFTONE">error_PDRIVER_BAD_HALFTONE</h3>
+<pre>#define error_PDRIVER_BAD_HALFTONE 0x5C8u</pre>
+
+<h3 id="error_PDRIVER_CANCELLED">error_PDRIVER_CANCELLED</h3>
+<pre>#define error_PDRIVER_CANCELLED 0x5C9u</pre>
+
+<h3 id="error_PDRIVER_SINGULAR_MATRIX">error_PDRIVER_SINGULAR_MATRIX</h3>
+<pre>#define error_PDRIVER_SINGULAR_MATRIX 0x5CAu</pre>
+
+<h3 id="error_PDRIVER_BAD_RECTANGLE">error_PDRIVER_BAD_RECTANGLE</h3>
+<pre>#define error_PDRIVER_BAD_RECTANGLE 0x5CBu</pre>
+
+<h3 id="error_PDRIVER_RECTANGLES_MISS">error_PDRIVER_RECTANGLES_MISS</h3>
+<pre>#define error_PDRIVER_RECTANGLES_MISS 0x5CCu</pre>
+
+<h3 id="error_PDRIVER_NO_FREE_MEMORY">error_PDRIVER_NO_FREE_MEMORY</h3>
+<pre>#define error_PDRIVER_NO_FREE_MEMORY 0x5CDu</pre>
+
+<h3 id="error_PDRIVER_NOT_ONE_PAGE">error_PDRIVER_NOT_ONE_PAGE</h3>
+<pre>#define error_PDRIVER_NOT_ONE_PAGE 0x5CEu</pre>
+
+<h3 id="error_PDRIVER_IN_USE">error_PDRIVER_IN_USE</h3>
+<pre>#define error_PDRIVER_IN_USE 0x5CFu</pre>
+
+<h3 id="error_PDRIVER_OVERFLOW">error_PDRIVER_OVERFLOW</h3>
+<pre>#define error_PDRIVER_OVERFLOW 0x5D0u</pre>
+
+<h3 id="error_PDRIVER_BAD_MISC_OP">error_PDRIVER_BAD_MISC_OP</h3>
+<pre>#define error_PDRIVER_BAD_MISC_OP 0x5D1u</pre>
+
+<h3 id="error_PDRIVER_NO_DUPLICATES">error_PDRIVER_NO_DUPLICATES</h3>
+<pre>#define error_PDRIVER_NO_DUPLICATES 0x5D2u</pre>
+
+<h3 id="error_PDRIVER_NO_CURRENT_DRIVER">error_PDRIVER_NO_CURRENT_DRIVER</h3>
+<pre>#define error_PDRIVER_NO_CURRENT_DRIVER 0x5D3u</pre>
+
+<h3 id="error_PDRIVER_UNKNOWN_NUMBER">error_PDRIVER_UNKNOWN_NUMBER</h3>
+<pre>#define error_PDRIVER_UNKNOWN_NUMBER 0x5D4u</pre>
+
+<h3 id="error_PDRIVER_DUPLICATE_NUMBER">error_PDRIVER_DUPLICATE_NUMBER</h3>
+<pre>#define error_PDRIVER_DUPLICATE_NUMBER 0x5D5u</pre>
+
+<h3 id="error_PDRIVER_BAD_SET_PRINTER">error_PDRIVER_BAD_SET_PRINTER</h3>
+<pre>#define error_PDRIVER_BAD_SET_PRINTER 0x5D6u</pre>
+
+<h3 id="message_PRINT_FILE">message_PRINT_FILE</h3>
+<pre>#define message_PRINT_FILE 0x80140u</pre>
+
+<h3 id="message_WILL_PRINT">message_WILL_PRINT</h3>
+<pre>#define message_WILL_PRINT 0x80141u</pre>
+
+<h3 id="message_PRINT_SAVE">message_PRINT_SAVE</h3>
+<pre>#define message_PRINT_SAVE 0x80142u</pre>
+
+<h3 id="message_PRINT_INIT">message_PRINT_INIT</h3>
+<pre>#define message_PRINT_INIT 0x80143u</pre>
+
+<h3 id="message_PRINT_ERROR">message_PRINT_ERROR</h3>
+<pre>#define message_PRINT_ERROR 0x80144u</pre>
+
+<h3 id="message_PRINT_TYPE_ODD">message_PRINT_TYPE_ODD</h3>
+<pre>#define message_PRINT_TYPE_ODD 0x80145u</pre>
+
+<h3 id="message_PRINT_TYPE_KNOWN">message_PRINT_TYPE_KNOWN</h3>
+<pre>#define message_PRINT_TYPE_KNOWN 0x80146u</pre>
+
+<h3 id="message_SET_PRINTER">message_SET_PRINTER</h3>
+<pre>#define message_SET_PRINTER 0x80147u</pre>
+
+<h3 id="message_PRINT_INIT2">message_PRINT_INIT2</h3>
+<pre>#define message_PRINT_INIT2 0x80148u</pre>
+
+<h3 id="message_PRINT_CONFIGURE">message_PRINT_CONFIGURE</h3>
+<pre>#define message_PRINT_CONFIGURE 0x8014Au</pre>
+
+<h3 id="message_PRINT_INTERROGATE">message_PRINT_INTERROGATE</h3>
+<pre>#define message_PRINT_INTERROGATE 0x8014Bu</pre>
+
+<h3 id="message_PS_PRINTER_QUERY">message_PS_PRINTER_QUERY</h3>
+<pre>#define message_PS_PRINTER_QUERY 0x8014Cu</pre>
+
+<h3 id="message_PS_PRINTER_ACK">message_PS_PRINTER_ACK</h3>
+<pre>#define message_PS_PRINTER_ACK 0x8014Du</pre>
+
+<h3 id="message_PS_PRINTER_MODIFIED">message_PS_PRINTER_MODIFIED</h3>
+<pre>#define message_PS_PRINTER_MODIFIED 0x8014Eu</pre>
+
+<h3 id="message_PS_PRINTER_DEFAULTS">message_PS_PRINTER_DEFAULTS</h3>
+<pre>#define message_PS_PRINTER_DEFAULTS 0x8014Fu</pre>
+
+<h3 id="message_PS_PRINTER_DEFAULTED">message_PS_PRINTER_DEFAULTED</h3>
+<pre>#define message_PS_PRINTER_DEFAULTED 0x80150u</pre>
+
+<h3 id="message_PS_PRINTER_NOT_PS">message_PS_PRINTER_NOT_PS</h3>
+<pre>#define message_PS_PRINTER_NOT_PS 0x80151u</pre>
+
+<h3 id="message_RESET_PRINTER">message_RESET_PRINTER</h3>
+<pre>#define message_RESET_PRINTER 0x80152u</pre>
+
+<h3 id="message_PS_IS_FONTPRINT_RUNNING">message_PS_IS_FONTPRINT_RUNNING</h3>
+<pre>#define message_PS_IS_FONTPRINT_RUNNING 0x80153u</pre>
+
+<h3 id="pdriver_CONFIGURE_PAPER_SIZES">pdriver_CONFIGURE_PAPER_SIZES</h3>
+<pre>#define pdriver_CONFIGURE_PAPER_SIZES ((<a href="#pdriver_configure_reason">pdriver_configure_reason</a>) 0x0u)</pre>
+
+<h3 id="pdriver_INTERROGATE_SETTINGS">pdriver_INTERROGATE_SETTINGS</h3>
+<pre>#define pdriver_INTERROGATE_SETTINGS ((<a href="#pdriver_interrogate_reason">pdriver_interrogate_reason</a>) 0x0u)</pre>
+
+<h3 id="pdriver_DRAW_COPY_COUNT">pdriver_DRAW_COPY_COUNT</h3>
+<pre>#define pdriver_DRAW_COPY_COUNT ((<a href="#pdriver_draw_flags">pdriver_draw_flags</a>) 0xFFFFFFu)</pre>
+
+<h3 id="pdriver_DRAW_MAY_PRESCAN">pdriver_DRAW_MAY_PRESCAN</h3>
+<pre>#define pdriver_DRAW_MAY_PRESCAN ((<a href="#pdriver_draw_flags">pdriver_draw_flags</a>) 0x1000000u)</pre>
+
+<h3 id="xpdriver_info">xpdriver_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_info (<a href="#pdriver_info_type">pdriver_info_type</a> *type,
+      int *xres,
+      int *yres,
+      <a href="#pdriver_features">pdriver_features</a> *features,
+      char **desc,
+      int *halftone_xres,
+      int *halftone_yres,
+      int *printer);</pre>
+<p>Gets information on the printer manager</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>xres</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>yres</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>features</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>desc</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>halftone_xres</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>halftone_yres</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>printer</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="pdriver_info">pdriver_info</h3>
+<pre>extern void pdriver_info (<a href="#pdriver_info_type">pdriver_info_type</a> *type,
+      int *xres,
+      int *yres,
+      <a href="#pdriver_features">pdriver_features</a> *features,
+      char **desc,
+      int *halftone_xres,
+      int *halftone_yres,
+      int *printer);</pre>
+<p>Gets information on the printer manager</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>xres</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>yres</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>features</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>desc</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>halftone_xres</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>halftone_yres</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>printer</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xpdriver_set_info">xpdriver_set_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_set_info (int xres,
+      int yres,
+      <a href="#pdriver_features">pdriver_features</a> features,
+      char const *printer_name,
+      int halftone_xres,
+      int halftone_yres,
+      int printer);</pre>
+<p>Configures the printer driver</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>xres</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>yres</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>features</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>printer_name</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>halftone_xres</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>halftone_yres</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>printer</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="pdriver_set_info">pdriver_set_info</h3>
+<pre>extern void pdriver_set_info (int xres,
+      int yres,
+      <a href="#pdriver_features">pdriver_features</a> features,
+      char const *printer_name,
+      int halftone_xres,
+      int halftone_yres,
+      int printer);</pre>
+<p>Configures the printer driver</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>xres</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>yres</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>features</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>printer_name</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>halftone_xres</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>halftone_yres</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>printer</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xpdriver_check_features">xpdriver_check_features</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_check_features (<a href="#pdriver_features">pdriver_features</a> features,
+      <a href="#pdriver_features">pdriver_features</a> value);</pre>
+<p>Checks the features of a printer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>features</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>value</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="pdriver_check_features">pdriver_check_features</h3>
+<pre>extern void pdriver_check_features (<a href="#pdriver_features">pdriver_features</a> features,
+      <a href="#pdriver_features">pdriver_features</a> value);</pre>
+<p>Checks the features of a printer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>features</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>value</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xpdriver_page_size">xpdriver_page_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_page_size (int *xsize,
+      int *ysize,
+      int *left,
+      int *bottom,
+      int *right,
+      int *top);</pre>
+<p>Finds how large the paper and printable area are</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>xsize</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ysize</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>left</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bottom</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>right</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>top</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="pdriver_page_size">pdriver_page_size</h3>
+<pre>extern void pdriver_page_size (int *xsize,
+      int *ysize,
+      int *left,
+      int *bottom,
+      int *right,
+      int *top);</pre>
+<p>Finds how large the paper and printable area are</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>xsize</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ysize</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>left</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bottom</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>right</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>top</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xpdriver_set_page_size">xpdriver_set_page_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_set_page_size (int xsize,
+      int ysize,
+      int left,
+      int bottom,
+      int right,
+      int top);</pre>
+<p>Sets how large the paper and printable area are</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>xsize</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ysize</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>left</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bottom</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>right</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>top</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="pdriver_set_page_size">pdriver_set_page_size</h3>
+<pre>extern void pdriver_set_page_size (int xsize,
+      int ysize,
+      int left,
+      int bottom,
+      int right,
+      int top);</pre>
+<p>Sets how large the paper and printable area are</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>xsize</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ysize</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>left</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bottom</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>right</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>top</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xpdriver_select_job">xpdriver_select_job</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_select_job (<a href="os.html#os_f">os_f</a> job,
+      char const *title,
+      <a href="os.html#os_f">os_f</a> *old_job);</pre>
+<p>Makes a given print job the current one. Prefer PDriver_SelectJobW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_job</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="pdriver_select_job">pdriver_select_job</h3>
+<pre>extern <a href="os.html#os_f">os_f</a> pdriver_select_job (<a href="os.html#os_f">os_f</a> job,
+      char const *title);</pre>
+<p>Makes a given print job the current one. Prefer PDriver_SelectJobW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_job</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xpdriver_select_jobw">xpdriver_select_jobw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_select_jobw (<a href="os.html#os_fw">os_fw</a> job,
+      char const *title,
+      <a href="os.html#os_fw">os_fw</a> *old_job);</pre>
+<p>Makes a given print job the current one. Uses 32-bit file handles.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_job</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="pdriver_select_jobw">pdriver_select_jobw</h3>
+<pre>extern <a href="os.html#os_fw">os_fw</a> pdriver_select_jobw (<a href="os.html#os_fw">os_fw</a> job,
+      char const *title);</pre>
+<p>Makes a given print job the current one. Uses 32-bit file handles.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_job</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xpdriver_current_job">xpdriver_current_job</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_current_job (<a href="os.html#os_f">os_f</a> *job);</pre>
+<p>Gets the file handle of the current job. Prefer PDriver_CurrentJobW</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="pdriver_current_job">pdriver_current_job</h3>
+<pre>extern <a href="os.html#os_f">os_f</a> pdriver_current_job (void);
+</pre><p>Gets the file handle of the current job. Prefer PDriver_CurrentJobW</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>job</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xpdriver_current_jobw">xpdriver_current_jobw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_current_jobw (<a href="os.html#os_fw">os_fw</a> *job);</pre>
+<p>Gets the file handle of the current job. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="pdriver_current_jobw">pdriver_current_jobw</h3>
+<pre>extern <a href="os.html#os_fw">os_fw</a> pdriver_current_jobw (void);
+</pre><p>Gets the file handle of the current job. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>job</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xpdriver_end_job">xpdriver_end_job</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_end_job (<a href="os.html#os_f">os_f</a> job);</pre>
+<p>Ends a print job normally. Prefer PDriver_EndJobW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="pdriver_end_job">pdriver_end_job</h3>
+<pre>extern void pdriver_end_job (<a href="os.html#os_f">os_f</a> job);</pre>
+<p>Ends a print job normally. Prefer PDriver_EndJobW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xpdriver_end_jobw">xpdriver_end_jobw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_end_jobw (<a href="os.html#os_fw">os_fw</a> job);</pre>
+<p>Ends a print job normally. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="pdriver_end_jobw">pdriver_end_jobw</h3>
+<pre>extern void pdriver_end_jobw (<a href="os.html#os_fw">os_fw</a> job);</pre>
+<p>Ends a print job normally. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xpdriver_abort_job">xpdriver_abort_job</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_abort_job (<a href="os.html#os_f">os_f</a> job);</pre>
+<p>Ends a print job without any further output. Prefer PDriver_AbortJobW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="pdriver_abort_job">pdriver_abort_job</h3>
+<pre>extern void pdriver_abort_job (<a href="os.html#os_f">os_f</a> job);</pre>
+<p>Ends a print job without any further output. Prefer PDriver_AbortJobW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xpdriver_abort_jobw">xpdriver_abort_jobw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_abort_jobw (<a href="os.html#os_fw">os_fw</a> job);</pre>
+<p>Ends a print job without any further output. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="pdriver_abort_jobw">pdriver_abort_jobw</h3>
+<pre>extern void pdriver_abort_jobw (<a href="os.html#os_fw">os_fw</a> job);</pre>
+<p>Ends a print job without any further output. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xpdriver_reset">xpdriver_reset</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_reset (void);
+</pre><p>Aborts all print jobs</p>
+
+
+<table>
+</table>
+
+<h3 id="pdriver_reset">pdriver_reset</h3>
+<pre>extern void pdriver_reset (void);
+</pre><p>Aborts all print jobs</p>
+
+
+<table>
+</table>
+
+<h3 id="xpdriver_give_rectangle">xpdriver_give_rectangle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_give_rectangle (int id,
+      <a href="os.html#os_box">os_box</a> const *rect,
+      <a href="os.html#os_hom_trfm">os_hom_trfm</a> const *trfm,
+      <a href="os.html#os_coord">os_coord</a> const *pos,
+      <a href="os.html#os_colour">os_colour</a> bg);</pre>
+<p>Specifies a rectangle to be printed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>id</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>rect</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>pos</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bg</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="pdriver_give_rectangle">pdriver_give_rectangle</h3>
+<pre>extern void pdriver_give_rectangle (int id,
+      <a href="os.html#os_box">os_box</a> const *rect,
+      <a href="os.html#os_hom_trfm">os_hom_trfm</a> const *trfm,
+      <a href="os.html#os_coord">os_coord</a> const *pos,
+      <a href="os.html#os_colour">os_colour</a> bg);</pre>
+<p>Specifies a rectangle to be printed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>id</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>rect</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>pos</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bg</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xpdriver_draw_page">xpdriver_draw_page</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_draw_page (<a href="#pdriver_draw_flags">pdriver_draw_flags</a> copies_and_flags,
+      <a href="os.html#os_box">os_box</a> *rect,
+      int page,
+      char const *page_no,
+      osbool *more,
+      int *id);</pre>
+<p>Called to draw the page after all rectangles have been specified</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>copies_and_flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>rect</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>page</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>page_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>more</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="pdriver_draw_page">pdriver_draw_page</h3>
+<pre>extern osbool pdriver_draw_page (<a href="#pdriver_draw_flags">pdriver_draw_flags</a> copies_and_flags,
+      <a href="os.html#os_box">os_box</a> *rect,
+      int page,
+      char const *page_no,
+      int *id);</pre>
+<p>Called to draw the page after all rectangles have been specified</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>copies_and_flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>rect</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>page</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>page_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>more</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xpdriver_get_rectangle">xpdriver_get_rectangle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_get_rectangle (<a href="os.html#os_box">os_box</a> *rect,
+      osbool *more,
+      int *id);</pre>
+<p>Gets the next print rectangle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rect</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>more</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="pdriver_get_rectangle">pdriver_get_rectangle</h3>
+<pre>extern osbool pdriver_get_rectangle (<a href="os.html#os_box">os_box</a> *rect,
+      int *id);</pre>
+<p>Gets the next print rectangle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rect</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>more</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xpdriver_cancel_job">xpdriver_cancel_job</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_cancel_job (<a href="os.html#os_f">os_f</a> job);</pre>
+<p>Stops a print job from printing. Prefer PDriver_CancelJobW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="pdriver_cancel_job">pdriver_cancel_job</h3>
+<pre>extern void pdriver_cancel_job (<a href="os.html#os_f">os_f</a> job);</pre>
+<p>Stops a print job from printing. Prefer PDriver_CancelJobW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xpdriver_cancel_jobw">xpdriver_cancel_jobw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_cancel_jobw (<a href="os.html#os_fw">os_fw</a> job);</pre>
+<p>Stops a print job from printing. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="pdriver_cancel_jobw">pdriver_cancel_jobw</h3>
+<pre>extern void pdriver_cancel_jobw (<a href="os.html#os_fw">os_fw</a> job);</pre>
+<p>Stops a print job from printing. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xpdriver_screen_dump">xpdriver_screen_dump</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_screen_dump (<a href="os.html#os_f">os_f</a> job);</pre>
+<p>Outputs a screen dump to the printer. Prefer PDriver_ScreenDumpW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="pdriver_screen_dump">pdriver_screen_dump</h3>
+<pre>extern void pdriver_screen_dump (<a href="os.html#os_f">os_f</a> job);</pre>
+<p>Outputs a screen dump to the printer. Prefer PDriver_ScreenDumpW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xpdriver_screen_dumpw">xpdriver_screen_dumpw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_screen_dumpw (<a href="os.html#os_fw">os_fw</a> job);</pre>
+<p>Outputs a screen dump to the printer. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="pdriver_screen_dumpw">pdriver_screen_dumpw</h3>
+<pre>extern void pdriver_screen_dumpw (<a href="os.html#os_fw">os_fw</a> job);</pre>
+<p>Outputs a screen dump to the printer. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xpdriver_enumerate_jobs">xpdriver_enumerate_jobs</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_enumerate_jobs (int context,
+      int *context_out);</pre>
+<p>Lists existing print jobs</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="pdriver_enumerate_jobs">pdriver_enumerate_jobs</h3>
+<pre>extern int pdriver_enumerate_jobs (int context);</pre>
+<p>Lists existing print jobs</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xpdriver_cancel_job_with_error">xpdriver_cancel_job_with_error</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_cancel_job_with_error (<a href="os.html#os_f">os_f</a> job,
+      <a href="os.html#os_error">os_error</a> const *error);</pre>
+<p>Cancels a print job - future attempts to output to it are errors. Prefer PDriver_CancelJobWithErrorW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>error</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="pdriver_cancel_job_with_error">pdriver_cancel_job_with_error</h3>
+<pre>extern void pdriver_cancel_job_with_error (<a href="os.html#os_f">os_f</a> job,
+      <a href="os.html#os_error">os_error</a> const *error);</pre>
+<p>Cancels a print job - future attempts to output to it are errors. Prefer PDriver_CancelJobWithErrorW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>error</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xpdriver_cancel_job_with_errorw">xpdriver_cancel_job_with_errorw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_cancel_job_with_errorw (<a href="os.html#os_fw">os_fw</a> job,
+      <a href="os.html#os_error">os_error</a> const *error);</pre>
+<p>Cancels a print job - future attempts to output to it are errors. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>error</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="pdriver_cancel_job_with_errorw">pdriver_cancel_job_with_errorw</h3>
+<pre>extern void pdriver_cancel_job_with_errorw (<a href="os.html#os_fw">os_fw</a> job,
+      <a href="os.html#os_error">os_error</a> const *error);</pre>
+<p>Cancels a print job - future attempts to output to it are errors. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>error</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xpdriver_select_illustration">xpdriver_select_illustration</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_select_illustration (<a href="os.html#os_f">os_f</a> job,
+      char const *title,
+      <a href="os.html#os_f">os_f</a> *old_job);</pre>
+<p>Makes the given print job the current one, and treats it as an illustration. Prefer PDriver_SelectIllustrationW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_job</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="pdriver_select_illustration">pdriver_select_illustration</h3>
+<pre>extern <a href="os.html#os_f">os_f</a> pdriver_select_illustration (<a href="os.html#os_f">os_f</a> job,
+      char const *title);</pre>
+<p>Makes the given print job the current one, and treats it as an illustration. Prefer PDriver_SelectIllustrationW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_job</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xpdriver_select_illustrationw">xpdriver_select_illustrationw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_select_illustrationw (<a href="os.html#os_fw">os_fw</a> job,
+      char const *title,
+      <a href="os.html#os_fw">os_fw</a> *old_job);</pre>
+<p>Makes the given print job the current one, and treats it as an illustration. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_job</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="pdriver_select_illustrationw">pdriver_select_illustrationw</h3>
+<pre>extern <a href="os.html#os_fw">os_fw</a> pdriver_select_illustrationw (<a href="os.html#os_fw">os_fw</a> job,
+      char const *title);</pre>
+<p>Makes the given print job the current one, and treats it as an illustration. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_job</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xpdriver_insert_illustration">xpdriver_insert_illustration</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_insert_illustration (<a href="os.html#os_f">os_f</a> job,
+      <a href="draw.html#draw_path">draw_path</a> const *clip_path,
+      int x0,
+      int y0,
+      int x1,
+      int y1,
+      int x2,
+      int y2);</pre>
+<p>Inserts a file containing an illustration into the current job's output. Prefer PDriver_InsertIllustrationW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>clip_path</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>x0</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>y0</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>x1</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>y1</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>x2</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>y2</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="pdriver_insert_illustration">pdriver_insert_illustration</h3>
+<pre>extern void pdriver_insert_illustration (<a href="os.html#os_f">os_f</a> job,
+      <a href="draw.html#draw_path">draw_path</a> const *clip_path,
+      int x0,
+      int y0,
+      int x1,
+      int y1,
+      int x2,
+      int y2);</pre>
+<p>Inserts a file containing an illustration into the current job's output. Prefer PDriver_InsertIllustrationW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>clip_path</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>x0</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>y0</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>x1</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>y1</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>x2</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>y2</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xpdriver_insert_illustrationw">xpdriver_insert_illustrationw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_insert_illustrationw (<a href="os.html#os_fw">os_fw</a> job,
+      <a href="draw.html#draw_path">draw_path</a> const *clip_path,
+      int x0,
+      int y0,
+      int x1,
+      int y1,
+      int x2,
+      int y2);</pre>
+<p>Inserts a file containing an illustration into the current job's output. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>clip_path</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>x0</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>y0</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>x1</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>y1</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>x2</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>y2</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="pdriver_insert_illustrationw">pdriver_insert_illustrationw</h3>
+<pre>extern void pdriver_insert_illustrationw (<a href="os.html#os_fw">os_fw</a> job,
+      <a href="draw.html#draw_path">draw_path</a> const *clip_path,
+      int x0,
+      int y0,
+      int x1,
+      int y1,
+      int x2,
+      int y2);</pre>
+<p>Inserts a file containing an illustration into the current job's output. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>job</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>clip_path</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>x0</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>y0</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>x1</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>y1</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>x2</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>y2</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xpdriver_declare_font">xpdriver_declare_font</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_declare_font (<a href="font.html#font_f">font_f</a> font,
+      char const *font_name,
+      <a href="#pdriver_font_flags">pdriver_font_flags</a> flags);</pre>
+<p>Declares the fonts that will be used in a document</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="pdriver_declare_font">pdriver_declare_font</h3>
+<pre>extern void pdriver_declare_font (<a href="font.html#font_f">font_f</a> font,
+      char const *font_name,
+      <a href="#pdriver_font_flags">pdriver_font_flags</a> flags);</pre>
+<p>Declares the fonts that will be used in a document</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xpdriver_declare_driver">xpdriver_declare_driver</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_declare_driver (asm_routine reason,
+      void *workspace,
+      <a href="#pdriver_type">pdriver_type</a> type);</pre>
+<p>Registers a printer driver with the PDriver sharer module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>reason</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="pdriver_declare_driver">pdriver_declare_driver</h3>
+<pre>extern void pdriver_declare_driver (asm_routine reason,
+      void *workspace,
+      <a href="#pdriver_type">pdriver_type</a> type);</pre>
+<p>Registers a printer driver with the PDriver sharer module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>reason</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xpdriver_remove_driver">xpdriver_remove_driver</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_remove_driver (<a href="#pdriver_type">pdriver_type</a> type);</pre>
+<p>Deregisters a printer driver with the PDriver sharer module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>type</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="pdriver_remove_driver">pdriver_remove_driver</h3>
+<pre>extern void pdriver_remove_driver (<a href="#pdriver_type">pdriver_type</a> type);</pre>
+<p>Deregisters a printer driver with the PDriver sharer module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>type</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xpdriver_select_driver">xpdriver_select_driver</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_select_driver (<a href="#pdriver_type">pdriver_type</a> type,
+      <a href="#pdriver_type">pdriver_type</a> *old_type);</pre>
+<p>Selects the specified printer driver</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>type</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_type</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="pdriver_select_driver">pdriver_select_driver</h3>
+<pre>extern <a href="#pdriver_type">pdriver_type</a> pdriver_select_driver (<a href="#pdriver_type">pdriver_type</a> type);</pre>
+<p>Selects the specified printer driver</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>type</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xpdriver_enumerate_drivers">xpdriver_enumerate_drivers</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_enumerate_drivers (int context,
+      int *context_out,
+      <a href="#pdriver_type">pdriver_type</a> *type);</pre>
+<p>Enumerates all printer drivers within the system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="pdriver_enumerate_drivers">pdriver_enumerate_drivers</h3>
+<pre>extern int pdriver_enumerate_drivers (int context,
+      <a href="#pdriver_type">pdriver_type</a> *type);</pre>
+<p>Enumerates all printer drivers within the system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>type</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xpdrivermiscop_add_font">xpdrivermiscop_add_font</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdrivermiscop_add_font (char const *font_name,
+      char const *alien_name,
+      <a href="#pdriver_font_map_flags">pdriver_font_map_flags</a> flags,
+      <a href="#pdriver_font_add_flags">pdriver_font_add_flags</a> add_flags);</pre>
+<p>Adds a font name to a list of those known to the current printer driver</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>alien_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>add_flags</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="pdrivermiscop_add_font">pdrivermiscop_add_font</h3>
+<pre>extern void pdrivermiscop_add_font (char const *font_name,
+      char const *alien_name,
+      <a href="#pdriver_font_map_flags">pdriver_font_map_flags</a> flags,
+      <a href="#pdriver_font_add_flags">pdriver_font_add_flags</a> add_flags);</pre>
+<p>Adds a font name to a list of those known to the current printer driver</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>alien_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>add_flags</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xpdrivermiscop_remove_font">xpdrivermiscop_remove_font</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdrivermiscop_remove_font (char const *font_name);</pre>
+<p>Removes font name(s) from a list of those known to the current printer driver</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="pdrivermiscop_remove_font">pdrivermiscop_remove_font</h3>
+<pre>extern void pdrivermiscop_remove_font (char const *font_name);</pre>
+<p>Removes font name(s) from a list of those known to the current printer driver</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xpdrivermiscop_enumerate_fonts">xpdrivermiscop_enumerate_fonts</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdrivermiscop_enumerate_fonts (char *buffer,
+      int size,
+      int context,
+      <a href="#pdriver_enumerate_flags">pdriver_enumerate_flags</a> flags,
+      char **end,
+      int *context_out);</pre>
+<p>Enumerates the font names known to the current printer driver</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="pdrivermiscop_enumerate_fonts">pdrivermiscop_enumerate_fonts</h3>
+<pre>extern int pdrivermiscop_enumerate_fonts (char *buffer,
+      int size,
+      int context,
+      <a href="#pdriver_enumerate_flags">pdriver_enumerate_flags</a> flags,
+      char **end);</pre>
+<p>Enumerates the font names known to the current printer driver</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_out</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xpdrivermiscop_register_dumper">xpdrivermiscop_register_dumper</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdrivermiscop_register_dumper (int pdumper_no,
+      int dp_version_required,
+      void *dumper_workspace,
+      asm_routine dumper_code,
+      bits supported_calls,
+      bits supported_strips);</pre>
+<p>Registers a printer dumper with the current printer driver, PDriverDP</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pdumper_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dp_version_required</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dumper_workspace</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>dumper_code</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>supported_calls</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>supported_strips</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="pdrivermiscop_register_dumper">pdrivermiscop_register_dumper</h3>
+<pre>extern void pdrivermiscop_register_dumper (int pdumper_no,
+      int dp_version_required,
+      void *dumper_workspace,
+      asm_routine dumper_code,
+      bits supported_calls,
+      bits supported_strips);</pre>
+<p>Registers a printer dumper with the current printer driver, PDriverDP</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pdumper_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dp_version_required</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dumper_workspace</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>dumper_code</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>supported_calls</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>supported_strips</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xpdrivermiscop_deregister_dumper">xpdrivermiscop_deregister_dumper</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdrivermiscop_deregister_dumper (int pdumper_no);</pre>
+<p>Deregisters a printer dumper with the current printer driver, PDriverDP</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pdumper_no</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="pdrivermiscop_deregister_dumper">pdrivermiscop_deregister_dumper</h3>
+<pre>extern void pdrivermiscop_deregister_dumper (int pdumper_no);</pre>
+<p>Deregisters a printer dumper with the current printer driver, PDriverDP</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pdumper_no</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xpdrivermiscop_strip_types">xpdrivermiscop_strip_types</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdrivermiscop_strip_types (int pdumper_no,
+      bits *supported_strips);</pre>
+<p>Returns a bit mask showing which strip types a printer dumper supports with the current printer driver - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pdumper_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>supported_strips</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="pdrivermiscop_strip_types">pdrivermiscop_strip_types</h3>
+<pre>extern bits pdrivermiscop_strip_types (int pdumper_no);</pre>
+<p>Returns a bit mask showing which strip types a printer dumper supports with the current printer driver - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pdumper_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>supported_strips</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xpdrivermiscopfordriver_add_font">xpdrivermiscopfordriver_add_font</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdrivermiscopfordriver_add_font (char const *font_name,
+      char const *alien_name,
+      <a href="#pdriver_font_map_flags">pdriver_font_map_flags</a> flags,
+      <a href="#pdriver_font_add_flags">pdriver_font_add_flags</a> add_flags,
+      <a href="#pdriver_type">pdriver_type</a> type);</pre>
+<p>Adds a font name to a list of those known to a specified printer driver</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>alien_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>add_flags</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="pdrivermiscopfordriver_add_font">pdrivermiscopfordriver_add_font</h3>
+<pre>extern void pdrivermiscopfordriver_add_font (char const *font_name,
+      char const *alien_name,
+      <a href="#pdriver_font_map_flags">pdriver_font_map_flags</a> flags,
+      <a href="#pdriver_font_add_flags">pdriver_font_add_flags</a> add_flags,
+      <a href="#pdriver_type">pdriver_type</a> type);</pre>
+<p>Adds a font name to a list of those known to a specified printer driver</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>alien_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>add_flags</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xpdrivermiscopfordriver_remove_font">xpdrivermiscopfordriver_remove_font</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdrivermiscopfordriver_remove_font (char const *font_name,
+      <a href="#pdriver_type">pdriver_type</a> type);</pre>
+<p>Removes font name(s) from a list of those known to a specified printer driver</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="pdrivermiscopfordriver_remove_font">pdrivermiscopfordriver_remove_font</h3>
+<pre>extern void pdrivermiscopfordriver_remove_font (char const *font_name,
+      <a href="#pdriver_type">pdriver_type</a> type);</pre>
+<p>Removes font name(s) from a list of those known to a specified printer driver</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xpdrivermiscopfordriver_enumerate_fonts">xpdrivermiscopfordriver_enumerate_fonts</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdrivermiscopfordriver_enumerate_fonts (char *buffer,
+      int size,
+      int context,
+      <a href="#pdriver_enumerate_flags">pdriver_enumerate_flags</a> flags,
+      <a href="#pdriver_type">pdriver_type</a> type,
+      char **end,
+      int *context_out);</pre>
+<p>Enumerates the font names known to a specified printer driver</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="pdrivermiscopfordriver_enumerate_fonts">pdrivermiscopfordriver_enumerate_fonts</h3>
+<pre>extern int pdrivermiscopfordriver_enumerate_fonts (char *buffer,
+      int size,
+      int context,
+      <a href="#pdriver_enumerate_flags">pdriver_enumerate_flags</a> flags,
+      <a href="#pdriver_type">pdriver_type</a> type,
+      char **end);</pre>
+<p>Enumerates the font names known to a specified printer driver</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_out</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xpdrivermiscopfordriver_register_dumper">xpdrivermiscopfordriver_register_dumper</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdrivermiscopfordriver_register_dumper (int pdumper_no,
+      int dp_version_required,
+      void *dumper_workspace,
+      asm_routine dumper_code,
+      bits supported_calls,
+      bits supported_strips,
+      <a href="#pdriver_type">pdriver_type</a> type);</pre>
+<p>Registers a printer dumper a specified printer driver, PDriverDP</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pdumper_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dp_version_required</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dumper_workspace</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>dumper_code</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>supported_calls</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>supported_strips</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="pdrivermiscopfordriver_register_dumper">pdrivermiscopfordriver_register_dumper</h3>
+<pre>extern void pdrivermiscopfordriver_register_dumper (int pdumper_no,
+      int dp_version_required,
+      void *dumper_workspace,
+      asm_routine dumper_code,
+      bits supported_calls,
+      bits supported_strips,
+      <a href="#pdriver_type">pdriver_type</a> type);</pre>
+<p>Registers a printer dumper a specified printer driver, PDriverDP</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pdumper_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dp_version_required</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dumper_workspace</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>dumper_code</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>supported_calls</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>supported_strips</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xpdrivermiscopfordriver_deregister_dumper">xpdrivermiscopfordriver_deregister_dumper</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdrivermiscopfordriver_deregister_dumper (int pdumper_no,
+      <a href="#pdriver_type">pdriver_type</a> type);</pre>
+<p>Deregisters a printer dumper with a specified printer driver, PDriverDP</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pdumper_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="pdrivermiscopfordriver_deregister_dumper">pdrivermiscopfordriver_deregister_dumper</h3>
+<pre>extern void pdrivermiscopfordriver_deregister_dumper (int pdumper_no,
+      <a href="#pdriver_type">pdriver_type</a> type);</pre>
+<p>Deregisters a printer dumper with a specified printer driver, PDriverDP</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pdumper_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xpdrivermiscopfordriver_strip_types">xpdrivermiscopfordriver_strip_types</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdrivermiscopfordriver_strip_types (int pdumper_no,
+      <a href="#pdriver_type">pdriver_type</a> type,
+      bits *supported_strips);</pre>
+<p>Returns a bit mask showing which strip types a printer dumper supports with a specified printer driver - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pdumper_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>supported_strips</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="pdrivermiscopfordriver_strip_types">pdrivermiscopfordriver_strip_types</h3>
+<pre>extern bits pdrivermiscopfordriver_strip_types (int pdumper_no,
+      <a href="#pdriver_type">pdriver_type</a> type);</pre>
+<p>Returns a bit mask showing which strip types a printer dumper supports with a specified printer driver - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pdumper_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>supported_strips</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xpdriver_set_driver">xpdriver_set_driver</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_set_driver (int pdumper_no,
+      char const *ensure_command,
+      byte const *configuration_data1,
+      byte const *configuration_data2,
+      int configuration_word);</pre>
+<p>Configures the current printer driver - RISC OS 3+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pdumper_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ensure_command</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>configuration_data1</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>configuration_data2</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>configuration_word</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="pdriver_set_driver">pdriver_set_driver</h3>
+<pre>extern void pdriver_set_driver (int pdumper_no,
+      char const *ensure_command,
+      byte const *configuration_data1,
+      byte const *configuration_data2,
+      int configuration_word);</pre>
+<p>Configures the current printer driver - RISC OS 3+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pdumper_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ensure_command</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>configuration_data1</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>configuration_data2</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>configuration_word</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xpdriver_set_driver_extended">xpdriver_set_driver_extended</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriver_set_driver_extended (int pdumper_no,
+      char const *ensure_command,
+      byte const *configuration_data1,
+      byte const *configuration_data2,
+      int configuration_word,
+      <a href="#pdriver_configuration_info">pdriver_configuration_info</a> const *configuration_info);</pre>
+<p>Configures the current printer driver - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pdumper_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ensure_command</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>configuration_data1</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>configuration_data2</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>configuration_word</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>configuration_info</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="pdriver_set_driver_extended">pdriver_set_driver_extended</h3>
+<pre>extern void pdriver_set_driver_extended (int pdumper_no,
+      char const *ensure_command,
+      byte const *configuration_data1,
+      byte const *configuration_data2,
+      int configuration_word,
+      <a href="#pdriver_configuration_info">pdriver_configuration_info</a> const *configuration_info);</pre>
+<p>Configures the current printer driver - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pdumper_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ensure_command</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>configuration_data1</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>configuration_data2</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>configuration_word</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>configuration_info</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xpdriverjpegswiinfo_dimensions">xpdriverjpegswiinfo_dimensions</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriverjpegswiinfo_dimensions (<a href="jpeg.html#jpeg_image">jpeg_image</a> const *image,
+      int size,
+      <a href="jpeg.html#jpeg_info_flags">jpeg_info_flags</a> *info_flags,
+      int *width,
+      int *height,
+      int *xdpi,
+      int *ydpi,
+      int *workspace_size);</pre>
+<p>Returns the dimensions of a JPEG image in memory - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>info_flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>width</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xdpi</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>ydpi</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>workspace_size</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="pdriverjpegswiinfo_dimensions">pdriverjpegswiinfo_dimensions</h3>
+<pre>extern <a href="jpeg.html#jpeg_info_flags">jpeg_info_flags</a> pdriverjpegswiinfo_dimensions (<a href="jpeg.html#jpeg_image">jpeg_image</a> const *image,
+      int size,
+      int *width,
+      int *height,
+      int *xdpi,
+      int *ydpi,
+      int *workspace_size);</pre>
+<p>Returns the dimensions of a JPEG image in memory - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>width</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xdpi</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>ydpi</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>workspace_size</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>info_flags</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xpdriverjpegswifileinfo_dimensions">xpdriverjpegswifileinfo_dimensions</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriverjpegswifileinfo_dimensions (char const *file_name,
+      <a href="jpeg.html#jpeg_info_flags">jpeg_info_flags</a> *info_flags,
+      int *width,
+      int *height,
+      int *xdpi,
+      int *ydpi,
+      int *workspace_size);</pre>
+<p>Returns the dimensions of a JPEG image in a file - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>info_flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>width</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xdpi</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>ydpi</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>workspace_size</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="pdriverjpegswifileinfo_dimensions">pdriverjpegswifileinfo_dimensions</h3>
+<pre>extern <a href="jpeg.html#jpeg_info_flags">jpeg_info_flags</a> pdriverjpegswifileinfo_dimensions (char const *file_name,
+      int *width,
+      int *height,
+      int *xdpi,
+      int *ydpi,
+      int *workspace_size);</pre>
+<p>Returns the dimensions of a JPEG image in a file - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>width</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xdpi</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>ydpi</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>workspace_size</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>info_flags</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xpdriverjpegswi_plot_scaled">xpdriverjpegswi_plot_scaled</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriverjpegswi_plot_scaled (<a href="jpeg.html#jpeg_image">jpeg_image</a> const *image,
+      int x,
+      int y,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      int size,
+      <a href="jpeg.html#jpeg_scale_flags">jpeg_scale_flags</a> flags);</pre>
+<p>Plots a JPEG image from memory - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="pdriverjpegswi_plot_scaled">pdriverjpegswi_plot_scaled</h3>
+<pre>extern void pdriverjpegswi_plot_scaled (<a href="jpeg.html#jpeg_image">jpeg_image</a> const *image,
+      int x,
+      int y,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      int size,
+      <a href="jpeg.html#jpeg_scale_flags">jpeg_scale_flags</a> flags);</pre>
+<p>Plots a JPEG image from memory - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xpdriverjpegswi_plot_file_scaled">xpdriverjpegswi_plot_file_scaled</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriverjpegswi_plot_file_scaled (char const *file_name,
+      int x,
+      int y,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      <a href="jpeg.html#jpeg_scale_flags">jpeg_scale_flags</a> flags);</pre>
+<p>Plots a JPEG image from a file - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="pdriverjpegswi_plot_file_scaled">pdriverjpegswi_plot_file_scaled</h3>
+<pre>extern void pdriverjpegswi_plot_file_scaled (char const *file_name,
+      int x,
+      int y,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      <a href="jpeg.html#jpeg_scale_flags">jpeg_scale_flags</a> flags);</pre>
+<p>Plots a JPEG image from a file - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xpdriverjpegswi_plot_transformed">xpdriverjpegswi_plot_transformed</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriverjpegswi_plot_transformed (<a href="jpeg.html#jpeg_image">jpeg_image</a> const *image,
+      <a href="jpeg.html#jpeg_transform_flags">jpeg_transform_flags</a> flags,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm_or_rect,
+      int size);</pre>
+<p>Plots a JPEG image from memory using a transformation matrix - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm_or_rect</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="pdriverjpegswi_plot_transformed">pdriverjpegswi_plot_transformed</h3>
+<pre>extern void pdriverjpegswi_plot_transformed (<a href="jpeg.html#jpeg_image">jpeg_image</a> const *image,
+      <a href="jpeg.html#jpeg_transform_flags">jpeg_transform_flags</a> flags,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm_or_rect,
+      int size);</pre>
+<p>Plots a JPEG image from memory using a transformation matrix - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm_or_rect</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xpdriverjpegswi_plot_file_transformed">xpdriverjpegswi_plot_file_transformed</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdriverjpegswi_plot_file_transformed (char const *file_name,
+      <a href="jpeg.html#jpeg_transform_flags">jpeg_transform_flags</a> flags,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm_or_rect);</pre>
+<p>Plots a JPEG image from a file using a transformation matrix - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm_or_rect</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="pdriverjpegswi_plot_file_transformed">pdriverjpegswi_plot_file_transformed</h3>
+<pre>extern void pdriverjpegswi_plot_file_transformed (char const *file_name,
+      <a href="jpeg.html#jpeg_transform_flags">jpeg_transform_flags</a> flags,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm_or_rect);</pre>
+<p>Plots a JPEG image from a file using a transformation matrix - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm_or_rect</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xservice_print">xservice_print</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_print (void);
+</pre><p>For internal use only</p>
+
+
+<table>
+</table>
+
+<h3 id="service_print">service_print</h3>
+<pre>extern void service_print (void);
+</pre><p>For internal use only</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_pdriver_starting">xservice_pdriver_starting</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_pdriver_starting (void);
+</pre><p>PDriver sharer module started</p>
+
+
+<table>
+</table>
+
+<h3 id="service_pdriver_starting">service_pdriver_starting</h3>
+<pre>extern void service_pdriver_starting (void);
+</pre><p>PDriver sharer module started</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_pdriver_get_messages">xservice_pdriver_get_messages</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_pdriver_get_messages (osbool *unclaimed,
+      <a href="messagetrans.html#messagetrans_control_block">messagetrans_control_block</a> **common_cb);</pre>
+<p>Get common messages file</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>common_cb</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="service_pdriver_get_messages">service_pdriver_get_messages</h3>
+<pre>extern osbool service_pdriver_get_messages (<a href="messagetrans.html#messagetrans_control_block">messagetrans_control_block</a> **common_cb);</pre>
+<p>Get common messages file</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>common_cb</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_pdriver_changed">xservice_pdriver_changed</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_pdriver_changed (void);
+</pre><p>The currently selected printer driver has changed</p>
+
+
+<table>
+</table>
+
+<h3 id="service_pdriver_changed">service_pdriver_changed</h3>
+<pre>extern void service_pdriver_changed (void);
+</pre><p>The currently selected printer driver has changed</p>
+
+
+<table>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

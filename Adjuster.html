@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Adjuster</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Adjuster</h2>
+
+<pre>#include "oslib/adjuster.h"</pre>
+
+<h3 id="adjuster_gadget">adjuster_gadget</h3>
+<pre>typedef struct
+   {  int reserved;
+   }
+   adjuster_gadget;</pre>
+
+<h3 id="adjuster_object">adjuster_object</h3>
+<pre>typedef struct
+   {  <a href="#gadget_OBJECT_MEMBERS">gadget_OBJECT_MEMBERS</a>
+      int reserved;
+   }
+   adjuster_object;</pre>
+
+<h3 id="adjuster_action_clicked">adjuster_action_clicked</h3>
+<pre>typedef struct
+   {  osbool up;
+   }
+   adjuster_action_clicked;</pre>
+
+<p>Prefer Adjuster_ActionClickedBlock</p>
+
+<h3 id="adjuster_action_clicked_block">adjuster_action_clicked_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      osbool up;
+   }
+   adjuster_action_clicked_block;</pre>
+
+<h3 id="class_ADJUSTER">class_ADJUSTER</h3>
+<pre>#define class_ADJUSTER ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x300u)</pre>
+
+<h3 id="adjuster_INCREMENT">adjuster_INCREMENT</h3>
+<pre>#define adjuster_INCREMENT ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x1u)</pre>
+
+<h3 id="adjuster_VERTICAL">adjuster_VERTICAL</h3>
+<pre>#define adjuster_VERTICAL ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x2u)</pre>
+
+<h3 id="action_ADJUSTER_CLICKED">action_ADJUSTER_CLICKED</h3>
+<pre>#define action_ADJUSTER_CLICKED 0x8288Cu</pre>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

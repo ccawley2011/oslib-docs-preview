@@ -1,0 +1,251 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; CDFS</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>CDFS</h2>
+
+<pre>#include "oslib/cdfs.h"</pre>
+
+<h3 id="cdfs_truncation_type">cdfs_truncation_type</h3>
+<pre>typedef int cdfs_truncation_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#cdfs_TRUNCATION_FROM_RIGHT">cdfs_TRUNCATION_FROM_RIGHT</a></dd>
+<dd><a href="#cdfs_TRUNCATION_FROM_LEFT">cdfs_TRUNCATION_FROM_LEFT</a></dd>
+<dd><a href="#cdfs_TRUNCATION_NONE">cdfs_TRUNCATION_NONE</a></dd>
+<dd><a href="#cdfs_TRUNCATION_DEFAULT">cdfs_TRUNCATION_DEFAULT</a></dd>
+</dl>
+
+<h3 id="cdfs_TRUNCATION_FROM_RIGHT">cdfs_TRUNCATION_FROM_RIGHT</h3>
+<pre>#define cdfs_TRUNCATION_FROM_RIGHT ((<a href="#cdfs_truncation_type">cdfs_truncation_type</a>) 0x0u)</pre>
+
+<h3 id="cdfs_TRUNCATION_FROM_LEFT">cdfs_TRUNCATION_FROM_LEFT</h3>
+<pre>#define cdfs_TRUNCATION_FROM_LEFT ((<a href="#cdfs_truncation_type">cdfs_truncation_type</a>) 0x1u)</pre>
+
+<h3 id="cdfs_TRUNCATION_NONE">cdfs_TRUNCATION_NONE</h3>
+<pre>#define cdfs_TRUNCATION_NONE ((<a href="#cdfs_truncation_type">cdfs_truncation_type</a>) 0x2u)</pre>
+
+<h3 id="cdfs_TRUNCATION_DEFAULT">cdfs_TRUNCATION_DEFAULT</h3>
+<pre>#define cdfs_TRUNCATION_DEFAULT ((<a href="#cdfs_truncation_type">cdfs_truncation_type</a>) 0xFFFFFFFFu)</pre>
+
+<h3 id="xcdfs_convert_drive_to_device">xcdfs_convert_drive_to_device</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcdfs_convert_drive_to_device (int log_no,
+      int *phys_no);</pre>
+<p>Converts a logical drive number to a physical drive number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>log_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>phys_no</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="cdfs_convert_drive_to_device">cdfs_convert_drive_to_device</h3>
+<pre>extern int cdfs_convert_drive_to_device (int log_no);</pre>
+<p>Converts a logical drive number to a physical drive number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>log_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>phys_no</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xcdfs_set_buffer_size">xcdfs_set_buffer_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcdfs_set_buffer_size (int buffer_size_exp);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer_size_exp</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="cdfs_set_buffer_size">cdfs_set_buffer_size</h3>
+<pre>extern void cdfs_set_buffer_size (int buffer_size_exp);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer_size_exp</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xcdfs_get_buffer_size">xcdfs_get_buffer_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcdfs_get_buffer_size (int *buffer_size_exp);</pre>
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>buffer_size_exp</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="cdfs_get_buffer_size">cdfs_get_buffer_size</h3>
+<pre>extern int cdfs_get_buffer_size (void);
+</pre>
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>buffer_size_exp</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcdfs_set_number_of_drives">xcdfs_set_number_of_drives</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcdfs_set_number_of_drives (int drive_count);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>drive_count</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="cdfs_set_number_of_drives">cdfs_set_number_of_drives</h3>
+<pre>extern void cdfs_set_number_of_drives (int drive_count);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>drive_count</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xcdfs_get_number_of_drives">xcdfs_get_number_of_drives</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcdfs_get_number_of_drives (int *drive_count);</pre>
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>drive_count</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="cdfs_get_number_of_drives">cdfs_get_number_of_drives</h3>
+<pre>extern int cdfs_get_number_of_drives (void);
+</pre>
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>drive_count</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcdfs_give_file_type">xcdfs_give_file_type</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcdfs_give_file_type (char const *file_name,
+      bits *file_type);</pre>
+<p>Do not use</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="cdfs_give_file_type">cdfs_give_file_type</h3>
+<pre>extern bits cdfs_give_file_type (char const *file_name);</pre>
+<p>Do not use</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>file_type</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xcdfs_describe_disc">xcdfs_describe_disc</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcdfs_describe_disc (int log_no,
+      <a href="filecore.html#filecore_disc">filecore_disc</a> *disc);</pre>
+<p>Do not use</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>log_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>disc</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="cdfs_describe_disc">cdfs_describe_disc</h3>
+<pre>extern void cdfs_describe_disc (int log_no,
+      <a href="filecore.html#filecore_disc">filecore_disc</a> *disc);</pre>
+<p>Do not use</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>log_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>disc</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xcdfs_where_is_file">xcdfs_where_is_file</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcdfs_where_is_file (char const *file_name,
+      int *block_no,
+      int *size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>block_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="cdfs_where_is_file">cdfs_where_is_file</h3>
+<pre>extern void cdfs_where_is_file (char const *file_name,
+      int *block_no,
+      int *size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>block_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xcdfstruncation_read">xcdfstruncation_read</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcdfstruncation_read (<a href="#cdfs_truncation_type">cdfs_truncation_type</a> *type);</pre>
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>type</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="cdfstruncation_read">cdfstruncation_read</h3>
+<pre>extern <a href="#cdfs_truncation_type">cdfs_truncation_type</a> cdfstruncation_read (void);
+</pre>
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>type</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xcdfstruncation_write">xcdfstruncation_write</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcdfstruncation_write (<a href="#cdfs_truncation_type">cdfs_truncation_type</a> type);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>type</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="cdfstruncation_write">cdfstruncation_write</h3>
+<pre>extern void cdfstruncation_write (<a href="#cdfs_truncation_type">cdfs_truncation_type</a> type);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>type</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

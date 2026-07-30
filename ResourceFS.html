@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ResourceFS</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ResourceFS</h2>
+
+<pre>#include "oslib/resourcefs.h"</pre>
+
+<h3 id="resourcefs_FILE_HEADER_MEMBERS">resourcefs_FILE_HEADER_MEMBERS</h3>
+<pre>#define resourcefs_FILE_HEADER_MEMBERS \
+   int data_size; \
+   bits load_addr; \
+   bits exec_addr; \
+   int size; \
+   <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr;
+</pre>
+
+<h3 id="resourcefs_file_header_base">resourcefs_file_header_base</h3>
+<pre>typedef struct
+   {  int data_size;
+      bits load_addr;
+      bits exec_addr;
+      int size;
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr;
+   }
+   resourcefs_file_header_base;</pre>
+
+<h3 id="resourcefs_file_header">resourcefs_file_header</h3>
+<pre>typedef struct
+   {  int data_size;
+      bits load_addr;
+      bits exec_addr;
+      int size;
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr;
+      char name [...];
+   }
+   resourcefs_file_header;</pre>
+
+<h3 id="resourcefs_FILE_DATA_MEMBERS">resourcefs_FILE_DATA_MEMBERS</h3>
+<pre>#define resourcefs_FILE_DATA_MEMBERS \
+   int size;
+</pre>
+
+<h3 id="resourcefs_file_data_base">resourcefs_file_data_base</h3>
+<pre>typedef struct
+   {  int size;
+   }
+   resourcefs_file_data_base;</pre>
+
+<h3 id="resourcefs_file_data">resourcefs_file_data</h3>
+<pre>typedef struct
+   {  int size;
+      byte data [...];
+   }
+   resourcefs_file_data;</pre>
+
+<h3 id="resourcefs_file">resourcefs_file</h3>
+<pre>typedef struct
+   {  <a href="#resourcefs_file_header">resourcefs_file_header</a> header;
+      <a href="#resourcefs_file_data">resourcefs_file_data</a> data;
+   }
+   resourcefs_file;</pre>
+
+<h3 id="resourcefs_file_list">resourcefs_file_list</h3>
+<pre>typedef struct
+   {  <a href="#resourcefs_file">resourcefs_file</a> file [...];
+   }
+   resourcefs_file_list;</pre>
+
+<h3 id="xresourcefs_register_files">xresourcefs_register_files</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xresourcefs_register_files (<a href="#resourcefs_file_list">resourcefs_file_list</a> const *file_list);</pre>
+<p>Add file(s) to the ResourceFS structure</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_list</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="resourcefs_register_files">resourcefs_register_files</h3>
+<pre>extern void resourcefs_register_files (<a href="#resourcefs_file_list">resourcefs_file_list</a> const *file_list);</pre>
+<p>Add file(s) to the ResourceFS structure</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_list</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xresourcefs_deregister_files">xresourcefs_deregister_files</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xresourcefs_deregister_files (<a href="#resourcefs_file_list">resourcefs_file_list</a> const *file_list);</pre>
+<p>Remove file(s) from the ResourceFS structure</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_list</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="resourcefs_deregister_files">resourcefs_deregister_files</h3>
+<pre>extern void resourcefs_deregister_files (<a href="#resourcefs_file_list">resourcefs_file_list</a> const *file_list);</pre>
+<p>Remove file(s) from the ResourceFS structure</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_list</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xservice_resource_fs_started">xservice_resource_fs_started</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_resource_fs_started (void);
+</pre><p>The file structure inside ResourceFS has changed</p>
+
+
+<table>
+</table>
+
+<h3 id="service_resource_fs_started">service_resource_fs_started</h3>
+<pre>extern void service_resource_fs_started (void);
+</pre><p>The file structure inside ResourceFS has changed</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_resource_fs_dying">xservice_resource_fs_dying</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_resource_fs_dying (void);
+</pre><p>ResourceFS is killed</p>
+
+
+<table>
+</table>
+
+<h3 id="service_resource_fs_dying">service_resource_fs_dying</h3>
+<pre>extern void service_resource_fs_dying (void);
+</pre><p>ResourceFS is killed</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_resource_fs_starting">xservice_resource_fs_starting</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_resource_fs_starting (asm_routine register_files,
+      void *workspace);</pre>
+<p>ResourceFS module is reloaded or reinitialised</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>register_files</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="service_resource_fs_starting">service_resource_fs_starting</h3>
+<pre>extern void service_resource_fs_starting (asm_routine register_files,
+      void *workspace);</pre>
+<p>ResourceFS module is reloaded or reinitialised</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>register_files</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

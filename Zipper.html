@@ -1,0 +1,808 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Zipper</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Zipper</h2>
+
+<pre>#include "oslib/zipper.h"</pre>
+
+<h3 id="zipper_un_zip_handle">zipper_un_zip_handle</h3>
+<pre>typedef struct {...} *zipper_un_zip_handle;</pre>
+
+<h3 id="zipper_zip_handle">zipper_zip_handle</h3>
+<pre>typedef struct {...} *zipper_zip_handle;</pre>
+
+<h3 id="zipper_open_flags">zipper_open_flags</h3>
+<pre>typedef bits zipper_open_flags;</pre>
+
+<p>Used in Zipper_UnZipOpen and Zipper_ZipOpen</p>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#zipperopenflags_APPEND">zipperopenflags_APPEND</a></dd>
+<dd><a href="#zipperopenflags_NO_DISCARD">zipperopenflags_NO_DISCARD</a></dd>
+</dl>
+
+<h3 id="zipper_close_flags">zipper_close_flags</h3>
+<pre>typedef bits zipper_close_flags;</pre>
+
+<p>Used in Zipper_UnZipClose and Zipper_ZipClose</p>
+
+<h3 id="zipper_info_flags">zipper_info_flags</h3>
+<pre>typedef bits zipper_info_flags;</pre>
+
+<h3 id="zipper_enumerate_flags">zipper_enumerate_flags</h3>
+<pre>typedef bits zipper_enumerate_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#zipperenumerateflags_CREATOR_VERSION_NUMBER">zipperenumerateflags_CREATOR_VERSION_NUMBER</a></dd>
+<dd><a href="#zipperenumerateflags_GENERAL_PURPOSE_FLAGS">zipperenumerateflags_GENERAL_PURPOSE_FLAGS</a></dd>
+<dd><a href="#zipperenumerateflags_COMPRESSION_METHOD">zipperenumerateflags_COMPRESSION_METHOD</a></dd>
+<dd><a href="#zipperenumerateflags_COMPRESSED_SIZE">zipperenumerateflags_COMPRESSED_SIZE</a></dd>
+<dd><a href="#zipperenumerateflags_EXPANDED_SIZE">zipperenumerateflags_EXPANDED_SIZE</a></dd>
+<dd><a href="#zipperenumerateflags_INTERNAL_ATTRIBUTES">zipperenumerateflags_INTERNAL_ATTRIBUTES</a></dd>
+<dd><a href="#zipperenumerateflags_EXTERNAL_ATTRIBUTES">zipperenumerateflags_EXTERNAL_ATTRIBUTES</a></dd>
+<dd><a href="#zipperenumerateflags_TIMESTAMP">zipperenumerateflags_TIMESTAMP</a></dd>
+<dd><a href="#zipperenumerateflags_LOAD_AND_EXEC_ADDRESS">zipperenumerateflags_LOAD_AND_EXEC_ADDRESS</a></dd>
+<dd><a href="#zipperenumerateflags_RO_EXPANDED_SIZE">zipperenumerateflags_RO_EXPANDED_SIZE</a></dd>
+<dd><a href="#zipperenumerateflags_RO_ATTRIBUTES">zipperenumerateflags_RO_ATTRIBUTES</a></dd>
+<dd><a href="#zipperenumerateflags_RO_OBJECT_TYPE">zipperenumerateflags_RO_OBJECT_TYPE</a></dd>
+<dd><a href="#zipperenumerateflags_RO_FILE_TYPE">zipperenumerateflags_RO_FILE_TYPE</a></dd>
+<dd><a href="#zipperenumerateflags_GBPB_FILENAME_LEN">zipperenumerateflags_GBPB_FILENAME_LEN</a></dd>
+<dd><a href="#zipperenumerateflags_FILENAME_LEN">zipperenumerateflags_FILENAME_LEN</a></dd>
+<dd><a href="#zipperenumerateflags_EXTRA_INFO_LEN">zipperenumerateflags_EXTRA_INFO_LEN</a></dd>
+<dd><a href="#zipperenumerateflags_FILE_COMMENT_LEN">zipperenumerateflags_FILE_COMMENT_LEN</a></dd>
+</dl>
+
+<h3 id="zipper_un_zip_file_open_flags">zipper_un_zip_file_open_flags</h3>
+<pre>typedef bits zipper_un_zip_file_open_flags;</pre>
+
+<h3 id="zipper_un_zip_file_close_flags">zipper_un_zip_file_close_flags</h3>
+<pre>typedef bits zipper_un_zip_file_close_flags;</pre>
+
+<h3 id="zipper_un_zip_file_read_flags">zipper_un_zip_file_read_flags</h3>
+<pre>typedef bits zipper_un_zip_file_read_flags;</pre>
+
+<h3 id="zipper_un_zip_file_eof_flags">zipper_un_zip_file_eof_flags</h3>
+<pre>typedef bits zipper_un_zip_file_eof_flags;</pre>
+
+<h3 id="zipper_zip_file_open_flags">zipper_zip_file_open_flags</h3>
+<pre>typedef bits zipper_zip_file_open_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#zipperfileopenflags_RO_STYLE_TIME_SPECIFIER">zipperfileopenflags_RO_STYLE_TIME_SPECIFIER</a></dd>
+<dd><a href="#zipperfileopenflags_OBJ_IS_DIR">zipperfileopenflags_OBJ_IS_DIR</a></dd>
+<dd><a href="#zipperfileopenflags_OBJ_IS_TEXT">zipperfileopenflags_OBJ_IS_TEXT</a></dd>
+<dd><a href="#zipperfileopenflags_EXTRA_FIELD">zipperfileopenflags_EXTRA_FIELD</a></dd>
+<dd><a href="#zipperfileopenflags_COMMENT_FIELD">zipperfileopenflags_COMMENT_FIELD</a></dd>
+<dd><a href="#zipperfileopenflags_FILE_ATTRIBUTES">zipperfileopenflags_FILE_ATTRIBUTES</a></dd>
+</dl>
+
+<h3 id="zipper_zip_file_close_flags">zipper_zip_file_close_flags</h3>
+<pre>typedef bits zipper_zip_file_close_flags;</pre>
+
+<h3 id="zipper_zip_file_write_flags">zipper_zip_file_write_flags</h3>
+<pre>typedef bits zipper_zip_file_write_flags;</pre>
+
+<h3 id="zipper_compression_details">zipper_compression_details</h3>
+<pre>typedef bits zipper_compression_details;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#zipper_COMPRESSION_METHOD">zipper_COMPRESSION_METHOD</a></dd>
+<dd><a href="#zipper_COMPRESSION_LEVEL">zipper_COMPRESSION_LEVEL</a></dd>
+<dd><a href="#zipper_COMPRESSION_METHOD_STORE">zipper_COMPRESSION_METHOD_STORE</a></dd>
+<dd><a href="#zipper_COMPRESSION_METHOD_DEFLATE">zipper_COMPRESSION_METHOD_DEFLATE</a></dd>
+<dd><a href="#zipper_COMPRESSION_LEVEL_MINIMUM">zipper_COMPRESSION_LEVEL_MINIMUM</a></dd>
+<dd><a href="#zipper_COMPRESSION_LEVEL_MAXIMUM">zipper_COMPRESSION_LEVEL_MAXIMUM</a></dd>
+</dl>
+
+<h3 id="zipper_time_specifier">zipper_time_specifier</h3>
+<pre>typedef union
+   {  struct
+      {  bits load_addr;
+         bits exec_addr;
+         <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr;
+      }
+      riscos_style;
+      struct
+      {  int centiseconds;
+         int seconds;
+         int minutes;
+         int hours;
+         int date;
+         int month;
+         int year;
+      }
+      zip_style;
+   }
+   zipper_time_specifier;</pre>
+
+<h3 id="zipper_file_attributes">zipper_file_attributes</h3>
+<pre>typedef struct
+   {  bits internal;
+      bits external;
+   }
+   zipper_file_attributes;</pre>
+
+<h3 id="zipperopenflags_APPEND">zipperopenflags_APPEND</h3>
+<pre>#define zipperopenflags_APPEND ((<a href="#zipper_open_flags">zipper_open_flags</a>) 0x1u)</pre>
+
+<p>Only for Zipper_ZipOpen</p>
+
+<h3 id="zipperopenflags_NO_DISCARD">zipperopenflags_NO_DISCARD</h3>
+<pre>#define zipperopenflags_NO_DISCARD ((<a href="#zipper_open_flags">zipper_open_flags</a>) 0x80000000u)</pre>
+
+<h3 id="zipperenumerateflags_CREATOR_VERSION_NUMBER">zipperenumerateflags_CREATOR_VERSION_NUMBER</h3>
+<pre>#define zipperenumerateflags_CREATOR_VERSION_NUMBER ((<a href="#zipper_enumerate_flags">zipper_enumerate_flags</a>) 0x1u)</pre>
+
+<h3 id="zipperenumerateflags_GENERAL_PURPOSE_FLAGS">zipperenumerateflags_GENERAL_PURPOSE_FLAGS</h3>
+<pre>#define zipperenumerateflags_GENERAL_PURPOSE_FLAGS ((<a href="#zipper_enumerate_flags">zipper_enumerate_flags</a>) 0x2u)</pre>
+
+<h3 id="zipperenumerateflags_COMPRESSION_METHOD">zipperenumerateflags_COMPRESSION_METHOD</h3>
+<pre>#define zipperenumerateflags_COMPRESSION_METHOD ((<a href="#zipper_enumerate_flags">zipper_enumerate_flags</a>) 0x4u)</pre>
+
+<h3 id="zipperenumerateflags_COMPRESSED_SIZE">zipperenumerateflags_COMPRESSED_SIZE</h3>
+<pre>#define zipperenumerateflags_COMPRESSED_SIZE ((<a href="#zipper_enumerate_flags">zipper_enumerate_flags</a>) 0x8u)</pre>
+
+<h3 id="zipperenumerateflags_EXPANDED_SIZE">zipperenumerateflags_EXPANDED_SIZE</h3>
+<pre>#define zipperenumerateflags_EXPANDED_SIZE ((<a href="#zipper_enumerate_flags">zipper_enumerate_flags</a>) 0x10u)</pre>
+
+<h3 id="zipperenumerateflags_INTERNAL_ATTRIBUTES">zipperenumerateflags_INTERNAL_ATTRIBUTES</h3>
+<pre>#define zipperenumerateflags_INTERNAL_ATTRIBUTES ((<a href="#zipper_enumerate_flags">zipper_enumerate_flags</a>) 0x20u)</pre>
+
+<h3 id="zipperenumerateflags_EXTERNAL_ATTRIBUTES">zipperenumerateflags_EXTERNAL_ATTRIBUTES</h3>
+<pre>#define zipperenumerateflags_EXTERNAL_ATTRIBUTES ((<a href="#zipper_enumerate_flags">zipper_enumerate_flags</a>) 0x40u)</pre>
+
+<h3 id="zipperenumerateflags_TIMESTAMP">zipperenumerateflags_TIMESTAMP</h3>
+<pre>#define zipperenumerateflags_TIMESTAMP ((<a href="#zipper_enumerate_flags">zipper_enumerate_flags</a>) 0x80u)</pre>
+
+<h3 id="zipperenumerateflags_LOAD_AND_EXEC_ADDRESS">zipperenumerateflags_LOAD_AND_EXEC_ADDRESS</h3>
+<pre>#define zipperenumerateflags_LOAD_AND_EXEC_ADDRESS ((<a href="#zipper_enumerate_flags">zipper_enumerate_flags</a>) 0x100u)</pre>
+
+<h3 id="zipperenumerateflags_RO_EXPANDED_SIZE">zipperenumerateflags_RO_EXPANDED_SIZE</h3>
+<pre>#define zipperenumerateflags_RO_EXPANDED_SIZE ((<a href="#zipper_enumerate_flags">zipper_enumerate_flags</a>) 0x200u)</pre>
+
+<h3 id="zipperenumerateflags_RO_ATTRIBUTES">zipperenumerateflags_RO_ATTRIBUTES</h3>
+<pre>#define zipperenumerateflags_RO_ATTRIBUTES ((<a href="#zipper_enumerate_flags">zipper_enumerate_flags</a>) 0x400u)</pre>
+
+<h3 id="zipperenumerateflags_RO_OBJECT_TYPE">zipperenumerateflags_RO_OBJECT_TYPE</h3>
+<pre>#define zipperenumerateflags_RO_OBJECT_TYPE ((<a href="#zipper_enumerate_flags">zipper_enumerate_flags</a>) 0x800u)</pre>
+
+<h3 id="zipperenumerateflags_RO_FILE_TYPE">zipperenumerateflags_RO_FILE_TYPE</h3>
+<pre>#define zipperenumerateflags_RO_FILE_TYPE ((<a href="#zipper_enumerate_flags">zipper_enumerate_flags</a>) 0x1000u)</pre>
+
+<h3 id="zipperenumerateflags_GBPB_FILENAME_LEN">zipperenumerateflags_GBPB_FILENAME_LEN</h3>
+<pre>#define zipperenumerateflags_GBPB_FILENAME_LEN ((<a href="#zipper_enumerate_flags">zipper_enumerate_flags</a>) 0x2000u)</pre>
+
+<h3 id="zipperenumerateflags_FILENAME_LEN">zipperenumerateflags_FILENAME_LEN</h3>
+<pre>#define zipperenumerateflags_FILENAME_LEN ((<a href="#zipper_enumerate_flags">zipper_enumerate_flags</a>) 0x4000u)</pre>
+
+<h3 id="zipperenumerateflags_EXTRA_INFO_LEN">zipperenumerateflags_EXTRA_INFO_LEN</h3>
+<pre>#define zipperenumerateflags_EXTRA_INFO_LEN ((<a href="#zipper_enumerate_flags">zipper_enumerate_flags</a>) 0x8000u)</pre>
+
+<h3 id="zipperenumerateflags_FILE_COMMENT_LEN">zipperenumerateflags_FILE_COMMENT_LEN</h3>
+<pre>#define zipperenumerateflags_FILE_COMMENT_LEN ((<a href="#zipper_enumerate_flags">zipper_enumerate_flags</a>) 0x10000u)</pre>
+
+<h3 id="zipperfileopenflags_RO_STYLE_TIME_SPECIFIER">zipperfileopenflags_RO_STYLE_TIME_SPECIFIER</h3>
+<pre>#define zipperfileopenflags_RO_STYLE_TIME_SPECIFIER ((<a href="#zipper_zip_file_open_flags">zipper_zip_file_open_flags</a>) 0x1u)</pre>
+
+<h3 id="zipperfileopenflags_OBJ_IS_DIR">zipperfileopenflags_OBJ_IS_DIR</h3>
+<pre>#define zipperfileopenflags_OBJ_IS_DIR ((<a href="#zipper_zip_file_open_flags">zipper_zip_file_open_flags</a>) 0x2u)</pre>
+
+<h3 id="zipperfileopenflags_OBJ_IS_TEXT">zipperfileopenflags_OBJ_IS_TEXT</h3>
+<pre>#define zipperfileopenflags_OBJ_IS_TEXT ((<a href="#zipper_zip_file_open_flags">zipper_zip_file_open_flags</a>) 0x4u)</pre>
+
+<h3 id="zipperfileopenflags_EXTRA_FIELD">zipperfileopenflags_EXTRA_FIELD</h3>
+<pre>#define zipperfileopenflags_EXTRA_FIELD ((<a href="#zipper_zip_file_open_flags">zipper_zip_file_open_flags</a>) 0x8u)</pre>
+
+<h3 id="zipperfileopenflags_COMMENT_FIELD">zipperfileopenflags_COMMENT_FIELD</h3>
+<pre>#define zipperfileopenflags_COMMENT_FIELD ((<a href="#zipper_zip_file_open_flags">zipper_zip_file_open_flags</a>) 0x10u)</pre>
+
+<h3 id="zipperfileopenflags_FILE_ATTRIBUTES">zipperfileopenflags_FILE_ATTRIBUTES</h3>
+<pre>#define zipperfileopenflags_FILE_ATTRIBUTES ((<a href="#zipper_zip_file_open_flags">zipper_zip_file_open_flags</a>) 0x20u)</pre>
+
+<h3 id="zipper_COMPRESSION_METHOD">zipper_COMPRESSION_METHOD</h3>
+<pre>#define zipper_COMPRESSION_METHOD ((<a href="#zipper_compression_details">zipper_compression_details</a>) 0xFFu)</pre>
+
+<h3 id="zipper_COMPRESSION_METHOD_SHIFT">zipper_COMPRESSION_METHOD_SHIFT</h3>
+<pre>#define zipper_COMPRESSION_METHOD_SHIFT 0</pre>
+
+<h3 id="zipper_COMPRESSION_LEVEL">zipper_COMPRESSION_LEVEL</h3>
+<pre>#define zipper_COMPRESSION_LEVEL ((<a href="#zipper_compression_details">zipper_compression_details</a>) 0xF00u)</pre>
+
+<h3 id="zipper_COMPRESSION_LEVEL_SHIFT">zipper_COMPRESSION_LEVEL_SHIFT</h3>
+<pre>#define zipper_COMPRESSION_LEVEL_SHIFT 8</pre>
+
+<h3 id="zipper_COMPRESSION_METHOD_STORE">zipper_COMPRESSION_METHOD_STORE</h3>
+<pre>#define zipper_COMPRESSION_METHOD_STORE ((<a href="#zipper_compression_details">zipper_compression_details</a>) 0x0u)</pre>
+
+<h3 id="zipper_COMPRESSION_METHOD_DEFLATE">zipper_COMPRESSION_METHOD_DEFLATE</h3>
+<pre>#define zipper_COMPRESSION_METHOD_DEFLATE ((<a href="#zipper_compression_details">zipper_compression_details</a>) 0x8u)</pre>
+
+<h3 id="zipper_COMPRESSION_LEVEL_MINIMUM">zipper_COMPRESSION_LEVEL_MINIMUM</h3>
+<pre>#define zipper_COMPRESSION_LEVEL_MINIMUM ((<a href="#zipper_compression_details">zipper_compression_details</a>) 0x1u)</pre>
+
+<h3 id="zipper_COMPRESSION_LEVEL_MAXIMUM">zipper_COMPRESSION_LEVEL_MAXIMUM</h3>
+<pre>#define zipper_COMPRESSION_LEVEL_MAXIMUM ((<a href="#zipper_compression_details">zipper_compression_details</a>) 0x9u)</pre>
+
+<h3 id="xzipper_un_zip_open">xzipper_un_zip_open</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzipper_un_zip_open (<a href="#zipper_open_flags">zipper_open_flags</a> flags,
+      char const *filename,
+      <a href="#zipper_un_zip_handle">zipper_un_zip_handle</a> *handle);</pre>
+<p>Open an archive for extraction</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zipper_un_zip_open">zipper_un_zip_open</h3>
+<pre>extern <a href="#zipper_un_zip_handle">zipper_un_zip_handle</a> zipper_un_zip_open (<a href="#zipper_open_flags">zipper_open_flags</a> flags,
+      char const *filename);</pre>
+<p>Open an archive for extraction</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>handle</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzipper_un_zip_close">xzipper_un_zip_close</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzipper_un_zip_close (<a href="#zipper_close_flags">zipper_close_flags</a> flags,
+      <a href="#zipper_un_zip_handle">zipper_un_zip_handle</a> handle);</pre>
+<p>Close a file previously opened for extraction</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="zipper_un_zip_close">zipper_un_zip_close</h3>
+<pre>extern void zipper_un_zip_close (<a href="#zipper_close_flags">zipper_close_flags</a> flags,
+      <a href="#zipper_un_zip_handle">zipper_un_zip_handle</a> handle);</pre>
+<p>Close a file previously opened for extraction</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xzipper_un_zip_info_object_count">xzipper_un_zip_info_object_count</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzipper_un_zip_info_object_count (<a href="#zipper_info_flags">zipper_info_flags</a> flags,
+      <a href="#zipper_un_zip_handle">zipper_un_zip_handle</a> handle,
+      int *objects);</pre>
+<p>Read number of objects in the archive</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>objects</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zipper_un_zip_info_object_count">zipper_un_zip_info_object_count</h3>
+<pre>extern int zipper_un_zip_info_object_count (<a href="#zipper_info_flags">zipper_info_flags</a> flags,
+      <a href="#zipper_un_zip_handle">zipper_un_zip_handle</a> handle);</pre>
+<p>Read number of objects in the archive</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>objects</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzipper_un_zip_info_archive_comment">xzipper_un_zip_info_archive_comment</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzipper_un_zip_info_archive_comment (<a href="#zipper_info_flags">zipper_info_flags</a> flags,
+      <a href="#zipper_un_zip_handle">zipper_un_zip_handle</a> handle,
+      byte *buffer,
+      int buffer_size,
+      int *read);</pre>
+<p>Read archive comment</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>buffer_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>read</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zipper_un_zip_info_archive_comment">zipper_un_zip_info_archive_comment</h3>
+<pre>extern int zipper_un_zip_info_archive_comment (<a href="#zipper_info_flags">zipper_info_flags</a> flags,
+      <a href="#zipper_un_zip_handle">zipper_un_zip_handle</a> handle,
+      byte *buffer,
+      int buffer_size);</pre>
+<p>Read archive comment</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>buffer_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>read</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzipper_un_zip_enumerate">xzipper_un_zip_enumerate</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzipper_un_zip_enumerate (<a href="#zipper_enumerate_flags">zipper_enumerate_flags</a> flags,
+      <a href="#zipper_un_zip_handle">zipper_un_zip_handle</a> handle,
+      byte *buffer,
+      int objects,
+      int offset,
+      int buffer_size,
+      int *objects_read,
+      int *next_offset,
+      int *buffer_unused);</pre>
+<p>Enumerate the objects in an archive</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>objects</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>buffer_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>objects_read</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>next_offset</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>buffer_unused</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="zipper_un_zip_enumerate">zipper_un_zip_enumerate</h3>
+<pre>extern int zipper_un_zip_enumerate (<a href="#zipper_enumerate_flags">zipper_enumerate_flags</a> flags,
+      <a href="#zipper_un_zip_handle">zipper_un_zip_handle</a> handle,
+      byte *buffer,
+      int objects,
+      int offset,
+      int buffer_size,
+      int *next_offset,
+      int *buffer_unused);</pre>
+<p>Enumerate the objects in an archive</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>objects</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>buffer_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_offset</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>buffer_unused</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>objects_read</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xzipper_un_zip_file_info_to_buffer">xzipper_un_zip_file_info_to_buffer</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzipper_un_zip_file_info_to_buffer (<a href="#zipper_enumerate_flags">zipper_enumerate_flags</a> flags,
+      <a href="#zipper_un_zip_handle">zipper_un_zip_handle</a> handle,
+      char const *filename,
+      byte *data,
+      int data_size,
+      byte **data_end,
+      int *data_unused);</pre>
+<p>Read information on a file to a buffer, like Zipper_UnZipEnumerate</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>data_size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>data_end</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>data_unused</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="zipper_un_zip_file_info_to_buffer">zipper_un_zip_file_info_to_buffer</h3>
+<pre>extern void zipper_un_zip_file_info_to_buffer (<a href="#zipper_enumerate_flags">zipper_enumerate_flags</a> flags,
+      <a href="#zipper_un_zip_handle">zipper_un_zip_handle</a> handle,
+      char const *filename,
+      byte *data,
+      int data_size,
+      byte **data_end,
+      int *data_unused);</pre>
+<p>Read information on a file to a buffer, like Zipper_UnZipEnumerate</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>data_size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>data_end</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>data_unused</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xzipper_un_zip_file_info_to_registers">xzipper_un_zip_file_info_to_registers</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzipper_un_zip_file_info_to_registers (<a href="#zipper_un_zip_handle">zipper_un_zip_handle</a> handle,
+      char const *filename,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_address,
+      bits *exec_address,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Read information on a file to registers, like OS_File 5</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_address</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_address</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="zipper_un_zip_file_info_to_registers">zipper_un_zip_file_info_to_registers</h3>
+<pre>extern void zipper_un_zip_file_info_to_registers (<a href="#zipper_un_zip_handle">zipper_un_zip_handle</a> handle,
+      char const *filename,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_address,
+      bits *exec_address,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr);</pre>
+<p>Read information on a file to registers, like OS_File 5</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_address</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_address</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xzipper_un_zip_file_open">xzipper_un_zip_file_open</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzipper_un_zip_file_open (<a href="#zipper_un_zip_file_open_flags">zipper_un_zip_file_open_flags</a> flags,
+      <a href="#zipper_un_zip_handle">zipper_un_zip_handle</a> handle,
+      char const *filename);</pre>
+<p>Open a file in an archive for input</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="zipper_un_zip_file_open">zipper_un_zip_file_open</h3>
+<pre>extern void zipper_un_zip_file_open (<a href="#zipper_un_zip_file_open_flags">zipper_un_zip_file_open_flags</a> flags,
+      <a href="#zipper_un_zip_handle">zipper_un_zip_handle</a> handle,
+      char const *filename);</pre>
+<p>Open a file in an archive for input</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xzipper_un_zip_file_close">xzipper_un_zip_file_close</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzipper_un_zip_file_close (<a href="#zipper_un_zip_file_close_flags">zipper_un_zip_file_close_flags</a> flags,
+      <a href="#zipper_un_zip_handle">zipper_un_zip_handle</a> handle);</pre>
+<p>Close the currently opened archive file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="zipper_un_zip_file_close">zipper_un_zip_file_close</h3>
+<pre>extern void zipper_un_zip_file_close (<a href="#zipper_un_zip_file_close_flags">zipper_un_zip_file_close_flags</a> flags,
+      <a href="#zipper_un_zip_handle">zipper_un_zip_handle</a> handle);</pre>
+<p>Close the currently opened archive file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xzipper_un_zip_file_read">xzipper_un_zip_file_read</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzipper_un_zip_file_read (<a href="#zipper_un_zip_file_read_flags">zipper_un_zip_file_read_flags</a> flags,
+      <a href="#zipper_un_zip_handle">zipper_un_zip_handle</a> handle,
+      byte *data,
+      int size,
+      int *read);</pre>
+<p>Read data from the currently opened archive file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>read</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zipper_un_zip_file_read">zipper_un_zip_file_read</h3>
+<pre>extern int zipper_un_zip_file_read (<a href="#zipper_un_zip_file_read_flags">zipper_un_zip_file_read_flags</a> flags,
+      <a href="#zipper_un_zip_handle">zipper_un_zip_handle</a> handle,
+      byte *data,
+      int size);</pre>
+<p>Read data from the currently opened archive file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>read</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzipper_un_zip_file_eof">xzipper_un_zip_file_eof</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzipper_un_zip_file_eof (<a href="#zipper_un_zip_file_eof_flags">zipper_un_zip_file_eof_flags</a> flags,
+      <a href="#zipper_un_zip_handle">zipper_un_zip_handle</a> handle,
+      osbool *eof);</pre>
+<p>Check whether EOF has been reached for the currently opened archive file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>eof</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zipper_un_zip_file_eof">zipper_un_zip_file_eof</h3>
+<pre>extern osbool zipper_un_zip_file_eof (<a href="#zipper_un_zip_file_eof_flags">zipper_un_zip_file_eof_flags</a> flags,
+      <a href="#zipper_un_zip_handle">zipper_un_zip_handle</a> handle);</pre>
+<p>Check whether EOF has been reached for the currently opened archive file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>eof</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzipper_zip_open">xzipper_zip_open</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzipper_zip_open (<a href="#zipper_open_flags">zipper_open_flags</a> flags,
+      char const *filename,
+      <a href="#zipper_zip_handle">zipper_zip_handle</a> *handle);</pre>
+<p>Create an archive</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zipper_zip_open">zipper_zip_open</h3>
+<pre>extern <a href="#zipper_zip_handle">zipper_zip_handle</a> zipper_zip_open (<a href="#zipper_open_flags">zipper_open_flags</a> flags,
+      char const *filename);</pre>
+<p>Create an archive</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>handle</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzipper_zip_close">xzipper_zip_close</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzipper_zip_close (<a href="#zipper_close_flags">zipper_close_flags</a> flags,
+      <a href="#zipper_zip_handle">zipper_zip_handle</a> handle);</pre>
+<p>Close a file previously opened for writing</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="zipper_zip_close">zipper_zip_close</h3>
+<pre>extern void zipper_zip_close (<a href="#zipper_close_flags">zipper_close_flags</a> flags,
+      <a href="#zipper_zip_handle">zipper_zip_handle</a> handle);</pre>
+<p>Close a file previously opened for writing</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xzipper_zip_file_open">xzipper_zip_file_open</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzipper_zip_file_open (<a href="#zipper_zip_file_open_flags">zipper_zip_file_open_flags</a> flags,
+      <a href="#zipper_zip_handle">zipper_zip_handle</a> handle,
+      char const *filename,
+      <a href="#zipper_compression_details">zipper_compression_details</a> compression_details,
+      <a href="#zipper_time_specifier">zipper_time_specifier</a> const *time_specifier,
+      byte const *extra,
+      int extra_size,
+      char const *comment,
+      <a href="#zipper_file_attributes">zipper_file_attributes</a> const *attr);</pre>
+<p>Open a file in an archive for input</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>compression_details</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>time_specifier</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>extra</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>extra_size</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>comment</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="zipper_zip_file_open">zipper_zip_file_open</h3>
+<pre>extern void zipper_zip_file_open (<a href="#zipper_zip_file_open_flags">zipper_zip_file_open_flags</a> flags,
+      <a href="#zipper_zip_handle">zipper_zip_handle</a> handle,
+      char const *filename,
+      <a href="#zipper_compression_details">zipper_compression_details</a> compression_details,
+      <a href="#zipper_time_specifier">zipper_time_specifier</a> const *time_specifier,
+      byte const *extra,
+      int extra_size,
+      char const *comment,
+      <a href="#zipper_file_attributes">zipper_file_attributes</a> const *attr);</pre>
+<p>Open a file in an archive for input</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>compression_details</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>time_specifier</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>extra</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>extra_size</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>comment</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xzipper_zip_file_close">xzipper_zip_file_close</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzipper_zip_file_close (<a href="#zipper_zip_file_close_flags">zipper_zip_file_close_flags</a> flags,
+      <a href="#zipper_zip_handle">zipper_zip_handle</a> handle,
+      int *uncompressed_size,
+      int *compressed_size);</pre>
+<p>Close the currently opened archive file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>uncompressed_size</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>compressed_size</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="zipper_zip_file_close">zipper_zip_file_close</h3>
+<pre>extern void zipper_zip_file_close (<a href="#zipper_zip_file_close_flags">zipper_zip_file_close_flags</a> flags,
+      <a href="#zipper_zip_handle">zipper_zip_handle</a> handle,
+      int *uncompressed_size,
+      int *compressed_size);</pre>
+<p>Close the currently opened archive file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>uncompressed_size</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>compressed_size</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xzipper_zip_file_write">xzipper_zip_file_write</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzipper_zip_file_write (<a href="#zipper_zip_file_write_flags">zipper_zip_file_write_flags</a> flags,
+      <a href="#zipper_zip_handle">zipper_zip_handle</a> handle,
+      byte *data,
+      int size);</pre>
+<p>Write data to the currently opened archive file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="zipper_zip_file_write">zipper_zip_file_write</h3>
+<pre>extern void zipper_zip_file_write (<a href="#zipper_zip_file_write_flags">zipper_zip_file_write_flags</a> flags,
+      <a href="#zipper_zip_handle">zipper_zip_handle</a> handle,
+      byte *data,
+      int size);</pre>
+<p>Write data to the currently opened archive file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

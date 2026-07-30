@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Joystick</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Joystick</h2>
+
+<pre>#include "oslib/joystick.h"</pre>
+
+<h3 id="joystick_state">joystick_state</h3>
+<pre>typedef bits joystick_state;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#joystick_X">joystick_X</a></dd>
+<dd><a href="#joystick_Y">joystick_Y</a></dd>
+<dd><a href="#joystick_SWITCHES">joystick_SWITCHES</a></dd>
+<dd><a href="#joystick_HALF_WORDX">joystick_HALF_WORDX</a></dd>
+<dd><a href="#joystick_HALF_WORDY">joystick_HALF_WORDY</a></dd>
+</dl>
+
+<h3 id="joystick_half_word_state">joystick_half_word_state</h3>
+<pre>typedef bits joystick_half_word_state;</pre>
+
+<h3 id="joystick_X">joystick_X</h3>
+<pre>#define joystick_X ((<a href="#joystick_state">joystick_state</a>) 0xFFu)</pre>
+
+<h3 id="joystick_Y">joystick_Y</h3>
+<pre>#define joystick_Y ((<a href="#joystick_state">joystick_state</a>) 0xFF00u)</pre>
+
+<h3 id="joystick_SWITCHES">joystick_SWITCHES</h3>
+<pre>#define joystick_SWITCHES ((<a href="#joystick_state">joystick_state</a>) 0xFF0000u)</pre>
+
+<h3 id="joystick_XSHIFT">joystick_XSHIFT</h3>
+<pre>#define joystick_XSHIFT 0</pre>
+
+<h3 id="joystick_YSHIFT">joystick_YSHIFT</h3>
+<pre>#define joystick_YSHIFT 8</pre>
+
+<h3 id="joystick_SWITCHES_SHIFT">joystick_SWITCHES_SHIFT</h3>
+<pre>#define joystick_SWITCHES_SHIFT 16</pre>
+
+<h3 id="joystick_HALF_WORDX">joystick_HALF_WORDX</h3>
+<pre>#define joystick_HALF_WORDX ((<a href="#joystick_state">joystick_state</a>) 0xFFFFu)</pre>
+
+<h3 id="joystick_HALF_WORDY">joystick_HALF_WORDY</h3>
+<pre>#define joystick_HALF_WORDY ((<a href="#joystick_state">joystick_state</a>) 0xFFFF0000u)</pre>
+
+<h3 id="joystick_HALF_WORD_XSHIFT">joystick_HALF_WORD_XSHIFT</h3>
+<pre>#define joystick_HALF_WORD_XSHIFT 0</pre>
+
+<h3 id="joystick_HALF_WORD_YSHIFT">joystick_HALF_WORD_YSHIFT</h3>
+<pre>#define joystick_HALF_WORD_YSHIFT 16</pre>
+
+<h3 id="xjoystick_read">xjoystick_read</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xjoystick_read (int joystick_no,
+      <a href="#joystick_state">joystick_state</a> *state);</pre>
+<p>Returns the state of a joystick</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>joystick_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>state</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="joystick_read">joystick_read</h3>
+<pre>extern <a href="#joystick_state">joystick_state</a> joystick_read (int joystick_no);</pre>
+<p>Returns the state of a joystick</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>joystick_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>state</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xjoystick_read_half_word">xjoystick_read_half_word</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xjoystick_read_half_word (int joystick_no,
+      <a href="#joystick_half_word_state">joystick_half_word_state</a> *state,
+      bits *switches);</pre>
+<p>Returns the state of a joystick</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>joystick_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>state</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>switches</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="joystick_read_half_word">joystick_read_half_word</h3>
+<pre>extern <a href="#joystick_half_word_state">joystick_half_word_state</a> joystick_read_half_word (int joystick_no,
+      bits *switches);</pre>
+<p>Returns the state of a joystick</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>joystick_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>switches</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>state</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xjoystick_calibrate_top_right">xjoystick_calibrate_top_right</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xjoystick_calibrate_top_right (void);
+</pre><p>One of the pair of SWI's to calibrate an analogue joystick</p>
+
+
+<table>
+</table>
+
+<h3 id="joystick_calibrate_top_right">joystick_calibrate_top_right</h3>
+<pre>extern void joystick_calibrate_top_right (void);
+</pre><p>One of the pair of SWI's to calibrate an analogue joystick</p>
+
+
+<table>
+</table>
+
+<h3 id="xjoystick_calibrate_bottom_left">xjoystick_calibrate_bottom_left</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xjoystick_calibrate_bottom_left (void);
+</pre><p>One of the pair of SWI's to calibrate an analogue joystick</p>
+
+
+<table>
+</table>
+
+<h3 id="joystick_calibrate_bottom_left">joystick_calibrate_bottom_left</h3>
+<pre>extern void joystick_calibrate_bottom_left (void);
+</pre><p>One of the pair of SWI's to calibrate an analogue joystick</p>
+
+
+<table>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

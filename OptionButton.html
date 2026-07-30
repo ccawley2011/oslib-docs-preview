@@ -1,0 +1,269 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; OptionButton</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>OptionButton</h2>
+
+<pre>#include "oslib/optionbutton.h"</pre>
+
+<h3 id="optionbutton_gadget">optionbutton_gadget</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> label;
+      int label_limit;
+      bits action;
+   }
+   optionbutton_gadget;</pre>
+
+<h3 id="optionbutton_object">optionbutton_object</h3>
+<pre>typedef struct
+   {  <a href="#gadget_OBJECT_MEMBERS">gadget_OBJECT_MEMBERS</a>
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> label;
+      int label_limit;
+      bits action;
+   }
+   optionbutton_object;</pre>
+
+<h3 id="optionbutton_action_state_changed">optionbutton_action_state_changed</h3>
+<pre>typedef struct
+   {  osbool on;
+   }
+   optionbutton_action_state_changed;</pre>
+
+<p>Prefer OptionButton_ActionStateChangedBlock</p>
+
+<h3 id="optionbutton_action_state_changed_block">optionbutton_action_state_changed_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      osbool on;
+   }
+   optionbutton_action_state_changed_block;</pre>
+
+<h3 id="class_OPTION_BUTTON">class_OPTION_BUTTON</h3>
+<pre>#define class_OPTION_BUTTON ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0xC0u)</pre>
+
+<h3 id="optionbutton_GENERATE_STATE_CHANGED">optionbutton_GENERATE_STATE_CHANGED</h3>
+<pre>#define optionbutton_GENERATE_STATE_CHANGED ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x1u)</pre>
+
+<h3 id="optionbutton_ON">optionbutton_ON</h3>
+<pre>#define optionbutton_ON ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x4u)</pre>
+
+<h3 id="action_OPTION_BUTTON_STATE_CHANGED">action_OPTION_BUTTON_STATE_CHANGED</h3>
+<pre>#define action_OPTION_BUTTON_STATE_CHANGED 0x82882u</pre>
+
+<h3 id="optionbutton_STATE_CHANGED_ADJUST">optionbutton_STATE_CHANGED_ADJUST</h3>
+<pre>#define optionbutton_STATE_CHANGED_ADJUST 0x1u</pre>
+
+<h3 id="optionbutton_STATE_CHANGED_SELECT">optionbutton_STATE_CHANGED_SELECT</h3>
+<pre>#define optionbutton_STATE_CHANGED_SELECT 0x4u</pre>
+
+<h3 id="xoptionbutton_set_label">xoptionbutton_set_label</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xoptionbutton_set_label (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> option_button,
+      char const *label);</pre>
+<p>Sets the label of the specified option button</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>option_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>label</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="optionbutton_set_label">optionbutton_set_label</h3>
+<pre>extern void optionbutton_set_label (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> option_button,
+      char const *label);</pre>
+<p>Sets the label of the specified option button</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>option_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>label</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xoptionbutton_get_label">xoptionbutton_get_label</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xoptionbutton_get_label (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> option_button,
+      char *buffer,
+      int size,
+      int *used);</pre>
+<p>Gets the label of the specified option button</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>option_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="optionbutton_get_label">optionbutton_get_label</h3>
+<pre>extern int optionbutton_get_label (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> option_button,
+      char *buffer,
+      int size);</pre>
+<p>Gets the label of the specified option button</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>option_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xoptionbutton_set_action">xoptionbutton_set_action</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xoptionbutton_set_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> option_button,
+      bits action);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>option_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="optionbutton_set_action">optionbutton_set_action</h3>
+<pre>extern void optionbutton_set_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> option_button,
+      bits action);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>option_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xoptionbutton_get_action">xoptionbutton_get_action</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xoptionbutton_get_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> option_button,
+      bits *action);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>option_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>action</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="optionbutton_get_action">optionbutton_get_action</h3>
+<pre>extern bits optionbutton_get_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> option_button);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>option_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>action</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xoptionbutton_set_state">xoptionbutton_set_state</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xoptionbutton_set_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> option_button,
+      osbool on);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>option_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>on</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="optionbutton_set_state">optionbutton_set_state</h3>
+<pre>extern void optionbutton_set_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> option_button,
+      osbool on);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>option_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>on</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xoptionbutton_get_state">xoptionbutton_get_state</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xoptionbutton_get_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> option_button,
+      osbool *on);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>option_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>on</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="optionbutton_get_state">optionbutton_get_state</h3>
+<pre>extern osbool optionbutton_get_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> option_button);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>option_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>on</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

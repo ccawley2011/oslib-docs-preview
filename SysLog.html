@@ -1,0 +1,653 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; SysLog</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>SysLog</h2>
+
+<pre>#include "oslib/syslog.h"</pre>
+
+<h3 id="xsyslog_log_message">xsyslog_log_message</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_log_message (char const *name_or_handle,
+      char const *message,
+      int priority);</pre>
+<p>Log a message in a named system log or session log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name_or_handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>message</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>priority</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="syslog_log_message">syslog_log_message</h3>
+<pre>extern void syslog_log_message (char const *name_or_handle,
+      char const *message,
+      int priority);</pre>
+<p>Log a message in a named system log or session log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name_or_handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>message</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>priority</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xsyslog_log_message_by_handle">xsyslog_log_message_by_handle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_log_message_by_handle (bits handle,
+      char const *message,
+      int priority);</pre>
+<p>Log a message in a session log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>message</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>priority</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="syslog_log_message_by_handle">syslog_log_message_by_handle</h3>
+<pre>extern void syslog_log_message_by_handle (bits handle,
+      char const *message,
+      int priority);</pre>
+<p>Log a message in a session log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>message</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>priority</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xsyslog_get_log_level">xsyslog_get_log_level</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_get_log_level (char const *name_or_handle,
+      int *priority);</pre>
+<p>Read the current logging level for a particular log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name_or_handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>priority</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="syslog_get_log_level">syslog_get_log_level</h3>
+<pre>extern int syslog_get_log_level (char const *name_or_handle);</pre>
+<p>Read the current logging level for a particular log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name_or_handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>priority</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsyslog_get_log_level_by_handle">xsyslog_get_log_level_by_handle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_get_log_level_by_handle (bits handle,
+      int *priority);</pre>
+<p>Read the current logging level for a particular session log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>priority</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="syslog_get_log_level_by_handle">syslog_get_log_level_by_handle</h3>
+<pre>extern int syslog_get_log_level_by_handle (bits handle);</pre>
+<p>Read the current logging level for a particular session log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>priority</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsyslog_flush_log">xsyslog_flush_log</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_flush_log (char const *name_or_handle);</pre>
+<p>Writes any cached data from memory to the logs and closes the files</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name_or_handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="syslog_flush_log">syslog_flush_log</h3>
+<pre>extern void syslog_flush_log (char const *name_or_handle);</pre>
+<p>Writes any cached data from memory to the logs and closes the files</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name_or_handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xsyslog_flush_log_by_handle">xsyslog_flush_log_by_handle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_flush_log_by_handle (bits handle);</pre>
+<p>Writes any cached data from memory to the logs and closes the files</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="syslog_flush_log_by_handle">syslog_flush_log_by_handle</h3>
+<pre>extern void syslog_flush_log_by_handle (bits handle);</pre>
+<p>Writes any cached data from memory to the logs and closes the files</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xsyslog_set_log_level">xsyslog_set_log_level</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_set_log_level (char const *name_or_handle,
+      int priority);</pre>
+<p>Set the current logging level for a particular log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name_or_handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>priority</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="syslog_set_log_level">syslog_set_log_level</h3>
+<pre>extern void syslog_set_log_level (char const *name_or_handle,
+      int priority);</pre>
+<p>Set the current logging level for a particular log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name_or_handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>priority</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xsyslog_set_log_level_by_handle">xsyslog_set_log_level_by_handle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_set_log_level_by_handle (bits handle,
+      int priority);</pre>
+<p>Set the current logging level for a particular log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>priority</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="syslog_set_log_level_by_handle">syslog_set_log_level_by_handle</h3>
+<pre>extern void syslog_set_log_level_by_handle (bits handle,
+      int priority);</pre>
+<p>Set the current logging level for a particular log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>priority</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xsyslog_log_unstamped">xsyslog_log_unstamped</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_log_unstamped (char const *name_or_handle,
+      char const *message,
+      int priority);</pre>
+<p>Log a message in a named system log or session log without stamping it with the time and date</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name_or_handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>message</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>priority</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="syslog_log_unstamped">syslog_log_unstamped</h3>
+<pre>extern void syslog_log_unstamped (char const *name_or_handle,
+      char const *message,
+      int priority);</pre>
+<p>Log a message in a named system log or session log without stamping it with the time and date</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name_or_handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>message</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>priority</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xsyslog_log_unstamped_by_handle">xsyslog_log_unstamped_by_handle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_log_unstamped_by_handle (bits handle,
+      char const *message,
+      int priority);</pre>
+<p>Log a message in a session log without stamping it with the time and date</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>message</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>priority</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="syslog_log_unstamped_by_handle">syslog_log_unstamped_by_handle</h3>
+<pre>extern void syslog_log_unstamped_by_handle (bits handle,
+      char const *message,
+      int priority);</pre>
+<p>Log a message in a session log without stamping it with the time and date</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>message</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>priority</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xsyslog_indent">xsyslog_indent</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_indent (char const *name_or_handle);</pre>
+<p>Increases the indentation for a log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name_or_handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="syslog_indent">syslog_indent</h3>
+<pre>extern void syslog_indent (char const *name_or_handle);</pre>
+<p>Increases the indentation for a log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name_or_handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xsyslog_indent_by_handle">xsyslog_indent_by_handle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_indent_by_handle (bits handle);</pre>
+<p>Increases the indentation for a log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="syslog_indent_by_handle">syslog_indent_by_handle</h3>
+<pre>extern void syslog_indent_by_handle (bits handle);</pre>
+<p>Increases the indentation for a log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xsyslog_un_indent">xsyslog_un_indent</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_un_indent (char const *name_or_handle);</pre>
+<p>Decreases the indentation for a log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name_or_handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="syslog_un_indent">syslog_un_indent</h3>
+<pre>extern void syslog_un_indent (char const *name_or_handle);</pre>
+<p>Decreases the indentation for a log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name_or_handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xsyslog_un_indent_by_handle">xsyslog_un_indent_by_handle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_un_indent_by_handle (bits handle);</pre>
+<p>Decreases the indentation for a log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="syslog_un_indent_by_handle">syslog_un_indent_by_handle</h3>
+<pre>extern void syslog_un_indent_by_handle (bits handle);</pre>
+<p>Decreases the indentation for a log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xsyslog_no_indent">xsyslog_no_indent</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_no_indent (char const *handle);</pre>
+<p>Resets the indentation for a log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="syslog_no_indent">syslog_no_indent</h3>
+<pre>extern void syslog_no_indent (char const *handle);</pre>
+<p>Resets the indentation for a log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xsyslog_no_indent_by_handle">xsyslog_no_indent_by_handle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_no_indent_by_handle (bits handle);</pre>
+<p>Resets the indentation for a log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="syslog_no_indent_by_handle">syslog_no_indent_by_handle</h3>
+<pre>extern void syslog_no_indent_by_handle (bits handle);</pre>
+<p>Resets the indentation for a log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xsyslog_open_session_log">xsyslog_open_session_log</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_open_session_log (char const *name,
+      int priority,
+      char **handle);</pre>
+<p>Open a session log file with a particular priority - Prefer SysLog_OpenSessionLogByHandle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>priority</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="syslog_open_session_log">syslog_open_session_log</h3>
+<pre>extern char *syslog_open_session_log (char const *name,
+      int priority);</pre>
+<p>Open a session log file with a particular priority - Prefer SysLog_OpenSessionLogByHandle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>priority</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>handle</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsyslog_open_session_log_by_handle">xsyslog_open_session_log_by_handle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_open_session_log_by_handle (char const *name,
+      int priority,
+      bits *handle);</pre>
+<p>Open a session log file with a particular priority</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>priority</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="syslog_open_session_log_by_handle">syslog_open_session_log_by_handle</h3>
+<pre>extern bits syslog_open_session_log_by_handle (char const *name,
+      int priority);</pre>
+<p>Open a session log file with a particular priority</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>priority</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>handle</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsyslog_close_session_log">xsyslog_close_session_log</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_close_session_log (char const *handle);</pre>
+<p>Close a session log and append it's date to the mail log - Prefer SysLog_CloseSessionLogByHandle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="syslog_close_session_log">syslog_close_session_log</h3>
+<pre>extern void syslog_close_session_log (char const *handle);</pre>
+<p>Close a session log and append it's date to the mail log - Prefer SysLog_CloseSessionLogByHandle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xsyslog_close_session_log_by_handle">xsyslog_close_session_log_by_handle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_close_session_log_by_handle (bits handle);</pre>
+<p>Close a session log and append it's date to the mail log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="syslog_close_session_log_by_handle">syslog_close_session_log_by_handle</h3>
+<pre>extern void syslog_close_session_log_by_handle (bits handle);</pre>
+<p>Close a session log and append it's date to the mail log</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xsyslog_log_data">xsyslog_log_data</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_log_data (char const *name_or_handle,
+      int priority,
+      byte const *data,
+      int data_size,
+      byte const *base_address);</pre>
+<p>Log a block of data as a hex dump</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name_or_handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>priority</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>base_address</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="syslog_log_data">syslog_log_data</h3>
+<pre>extern void syslog_log_data (char const *name_or_handle,
+      int priority,
+      byte const *data,
+      int data_size,
+      byte const *base_address);</pre>
+<p>Log a block of data as a hex dump</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name_or_handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>priority</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>base_address</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xsyslog_log_data_by_handle">xsyslog_log_data_by_handle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_log_data_by_handle (bits handle,
+      int priority,
+      byte const *data,
+      int data_size,
+      byte const *base_address);</pre>
+<p>Log a block of data as a hex dump</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>priority</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>base_address</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="syslog_log_data_by_handle">syslog_log_data_by_handle</h3>
+<pre>extern void syslog_log_data_by_handle (bits handle,
+      int priority,
+      byte const *data,
+      int data_size,
+      byte const *base_address);</pre>
+<p>Log a block of data as a hex dump</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>priority</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>base_address</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xsyslog_read_error_message">xsyslog_read_error_message</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_read_error_message (int error_number,
+      char **error_message);</pre>
+<p>Decodes the errors returned by the stack</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>error_number</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>error_message</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="syslog_read_error_message">syslog_read_error_message</h3>
+<pre>extern char *syslog_read_error_message (int error_number);</pre>
+<p>Decodes the errors returned by the stack</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>error_number</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>error_message</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsyslog_log_complete">xsyslog_log_complete</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_log_complete (char const *name_or_handle);</pre>
+<p>Flushes the names log and deallocates the space set aside for it</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name_or_handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="syslog_log_complete">syslog_log_complete</h3>
+<pre>extern void syslog_log_complete (char const *name_or_handle);</pre>
+<p>Flushes the names log and deallocates the space set aside for it</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name_or_handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xsyslog_log_complete_by_handle">xsyslog_log_complete_by_handle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_log_complete_by_handle (bits handle);</pre>
+<p>Flushes the names log and deallocates the space set aside for it</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="syslog_log_complete_by_handle">syslog_log_complete_by_handle</h3>
+<pre>extern void syslog_log_complete_by_handle (bits handle);</pre>
+<p>Flushes the names log and deallocates the space set aside for it</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xsyslog_irq_mode">xsyslog_irq_mode</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsyslog_irq_mode (osbool flag);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flag</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="syslog_irq_mode">syslog_irq_mode</h3>
+<pre>extern void syslog_irq_mode (osbool flag);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flag</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

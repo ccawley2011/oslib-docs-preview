@@ -1,0 +1,303 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Squash</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Squash</h2>
+
+<pre>#include "oslib/squash.h"</pre>
+
+<h3 id="squash_input_status">squash_input_status</h3>
+<pre>typedef bits squash_input_status;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#squash_INPUT_NOT_START">squash_INPUT_NOT_START</a></dd>
+<dd><a href="#squash_INPUT_NOT_END">squash_INPUT_NOT_END</a></dd>
+<dd><a href="#squash_INPUT_ALL_PRESENT">squash_INPUT_ALL_PRESENT</a></dd>
+</dl>
+
+<h3 id="squash_output_status">squash_output_status</h3>
+<pre>typedef bits squash_output_status;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#squash_OUTPUT_END">squash_OUTPUT_END</a></dd>
+<dd><a href="#squash_OUTPUT_MORE">squash_OUTPUT_MORE</a></dd>
+<dd><a href="#squash_OUTPUT_NO_MEM">squash_OUTPUT_NO_MEM</a></dd>
+</dl>
+
+<h3 id="squash_FILE_MEMBERS">squash_FILE_MEMBERS</h3>
+<pre>#define squash_FILE_MEMBERS \
+   bits id; \
+   int size; \
+   bits load_addr; \
+   bits exec_addr; \
+   int reserved;
+</pre>
+
+<h3 id="squash_file_base">squash_file_base</h3>
+<pre>typedef struct
+   {  bits id;
+      int size;
+      bits load_addr;
+      bits exec_addr;
+      int reserved;
+   }
+   squash_file_base;</pre>
+
+
+Fields:	id - SQSH 
+ 	reserved - Should be set to 0<h3 id="squash_file">squash_file</h3>
+<pre>typedef struct
+   {  bits id;
+      int size;
+      bits load_addr;
+      bits exec_addr;
+      int reserved;
+      byte data [...];
+   }
+   squash_file;</pre>
+
+
+Fields:	id - SQSH 
+ 	reserved - Should be set to 0<h3 id="error_SQUASH_BAD_ADDRESS">error_SQUASH_BAD_ADDRESS</h3>
+<pre>#define error_SQUASH_BAD_ADDRESS 0x921u</pre>
+
+<h3 id="error_SQUASH_BAD_INPUT">error_SQUASH_BAD_INPUT</h3>
+<pre>#define error_SQUASH_BAD_INPUT 0x922u</pre>
+
+<h3 id="error_SQUASH_BAD_WORKSPACE">error_SQUASH_BAD_WORKSPACE</h3>
+<pre>#define error_SQUASH_BAD_WORKSPACE 0x923u</pre>
+
+<h3 id="error_SQUASH_BAD_PARAMETERS">error_SQUASH_BAD_PARAMETERS</h3>
+<pre>#define error_SQUASH_BAD_PARAMETERS 0x924u</pre>
+
+<h3 id="squash_FILE_TYPE">squash_FILE_TYPE</h3>
+<pre>#define squash_FILE_TYPE 0xFCAu</pre>
+
+<h3 id="squash_INPUT_NOT_START">squash_INPUT_NOT_START</h3>
+<pre>#define squash_INPUT_NOT_START ((<a href="#squash_input_status">squash_input_status</a>) 0x1u)</pre>
+
+<h3 id="squash_INPUT_NOT_END">squash_INPUT_NOT_END</h3>
+<pre>#define squash_INPUT_NOT_END ((<a href="#squash_input_status">squash_input_status</a>) 0x2u)</pre>
+
+<h3 id="squash_INPUT_ALL_PRESENT">squash_INPUT_ALL_PRESENT</h3>
+<pre>#define squash_INPUT_ALL_PRESENT ((<a href="#squash_input_status">squash_input_status</a>) 0x4u)</pre>
+
+<h3 id="squash_OUTPUT_END">squash_OUTPUT_END</h3>
+<pre>#define squash_OUTPUT_END ((<a href="#squash_output_status">squash_output_status</a>) 0x1u)</pre>
+
+<h3 id="squash_OUTPUT_MORE">squash_OUTPUT_MORE</h3>
+<pre>#define squash_OUTPUT_MORE ((<a href="#squash_output_status">squash_output_status</a>) 0x2u)</pre>
+
+<h3 id="squash_OUTPUT_NO_MEM">squash_OUTPUT_NO_MEM</h3>
+<pre>#define squash_OUTPUT_NO_MEM ((<a href="#squash_output_status">squash_output_status</a>) 0x4u)</pre>
+
+<h3 id="xsquash_compress_return_sizes">xsquash_compress_return_sizes</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsquash_compress_return_sizes (int input_size,
+      int *workspace_size,
+      int *output_size);</pre>
+<p>Returns the workspace and maximum output sizes for Squash_Compress</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>workspace_size</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="squash_compress_return_sizes">squash_compress_return_sizes</h3>
+<pre>extern void squash_compress_return_sizes (int input_size,
+      int *workspace_size,
+      int *output_size);</pre>
+<p>Returns the workspace and maximum output sizes for Squash_Compress</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>workspace_size</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xsquash_compress">xsquash_compress</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsquash_compress (<a href="#squash_input_status">squash_input_status</a> input_status,
+      void *workspace,
+      byte const *input,
+      int input_size,
+      byte *output,
+      int output_size,
+      <a href="#squash_output_status">squash_output_status</a> *output_status,
+      byte **input_out,
+      int *input_spare,
+      byte **output_out,
+      int *output_spare);</pre>
+<p>Provides general compression of a lossless nature</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>input_status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>input</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>output</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>output_status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>input_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>input_spare</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>output_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>output_spare</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="squash_compress">squash_compress</h3>
+<pre>extern void squash_compress (<a href="#squash_input_status">squash_input_status</a> input_status,
+      void *workspace,
+      byte const *input,
+      int input_size,
+      byte *output,
+      int output_size,
+      <a href="#squash_output_status">squash_output_status</a> *output_status,
+      byte **input_out,
+      int *input_spare,
+      byte **output_out,
+      int *output_spare);</pre>
+<p>Provides general compression of a lossless nature</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>input_status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>input</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>output</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>output_status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>input_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>input_spare</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>output_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>output_spare</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xsquash_decompress_return_sizes">xsquash_decompress_return_sizes</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsquash_decompress_return_sizes (int input_size,
+      int *workspace_size,
+      int *output_size);</pre>
+<p>Returns the workspace and maximum output sizes for Squash_Decompress</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>workspace_size</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="squash_decompress_return_sizes">squash_decompress_return_sizes</h3>
+<pre>extern void squash_decompress_return_sizes (int input_size,
+      int *workspace_size,
+      int *output_size);</pre>
+<p>Returns the workspace and maximum output sizes for Squash_Decompress</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>workspace_size</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xsquash_decompress">xsquash_decompress</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsquash_decompress (<a href="#squash_input_status">squash_input_status</a> input_status,
+      void *workspace,
+      byte const *input,
+      int input_size,
+      byte *output,
+      int output_size,
+      <a href="#squash_output_status">squash_output_status</a> *output_status,
+      byte **input_out,
+      int *input_spare,
+      byte **output_out,
+      int *output_spare);</pre>
+<p>Decompresses data produced by Squash_Compress</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>input_status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>input</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>output</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>output_status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>input_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>input_spare</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>output_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>output_spare</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="squash_decompress">squash_decompress</h3>
+<pre>extern void squash_decompress (<a href="#squash_input_status">squash_input_status</a> input_status,
+      void *workspace,
+      byte const *input,
+      int input_size,
+      byte *output,
+      int output_size,
+      <a href="#squash_output_status">squash_output_status</a> *output_status,
+      byte **input_out,
+      int *input_spare,
+      byte **output_out,
+      int *output_spare);</pre>
+<p>Decompresses data produced by Squash_Compress</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>input_status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>input</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>output</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>output_status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>input_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>input_spare</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>output_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>output_spare</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

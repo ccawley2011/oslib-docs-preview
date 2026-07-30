@@ -1,0 +1,407 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; MimeMap</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>MimeMap</h2>
+
+<pre>#include "oslib/mimemap.h"</pre>
+
+<h3 id="mimemap_format">mimemap_format</h3>
+<pre>typedef int mimemap_format;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#mimemap_FORMAT_FILETYPE">mimemap_FORMAT_FILETYPE</a></dd>
+<dd><a href="#mimemap_FORMAT_FILETYPE_NAME">mimemap_FORMAT_FILETYPE_NAME</a></dd>
+<dd><a href="#mimemap_FORMAT_MIME_TYPE">mimemap_FORMAT_MIME_TYPE</a></dd>
+<dd><a href="#mimemap_FORMAT_EXTENSION">mimemap_FORMAT_EXTENSION</a></dd>
+<dd><a href="#mimemap_FORMAT_MAC">mimemap_FORMAT_MAC</a></dd>
+</dl>
+
+<h3 id="mimemap_FORMAT_FILETYPE">mimemap_FORMAT_FILETYPE</h3>
+<pre>#define mimemap_FORMAT_FILETYPE ((<a href="#mimemap_format">mimemap_format</a>) 0x0u)</pre>
+
+<h3 id="mimemap_FORMAT_FILETYPE_NAME">mimemap_FORMAT_FILETYPE_NAME</h3>
+<pre>#define mimemap_FORMAT_FILETYPE_NAME ((<a href="#mimemap_format">mimemap_format</a>) 0x1u)</pre>
+
+<h3 id="mimemap_FORMAT_MIME_TYPE">mimemap_FORMAT_MIME_TYPE</h3>
+<pre>#define mimemap_FORMAT_MIME_TYPE ((<a href="#mimemap_format">mimemap_format</a>) 0x2u)</pre>
+
+<h3 id="mimemap_FORMAT_EXTENSION">mimemap_FORMAT_EXTENSION</h3>
+<pre>#define mimemap_FORMAT_EXTENSION ((<a href="#mimemap_format">mimemap_format</a>) 0x3u)</pre>
+
+<h3 id="mimemap_FORMAT_MAC">mimemap_FORMAT_MAC</h3>
+<pre>#define mimemap_FORMAT_MAC ((<a href="#mimemap_format">mimemap_format</a>) 0x4u)</pre>
+
+<h3 id="xmimemaptranslate_file_type_to_anything">xmimemaptranslate_file_type_to_anything</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmimemaptranslate_file_type_to_anything (bits file_type,
+      <a href="#mimemap_format">mimemap_format</a> output_format,
+      char *output);</pre>
+<p>Translate a numeric file type to any other type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>output_format</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>output</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="mimemaptranslate_file_type_to_anything">mimemaptranslate_file_type_to_anything</h3>
+<pre>extern void mimemaptranslate_file_type_to_anything (bits file_type,
+      <a href="#mimemap_format">mimemap_format</a> output_format,
+      char *output);</pre>
+<p>Translate a numeric file type to any other type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>output_format</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>output</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xmimemaptranslate_anything_to_file_type">xmimemaptranslate_anything_to_file_type</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmimemaptranslate_anything_to_file_type (<a href="#mimemap_format">mimemap_format</a> input_format,
+      char const *input,
+      bits *file_type);</pre>
+<p>Translate any type to a numeric file type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>input_format</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>input</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="mimemaptranslate_anything_to_file_type">mimemaptranslate_anything_to_file_type</h3>
+<pre>extern bits mimemaptranslate_anything_to_file_type (<a href="#mimemap_format">mimemap_format</a> input_format,
+      char const *input);</pre>
+<p>Translate any type to a numeric file type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>input_format</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>input</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>file_type</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xmimemaptranslate_filetype_to_filetype_name">xmimemaptranslate_filetype_to_filetype_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmimemaptranslate_filetype_to_filetype_name (bits file_type,
+      char *file_type_name);</pre>
+<p>Translate a numeric file type to a textual file type name</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_type_name</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="mimemaptranslate_filetype_to_filetype_name">mimemaptranslate_filetype_to_filetype_name</h3>
+<pre>extern void mimemaptranslate_filetype_to_filetype_name (bits file_type,
+      char *file_type_name);</pre>
+<p>Translate a numeric file type to a textual file type name</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_type_name</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xmimemaptranslate_filetype_to_mime_type">xmimemaptranslate_filetype_to_mime_type</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmimemaptranslate_filetype_to_mime_type (bits file_type,
+      char *mime_type);</pre>
+<p>Translate a numeric file type to a MIME type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>mime_type</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="mimemaptranslate_filetype_to_mime_type">mimemaptranslate_filetype_to_mime_type</h3>
+<pre>extern void mimemaptranslate_filetype_to_mime_type (bits file_type,
+      char *mime_type);</pre>
+<p>Translate a numeric file type to a MIME type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>mime_type</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xmimemaptranslate_filetype_to_extension">xmimemaptranslate_filetype_to_extension</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmimemaptranslate_filetype_to_extension (bits file_type,
+      char *extension);</pre>
+<p>Translate a numeric file type to a file extension</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>extension</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="mimemaptranslate_filetype_to_extension">mimemaptranslate_filetype_to_extension</h3>
+<pre>extern void mimemaptranslate_filetype_to_extension (bits file_type,
+      char *extension);</pre>
+<p>Translate a numeric file type to a file extension</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>extension</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xmimemaptranslate_filetype_name_to_filetype">xmimemaptranslate_filetype_name_to_filetype</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmimemaptranslate_filetype_name_to_filetype (char const *file_type_name,
+      bits *file_type);</pre>
+<p>Translate a textual file type name to a numeric file type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_type_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="mimemaptranslate_filetype_name_to_filetype">mimemaptranslate_filetype_name_to_filetype</h3>
+<pre>extern bits mimemaptranslate_filetype_name_to_filetype (char const *file_type_name);</pre>
+<p>Translate a textual file type name to a numeric file type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_type_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>file_type</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xmimemaptranslate_filetype_name_to_mime_type">xmimemaptranslate_filetype_name_to_mime_type</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmimemaptranslate_filetype_name_to_mime_type (char const *file_type_name,
+      char *mime_type);</pre>
+<p>Translate a textual file type name to a MIME type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_type_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>mime_type</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="mimemaptranslate_filetype_name_to_mime_type">mimemaptranslate_filetype_name_to_mime_type</h3>
+<pre>extern void mimemaptranslate_filetype_name_to_mime_type (char const *file_type_name,
+      char *mime_type);</pre>
+<p>Translate a textual file type name to a MIME type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_type_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>mime_type</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xmimemaptranslate_filetype_name_to_extension">xmimemaptranslate_filetype_name_to_extension</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmimemaptranslate_filetype_name_to_extension (char const *file_type_name,
+      char *extension);</pre>
+<p>Translate a textual file type name to a file extension</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_type_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>extension</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="mimemaptranslate_filetype_name_to_extension">mimemaptranslate_filetype_name_to_extension</h3>
+<pre>extern void mimemaptranslate_filetype_name_to_extension (char const *file_type_name,
+      char *extension);</pre>
+<p>Translate a textual file type name to a file extension</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_type_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>extension</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xmimemaptranslate_mime_type_to_filetype">xmimemaptranslate_mime_type_to_filetype</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmimemaptranslate_mime_type_to_filetype (char const *mime_type,
+      bits *file_type);</pre>
+<p>Translate a MIME type to a numeric file type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>mime_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="mimemaptranslate_mime_type_to_filetype">mimemaptranslate_mime_type_to_filetype</h3>
+<pre>extern bits mimemaptranslate_mime_type_to_filetype (char const *mime_type);</pre>
+<p>Translate a MIME type to a numeric file type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>mime_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>file_type</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xmimemaptranslate_mime_type_to_filetype_name">xmimemaptranslate_mime_type_to_filetype_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmimemaptranslate_mime_type_to_filetype_name (char const *mime_type,
+      char *file_type_name);</pre>
+<p>Translate a MIME type to a textual file type name</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>mime_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_type_name</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="mimemaptranslate_mime_type_to_filetype_name">mimemaptranslate_mime_type_to_filetype_name</h3>
+<pre>extern void mimemaptranslate_mime_type_to_filetype_name (char const *mime_type,
+      char *file_type_name);</pre>
+<p>Translate a MIME type to a textual file type name</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>mime_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_type_name</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xmimemaptranslate_mime_type_to_extension">xmimemaptranslate_mime_type_to_extension</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmimemaptranslate_mime_type_to_extension (char const *mime_type,
+      char *extension);</pre>
+<p>Translate a MIME type to a file extension</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>mime_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>extension</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="mimemaptranslate_mime_type_to_extension">mimemaptranslate_mime_type_to_extension</h3>
+<pre>extern void mimemaptranslate_mime_type_to_extension (char const *mime_type,
+      char *extension);</pre>
+<p>Translate a MIME type to a file extension</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>mime_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>extension</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xmimemaptranslate_extension_to_filetype">xmimemaptranslate_extension_to_filetype</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmimemaptranslate_extension_to_filetype (char const *extension,
+      bits *file_type);</pre>
+<p>Translate a file extension to a numeric file type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>extension</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="mimemaptranslate_extension_to_filetype">mimemaptranslate_extension_to_filetype</h3>
+<pre>extern bits mimemaptranslate_extension_to_filetype (char const *extension);</pre>
+<p>Translate a file extension to a numeric file type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>extension</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>file_type</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xmimemaptranslate_extension_to_filetype_name">xmimemaptranslate_extension_to_filetype_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmimemaptranslate_extension_to_filetype_name (char const *extension,
+      char *file_type_name);</pre>
+<p>Translate a file extension to a textual file type name</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>extension</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_type_name</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="mimemaptranslate_extension_to_filetype_name">mimemaptranslate_extension_to_filetype_name</h3>
+<pre>extern void mimemaptranslate_extension_to_filetype_name (char const *extension,
+      char *file_type_name);</pre>
+<p>Translate a file extension to a textual file type name</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>extension</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_type_name</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xmimemaptranslate_extension_to_mime_type">xmimemaptranslate_extension_to_mime_type</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmimemaptranslate_extension_to_mime_type (char const *extension,
+      char *mime_type);</pre>
+<p>Translate a file extension to a MIME type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>extension</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>mime_type</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="mimemaptranslate_extension_to_mime_type">mimemaptranslate_extension_to_mime_type</h3>
+<pre>extern void mimemaptranslate_extension_to_mime_type (char const *extension,
+      char *mime_type);</pre>
+<p>Translate a file extension to a MIME type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>extension</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>mime_type</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; IIC</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>IIC</h2>
+
+<pre>#include "oslib/iic.h"</pre>
+
+<h3 id="error_IIC_NO_ACKNOWLEDGE">error_IIC_NO_ACKNOWLEDGE</h3>
+<pre>#define error_IIC_NO_ACKNOWLEDGE 0x20300u</pre>
+
+<h3 id="xiiccontrol_read">xiiccontrol_read</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xiiccontrol_read (int *device,
+      byte *buffer,
+      int size);</pre>
+<p>Reads from an IIC device</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="iiccontrol_read">iiccontrol_read</h3>
+<pre>extern void iiccontrol_read (int *device,
+      byte *buffer,
+      int size);</pre>
+<p>Reads from an IIC device</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xiiccontrol_write">xiiccontrol_write</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xiiccontrol_write (int *device,
+      byte const *data,
+      int size);</pre>
+<p>Writes to an IIC device</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="iiccontrol_write">iiccontrol_write</h3>
+<pre>extern void iiccontrol_write (int *device,
+      byte const *data,
+      int size);</pre>
+<p>Writes to an IIC device</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

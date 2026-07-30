@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Help</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Help</h2>
+
+<pre>#include "oslib/help.h"</pre>
+
+<h3 id="help_flags">help_flags</h3>
+<pre>typedef bits help_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#help_DISABLE">help_DISABLE</a></dd>
+<dd><a href="#help_READ_CONFIGURATION">help_READ_CONFIGURATION</a></dd>
+</dl>
+
+<h3 id="help_message_request">help_message_request</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_coord">os_coord</a> pos;
+      <a href="wimp.html#wimp_mouse_state">wimp_mouse_state</a> buttons;
+      <a href="wimp.html#wimp_w">wimp_w</a> w;
+      <a href="wimp.html#wimp_i">wimp_i</a> i;
+   }
+   help_message_request;</pre>
+
+<p>message type to request help from an application</p>
+
+
+Fields:	pos - mouse coordinates
+ 	buttons - mouse button state
+ 	w - window handle
+ 	i - icon handle<h3 id="help_message_reply">help_message_reply</h3>
+<pre>typedef struct
+   {  char reply [236];
+   }
+   help_message_reply;</pre>
+
+<p>message type to reply with help text</p>
+
+
+Fields:	reply - help message, 0-terminated<h3 id="help_message_enable">help_message_enable</h3>
+<pre>typedef struct
+   {  <a href="#help_flags">help_flags</a> flags;
+   }
+   help_message_enable;</pre>
+
+<p>message type to switch help on and off - RISC OS 4+</p>
+
+<h3 id="help_full_message_request">help_full_message_request</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="os.html#os_coord">os_coord</a> pos;
+      <a href="wimp.html#wimp_mouse_state">wimp_mouse_state</a> buttons;
+      <a href="wimp.html#wimp_w">wimp_w</a> w;
+      <a href="wimp.html#wimp_i">wimp_i</a> i;
+   }
+   help_full_message_request;</pre>
+
+<p>message type to request help from an application</p>
+
+
+Fields:	pos - mouse coordinates
+ 	buttons - mouse button state
+ 	w - window handle
+ 	i - icon handle<h3 id="help_full_message_reply">help_full_message_reply</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      char reply [236];
+   }
+   help_full_message_reply;</pre>
+
+<p>message type to reply with help text</p>
+
+
+Fields:	reply - help message, 0-terminated<h3 id="help_full_message_enable">help_full_message_enable</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#help_flags">help_flags</a> flags;
+   }
+   help_full_message_enable;</pre>
+
+<p>message type to switch help on and off - RISC OS 4+</p>
+
+<h3 id="message_HELP_REQUEST">message_HELP_REQUEST</h3>
+<pre>#define message_HELP_REQUEST 0x502u</pre>
+
+<h3 id="message_HELP_REPLY">message_HELP_REPLY</h3>
+<pre>#define message_HELP_REPLY 0x503u</pre>
+
+<h3 id="message_HELP_ENABLE">message_HELP_ENABLE</h3>
+<pre>#define message_HELP_ENABLE 0x504u</pre>
+
+<p>RISC OS 4+</p>
+
+<h3 id="help_DISABLE">help_DISABLE</h3>
+<pre>#define help_DISABLE ((<a href="#help_flags">help_flags</a>) 0x1u)</pre>
+
+<h3 id="help_READ_CONFIGURATION">help_READ_CONFIGURATION</h3>
+<pre>#define help_READ_CONFIGURATION ((<a href="#help_flags">help_flags</a>) 0x2u)</pre>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

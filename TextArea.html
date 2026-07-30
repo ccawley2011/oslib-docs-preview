@@ -1,0 +1,665 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; TextArea</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>TextArea</h2>
+
+<pre>#include "oslib/textarea.h"</pre>
+
+<h3 id="textarea_gadget">textarea_gadget</h3>
+<pre>typedef struct
+   {  int type;
+      int event;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> text;
+      <a href="os.html#os_colour">os_colour</a> foreground;
+      <a href="os.html#os_colour">os_colour</a> background;
+   }
+   textarea_gadget;</pre>
+
+<h3 id="textarea_object">textarea_object</h3>
+<pre>typedef struct
+   {  <a href="#gadget_OBJECT_MEMBERS">gadget_OBJECT_MEMBERS</a>
+      int type;
+      int event;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> text;
+      <a href="os.html#os_colour">os_colour</a> foreground;
+      <a href="os.html#os_colour">os_colour</a> background;
+   }
+   textarea_object;</pre>
+
+<h3 id="textarea_state">textarea_state</h3>
+<pre>typedef bits textarea_state;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#textarea_STATE_HAS_VERTICAL_SCROLLBAR">textarea_STATE_HAS_VERTICAL_SCROLLBAR</a></dd>
+<dd><a href="#textarea_STATE_HAS_HORIZONTAL_SCROLLBAR">textarea_STATE_HAS_HORIZONTAL_SCROLLBAR</a></dd>
+<dd><a href="#textarea_STATE_WORDWRAPPING_ENABLED">textarea_STATE_WORDWRAPPING_ENABLED</a></dd>
+<dd><a href="#textarea_ALLOW_SELECTION">textarea_ALLOW_SELECTION</a></dd>
+<dd><a href="#textarea_ALLOW_SAVE">textarea_ALLOW_SAVE</a></dd>
+<dd><a href="#textarea_ALLOW_LOAD">textarea_ALLOW_LOAD</a></dd>
+<dd><a href="#textarea_CLIPBOARD">textarea_CLIPBOARD</a></dd>
+<dd><a href="#textarea_AUTO_SCROLL">textarea_AUTO_SCROLL</a></dd>
+</dl>
+
+<h3 id="textarea_get_selection_flags">textarea_get_selection_flags</h3>
+<pre>typedef bits textarea_get_selection_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#textarea_GET_SELECTION_RETURN_TEXT">textarea_GET_SELECTION_RETURN_TEXT</a></dd>
+</dl>
+
+<h3 id="textarea_set_colour_flags">textarea_set_colour_flags</h3>
+<pre>typedef bits textarea_set_colour_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#textarea_SET_COLOUR_DESKTOP">textarea_SET_COLOUR_DESKTOP</a></dd>
+</dl>
+
+<h3 id="textarea_colour">textarea_colour</h3>
+<pre>typedef union
+   {  <a href="os.html#os_colour">os_colour</a> real;
+      <a href="wimp.html#wimp_colour">wimp_colour</a> desktop;
+   }
+   textarea_colour;</pre>
+
+<h3 id="class_TEXT_AREA">class_TEXT_AREA</h3>
+<pre>#define class_TEXT_AREA ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x4018u)</pre>
+
+<h3 id="textarea_STATE_HAS_VERTICAL_SCROLLBAR">textarea_STATE_HAS_VERTICAL_SCROLLBAR</h3>
+<pre>#define textarea_STATE_HAS_VERTICAL_SCROLLBAR ((<a href="#textarea_state">textarea_state</a>) 0x1u)</pre>
+
+<h3 id="textarea_STATE_HAS_HORIZONTAL_SCROLLBAR">textarea_STATE_HAS_HORIZONTAL_SCROLLBAR</h3>
+<pre>#define textarea_STATE_HAS_HORIZONTAL_SCROLLBAR ((<a href="#textarea_state">textarea_state</a>) 0x2u)</pre>
+
+<h3 id="textarea_STATE_WORDWRAPPING_ENABLED">textarea_STATE_WORDWRAPPING_ENABLED</h3>
+<pre>#define textarea_STATE_WORDWRAPPING_ENABLED ((<a href="#textarea_state">textarea_state</a>) 0x4u)</pre>
+
+<h3 id="textarea_ALLOW_SELECTION">textarea_ALLOW_SELECTION</h3>
+<pre>#define textarea_ALLOW_SELECTION ((<a href="#textarea_state">textarea_state</a>) 0x8u)</pre>
+
+<h3 id="textarea_ALLOW_SAVE">textarea_ALLOW_SAVE</h3>
+<pre>#define textarea_ALLOW_SAVE ((<a href="#textarea_state">textarea_state</a>) 0x10u)</pre>
+
+<h3 id="textarea_ALLOW_LOAD">textarea_ALLOW_LOAD</h3>
+<pre>#define textarea_ALLOW_LOAD ((<a href="#textarea_state">textarea_state</a>) 0x20u)</pre>
+
+<h3 id="textarea_CLIPBOARD">textarea_CLIPBOARD</h3>
+<pre>#define textarea_CLIPBOARD ((<a href="#textarea_state">textarea_state</a>) 0x40u)</pre>
+
+<h3 id="textarea_AUTO_SCROLL">textarea_AUTO_SCROLL</h3>
+<pre>#define textarea_AUTO_SCROLL ((<a href="#textarea_state">textarea_state</a>) 0x80u)</pre>
+
+<h3 id="textarea_GET_SELECTION_RETURN_TEXT">textarea_GET_SELECTION_RETURN_TEXT</h3>
+<pre>#define textarea_GET_SELECTION_RETURN_TEXT ((<a href="#textarea_get_selection_flags">textarea_get_selection_flags</a>) 0x1u)</pre>
+
+<h3 id="textarea_SET_COLOUR_DESKTOP">textarea_SET_COLOUR_DESKTOP</h3>
+<pre>#define textarea_SET_COLOUR_DESKTOP ((<a href="#textarea_set_colour_flags">textarea_set_colour_flags</a>) 0x1u)</pre>
+
+<h3 id="xtextarea_get_state">xtextarea_get_state</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtextarea_get_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      <a href="#textarea_state">textarea_state</a> *state);</pre>
+<p>Reads the state of the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>state</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="textarea_get_state">textarea_get_state</h3>
+<pre>extern <a href="#textarea_state">textarea_state</a> textarea_get_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area);</pre>
+<p>Reads the state of the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>state</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xtextarea_set_state">xtextarea_set_state</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtextarea_set_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      <a href="#textarea_state">textarea_state</a> state);</pre>
+<p>Sets the state of the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>state</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="textarea_set_state">textarea_set_state</h3>
+<pre>extern void textarea_set_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      <a href="#textarea_state">textarea_state</a> state);</pre>
+<p>Sets the state of the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>state</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xtextarea_set_text">xtextarea_set_text</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtextarea_set_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      char const *text);</pre>
+<p>Sets the text displayed in the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>text</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="textarea_set_text">textarea_set_text</h3>
+<pre>extern void textarea_set_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      char const *text);</pre>
+<p>Sets the text displayed in the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>text</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xtextarea_get_text_size">xtextarea_get_text_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtextarea_get_text_size (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      int *buffer_size);</pre>
+<p>Reads size of text displayed in the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>buffer_size</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="textarea_get_text_size">textarea_get_text_size</h3>
+<pre>extern int textarea_get_text_size (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area);</pre>
+<p>Reads size of text displayed in the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>buffer_size</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xtextarea_get_text">xtextarea_get_text</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtextarea_get_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      char *buffer,
+      int buffer_size,
+      int *length);</pre>
+<p>Reads the text displayed in the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>buffer_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>length</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="textarea_get_text">textarea_get_text</h3>
+<pre>extern int textarea_get_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      char *buffer,
+      int buffer_size);</pre>
+<p>Reads the text displayed in the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>buffer_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>length</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xtextarea_insert_text">xtextarea_insert_text</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtextarea_insert_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      int insert_at,
+      char const *text);</pre>
+<p>Inserts text into the text displayed in the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>insert_at</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>text</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="textarea_insert_text">textarea_insert_text</h3>
+<pre>extern void textarea_insert_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      int insert_at,
+      char const *text);</pre>
+<p>Inserts text into the text displayed in the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>insert_at</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>text</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xtextarea_replace_text">xtextarea_replace_text</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtextarea_replace_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      int start,
+      int end,
+      char const *text);</pre>
+<p>Replaces a portion of the text displayed in the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>start</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>end</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>text</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="textarea_replace_text">textarea_replace_text</h3>
+<pre>extern void textarea_replace_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      int start,
+      int end,
+      char const *text);</pre>
+<p>Replaces a portion of the text displayed in the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>start</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>end</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>text</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xtextarea_get_selection">xtextarea_get_selection</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtextarea_get_selection (<a href="#textarea_get_selection_flags">textarea_get_selection_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      int *start,
+      int *end);</pre>
+<p>Gets the selection details for the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>start</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>end</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="textarea_get_selection">textarea_get_selection</h3>
+<pre>extern void textarea_get_selection (<a href="#textarea_get_selection_flags">textarea_get_selection_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      int *start,
+      int *end);</pre>
+<p>Gets the selection details for the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>start</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>end</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xtextarea_get_selection_text_size">xtextarea_get_selection_text_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtextarea_get_selection_text_size (<a href="#textarea_get_selection_flags">textarea_get_selection_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      int *buffer_size);</pre>
+<p>Gets the size of the selected text for the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>buffer_size</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="textarea_get_selection_text_size">textarea_get_selection_text_size</h3>
+<pre>extern int textarea_get_selection_text_size (<a href="#textarea_get_selection_flags">textarea_get_selection_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area);</pre>
+<p>Gets the size of the selected text for the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>buffer_size</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xtextarea_get_selection_text">xtextarea_get_selection_text</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtextarea_get_selection_text (<a href="#textarea_get_selection_flags">textarea_get_selection_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      char *buffer,
+      int buffer_size,
+      int *length);</pre>
+<p>Gets the selected text for the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>buffer_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>length</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="textarea_get_selection_text">textarea_get_selection_text</h3>
+<pre>extern int textarea_get_selection_text (<a href="#textarea_get_selection_flags">textarea_get_selection_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      char *buffer,
+      int buffer_size);</pre>
+<p>Gets the selected text for the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>buffer_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>length</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xtextarea_set_selection">xtextarea_set_selection</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtextarea_set_selection (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      int start,
+      int end);</pre>
+<p>Sets the selection details for the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>start</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>end</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="textarea_set_selection">textarea_set_selection</h3>
+<pre>extern void textarea_set_selection (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      int start,
+      int end);</pre>
+<p>Sets the selection details for the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>start</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>end</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xtextarea_set_font">xtextarea_set_font</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtextarea_set_font (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      char const *font_name,
+      int width,
+      int height);</pre>
+<p>Sets the font details for the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>width</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="textarea_set_font">textarea_set_font</h3>
+<pre>extern void textarea_set_font (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      char const *font_name,
+      int width,
+      int height);</pre>
+<p>Sets the font details for the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>width</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xtextarea_set_colour">xtextarea_set_colour</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtextarea_set_colour (<a href="#textarea_set_colour_flags">textarea_set_colour_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      <a href="#textarea_colour">textarea_colour</a> foreground,
+      <a href="#textarea_colour">textarea_colour</a> background);</pre>
+<p>Sets the foreground and background colours of the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>foreground</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>background</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="textarea_set_colour">textarea_set_colour</h3>
+<pre>extern void textarea_set_colour (<a href="#textarea_set_colour_flags">textarea_set_colour_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      <a href="#textarea_colour">textarea_colour</a> foreground,
+      <a href="#textarea_colour">textarea_colour</a> background);</pre>
+<p>Sets the foreground and background colours of the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>foreground</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>background</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xtextarea_get_colour">xtextarea_get_colour</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtextarea_get_colour (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      <a href="os.html#os_colour">os_colour</a> *foreground,
+      <a href="os.html#os_colour">os_colour</a> *background);</pre>
+<p>Gets the foreground and background colours of the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>foreground</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>background</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="textarea_get_colour">textarea_get_colour</h3>
+<pre>extern void textarea_get_colour (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      <a href="os.html#os_colour">os_colour</a> *foreground,
+      <a href="os.html#os_colour">os_colour</a> *background);</pre>
+<p>Gets the foreground and background colours of the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>foreground</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>background</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xtextarea_set_text_border">xtextarea_set_text_border</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtextarea_set_text_border (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      int border_size);</pre>
+<p>Sets the border width of the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>border_size</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="textarea_set_text_border">textarea_set_text_border</h3>
+<pre>extern void textarea_set_text_border (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> text_area,
+      int border_size);</pre>
+<p>Sets the border width of the TextArea</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>border_size</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

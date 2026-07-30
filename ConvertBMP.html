@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ConvertBMP</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ConvertBMP</h2>
+
+<pre>#include "oslib/convertbmp.h"</pre>
+
+<h3 id="convertbmpcreatespritefromdib_flags">convertbmpcreatespritefromdib_flags</h3>
+<pre>typedef bits convertbmpcreatespritefromdib_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#convertbmpcreatespritefromdibflags_CREATE_SPRITE">convertbmpcreatespritefromdibflags_CREATE_SPRITE</a></dd>
+</dl>
+
+<h3 id="dibheader">dibheader</h3>
+<pre>typedef struct
+   {  int sizeHeader;
+      int width;
+      int height;
+      int planes_bps;
+      int compression;
+      int sizeImage;
+      int x_pixels_per_meter;
+      int y_pixels_per_meter;
+      int num_colormap_entries;
+      int num_important_colours;
+   }
+   dibheader;</pre>
+
+<h3 id="convertbmpcreatespritefromdibflags_CREATE_SPRITE">convertbmpcreatespritefromdibflags_CREATE_SPRITE</h3>
+<pre>#define convertbmpcreatespritefromdibflags_CREATE_SPRITE ((<a href="#convertbmpcreatespritefromdib_flags">convertbmpcreatespritefromdib_flags</a>) 0x1u)</pre>
+
+<h3 id="xconvertbmp_create_sprite_from_dib">xconvertbmp_create_sprite_from_dib</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xconvertbmp_create_sprite_from_dib (<a href="#convertbmpcreatespritefromdib_flags">convertbmpcreatespritefromdib_flags</a> flags,
+      dibheader const *header,
+      int header_length,
+      byte const *bitmap,
+      int bitmap_length,
+      byte *buf_out,
+      int buf_out_len,
+      int *buf_out_used);</pre>
+<p>Convert from a Windows 'Device Independent Bitmap' (DIB) to a sprite (or sprite area)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>header</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>header_length</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>bitmap</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bitmap_length</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>buf_out</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>buf_out_len</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>buf_out_used</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="convertbmp_create_sprite_from_dib">convertbmp_create_sprite_from_dib</h3>
+<pre>extern int convertbmp_create_sprite_from_dib (<a href="#convertbmpcreatespritefromdib_flags">convertbmpcreatespritefromdib_flags</a> flags,
+      dibheader const *header,
+      int header_length,
+      byte const *bitmap,
+      int bitmap_length,
+      byte *buf_out,
+      int buf_out_len);</pre>
+<p>Convert from a Windows 'Device Independent Bitmap' (DIB) to a sprite (or sprite area)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>header</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>header_length</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>bitmap</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bitmap_length</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>buf_out</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>buf_out_len</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>buf_out_used</td><td></td><td><code>R6<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

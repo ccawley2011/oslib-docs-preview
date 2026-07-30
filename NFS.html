@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; NFS</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>NFS</h2>
+
+<pre>#include "oslib/nfs.h"</pre>
+
+<h3 id="nfs_NOBODY_ID">nfs_NOBODY_ID</h3>
+<pre>#define nfs_NOBODY_ID 32767</pre>
+
+<h3 id="nfs_NOBODY_GROUP">nfs_NOBODY_GROUP</h3>
+<pre>#define nfs_NOBODY_GROUP 9999</pre>
+
+<h3 id="xnfs_mount">xnfs_mount</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnfs_mount (char const *file_server,
+      char const *mount_name,
+      char const *path);</pre>
+<p>Mounts a directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_server</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>mount_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="nfs_mount">nfs_mount</h3>
+<pre>extern void nfs_mount (char const *file_server,
+      char const *mount_name,
+      char const *path);</pre>
+<p>Mounts a directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_server</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>mount_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xnfs_mount_list">xnfs_mount_list</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnfs_mount_list (char const *file_server,
+      char *context,
+      char **context_out);</pre>
+<p>Lists current mount points</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_server</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="nfs_mount_list">nfs_mount_list</h3>
+<pre>extern char *nfs_mount_list (char const *file_server,
+      char *context);</pre>
+<p>Lists current mount points</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_server</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_out</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xnfs_set_user">xnfs_set_user</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnfs_set_user (char const *name_server,
+      char const *user_name,
+      char const *password);</pre>
+<p>Sets the current user</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name_server</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>user_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>password</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="nfs_set_user">nfs_set_user</h3>
+<pre>extern void nfs_set_user (char const *name_server,
+      char const *user_name,
+      char const *password);</pre>
+<p>Sets the current user</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name_server</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>user_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>password</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xnfs_dismount">xnfs_dismount</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnfs_dismount (char const *file_server,
+      char const *mount_name);</pre>
+<p>Dismounts a directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_server</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>mount_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="nfs_dismount">nfs_dismount</h3>
+<pre>extern void nfs_dismount (char const *file_server,
+      char const *mount_name);</pre>
+<p>Dismounts a directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_server</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>mount_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xnfs_mount_info">xnfs_mount_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnfs_mount_info (char const *mount_name,
+      char **file_server,
+      char **path,
+      char **user_name,
+      char **name_server);</pre>
+<p>Provides information about a given mount</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>mount_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>file_server</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>user_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>name_server</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="nfs_mount_info">nfs_mount_info</h3>
+<pre>extern void nfs_mount_info (char const *mount_name,
+      char **file_server,
+      char **path,
+      char **user_name,
+      char **name_server);</pre>
+<p>Provides information about a given mount</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>mount_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>file_server</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>user_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>name_server</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xnfs_free_space">xnfs_free_space</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnfs_free_space (char const *mount_name,
+      int *free,
+      int *size,
+      int *unused);</pre>
+<p>Provides free-space information about a mount</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>mount_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>free</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>unused</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="nfs_free_space">nfs_free_space</h3>
+<pre>extern int nfs_free_space (char const *mount_name,
+      int *size,
+      int *unused);</pre>
+<p>Provides free-space information about a mount</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>mount_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>unused</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>free</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xservice_nfs">xservice_nfs</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_nfs (void);
+</pre><p>An NFS mount or dismount has occurred</p>
+
+
+<table>
+</table>
+
+<h3 id="service_nfs">service_nfs</h3>
+<pre>extern void service_nfs (void);
+</pre><p>An NFS mount or dismount has occurred</p>
+
+
+<table>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

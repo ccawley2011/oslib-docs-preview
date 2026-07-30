@@ -1,0 +1,341 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; NumberRange</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>NumberRange</h2>
+
+<pre>#include "oslib/numberrange.h"</pre>
+
+<h3 id="numberrange_gadget">numberrange_gadget</h3>
+<pre>typedef struct
+   {  int lower_bound;
+      int upper_bound;
+      int step_size;
+      int initial_value;
+      int precision;
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> prev;
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> next;
+      int display_length;
+   }
+   numberrange_gadget;</pre>
+
+<h3 id="numberrange_object">numberrange_object</h3>
+<pre>typedef struct
+   {  <a href="#gadget_OBJECT_MEMBERS">gadget_OBJECT_MEMBERS</a>
+      int lower_bound;
+      int upper_bound;
+      int step_size;
+      int initial_value;
+      int precision;
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> prev;
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> next;
+      int display_length;
+   }
+   numberrange_object;</pre>
+
+<h3 id="numberrange_bounds_flags">numberrange_bounds_flags</h3>
+<pre>typedef bits numberrange_bounds_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#numberrange_BOUND_LOWER">numberrange_BOUND_LOWER</a></dd>
+<dd><a href="#numberrange_BOUND_UPPER">numberrange_BOUND_UPPER</a></dd>
+<dd><a href="#numberrange_BOUND_STEP">numberrange_BOUND_STEP</a></dd>
+<dd><a href="#numberrange_BOUND_PRECISION">numberrange_BOUND_PRECISION</a></dd>
+</dl>
+
+<h3 id="numberrange_action_value_changed">numberrange_action_value_changed</h3>
+<pre>typedef struct
+   {  int new_value;
+   }
+   numberrange_action_value_changed;</pre>
+
+<p>Prefer NumberRange_ActionValueChangedBlock</p>
+
+<h3 id="numberrange_action_value_changed_block">numberrange_action_value_changed_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      int new_value;
+   }
+   numberrange_action_value_changed_block;</pre>
+
+<h3 id="class_NUMBER_RANGE">class_NUMBER_RANGE</h3>
+<pre>#define class_NUMBER_RANGE ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x340u)</pre>
+
+<h3 id="numberrange_GENERATE_VALUE_CHANGED">numberrange_GENERATE_VALUE_CHANGED</h3>
+<pre>#define numberrange_GENERATE_VALUE_CHANGED ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x1u)</pre>
+
+<h3 id="numberrange_WRITABLE">numberrange_WRITABLE</h3>
+<pre>#define numberrange_WRITABLE ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x4u)</pre>
+
+<h3 id="numberrange_HAS_NUMERICAL_DISPLAY">numberrange_HAS_NUMERICAL_DISPLAY</h3>
+<pre>#define numberrange_HAS_NUMERICAL_DISPLAY ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x8u)</pre>
+
+<h3 id="numberrange_ADJUSTERS">numberrange_ADJUSTERS</h3>
+<pre>#define numberrange_ADJUSTERS ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x10u)</pre>
+
+<h3 id="numberrange_SLIDER_TYPE">numberrange_SLIDER_TYPE</h3>
+<pre>#define numberrange_SLIDER_TYPE ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0xE0u)</pre>
+
+<h3 id="numberrange_SLIDER_TYPE_SHIFT">numberrange_SLIDER_TYPE_SHIFT</h3>
+<pre>#define numberrange_SLIDER_TYPE_SHIFT 5</pre>
+
+<h3 id="numberrange_SLIDER_TYPE_NONE">numberrange_SLIDER_TYPE_NONE</h3>
+<pre>#define numberrange_SLIDER_TYPE_NONE 0</pre>
+
+<h3 id="numberrange_SLIDER_TYPE_RIGHT">numberrange_SLIDER_TYPE_RIGHT</h3>
+<pre>#define numberrange_SLIDER_TYPE_RIGHT 1</pre>
+
+<h3 id="numberrange_SLIDER_TYPE_LEFT">numberrange_SLIDER_TYPE_LEFT</h3>
+<pre>#define numberrange_SLIDER_TYPE_LEFT 2</pre>
+
+<h3 id="numberrange_RJUSTIFIED">numberrange_RJUSTIFIED</h3>
+<pre>#define numberrange_RJUSTIFIED ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x100u)</pre>
+
+<h3 id="numberrange_HCENTRED">numberrange_HCENTRED</h3>
+<pre>#define numberrange_HCENTRED ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x200u)</pre>
+
+<h3 id="numberrange_KNOB_COLOUR">numberrange_KNOB_COLOUR</h3>
+<pre>#define numberrange_KNOB_COLOUR ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0xF000u)</pre>
+
+<h3 id="numberrange_KNOB_COLOUR_SHIFT">numberrange_KNOB_COLOUR_SHIFT</h3>
+<pre>#define numberrange_KNOB_COLOUR_SHIFT 12</pre>
+
+<h3 id="numberrange_WELL_COLOUR">numberrange_WELL_COLOUR</h3>
+<pre>#define numberrange_WELL_COLOUR ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0xF0000u)</pre>
+
+<h3 id="numberrange_WELL_COLOUR_SHIFT">numberrange_WELL_COLOUR_SHIFT</h3>
+<pre>#define numberrange_WELL_COLOUR_SHIFT 16</pre>
+
+<h3 id="numberrange_GET_NUMERICAL_FIELD">numberrange_GET_NUMERICAL_FIELD</h3>
+<pre>#define numberrange_GET_NUMERICAL_FIELD 0x1u</pre>
+
+<h3 id="numberrange_GET_LEFT_ADJUSTER">numberrange_GET_LEFT_ADJUSTER</h3>
+<pre>#define numberrange_GET_LEFT_ADJUSTER 0x2u</pre>
+
+<h3 id="numberrange_GET_RIGHT_ADJUSTER">numberrange_GET_RIGHT_ADJUSTER</h3>
+<pre>#define numberrange_GET_RIGHT_ADJUSTER 0x4u</pre>
+
+<h3 id="numberrange_GET_SLIDER">numberrange_GET_SLIDER</h3>
+<pre>#define numberrange_GET_SLIDER 0x8u</pre>
+
+<h3 id="numberrange_BOUND_LOWER">numberrange_BOUND_LOWER</h3>
+<pre>#define numberrange_BOUND_LOWER ((<a href="#numberrange_bounds_flags">numberrange_bounds_flags</a>) 0x1u)</pre>
+
+<h3 id="numberrange_BOUND_UPPER">numberrange_BOUND_UPPER</h3>
+<pre>#define numberrange_BOUND_UPPER ((<a href="#numberrange_bounds_flags">numberrange_bounds_flags</a>) 0x2u)</pre>
+
+<h3 id="numberrange_BOUND_STEP">numberrange_BOUND_STEP</h3>
+<pre>#define numberrange_BOUND_STEP ((<a href="#numberrange_bounds_flags">numberrange_bounds_flags</a>) 0x4u)</pre>
+
+<h3 id="numberrange_BOUND_PRECISION">numberrange_BOUND_PRECISION</h3>
+<pre>#define numberrange_BOUND_PRECISION ((<a href="#numberrange_bounds_flags">numberrange_bounds_flags</a>) 0x8u)</pre>
+
+<h3 id="action_NUMBER_RANGE_VALUE_CHANGED">action_NUMBER_RANGE_VALUE_CHANGED</h3>
+<pre>#define action_NUMBER_RANGE_VALUE_CHANGED 0x8288Du</pre>
+
+<h3 id="xnumberrange_set_value">xnumberrange_set_value</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnumberrange_set_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> number_range,
+      int value);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>number_range</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>value</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="numberrange_set_value">numberrange_set_value</h3>
+<pre>extern void numberrange_set_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> number_range,
+      int value);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>number_range</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>value</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xnumberrange_get_value">xnumberrange_get_value</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnumberrange_get_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> number_range,
+      int *value);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>number_range</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>value</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="numberrange_get_value">numberrange_get_value</h3>
+<pre>extern int numberrange_get_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> number_range);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>number_range</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>value</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xnumberrange_set_bounds">xnumberrange_set_bounds</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnumberrange_set_bounds (<a href="#numberrange_bounds_flags">numberrange_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> number_range,
+      int lower_bound,
+      int upper_bound,
+      int step_size,
+      int precision);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>number_range</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>lower_bound</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>upper_bound</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>step_size</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>precision</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="numberrange_set_bounds">numberrange_set_bounds</h3>
+<pre>extern void numberrange_set_bounds (<a href="#numberrange_bounds_flags">numberrange_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> number_range,
+      int lower_bound,
+      int upper_bound,
+      int step_size,
+      int precision);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>number_range</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>lower_bound</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>upper_bound</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>step_size</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>precision</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xnumberrange_get_bounds">xnumberrange_get_bounds</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnumberrange_get_bounds (<a href="#numberrange_bounds_flags">numberrange_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> number_range,
+      int *lower_bound,
+      int *upper_bound,
+      int *step_size,
+      int *precision);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>number_range</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>lower_bound</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>upper_bound</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>step_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>precision</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="numberrange_get_bounds">numberrange_get_bounds</h3>
+<pre>extern void numberrange_get_bounds (<a href="#numberrange_bounds_flags">numberrange_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> number_range,
+      int *lower_bound,
+      int *upper_bound,
+      int *step_size,
+      int *precision);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>number_range</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>lower_bound</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>upper_bound</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>step_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>precision</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xnumberrange_get_components">xnumberrange_get_components</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnumberrange_get_components (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> number_range,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> *numeric_field,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> *down,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> *up,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> *slider);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>number_range</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>numeric_field</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>down</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>up</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>slider</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="numberrange_get_components">numberrange_get_components</h3>
+<pre>extern void numberrange_get_components (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> number_range,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> *numeric_field,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> *down,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> *up,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> *slider);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>number_range</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>numeric_field</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>down</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>up</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>slider</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

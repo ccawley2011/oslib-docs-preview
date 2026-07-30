@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Hourglass</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Hourglass</h2>
+
+<pre>#include "oslib/hourglass.h"</pre>
+
+<h3 id="xhourglass_on">xhourglass_on</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhourglass_on (void);
+</pre><p>Turns on the hourglass</p>
+
+
+<table>
+</table>
+
+<h3 id="hourglass_on">hourglass_on</h3>
+<pre>extern void hourglass_on (void);
+</pre><p>Turns on the hourglass</p>
+
+
+<table>
+</table>
+
+<h3 id="xhourglass_off">xhourglass_off</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhourglass_off (void);
+</pre><p>Turns off the hourglass</p>
+
+
+<table>
+</table>
+
+<h3 id="hourglass_off">hourglass_off</h3>
+<pre>extern void hourglass_off (void);
+</pre><p>Turns off the hourglass</p>
+
+
+<table>
+</table>
+
+<h3 id="xhourglass_smash">xhourglass_smash</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhourglass_smash (void);
+</pre><p>Turns off the hourglass immediately</p>
+
+
+<table>
+</table>
+
+<h3 id="hourglass_smash">hourglass_smash</h3>
+<pre>extern void hourglass_smash (void);
+</pre><p>Turns off the hourglass immediately</p>
+
+
+<table>
+</table>
+
+<h3 id="xhourglass_start">xhourglass_start</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhourglass_start (int delay);</pre>
+<p>Turns on the hourglass after a given delay</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>delay</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hourglass_start">hourglass_start</h3>
+<pre>extern void hourglass_start (int delay);</pre>
+<p>Turns on the hourglass after a given delay</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>delay</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xhourglass_percentage">xhourglass_percentage</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhourglass_percentage (int percent);</pre>
+<p>Displays a percentage below the hourglass</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>percent</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hourglass_percentage">hourglass_percentage</h3>
+<pre>extern void hourglass_percentage (int percent);</pre>
+<p>Displays a percentage below the hourglass</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>percent</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xhourglass_leds">xhourglass_leds</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhourglass_leds (bits eor_mask,
+      bits and_mask,
+      bits *old_leds);</pre>
+<p>Controls the display indicators above and below the hourglass</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>eor_mask</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>and_mask</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_leds</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="hourglass_leds">hourglass_leds</h3>
+<pre>extern bits hourglass_leds (bits eor_mask,
+      bits and_mask);</pre>
+<p>Controls the display indicators above and below the hourglass</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>eor_mask</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>and_mask</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_leds</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xhourglass_colours">xhourglass_colours</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xhourglass_colours (<a href="os.html#os_colour">os_colour</a> sand,
+      <a href="os.html#os_colour">os_colour</a> glass,
+      <a href="os.html#os_colour">os_colour</a> *old_sand,
+      <a href="os.html#os_colour">os_colour</a> *old_glass);</pre>
+<p>Sets the colours used to display the hourglass</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sand</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>glass</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_sand</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>old_glass</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="hourglass_colours">hourglass_colours</h3>
+<pre>extern void hourglass_colours (<a href="os.html#os_colour">os_colour</a> sand,
+      <a href="os.html#os_colour">os_colour</a> glass,
+      <a href="os.html#os_colour">os_colour</a> *old_sand,
+      <a href="os.html#os_colour">os_colour</a> *old_glass);</pre>
+<p>Sets the colours used to display the hourglass</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sand</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>glass</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_sand</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>old_glass</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

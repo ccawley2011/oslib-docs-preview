@@ -1,0 +1,464 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; SharedCLibrary</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>SharedCLibrary</h2>
+
+<pre>#include "oslib/sharedclibrary.h"</pre>
+
+<h3 id="sharedclibrary_stub">sharedclibrary_stub</h3>
+<pre>typedef struct
+   {  int chunk_id;
+      byte **entry_vector;
+      byte **entry_vector_limit;
+      byte *static_data;
+      byte *static_data_limit;
+   }
+   sharedclibrary_stub;</pre>
+
+<h3 id="sharedclibrary_stub_list">sharedclibrary_stub_list</h3>
+<pre>typedef struct
+   {  <a href="#sharedclibrary_stub">sharedclibrary_stub</a> stub [...];
+   }
+   sharedclibrary_stub_list;</pre>
+
+<h3 id="kernel_unwind_block">kernel_unwind_block</h3>
+<pre>typedef struct
+   {  int r4;
+      int r5;
+      int r6;
+      int r7;
+      int r8;
+      int r9;
+      int fp;
+      int sp;
+      int pc;
+      int sl;
+      int f4 [3];
+      int f5 [3];
+      int f6 [3];
+      int f7 [3];
+   }
+   kernel_unwind_block;</pre>
+
+<h3 id="sharedclibrary_ROOT_STACK_SIZE_SHIFT">sharedclibrary_ROOT_STACK_SIZE_SHIFT</h3>
+<pre>#define sharedclibrary_ROOT_STACK_SIZE_SHIFT 16</pre>
+
+<h3 id="xsharedclibrary_lib_init_apcs_r">xsharedclibrary_lib_init_apcs_r</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsharedclibrary_lib_init_apcs_r (<a href="#sharedclibrary_stub_list">sharedclibrary_stub_list</a> const *stub_list,
+      void *workspace,
+      void *workspace_limit,
+      int shifted_root_stack_size,
+      byte **stack,
+      byte **stack_limit,
+      int *version);</pre>
+<p>Interfaces an application using APCS-R with the Shared C Library</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>stub_list</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>workspace_limit</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>shifted_root_stack_size</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>stack</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>stack_limit</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>version</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="sharedclibrary_lib_init_apcs_r">sharedclibrary_lib_init_apcs_r</h3>
+<pre>extern void sharedclibrary_lib_init_apcs_r (<a href="#sharedclibrary_stub_list">sharedclibrary_stub_list</a> const *stub_list,
+      void *workspace,
+      void *workspace_limit,
+      int shifted_root_stack_size,
+      byte **stack,
+      byte **stack_limit,
+      int *version);</pre>
+<p>Interfaces an application using APCS-R with the Shared C Library</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>stub_list</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>workspace_limit</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>shifted_root_stack_size</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>stack</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>stack_limit</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>version</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xsharedclibrary_lib_init_module">xsharedclibrary_lib_init_module</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsharedclibrary_lib_init_module (<a href="#sharedclibrary_stub_list">sharedclibrary_stub_list</a> const *stub_list,
+      void *workspace,
+      void *workspace_limit,
+      byte *clear,
+      byte const *static_data,
+      byte *static_data_limit,
+      int shifted_root_stack_size,
+      byte **stack,
+      byte **stack_limit,
+      int *version);</pre>
+<p>Interfaces a module using APCS-R with the Shared C Library</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>stub_list</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>workspace_limit</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>clear</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>static_data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>static_data_limit</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>shifted_root_stack_size</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>stack</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>stack_limit</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>version</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="sharedclibrary_lib_init_module">sharedclibrary_lib_init_module</h3>
+<pre>extern void sharedclibrary_lib_init_module (<a href="#sharedclibrary_stub_list">sharedclibrary_stub_list</a> const *stub_list,
+      void *workspace,
+      void *workspace_limit,
+      byte *clear,
+      byte const *static_data,
+      byte *static_data_limit,
+      int shifted_root_stack_size,
+      byte **stack,
+      byte **stack_limit,
+      int *version);</pre>
+<p>Interfaces a module using APCS-R with the Shared C Library</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>stub_list</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>workspace_limit</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>clear</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>static_data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>static_data_limit</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>shifted_root_stack_size</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>stack</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>stack_limit</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>version</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xsharedclibrary_lib_init_apcs_32">xsharedclibrary_lib_init_apcs_32</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsharedclibrary_lib_init_apcs_32 (<a href="#sharedclibrary_stub_list">sharedclibrary_stub_list</a> const *stub_list,
+      void *workspace,
+      void *workspace_limit,
+      int shifted_root_stack_size,
+      byte **stack,
+      byte **stack_limit,
+      int *version);</pre>
+<p>Interfaces an application using APCS-32 with the Shared C Library</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>stub_list</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>workspace_limit</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>shifted_root_stack_size</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>stack</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>stack_limit</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>version</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="sharedclibrary_lib_init_apcs_32">sharedclibrary_lib_init_apcs_32</h3>
+<pre>extern void sharedclibrary_lib_init_apcs_32 (<a href="#sharedclibrary_stub_list">sharedclibrary_stub_list</a> const *stub_list,
+      void *workspace,
+      void *workspace_limit,
+      int shifted_root_stack_size,
+      byte **stack,
+      byte **stack_limit,
+      int *version);</pre>
+<p>Interfaces an application using APCS-32 with the Shared C Library</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>stub_list</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>workspace_limit</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>shifted_root_stack_size</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>stack</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>stack_limit</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>version</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xsharedclibrary_lib_init_module_apcs_32">xsharedclibrary_lib_init_module_apcs_32</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsharedclibrary_lib_init_module_apcs_32 (<a href="#sharedclibrary_stub_list">sharedclibrary_stub_list</a> const *stub_list,
+      void *workspace,
+      void *workspace_limit,
+      byte *clear,
+      byte const *static_data,
+      byte *static_data_limit,
+      int shifted_root_stack_size,
+      byte **stack,
+      byte **stack_limit,
+      int *version);</pre>
+<p>Interfaces a module using APCS-32 with the Shared C Library</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>stub_list</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>workspace_limit</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>clear</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>static_data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>static_data_limit</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>shifted_root_stack_size</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>stack</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>stack_limit</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>version</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="sharedclibrary_lib_init_module_apcs_32">sharedclibrary_lib_init_module_apcs_32</h3>
+<pre>extern void sharedclibrary_lib_init_module_apcs_32 (<a href="#sharedclibrary_stub_list">sharedclibrary_stub_list</a> const *stub_list,
+      void *workspace,
+      void *workspace_limit,
+      byte *clear,
+      byte const *static_data,
+      byte *static_data_limit,
+      int shifted_root_stack_size,
+      byte **stack,
+      byte **stack_limit,
+      int *version);</pre>
+<p>Interfaces a module using APCS-32 with the Shared C Library</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>stub_list</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>workspace_limit</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>clear</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>static_data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>static_data_limit</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>shifted_root_stack_size</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>stack</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>stack_limit</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>version</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xservice_apcs_backtrace_backtrace_request">xservice_apcs_backtrace_backtrace_request</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_apcs_backtrace_backtrace_request (<a href="os.html#os_f">os_f</a> output,
+      <a href="os.html#os_register_block">os_register_block</a> const *initial_register_set,
+      <a href="kernel.html#kernel_unwind_block">kernel_unwind_block</a> const *unwind,
+      char const *language,
+      int error_number,
+      byte const *fault_address,
+      byte const *app_def,
+      osbool *unclaimed);</pre>
+<p>An APCS Backtrace has been requested - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>output</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>initial_register_set</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>unwind</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>language</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>error_number</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fault_address</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>app_def</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="service_apcs_backtrace_backtrace_request">service_apcs_backtrace_backtrace_request</h3>
+<pre>extern osbool service_apcs_backtrace_backtrace_request (<a href="os.html#os_f">os_f</a> output,
+      <a href="os.html#os_register_block">os_register_block</a> const *initial_register_set,
+      <a href="kernel.html#kernel_unwind_block">kernel_unwind_block</a> const *unwind,
+      char const *language,
+      int error_number,
+      byte const *fault_address,
+      byte const *app_def);</pre>
+<p>An APCS Backtrace has been requested - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>output</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>initial_register_set</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>unwind</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>language</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>error_number</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fault_address</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>app_def</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_apcs_backtrace_register_dump">xservice_apcs_backtrace_register_dump</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_apcs_backtrace_register_dump (<a href="os.html#os_f">os_f</a> output,
+      <a href="os.html#os_register_block">os_register_block</a> const *initial_register_set,
+      byte const *app_def,
+      osbool *unclaimed);</pre>
+<p>An APCS Backtrace is in progress and a register dump needs to be written - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>output</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>initial_register_set</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>app_def</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="service_apcs_backtrace_register_dump">service_apcs_backtrace_register_dump</h3>
+<pre>extern osbool service_apcs_backtrace_register_dump (<a href="os.html#os_f">os_f</a> output,
+      <a href="os.html#os_register_block">os_register_block</a> const *initial_register_set,
+      byte const *app_def);</pre>
+<p>An APCS Backtrace is in progress and a register dump needs to be written - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>output</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>initial_register_set</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>app_def</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_apcs_backtrace_backtrace_dump">xservice_apcs_backtrace_backtrace_dump</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_apcs_backtrace_backtrace_dump (<a href="os.html#os_f">os_f</a> output,
+      <a href="os.html#os_register_block">os_register_block</a> const *initial_register_set,
+      <a href="kernel.html#kernel_unwind_block">kernel_unwind_block</a> const *unwind,
+      char const *language,
+      byte const *app_def,
+      osbool *unclaimed);</pre>
+<p>An APCS Backtrace is in progress and the backtrace needs to be written - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>output</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>initial_register_set</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>unwind</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>language</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>app_def</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="service_apcs_backtrace_backtrace_dump">service_apcs_backtrace_backtrace_dump</h3>
+<pre>extern osbool service_apcs_backtrace_backtrace_dump (<a href="os.html#os_f">os_f</a> output,
+      <a href="os.html#os_register_block">os_register_block</a> const *initial_register_set,
+      <a href="kernel.html#kernel_unwind_block">kernel_unwind_block</a> const *unwind,
+      char const *language,
+      byte const *app_def);</pre>
+<p>An APCS Backtrace is in progress and the backtrace needs to be written - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>output</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>initial_register_set</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>unwind</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>language</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>app_def</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_apcs_backtrace_decode_name">xservice_apcs_backtrace_decode_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_apcs_backtrace_decode_name (char const *encoded_name,
+      char const *language,
+      osbool *unclaimed,
+      char **decoded_name);</pre>
+<p>Request to decode a function name into a displayable format - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>encoded_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>language</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>decoded_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="service_apcs_backtrace_decode_name">service_apcs_backtrace_decode_name</h3>
+<pre>extern osbool service_apcs_backtrace_decode_name (char const *encoded_name,
+      char const *language,
+      char **decoded_name);</pre>
+<p>Request to decode a function name into a displayable format - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>encoded_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>language</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>decoded_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_apcs_backtrace_mini_dump_created">xservice_apcs_backtrace_mini_dump_created</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_apcs_backtrace_mini_dump_created (char const *minidump_filename,
+      char const *executable_name,
+      osbool *unclaimed);</pre>
+<p>Notification to clients that a MiniDump has been created - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>minidump_filename</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>executable_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="service_apcs_backtrace_mini_dump_created">service_apcs_backtrace_mini_dump_created</h3>
+<pre>extern osbool service_apcs_backtrace_mini_dump_created (char const *minidump_filename,
+      char const *executable_name);</pre>
+<p>Notification to clients that a MiniDump has been created - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>minidump_filename</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>executable_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

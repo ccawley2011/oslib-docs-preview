@@ -1,0 +1,657 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Report</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Report</h2>
+
+<pre>#include "oslib/report.h"</pre>
+
+<h3 id="report_registers_save_area">report_registers_save_area</h3>
+<pre>typedef struct
+   {  int reg [16];
+   }
+   report_registers_save_area;</pre>
+
+<h3 id="report_registers_flags">report_registers_flags</h3>
+<pre>typedef bits report_registers_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#report_REGISTERS_DISPLAY_R0">report_REGISTERS_DISPLAY_R0</a></dd>
+<dd><a href="#report_REGISTERS_DISPLAY_R1">report_REGISTERS_DISPLAY_R1</a></dd>
+<dd><a href="#report_REGISTERS_DISPLAY_R2">report_REGISTERS_DISPLAY_R2</a></dd>
+<dd><a href="#report_REGISTERS_DISPLAY_R3">report_REGISTERS_DISPLAY_R3</a></dd>
+<dd><a href="#report_REGISTERS_DISPLAY_R4">report_REGISTERS_DISPLAY_R4</a></dd>
+<dd><a href="#report_REGISTERS_DISPLAY_R5">report_REGISTERS_DISPLAY_R5</a></dd>
+<dd><a href="#report_REGISTERS_DISPLAY_R6">report_REGISTERS_DISPLAY_R6</a></dd>
+<dd><a href="#report_REGISTERS_DISPLAY_R7">report_REGISTERS_DISPLAY_R7</a></dd>
+<dd><a href="#report_REGISTERS_DISPLAY_R8">report_REGISTERS_DISPLAY_R8</a></dd>
+<dd><a href="#report_REGISTERS_DISPLAY_R9">report_REGISTERS_DISPLAY_R9</a></dd>
+<dd><a href="#report_REGISTERS_DISPLAY_R10">report_REGISTERS_DISPLAY_R10</a></dd>
+<dd><a href="#report_REGISTERS_DISPLAY_R11">report_REGISTERS_DISPLAY_R11</a></dd>
+<dd><a href="#report_REGISTERS_DISPLAY_R12">report_REGISTERS_DISPLAY_R12</a></dd>
+<dd><a href="#report_REGISTERS_DISPLAY_R13">report_REGISTERS_DISPLAY_R13</a></dd>
+<dd><a href="#report_REGISTERS_DISPLAY_R14">report_REGISTERS_DISPLAY_R14</a></dd>
+<dd><a href="#report_REGISTERS_DISPLAY_R15">report_REGISTERS_DISPLAY_R15</a></dd>
+<dd><a href="#report_REGISTERS_REGISTERS_ARE_STRINGS">report_REGISTERS_REGISTERS_ARE_STRINGS</a></dd>
+</dl>
+
+<h3 id="report_REGISTERS_DISPLAY_R0">report_REGISTERS_DISPLAY_R0</h3>
+<pre>#define report_REGISTERS_DISPLAY_R0 ((<a href="#report_registers_flags">report_registers_flags</a>) 0x1u)</pre>
+
+<h3 id="report_REGISTERS_DISPLAY_R1">report_REGISTERS_DISPLAY_R1</h3>
+<pre>#define report_REGISTERS_DISPLAY_R1 ((<a href="#report_registers_flags">report_registers_flags</a>) 0x2u)</pre>
+
+<h3 id="report_REGISTERS_DISPLAY_R2">report_REGISTERS_DISPLAY_R2</h3>
+<pre>#define report_REGISTERS_DISPLAY_R2 ((<a href="#report_registers_flags">report_registers_flags</a>) 0x4u)</pre>
+
+<h3 id="report_REGISTERS_DISPLAY_R3">report_REGISTERS_DISPLAY_R3</h3>
+<pre>#define report_REGISTERS_DISPLAY_R3 ((<a href="#report_registers_flags">report_registers_flags</a>) 0x8u)</pre>
+
+<h3 id="report_REGISTERS_DISPLAY_R4">report_REGISTERS_DISPLAY_R4</h3>
+<pre>#define report_REGISTERS_DISPLAY_R4 ((<a href="#report_registers_flags">report_registers_flags</a>) 0x10u)</pre>
+
+<h3 id="report_REGISTERS_DISPLAY_R5">report_REGISTERS_DISPLAY_R5</h3>
+<pre>#define report_REGISTERS_DISPLAY_R5 ((<a href="#report_registers_flags">report_registers_flags</a>) 0x20u)</pre>
+
+<h3 id="report_REGISTERS_DISPLAY_R6">report_REGISTERS_DISPLAY_R6</h3>
+<pre>#define report_REGISTERS_DISPLAY_R6 ((<a href="#report_registers_flags">report_registers_flags</a>) 0x40u)</pre>
+
+<h3 id="report_REGISTERS_DISPLAY_R7">report_REGISTERS_DISPLAY_R7</h3>
+<pre>#define report_REGISTERS_DISPLAY_R7 ((<a href="#report_registers_flags">report_registers_flags</a>) 0x80u)</pre>
+
+<h3 id="report_REGISTERS_DISPLAY_R8">report_REGISTERS_DISPLAY_R8</h3>
+<pre>#define report_REGISTERS_DISPLAY_R8 ((<a href="#report_registers_flags">report_registers_flags</a>) 0x100u)</pre>
+
+<h3 id="report_REGISTERS_DISPLAY_R9">report_REGISTERS_DISPLAY_R9</h3>
+<pre>#define report_REGISTERS_DISPLAY_R9 ((<a href="#report_registers_flags">report_registers_flags</a>) 0x200u)</pre>
+
+<h3 id="report_REGISTERS_DISPLAY_R10">report_REGISTERS_DISPLAY_R10</h3>
+<pre>#define report_REGISTERS_DISPLAY_R10 ((<a href="#report_registers_flags">report_registers_flags</a>) 0x400u)</pre>
+
+<h3 id="report_REGISTERS_DISPLAY_R11">report_REGISTERS_DISPLAY_R11</h3>
+<pre>#define report_REGISTERS_DISPLAY_R11 ((<a href="#report_registers_flags">report_registers_flags</a>) 0x800u)</pre>
+
+<h3 id="report_REGISTERS_DISPLAY_R12">report_REGISTERS_DISPLAY_R12</h3>
+<pre>#define report_REGISTERS_DISPLAY_R12 ((<a href="#report_registers_flags">report_registers_flags</a>) 0x1000u)</pre>
+
+<h3 id="report_REGISTERS_DISPLAY_R13">report_REGISTERS_DISPLAY_R13</h3>
+<pre>#define report_REGISTERS_DISPLAY_R13 ((<a href="#report_registers_flags">report_registers_flags</a>) 0x2000u)</pre>
+
+<h3 id="report_REGISTERS_DISPLAY_R14">report_REGISTERS_DISPLAY_R14</h3>
+<pre>#define report_REGISTERS_DISPLAY_R14 ((<a href="#report_registers_flags">report_registers_flags</a>) 0x4000u)</pre>
+
+<h3 id="report_REGISTERS_DISPLAY_R15">report_REGISTERS_DISPLAY_R15</h3>
+<pre>#define report_REGISTERS_DISPLAY_R15 ((<a href="#report_registers_flags">report_registers_flags</a>) 0x8000u)</pre>
+
+<h3 id="report_REGISTERS_REGISTERS_ARE_STRINGS">report_REGISTERS_REGISTERS_ARE_STRINGS</h3>
+<pre>#define report_REGISTERS_REGISTERS_ARE_STRINGS ((<a href="#report_registers_flags">report_registers_flags</a>) 0x10000u)</pre>
+
+<h3 id="xreport_text0">xreport_text0</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_text0 (char const *text);</pre>
+<p>Displays the null terminated text</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>text</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="report_text0">report_text0</h3>
+<pre>extern void report_text0 (char const *text);</pre>
+<p>Displays the null terminated text</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>text</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xreport_regs">xreport_regs</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_regs (void);
+</pre><p>Displays registers 0-8</p>
+
+
+<table>
+</table>
+
+<h3 id="report_regs">report_regs</h3>
+<pre>extern void report_regs (void);
+</pre><p>Displays registers 0-8</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_registers">xreport_registers</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_registers (char const *heading,
+      <a href="#report_registers_save_area">report_registers_save_area</a> const *registers,
+      <a href="#report_registers_flags">report_registers_flags</a> flags);</pre>
+<p>Displays some or all of the registers</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>heading</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>registers</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="report_registers">report_registers</h3>
+<pre>extern void report_registers (char const *heading,
+      <a href="#report_registers_save_area">report_registers_save_area</a> const *registers,
+      <a href="#report_registers_flags">report_registers_flags</a> flags);</pre>
+<p>Displays some or all of the registers</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>heading</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>registers</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xreport_where">xreport_where</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_where (void);
+</pre><p>Display processor Abort information</p>
+
+
+<table>
+</table>
+
+<h3 id="report_where">report_where</h3>
+<pre>extern void report_where (void);
+</pre><p>Display processor Abort information</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_poll">xreport_poll</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_poll (<a href="wimp.html#wimp_event_no">wimp_event_no</a> event);</pre>
+<p>Display Wimp event number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>event</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="report_poll">report_poll</h3>
+<pre>extern void report_poll (<a href="wimp.html#wimp_event_no">wimp_event_no</a> event);</pre>
+<p>Display Wimp event number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>event</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xreport_dump">xreport_dump</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_dump (byte const *address,
+      int length,
+      int width);</pre>
+<p>Display memory dump</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>width</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="report_dump">report_dump</h3>
+<pre>extern void report_dump (byte const *address,
+      int length,
+      int width);</pre>
+<p>Display memory dump</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>width</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xreport_quit">xreport_quit</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_quit (void);
+</pre><p>Quit Reporter</p>
+
+
+<table>
+</table>
+
+<h3 id="report_quit">report_quit</h3>
+<pre>extern void report_quit (void);
+</pre><p>Quit Reporter</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_clear">xreport_clear</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_clear (void);
+</pre><p>Clear Reporter's window</p>
+
+
+<table>
+</table>
+
+<h3 id="report_clear">report_clear</h3>
+<pre>extern void report_clear (void);
+</pre><p>Clear Reporter's window</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_open">xreport_open</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_open (void);
+</pre><p>Opens the Reporter window after it has been closed by Report_Close but not Report_Hide</p>
+
+
+<table>
+</table>
+
+<h3 id="report_open">report_open</h3>
+<pre>extern void report_open (void);
+</pre><p>Opens the Reporter window after it has been closed by Report_Close but not Report_Hide</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_close">xreport_close</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_close (void);
+</pre><p>Closes Reporter's window</p>
+
+
+<table>
+</table>
+
+<h3 id="report_close">report_close</h3>
+<pre>extern void report_close (void);
+</pre><p>Closes Reporter's window</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_on">xreport_on</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_on (void);
+</pre><p>Turn general reporting on</p>
+
+
+<table>
+</table>
+
+<h3 id="report_on">report_on</h3>
+<pre>extern void report_on (void);
+</pre><p>Turn general reporting on</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_off">xreport_off</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_off (void);
+</pre><p>Turn general reporting off</p>
+
+
+<table>
+</table>
+
+<h3 id="report_off">report_off</h3>
+<pre>extern void report_off (void);
+</pre><p>Turn general reporting off</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_cmd_on">xreport_cmd_on</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_cmd_on (void);
+</pre><p>Turn reporting of *commands on</p>
+
+
+<table>
+</table>
+
+<h3 id="report_cmd_on">report_cmd_on</h3>
+<pre>extern void report_cmd_on (void);
+</pre><p>Turn reporting of *commands on</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_cmd_off">xreport_cmd_off</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_cmd_off (void);
+</pre><p>Turn reporting of *commands off</p>
+
+
+<table>
+</table>
+
+<h3 id="report_cmd_off">report_cmd_off</h3>
+<pre>extern void report_cmd_off (void);
+</pre><p>Turn reporting of *commands off</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_hide">xreport_hide</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_hide (void);
+</pre><p>Closes Reporter's window more permanently than Report_Close</p>
+
+
+<table>
+</table>
+
+<h3 id="report_hide">report_hide</h3>
+<pre>extern void report_hide (void);
+</pre><p>Closes Reporter's window more permanently than Report_Close</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_un_hide">xreport_un_hide</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_un_hide (void);
+</pre><p>Opens Reporter's window after Report_Hide</p>
+
+
+<table>
+</table>
+
+<h3 id="report_un_hide">report_un_hide</h3>
+<pre>extern void report_un_hide (void);
+</pre><p>Opens Reporter's window after Report_Hide</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_err_on">xreport_err_on</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_err_on (void);
+</pre><p>Turn reporting of errors on</p>
+
+
+<table>
+</table>
+
+<h3 id="report_err_on">report_err_on</h3>
+<pre>extern void report_err_on (void);
+</pre><p>Turn reporting of errors on</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_err_off">xreport_err_off</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_err_off (void);
+</pre><p>Turn reporting of errors off</p>
+
+
+<table>
+</table>
+
+<h3 id="report_err_off">report_err_off</h3>
+<pre>extern void report_err_off (void);
+</pre><p>Turn reporting of errors off</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_task_on">xreport_task_on</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_task_on (void);
+</pre><p>Turn reporting of task init/close on</p>
+
+
+<table>
+</table>
+
+<h3 id="report_task_on">report_task_on</h3>
+<pre>extern void report_task_on (void);
+</pre><p>Turn reporting of task init/close on</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_task_off">xreport_task_off</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_task_off (void);
+</pre><p>Turn reporting of task init/close off</p>
+
+
+<table>
+</table>
+
+<h3 id="report_task_off">report_task_off</h3>
+<pre>extern void report_task_off (void);
+</pre><p>Turn reporting of task init/close off</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_vdu4_on">xreport_vdu4_on</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_vdu4_on (void);
+</pre><p>Turn reporting of VDU4 output on</p>
+
+
+<table>
+</table>
+
+<h3 id="report_vdu4_on">report_vdu4_on</h3>
+<pre>extern void report_vdu4_on (void);
+</pre><p>Turn reporting of VDU4 output on</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_vdu4_off">xreport_vdu4_off</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_vdu4_off (void);
+</pre><p>Turn reporting of VDU4 output off</p>
+
+
+<table>
+</table>
+
+<h3 id="report_vdu4_off">report_vdu4_off</h3>
+<pre>extern void report_vdu4_off (void);
+</pre><p>Turn reporting of VDU4 output off</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_rma_on">xreport_rma_on</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_rma_on (void);
+</pre><p>Turn reporting of RMA storage on</p>
+
+
+<table>
+</table>
+
+<h3 id="report_rma_on">report_rma_on</h3>
+<pre>extern void report_rma_on (void);
+</pre><p>Turn reporting of RMA storage on</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_rma_off">xreport_rma_off</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_rma_off (void);
+</pre><p>Turn reporting of RMA storage off</p>
+
+
+<table>
+</table>
+
+<h3 id="report_rma_off">report_rma_off</h3>
+<pre>extern void report_rma_off (void);
+</pre><p>Turn reporting of RMA storage off</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_time_on">xreport_time_on</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_time_on (void);
+</pre><p>Add Timestamp to Reported Commands</p>
+
+
+<table>
+</table>
+
+<h3 id="report_time_on">report_time_on</h3>
+<pre>extern void report_time_on (void);
+</pre><p>Add Timestamp to Reported Commands</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_time_off">xreport_time_off</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_time_off (void);
+</pre><p>Remove Timestamp from Reported Commands</p>
+
+
+<table>
+</table>
+
+<h3 id="report_time_off">report_time_off</h3>
+<pre>extern void report_time_off (void);
+</pre><p>Remove Timestamp from Reported Commands</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_srce_on">xreport_srce_on</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_srce_on (void);
+</pre><p>Add Source to Reported Commands</p>
+
+
+<table>
+</table>
+
+<h3 id="report_srce_on">report_srce_on</h3>
+<pre>extern void report_srce_on (void);
+</pre><p>Add Source to Reported Commands</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_srce_off">xreport_srce_off</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_srce_off (void);
+</pre><p>Remove Source from Reported Commands</p>
+
+
+<table>
+</table>
+
+<h3 id="report_srce_off">report_srce_off</h3>
+<pre>extern void report_srce_off (void);
+</pre><p>Remove Source from Reported Commands</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_obey_on">xreport_obey_on</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_obey_on (void);
+</pre><p>Report only Obey commands</p>
+
+
+<table>
+</table>
+
+<h3 id="report_obey_on">report_obey_on</h3>
+<pre>extern void report_obey_on (void);
+</pre><p>Report only Obey commands</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_obey_off">xreport_obey_off</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_obey_off (void);
+</pre><p>Report all Commands</p>
+
+
+<table>
+</table>
+
+<h3 id="report_obey_off">report_obey_off</h3>
+<pre>extern void report_obey_off (void);
+</pre><p>Report all Commands</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_push">xreport_push</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_push (void);
+</pre><p>Store Reporter Status</p>
+
+
+<table>
+</table>
+
+<h3 id="report_push">report_push</h3>
+<pre>extern void report_push (void);
+</pre><p>Store Reporter Status</p>
+
+
+<table>
+</table>
+
+<h3 id="xreport_pull">xreport_pull</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xreport_pull (void);
+</pre><p>Restore Reporter Status</p>
+
+
+<table>
+</table>
+
+<h3 id="report_pull">report_pull</h3>
+<pre>extern void report_pull (void);
+</pre><p>Restore Reporter Status</p>
+
+
+<table>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

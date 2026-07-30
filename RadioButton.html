@@ -1,0 +1,281 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; RadioButton</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>RadioButton</h2>
+
+<pre>#include "oslib/radiobutton.h"</pre>
+
+<h3 id="radiobutton_gadget">radiobutton_gadget</h3>
+<pre>typedef struct
+   {  int group;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> label;
+      int label_limit;
+      bits action;
+   }
+   radiobutton_gadget;</pre>
+
+<h3 id="radiobutton_object">radiobutton_object</h3>
+<pre>typedef struct
+   {  <a href="#gadget_OBJECT_MEMBERS">gadget_OBJECT_MEMBERS</a>
+      int group;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> label;
+      int label_limit;
+      bits action;
+   }
+   radiobutton_object;</pre>
+
+<h3 id="radiobutton_action_state_changed">radiobutton_action_state_changed</h3>
+<pre>typedef struct
+   {  osbool on;
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> previous_on;
+   }
+   radiobutton_action_state_changed;</pre>
+
+<p>Prefer RadioButton_ActionStateChangedBlock</p>
+
+<h3 id="radiobutton_action_state_changed_block">radiobutton_action_state_changed_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      osbool on;
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> previous_on;
+   }
+   radiobutton_action_state_changed_block;</pre>
+
+<h3 id="class_RADIO_BUTTON">class_RADIO_BUTTON</h3>
+<pre>#define class_RADIO_BUTTON ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x180u)</pre>
+
+<h3 id="radiobutton_GENERATE_STATE_CHANGED">radiobutton_GENERATE_STATE_CHANGED</h3>
+<pre>#define radiobutton_GENERATE_STATE_CHANGED ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x1u)</pre>
+
+<h3 id="radiobutton_GENERATE_SET_STATE_CHANGED">radiobutton_GENERATE_SET_STATE_CHANGED</h3>
+<pre>#define radiobutton_GENERATE_SET_STATE_CHANGED ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x2u)</pre>
+
+<h3 id="radiobutton_ON">radiobutton_ON</h3>
+<pre>#define radiobutton_ON ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x4u)</pre>
+
+<h3 id="action_RADIO_BUTTON_STATE_CHANGED">action_RADIO_BUTTON_STATE_CHANGED</h3>
+<pre>#define action_RADIO_BUTTON_STATE_CHANGED 0x82883u</pre>
+
+<h3 id="radiobutton_STATE_CHANGED_ADJUST">radiobutton_STATE_CHANGED_ADJUST</h3>
+<pre>#define radiobutton_STATE_CHANGED_ADJUST 0x1u</pre>
+
+<h3 id="radiobutton_STATE_CHANGED_SELECT">radiobutton_STATE_CHANGED_SELECT</h3>
+<pre>#define radiobutton_STATE_CHANGED_SELECT 0x4u</pre>
+
+<h3 id="xradiobutton_set_label">xradiobutton_set_label</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xradiobutton_set_label (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> radio_button,
+      char const *label);</pre>
+<p>sets the label text for the specified radio button</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>radio_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>label</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="radiobutton_set_label">radiobutton_set_label</h3>
+<pre>extern void radiobutton_set_label (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> radio_button,
+      char const *label);</pre>
+<p>sets the label text for the specified radio button</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>radio_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>label</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xradiobutton_get_label">xradiobutton_get_label</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xradiobutton_get_label (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> radio_button,
+      char *buffer,
+      int size,
+      int *used);</pre>
+<p>Gets the label text for the specified radio button</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>radio_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="radiobutton_get_label">radiobutton_get_label</h3>
+<pre>extern int radiobutton_get_label (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> radio_button,
+      char *buffer,
+      int size);</pre>
+<p>Gets the label text for the specified radio button</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>radio_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xradiobutton_set_action">xradiobutton_set_action</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xradiobutton_set_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> radio_button,
+      bits action);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>radio_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="radiobutton_set_action">radiobutton_set_action</h3>
+<pre>extern void radiobutton_set_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> radio_button,
+      bits action);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>radio_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xradiobutton_get_action">xradiobutton_get_action</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xradiobutton_get_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> radio_button,
+      bits *action);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>radio_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>action</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="radiobutton_get_action">radiobutton_get_action</h3>
+<pre>extern bits radiobutton_get_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> radio_button);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>radio_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>action</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xradiobutton_set_state">xradiobutton_set_state</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xradiobutton_set_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> radio_button,
+      osbool on);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>radio_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>on</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="radiobutton_set_state">radiobutton_set_state</h3>
+<pre>extern void radiobutton_set_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> radio_button,
+      osbool on);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>radio_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>on</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xradiobutton_get_state">xradiobutton_get_state</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xradiobutton_get_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> radio_button,
+      osbool *on,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> *on_button);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>radio_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>on</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>on_button</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="radiobutton_get_state">radiobutton_get_state</h3>
+<pre>extern osbool radiobutton_get_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> radio_button,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> *on_button);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>radio_button</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>on_button</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>on</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

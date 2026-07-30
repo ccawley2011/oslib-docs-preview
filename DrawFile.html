@@ -1,0 +1,918 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; DrawFile</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>DrawFile</h2>
+
+<pre>#include "oslib/drawfile.h"</pre>
+
+<h3 id="drawfile_type">drawfile_type</h3>
+<pre>typedef int drawfile_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#drawfile_TYPE_FONT_TABLE">drawfile_TYPE_FONT_TABLE</a></dd>
+<dd><a href="#drawfile_TYPE_TEXT">drawfile_TYPE_TEXT</a></dd>
+<dd><a href="#drawfile_TYPE_PATH">drawfile_TYPE_PATH</a></dd>
+<dd><a href="#drawfile_TYPE_SPRITE">drawfile_TYPE_SPRITE</a></dd>
+<dd><a href="#drawfile_TYPE_GROUP">drawfile_TYPE_GROUP</a></dd>
+<dd><a href="#drawfile_TYPE_TAGGED">drawfile_TYPE_TAGGED</a></dd>
+<dd><a href="#drawfile_TYPE_TEXT_AREA">drawfile_TYPE_TEXT_AREA</a></dd>
+<dd><a href="#drawfile_TYPE_TEXT_COLUMN">drawfile_TYPE_TEXT_COLUMN</a></dd>
+<dd><a href="#drawfile_TYPE_OPTIONS">drawfile_TYPE_OPTIONS</a></dd>
+<dd><a href="#drawfile_TYPE_TRFM_TEXT">drawfile_TYPE_TRFM_TEXT</a></dd>
+<dd><a href="#drawfile_TYPE_TRFM_SPRITE">drawfile_TYPE_TRFM_SPRITE</a></dd>
+<dd><a href="#drawfile_TYPE_JPEG">drawfile_TYPE_JPEG</a></dd>
+</dl>
+
+<h3 id="drawfile_path_style_flags">drawfile_path_style_flags</h3>
+<pre>typedef byte drawfile_path_style_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#drawfile_PATH_MITRED">drawfile_PATH_MITRED</a></dd>
+<dd><a href="#drawfile_PATH_ROUND">drawfile_PATH_ROUND</a></dd>
+<dd><a href="#drawfile_PATH_BEVELLED">drawfile_PATH_BEVELLED</a></dd>
+<dd><a href="#drawfile_PATH_BUTT">drawfile_PATH_BUTT</a></dd>
+<dd><a href="#drawfile_PATH_SQUARE">drawfile_PATH_SQUARE</a></dd>
+<dd><a href="#drawfile_PATH_TRIANGLE">drawfile_PATH_TRIANGLE</a></dd>
+<dd><a href="#drawfile_PATH_JOIN">drawfile_PATH_JOIN</a></dd>
+<dd><a href="#drawfile_PATH_END">drawfile_PATH_END</a></dd>
+<dd><a href="#drawfile_PATH_START">drawfile_PATH_START</a></dd>
+<dd><a href="#drawfile_PATH_WINDING_EVEN_ODD">drawfile_PATH_WINDING_EVEN_ODD</a></dd>
+<dd><a href="#drawfile_PATH_DASHED">drawfile_PATH_DASHED</a></dd>
+<dd><a href="#drawfile_PATH_CAP_WIDTH">drawfile_PATH_CAP_WIDTH</a></dd>
+<dd><a href="#drawfile_PATH_CAP_LENGTH">drawfile_PATH_CAP_LENGTH</a></dd>
+</dl>
+
+<h3 id="drawfile_text_flags">drawfile_text_flags</h3>
+<pre>typedef bits drawfile_text_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#drawfile_TEXT_KERN">drawfile_TEXT_KERN</a></dd>
+<dd><a href="#drawfile_TEXT_RIGHT_TO_LEFT">drawfile_TEXT_RIGHT_TO_LEFT</a></dd>
+<dd><a href="#drawfile_TEXT_UNDERLINE">drawfile_TEXT_UNDERLINE</a></dd>
+</dl>
+
+<h3 id="drawfile_render_flags">drawfile_render_flags</h3>
+<pre>typedef bits drawfile_render_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#drawfile_RENDER_BBOXES">drawfile_RENDER_BBOXES</a></dd>
+<dd><a href="#drawfile_RENDER_SUPPRESS">drawfile_RENDER_SUPPRESS</a></dd>
+<dd><a href="#drawfile_RENDER_GIVEN_FLATNESS">drawfile_RENDER_GIVEN_FLATNESS</a></dd>
+<dd><a href="#drawfile_RENDER_GIVEN_COLOUR_MAPPING">drawfile_RENDER_GIVEN_COLOUR_MAPPING</a></dd>
+</dl>
+
+<h3 id="drawfile_declare_fonts_flags">drawfile_declare_fonts_flags</h3>
+<pre>typedef bits drawfile_declare_fonts_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#drawfile_NO_DOWNLOAD">drawfile_NO_DOWNLOAD</a></dd>
+</dl>
+
+<h3 id="drawfile_paper_options">drawfile_paper_options</h3>
+<pre>typedef bits drawfile_paper_options;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#drawfile_PAPER_SHOW">drawfile_PAPER_SHOW</a></dd>
+<dd><a href="#drawfile_PAPER_LANDSCAPE">drawfile_PAPER_LANDSCAPE</a></dd>
+<dd><a href="#drawfile_PAPER_DEFAULT">drawfile_PAPER_DEFAULT</a></dd>
+</dl>
+
+<h3 id="drawfile_entry_mode">drawfile_entry_mode</h3>
+<pre>typedef bits drawfile_entry_mode;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#drawfile_ENTRY_MODE_LINE">drawfile_ENTRY_MODE_LINE</a></dd>
+<dd><a href="#drawfile_ENTRY_MODE_CLOSED_LINE">drawfile_ENTRY_MODE_CLOSED_LINE</a></dd>
+<dd><a href="#drawfile_ENTRY_MODE_CURVE">drawfile_ENTRY_MODE_CURVE</a></dd>
+<dd><a href="#drawfile_ENTRY_MODE_CLOSED_CURVE">drawfile_ENTRY_MODE_CLOSED_CURVE</a></dd>
+<dd><a href="#drawfile_ENTRY_MODE_RECTANGLE">drawfile_ENTRY_MODE_RECTANGLE</a></dd>
+<dd><a href="#drawfile_ENTRY_MODE_ELLIPSE">drawfile_ENTRY_MODE_ELLIPSE</a></dd>
+<dd><a href="#drawfile_ENTRY_MODE_TEXT_LINE">drawfile_ENTRY_MODE_TEXT_LINE</a></dd>
+<dd><a href="#drawfile_ENTRY_MODE_SELECT">drawfile_ENTRY_MODE_SELECT</a></dd>
+</dl>
+
+<h3 id="drawfile_FONT_DEF_MEMBERS">drawfile_FONT_DEF_MEMBERS</h3>
+<pre>#define drawfile_FONT_DEF_MEMBERS \
+   byte font_index;
+</pre>
+
+<h3 id="drawfile_font_def_base">drawfile_font_def_base</h3>
+<pre>typedef struct
+   {  byte font_index;
+   }
+   drawfile_font_def_base;</pre>
+
+<h3 id="drawfile_font_def">drawfile_font_def</h3>
+<pre>typedef struct
+   {  byte font_index;
+      char font_name [...];
+   }
+   drawfile_font_def;</pre>
+
+<h3 id="drawfile_text_style">drawfile_text_style</h3>
+<pre>typedef struct
+   {  byte font_index;
+      byte reserved [3];
+   }
+   drawfile_text_style;</pre>
+
+<h3 id="drawfile_path_style">drawfile_path_style</h3>
+<pre>typedef struct
+   {  <a href="#drawfile_path_style_flags">drawfile_path_style_flags</a> flags;
+      byte reserved;
+      byte cap_width;
+      byte cap_length;
+   }
+   drawfile_path_style;</pre>
+
+<h3 id="drawfile_font_table">drawfile_font_table</h3>
+<pre>typedef struct
+   {  <a href="#drawfile_font_def">drawfile_font_def</a> font_def [...];
+   }
+   drawfile_font_table;</pre>
+
+<h3 id="drawfile_TEXT_MEMBERS">drawfile_TEXT_MEMBERS</h3>
+<pre>#define drawfile_TEXT_MEMBERS \
+   <a href="os.html#os_box">os_box</a> bbox; \
+   <a href="os.html#os_colour">os_colour</a> fill; \
+   <a href="os.html#os_colour">os_colour</a> bg_hint; \
+   <a href="#drawfile_text_style">drawfile_text_style</a> style; \
+   int xsize; \
+   int ysize; \
+   <a href="os.html#os_coord">os_coord</a> base;
+</pre>
+
+<h3 id="drawfile_text_base">drawfile_text_base</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> bbox;
+      <a href="os.html#os_colour">os_colour</a> fill;
+      <a href="os.html#os_colour">os_colour</a> bg_hint;
+      <a href="#drawfile_text_style">drawfile_text_style</a> style;
+      int xsize;
+      int ysize;
+      <a href="os.html#os_coord">os_coord</a> base;
+   }
+   drawfile_text_base;</pre>
+
+<h3 id="drawfile_text">drawfile_text</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> bbox;
+      <a href="os.html#os_colour">os_colour</a> fill;
+      <a href="os.html#os_colour">os_colour</a> bg_hint;
+      <a href="#drawfile_text_style">drawfile_text_style</a> style;
+      int xsize;
+      int ysize;
+      <a href="os.html#os_coord">os_coord</a> base;
+      char text [...];
+   }
+   drawfile_text;</pre>
+
+<h3 id="drawfile_path">drawfile_path</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> bbox;
+      <a href="os.html#os_colour">os_colour</a> fill;
+      <a href="os.html#os_colour">os_colour</a> outline;
+      int width;
+      <a href="#drawfile_path_style">drawfile_path_style</a> style;
+      <a href="draw.html#draw_path">draw_path</a> path;
+   }
+   drawfile_path;</pre>
+
+<h3 id="drawfile_path_with_pattern">drawfile_path_with_pattern</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> bbox;
+      <a href="os.html#os_colour">os_colour</a> fill;
+      <a href="os.html#os_colour">os_colour</a> outline;
+      int width;
+      <a href="#drawfile_path_style">drawfile_path_style</a> style;
+      <a href="draw.html#draw_dash_pattern">draw_dash_pattern</a> pattern;
+      <a href="draw.html#draw_path">draw_path</a> path;
+   }
+   drawfile_path_with_pattern;</pre>
+
+<h3 id="drawfile_SPRITE_MEMBERS">drawfile_SPRITE_MEMBERS</h3>
+<pre>#define drawfile_SPRITE_MEMBERS \
+   <a href="os.html#os_box">os_box</a> bbox; \
+   <a href="osspriteop.html#osspriteop_header">osspriteop_header</a> header;
+</pre>
+
+<h3 id="drawfile_sprite_base">drawfile_sprite_base</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> bbox;
+      <a href="osspriteop.html#osspriteop_header">osspriteop_header</a> header;
+   }
+   drawfile_sprite_base;</pre>
+
+<h3 id="drawfile_sprite">drawfile_sprite</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> bbox;
+      <a href="osspriteop.html#osspriteop_header">osspriteop_header</a> header;
+      byte data [...];
+   }
+   drawfile_sprite;</pre>
+
+<h3 id="drawfile_GROUP_MEMBERS">drawfile_GROUP_MEMBERS</h3>
+<pre>#define drawfile_GROUP_MEMBERS \
+   <a href="os.html#os_box">os_box</a> bbox; \
+   char name [12];
+</pre>
+
+<h3 id="drawfile_group_base">drawfile_group_base</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> bbox;
+      char name [12];
+   }
+   drawfile_group_base;</pre>
+
+<h3 id="drawfile_group">drawfile_group</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> bbox;
+      char name [12];
+      int objects [...];
+   }
+   drawfile_group;</pre>
+
+
+Fields:	objects - Should be cast to pointer to object<h3 id="drawfile_TAGGED_MEMBERS">drawfile_TAGGED_MEMBERS</h3>
+<pre>#define drawfile_TAGGED_MEMBERS \
+   <a href="os.html#os_box">os_box</a> bbox; \
+   <a href="#drawfile_type">drawfile_type</a> tag;
+</pre>
+
+<h3 id="drawfile_tagged_base">drawfile_tagged_base</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> bbox;
+      <a href="#drawfile_type">drawfile_type</a> tag;
+   }
+   drawfile_tagged_base;</pre>
+
+<h3 id="drawfile_tagged">drawfile_tagged</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> bbox;
+      <a href="#drawfile_type">drawfile_type</a> tag;
+      int object [...];
+   }
+   drawfile_tagged;</pre>
+
+
+Fields:	object - Should be cast to pointer to object<h3 id="drawfile_text_column">drawfile_text_column</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> box;
+   }
+   drawfile_text_column;</pre>
+
+<h3 id="drawfile_text_column_list">drawfile_text_column_list</h3>
+<pre>typedef struct
+   {  struct
+      {  <a href="#drawfile_type">drawfile_type</a> type;
+         int size;
+         <a href="#drawfile_text_column">drawfile_text_column</a> data;
+      }
+      columns [...];
+   }
+   drawfile_text_column_list;</pre>
+
+<h3 id="drawfile_AREA_TEXT_MEMBERS">drawfile_AREA_TEXT_MEMBERS</h3>
+<pre>#define drawfile_AREA_TEXT_MEMBERS \
+   <a href="#drawfile_type">drawfile_type</a> type; \
+   int reserved [2]; \
+   <a href="os.html#os_colour">os_colour</a> fill; \
+   <a href="os.html#os_colour">os_colour</a> bg_hint;
+</pre>
+
+<h3 id="drawfile_area_text_base">drawfile_area_text_base</h3>
+<pre>typedef struct
+   {  <a href="#drawfile_type">drawfile_type</a> type;
+      int reserved [2];
+      <a href="os.html#os_colour">os_colour</a> fill;
+      <a href="os.html#os_colour">os_colour</a> bg_hint;
+   }
+   drawfile_area_text_base;</pre>
+
+<h3 id="drawfile_area_text">drawfile_area_text</h3>
+<pre>typedef struct
+   {  <a href="#drawfile_type">drawfile_type</a> type;
+      int reserved [2];
+      <a href="os.html#os_colour">os_colour</a> fill;
+      <a href="os.html#os_colour">os_colour</a> bg_hint;
+      char text [...];
+   }
+   drawfile_area_text;</pre>
+
+<h3 id="drawfile_text_area">drawfile_text_area</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> bbox;
+      <a href="#drawfile_text_column_list">drawfile_text_column_list</a> header;
+      <a href="#drawfile_area_text">drawfile_area_text</a> area_text;
+   }
+   drawfile_text_area;</pre>
+
+<h3 id="drawfile_options">drawfile_options</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> bbox;
+      int paper_size;
+      <a href="#drawfile_paper_options">drawfile_paper_options</a> paper_options;
+      double grid_spacing;
+      int grid_division;
+      osbool isometric;
+      osbool auto_adjust;
+      osbool show;
+      osbool lock;
+      osbool cm;
+      int zoom_mul;
+      int zoom_div;
+      osbool zoom_lock;
+      osbool toolbox;
+      <a href="#drawfile_entry_mode">drawfile_entry_mode</a> entry_mode;
+      int undo_size;
+   }
+   drawfile_options;</pre>
+
+<h3 id="drawfile_TRFM_TEXT_MEMBERS">drawfile_TRFM_TEXT_MEMBERS</h3>
+<pre>#define drawfile_TRFM_TEXT_MEMBERS \
+   <a href="os.html#os_box">os_box</a> bbox; \
+   <a href="os.html#os_trfm">os_trfm</a> trfm; \
+   <a href="#drawfile_text_flags">drawfile_text_flags</a> flags; \
+   <a href="os.html#os_colour">os_colour</a> fill; \
+   <a href="os.html#os_colour">os_colour</a> bg_hint; \
+   <a href="#drawfile_text_style">drawfile_text_style</a> style; \
+   int xsize; \
+   int ysize; \
+   <a href="os.html#os_coord">os_coord</a> base;
+</pre>
+
+<h3 id="drawfile_trfm_text_base">drawfile_trfm_text_base</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> bbox;
+      <a href="os.html#os_trfm">os_trfm</a> trfm;
+      <a href="#drawfile_text_flags">drawfile_text_flags</a> flags;
+      <a href="os.html#os_colour">os_colour</a> fill;
+      <a href="os.html#os_colour">os_colour</a> bg_hint;
+      <a href="#drawfile_text_style">drawfile_text_style</a> style;
+      int xsize;
+      int ysize;
+      <a href="os.html#os_coord">os_coord</a> base;
+   }
+   drawfile_trfm_text_base;</pre>
+
+<h3 id="drawfile_trfm_text">drawfile_trfm_text</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> bbox;
+      <a href="os.html#os_trfm">os_trfm</a> trfm;
+      <a href="#drawfile_text_flags">drawfile_text_flags</a> flags;
+      <a href="os.html#os_colour">os_colour</a> fill;
+      <a href="os.html#os_colour">os_colour</a> bg_hint;
+      <a href="#drawfile_text_style">drawfile_text_style</a> style;
+      int xsize;
+      int ysize;
+      <a href="os.html#os_coord">os_coord</a> base;
+      char text [...];
+   }
+   drawfile_trfm_text;</pre>
+
+<h3 id="drawfile_TRFM_SPRITE_MEMBERS">drawfile_TRFM_SPRITE_MEMBERS</h3>
+<pre>#define drawfile_TRFM_SPRITE_MEMBERS \
+   <a href="os.html#os_box">os_box</a> bbox; \
+   <a href="os.html#os_trfm">os_trfm</a> trfm; \
+   <a href="osspriteop.html#osspriteop_header">osspriteop_header</a> header;
+</pre>
+
+<h3 id="drawfile_trfm_sprite_base">drawfile_trfm_sprite_base</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> bbox;
+      <a href="os.html#os_trfm">os_trfm</a> trfm;
+      <a href="osspriteop.html#osspriteop_header">osspriteop_header</a> header;
+   }
+   drawfile_trfm_sprite_base;</pre>
+
+<h3 id="drawfile_trfm_sprite">drawfile_trfm_sprite</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> bbox;
+      <a href="os.html#os_trfm">os_trfm</a> trfm;
+      <a href="osspriteop.html#osspriteop_header">osspriteop_header</a> header;
+      byte data [...];
+   }
+   drawfile_trfm_sprite;</pre>
+
+<h3 id="drawfile_jpeg">drawfile_jpeg</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> bbox;
+      int width;
+      int height;
+      int xdpi;
+      int ydpi;
+      <a href="os.html#os_trfm">os_trfm</a> trfm;
+      int len;
+      <a href="jpeg.html#jpeg_image">jpeg_image</a> image;
+   }
+   drawfile_jpeg;</pre>
+
+<h3 id="drawfile_object">drawfile_object</h3>
+<pre>typedef struct
+   {  <a href="#drawfile_type">drawfile_type</a> type;
+      int size;
+      union
+      {  <a href="#drawfile_font_table">drawfile_font_table</a> font_table;
+         <a href="#drawfile_text">drawfile_text</a> text;
+         <a href="#drawfile_path">drawfile_path</a> path;
+         <a href="#drawfile_path_with_pattern">drawfile_path_with_pattern</a> path_with_pattern;
+         <a href="#drawfile_sprite">drawfile_sprite</a> sprite;
+         <a href="#drawfile_group">drawfile_group</a> group;
+         <a href="#drawfile_tagged">drawfile_tagged</a> tagged;
+         <a href="#drawfile_text_column">drawfile_text_column</a> text_column;
+         <a href="#drawfile_text_area">drawfile_text_area</a> text_area;
+         <a href="#drawfile_options">drawfile_options</a> options;
+         <a href="#drawfile_trfm_text">drawfile_trfm_text</a> trfm_text;
+         <a href="#drawfile_trfm_sprite">drawfile_trfm_sprite</a> trfm_sprite;
+         <a href="#drawfile_jpeg">drawfile_jpeg</a> jpeg;
+      }
+      data;
+   }
+   drawfile_object;</pre>
+
+<p>This type is used to declare pointers rather than objects</p>
+
+<h3 id="drawfile_DIAGRAM_MEMBERS">drawfile_DIAGRAM_MEMBERS</h3>
+<pre>#define drawfile_DIAGRAM_MEMBERS \
+   char tag [4]; \
+   int major_version; \
+   int minor_version; \
+   char source [12]; \
+   <a href="os.html#os_box">os_box</a> bbox;
+</pre>
+
+<h3 id="drawfile_diagram_base">drawfile_diagram_base</h3>
+<pre>typedef struct
+   {  char tag [4];
+      int major_version;
+      int minor_version;
+      char source [12];
+      <a href="os.html#os_box">os_box</a> bbox;
+   }
+   drawfile_diagram_base;</pre>
+
+
+Fields:	tag - Draw <h3 id="drawfile_diagram">drawfile_diagram</h3>
+<pre>typedef struct
+   {  char tag [4];
+      int major_version;
+      int minor_version;
+      char source [12];
+      <a href="os.html#os_box">os_box</a> bbox;
+      <a href="#drawfile_object">drawfile_object</a> objects [...];
+   }
+   drawfile_diagram;</pre>
+
+
+Fields:	tag - Draw <h3 id="drawfile_bbox_flags">drawfile_bbox_flags</h3>
+<pre>typedef bits drawfile_bbox_flags;</pre>
+
+<h3 id="drawfile_render_state">drawfile_render_state</h3>
+<pre>typedef struct
+   {  <a href="#drawfile_object">drawfile_object</a> *object;
+      <a href="#drawfile_diagram">drawfile_diagram</a> *diagram;
+      <a href="#drawfile_object">drawfile_object</a> *font_table;
+      <a href="#drawfile_render_flags">drawfile_render_flags</a> flags;
+      <a href="os.html#os_trfm">os_trfm</a> *trfm;
+      <a href="os.html#os_box">os_box</a> *clip;
+      int flatness;
+      <a href="os.html#os_error">os_error</a> *error;
+      <a href="osspriteop.html#osspriteop_colour_mapping">osspriteop_colour_mapping</a> *mapping;
+   }
+   drawfile_render_state;</pre>
+
+
+Fields:	flags - Flags as passed to DrawFile_Render
+ 	mapping - RISC OS 4+<h3 id="drawfile_declare_fonts_state">drawfile_declare_fonts_state</h3>
+<pre>typedef struct
+   {  <a href="#drawfile_object">drawfile_object</a> *object;
+      <a href="#drawfile_diagram">drawfile_diagram</a> *diagram;
+      <a href="#drawfile_object">drawfile_object</a> *font_table;
+      <a href="#drawfile_declare_fonts_flags">drawfile_declare_fonts_flags</a> flags;
+      <a href="os.html#os_error">os_error</a> *error;
+   }
+   drawfile_declare_fonts_state;</pre>
+
+<p>Used by Service_DrawObjectDeclareFonts</p>
+
+<h3 id="error_DRAW_FILE_NOT_DRAW">error_DRAW_FILE_NOT_DRAW</h3>
+<pre>#define error_DRAW_FILE_NOT_DRAW 0x20C00u</pre>
+
+<h3 id="error_DRAW_FILE_VERSION">error_DRAW_FILE_VERSION</h3>
+<pre>#define error_DRAW_FILE_VERSION 0x20C01u</pre>
+
+<h3 id="error_DRAW_FILE_FONT_TAB">error_DRAW_FILE_FONT_TAB</h3>
+<pre>#define error_DRAW_FILE_FONT_TAB 0x20C02u</pre>
+
+<h3 id="error_DRAW_FILE_BAD_FONT_NO">error_DRAW_FILE_BAD_FONT_NO</h3>
+<pre>#define error_DRAW_FILE_BAD_FONT_NO 0x20C03u</pre>
+
+<h3 id="error_DRAW_FILE_BAD_MODE">error_DRAW_FILE_BAD_MODE</h3>
+<pre>#define error_DRAW_FILE_BAD_MODE 0x20C04u</pre>
+
+<h3 id="error_DRAW_FILE_BAD_FILE">error_DRAW_FILE_BAD_FILE</h3>
+<pre>#define error_DRAW_FILE_BAD_FILE 0x20C05u</pre>
+
+<h3 id="error_DRAW_FILE_BAD_GROUP">error_DRAW_FILE_BAD_GROUP</h3>
+<pre>#define error_DRAW_FILE_BAD_GROUP 0x20C06u</pre>
+
+<h3 id="error_DRAW_FILE_BAD_TAG">error_DRAW_FILE_BAD_TAG</h3>
+<pre>#define error_DRAW_FILE_BAD_TAG 0x20C07u</pre>
+
+<h3 id="error_DRAW_FILE_SYNTAX">error_DRAW_FILE_SYNTAX</h3>
+<pre>#define error_DRAW_FILE_SYNTAX 0x20C08u</pre>
+
+<h3 id="error_DRAW_FILE_FONT_NO">error_DRAW_FILE_FONT_NO</h3>
+<pre>#define error_DRAW_FILE_FONT_NO 0x20C09u</pre>
+
+<h3 id="error_DRAW_FILE_AREA_VER">error_DRAW_FILE_AREA_VER</h3>
+<pre>#define error_DRAW_FILE_AREA_VER 0x20C0Au</pre>
+
+<h3 id="error_DRAW_FILE_NO_AREA_VER">error_DRAW_FILE_NO_AREA_VER</h3>
+<pre>#define error_DRAW_FILE_NO_AREA_VER 0x20C0Bu</pre>
+
+<h3 id="drawfile_TYPE_FONT_TABLE">drawfile_TYPE_FONT_TABLE</h3>
+<pre>#define drawfile_TYPE_FONT_TABLE ((<a href="#drawfile_type">drawfile_type</a>) 0x0u)</pre>
+
+<h3 id="drawfile_TYPE_TEXT">drawfile_TYPE_TEXT</h3>
+<pre>#define drawfile_TYPE_TEXT ((<a href="#drawfile_type">drawfile_type</a>) 0x1u)</pre>
+
+<h3 id="drawfile_TYPE_PATH">drawfile_TYPE_PATH</h3>
+<pre>#define drawfile_TYPE_PATH ((<a href="#drawfile_type">drawfile_type</a>) 0x2u)</pre>
+
+<h3 id="drawfile_TYPE_SPRITE">drawfile_TYPE_SPRITE</h3>
+<pre>#define drawfile_TYPE_SPRITE ((<a href="#drawfile_type">drawfile_type</a>) 0x5u)</pre>
+
+<h3 id="drawfile_TYPE_GROUP">drawfile_TYPE_GROUP</h3>
+<pre>#define drawfile_TYPE_GROUP ((<a href="#drawfile_type">drawfile_type</a>) 0x6u)</pre>
+
+<h3 id="drawfile_TYPE_TAGGED">drawfile_TYPE_TAGGED</h3>
+<pre>#define drawfile_TYPE_TAGGED ((<a href="#drawfile_type">drawfile_type</a>) 0x7u)</pre>
+
+<h3 id="drawfile_TYPE_TEXT_AREA">drawfile_TYPE_TEXT_AREA</h3>
+<pre>#define drawfile_TYPE_TEXT_AREA ((<a href="#drawfile_type">drawfile_type</a>) 0x9u)</pre>
+
+<h3 id="drawfile_TYPE_TEXT_COLUMN">drawfile_TYPE_TEXT_COLUMN</h3>
+<pre>#define drawfile_TYPE_TEXT_COLUMN ((<a href="#drawfile_type">drawfile_type</a>) 0xAu)</pre>
+
+<h3 id="drawfile_TYPE_OPTIONS">drawfile_TYPE_OPTIONS</h3>
+<pre>#define drawfile_TYPE_OPTIONS ((<a href="#drawfile_type">drawfile_type</a>) 0xBu)</pre>
+
+<h3 id="drawfile_TYPE_TRFM_TEXT">drawfile_TYPE_TRFM_TEXT</h3>
+<pre>#define drawfile_TYPE_TRFM_TEXT ((<a href="#drawfile_type">drawfile_type</a>) 0xCu)</pre>
+
+<h3 id="drawfile_TYPE_TRFM_SPRITE">drawfile_TYPE_TRFM_SPRITE</h3>
+<pre>#define drawfile_TYPE_TRFM_SPRITE ((<a href="#drawfile_type">drawfile_type</a>) 0xDu)</pre>
+
+<h3 id="drawfile_TYPE_JPEG">drawfile_TYPE_JPEG</h3>
+<pre>#define drawfile_TYPE_JPEG ((<a href="#drawfile_type">drawfile_type</a>) 0x10u)</pre>
+
+<h3 id="drawfile_PATH_MITRED">drawfile_PATH_MITRED</h3>
+<pre>#define drawfile_PATH_MITRED ((<a href="#drawfile_path_style_flags">drawfile_path_style_flags</a>) 0x0u)</pre>
+
+<h3 id="drawfile_PATH_ROUND">drawfile_PATH_ROUND</h3>
+<pre>#define drawfile_PATH_ROUND ((<a href="#drawfile_path_style_flags">drawfile_path_style_flags</a>) 0x1u)</pre>
+
+<h3 id="drawfile_PATH_BEVELLED">drawfile_PATH_BEVELLED</h3>
+<pre>#define drawfile_PATH_BEVELLED ((<a href="#drawfile_path_style_flags">drawfile_path_style_flags</a>) 0x2u)</pre>
+
+<h3 id="drawfile_PATH_BUTT">drawfile_PATH_BUTT</h3>
+<pre>#define drawfile_PATH_BUTT ((<a href="#drawfile_path_style_flags">drawfile_path_style_flags</a>) 0x0u)</pre>
+
+<h3 id="drawfile_PATH_SQUARE">drawfile_PATH_SQUARE</h3>
+<pre>#define drawfile_PATH_SQUARE ((<a href="#drawfile_path_style_flags">drawfile_path_style_flags</a>) 0x2u)</pre>
+
+<h3 id="drawfile_PATH_TRIANGLE">drawfile_PATH_TRIANGLE</h3>
+<pre>#define drawfile_PATH_TRIANGLE ((<a href="#drawfile_path_style_flags">drawfile_path_style_flags</a>) 0x3u)</pre>
+
+<h3 id="drawfile_PATH_JOIN_SHIFT">drawfile_PATH_JOIN_SHIFT</h3>
+<pre>#define drawfile_PATH_JOIN_SHIFT 0</pre>
+
+<h3 id="drawfile_PATH_JOIN">drawfile_PATH_JOIN</h3>
+<pre>#define drawfile_PATH_JOIN ((<a href="#drawfile_path_style_flags">drawfile_path_style_flags</a>) 0x3u)</pre>
+
+<h3 id="drawfile_PATH_END_SHIFT">drawfile_PATH_END_SHIFT</h3>
+<pre>#define drawfile_PATH_END_SHIFT 2</pre>
+
+<h3 id="drawfile_PATH_END">drawfile_PATH_END</h3>
+<pre>#define drawfile_PATH_END ((<a href="#drawfile_path_style_flags">drawfile_path_style_flags</a>) 0xCu)</pre>
+
+<h3 id="drawfile_PATH_START_SHIFT">drawfile_PATH_START_SHIFT</h3>
+<pre>#define drawfile_PATH_START_SHIFT 4</pre>
+
+<h3 id="drawfile_PATH_START">drawfile_PATH_START</h3>
+<pre>#define drawfile_PATH_START ((<a href="#drawfile_path_style_flags">drawfile_path_style_flags</a>) 0x30u)</pre>
+
+<h3 id="drawfile_PATH_WINDING_EVEN_ODD">drawfile_PATH_WINDING_EVEN_ODD</h3>
+<pre>#define drawfile_PATH_WINDING_EVEN_ODD ((<a href="#drawfile_path_style_flags">drawfile_path_style_flags</a>) 0x40u)</pre>
+
+<h3 id="drawfile_PATH_DASHED">drawfile_PATH_DASHED</h3>
+<pre>#define drawfile_PATH_DASHED ((<a href="#drawfile_path_style_flags">drawfile_path_style_flags</a>) 0x80u)</pre>
+
+<h3 id="drawfile_PATH_CAP_WIDTH_SHIFT">drawfile_PATH_CAP_WIDTH_SHIFT</h3>
+<pre>#define drawfile_PATH_CAP_WIDTH_SHIFT 16</pre>
+
+<h3 id="drawfile_PATH_CAP_WIDTH">drawfile_PATH_CAP_WIDTH</h3>
+<pre>#define drawfile_PATH_CAP_WIDTH ((<a href="#drawfile_path_style_flags">drawfile_path_style_flags</a>) 0xFF0000u)</pre>
+
+<h3 id="drawfile_PATH_CAP_LENGTH_SHIFT">drawfile_PATH_CAP_LENGTH_SHIFT</h3>
+<pre>#define drawfile_PATH_CAP_LENGTH_SHIFT 24</pre>
+
+<h3 id="drawfile_PATH_CAP_LENGTH">drawfile_PATH_CAP_LENGTH</h3>
+<pre>#define drawfile_PATH_CAP_LENGTH ((<a href="#drawfile_path_style_flags">drawfile_path_style_flags</a>) 0xFF000000u)</pre>
+
+<h3 id="drawfile_TEXT_KERN">drawfile_TEXT_KERN</h3>
+<pre>#define drawfile_TEXT_KERN ((<a href="#drawfile_text_flags">drawfile_text_flags</a>) 0x1u)</pre>
+
+<h3 id="drawfile_TEXT_RIGHT_TO_LEFT">drawfile_TEXT_RIGHT_TO_LEFT</h3>
+<pre>#define drawfile_TEXT_RIGHT_TO_LEFT ((<a href="#drawfile_text_flags">drawfile_text_flags</a>) 0x2u)</pre>
+
+<h3 id="drawfile_TEXT_UNDERLINE">drawfile_TEXT_UNDERLINE</h3>
+<pre>#define drawfile_TEXT_UNDERLINE ((<a href="#drawfile_text_flags">drawfile_text_flags</a>) 0x4u)</pre>
+
+<h3 id="drawfile_RENDER_BBOXES">drawfile_RENDER_BBOXES</h3>
+<pre>#define drawfile_RENDER_BBOXES ((<a href="#drawfile_render_flags">drawfile_render_flags</a>) 0x1u)</pre>
+
+<h3 id="drawfile_RENDER_SUPPRESS">drawfile_RENDER_SUPPRESS</h3>
+<pre>#define drawfile_RENDER_SUPPRESS ((<a href="#drawfile_render_flags">drawfile_render_flags</a>) 0x2u)</pre>
+
+<h3 id="drawfile_RENDER_GIVEN_FLATNESS">drawfile_RENDER_GIVEN_FLATNESS</h3>
+<pre>#define drawfile_RENDER_GIVEN_FLATNESS ((<a href="#drawfile_render_flags">drawfile_render_flags</a>) 0x4u)</pre>
+
+<h3 id="drawfile_RENDER_GIVEN_COLOUR_MAPPING">drawfile_RENDER_GIVEN_COLOUR_MAPPING</h3>
+<pre>#define drawfile_RENDER_GIVEN_COLOUR_MAPPING ((<a href="#drawfile_render_flags">drawfile_render_flags</a>) 0x8u)</pre>
+
+<h3 id="drawfile_NO_DOWNLOAD">drawfile_NO_DOWNLOAD</h3>
+<pre>#define drawfile_NO_DOWNLOAD ((<a href="#drawfile_declare_fonts_flags">drawfile_declare_fonts_flags</a>) 0x1u)</pre>
+
+<h3 id="drawfile_PAPER_SHOW">drawfile_PAPER_SHOW</h3>
+<pre>#define drawfile_PAPER_SHOW ((<a href="#drawfile_paper_options">drawfile_paper_options</a>) 0x1u)</pre>
+
+<h3 id="drawfile_PAPER_LANDSCAPE">drawfile_PAPER_LANDSCAPE</h3>
+<pre>#define drawfile_PAPER_LANDSCAPE ((<a href="#drawfile_paper_options">drawfile_paper_options</a>) 0x10u)</pre>
+
+<h3 id="drawfile_PAPER_DEFAULT">drawfile_PAPER_DEFAULT</h3>
+<pre>#define drawfile_PAPER_DEFAULT ((<a href="#drawfile_paper_options">drawfile_paper_options</a>) 0x100u)</pre>
+
+<h3 id="drawfile_ENTRY_MODE_LINE">drawfile_ENTRY_MODE_LINE</h3>
+<pre>#define drawfile_ENTRY_MODE_LINE ((<a href="#drawfile_entry_mode">drawfile_entry_mode</a>) 0x1u)</pre>
+
+<h3 id="drawfile_ENTRY_MODE_CLOSED_LINE">drawfile_ENTRY_MODE_CLOSED_LINE</h3>
+<pre>#define drawfile_ENTRY_MODE_CLOSED_LINE ((<a href="#drawfile_entry_mode">drawfile_entry_mode</a>) 0x2u)</pre>
+
+<h3 id="drawfile_ENTRY_MODE_CURVE">drawfile_ENTRY_MODE_CURVE</h3>
+<pre>#define drawfile_ENTRY_MODE_CURVE ((<a href="#drawfile_entry_mode">drawfile_entry_mode</a>) 0x4u)</pre>
+
+<h3 id="drawfile_ENTRY_MODE_CLOSED_CURVE">drawfile_ENTRY_MODE_CLOSED_CURVE</h3>
+<pre>#define drawfile_ENTRY_MODE_CLOSED_CURVE ((<a href="#drawfile_entry_mode">drawfile_entry_mode</a>) 0x8u)</pre>
+
+<h3 id="drawfile_ENTRY_MODE_RECTANGLE">drawfile_ENTRY_MODE_RECTANGLE</h3>
+<pre>#define drawfile_ENTRY_MODE_RECTANGLE ((<a href="#drawfile_entry_mode">drawfile_entry_mode</a>) 0x10u)</pre>
+
+<h3 id="drawfile_ENTRY_MODE_ELLIPSE">drawfile_ENTRY_MODE_ELLIPSE</h3>
+<pre>#define drawfile_ENTRY_MODE_ELLIPSE ((<a href="#drawfile_entry_mode">drawfile_entry_mode</a>) 0x20u)</pre>
+
+<h3 id="drawfile_ENTRY_MODE_TEXT_LINE">drawfile_ENTRY_MODE_TEXT_LINE</h3>
+<pre>#define drawfile_ENTRY_MODE_TEXT_LINE ((<a href="#drawfile_entry_mode">drawfile_entry_mode</a>) 0x40u)</pre>
+
+<h3 id="drawfile_ENTRY_MODE_SELECT">drawfile_ENTRY_MODE_SELECT</h3>
+<pre>#define drawfile_ENTRY_MODE_SELECT ((<a href="#drawfile_entry_mode">drawfile_entry_mode</a>) 0x80u)</pre>
+
+<h3 id="xdrawfile_render">xdrawfile_render</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdrawfile_render (<a href="#drawfile_render_flags">drawfile_render_flags</a> flags,
+      <a href="#drawfile_diagram">drawfile_diagram</a> const *diagram,
+      int size,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      <a href="os.html#os_box">os_box</a> const *clip,
+      int flatness);</pre>
+<p>Renders given DrawFile</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>diagram</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>clip</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>flatness</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="drawfile_render">drawfile_render</h3>
+<pre>extern void drawfile_render (<a href="#drawfile_render_flags">drawfile_render_flags</a> flags,
+      <a href="#drawfile_diagram">drawfile_diagram</a> const *diagram,
+      int size,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      <a href="os.html#os_box">os_box</a> const *clip,
+      int flatness);</pre>
+<p>Renders given DrawFile</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>diagram</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>clip</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>flatness</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xdrawfile_render_mapped">xdrawfile_render_mapped</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdrawfile_render_mapped (<a href="#drawfile_render_flags">drawfile_render_flags</a> flags,
+      <a href="#drawfile_diagram">drawfile_diagram</a> const *diagram,
+      int size,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      <a href="os.html#os_box">os_box</a> const *clip,
+      int flatness,
+      <a href="osspriteop.html#osspriteop_colour_mapping">osspriteop_colour_mapping</a> const *mapping);</pre>
+<p>Renders given DrawFile with colour mapping - RISC OS 4, RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>diagram</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>clip</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>flatness</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>mapping</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="drawfile_render_mapped">drawfile_render_mapped</h3>
+<pre>extern void drawfile_render_mapped (<a href="#drawfile_render_flags">drawfile_render_flags</a> flags,
+      <a href="#drawfile_diagram">drawfile_diagram</a> const *diagram,
+      int size,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      <a href="os.html#os_box">os_box</a> const *clip,
+      int flatness,
+      <a href="osspriteop.html#osspriteop_colour_mapping">osspriteop_colour_mapping</a> const *mapping);</pre>
+<p>Renders given DrawFile with colour mapping - RISC OS 4, RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>diagram</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>clip</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>flatness</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>mapping</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xdrawfile_bbox">xdrawfile_bbox</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdrawfile_bbox (<a href="#drawfile_bbox_flags">drawfile_bbox_flags</a> flags,
+      <a href="#drawfile_diagram">drawfile_diagram</a> const *diagram,
+      int size,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      <a href="os.html#os_box">os_box</a> *bbox);</pre>
+<p>Returns a bbox for given DrawFile.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>diagram</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bbox</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="drawfile_bbox">drawfile_bbox</h3>
+<pre>extern void drawfile_bbox (<a href="#drawfile_bbox_flags">drawfile_bbox_flags</a> flags,
+      <a href="#drawfile_diagram">drawfile_diagram</a> const *diagram,
+      int size,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      <a href="os.html#os_box">os_box</a> *bbox);</pre>
+<p>Returns a bbox for given DrawFile.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>diagram</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bbox</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xdrawfile_declare_fonts">xdrawfile_declare_fonts</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdrawfile_declare_fonts (<a href="#drawfile_declare_fonts_flags">drawfile_declare_fonts_flags</a> flags,
+      <a href="#drawfile_diagram">drawfile_diagram</a> const *diagram,
+      int size);</pre>
+<p>Declares the fonts used in a draw file.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>diagram</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="drawfile_declare_fonts">drawfile_declare_fonts</h3>
+<pre>extern void drawfile_declare_fonts (<a href="#drawfile_declare_fonts_flags">drawfile_declare_fonts_flags</a> flags,
+      <a href="#drawfile_diagram">drawfile_diagram</a> const *diagram,
+      int size);</pre>
+<p>Declares the fonts used in a draw file.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>diagram</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xservice_draw_object_render">xservice_draw_object_render</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_draw_object_render (<a href="#drawfile_type">drawfile_type</a> type,
+      <a href="#drawfile_render_state">drawfile_render_state</a> *state,
+      osbool *unclaimed);</pre>
+<p>Render unknown Draw object in Draw file.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>state</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="service_draw_object_render">service_draw_object_render</h3>
+<pre>extern osbool service_draw_object_render (<a href="#drawfile_type">drawfile_type</a> type,
+      <a href="#drawfile_render_state">drawfile_render_state</a> *state);</pre>
+<p>Render unknown Draw object in Draw file.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>state</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_draw_object_declare_fonts">xservice_draw_object_declare_fonts</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_draw_object_declare_fonts (<a href="#drawfile_type">drawfile_type</a> type,
+      <a href="#drawfile_declare_fonts_state">drawfile_declare_fonts_state</a> *state,
+      osbool *unclaimed);</pre>
+<p>Declare fonts for unknown Draw object in Draw file.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>state</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="service_draw_object_declare_fonts">service_draw_object_declare_fonts</h3>
+<pre>extern osbool service_draw_object_declare_fonts (<a href="#drawfile_type">drawfile_type</a> type,
+      <a href="#drawfile_declare_fonts_state">drawfile_declare_fonts_state</a> *state);</pre>
+<p>Declare fonts for unknown Draw object in Draw file.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>state</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

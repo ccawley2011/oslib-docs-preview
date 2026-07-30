@@ -1,0 +1,670 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; CompressJPEG</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>CompressJPEG</h2>
+
+<pre>#include "oslib/compressjpeg.h"</pre>
+
+<h3 id="compressjpeg_tag">compressjpeg_tag</h3>
+<pre>typedef struct {...} *compressjpeg_tag;</pre>
+
+<h3 id="compressjpeg_parameters">compressjpeg_parameters</h3>
+<pre>typedef struct
+   {  int width;
+      int height;
+      int quality;
+      int bytes_per_pixel;
+      int xdpi;
+      int ydpi;
+   }
+   compressjpeg_parameters;</pre>
+
+<h3 id="compressjpeg_SCAN_DESCRIPTION_MEMBERS">compressjpeg_SCAN_DESCRIPTION_MEMBERS</h3>
+<pre>#define compressjpeg_SCAN_DESCRIPTION_MEMBERS \
+   int scan_count;
+</pre>
+
+<h3 id="compressjpeg_scan_description_base">compressjpeg_scan_description_base</h3>
+<pre>typedef struct
+   {  int scan_count;
+   }
+   compressjpeg_scan_description_base;</pre>
+
+<h3 id="compressjpeg_scan_description">compressjpeg_scan_description</h3>
+<pre>typedef struct
+   {  int scan_count;
+      struct
+      {  int components;
+         int r;
+         int g;
+         int b;
+         int ss;
+         int se;
+         int ah;
+         int al;
+      }
+      scan_data [...];
+   }
+   compressjpeg_scan_description;</pre>
+
+<h3 id="compressjpeg_comment_flags">compressjpeg_comment_flags</h3>
+<pre>typedef bits compressjpeg_comment_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#compressjpeg_CONTROL_TERMINATED">compressjpeg_CONTROL_TERMINATED</a></dd>
+</dl>
+
+<h3 id="compressjpeg_write_line_flags">compressjpeg_write_line_flags</h3>
+<pre>typedef bits compressjpeg_write_line_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#compressjpeg_SOURCE_TYPE">compressjpeg_SOURCE_TYPE</a></dd>
+<dd><a href="#compressjpeg_SOURCE_TYPE1_BPP">compressjpeg_SOURCE_TYPE1_BPP</a></dd>
+<dd><a href="#compressjpeg_SOURCE_TYPE2_BPP">compressjpeg_SOURCE_TYPE2_BPP</a></dd>
+<dd><a href="#compressjpeg_SOURCE_TYPE4_BPP">compressjpeg_SOURCE_TYPE4_BPP</a></dd>
+<dd><a href="#compressjpeg_SOURCE_TYPE8_BPP">compressjpeg_SOURCE_TYPE8_BPP</a></dd>
+<dd><a href="#compressjpeg_SOURCE_TYPE16BPP">compressjpeg_SOURCE_TYPE16BPP</a></dd>
+<dd><a href="#compressjpeg_SOURCE_TYPE32BPP">compressjpeg_SOURCE_TYPE32BPP</a></dd>
+<dd><a href="#compressjpeg_SOURCE_TYPE_RGB_TRIPLES">compressjpeg_SOURCE_TYPE_RGB_TRIPLES</a></dd>
+<dd><a href="#compressjpeg_HAS_DOUBLE_ENTRIES">compressjpeg_HAS_DOUBLE_ENTRIES</a></dd>
+<dd><a href="#compressjpeg_IGNORE_HIGH_BYTE">compressjpeg_IGNORE_HIGH_BYTE</a></dd>
+<dd><a href="#compressjpeg_IS_RGB">compressjpeg_IS_RGB</a></dd>
+</dl>
+
+<h3 id="compressjpeg_transcode_flags">compressjpeg_transcode_flags</h3>
+<pre>typedef bits compressjpeg_transcode_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#compressjpeg_GENERATE_PROGRESSIVE">compressjpeg_GENERATE_PROGRESSIVE</a></dd>
+<dd><a href="#compressjpeg_OPERATION_ON_UNKNOWNS">compressjpeg_OPERATION_ON_UNKNOWNS</a></dd>
+<dd><a href="#compressjpeg_TRANSFORMATION_TYPE">compressjpeg_TRANSFORMATION_TYPE</a></dd>
+<dd><a href="#compressjpeg_TRIM_EDGES">compressjpeg_TRIM_EDGES</a></dd>
+<dd><a href="#compressjpeg_GENERATE_GREYSCALE">compressjpeg_GENERATE_GREYSCALE</a></dd>
+<dd><a href="#compressjpeg_OPTIMISE_FOR_SMALLER">compressjpeg_OPTIMISE_FOR_SMALLER</a></dd>
+<dd><a href="#compressjpeg_COPY_NO_ADDITIONAL">compressjpeg_COPY_NO_ADDITIONAL</a></dd>
+<dd><a href="#compressjpeg_COPY_COMMENTS">compressjpeg_COPY_COMMENTS</a></dd>
+<dd><a href="#compressjpeg_COPY_ALL_ELEMENTS">compressjpeg_COPY_ALL_ELEMENTS</a></dd>
+<dd><a href="#compressjpeg_NO_TRANSFORMATION">compressjpeg_NO_TRANSFORMATION</a></dd>
+<dd><a href="#compressjpeg_FLIP_HORIZONTALLY">compressjpeg_FLIP_HORIZONTALLY</a></dd>
+<dd><a href="#compressjpeg_FLIP_VERTICALLY">compressjpeg_FLIP_VERTICALLY</a></dd>
+<dd><a href="#compressjpeg_ROTATE90_CLOCKWISE">compressjpeg_ROTATE90_CLOCKWISE</a></dd>
+<dd><a href="#compressjpeg_ROTATE180">compressjpeg_ROTATE180</a></dd>
+<dd><a href="#compressjpeg_ROTATE90_ANTI_CLOCKWISE">compressjpeg_ROTATE90_ANTI_CLOCKWISE</a></dd>
+<dd><a href="#compressjpeg_TRANSPOSE">compressjpeg_TRANSPOSE</a></dd>
+<dd><a href="#compressjpeg_TRANSVERSE_TRANSPOSE">compressjpeg_TRANSVERSE_TRANSPOSE</a></dd>
+</dl>
+
+<h3 id="compressjpeg_CONTROL_TERMINATED">compressjpeg_CONTROL_TERMINATED</h3>
+<pre>#define compressjpeg_CONTROL_TERMINATED ((<a href="#compressjpeg_comment_flags">compressjpeg_comment_flags</a>) 0x1u)</pre>
+
+<h3 id="compressjpeg_SOURCE_TYPE">compressjpeg_SOURCE_TYPE</h3>
+<pre>#define compressjpeg_SOURCE_TYPE ((<a href="#compressjpeg_write_line_flags">compressjpeg_write_line_flags</a>) 0x7u)</pre>
+
+<h3 id="compressjpeg_SOURCE_TYPE1_BPP">compressjpeg_SOURCE_TYPE1_BPP</h3>
+<pre>#define compressjpeg_SOURCE_TYPE1_BPP ((<a href="#compressjpeg_write_line_flags">compressjpeg_write_line_flags</a>) 0x0u)</pre>
+
+<h3 id="compressjpeg_SOURCE_TYPE2_BPP">compressjpeg_SOURCE_TYPE2_BPP</h3>
+<pre>#define compressjpeg_SOURCE_TYPE2_BPP ((<a href="#compressjpeg_write_line_flags">compressjpeg_write_line_flags</a>) 0x1u)</pre>
+
+<h3 id="compressjpeg_SOURCE_TYPE4_BPP">compressjpeg_SOURCE_TYPE4_BPP</h3>
+<pre>#define compressjpeg_SOURCE_TYPE4_BPP ((<a href="#compressjpeg_write_line_flags">compressjpeg_write_line_flags</a>) 0x2u)</pre>
+
+<h3 id="compressjpeg_SOURCE_TYPE8_BPP">compressjpeg_SOURCE_TYPE8_BPP</h3>
+<pre>#define compressjpeg_SOURCE_TYPE8_BPP ((<a href="#compressjpeg_write_line_flags">compressjpeg_write_line_flags</a>) 0x3u)</pre>
+
+<h3 id="compressjpeg_SOURCE_TYPE16BPP">compressjpeg_SOURCE_TYPE16BPP</h3>
+<pre>#define compressjpeg_SOURCE_TYPE16BPP ((<a href="#compressjpeg_write_line_flags">compressjpeg_write_line_flags</a>) 0x4u)</pre>
+
+<h3 id="compressjpeg_SOURCE_TYPE32BPP">compressjpeg_SOURCE_TYPE32BPP</h3>
+<pre>#define compressjpeg_SOURCE_TYPE32BPP ((<a href="#compressjpeg_write_line_flags">compressjpeg_write_line_flags</a>) 0x5u)</pre>
+
+<h3 id="compressjpeg_SOURCE_TYPE_RGB_TRIPLES">compressjpeg_SOURCE_TYPE_RGB_TRIPLES</h3>
+<pre>#define compressjpeg_SOURCE_TYPE_RGB_TRIPLES ((<a href="#compressjpeg_write_line_flags">compressjpeg_write_line_flags</a>) 0x7u)</pre>
+
+<h3 id="compressjpeg_HAS_DOUBLE_ENTRIES">compressjpeg_HAS_DOUBLE_ENTRIES</h3>
+<pre>#define compressjpeg_HAS_DOUBLE_ENTRIES ((<a href="#compressjpeg_write_line_flags">compressjpeg_write_line_flags</a>) 0x8u)</pre>
+
+<h3 id="compressjpeg_IGNORE_HIGH_BYTE">compressjpeg_IGNORE_HIGH_BYTE</h3>
+<pre>#define compressjpeg_IGNORE_HIGH_BYTE ((<a href="#compressjpeg_write_line_flags">compressjpeg_write_line_flags</a>) 0x10u)</pre>
+
+<h3 id="compressjpeg_IS_RGB">compressjpeg_IS_RGB</h3>
+<pre>#define compressjpeg_IS_RGB ((<a href="#compressjpeg_write_line_flags">compressjpeg_write_line_flags</a>) 0x20u)</pre>
+
+<h3 id="compressjpeg_GENERATE_PROGRESSIVE">compressjpeg_GENERATE_PROGRESSIVE</h3>
+<pre>#define compressjpeg_GENERATE_PROGRESSIVE ((<a href="#compressjpeg_transcode_flags">compressjpeg_transcode_flags</a>) 0x1u)</pre>
+
+<h3 id="compressjpeg_OPERATION_ON_UNKNOWNS">compressjpeg_OPERATION_ON_UNKNOWNS</h3>
+<pre>#define compressjpeg_OPERATION_ON_UNKNOWNS ((<a href="#compressjpeg_transcode_flags">compressjpeg_transcode_flags</a>) 0x6u)</pre>
+
+<h3 id="compressjpeg_OPERATION_ON_UNKNOWNS_SHIFT">compressjpeg_OPERATION_ON_UNKNOWNS_SHIFT</h3>
+<pre>#define compressjpeg_OPERATION_ON_UNKNOWNS_SHIFT 1</pre>
+
+<h3 id="compressjpeg_TRANSFORMATION_TYPE">compressjpeg_TRANSFORMATION_TYPE</h3>
+<pre>#define compressjpeg_TRANSFORMATION_TYPE ((<a href="#compressjpeg_transcode_flags">compressjpeg_transcode_flags</a>) 0x78u)</pre>
+
+<h3 id="compressjpeg_TRANSFORMATION_TYPE_SHIFT">compressjpeg_TRANSFORMATION_TYPE_SHIFT</h3>
+<pre>#define compressjpeg_TRANSFORMATION_TYPE_SHIFT 3</pre>
+
+<h3 id="compressjpeg_TRIM_EDGES">compressjpeg_TRIM_EDGES</h3>
+<pre>#define compressjpeg_TRIM_EDGES ((<a href="#compressjpeg_transcode_flags">compressjpeg_transcode_flags</a>) 0x80u)</pre>
+
+<h3 id="compressjpeg_GENERATE_GREYSCALE">compressjpeg_GENERATE_GREYSCALE</h3>
+<pre>#define compressjpeg_GENERATE_GREYSCALE ((<a href="#compressjpeg_transcode_flags">compressjpeg_transcode_flags</a>) 0x100u)</pre>
+
+<h3 id="compressjpeg_OPTIMISE_FOR_SMALLER">compressjpeg_OPTIMISE_FOR_SMALLER</h3>
+<pre>#define compressjpeg_OPTIMISE_FOR_SMALLER ((<a href="#compressjpeg_transcode_flags">compressjpeg_transcode_flags</a>) 0x200u)</pre>
+
+<h3 id="compressjpeg_COPY_NO_ADDITIONAL">compressjpeg_COPY_NO_ADDITIONAL</h3>
+<pre>#define compressjpeg_COPY_NO_ADDITIONAL ((<a href="#compressjpeg_transcode_flags">compressjpeg_transcode_flags</a>) 0x0u)</pre>
+
+<p>shift by CompressJPEG_OperationOnUnknownsShift</p>
+
+<h3 id="compressjpeg_COPY_COMMENTS">compressjpeg_COPY_COMMENTS</h3>
+<pre>#define compressjpeg_COPY_COMMENTS ((<a href="#compressjpeg_transcode_flags">compressjpeg_transcode_flags</a>) 0x1u)</pre>
+
+<p>shift by CompressJPEG_OperationOnUnknownsShift</p>
+
+<h3 id="compressjpeg_COPY_ALL_ELEMENTS">compressjpeg_COPY_ALL_ELEMENTS</h3>
+<pre>#define compressjpeg_COPY_ALL_ELEMENTS ((<a href="#compressjpeg_transcode_flags">compressjpeg_transcode_flags</a>) 0x3u)</pre>
+
+<p>shift by CompressJPEG_OperationOnUnknownsShift</p>
+
+<h3 id="compressjpeg_NO_TRANSFORMATION">compressjpeg_NO_TRANSFORMATION</h3>
+<pre>#define compressjpeg_NO_TRANSFORMATION ((<a href="#compressjpeg_transcode_flags">compressjpeg_transcode_flags</a>) 0x0u)</pre>
+
+<p>shift by CompressJPEG_TransformationTypeShift</p>
+
+<h3 id="compressjpeg_FLIP_HORIZONTALLY">compressjpeg_FLIP_HORIZONTALLY</h3>
+<pre>#define compressjpeg_FLIP_HORIZONTALLY ((<a href="#compressjpeg_transcode_flags">compressjpeg_transcode_flags</a>) 0x1u)</pre>
+
+<p>shift by CompressJPEG_TransformationTypeShift</p>
+
+<h3 id="compressjpeg_FLIP_VERTICALLY">compressjpeg_FLIP_VERTICALLY</h3>
+<pre>#define compressjpeg_FLIP_VERTICALLY ((<a href="#compressjpeg_transcode_flags">compressjpeg_transcode_flags</a>) 0x2u)</pre>
+
+<p>shift by CompressJPEG_TransformationTypeShift</p>
+
+<h3 id="compressjpeg_ROTATE90_CLOCKWISE">compressjpeg_ROTATE90_CLOCKWISE</h3>
+<pre>#define compressjpeg_ROTATE90_CLOCKWISE ((<a href="#compressjpeg_transcode_flags">compressjpeg_transcode_flags</a>) 0x3u)</pre>
+
+<p>shift by CompressJPEG_TransformationTypeShift</p>
+
+<h3 id="compressjpeg_ROTATE180">compressjpeg_ROTATE180</h3>
+<pre>#define compressjpeg_ROTATE180 ((<a href="#compressjpeg_transcode_flags">compressjpeg_transcode_flags</a>) 0x4u)</pre>
+
+<p>shift by CompressJPEG_TransformationTypeShift</p>
+
+<h3 id="compressjpeg_ROTATE90_ANTI_CLOCKWISE">compressjpeg_ROTATE90_ANTI_CLOCKWISE</h3>
+<pre>#define compressjpeg_ROTATE90_ANTI_CLOCKWISE ((<a href="#compressjpeg_transcode_flags">compressjpeg_transcode_flags</a>) 0x5u)</pre>
+
+<p>shift by CompressJPEG_TransformationTypeShift</p>
+
+<h3 id="compressjpeg_TRANSPOSE">compressjpeg_TRANSPOSE</h3>
+<pre>#define compressjpeg_TRANSPOSE ((<a href="#compressjpeg_transcode_flags">compressjpeg_transcode_flags</a>) 0x6u)</pre>
+
+<p>shift by CompressJPEG_TransformationTypeShift</p>
+
+<h3 id="compressjpeg_TRANSVERSE_TRANSPOSE">compressjpeg_TRANSVERSE_TRANSPOSE</h3>
+<pre>#define compressjpeg_TRANSVERSE_TRANSPOSE ((<a href="#compressjpeg_transcode_flags">compressjpeg_transcode_flags</a>) 0x7u)</pre>
+
+<p>shift by CompressJPEG_TransformationTypeShift</p>
+
+<h3 id="error_COMPRESS_JPEG_BAD_BPP">error_COMPRESS_JPEG_BAD_BPP</h3>
+<pre>#define error_COMPRESS_JPEG_BAD_BPP 0x8183C0u</pre>
+
+<h3 id="error_COMPRESS_JPEG_BAD_LINE_COUNT">error_COMPRESS_JPEG_BAD_LINE_COUNT</h3>
+<pre>#define error_COMPRESS_JPEG_BAD_LINE_COUNT 0x8183C1u</pre>
+
+<h3 id="error_COMPRESS_JPEG_BAD_BUFFER">error_COMPRESS_JPEG_BAD_BUFFER</h3>
+<pre>#define error_COMPRESS_JPEG_BAD_BUFFER 0x8183C2u</pre>
+
+<h3 id="error_COMPRESS_JPEG_BAD_SIZE">error_COMPRESS_JPEG_BAD_SIZE</h3>
+<pre>#define error_COMPRESS_JPEG_BAD_SIZE 0x8183C3u</pre>
+
+<h3 id="error_COMPRESS_JPEG_ARITH_NOT_IMPL">error_COMPRESS_JPEG_ARITH_NOT_IMPL</h3>
+<pre>#define error_COMPRESS_JPEG_ARITH_NOT_IMPL 0x81A881u</pre>
+
+<h3 id="error_COMPRESS_JPEG_BAD_ALIGN_TYPE">error_COMPRESS_JPEG_BAD_ALIGN_TYPE</h3>
+<pre>#define error_COMPRESS_JPEG_BAD_ALIGN_TYPE 0x81A882u</pre>
+
+<h3 id="error_COMPRESS_JPEG_BAD_ALLOC_CHUNK">error_COMPRESS_JPEG_BAD_ALLOC_CHUNK</h3>
+<pre>#define error_COMPRESS_JPEG_BAD_ALLOC_CHUNK 0x81A883u</pre>
+
+<h3 id="error_COMPRESS_JPEG_BAD_BUFFER_MODE">error_COMPRESS_JPEG_BAD_BUFFER_MODE</h3>
+<pre>#define error_COMPRESS_JPEG_BAD_BUFFER_MODE 0x81A884u</pre>
+
+<h3 id="error_COMPRESS_JPEG_BAD_COMPONENT_ID">error_COMPRESS_JPEG_BAD_COMPONENT_ID</h3>
+<pre>#define error_COMPRESS_JPEG_BAD_COMPONENT_ID 0x81A885u</pre>
+
+<h3 id="error_COMPRESS_JPEG_BAD_DCT_SIZE">error_COMPRESS_JPEG_BAD_DCT_SIZE</h3>
+<pre>#define error_COMPRESS_JPEG_BAD_DCT_SIZE 0x81A886u</pre>
+
+<h3 id="error_COMPRESS_JPEG_BAD_IN_COLOUR_SPACE">error_COMPRESS_JPEG_BAD_IN_COLOUR_SPACE</h3>
+<pre>#define error_COMPRESS_JPEG_BAD_IN_COLOUR_SPACE 0x81A887u</pre>
+
+<h3 id="error_COMPRESS_JPEG_BAD_KCOLOUR_SPACE">error_COMPRESS_JPEG_BAD_KCOLOUR_SPACE</h3>
+<pre>#define error_COMPRESS_JPEG_BAD_KCOLOUR_SPACE 0x81A888u</pre>
+
+<h3 id="error_COMPRESS_JPEG_BAD_LENGTH">error_COMPRESS_JPEG_BAD_LENGTH</h3>
+<pre>#define error_COMPRESS_JPEG_BAD_LENGTH 0x81A889u</pre>
+
+<h3 id="error_COMPRESS_JPEG_BAD_MCU_SIZE">error_COMPRESS_JPEG_BAD_MCU_SIZE</h3>
+<pre>#define error_COMPRESS_JPEG_BAD_MCU_SIZE 0x81A88Au</pre>
+
+<h3 id="error_COMPRESS_JPEG_BAD_POOL_ID">error_COMPRESS_JPEG_BAD_POOL_ID</h3>
+<pre>#define error_COMPRESS_JPEG_BAD_POOL_ID 0x81A88Bu</pre>
+
+<h3 id="error_COMPRESS_JPEG_BAD_PRECISION">error_COMPRESS_JPEG_BAD_PRECISION</h3>
+<pre>#define error_COMPRESS_JPEG_BAD_PRECISION 0x81A88Cu</pre>
+
+<h3 id="error_COMPRESS_JPEG_BAD_SAMPLING">error_COMPRESS_JPEG_BAD_SAMPLING</h3>
+<pre>#define error_COMPRESS_JPEG_BAD_SAMPLING 0x81A88Du</pre>
+
+<h3 id="error_COMPRESS_JPEG_BAD_STATE">error_COMPRESS_JPEG_BAD_STATE</h3>
+<pre>#define error_COMPRESS_JPEG_BAD_STATE 0x81A88Eu</pre>
+
+<h3 id="error_COMPRESS_JPEG_BAD_VIRTUAL_ACCESS">error_COMPRESS_JPEG_BAD_VIRTUAL_ACCESS</h3>
+<pre>#define error_COMPRESS_JPEG_BAD_VIRTUAL_ACCESS 0x81A88Fu</pre>
+
+<h3 id="error_COMPRESS_JPEG_BUFFER_SIZE">error_COMPRESS_JPEG_BUFFER_SIZE</h3>
+<pre>#define error_COMPRESS_JPEG_BUFFER_SIZE 0x81A890u</pre>
+
+<h3 id="error_COMPRESS_JPEG_CANT_SUSPEND">error_COMPRESS_JPEG_CANT_SUSPEND</h3>
+<pre>#define error_COMPRESS_JPEG_CANT_SUSPEND 0x81A891u</pre>
+
+<h3 id="error_COMPRESS_JPEGCCIR601_NOT_IMPL">error_COMPRESS_JPEGCCIR601_NOT_IMPL</h3>
+<pre>#define error_COMPRESS_JPEGCCIR601_NOT_IMPL 0x81A892u</pre>
+
+<h3 id="error_COMPRESS_JPEG_COMPONENT_COUNT">error_COMPRESS_JPEG_COMPONENT_COUNT</h3>
+<pre>#define error_COMPRESS_JPEG_COMPONENT_COUNT 0x81A893u</pre>
+
+<h3 id="error_COMPRESS_JPEG_CONVERSION_NOT_IMPL">error_COMPRESS_JPEG_CONVERSION_NOT_IMPL</h3>
+<pre>#define error_COMPRESS_JPEG_CONVERSION_NOT_IMPL 0x81A894u</pre>
+
+<h3 id="error_COMPRESS_JPEGDAC_INDEX">error_COMPRESS_JPEGDAC_INDEX</h3>
+<pre>#define error_COMPRESS_JPEGDAC_INDEX 0x81A895u</pre>
+
+<h3 id="error_COMPRESS_JPEGDAC_VALUE">error_COMPRESS_JPEGDAC_VALUE</h3>
+<pre>#define error_COMPRESS_JPEGDAC_VALUE 0x81A896u</pre>
+
+<h3 id="error_COMPRESS_JPEGDHT_INDEX">error_COMPRESS_JPEGDHT_INDEX</h3>
+<pre>#define error_COMPRESS_JPEGDHT_INDEX 0x81A897u</pre>
+
+<h3 id="error_COMPRESS_JPEGDQT_INDEX">error_COMPRESS_JPEGDQT_INDEX</h3>
+<pre>#define error_COMPRESS_JPEGDQT_INDEX 0x81A898u</pre>
+
+<h3 id="error_COMPRESS_JPEG_EMPTY_IMAGE">error_COMPRESS_JPEG_EMPTY_IMAGE</h3>
+<pre>#define error_COMPRESS_JPEG_EMPTY_IMAGE 0x81A899u</pre>
+
+<h3 id="error_COMPRESS_JPEGEOI_EXPECTED">error_COMPRESS_JPEGEOI_EXPECTED</h3>
+<pre>#define error_COMPRESS_JPEGEOI_EXPECTED 0x81A89Au</pre>
+
+<h3 id="error_COMPRESS_JPEG_FILE_READ">error_COMPRESS_JPEG_FILE_READ</h3>
+<pre>#define error_COMPRESS_JPEG_FILE_READ 0x81A89Bu</pre>
+
+<h3 id="error_COMPRESS_JPEG_FILE_WRITE">error_COMPRESS_JPEG_FILE_WRITE</h3>
+<pre>#define error_COMPRESS_JPEG_FILE_WRITE 0x81A89Cu</pre>
+
+<h3 id="error_COMPRESS_JPEG_FRACT_SAMPLE_NOT_IMPL">error_COMPRESS_JPEG_FRACT_SAMPLE_NOT_IMPL</h3>
+<pre>#define error_COMPRESS_JPEG_FRACT_SAMPLE_NOT_IMPL 0x81A89Du</pre>
+
+<h3 id="error_COMPRESS_JPEG_HUFF_CLEN_OVERFLOW">error_COMPRESS_JPEG_HUFF_CLEN_OVERFLOW</h3>
+<pre>#define error_COMPRESS_JPEG_HUFF_CLEN_OVERFLOW 0x81A89Eu</pre>
+
+<h3 id="error_COMPRESS_JPEG_HUFF_MISSING_CODE">error_COMPRESS_JPEG_HUFF_MISSING_CODE</h3>
+<pre>#define error_COMPRESS_JPEG_HUFF_MISSING_CODE 0x81A89Fu</pre>
+
+<h3 id="error_COMPRESS_JPEG_IMAGE_TOO_BIG">error_COMPRESS_JPEG_IMAGE_TOO_BIG</h3>
+<pre>#define error_COMPRESS_JPEG_IMAGE_TOO_BIG 0x81A8A0u</pre>
+
+<h3 id="error_COMPRESS_JPEG_INPUT_EMPTY">error_COMPRESS_JPEG_INPUT_EMPTY</h3>
+<pre>#define error_COMPRESS_JPEG_INPUT_EMPTY 0x81A8A1u</pre>
+
+<h3 id="error_COMPRESS_JPEG_INPUT_EOF">error_COMPRESS_JPEG_INPUT_EOF</h3>
+<pre>#define error_COMPRESS_JPEG_INPUT_EOF 0x81A8A2u</pre>
+
+<h3 id="error_COMPRESS_JPEG_NOT_IMPL">error_COMPRESS_JPEG_NOT_IMPL</h3>
+<pre>#define error_COMPRESS_JPEG_NOT_IMPL 0x81A8A3u</pre>
+
+<h3 id="error_COMPRESS_JPEG_NOT_COMPILED">error_COMPRESS_JPEG_NOT_COMPILED</h3>
+<pre>#define error_COMPRESS_JPEG_NOT_COMPILED 0x81A8A4u</pre>
+
+<h3 id="error_COMPRESS_JPEG_NO_BACKING_STORE">error_COMPRESS_JPEG_NO_BACKING_STORE</h3>
+<pre>#define error_COMPRESS_JPEG_NO_BACKING_STORE 0x81A8A5u</pre>
+
+<h3 id="error_COMPRESS_JPEG_NO_HUFF_TABLE">error_COMPRESS_JPEG_NO_HUFF_TABLE</h3>
+<pre>#define error_COMPRESS_JPEG_NO_HUFF_TABLE 0x81A8A6u</pre>
+
+<h3 id="error_COMPRESS_JPEG_NO_IMAGE">error_COMPRESS_JPEG_NO_IMAGE</h3>
+<pre>#define error_COMPRESS_JPEG_NO_IMAGE 0x81A8A7u</pre>
+
+<h3 id="error_COMPRESS_JPEG_NO_QUANT_TABLE">error_COMPRESS_JPEG_NO_QUANT_TABLE</h3>
+<pre>#define error_COMPRESS_JPEG_NO_QUANT_TABLE 0x81A8A8u</pre>
+
+<h3 id="error_COMPRESS_JPEG_NO_SOI">error_COMPRESS_JPEG_NO_SOI</h3>
+<pre>#define error_COMPRESS_JPEG_NO_SOI 0x81A8A9u</pre>
+
+<h3 id="error_COMPRESS_JPEG_OUT_OF_MEMORY">error_COMPRESS_JPEG_OUT_OF_MEMORY</h3>
+<pre>#define error_COMPRESS_JPEG_OUT_OF_MEMORY 0x81A8AAu</pre>
+
+<h3 id="error_COMPRESS_JPEG_QUANT_COMPONENTS">error_COMPRESS_JPEG_QUANT_COMPONENTS</h3>
+<pre>#define error_COMPRESS_JPEG_QUANT_COMPONENTS 0x81A8ABu</pre>
+
+<h3 id="error_COMPRESS_JPEG_QUANT_FEW_COLOURS">error_COMPRESS_JPEG_QUANT_FEW_COLOURS</h3>
+<pre>#define error_COMPRESS_JPEG_QUANT_FEW_COLOURS 0x81A8ACu</pre>
+
+<h3 id="error_COMPRESS_JPEG_QUANT_MANY_COLOURS">error_COMPRESS_JPEG_QUANT_MANY_COLOURS</h3>
+<pre>#define error_COMPRESS_JPEG_QUANT_MANY_COLOURS 0x81A8ADu</pre>
+
+<h3 id="error_COMPRESS_JPEGSOF_DUPLICATE">error_COMPRESS_JPEGSOF_DUPLICATE</h3>
+<pre>#define error_COMPRESS_JPEGSOF_DUPLICATE 0x81A8AEu</pre>
+
+<h3 id="error_COMPRESS_JPEGSOF_NO_SOS">error_COMPRESS_JPEGSOF_NO_SOS</h3>
+<pre>#define error_COMPRESS_JPEGSOF_NO_SOS 0x81A8AFu</pre>
+
+<h3 id="error_COMPRESS_JPEGSOF_UNSUPPORTED">error_COMPRESS_JPEGSOF_UNSUPPORTED</h3>
+<pre>#define error_COMPRESS_JPEGSOF_UNSUPPORTED 0x81A8B0u</pre>
+
+<h3 id="error_COMPRESS_JPEGSOI_DUPLICATE">error_COMPRESS_JPEGSOI_DUPLICATE</h3>
+<pre>#define error_COMPRESS_JPEGSOI_DUPLICATE 0x81A8B1u</pre>
+
+<h3 id="error_COMPRESS_JPEGSOS_NO_SOF">error_COMPRESS_JPEGSOS_NO_SOF</h3>
+<pre>#define error_COMPRESS_JPEGSOS_NO_SOF 0x81A8B2u</pre>
+
+<h3 id="error_COMPRESS_JPEG_TOO_LITTLE_DATA">error_COMPRESS_JPEG_TOO_LITTLE_DATA</h3>
+<pre>#define error_COMPRESS_JPEG_TOO_LITTLE_DATA 0x81A8B3u</pre>
+
+<h3 id="error_COMPRESS_JPEG_UNKNOWN_MARKER">error_COMPRESS_JPEG_UNKNOWN_MARKER</h3>
+<pre>#define error_COMPRESS_JPEG_UNKNOWN_MARKER 0x81A8B4u</pre>
+
+<h3 id="error_COMPRESS_JPEG_VIRTUAL_BUG">error_COMPRESS_JPEG_VIRTUAL_BUG</h3>
+<pre>#define error_COMPRESS_JPEG_VIRTUAL_BUG 0x81A8B5u</pre>
+
+<h3 id="error_COMPRESS_JPEG_WIDTH_OVERFLOW">error_COMPRESS_JPEG_WIDTH_OVERFLOW</h3>
+<pre>#define error_COMPRESS_JPEG_WIDTH_OVERFLOW 0x81A8B6u</pre>
+
+<h3 id="error_COMPRESS_JPEG_BAD_DCT_COEF">error_COMPRESS_JPEG_BAD_DCT_COEF</h3>
+<pre>#define error_COMPRESS_JPEG_BAD_DCT_COEF 0x81A8B7u</pre>
+
+<h3 id="error_COMPRESS_JPEG_BAD_HUFF_TABLE">error_COMPRESS_JPEG_BAD_HUFF_TABLE</h3>
+<pre>#define error_COMPRESS_JPEG_BAD_HUFF_TABLE 0x81A8B8u</pre>
+
+<h3 id="error_COMPRESS_JPEG_BAD_PROGRESSION">error_COMPRESS_JPEG_BAD_PROGRESSION</h3>
+<pre>#define error_COMPRESS_JPEG_BAD_PROGRESSION 0x81A8B9u</pre>
+
+<h3 id="error_COMPRESS_JPEG_BAD_PROG_SCRIPT">error_COMPRESS_JPEG_BAD_PROG_SCRIPT</h3>
+<pre>#define error_COMPRESS_JPEG_BAD_PROG_SCRIPT 0x81A8BAu</pre>
+
+<h3 id="error_COMPRESS_JPEG_BAD_SCAN_SCRIPT">error_COMPRESS_JPEG_BAD_SCAN_SCRIPT</h3>
+<pre>#define error_COMPRESS_JPEG_BAD_SCAN_SCRIPT 0x81A8BBu</pre>
+
+<h3 id="error_COMPRESS_JPEG_MISMATCHED_QUANT_TABLE">error_COMPRESS_JPEG_MISMATCHED_QUANT_TABLE</h3>
+<pre>#define error_COMPRESS_JPEG_MISMATCHED_QUANT_TABLE 0x81A8BCu</pre>
+
+<h3 id="error_COMPRESS_JPEG_MISSING_DATA">error_COMPRESS_JPEG_MISSING_DATA</h3>
+<pre>#define error_COMPRESS_JPEG_MISSING_DATA 0x81A8BDu</pre>
+
+<h3 id="error_COMPRESS_JPEG_MODE_CHANGE">error_COMPRESS_JPEG_MODE_CHANGE</h3>
+<pre>#define error_COMPRESS_JPEG_MODE_CHANGE 0x81A8BEu</pre>
+
+<h3 id="error_COMPRESS_JPEGW_BUFFER_SIZE">error_COMPRESS_JPEGW_BUFFER_SIZE</h3>
+<pre>#define error_COMPRESS_JPEGW_BUFFER_SIZE 0x81A8BFu</pre>
+
+<h3 id="xcompressjpeg_start">xcompressjpeg_start</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcompressjpeg_start (<a href="jpeg.html#jpeg_image">jpeg_image</a> const *image,
+      int image_size,
+      <a href="#compressjpeg_parameters">compressjpeg_parameters</a> const *parameters,
+      void *workspace,
+      int workspace_size,
+      <a href="#compressjpeg_tag">compressjpeg_tag</a> *tag);</pre>
+<p>Starts the JPEG compression process and sets up various parameters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>image_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>parameters</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>workspace_size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>tag</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="compressjpeg_start">compressjpeg_start</h3>
+<pre>extern <a href="#compressjpeg_tag">compressjpeg_tag</a> compressjpeg_start (<a href="jpeg.html#jpeg_image">jpeg_image</a> const *image,
+      int image_size,
+      <a href="#compressjpeg_parameters">compressjpeg_parameters</a> const *parameters,
+      void *workspace,
+      int workspace_size);</pre>
+<p>Starts the JPEG compression process and sets up various parameters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>image_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>parameters</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>workspace_size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>tag</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcompressjpeg_write_line">xcompressjpeg_write_line</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcompressjpeg_write_line (<a href="#compressjpeg_tag">compressjpeg_tag</a> tag,
+      byte const *pixels);</pre>
+<p>Compresses one row of source pixels into the JPEG buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tag</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>pixels</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="compressjpeg_write_line">compressjpeg_write_line</h3>
+<pre>extern void compressjpeg_write_line (<a href="#compressjpeg_tag">compressjpeg_tag</a> tag,
+      byte const *pixels);</pre>
+<p>Compresses one row of source pixels into the JPEG buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tag</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>pixels</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xcompressjpeg_finish">xcompressjpeg_finish</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcompressjpeg_finish (<a href="#compressjpeg_tag">compressjpeg_tag</a> tag,
+      int *image_size);</pre>
+<p>Tidies up JPEG buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tag</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>image_size</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="compressjpeg_finish">compressjpeg_finish</h3>
+<pre>extern int compressjpeg_finish (<a href="#compressjpeg_tag">compressjpeg_tag</a> tag);</pre>
+<p>Tidies up JPEG buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tag</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>image_size</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcompressjpeg_comment">xcompressjpeg_comment</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcompressjpeg_comment (<a href="#compressjpeg_tag">compressjpeg_tag</a> tag,
+      <a href="#compressjpeg_comment_flags">compressjpeg_comment_flags</a> flags,
+      char const *comment,
+      int comment_size);</pre>
+<p>Add a textual comment to a JPEG - RISC OS Select</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tag</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>comment</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>comment_size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="compressjpeg_comment">compressjpeg_comment</h3>
+<pre>extern void compressjpeg_comment (<a href="#compressjpeg_tag">compressjpeg_tag</a> tag,
+      <a href="#compressjpeg_comment_flags">compressjpeg_comment_flags</a> flags,
+      char const *comment,
+      int comment_size);</pre>
+<p>Add a textual comment to a JPEG - RISC OS Select</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tag</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>comment</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>comment_size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xcompressjpeg_write_line_extended">xcompressjpeg_write_line_extended</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcompressjpeg_write_line_extended (<a href="#compressjpeg_tag">compressjpeg_tag</a> tag,
+      <a href="#compressjpeg_write_line_flags">compressjpeg_write_line_flags</a> flags,
+      byte const *image_data,
+      byte const *palette_data,
+      int lines,
+      int bytes_between_lines,
+      byte **image_data_end,
+      int *lines_written);</pre>
+<p>Compresses multiple rows of (paletted) source pixels into the JPEG buffer - RISC OS Select</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tag</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>image_data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>palette_data</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>lines</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>bytes_between_lines</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>image_data_end</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>lines_written</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="compressjpeg_write_line_extended">compressjpeg_write_line_extended</h3>
+<pre>extern byte *compressjpeg_write_line_extended (<a href="#compressjpeg_tag">compressjpeg_tag</a> tag,
+      <a href="#compressjpeg_write_line_flags">compressjpeg_write_line_flags</a> flags,
+      byte const *image_data,
+      byte const *palette_data,
+      int lines,
+      int bytes_between_lines,
+      int *lines_written);</pre>
+<p>Compresses multiple rows of (paletted) source pixels into the JPEG buffer - RISC OS Select</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tag</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>image_data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>palette_data</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>lines</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>bytes_between_lines</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>lines_written</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>image_data_end</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xcompressjpeg_transcode">xcompressjpeg_transcode</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcompressjpeg_transcode (<a href="#compressjpeg_transcode_flags">compressjpeg_transcode_flags</a> flags,
+      byte const *source_data,
+      int source_size,
+      byte *destination_data,
+      int destination_size,
+      byte *workspace,
+      int workspace_size,
+      <a href="#compressjpeg_scan_description">compressjpeg_scan_description</a> const *scans,
+      int *out_destination_size,
+      int *out_workspace_size);</pre>
+<p>Transcodes a JPEG from one form to another - RISC OS Select</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>source_data</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>source_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>destination_data</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>destination_size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>workspace_size</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>scans</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>out_destination_size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>out_workspace_size</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="compressjpeg_transcode">compressjpeg_transcode</h3>
+<pre>extern void compressjpeg_transcode (<a href="#compressjpeg_transcode_flags">compressjpeg_transcode_flags</a> flags,
+      byte const *source_data,
+      int source_size,
+      byte *destination_data,
+      int destination_size,
+      byte *workspace,
+      int workspace_size,
+      <a href="#compressjpeg_scan_description">compressjpeg_scan_description</a> const *scans,
+      int *out_destination_size,
+      int *out_workspace_size);</pre>
+<p>Transcodes a JPEG from one form to another - RISC OS Select</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>source_data</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>source_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>destination_data</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>destination_size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>workspace_size</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>scans</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>out_destination_size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>out_workspace_size</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

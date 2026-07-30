@@ -1,0 +1,329 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ServiceInternational</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ServiceInternational</h2>
+
+<pre>#include "oslib/serviceinternational.h"</pre>
+
+<h3 id="error_UNKNOWN_ALPHABET">error_UNKNOWN_ALPHABET</h3>
+<pre>#define error_UNKNOWN_ALPHABET 0x640u</pre>
+
+<p>Unknown alphabet</p>
+
+<h3 id="error_UNKNOWN_COUNTRY">error_UNKNOWN_COUNTRY</h3>
+<pre>#define error_UNKNOWN_COUNTRY 0x641u</pre>
+
+<p>Unknown country</p>
+
+<h3 id="error_UNKNOWN_KEYBOARD">error_UNKNOWN_KEYBOARD</h3>
+<pre>#define error_UNKNOWN_KEYBOARD 0x642u</pre>
+
+<p>Unknown keyboard</p>
+
+<h3 id="xserviceinternational_country_name_to_country_number">xserviceinternational_country_name_to_country_number</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xserviceinternational_country_name_to_country_number (char const *country_name,
+      osbool *unclaimed,
+      <a href="territory.html#territory_t">territory_t</a> *country_no);</pre>
+<p>Converts country name to country number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>country_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>country_no</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="serviceinternational_country_name_to_country_number">serviceinternational_country_name_to_country_number</h3>
+<pre>extern osbool serviceinternational_country_name_to_country_number (char const *country_name,
+      <a href="territory.html#territory_t">territory_t</a> *country_no);</pre>
+<p>Converts country name to country number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>country_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>country_no</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xserviceinternational_alphabet_name_to_alphabet_number">xserviceinternational_alphabet_name_to_alphabet_number</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xserviceinternational_alphabet_name_to_alphabet_number (char const *alphabet_name,
+      osbool *unclaimed,
+      <a href="territory.html#territory_alphabet_number">territory_alphabet_number</a> *alphabet_no);</pre>
+<p>Converts alphabet name to alphabet number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>alphabet_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>alphabet_no</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="serviceinternational_alphabet_name_to_alphabet_number">serviceinternational_alphabet_name_to_alphabet_number</h3>
+<pre>extern osbool serviceinternational_alphabet_name_to_alphabet_number (char const *alphabet_name,
+      <a href="territory.html#territory_alphabet_number">territory_alphabet_number</a> *alphabet_no);</pre>
+<p>Converts alphabet name to alphabet number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>alphabet_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>alphabet_no</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xserviceinternational_country_number_to_country_name">xserviceinternational_country_number_to_country_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xserviceinternational_country_number_to_country_name (<a href="territory.html#territory_t">territory_t</a> country_no,
+      char *buffer,
+      int size,
+      osbool *unclaimed,
+      int *used);</pre>
+<p>Converts country number to country name</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>country_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>used</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="serviceinternational_country_number_to_country_name">serviceinternational_country_number_to_country_name</h3>
+<pre>extern osbool serviceinternational_country_number_to_country_name (<a href="territory.html#territory_t">territory_t</a> country_no,
+      char *buffer,
+      int size,
+      int *used);</pre>
+<p>Converts country number to country name</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>country_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xserviceinternational_alphabet_number_to_alphabet_name">xserviceinternational_alphabet_number_to_alphabet_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xserviceinternational_alphabet_number_to_alphabet_name (<a href="territory.html#territory_alphabet_number">territory_alphabet_number</a> alphabet_no,
+      char *buffer,
+      int size,
+      osbool *unclaimed,
+      int *used);</pre>
+<p>Converts alphabet number to alphabet name</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>alphabet_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>used</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="serviceinternational_alphabet_number_to_alphabet_name">serviceinternational_alphabet_number_to_alphabet_name</h3>
+<pre>extern osbool serviceinternational_alphabet_number_to_alphabet_name (<a href="territory.html#territory_alphabet_number">territory_alphabet_number</a> alphabet_no,
+      char *buffer,
+      int size,
+      int *used);</pre>
+<p>Converts alphabet number to alphabet name</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>alphabet_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xserviceinternational_country_number_to_alphabet_number">xserviceinternational_country_number_to_alphabet_number</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xserviceinternational_country_number_to_alphabet_number (<a href="territory.html#territory_t">territory_t</a> country_no,
+      osbool *unclaimed,
+      <a href="territory.html#territory_alphabet_number">territory_alphabet_number</a> *alphabet_no);</pre>
+<p>Converts country number to alphabet number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>country_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>alphabet_no</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="serviceinternational_country_number_to_alphabet_number">serviceinternational_country_number_to_alphabet_number</h3>
+<pre>extern osbool serviceinternational_country_number_to_alphabet_number (<a href="territory.html#territory_t">territory_t</a> country_no,
+      <a href="territory.html#territory_alphabet_number">territory_alphabet_number</a> *alphabet_no);</pre>
+<p>Converts country number to alphabet number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>country_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>alphabet_no</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xserviceinternational_define_chars">xserviceinternational_define_chars</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xserviceinternational_define_chars (<a href="territory.html#territory_alphabet_number">territory_alphabet_number</a> alphabet_no,
+      byte first,
+      byte last,
+      osbool *unclaimed);</pre>
+<p>Defines a range of characters from a given alphabet number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>alphabet_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>first</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>last</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="serviceinternational_define_chars">serviceinternational_define_chars</h3>
+<pre>extern osbool serviceinternational_define_chars (<a href="territory.html#territory_alphabet_number">territory_alphabet_number</a> alphabet_no,
+      byte first,
+      byte last);</pre>
+<p>Defines a range of characters from a given alphabet number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>alphabet_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>first</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>last</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xserviceinternational_new_keyboard">xserviceinternational_new_keyboard</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xserviceinternational_new_keyboard (int keyboard_no,
+      <a href="territory.html#territory_alphabet_number">territory_alphabet_number</a> alphabet_no);</pre>
+<p>Notification of a new keyboard selection</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>keyboard_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>alphabet_no</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="serviceinternational_new_keyboard">serviceinternational_new_keyboard</h3>
+<pre>extern void serviceinternational_new_keyboard (int keyboard_no,
+      <a href="territory.html#territory_alphabet_number">territory_alphabet_number</a> alphabet_no);</pre>
+<p>Notification of a new keyboard selection</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>keyboard_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>alphabet_no</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xserviceinternational_define_ucs_character">xserviceinternational_define_ucs_character</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xserviceinternational_define_ucs_character (int char_index,
+      int ucs_charcode,
+      osbool *unclaimed);</pre>
+<p>Defines a UCS character - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>char_index</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>ucs_charcode</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="serviceinternational_define_ucs_character">serviceinternational_define_ucs_character</h3>
+<pre>extern osbool serviceinternational_define_ucs_character (int char_index,
+      int ucs_charcode);</pre>
+<p>Defines a UCS character - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>char_index</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>ucs_charcode</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xserviceinternational_get_ucs_conversion_table">xserviceinternational_get_ucs_conversion_table</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xserviceinternational_get_ucs_conversion_table (int alphabet_no,
+      osbool *unclaimed,
+      void **char_table);</pre>
+<p>Read UCS conversion table for given alphabet - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>alphabet_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>char_table</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="serviceinternational_get_ucs_conversion_table">serviceinternational_get_ucs_conversion_table</h3>
+<pre>extern osbool serviceinternational_get_ucs_conversion_table (int alphabet_no,
+      void **char_table);</pre>
+<p>Read UCS conversion table for given alphabet - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>alphabet_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>char_table</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

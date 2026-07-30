@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; KeyboardShortcut</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>KeyboardShortcut</h2>
+
+<pre>#include "oslib/keyboardshortcut.h"</pre>
+
+<h3 id="keyboardshortcut_flags">keyboardshortcut_flags</h3>
+<pre>typedef bits keyboardshortcut_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#keyboardshortcut_SHOW_AS_MENU">keyboardshortcut_SHOW_AS_MENU</a></dd>
+<dd><a href="#keyboardshortcut_SHOW_AT_CENTRE">keyboardshortcut_SHOW_AT_CENTRE</a></dd>
+<dd><a href="#keyboardshortcut_SHOW_AT_POINTER">keyboardshortcut_SHOW_AT_POINTER</a></dd>
+</dl>
+
+<h3 id="keyboardshortcut_object">keyboardshortcut_object</h3>
+<pre>typedef struct
+   {  <a href="#keyboardshortcut_flags">keyboardshortcut_flags</a> flags;
+      int c;
+      bits action;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> name;
+   }
+   keyboardshortcut_object;</pre>
+
+<h3 id="keyboardshortcut_SHOW_AS_MENU">keyboardshortcut_SHOW_AS_MENU</h3>
+<pre>#define keyboardshortcut_SHOW_AS_MENU ((<a href="#keyboardshortcut_flags">keyboardshortcut_flags</a>) 0x1u)</pre>
+
+<h3 id="keyboardshortcut_SHOW_AT_CENTRE">keyboardshortcut_SHOW_AT_CENTRE</h3>
+<pre>#define keyboardshortcut_SHOW_AT_CENTRE ((<a href="#keyboardshortcut_flags">keyboardshortcut_flags</a>) 0x2u)</pre>
+
+<h3 id="keyboardshortcut_SHOW_AT_POINTER">keyboardshortcut_SHOW_AT_POINTER</h3>
+<pre>#define keyboardshortcut_SHOW_AT_POINTER ((<a href="#keyboardshortcut_flags">keyboardshortcut_flags</a>) 0x4u)</pre>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

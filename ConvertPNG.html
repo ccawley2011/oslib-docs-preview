@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ConvertPNG</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ConvertPNG</h2>
+
+<pre>#include "oslib/convertpng.h"</pre>
+
+<h3 id="convertpng_info_flags">convertpng_info_flags</h3>
+<pre>typedef bits convertpng_info_flags;</pre>
+
+<h3 id="convertpng_create_sprite_flags">convertpng_create_sprite_flags</h3>
+<pre>typedef bits convertpng_create_sprite_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#convertpng_CREATE_SPRITE_AREA">convertpng_CREATE_SPRITE_AREA</a></dd>
+<dd><a href="#convertpng_USE_BACKGROUND">convertpng_USE_BACKGROUND</a></dd>
+</dl>
+
+<h3 id="convertpng_colour_type">convertpng_colour_type</h3>
+<pre>typedef bits convertpng_colour_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#convertpng_HAS_PALETTE">convertpng_HAS_PALETTE</a></dd>
+<dd><a href="#convertpng_IS_COLOUR">convertpng_IS_COLOUR</a></dd>
+<dd><a href="#convertpng_HAS_ALPHA_CHANNEL">convertpng_HAS_ALPHA_CHANNEL</a></dd>
+</dl>
+
+<h3 id="convertpng_interlace_type">convertpng_interlace_type</h3>
+<pre>typedef bits convertpng_interlace_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#convertpng_NO_INTERLACING">convertpng_NO_INTERLACING</a></dd>
+<dd><a href="#convertpng_ADAM7_INTERLACING">convertpng_ADAM7_INTERLACING</a></dd>
+</dl>
+
+<h3 id="convertpng_CREATE_SPRITE_AREA">convertpng_CREATE_SPRITE_AREA</h3>
+<pre>#define convertpng_CREATE_SPRITE_AREA ((<a href="#convertpng_create_sprite_flags">convertpng_create_sprite_flags</a>) 0x1u)</pre>
+
+<h3 id="convertpng_USE_BACKGROUND">convertpng_USE_BACKGROUND</h3>
+<pre>#define convertpng_USE_BACKGROUND ((<a href="#convertpng_create_sprite_flags">convertpng_create_sprite_flags</a>) 0x2u)</pre>
+
+<h3 id="convertpng_HAS_PALETTE">convertpng_HAS_PALETTE</h3>
+<pre>#define convertpng_HAS_PALETTE ((<a href="#convertpng_colour_type">convertpng_colour_type</a>) 0x1u)</pre>
+
+<h3 id="convertpng_IS_COLOUR">convertpng_IS_COLOUR</h3>
+<pre>#define convertpng_IS_COLOUR ((<a href="#convertpng_colour_type">convertpng_colour_type</a>) 0x2u)</pre>
+
+<h3 id="convertpng_HAS_ALPHA_CHANNEL">convertpng_HAS_ALPHA_CHANNEL</h3>
+<pre>#define convertpng_HAS_ALPHA_CHANNEL ((<a href="#convertpng_colour_type">convertpng_colour_type</a>) 0x4u)</pre>
+
+<h3 id="convertpng_NO_INTERLACING">convertpng_NO_INTERLACING</h3>
+<pre>#define convertpng_NO_INTERLACING ((<a href="#convertpng_interlace_type">convertpng_interlace_type</a>) 0x1u)</pre>
+
+<h3 id="convertpng_ADAM7_INTERLACING">convertpng_ADAM7_INTERLACING</h3>
+<pre>#define convertpng_ADAM7_INTERLACING ((<a href="#convertpng_interlace_type">convertpng_interlace_type</a>) 0x2u)</pre>
+
+<h3 id="xconvertpng_info">xconvertpng_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xconvertpng_info (<a href="#convertpng_info_flags">convertpng_info_flags</a> flags,
+      byte const *buffer,
+      int size,
+      int *width,
+      int *height,
+      int *bpp,
+      <a href="#convertpng_colour_type">convertpng_colour_type</a> *colour_type,
+      <a href="#convertpng_interlace_type">convertpng_interlace_type</a> *interlace_type);</pre>
+<p>Read information about a PNG image - RISC OS 4.32+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>width</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>bpp</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>colour_type</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>interlace_type</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="convertpng_info">convertpng_info</h3>
+<pre>extern void convertpng_info (<a href="#convertpng_info_flags">convertpng_info_flags</a> flags,
+      byte const *buffer,
+      int size,
+      int *width,
+      int *height,
+      int *bpp,
+      <a href="#convertpng_colour_type">convertpng_colour_type</a> *colour_type,
+      <a href="#convertpng_interlace_type">convertpng_interlace_type</a> *interlace_type);</pre>
+<p>Read information about a PNG image - RISC OS 4.32+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>width</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>bpp</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>colour_type</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>interlace_type</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xconvertpng_create_sprite">xconvertpng_create_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xconvertpng_create_sprite (<a href="#convertpng_create_sprite_flags">convertpng_create_sprite_flags</a> flags,
+      byte const *input_buffer,
+      int input_size,
+      byte *output_buffer,
+      int output_size,
+      <a href="os.html#os_colour">os_colour</a> background,
+      int *size);</pre>
+<p>Create a sprite from a PNG image - RISC OS 4.32+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>input_buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>output_buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>background</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="convertpng_create_sprite">convertpng_create_sprite</h3>
+<pre>extern int convertpng_create_sprite (<a href="#convertpng_create_sprite_flags">convertpng_create_sprite_flags</a> flags,
+      byte const *input_buffer,
+      int input_size,
+      byte *output_buffer,
+      int output_size,
+      <a href="os.html#os_colour">os_colour</a> background);</pre>
+<p>Create a sprite from a PNG image - RISC OS 4.32+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>input_buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>output_buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>background</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1703 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Socket</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Socket</h2>
+
+<pre>#include "oslib/socket.h"</pre>
+
+<h3 id="socket_af">socket_af</h3>
+<pre>typedef short socket_af;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#socket_AF_INET">socket_AF_INET</a></dd>
+</dl>
+
+<h3 id="socket_sock">socket_sock</h3>
+<pre>typedef int socket_sock;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#socket_SOCK_STREAM">socket_SOCK_STREAM</a></dd>
+<dd><a href="#socket_SOCK_DGRAM">socket_SOCK_DGRAM</a></dd>
+<dd><a href="#socket_SOCK_RAW">socket_SOCK_RAW</a></dd>
+</dl>
+
+<h3 id="socket_ipproto">socket_ipproto</h3>
+<pre>typedef int socket_ipproto;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#socket_IPPROTO_IP">socket_IPPROTO_IP</a></dd>
+<dd><a href="#socket_IPPROTO_ICMP">socket_IPPROTO_ICMP</a></dd>
+<dd><a href="#socket_IPPROTO_TCP">socket_IPPROTO_TCP</a></dd>
+<dd><a href="#socket_IPPROTO_UDP">socket_IPPROTO_UDP</a></dd>
+<dd><a href="#socket_IPPROTO_RAW">socket_IPPROTO_RAW</a></dd>
+</dl>
+
+<h3 id="socket_level">socket_level</h3>
+<pre>typedef int socket_level;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#socket_SOL_SOCKET">socket_SOL_SOCKET</a></dd>
+</dl>
+
+<h3 id="socket_sockaddr_in">socket_sockaddr_in</h3>
+<pre>typedef struct
+   {  <a href="#socket_af">socket_af</a> af;
+      short port;
+      bits addr;
+      byte data [8];
+   }
+   socket_sockaddr_in;</pre>
+
+<h3 id="socket_sockaddr">socket_sockaddr</h3>
+<pre>typedef union
+   {  struct
+      {  <a href="#socket_af">socket_af</a> af;
+         byte data [14];
+      }
+      sockaddr;
+      <a href="#socket_sockaddr_in">socket_sockaddr_in</a> sockaddr_in;
+   }
+   socket_sockaddr;</pre>
+
+<h3 id="socket_linger">socket_linger</h3>
+<pre>typedef struct
+   {  int onoff;
+      int linger;
+   }
+   socket_linger;</pre>
+
+<h3 id="socket_timeval">socket_timeval</h3>
+<pre>typedef struct
+   {  int sec;
+      int usec;
+   }
+   socket_timeval;</pre>
+
+<h3 id="socket_so">socket_so</h3>
+<pre>typedef int socket_so;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#socket_SO_ACCEPTCONN">socket_SO_ACCEPTCONN</a></dd>
+<dd><a href="#socket_SO_REUSEADDR">socket_SO_REUSEADDR</a></dd>
+<dd><a href="#socket_SO_KEEPALIVE">socket_SO_KEEPALIVE</a></dd>
+<dd><a href="#socket_SO_DONTROUTE">socket_SO_DONTROUTE</a></dd>
+<dd><a href="#socket_SO_BROADCAST">socket_SO_BROADCAST</a></dd>
+<dd><a href="#socket_SO_USELOOPBACK">socket_SO_USELOOPBACK</a></dd>
+<dd><a href="#socket_SO_LINGER">socket_SO_LINGER</a></dd>
+<dd><a href="#socket_SO_OOBINLINE">socket_SO_OOBINLINE</a></dd>
+<dd><a href="#socket_SO_SNDBUF">socket_SO_SNDBUF</a></dd>
+<dd><a href="#socket_SO_RCVBUF">socket_SO_RCVBUF</a></dd>
+<dd><a href="#socket_SO_SNDLOWAT">socket_SO_SNDLOWAT</a></dd>
+<dd><a href="#socket_SO_RCVLOWAT">socket_SO_RCVLOWAT</a></dd>
+<dd><a href="#socket_SO_SNDTIMEO">socket_SO_SNDTIMEO</a></dd>
+<dd><a href="#socket_SO_RCVTIMEO">socket_SO_RCVTIMEO</a></dd>
+<dd><a href="#socket_SO_ERROR">socket_SO_ERROR</a></dd>
+<dd><a href="#socket_SO_TYPE">socket_SO_TYPE</a></dd>
+</dl>
+
+<h3 id="socket_if_flags">socket_if_flags</h3>
+<pre>typedef short socket_if_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#socket_IF_UP">socket_IF_UP</a></dd>
+<dd><a href="#socket_IF_BROADCAST">socket_IF_BROADCAST</a></dd>
+<dd><a href="#socket_IF_DEBUG">socket_IF_DEBUG</a></dd>
+<dd><a href="#socket_IF_LOOPBACK">socket_IF_LOOPBACK</a></dd>
+<dd><a href="#socket_IF_POINT_TO_POINT">socket_IF_POINT_TO_POINT</a></dd>
+<dd><a href="#socket_IF_NO_TRAILERS">socket_IF_NO_TRAILERS</a></dd>
+<dd><a href="#socket_IF_RUNNING">socket_IF_RUNNING</a></dd>
+<dd><a href="#socket_IF_NO_ARP">socket_IF_NO_ARP</a></dd>
+</dl>
+
+<h3 id="socket_ifreq">socket_ifreq</h3>
+<pre>typedef struct
+   {  char name [16];
+      union
+      {  <a href="#socket_sockaddr">socket_sockaddr</a> sockaddr;
+         <a href="#socket_sockaddr">socket_sockaddr</a> broadaddr;
+         <a href="#socket_if_flags">socket_if_flags</a> flags;
+         int metric;
+         byte *data;
+         byte reserved [16];
+      }
+      u;
+   }
+   socket_ifreq;</pre>
+
+<h3 id="socket_ifconf">socket_ifconf</h3>
+<pre>typedef struct
+   {  int len;
+      union
+      {  byte *buf;
+         <a href="#socket_ifreq">socket_ifreq</a> *req;
+      }
+      u;
+   }
+   socket_ifconf;</pre>
+
+<h3 id="socket_pwstruct">socket_pwstruct</h3>
+<pre>typedef struct
+   {  bits *pollword;
+      int bit_number;
+   }
+   socket_pwstruct;</pre>
+
+<h3 id="socket_ioctl_no">socket_ioctl_no</h3>
+<pre>typedef bits socket_ioctl_no;</pre>
+
+<p>Bits 0, ..., 7: operation; 8, ..., 15: s/i/f; 16, ..., 23: size; 24, ..., 31: calling convention</p>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#socket_SIOCSHIWAT">socket_SIOCSHIWAT</a></dd>
+<dd><a href="#socket_SIOCGHIWAT">socket_SIOCGHIWAT</a></dd>
+<dd><a href="#socket_SIOCSLOWAT">socket_SIOCSLOWAT</a></dd>
+<dd><a href="#socket_SIOCGLOWAT">socket_SIOCGLOWAT</a></dd>
+<dd><a href="#socket_SIOCATMARK">socket_SIOCATMARK</a></dd>
+<dd><a href="#socket_SIOCSIFADDR">socket_SIOCSIFADDR</a></dd>
+<dd><a href="#socket_SIOCGIFADDR">socket_SIOCGIFADDR</a></dd>
+<dd><a href="#socket_SIOCSIFDSTADDR">socket_SIOCSIFDSTADDR</a></dd>
+<dd><a href="#socket_SIOCGIFDSTADDR">socket_SIOCGIFDSTADDR</a></dd>
+<dd><a href="#socket_SIOCSIFFLAGS">socket_SIOCSIFFLAGS</a></dd>
+<dd><a href="#socket_SIOCGIFFLAGS">socket_SIOCGIFFLAGS</a></dd>
+<dd><a href="#socket_SIOCGIFBRDADDR">socket_SIOCGIFBRDADDR</a></dd>
+<dd><a href="#socket_SIOCSIFBRDADDR">socket_SIOCSIFBRDADDR</a></dd>
+<dd><a href="#socket_SIOCGIFCONF">socket_SIOCGIFCONF</a></dd>
+<dd><a href="#socket_SIOCGIFNETMASK">socket_SIOCGIFNETMASK</a></dd>
+<dd><a href="#socket_SIOCSIFNETMASK">socket_SIOCSIFNETMASK</a></dd>
+<dd><a href="#socket_SIOCGIFMETRIC">socket_SIOCGIFMETRIC</a></dd>
+<dd><a href="#socket_SIOCSIFMETRIC">socket_SIOCSIFMETRIC</a></dd>
+<dd><a href="#socket_FIOSLEEPTW">socket_FIOSLEEPTW</a></dd>
+<dd><a href="#socket_FIONREAD">socket_FIONREAD</a></dd>
+<dd><a href="#socket_FIONBIO">socket_FIONBIO</a></dd>
+<dd><a href="#socket_FIOASYNC">socket_FIOASYNC</a></dd>
+<dd><a href="#socket_FIOPOLLWORD">socket_FIOPOLLWORD</a></dd>
+</dl>
+
+<h3 id="socket_msg_flags">socket_msg_flags</h3>
+<pre>typedef bits socket_msg_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#socket_MSG_OOB">socket_MSG_OOB</a></dd>
+<dd><a href="#socket_MSG_PEEK">socket_MSG_PEEK</a></dd>
+<dd><a href="#socket_MSG_DONTROUTE">socket_MSG_DONTROUTE</a></dd>
+</dl>
+
+<h3 id="socket_s">socket_s</h3>
+<pre>typedef struct {...} *socket_s;</pre>
+
+<h3 id="socket_iovec">socket_iovec</h3>
+<pre>typedef struct
+   {  byte *base;
+      int len;
+   }
+   socket_iovec;</pre>
+
+<h3 id="socket_msghdr">socket_msghdr</h3>
+<pre>typedef struct
+   {  byte *name;
+      int namelen;
+      <a href="#socket_iovec">socket_iovec</a> *iov;
+      int iov_count;
+      byte *accrights;
+      int accrightslen;
+   }
+   socket_msghdr;</pre>
+
+<h3 id="socket_shutdown_type">socket_shutdown_type</h3>
+<pre>typedef int socket_shutdown_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#socket_SHUTDOWN_RECV">socket_SHUTDOWN_RECV</a></dd>
+<dd><a href="#socket_SHUTDOWN_SEND">socket_SHUTDOWN_SEND</a></dd>
+<dd><a href="#socket_SHUTDOWN_ALL">socket_SHUTDOWN_ALL</a></dd>
+</dl>
+
+<h3 id="socket_fdset">socket_fdset</h3>
+<pre>typedef byte socket_fdset;</pre>
+
+<h3 id="socket_event_type">socket_event_type</h3>
+<pre>typedef int socket_event_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#socket_ASYNC_EVENT">socket_ASYNC_EVENT</a></dd>
+<dd><a href="#socket_URGENT_EVENT">socket_URGENT_EVENT</a></dd>
+<dd><a href="#socket_BROKEN_EVENT">socket_BROKEN_EVENT</a></dd>
+</dl>
+
+<h3 id="socket_AF_INET">socket_AF_INET</h3>
+<pre>#define socket_AF_INET ((<a href="#socket_af">socket_af</a>) 0x2u)</pre>
+
+<h3 id="socket_SOCK_STREAM">socket_SOCK_STREAM</h3>
+<pre>#define socket_SOCK_STREAM ((<a href="#socket_sock">socket_sock</a>) 0x1u)</pre>
+
+<p>TCP </p>
+
+<h3 id="socket_SOCK_DGRAM">socket_SOCK_DGRAM</h3>
+<pre>#define socket_SOCK_DGRAM ((<a href="#socket_sock">socket_sock</a>) 0x2u)</pre>
+
+<p>UDP </p>
+
+<h3 id="socket_SOCK_RAW">socket_SOCK_RAW</h3>
+<pre>#define socket_SOCK_RAW ((<a href="#socket_sock">socket_sock</a>) 0x3u)</pre>
+
+<p>IP </p>
+
+<h3 id="socket_IPPROTO_IP">socket_IPPROTO_IP</h3>
+<pre>#define socket_IPPROTO_IP ((<a href="#socket_ipproto">socket_ipproto</a>) 0x0u)</pre>
+
+<p>Dummy for internet protocol</p>
+
+<h3 id="socket_IPPROTO_ICMP">socket_IPPROTO_ICMP</h3>
+<pre>#define socket_IPPROTO_ICMP ((<a href="#socket_ipproto">socket_ipproto</a>) 0x1u)</pre>
+
+<p>Control message protocol</p>
+
+<h3 id="socket_IPPROTO_TCP">socket_IPPROTO_TCP</h3>
+<pre>#define socket_IPPROTO_TCP ((<a href="#socket_ipproto">socket_ipproto</a>) 0x6u)</pre>
+
+<p>Transmission control protocol</p>
+
+<h3 id="socket_IPPROTO_UDP">socket_IPPROTO_UDP</h3>
+<pre>#define socket_IPPROTO_UDP ((<a href="#socket_ipproto">socket_ipproto</a>) 0x11u)</pre>
+
+<p>User datagram protocol</p>
+
+<h3 id="socket_IPPROTO_RAW">socket_IPPROTO_RAW</h3>
+<pre>#define socket_IPPROTO_RAW ((<a href="#socket_ipproto">socket_ipproto</a>) 0xFFu)</pre>
+
+<p>Raw internet protocol packet</p>
+
+<h3 id="socket_SOL_SOCKET">socket_SOL_SOCKET</h3>
+<pre>#define socket_SOL_SOCKET ((<a href="#socket_level">socket_level</a>) 0xFFFFu)</pre>
+
+<h3 id="socket_EBADF">socket_EBADF</h3>
+<pre>#define socket_EBADF 0x9u</pre>
+
+<p>Bad descriptor</p>
+
+<h3 id="socket_EAGAIN">socket_EAGAIN</h3>
+<pre>#define socket_EAGAIN 0xBu</pre>
+
+<p>No more ports</p>
+
+<h3 id="socket_EFAULT">socket_EFAULT</h3>
+<pre>#define socket_EFAULT 0xEu</pre>
+
+<p>Bad address</p>
+
+<h3 id="socket_EINVAL">socket_EINVAL</h3>
+<pre>#define socket_EINVAL 0x16u</pre>
+
+<p>Invalid argument</p>
+
+<h3 id="socket_EWOULDBLOCK">socket_EWOULDBLOCK</h3>
+<pre>#define socket_EWOULDBLOCK 0x23u</pre>
+
+<p>Operation would block</p>
+
+<h3 id="socket_EINPROGRESS">socket_EINPROGRESS</h3>
+<pre>#define socket_EINPROGRESS 0x24u</pre>
+
+<p>Operation now in progress</p>
+
+<h3 id="socket_EALREADY">socket_EALREADY</h3>
+<pre>#define socket_EALREADY 0x25u</pre>
+
+<p>Operation already in progress</p>
+
+<h3 id="socket_ENOTSOCK">socket_ENOTSOCK</h3>
+<pre>#define socket_ENOTSOCK 0x26u</pre>
+
+<p>Socket operation on non-socket</p>
+
+<h3 id="socket_EDESTADDRREQ">socket_EDESTADDRREQ</h3>
+<pre>#define socket_EDESTADDRREQ 0x27u</pre>
+
+<p>Destination address required</p>
+
+<h3 id="socket_EMSGSIZE">socket_EMSGSIZE</h3>
+<pre>#define socket_EMSGSIZE 0x28u</pre>
+
+<p>Message too long</p>
+
+<h3 id="socket_EPROTOTYPE">socket_EPROTOTYPE</h3>
+<pre>#define socket_EPROTOTYPE 0x29u</pre>
+
+<p>Protocol wrong type for socket</p>
+
+<h3 id="socket_ENOPROTOOPT">socket_ENOPROTOOPT</h3>
+<pre>#define socket_ENOPROTOOPT 0x2Au</pre>
+
+<p>Protocol not available</p>
+
+<h3 id="socket_EPROTONOSUPPORT">socket_EPROTONOSUPPORT</h3>
+<pre>#define socket_EPROTONOSUPPORT 0x2Bu</pre>
+
+<p>Protocol not supported</p>
+
+<h3 id="socket_ESOCKTNOSUPPORT">socket_ESOCKTNOSUPPORT</h3>
+<pre>#define socket_ESOCKTNOSUPPORT 0x2Cu</pre>
+
+<p>Socket type not supported</p>
+
+<h3 id="socket_EOPNOTSUPP">socket_EOPNOTSUPP</h3>
+<pre>#define socket_EOPNOTSUPP 0x2Du</pre>
+
+<p>Operation not supported on socket</p>
+
+<h3 id="socket_EPFNOSUPPORT">socket_EPFNOSUPPORT</h3>
+<pre>#define socket_EPFNOSUPPORT 0x2Eu</pre>
+
+<p>Protocol family not supported</p>
+
+<h3 id="socket_EAFNOSUPPORT">socket_EAFNOSUPPORT</h3>
+<pre>#define socket_EAFNOSUPPORT 0x2Fu</pre>
+
+<p>Address family not supported by protocol family</p>
+
+<h3 id="socket_EADDRINUSE">socket_EADDRINUSE</h3>
+<pre>#define socket_EADDRINUSE 0x30u</pre>
+
+<p>Address already in use</p>
+
+<h3 id="socket_EADDRNOTAVAIL">socket_EADDRNOTAVAIL</h3>
+<pre>#define socket_EADDRNOTAVAIL 0x31u</pre>
+
+<p>Can't assign requested address</p>
+
+<h3 id="socket_ENETDOWN">socket_ENETDOWN</h3>
+<pre>#define socket_ENETDOWN 0x32u</pre>
+
+<p>Network is down</p>
+
+<h3 id="socket_ENETUNREACH">socket_ENETUNREACH</h3>
+<pre>#define socket_ENETUNREACH 0x33u</pre>
+
+<p>Network is unreachable</p>
+
+<h3 id="socket_ENETRESET">socket_ENETRESET</h3>
+<pre>#define socket_ENETRESET 0x34u</pre>
+
+<p>Network dropped connection on reset</p>
+
+<h3 id="socket_ECONNABORTED">socket_ECONNABORTED</h3>
+<pre>#define socket_ECONNABORTED 0x35u</pre>
+
+<p>Software caused connection abort</p>
+
+<h3 id="socket_ECONNRESET">socket_ECONNRESET</h3>
+<pre>#define socket_ECONNRESET 0x36u</pre>
+
+<p>Connection reset by peer</p>
+
+<h3 id="socket_ENOBUFS">socket_ENOBUFS</h3>
+<pre>#define socket_ENOBUFS 0x37u</pre>
+
+<p>No buffer space available</p>
+
+<h3 id="socket_EISCONN">socket_EISCONN</h3>
+<pre>#define socket_EISCONN 0x38u</pre>
+
+<p>Socket is already connected</p>
+
+<h3 id="socket_ENOTCONN">socket_ENOTCONN</h3>
+<pre>#define socket_ENOTCONN 0x39u</pre>
+
+<p>Socket is not connected</p>
+
+<h3 id="socket_ESHUTDOWN">socket_ESHUTDOWN</h3>
+<pre>#define socket_ESHUTDOWN 0x3Au</pre>
+
+<p>Can't send after socket shutdown</p>
+
+<h3 id="socket_ETOOMANYREFS">socket_ETOOMANYREFS</h3>
+<pre>#define socket_ETOOMANYREFS 0x3Bu</pre>
+
+<p>Too many references: can't splice</p>
+
+<h3 id="socket_ETIMEDOUT">socket_ETIMEDOUT</h3>
+<pre>#define socket_ETIMEDOUT 0x3Cu</pre>
+
+<p>Connection timed out</p>
+
+<h3 id="socket_ECONNREFUSED">socket_ECONNREFUSED</h3>
+<pre>#define socket_ECONNREFUSED 0x3Du</pre>
+
+<p>Connection refused</p>
+
+<h3 id="socket_EHOSTDOWN">socket_EHOSTDOWN</h3>
+<pre>#define socket_EHOSTDOWN 0x40u</pre>
+
+<p>Host is down</p>
+
+<h3 id="socket_EHOSTUNREACH">socket_EHOSTUNREACH</h3>
+<pre>#define socket_EHOSTUNREACH 0x41u</pre>
+
+<p>No route to host</p>
+
+<h3 id="socket_SO_ACCEPTCONN">socket_SO_ACCEPTCONN</h3>
+<pre>#define socket_SO_ACCEPTCONN ((<a href="#socket_so">socket_so</a>) 0x2u)</pre>
+
+<h3 id="socket_SO_REUSEADDR">socket_SO_REUSEADDR</h3>
+<pre>#define socket_SO_REUSEADDR ((<a href="#socket_so">socket_so</a>) 0x4u)</pre>
+
+<h3 id="socket_SO_KEEPALIVE">socket_SO_KEEPALIVE</h3>
+<pre>#define socket_SO_KEEPALIVE ((<a href="#socket_so">socket_so</a>) 0x8u)</pre>
+
+<h3 id="socket_SO_DONTROUTE">socket_SO_DONTROUTE</h3>
+<pre>#define socket_SO_DONTROUTE ((<a href="#socket_so">socket_so</a>) 0x10u)</pre>
+
+<h3 id="socket_SO_BROADCAST">socket_SO_BROADCAST</h3>
+<pre>#define socket_SO_BROADCAST ((<a href="#socket_so">socket_so</a>) 0x20u)</pre>
+
+<h3 id="socket_SO_USELOOPBACK">socket_SO_USELOOPBACK</h3>
+<pre>#define socket_SO_USELOOPBACK ((<a href="#socket_so">socket_so</a>) 0x40u)</pre>
+
+<h3 id="socket_SO_LINGER">socket_SO_LINGER</h3>
+<pre>#define socket_SO_LINGER ((<a href="#socket_so">socket_so</a>) 0x80u)</pre>
+
+<h3 id="socket_SO_OOBINLINE">socket_SO_OOBINLINE</h3>
+<pre>#define socket_SO_OOBINLINE ((<a href="#socket_so">socket_so</a>) 0x100u)</pre>
+
+<h3 id="socket_SO_SNDBUF">socket_SO_SNDBUF</h3>
+<pre>#define socket_SO_SNDBUF ((<a href="#socket_so">socket_so</a>) 0x1001u)</pre>
+
+<h3 id="socket_SO_RCVBUF">socket_SO_RCVBUF</h3>
+<pre>#define socket_SO_RCVBUF ((<a href="#socket_so">socket_so</a>) 0x1002u)</pre>
+
+<h3 id="socket_SO_SNDLOWAT">socket_SO_SNDLOWAT</h3>
+<pre>#define socket_SO_SNDLOWAT ((<a href="#socket_so">socket_so</a>) 0x1003u)</pre>
+
+<h3 id="socket_SO_RCVLOWAT">socket_SO_RCVLOWAT</h3>
+<pre>#define socket_SO_RCVLOWAT ((<a href="#socket_so">socket_so</a>) 0x1004u)</pre>
+
+<h3 id="socket_SO_SNDTIMEO">socket_SO_SNDTIMEO</h3>
+<pre>#define socket_SO_SNDTIMEO ((<a href="#socket_so">socket_so</a>) 0x1005u)</pre>
+
+<h3 id="socket_SO_RCVTIMEO">socket_SO_RCVTIMEO</h3>
+<pre>#define socket_SO_RCVTIMEO ((<a href="#socket_so">socket_so</a>) 0x1006u)</pre>
+
+<h3 id="socket_SO_ERROR">socket_SO_ERROR</h3>
+<pre>#define socket_SO_ERROR ((<a href="#socket_so">socket_so</a>) 0x1007u)</pre>
+
+<h3 id="socket_SO_TYPE">socket_SO_TYPE</h3>
+<pre>#define socket_SO_TYPE ((<a href="#socket_so">socket_so</a>) 0x1008u)</pre>
+
+<h3 id="socket_IF_NAME_LIMIT">socket_IF_NAME_LIMIT</h3>
+<pre>#define socket_IF_NAME_LIMIT 16</pre>
+
+<h3 id="socket_IF_UP">socket_IF_UP</h3>
+<pre>#define socket_IF_UP ((<a href="#socket_if_flags">socket_if_flags</a>) 0x1u)</pre>
+
+<p>Interface is up</p>
+
+<h3 id="socket_IF_BROADCAST">socket_IF_BROADCAST</h3>
+<pre>#define socket_IF_BROADCAST ((<a href="#socket_if_flags">socket_if_flags</a>) 0x2u)</pre>
+
+<p>Broadcast address valid</p>
+
+<h3 id="socket_IF_DEBUG">socket_IF_DEBUG</h3>
+<pre>#define socket_IF_DEBUG ((<a href="#socket_if_flags">socket_if_flags</a>) 0x4u)</pre>
+
+<p>Turn on debugging</p>
+
+<h3 id="socket_IF_LOOPBACK">socket_IF_LOOPBACK</h3>
+<pre>#define socket_IF_LOOPBACK ((<a href="#socket_if_flags">socket_if_flags</a>) 0x8u)</pre>
+
+<p>Is a loopback net</p>
+
+<h3 id="socket_IF_POINT_TO_POINT">socket_IF_POINT_TO_POINT</h3>
+<pre>#define socket_IF_POINT_TO_POINT ((<a href="#socket_if_flags">socket_if_flags</a>) 0x10u)</pre>
+
+<p>Interface is point-to-point link</p>
+
+<h3 id="socket_IF_NO_TRAILERS">socket_IF_NO_TRAILERS</h3>
+<pre>#define socket_IF_NO_TRAILERS ((<a href="#socket_if_flags">socket_if_flags</a>) 0x20u)</pre>
+
+<p>Avoid use of trailers</p>
+
+<h3 id="socket_IF_RUNNING">socket_IF_RUNNING</h3>
+<pre>#define socket_IF_RUNNING ((<a href="#socket_if_flags">socket_if_flags</a>) 0x40u)</pre>
+
+<p>Resources allocated</p>
+
+<h3 id="socket_IF_NO_ARP">socket_IF_NO_ARP</h3>
+<pre>#define socket_IF_NO_ARP ((<a href="#socket_if_flags">socket_if_flags</a>) 0x80u)</pre>
+
+<p>No address resolution protocol</p>
+
+<h3 id="socket_SIOCSHIWAT">socket_SIOCSHIWAT</h3>
+<pre>#define socket_SIOCSHIWAT ((<a href="#socket_ioctl_no">socket_ioctl_no</a>) 0x80047300u)</pre>
+
+<p>set high watermark (Int)</p>
+
+<h3 id="socket_SIOCGHIWAT">socket_SIOCGHIWAT</h3>
+<pre>#define socket_SIOCGHIWAT ((<a href="#socket_ioctl_no">socket_ioctl_no</a>) 0x40047301u)</pre>
+
+<p>get high watermark (Int)</p>
+
+<h3 id="socket_SIOCSLOWAT">socket_SIOCSLOWAT</h3>
+<pre>#define socket_SIOCSLOWAT ((<a href="#socket_ioctl_no">socket_ioctl_no</a>) 0x80047302u)</pre>
+
+<p>set low watermark (Int)</p>
+
+<h3 id="socket_SIOCGLOWAT">socket_SIOCGLOWAT</h3>
+<pre>#define socket_SIOCGLOWAT ((<a href="#socket_ioctl_no">socket_ioctl_no</a>) 0x40047303u)</pre>
+
+<p>get low watermark (Int)</p>
+
+<h3 id="socket_SIOCATMARK">socket_SIOCATMARK</h3>
+<pre>#define socket_SIOCATMARK ((<a href="#socket_ioctl_no">socket_ioctl_no</a>) 0x40047307u)</pre>
+
+<p>at oob mark? (Int)</p>
+
+<h3 id="socket_SIOCSIFADDR">socket_SIOCSIFADDR</h3>
+<pre>#define socket_SIOCSIFADDR ((<a href="#socket_ioctl_no">socket_ioctl_no</a>) 0x8020690Cu)</pre>
+
+<p>set ifnet address (Socket_Ifreq)</p>
+
+<h3 id="socket_SIOCGIFADDR">socket_SIOCGIFADDR</h3>
+<pre>#define socket_SIOCGIFADDR ((<a href="#socket_ioctl_no">socket_ioctl_no</a>) 0xC020690Du)</pre>
+
+<p>get ifnet address (Socket_Ifreq)</p>
+
+<h3 id="socket_SIOCSIFDSTADDR">socket_SIOCSIFDSTADDR</h3>
+<pre>#define socket_SIOCSIFDSTADDR ((<a href="#socket_ioctl_no">socket_ioctl_no</a>) 0x8020690Eu)</pre>
+
+<p>set p-p address (Socket_Ifreq)</p>
+
+<h3 id="socket_SIOCGIFDSTADDR">socket_SIOCGIFDSTADDR</h3>
+<pre>#define socket_SIOCGIFDSTADDR ((<a href="#socket_ioctl_no">socket_ioctl_no</a>) 0xC020690Fu)</pre>
+
+<p>get p-p address (Socket_Ifreq)</p>
+
+<h3 id="socket_SIOCSIFFLAGS">socket_SIOCSIFFLAGS</h3>
+<pre>#define socket_SIOCSIFFLAGS ((<a href="#socket_ioctl_no">socket_ioctl_no</a>) 0x80206910u)</pre>
+
+<p>set ifnet flags (Socket_Ifreq)</p>
+
+<h3 id="socket_SIOCGIFFLAGS">socket_SIOCGIFFLAGS</h3>
+<pre>#define socket_SIOCGIFFLAGS ((<a href="#socket_ioctl_no">socket_ioctl_no</a>) 0xC0206911u)</pre>
+
+<p>get ifnet flags (Socket_Ifreq)</p>
+
+<h3 id="socket_SIOCGIFBRDADDR">socket_SIOCGIFBRDADDR</h3>
+<pre>#define socket_SIOCGIFBRDADDR ((<a href="#socket_ioctl_no">socket_ioctl_no</a>) 0xC0206912u)</pre>
+
+<p>get broadcast addr (Socket_Ifreq)</p>
+
+<h3 id="socket_SIOCSIFBRDADDR">socket_SIOCSIFBRDADDR</h3>
+<pre>#define socket_SIOCSIFBRDADDR ((<a href="#socket_ioctl_no">socket_ioctl_no</a>) 0x80206913u)</pre>
+
+<p>set broadcast addr (Socket_Ifreq)</p>
+
+<h3 id="socket_SIOCGIFCONF">socket_SIOCGIFCONF</h3>
+<pre>#define socket_SIOCGIFCONF ((<a href="#socket_ioctl_no">socket_ioctl_no</a>) 0xC0086914u)</pre>
+
+<p>get ifnet list (Socket_Ifconf)</p>
+
+<h3 id="socket_SIOCGIFNETMASK">socket_SIOCGIFNETMASK</h3>
+<pre>#define socket_SIOCGIFNETMASK ((<a href="#socket_ioctl_no">socket_ioctl_no</a>) 0xC0206915u)</pre>
+
+<p>get net addr mask (Socket_Ifreq)</p>
+
+<h3 id="socket_SIOCSIFNETMASK">socket_SIOCSIFNETMASK</h3>
+<pre>#define socket_SIOCSIFNETMASK ((<a href="#socket_ioctl_no">socket_ioctl_no</a>) 0x80206916u)</pre>
+
+<p>set net addr mask (Socket_Ifreq)</p>
+
+<h3 id="socket_SIOCGIFMETRIC">socket_SIOCGIFMETRIC</h3>
+<pre>#define socket_SIOCGIFMETRIC ((<a href="#socket_ioctl_no">socket_ioctl_no</a>) 0xC0206917u)</pre>
+
+<p>get IF metric (Socket_Ifreq)</p>
+
+<h3 id="socket_SIOCSIFMETRIC">socket_SIOCSIFMETRIC</h3>
+<pre>#define socket_SIOCSIFMETRIC ((<a href="#socket_ioctl_no">socket_ioctl_no</a>) 0x80206918u)</pre>
+
+<p>set IF metric (Socket_Ifreq)</p>
+
+<h3 id="socket_FIOSLEEPTW">socket_FIOSLEEPTW</h3>
+<pre>#define socket_FIOSLEEPTW ((<a href="#socket_ioctl_no">socket_ioctl_no</a>) 0x80046679u)</pre>
+
+<p>set/clear taskwindow sleep support (Int)</p>
+
+<h3 id="socket_FIONREAD">socket_FIONREAD</h3>
+<pre>#define socket_FIONREAD ((<a href="#socket_ioctl_no">socket_ioctl_no</a>) 0x4004667Fu)</pre>
+
+<p>get number of bytes to read (Int)</p>
+
+<h3 id="socket_FIONBIO">socket_FIONBIO</h3>
+<pre>#define socket_FIONBIO ((<a href="#socket_ioctl_no">socket_ioctl_no</a>) 0x8004667Eu)</pre>
+
+<p>set/clear non-blocking i/o (Int)</p>
+
+<h3 id="socket_FIOASYNC">socket_FIOASYNC</h3>
+<pre>#define socket_FIOASYNC ((<a href="#socket_ioctl_no">socket_ioctl_no</a>) 0x8004667Du)</pre>
+
+<p>set/clear async i/o (Int)</p>
+
+<h3 id="socket_FIOPOLLWORD">socket_FIOPOLLWORD</h3>
+<pre>#define socket_FIOPOLLWORD ((<a href="#socket_ioctl_no">socket_ioctl_no</a>) 0x80086678u)</pre>
+
+<p>set/clear pollword (Socket_Pwstruct) - RISC OS 4.32+</p>
+
+<h3 id="socket_MSG_OOB">socket_MSG_OOB</h3>
+<pre>#define socket_MSG_OOB ((<a href="#socket_msg_flags">socket_msg_flags</a>) 0x1u)</pre>
+
+<h3 id="socket_MSG_PEEK">socket_MSG_PEEK</h3>
+<pre>#define socket_MSG_PEEK ((<a href="#socket_msg_flags">socket_msg_flags</a>) 0x2u)</pre>
+
+<h3 id="socket_MSG_DONTROUTE">socket_MSG_DONTROUTE</h3>
+<pre>#define socket_MSG_DONTROUTE ((<a href="#socket_msg_flags">socket_msg_flags</a>) 0x4u)</pre>
+
+<h3 id="socket_SHUTDOWN_RECV">socket_SHUTDOWN_RECV</h3>
+<pre>#define socket_SHUTDOWN_RECV ((<a href="#socket_shutdown_type">socket_shutdown_type</a>) 0x0u)</pre>
+
+<h3 id="socket_SHUTDOWN_SEND">socket_SHUTDOWN_SEND</h3>
+<pre>#define socket_SHUTDOWN_SEND ((<a href="#socket_shutdown_type">socket_shutdown_type</a>) 0x1u)</pre>
+
+<h3 id="socket_SHUTDOWN_ALL">socket_SHUTDOWN_ALL</h3>
+<pre>#define socket_SHUTDOWN_ALL ((<a href="#socket_shutdown_type">socket_shutdown_type</a>) 0x2u)</pre>
+
+<h3 id="socket_ASYNC_EVENT">socket_ASYNC_EVENT</h3>
+<pre>#define socket_ASYNC_EVENT ((<a href="#socket_event_type">socket_event_type</a>) 0x1u)</pre>
+
+<h3 id="socket_URGENT_EVENT">socket_URGENT_EVENT</h3>
+<pre>#define socket_URGENT_EVENT ((<a href="#socket_event_type">socket_event_type</a>) 0x2u)</pre>
+
+<h3 id="socket_BROKEN_EVENT">socket_BROKEN_EVENT</h3>
+<pre>#define socket_BROKEN_EVENT ((<a href="#socket_event_type">socket_event_type</a>) 0x3u)</pre>
+
+<h3 id="xsocket_creat">xsocket_creat</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_creat (<a href="#socket_af">socket_af</a> af,
+      <a href="#socket_sock">socket_sock</a> sock,
+      <a href="#socket_ipproto">socket_ipproto</a> proto,
+      <a href="#socket_s">socket_s</a> *s);</pre>
+<p>Creates an endpoint for communication</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>af</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>sock</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>proto</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="socket_creat">socket_creat</h3>
+<pre>extern <a href="#socket_s">socket_s</a> socket_creat (<a href="#socket_af">socket_af</a> af,
+      <a href="#socket_sock">socket_sock</a> sock,
+      <a href="#socket_ipproto">socket_ipproto</a> proto);</pre>
+<p>Creates an endpoint for communication</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>af</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>sock</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>proto</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>s</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsocket_bind">xsocket_bind</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_bind (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_sockaddr">socket_sockaddr</a> const *sockaddr,
+      int namelen);</pre>
+<p>Binds a name to a socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>sockaddr</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>namelen</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="socket_bind">socket_bind</h3>
+<pre>extern void socket_bind (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_sockaddr">socket_sockaddr</a> const *sockaddr,
+      int namelen);</pre>
+<p>Binds a name to a socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>sockaddr</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>namelen</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xsocket_listen">xsocket_listen</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_listen (<a href="#socket_s">socket_s</a> s,
+      int backlog);</pre>
+<p>Listens for connections on a socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>backlog</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="socket_listen">socket_listen</h3>
+<pre>extern void socket_listen (<a href="#socket_s">socket_s</a> s,
+      int backlog);</pre>
+<p>Listens for connections on a socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>backlog</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xsocket_accept">xsocket_accept</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_accept (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_sockaddr">socket_sockaddr</a> *sockaddr,
+      int *addrlen,
+      <a href="#socket_s">socket_s</a> *ns);</pre>
+<p>Accepts a connection on a socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>sockaddr</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>addrlen</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>ns</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="socket_accept">socket_accept</h3>
+<pre>extern <a href="#socket_s">socket_s</a> socket_accept (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_sockaddr">socket_sockaddr</a> *sockaddr,
+      int *addrlen);</pre>
+<p>Accepts a connection on a socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>sockaddr</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>addrlen</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>ns</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsocket_connect">xsocket_connect</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_connect (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_sockaddr">socket_sockaddr</a> *sockaddr,
+      int namelen);</pre>
+<p>Initiates a connection on a socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>sockaddr</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>namelen</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="socket_connect">socket_connect</h3>
+<pre>extern void socket_connect (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_sockaddr">socket_sockaddr</a> *sockaddr,
+      int namelen);</pre>
+<p>Initiates a connection on a socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>sockaddr</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>namelen</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xsocket_recv">xsocket_recv</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_recv (<a href="#socket_s">socket_s</a> s,
+      byte *buf,
+      int len,
+      <a href="#socket_msg_flags">socket_msg_flags</a> flags,
+      int *cc);</pre>
+<p>Receives data from a connected socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buf</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>len</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>cc</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="socket_recv">socket_recv</h3>
+<pre>extern int socket_recv (<a href="#socket_s">socket_s</a> s,
+      byte *buf,
+      int len,
+      <a href="#socket_msg_flags">socket_msg_flags</a> flags);</pre>
+<p>Receives data from a connected socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buf</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>len</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>cc</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsocket_recvfrom">xsocket_recvfrom</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_recvfrom (<a href="#socket_s">socket_s</a> s,
+      byte *buf,
+      int len,
+      <a href="#socket_msg_flags">socket_msg_flags</a> flags,
+      <a href="#socket_sockaddr">socket_sockaddr</a> *from,
+      int *fromlen,
+      int *cc);</pre>
+<p>Receives data from a socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buf</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>len</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>from</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>fromlen</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>cc</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="socket_recvfrom">socket_recvfrom</h3>
+<pre>extern int socket_recvfrom (<a href="#socket_s">socket_s</a> s,
+      byte *buf,
+      int len,
+      <a href="#socket_msg_flags">socket_msg_flags</a> flags,
+      <a href="#socket_sockaddr">socket_sockaddr</a> *from,
+      int *fromlen);</pre>
+<p>Receives data from a socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buf</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>len</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>from</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>fromlen</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>cc</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsocket_recvmsg">xsocket_recvmsg</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_recvmsg (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_msghdr">socket_msghdr</a> *msg,
+      <a href="#socket_msg_flags">socket_msg_flags</a> flags,
+      int *cc);</pre>
+<p>Receives a message from a socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>msg</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>cc</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="socket_recvmsg">socket_recvmsg</h3>
+<pre>extern int socket_recvmsg (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_msghdr">socket_msghdr</a> *msg,
+      <a href="#socket_msg_flags">socket_msg_flags</a> flags);</pre>
+<p>Receives a message from a socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>msg</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>cc</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsocket_send">xsocket_send</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_send (<a href="#socket_s">socket_s</a> s,
+      byte const *msg,
+      int len,
+      <a href="#socket_msg_flags">socket_msg_flags</a> flags,
+      int *cc);</pre>
+<p>Sends data from a connected socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>msg</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>len</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>cc</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="socket_send">socket_send</h3>
+<pre>extern int socket_send (<a href="#socket_s">socket_s</a> s,
+      byte const *msg,
+      int len,
+      <a href="#socket_msg_flags">socket_msg_flags</a> flags);</pre>
+<p>Sends data from a connected socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>msg</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>len</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>cc</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsocket_sendto">xsocket_sendto</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_sendto (<a href="#socket_s">socket_s</a> s,
+      byte const *msg,
+      int len,
+      <a href="#socket_msg_flags">socket_msg_flags</a> flags,
+      <a href="#socket_sockaddr">socket_sockaddr</a> const *to,
+      int tolen,
+      int *cc);</pre>
+<p>Sends data from a socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>msg</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>len</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>to</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>tolen</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>cc</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="socket_sendto">socket_sendto</h3>
+<pre>extern int socket_sendto (<a href="#socket_s">socket_s</a> s,
+      byte const *msg,
+      int len,
+      <a href="#socket_msg_flags">socket_msg_flags</a> flags,
+      <a href="#socket_sockaddr">socket_sockaddr</a> const *to,
+      int tolen);</pre>
+<p>Sends data from a socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>msg</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>len</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>to</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>tolen</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>cc</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsocket_sendmsg">xsocket_sendmsg</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_sendmsg (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_msghdr">socket_msghdr</a> const *msg,
+      <a href="#socket_msg_flags">socket_msg_flags</a> flags,
+      int *cc);</pre>
+<p>Sends a message from a socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>msg</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>cc</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="socket_sendmsg">socket_sendmsg</h3>
+<pre>extern int socket_sendmsg (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_msghdr">socket_msghdr</a> const *msg,
+      <a href="#socket_msg_flags">socket_msg_flags</a> flags);</pre>
+<p>Sends a message from a socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>msg</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>cc</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsocket_shutdown">xsocket_shutdown</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_shutdown (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_shutdown_type">socket_shutdown_type</a> type);</pre>
+<p>Shuts down part of a full-duplex connection</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="socket_shutdown">socket_shutdown</h3>
+<pre>extern void socket_shutdown (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_shutdown_type">socket_shutdown_type</a> type);</pre>
+<p>Shuts down part of a full-duplex connection</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xsocket_setsockopt">xsocket_setsockopt</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_setsockopt (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_level">socket_level</a> level,
+      <a href="#socket_so">socket_so</a> optname,
+      byte const *optval,
+      int optlen);</pre>
+<p>Set options on sockets</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>level</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>optname</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>optval</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>optlen</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="socket_setsockopt">socket_setsockopt</h3>
+<pre>extern void socket_setsockopt (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_level">socket_level</a> level,
+      <a href="#socket_so">socket_so</a> optname,
+      byte const *optval,
+      int optlen);</pre>
+<p>Set options on sockets</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>level</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>optname</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>optval</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>optlen</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xsocket_getsockopt">xsocket_getsockopt</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_getsockopt (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_level">socket_level</a> level,
+      <a href="#socket_so">socket_so</a> optname,
+      byte *optval,
+      int *optlen);</pre>
+<p>Get options on sockets</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>level</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>optname</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>optval</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>optlen</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="socket_getsockopt">socket_getsockopt</h3>
+<pre>extern void socket_getsockopt (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_level">socket_level</a> level,
+      <a href="#socket_so">socket_so</a> optname,
+      byte *optval,
+      int *optlen);</pre>
+<p>Get options on sockets</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>level</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>optname</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>optval</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>optlen</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xsocket_getpeername">xsocket_getpeername</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_getpeername (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_sockaddr">socket_sockaddr</a> *sockaddr,
+      int *namelen);</pre>
+<p>Gets name of connected peer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>sockaddr</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>namelen</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="socket_getpeername">socket_getpeername</h3>
+<pre>extern void socket_getpeername (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_sockaddr">socket_sockaddr</a> *sockaddr,
+      int *namelen);</pre>
+<p>Gets name of connected peer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>sockaddr</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>namelen</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xsocket_getsockname">xsocket_getsockname</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_getsockname (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_sockaddr">socket_sockaddr</a> *sockaddr,
+      int *namelen);</pre>
+<p>Gets socket name</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>sockaddr</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>namelen</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="socket_getsockname">socket_getsockname</h3>
+<pre>extern void socket_getsockname (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_sockaddr">socket_sockaddr</a> *sockaddr,
+      int *namelen);</pre>
+<p>Gets socket name</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>sockaddr</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>namelen</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xsocket_close">xsocket_close</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_close (<a href="#socket_s">socket_s</a> s);</pre>
+<p>Closes an open socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="socket_close">socket_close</h3>
+<pre>extern void socket_close (<a href="#socket_s">socket_s</a> s);</pre>
+<p>Closes an open socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xsocket_select">xsocket_select</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_select (int nfds,
+      <a href="#socket_fdset">socket_fdset</a> const *readfds,
+      <a href="#socket_fdset">socket_fdset</a> const *writefds,
+      <a href="#socket_fdset">socket_fdset</a> const *exceptfds,
+      <a href="#socket_timeval">socket_timeval</a> const *timeout,
+      int *nfound);</pre>
+<p>Synchronous socket i/o multiplexing</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>nfds</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>readfds</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>writefds</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exceptfds</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>timeout</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>nfound</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="socket_select">socket_select</h3>
+<pre>extern int socket_select (int nfds,
+      <a href="#socket_fdset">socket_fdset</a> const *readfds,
+      <a href="#socket_fdset">socket_fdset</a> const *writefds,
+      <a href="#socket_fdset">socket_fdset</a> const *exceptfds,
+      <a href="#socket_timeval">socket_timeval</a> const *timeout);</pre>
+<p>Synchronous socket i/o multiplexing</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>nfds</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>readfds</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>writefds</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exceptfds</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>timeout</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>nfound</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsocket_ioctl">xsocket_ioctl</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_ioctl (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_ioctl_no">socket_ioctl_no</a> flags,
+      byte *argp);</pre>
+<p>Controls an open socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>argp</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="socket_ioctl">socket_ioctl</h3>
+<pre>extern void socket_ioctl (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_ioctl_no">socket_ioctl_no</a> flags,
+      byte *argp);</pre>
+<p>Controls an open socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>argp</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xsocket_read">xsocket_read</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_read (<a href="#socket_s">socket_s</a> s,
+      byte *buf,
+      int len,
+      int *cc);</pre>
+<p>Receives data from a connected socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buf</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>len</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>cc</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="socket_read">socket_read</h3>
+<pre>extern int socket_read (<a href="#socket_s">socket_s</a> s,
+      byte *buf,
+      int len);</pre>
+<p>Receives data from a connected socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buf</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>len</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>cc</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsocket_write">xsocket_write</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_write (<a href="#socket_s">socket_s</a> s,
+      byte const *msg,
+      int len,
+      int *cc);</pre>
+<p>Sends data from a connected socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>msg</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>len</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>cc</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="socket_write">socket_write</h3>
+<pre>extern int socket_write (<a href="#socket_s">socket_s</a> s,
+      byte const *msg,
+      int len);</pre>
+<p>Sends data from a connected socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>msg</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>len</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>cc</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsocket_readv">xsocket_readv</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_readv (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_iovec">socket_iovec</a> *iov,
+      int iov_count,
+      int *cc);</pre>
+<p>Receives data from a connected socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iov</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>iov_count</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>cc</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="socket_readv">socket_readv</h3>
+<pre>extern int socket_readv (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_iovec">socket_iovec</a> *iov,
+      int iov_count);</pre>
+<p>Receives data from a connected socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iov</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>iov_count</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>cc</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsocket_writev">xsocket_writev</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_writev (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_iovec">socket_iovec</a> const *iov,
+      int iov_count,
+      int *cc);</pre>
+<p>Sends data from a connected socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iov</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>iov_count</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>cc</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="socket_writev">socket_writev</h3>
+<pre>extern int socket_writev (<a href="#socket_s">socket_s</a> s,
+      <a href="#socket_iovec">socket_iovec</a> const *iov,
+      int iov_count);</pre>
+<p>Sends data from a connected socket</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iov</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>iov_count</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>cc</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsocket_gettsize">xsocket_gettsize</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_gettsize (int *size);</pre>
+<p>Gets the size of the socket table</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="socket_gettsize">socket_gettsize</h3>
+<pre>extern int socket_gettsize (void);
+</pre><p>Gets the size of the socket table</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsocket_version">xsocket_version</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_version (int *n);</pre>
+<p>Reads the version of Internet that is present</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>n</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="socket_version">socket_version</h3>
+<pre>extern int socket_version (void);
+</pre><p>Reads the version of Internet that is present</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>n</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsocket_filter_deregister">xsocket_filter_deregister</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_filter_deregister (<a href="#socket_af">socket_af</a> addr_family,
+      int prot_hash,
+      asm_routine routine,
+      int priv_word);</pre>
+<p>Deregister a filter with the Internet module - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>addr_family</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>prot_hash</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>routine</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>priv_word</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="socket_filter_deregister">socket_filter_deregister</h3>
+<pre>extern void socket_filter_deregister (<a href="#socket_af">socket_af</a> addr_family,
+      int prot_hash,
+      asm_routine routine,
+      int priv_word);</pre>
+<p>Deregister a filter with the Internet module - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>addr_family</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>prot_hash</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>routine</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>priv_word</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xsocket_filter_register">xsocket_filter_register</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsocket_filter_register (<a href="#socket_af">socket_af</a> addr_family,
+      int prot_hash,
+      asm_routine routine,
+      int priv_word);</pre>
+<p>Register a filter with the Internet module - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>addr_family</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>prot_hash</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>routine</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>priv_word</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="socket_filter_register">socket_filter_register</h3>
+<pre>extern void socket_filter_register (<a href="#socket_af">socket_af</a> addr_family,
+      int prot_hash,
+      asm_routine routine,
+      int priv_word);</pre>
+<p>Register a filter with the Internet module - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>addr_family</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>prot_hash</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>routine</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>priv_word</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xevent_internet">xevent_internet</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xevent_internet (<a href="#socket_event_type">socket_event_type</a> event_type,
+      <a href="#socket_s">socket_s</a> s);</pre>
+<p>Internet event</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>event_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>s</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="event_internet">event_internet</h3>
+<pre>extern void event_internet (<a href="#socket_event_type">socket_event_type</a> event_type,
+      <a href="#socket_s">socket_s</a> s);</pre>
+<p>Internet event</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>event_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>s</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xeventinternet_async">xeventinternet_async</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeventinternet_async (<a href="#socket_s">socket_s</a> s);</pre>
+<p>A socket has input waiting to be read</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="eventinternet_async">eventinternet_async</h3>
+<pre>extern void eventinternet_async (<a href="#socket_s">socket_s</a> s);</pre>
+<p>A socket has input waiting to be read</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xeventinternet_urgent">xeventinternet_urgent</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeventinternet_urgent (<a href="#socket_s">socket_s</a> s);</pre>
+<p>An urgent event has occurred</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="eventinternet_urgent">eventinternet_urgent</h3>
+<pre>extern void eventinternet_urgent (<a href="#socket_s">socket_s</a> s);</pre>
+<p>An urgent event has occurred</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xeventinternet_broken">xeventinternet_broken</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeventinternet_broken (<a href="#socket_s">socket_s</a> s);</pre>
+<p>A socket connection is broken</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="eventinternet_broken">eventinternet_broken</h3>
+<pre>extern void eventinternet_broken (<a href="#socket_s">socket_s</a> s);</pre>
+<p>A socket connection is broken</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xeventinternet_rarp_reply">xeventinternet_rarp_reply</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeventinternet_rarp_reply (bits addr,
+      bits req_addr);</pre>
+<p>A RevARP server has replied to a RevARP request (PRM 5a-341)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>addr</code></td><td>IP address of replying server</td><td><code>R2</code></td></tr>
+<tr><td><code>req_addr</code></td><td>IP address of requesting station</td><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="eventinternet_rarp_reply">eventinternet_rarp_reply</h3>
+<pre>extern void eventinternet_rarp_reply (bits addr,
+      bits req_addr);</pre>
+<p>A RevARP server has replied to a RevARP request (PRM 5a-341)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>addr</code></td><td>IP address of replying server</td><td><code>R2</code></td></tr>
+<tr><td><code>req_addr</code></td><td>IP address of requesting station</td><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xservice_internet_status8">xservice_internet_status8</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_internet_status8 (char const *interface_name,
+      byte const *dib,
+      int ip_address,
+      byte const *hw_address,
+      osbool *unclaimed);</pre>
+<p>Duplicate IP address has been detected</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>interface_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dib</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>ip_address</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>hw_address</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="service_internet_status8">service_internet_status8</h3>
+<pre>extern osbool service_internet_status8 (char const *interface_name,
+      byte const *dib,
+      int ip_address,
+      byte const *hw_address);</pre>
+<p>Duplicate IP address has been detected</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>interface_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dib</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>ip_address</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>hw_address</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

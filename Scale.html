@@ -1,0 +1,392 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Scale</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Scale</h2>
+
+<pre>#include "oslib/scale.h"</pre>
+
+<h3 id="scale_flags">scale_flags</h3>
+<pre>typedef bits scale_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#scale_GENERATE_ABOUT_TO_BE_SHOWN">scale_GENERATE_ABOUT_TO_BE_SHOWN</a></dd>
+<dd><a href="#scale_GENERATE_DIALOGUE_COMPLETED">scale_GENERATE_DIALOGUE_COMPLETED</a></dd>
+<dd><a href="#scale_INCLUDE_SCALE_TO_FIT">scale_INCLUDE_SCALE_TO_FIT</a></dd>
+</dl>
+
+<h3 id="scale_object">scale_object</h3>
+<pre>typedef struct
+   {  <a href="#scale_flags">scale_flags</a> flags;
+      int lower_bound;
+      int upper_bound;
+      int step_size;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> title;
+      int title_limit;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> alternative_window_name;
+      int std_value [4];
+   }
+   scale_object;</pre>
+
+<p>Structure to describe Object for in-memory construction - referenced from Toolbox_Template</p>
+
+<h3 id="scale_object_template">scale_object_template</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_RESOURCE_FILE_OBJECT_MEMBERS">toolbox_RESOURCE_FILE_OBJECT_MEMBERS</a>
+      <a href="#scale_flags">scale_flags</a> objectflags;
+      int lower_bound;
+      int upper_bound;
+      int step_size;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> title;
+      int title_limit;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> alternative_window_name;
+      int std_value [4];
+   }
+   scale_object_template;</pre>
+
+<h3 id="scale_full">scale_full</h3>
+<pre>typedef <a href="toolbox.html#toolbox_full">toolbox_full</a> scale_full;</pre>
+
+<h3 id="scale_action_about_to_be_shown">scale_action_about_to_be_shown</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#scale_full">scale_full</a> full;
+      }
+      position;
+   }
+   scale_action_about_to_be_shown;</pre>
+
+<p>Prefer Scale_ActionAboutToBeShownBlock</p>
+
+<h3 id="scale_action_apply_factor">scale_action_apply_factor</h3>
+<pre>typedef struct
+   {  int percent;
+   }
+   scale_action_apply_factor;</pre>
+
+<p>Prefer Scale_ActionApplyFactorBlock</p>
+
+<h3 id="scale_action_about_to_be_shown_block">scale_action_about_to_be_shown_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#scale_full">scale_full</a> full;
+      }
+      position;
+   }
+   scale_action_about_to_be_shown_block;</pre>
+
+<h3 id="scale_action_dialogue_completed_block">scale_action_dialogue_completed_block</h3>
+<pre>typedef <a href="toolbox.html#toolbox_action_header_base">toolbox_action_header_base</a> scale_action_dialogue_completed_block;</pre>
+
+<h3 id="scale_action_apply_factor_block">scale_action_apply_factor_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      int percent;
+   }
+   scale_action_apply_factor_block;</pre>
+
+<h3 id="class_SCALE">class_SCALE</h3>
+<pre>#define class_SCALE ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x82C00u)</pre>
+
+<h3 id="scale_GENERATE_ABOUT_TO_BE_SHOWN">scale_GENERATE_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define scale_GENERATE_ABOUT_TO_BE_SHOWN ((<a href="#scale_flags">scale_flags</a>) 0x1u)</pre>
+
+<h3 id="scale_GENERATE_DIALOGUE_COMPLETED">scale_GENERATE_DIALOGUE_COMPLETED</h3>
+<pre>#define scale_GENERATE_DIALOGUE_COMPLETED ((<a href="#scale_flags">scale_flags</a>) 0x2u)</pre>
+
+<h3 id="scale_INCLUDE_SCALE_TO_FIT">scale_INCLUDE_SCALE_TO_FIT</h3>
+<pre>#define scale_INCLUDE_SCALE_TO_FIT ((<a href="#scale_flags">scale_flags</a>) 0x4u)</pre>
+
+<h3 id="scale_PERCENT">scale_PERCENT</h3>
+<pre>#define scale_PERCENT ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82C000u)</pre>
+
+<h3 id="scale_STD_VALUE0">scale_STD_VALUE0</h3>
+<pre>#define scale_STD_VALUE0 ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82C001u)</pre>
+
+<h3 id="scale_STD_VALUE1">scale_STD_VALUE1</h3>
+<pre>#define scale_STD_VALUE1 ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82C002u)</pre>
+
+<h3 id="scale_STD_VALUE2">scale_STD_VALUE2</h3>
+<pre>#define scale_STD_VALUE2 ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82C003u)</pre>
+
+<h3 id="scale_STD_VALUE3">scale_STD_VALUE3</h3>
+<pre>#define scale_STD_VALUE3 ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82C004u)</pre>
+
+<h3 id="scale_CANCEL">scale_CANCEL</h3>
+<pre>#define scale_CANCEL ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82C005u)</pre>
+
+<h3 id="scale_SCALE">scale_SCALE</h3>
+<pre>#define scale_SCALE ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82C006u)</pre>
+
+<h3 id="scale_PERCENT_LABEL">scale_PERCENT_LABEL</h3>
+<pre>#define scale_PERCENT_LABEL ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82C007u)</pre>
+
+<h3 id="scale_SCALE_LABEL">scale_SCALE_LABEL</h3>
+<pre>#define scale_SCALE_LABEL ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82C008u)</pre>
+
+<h3 id="scale_SCALE_TO_FIT">scale_SCALE_TO_FIT</h3>
+<pre>#define scale_SCALE_TO_FIT ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82C009u)</pre>
+
+<h3 id="action_SCALE_ABOUT_TO_BE_SHOWN">action_SCALE_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define action_SCALE_ABOUT_TO_BE_SHOWN 0x82C00u</pre>
+
+<h3 id="action_SCALE_DIALOGUE_COMPLETED">action_SCALE_DIALOGUE_COMPLETED</h3>
+<pre>#define action_SCALE_DIALOGUE_COMPLETED 0x82C01u</pre>
+
+<h3 id="action_SCALE_APPLY_FACTOR">action_SCALE_APPLY_FACTOR</h3>
+<pre>#define action_SCALE_APPLY_FACTOR 0x82C02u</pre>
+
+<h3 id="error_SCALE_TASKS_ACTIVE">error_SCALE_TASKS_ACTIVE</h3>
+<pre>#define error_SCALE_TASKS_ACTIVE 0x80B700u</pre>
+
+<h3 id="error_SCALE_ALLOC_FAILED">error_SCALE_ALLOC_FAILED</h3>
+<pre>#define error_SCALE_ALLOC_FAILED 0x80B701u</pre>
+
+<h3 id="error_SCALE_SHORT_BUFFER">error_SCALE_SHORT_BUFFER</h3>
+<pre>#define error_SCALE_SHORT_BUFFER 0x80B702u</pre>
+
+<h3 id="error_SCALE_NO_SUCH_TASK">error_SCALE_NO_SUCH_TASK</h3>
+<pre>#define error_SCALE_NO_SUCH_TASK 0x80B711u</pre>
+
+<h3 id="error_SCALE_NO_SUCH_METHOD">error_SCALE_NO_SUCH_METHOD</h3>
+<pre>#define error_SCALE_NO_SUCH_METHOD 0x80B712u</pre>
+
+<h3 id="error_SCALE_NO_SUCH_MISC_OP_METHOD">error_SCALE_NO_SUCH_MISC_OP_METHOD</h3>
+<pre>#define error_SCALE_NO_SUCH_MISC_OP_METHOD 0x80B713u</pre>
+
+<h3 id="scale_SET_LOWER_BOUND">scale_SET_LOWER_BOUND</h3>
+<pre>#define scale_SET_LOWER_BOUND 0x1u</pre>
+
+<h3 id="scale_SET_UPPER_BOUND">scale_SET_UPPER_BOUND</h3>
+<pre>#define scale_SET_UPPER_BOUND 0x2u</pre>
+
+<h3 id="scale_SET_STEP_SIZE">scale_SET_STEP_SIZE</h3>
+<pre>#define scale_SET_STEP_SIZE 0x4u</pre>
+
+<h3 id="xscale_get_window_id">xscale_get_window_id</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscale_get_window_id (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> scale,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *window);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>scale</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>window</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="scale_get_window_id">scale_get_window_id</h3>
+<pre>extern <a href="toolbox.html#toolbox_o">toolbox_o</a> scale_get_window_id (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> scale);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>scale</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>window</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xscale_set_value">xscale_set_value</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscale_set_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> scale,
+      int value);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>scale</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>value</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="scale_set_value">scale_set_value</h3>
+<pre>extern void scale_set_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> scale,
+      int value);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>scale</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>value</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xscale_get_value">xscale_get_value</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscale_get_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> scale,
+      int *value);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>scale</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>value</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="scale_get_value">scale_get_value</h3>
+<pre>extern int scale_get_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> scale);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>scale</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>value</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xscale_set_bounds">xscale_set_bounds</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscale_set_bounds (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> scale,
+      int lower_bound,
+      int upper_bound,
+      int step_size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>scale</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>lower_bound</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>upper_bound</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>step_size</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="scale_set_bounds">scale_set_bounds</h3>
+<pre>extern void scale_set_bounds (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> scale,
+      int lower_bound,
+      int upper_bound,
+      int step_size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>scale</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>lower_bound</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>upper_bound</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>step_size</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xscale_get_bounds">xscale_get_bounds</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscale_get_bounds (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> scale,
+      int *lower_bound,
+      int *upper_bound,
+      int *step_size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>scale</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>lower_bound</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>upper_bound</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>step_size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="scale_get_bounds">scale_get_bounds</h3>
+<pre>extern void scale_get_bounds (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> scale,
+      int *lower_bound,
+      int *upper_bound,
+      int *step_size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>scale</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>lower_bound</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>upper_bound</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>step_size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xscale_set_title">xscale_set_title</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscale_set_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> scale,
+      char const *title);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>scale</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="scale_set_title">scale_set_title</h3>
+<pre>extern void scale_set_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> scale,
+      char const *title);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>scale</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xscale_get_title">xscale_get_title</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscale_get_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> scale,
+      char *buffer,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>scale</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="scale_get_title">scale_get_title</h3>
+<pre>extern int scale_get_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> scale,
+      char *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>scale</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

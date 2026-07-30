@@ -1,0 +1,593 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; SaveAs</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>SaveAs</h2>
+
+<pre>#include "oslib/saveas.h"</pre>
+
+<h3 id="saveas_flags">saveas_flags</h3>
+<pre>typedef bits saveas_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#saveas_GENERATE_ABOUT_TO_BE_SHOWN">saveas_GENERATE_ABOUT_TO_BE_SHOWN</a></dd>
+<dd><a href="#saveas_GENERATE_DIALOGUE_COMPLETED">saveas_GENERATE_DIALOGUE_COMPLETED</a></dd>
+<dd><a href="#saveas_NO_SELECTION_BUTTON">saveas_NO_SELECTION_BUTTON</a></dd>
+<dd><a href="#saveas_GIVEN_DATA">saveas_GIVEN_DATA</a></dd>
+<dd><a href="#saveas_CLIENT_SUPPORTS_RAM_TRANSFER">saveas_CLIENT_SUPPORTS_RAM_TRANSFER</a></dd>
+</dl>
+
+<h3 id="saveas_object">saveas_object</h3>
+<pre>typedef struct
+   {  <a href="#saveas_flags">saveas_flags</a> flags;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> file_name;
+      bits file_type;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> title;
+      int title_limit;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> alternative_window_name;
+   }
+   saveas_object;</pre>
+
+<p>Structure to describe Object for in-memory construction - referenced from Toolbox_Template</p>
+
+<h3 id="saveas_object_template">saveas_object_template</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_RESOURCE_FILE_OBJECT_MEMBERS">toolbox_RESOURCE_FILE_OBJECT_MEMBERS</a>
+      <a href="#saveas_flags">saveas_flags</a> objectflags;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> file_name;
+      bits file_type;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> title;
+      int title_limit;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> alternative_window_name;
+   }
+   saveas_object_template;</pre>
+
+<h3 id="saveas_full">saveas_full</h3>
+<pre>typedef <a href="toolbox.html#toolbox_full">toolbox_full</a> saveas_full;</pre>
+
+<h3 id="saveas_action_about_to_be_shown">saveas_action_about_to_be_shown</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#saveas_full">saveas_full</a> full;
+      }
+      position;
+   }
+   saveas_action_about_to_be_shown;</pre>
+
+<p>Prefer SaveAs_ActionAboutToBeShownBlock</p>
+
+<h3 id="saveas_action_save_to_file">saveas_action_save_to_file</h3>
+<pre>typedef struct
+   {  char file_name [212];
+   }
+   saveas_action_save_to_file;</pre>
+
+<p>Prefer SaveAs_ActionSaveToFileBlock</p>
+
+<h3 id="saveas_action_fill_buffer">saveas_action_fill_buffer</h3>
+<pre>typedef struct
+   {  int size;
+      byte *buffer;
+      int size_saved;
+   }
+   saveas_action_fill_buffer;</pre>
+
+<p>Prefer SaveAs_ActionFillBufferBlock</p>
+
+<h3 id="saveas_action_save_completed">saveas_action_save_completed</h3>
+<pre>typedef struct
+   {  bits ref;
+      char file_name [208];
+   }
+   saveas_action_save_completed;</pre>
+
+<p>Prefer SaveAs_ActionSaveCompletedBlock</p>
+
+<h3 id="saveas_action_about_to_be_shown_block">saveas_action_about_to_be_shown_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#saveas_full">saveas_full</a> full;
+      }
+      position;
+   }
+   saveas_action_about_to_be_shown_block;</pre>
+
+<h3 id="saveas_action_dialogue_completed_block">saveas_action_dialogue_completed_block</h3>
+<pre>typedef <a href="toolbox.html#toolbox_action_header_base">toolbox_action_header_base</a> saveas_action_dialogue_completed_block;</pre>
+
+<h3 id="saveas_action_save_to_file_block">saveas_action_save_to_file_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      char file_name [212];
+   }
+   saveas_action_save_to_file_block;</pre>
+
+<h3 id="saveas_action_fill_buffer_block">saveas_action_fill_buffer_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      int buffer_size;
+      byte *buffer;
+      int size_saved;
+   }
+   saveas_action_fill_buffer_block;</pre>
+
+<h3 id="saveas_action_save_completed_block">saveas_action_save_completed_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      bits ref;
+      char file_name [208];
+   }
+   saveas_action_save_completed_block;</pre>
+
+<h3 id="class_SAVE_AS">class_SAVE_AS</h3>
+<pre>#define class_SAVE_AS ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x82BC0u)</pre>
+
+<h3 id="saveas_GENERATE_ABOUT_TO_BE_SHOWN">saveas_GENERATE_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define saveas_GENERATE_ABOUT_TO_BE_SHOWN ((<a href="#saveas_flags">saveas_flags</a>) 0x1u)</pre>
+
+<h3 id="saveas_GENERATE_DIALOGUE_COMPLETED">saveas_GENERATE_DIALOGUE_COMPLETED</h3>
+<pre>#define saveas_GENERATE_DIALOGUE_COMPLETED ((<a href="#saveas_flags">saveas_flags</a>) 0x2u)</pre>
+
+<h3 id="saveas_NO_SELECTION_BUTTON">saveas_NO_SELECTION_BUTTON</h3>
+<pre>#define saveas_NO_SELECTION_BUTTON ((<a href="#saveas_flags">saveas_flags</a>) 0x4u)</pre>
+
+<h3 id="saveas_GIVEN_DATA">saveas_GIVEN_DATA</h3>
+<pre>#define saveas_GIVEN_DATA ((<a href="#saveas_flags">saveas_flags</a>) 0x8u)</pre>
+
+<h3 id="saveas_CLIENT_SUPPORTS_RAM_TRANSFER">saveas_CLIENT_SUPPORTS_RAM_TRANSFER</h3>
+<pre>#define saveas_CLIENT_SUPPORTS_RAM_TRANSFER ((<a href="#saveas_flags">saveas_flags</a>) 0x10u)</pre>
+
+<h3 id="saveas_SAVE_SUCCESSFUL">saveas_SAVE_SUCCESSFUL</h3>
+<pre>#define saveas_SAVE_SUCCESSFUL 0x1u</pre>
+
+<h3 id="saveas_SAVE_SELECTION">saveas_SAVE_SELECTION</h3>
+<pre>#define saveas_SAVE_SELECTION 0x1u</pre>
+
+<h3 id="saveas_SAVE_SAFE">saveas_SAVE_SAFE</h3>
+<pre>#define saveas_SAVE_SAFE 0x2u</pre>
+
+<h3 id="saveas_FILE_ICON">saveas_FILE_ICON</h3>
+<pre>#define saveas_FILE_ICON ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82BC000u)</pre>
+
+<h3 id="saveas_FILE_NAME">saveas_FILE_NAME</h3>
+<pre>#define saveas_FILE_NAME ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82BC001u)</pre>
+
+<h3 id="saveas_CANCEL">saveas_CANCEL</h3>
+<pre>#define saveas_CANCEL ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82BC002u)</pre>
+
+<h3 id="saveas_SAVE">saveas_SAVE</h3>
+<pre>#define saveas_SAVE ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82BC003u)</pre>
+
+<h3 id="saveas_SELECTION">saveas_SELECTION</h3>
+<pre>#define saveas_SELECTION ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82BC004u)</pre>
+
+<h3 id="action_SAVE_AS_ABOUT_TO_BE_SHOWN">action_SAVE_AS_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define action_SAVE_AS_ABOUT_TO_BE_SHOWN 0x82BC0u</pre>
+
+<h3 id="action_SAVE_AS_DIALOGUE_COMPLETED">action_SAVE_AS_DIALOGUE_COMPLETED</h3>
+<pre>#define action_SAVE_AS_DIALOGUE_COMPLETED 0x82BC1u</pre>
+
+<h3 id="action_SAVE_AS_SAVE_TO_FILE">action_SAVE_AS_SAVE_TO_FILE</h3>
+<pre>#define action_SAVE_AS_SAVE_TO_FILE 0x82BC2u</pre>
+
+<h3 id="action_SAVE_AS_FILL_BUFFER">action_SAVE_AS_FILL_BUFFER</h3>
+<pre>#define action_SAVE_AS_FILL_BUFFER 0x82BC3u</pre>
+
+<h3 id="action_SAVE_AS_SAVE_COMPLETED">action_SAVE_AS_SAVE_COMPLETED</h3>
+<pre>#define action_SAVE_AS_SAVE_COMPLETED 0x82BC4u</pre>
+
+<h3 id="error_SAVE_AS_TASKS_ACTIVE">error_SAVE_AS_TASKS_ACTIVE</h3>
+<pre>#define error_SAVE_AS_TASKS_ACTIVE 0x80B600u</pre>
+
+<h3 id="error_SAVE_AS_ALLOC_FAILED">error_SAVE_AS_ALLOC_FAILED</h3>
+<pre>#define error_SAVE_AS_ALLOC_FAILED 0x80B601u</pre>
+
+<h3 id="error_SAVE_AS_SHORT_BUFFER">error_SAVE_AS_SHORT_BUFFER</h3>
+<pre>#define error_SAVE_AS_SHORT_BUFFER 0x80B602u</pre>
+
+<h3 id="error_SAVE_AS_FILE_NAME_TOO_LONG">error_SAVE_AS_FILE_NAME_TOO_LONG</h3>
+<pre>#define error_SAVE_AS_FILE_NAME_TOO_LONG 0x80B603u</pre>
+
+<h3 id="error_SAVE_AS_NO_SUCH_TASK">error_SAVE_AS_NO_SUCH_TASK</h3>
+<pre>#define error_SAVE_AS_NO_SUCH_TASK 0x80B611u</pre>
+
+<h3 id="error_SAVE_AS_NO_SUCH_METHOD">error_SAVE_AS_NO_SUCH_METHOD</h3>
+<pre>#define error_SAVE_AS_NO_SUCH_METHOD 0x80B612u</pre>
+
+<h3 id="error_SAVE_AS_NO_SUCH_MISC_OP_METHOD">error_SAVE_AS_NO_SUCH_MISC_OP_METHOD</h3>
+<pre>#define error_SAVE_AS_NO_SUCH_MISC_OP_METHOD 0x80B613u</pre>
+
+<h3 id="error_SAVE_AS_NOT_TYPE1">error_SAVE_AS_NOT_TYPE1</h3>
+<pre>#define error_SAVE_AS_NOT_TYPE1 0x80B621u</pre>
+
+<h3 id="error_SAVE_AS_NOT_TYPE3">error_SAVE_AS_NOT_TYPE3</h3>
+<pre>#define error_SAVE_AS_NOT_TYPE3 0x80B623u</pre>
+
+<h3 id="error_SAVE_AS_BUFFER_EXCEEDED">error_SAVE_AS_BUFFER_EXCEEDED</h3>
+<pre>#define error_SAVE_AS_BUFFER_EXCEEDED 0x80B631u</pre>
+
+<h3 id="error_SAVE_AS_DATA_ADDRESS_UNSET">error_SAVE_AS_DATA_ADDRESS_UNSET</h3>
+<pre>#define error_SAVE_AS_DATA_ADDRESS_UNSET 0x80B641u</pre>
+
+<h3 id="error_SAVE_AS_NOT_FULL_PATH">error_SAVE_AS_NOT_FULL_PATH</h3>
+<pre>#define error_SAVE_AS_NOT_FULL_PATH 0x80B642u</pre>
+
+<h3 id="xsaveas_get_window_id">xsaveas_get_window_id</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsaveas_get_window_id (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *window);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>window</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="saveas_get_window_id">saveas_get_window_id</h3>
+<pre>extern <a href="toolbox.html#toolbox_o">toolbox_o</a> saveas_get_window_id (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>window</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsaveas_set_title">xsaveas_set_title</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsaveas_set_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as,
+      char const *title);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="saveas_set_title">saveas_set_title</h3>
+<pre>extern void saveas_set_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as,
+      char const *title);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xsaveas_get_title">xsaveas_get_title</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsaveas_get_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as,
+      char *buffer,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="saveas_get_title">saveas_get_title</h3>
+<pre>extern int saveas_get_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as,
+      char *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xsaveas_set_file_name">xsaveas_set_file_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsaveas_set_file_name (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as,
+      char const *file_name);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="saveas_set_file_name">saveas_set_file_name</h3>
+<pre>extern void saveas_set_file_name (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as,
+      char const *file_name);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xsaveas_get_file_name">xsaveas_get_file_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsaveas_get_file_name (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as,
+      char *buffer,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="saveas_get_file_name">saveas_get_file_name</h3>
+<pre>extern int saveas_get_file_name (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as,
+      char *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xsaveas_set_file_type">xsaveas_set_file_type</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsaveas_set_file_type (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as,
+      bits file_type);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="saveas_set_file_type">saveas_set_file_type</h3>
+<pre>extern void saveas_set_file_type (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as,
+      bits file_type);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xsaveas_get_file_type">xsaveas_get_file_type</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsaveas_get_file_type (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as,
+      bits *file_type);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="saveas_get_file_type">saveas_get_file_type</h3>
+<pre>extern bits saveas_get_file_type (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>file_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsaveas_set_file_size">xsaveas_set_file_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsaveas_set_file_size (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as,
+      int file_size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="saveas_set_file_size">saveas_set_file_size</h3>
+<pre>extern void saveas_set_file_size (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as,
+      int file_size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xsaveas_get_file_size">xsaveas_get_file_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsaveas_get_file_size (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as,
+      int *file_size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>file_size</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="saveas_get_file_size">saveas_get_file_size</h3>
+<pre>extern int saveas_get_file_size (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>file_size</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsaveas_selection_available">xsaveas_selection_available</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsaveas_selection_available (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as,
+      osbool selection_available);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>selection_available</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="saveas_selection_available">saveas_selection_available</h3>
+<pre>extern void saveas_selection_available (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as,
+      osbool selection_available);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>selection_available</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xsaveas_set_data_address">xsaveas_set_data_address</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsaveas_set_data_address (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as,
+      byte *data,
+      int size,
+      byte *selection,
+      int selection_size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>selection</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>selection_size</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="saveas_set_data_address">saveas_set_data_address</h3>
+<pre>extern void saveas_set_data_address (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as,
+      byte *data,
+      int size,
+      byte *selection,
+      int selection_size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>selection</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>selection_size</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xsaveas_buffer_filled">xsaveas_buffer_filled</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsaveas_buffer_filled (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as,
+      byte *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="saveas_buffer_filled">saveas_buffer_filled</h3>
+<pre>extern void saveas_buffer_filled (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as,
+      byte *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xsaveas_file_save_completed">xsaveas_file_save_completed</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsaveas_file_save_completed (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as,
+      char const *file_name);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="saveas_file_save_completed">saveas_file_save_completed</h3>
+<pre>extern void saveas_file_save_completed (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> save_as,
+      char const *file_name);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>save_as</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

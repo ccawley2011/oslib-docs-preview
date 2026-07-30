@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; DragASprite</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>DragASprite</h2>
+
+<pre>#include "oslib/dragasprite.h"</pre>
+
+<h3 id="dragasprite_flags">dragasprite_flags</h3>
+<pre>typedef bits dragasprite_flags;</pre>
+
+<p>Flags word for DragASprite_Start</p>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#dragasprite_HPOS_LEFT">dragasprite_HPOS_LEFT</a></dd>
+<dd><a href="#dragasprite_HPOS_CENTRE">dragasprite_HPOS_CENTRE</a></dd>
+<dd><a href="#dragasprite_HPOS_RIGHT">dragasprite_HPOS_RIGHT</a></dd>
+<dd><a href="#dragasprite_VPOS_BOTTOM">dragasprite_VPOS_BOTTOM</a></dd>
+<dd><a href="#dragasprite_VPOS_CENTRE">dragasprite_VPOS_CENTRE</a></dd>
+<dd><a href="#dragasprite_VPOS_TOP">dragasprite_VPOS_TOP</a></dd>
+<dd><a href="#dragasprite_NO_BOUND">dragasprite_NO_BOUND</a></dd>
+<dd><a href="#dragasprite_BOUND_TO_WINDOW">dragasprite_BOUND_TO_WINDOW</a></dd>
+<dd><a href="#dragasprite_GIVEN_BBOX">dragasprite_GIVEN_BBOX</a></dd>
+<dd><a href="#dragasprite_BOUND_SPRITE">dragasprite_BOUND_SPRITE</a></dd>
+<dd><a href="#dragasprite_BOUND_POINTER">dragasprite_BOUND_POINTER</a></dd>
+<dd><a href="#dragasprite_DROP_SHADOW">dragasprite_DROP_SHADOW</a></dd>
+<dd><a href="#dragasprite_NO_DITHER">dragasprite_NO_DITHER</a></dd>
+<dd><a href="#dragasprite_CENTER_ON_PTR_POS">dragasprite_CENTER_ON_PTR_POS</a></dd>
+</dl>
+
+<h3 id="dragasprite_HPOS_LEFT">dragasprite_HPOS_LEFT</h3>
+<pre>#define dragasprite_HPOS_LEFT ((<a href="#dragasprite_flags">dragasprite_flags</a>) 0x0u)</pre>
+
+<p>Sprite at left of box</p>
+
+<h3 id="dragasprite_HPOS_CENTRE">dragasprite_HPOS_CENTRE</h3>
+<pre>#define dragasprite_HPOS_CENTRE ((<a href="#dragasprite_flags">dragasprite_flags</a>) 0x1u)</pre>
+
+<p>Sprite horizontally centred in box</p>
+
+<h3 id="dragasprite_HPOS_RIGHT">dragasprite_HPOS_RIGHT</h3>
+<pre>#define dragasprite_HPOS_RIGHT ((<a href="#dragasprite_flags">dragasprite_flags</a>) 0x2u)</pre>
+
+<p>Sprite at right of box</p>
+
+<h3 id="dragasprite_VPOS_BOTTOM">dragasprite_VPOS_BOTTOM</h3>
+<pre>#define dragasprite_VPOS_BOTTOM ((<a href="#dragasprite_flags">dragasprite_flags</a>) 0x0u)</pre>
+
+<p>Sprite at bottom of box</p>
+
+<h3 id="dragasprite_VPOS_CENTRE">dragasprite_VPOS_CENTRE</h3>
+<pre>#define dragasprite_VPOS_CENTRE ((<a href="#dragasprite_flags">dragasprite_flags</a>) 0x4u)</pre>
+
+<p>Sprite vertically centred in box</p>
+
+<h3 id="dragasprite_VPOS_TOP">dragasprite_VPOS_TOP</h3>
+<pre>#define dragasprite_VPOS_TOP ((<a href="#dragasprite_flags">dragasprite_flags</a>) 0x8u)</pre>
+
+<p>Sprite at top of box</p>
+
+<h3 id="dragasprite_NO_BOUND">dragasprite_NO_BOUND</h3>
+<pre>#define dragasprite_NO_BOUND ((<a href="#dragasprite_flags">dragasprite_flags</a>) 0x0u)</pre>
+
+<p>Drag not bounded</p>
+
+<h3 id="dragasprite_BOUND_TO_WINDOW">dragasprite_BOUND_TO_WINDOW</h3>
+<pre>#define dragasprite_BOUND_TO_WINDOW ((<a href="#dragasprite_flags">dragasprite_flags</a>) 0x10u)</pre>
+
+<p>Drag bounded to window containing pointer</p>
+
+<h3 id="dragasprite_GIVEN_BBOX">dragasprite_GIVEN_BBOX</h3>
+<pre>#define dragasprite_GIVEN_BBOX ((<a href="#dragasprite_flags">dragasprite_flags</a>) 0x20u)</pre>
+
+<p>Drag bounded to given OS_Box</p>
+
+<h3 id="dragasprite_BOUND_SPRITE">dragasprite_BOUND_SPRITE</h3>
+<pre>#define dragasprite_BOUND_SPRITE ((<a href="#dragasprite_flags">dragasprite_flags</a>) 0x0u)</pre>
+
+<p>Box is bounded</p>
+
+<h3 id="dragasprite_BOUND_POINTER">dragasprite_BOUND_POINTER</h3>
+<pre>#define dragasprite_BOUND_POINTER ((<a href="#dragasprite_flags">dragasprite_flags</a>) 0x40u)</pre>
+
+<p>Pointer is bounded</p>
+
+<h3 id="dragasprite_DROP_SHADOW">dragasprite_DROP_SHADOW</h3>
+<pre>#define dragasprite_DROP_SHADOW ((<a href="#dragasprite_flags">dragasprite_flags</a>) 0x80u)</pre>
+
+<p>Make a sprite with a drop-shadow</p>
+
+<h3 id="dragasprite_NO_DITHER">dragasprite_NO_DITHER</h3>
+<pre>#define dragasprite_NO_DITHER ((<a href="#dragasprite_flags">dragasprite_flags</a>) 0x100u)</pre>
+
+<p>Do not make a semi-transparent sprite</p>
+
+<h3 id="dragasprite_CENTER_ON_PTR_POS">dragasprite_CENTER_ON_PTR_POS</h3>
+<pre>#define dragasprite_CENTER_ON_PTR_POS ((<a href="#dragasprite_flags">dragasprite_flags</a>) 0x200u)</pre>
+
+<p>Sprite is centred on pointer position - RISC OS 4</p>
+
+<h3 id="dragasprite_SYSTEM_SPRITE_AREA">dragasprite_SYSTEM_SPRITE_AREA</h3>
+<pre>#define dragasprite_SYSTEM_SPRITE_AREA ((<a href="osspriteop.html#osspriteop_area">osspriteop_area</a> *) 0x0u)</pre>
+
+<h3 id="dragasprite_WIMP_SPRITE_AREA">dragasprite_WIMP_SPRITE_AREA</h3>
+<pre>#define dragasprite_WIMP_SPRITE_AREA ((<a href="osspriteop.html#osspriteop_area">osspriteop_area</a> *) 0x1u)</pre>
+
+<h3 id="xdragasprite_start">xdragasprite_start</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdragasprite_start (<a href="#dragasprite_flags">dragasprite_flags</a> flags,
+      <a href="osspriteop.html#osspriteop_area">osspriteop_area</a> const *area,
+      char const *sprite_name,
+      <a href="os.html#os_box">os_box</a> const *box,
+      <a href="os.html#os_box">os_box</a> const *bbox);</pre>
+<p>Takes a copy of a sprite and starts a Wimp drag</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td>flags </td><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td>sprite area holding sprite</td><td><code>R1</code></td></tr>
+<tr><td><code>sprite_name</code></td><td>pointer to sprite name</td><td><code>R2</code></td></tr>
+<tr><td><code>box</code></td><td>pointer to box</td><td><code>R3</code></td></tr>
+<tr><td><code>bbox</code></td><td>pointer to optional bounding box</td><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="dragasprite_start">dragasprite_start</h3>
+<pre>extern void dragasprite_start (<a href="#dragasprite_flags">dragasprite_flags</a> flags,
+      <a href="osspriteop.html#osspriteop_area">osspriteop_area</a> const *area,
+      char const *sprite_name,
+      <a href="os.html#os_box">os_box</a> const *box,
+      <a href="os.html#os_box">os_box</a> const *bbox);</pre>
+<p>Takes a copy of a sprite and starts a Wimp drag</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td>flags </td><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td>sprite area holding sprite</td><td><code>R1</code></td></tr>
+<tr><td><code>sprite_name</code></td><td>pointer to sprite name</td><td><code>R2</code></td></tr>
+<tr><td><code>box</code></td><td>pointer to box</td><td><code>R3</code></td></tr>
+<tr><td><code>bbox</code></td><td>pointer to optional bounding box</td><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xdragasprite_stop">xdragasprite_stop</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdragasprite_stop (void);
+</pre><p>Terminates any current drag operation, and releases workspace</p>
+
+
+<table>
+</table>
+
+<h3 id="dragasprite_stop">dragasprite_stop</h3>
+<pre>extern void dragasprite_stop (void);
+</pre><p>Terminates any current drag operation, and releases workspace</p>
+
+
+<table>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

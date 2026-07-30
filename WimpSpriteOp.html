@@ -1,0 +1,614 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; WimpSpriteOp</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>WimpSpriteOp</h2>
+
+<pre>#include "oslib/wimpspriteop.h"</pre>
+
+<h3 id="wimpspriteop_AREA">wimpspriteop_AREA</h3>
+<pre>#define wimpspriteop_AREA ((<a href="osspriteop.html#osspriteop_area">osspriteop_area</a> *) 0x1u)</pre>
+
+<h3 id="xwimpspriteop_merge_sprite_file">xwimpspriteop_merge_sprite_file</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpspriteop_merge_sprite_file (char const *file_name);</pre>
+<p>Merges sprite file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="wimpspriteop_merge_sprite_file">wimpspriteop_merge_sprite_file</h3>
+<pre>extern void wimpspriteop_merge_sprite_file (char const *file_name);</pre>
+<p>Merges sprite file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xwimpspriteop_get_sprite">xwimpspriteop_get_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpspriteop_get_sprite (char const *sprite_name,
+      osbool get_palette,
+      <a href="osspriteop.html#osspriteop_header">osspriteop_header</a> **header);</pre>
+<p>Gets sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>get_palette</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>header</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="wimpspriteop_get_sprite">wimpspriteop_get_sprite</h3>
+<pre>extern <a href="osspriteop.html#osspriteop_header">osspriteop_header</a> *wimpspriteop_get_sprite (char const *sprite_name,
+      osbool get_palette);</pre>
+<p>Gets sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>get_palette</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>header</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xwimpspriteop_select_sprite">xwimpspriteop_select_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpspriteop_select_sprite (char const *sprite_name,
+      <a href="osspriteop.html#osspriteop_header">osspriteop_header</a> **header);</pre>
+<p>Selects sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>header</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="wimpspriteop_select_sprite">wimpspriteop_select_sprite</h3>
+<pre>extern <a href="osspriteop.html#osspriteop_header">osspriteop_header</a> *wimpspriteop_select_sprite (char const *sprite_name);</pre>
+<p>Selects sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>header</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xwimpspriteop_put_sprite">xwimpspriteop_put_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpspriteop_put_sprite (char const *sprite_name,
+      <a href="os.html#os_action">os_action</a> action);</pre>
+<p>Puts sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="wimpspriteop_put_sprite">wimpspriteop_put_sprite</h3>
+<pre>extern void wimpspriteop_put_sprite (char const *sprite_name,
+      <a href="os.html#os_action">os_action</a> action);</pre>
+<p>Puts sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xwimpspriteop_put_sprite_user_coords">xwimpspriteop_put_sprite_user_coords</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpspriteop_put_sprite_user_coords (char const *sprite_name,
+      int x,
+      int y,
+      <a href="os.html#os_action">os_action</a> action);</pre>
+<p>Puts sprite at user coordinates</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="wimpspriteop_put_sprite_user_coords">wimpspriteop_put_sprite_user_coords</h3>
+<pre>extern void wimpspriteop_put_sprite_user_coords (char const *sprite_name,
+      int x,
+      int y,
+      <a href="os.html#os_action">os_action</a> action);</pre>
+<p>Puts sprite at user coordinates</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xwimpspriteop_set_pointer_shape">xwimpspriteop_set_pointer_shape</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpspriteop_set_pointer_shape (char const *sprite_name,
+      bits flags,
+      int xactive,
+      int yactive,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      <a href="osspriteop.html#osspriteop_trans_tab">osspriteop_trans_tab</a> const *trans_tab);</pre>
+<p>Sets pointer shape</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xactive</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>yactive</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="wimpspriteop_set_pointer_shape">wimpspriteop_set_pointer_shape</h3>
+<pre>extern void wimpspriteop_set_pointer_shape (char const *sprite_name,
+      bits flags,
+      int xactive,
+      int yactive,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      <a href="osspriteop.html#osspriteop_trans_tab">osspriteop_trans_tab</a> const *trans_tab);</pre>
+<p>Sets pointer shape</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xactive</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>yactive</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xwimpspriteop_read_palette_size">xwimpspriteop_read_palette_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpspriteop_read_palette_size (char const *sprite_name,
+      int *size,
+      <a href="os.html#os_sprite_palette">os_sprite_palette</a> **palette,
+      <a href="os.html#os_mode">os_mode</a> *mode);</pre>
+<p>Reads palette size</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>palette</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="wimpspriteop_read_palette_size">wimpspriteop_read_palette_size</h3>
+<pre>extern void wimpspriteop_read_palette_size (char const *sprite_name,
+      int *size,
+      <a href="os.html#os_sprite_palette">os_sprite_palette</a> **palette,
+      <a href="os.html#os_mode">os_mode</a> *mode);</pre>
+<p>Reads palette size</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>palette</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xwimpspriteop_read_sprite_size">xwimpspriteop_read_sprite_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpspriteop_read_sprite_size (char const *sprite_name,
+      int *width,
+      int *height,
+      osbool *mask,
+      <a href="os.html#os_mode">os_mode</a> *mode);</pre>
+<p>Synonymous with _ReadSpriteInfo. Reads sprite information</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>width</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>mask</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="wimpspriteop_read_sprite_size">wimpspriteop_read_sprite_size</h3>
+<pre>extern void wimpspriteop_read_sprite_size (char const *sprite_name,
+      int *width,
+      int *height,
+      osbool *mask,
+      <a href="os.html#os_mode">os_mode</a> *mode);</pre>
+<p>Synonymous with _ReadSpriteInfo. Reads sprite information</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>width</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>mask</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xwimpspriteop_read_sprite_info">xwimpspriteop_read_sprite_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpspriteop_read_sprite_info (char const *sprite_name,
+      int *width,
+      int *height,
+      osbool *mask,
+      <a href="os.html#os_mode">os_mode</a> *mode);</pre>
+<p>Reads sprite information</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>width</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>mask</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="wimpspriteop_read_sprite_info">wimpspriteop_read_sprite_info</h3>
+<pre>extern void wimpspriteop_read_sprite_info (char const *sprite_name,
+      int *width,
+      int *height,
+      osbool *mask,
+      <a href="os.html#os_mode">os_mode</a> *mode);</pre>
+<p>Reads sprite information</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>width</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>mask</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xwimpspriteop_read_pixel_colour">xwimpspriteop_read_pixel_colour</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpspriteop_read_pixel_colour (char const *sprite_name,
+      int x,
+      int y,
+      <a href="os.html#os_gcol">os_gcol</a> *gcol,
+      <a href="os.html#os_tint">os_tint</a> *tint);</pre>
+<p>Reads pixel colour</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>gcol</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>tint</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="wimpspriteop_read_pixel_colour">wimpspriteop_read_pixel_colour</h3>
+<pre>extern void wimpspriteop_read_pixel_colour (char const *sprite_name,
+      int x,
+      int y,
+      <a href="os.html#os_gcol">os_gcol</a> *gcol,
+      <a href="os.html#os_tint">os_tint</a> *tint);</pre>
+<p>Reads pixel colour</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>gcol</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>tint</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xwimpspriteop_read_pixel_mask">xwimpspriteop_read_pixel_mask</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpspriteop_read_pixel_mask (char const *sprite_name,
+      int x,
+      int y,
+      osbool *solid);</pre>
+<p>Reads pixel mask</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>solid</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="wimpspriteop_read_pixel_mask">wimpspriteop_read_pixel_mask</h3>
+<pre>extern osbool wimpspriteop_read_pixel_mask (char const *sprite_name,
+      int x,
+      int y);</pre>
+<p>Reads pixel mask</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>solid</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xwimpspriteop_plot_mask">xwimpspriteop_plot_mask</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpspriteop_plot_mask (char const *sprite_name);</pre>
+<p>Plots sprite mask</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="wimpspriteop_plot_mask">wimpspriteop_plot_mask</h3>
+<pre>extern void wimpspriteop_plot_mask (char const *sprite_name);</pre>
+<p>Plots sprite mask</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xwimpspriteop_plot_mask_user_coords">xwimpspriteop_plot_mask_user_coords</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpspriteop_plot_mask_user_coords (char const *sprite_name,
+      int x,
+      int y);</pre>
+<p>Plots sprite mask at user coordinates</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="wimpspriteop_plot_mask_user_coords">wimpspriteop_plot_mask_user_coords</h3>
+<pre>extern void wimpspriteop_plot_mask_user_coords (char const *sprite_name,
+      int x,
+      int y);</pre>
+<p>Plots sprite mask at user coordinates</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xwimpspriteop_plot_mask_scaled">xwimpspriteop_plot_mask_scaled</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpspriteop_plot_mask_scaled (char const *sprite_name,
+      int x,
+      int y,
+      <a href="os.html#os_factors">os_factors</a> const *factors);</pre>
+<p>Plots mask scaled</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="wimpspriteop_plot_mask_scaled">wimpspriteop_plot_mask_scaled</h3>
+<pre>extern void wimpspriteop_plot_mask_scaled (char const *sprite_name,
+      int x,
+      int y,
+      <a href="os.html#os_factors">os_factors</a> const *factors);</pre>
+<p>Plots mask scaled</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xwimpspriteop_put_sprite_scaled">xwimpspriteop_put_sprite_scaled</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpspriteop_put_sprite_scaled (char const *sprite_name,
+      int x,
+      int y,
+      <a href="os.html#os_action">os_action</a> action,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      <a href="osspriteop.html#osspriteop_trans_tab">osspriteop_trans_tab</a> const *trans_tab);</pre>
+<p>Puts sprite scaled</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="wimpspriteop_put_sprite_scaled">wimpspriteop_put_sprite_scaled</h3>
+<pre>extern void wimpspriteop_put_sprite_scaled (char const *sprite_name,
+      int x,
+      int y,
+      <a href="os.html#os_action">os_action</a> action,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      <a href="osspriteop.html#osspriteop_trans_tab">osspriteop_trans_tab</a> const *trans_tab);</pre>
+<p>Puts sprite scaled</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xwimpspriteop_put_sprite_grey_scaled">xwimpspriteop_put_sprite_grey_scaled</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpspriteop_put_sprite_grey_scaled (char const *sprite_name,
+      int x,
+      int y,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      <a href="osspriteop.html#osspriteop_trans_tab">osspriteop_trans_tab</a> const *trans_tab);</pre>
+<p>Puts sprite scaled and anti-aliased</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="wimpspriteop_put_sprite_grey_scaled">wimpspriteop_put_sprite_grey_scaled</h3>
+<pre>extern void wimpspriteop_put_sprite_grey_scaled (char const *sprite_name,
+      int x,
+      int y,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      <a href="osspriteop.html#osspriteop_trans_tab">osspriteop_trans_tab</a> const *trans_tab);</pre>
+<p>Puts sprite scaled and anti-aliased</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xwimpspriteop_plot_mask_trfm">xwimpspriteop_plot_mask_trfm</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpspriteop_plot_mask_trfm (char const *sprite_name,
+      bits flags,
+      <a href="os.html#os_box">os_box</a> const *source_rect,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm);</pre>
+<p>Plots sprite mask transformed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>source_rect</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="wimpspriteop_plot_mask_trfm">wimpspriteop_plot_mask_trfm</h3>
+<pre>extern void wimpspriteop_plot_mask_trfm (char const *sprite_name,
+      bits flags,
+      <a href="os.html#os_box">os_box</a> const *source_rect,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm);</pre>
+<p>Plots sprite mask transformed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>source_rect</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xwimpspriteop_put_sprite_trfm">xwimpspriteop_put_sprite_trfm</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpspriteop_put_sprite_trfm (char const *sprite_name,
+      bits flags,
+      <a href="os.html#os_box">os_box</a> const *source_rect,
+      <a href="os.html#os_action">os_action</a> action,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      <a href="osspriteop.html#osspriteop_trans_tab">osspriteop_trans_tab</a> const *trans_tab);</pre>
+<p>Puts sprite transformed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>source_rect</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="wimpspriteop_put_sprite_trfm">wimpspriteop_put_sprite_trfm</h3>
+<pre>extern void wimpspriteop_put_sprite_trfm (char const *sprite_name,
+      bits flags,
+      <a href="os.html#os_box">os_box</a> const *source_rect,
+      <a href="os.html#os_action">os_action</a> action,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      <a href="osspriteop.html#osspriteop_trans_tab">osspriteop_trans_tab</a> const *trans_tab);</pre>
+<p>Puts sprite transformed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>source_rect</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

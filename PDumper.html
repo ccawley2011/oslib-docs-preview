@@ -1,0 +1,556 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; PDumper</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>PDumper</h2>
+
+<pre>#include "oslib/pdumper.h"</pre>
+
+<h3 id="pdumper_job_flags">pdumper_job_flags</h3>
+<pre>typedef bits pdumper_job_flags;</pre>
+
+<h3 id="pdumper_device">pdumper_device</h3>
+<pre>typedef int pdumper_device;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#pdumper_DEVICE_SPRITE_DEVICE">pdumper_DEVICE_SPRITE_DEVICE</a></dd>
+<dd><a href="#pdumper_DEVICE_GENERIC_DOT_MATRIX">pdumper_DEVICE_GENERIC_DOT_MATRIX</a></dd>
+<dd><a href="#pdumper_DEVICE_LASERJET">pdumper_DEVICE_LASERJET</a></dd>
+<dd><a href="#pdumper_DEVICE_IMAGEWRITER">pdumper_DEVICE_IMAGEWRITER</a></dd>
+<dd><a href="#pdumper_DEVICE24_PIN">pdumper_DEVICE24_PIN</a></dd>
+<dd><a href="#pdumper_DEVICE_DESKJET">pdumper_DEVICE_DESKJET</a></dd>
+</dl>
+
+<h3 id="pdumper_strip_type">pdumper_strip_type</h3>
+<pre>typedef int pdumper_strip_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#pdumper_STRIP_MONOCHROME">pdumper_STRIP_MONOCHROME</a></dd>
+<dd><a href="#pdumper_STRIP_GREY_SCALE">pdumper_STRIP_GREY_SCALE</a></dd>
+<dd><a href="#pdumper_STRIP8_BIT">pdumper_STRIP8_BIT</a></dd>
+<dd><a href="#pdumper_STRIP24_BIT_MULTIPLE">pdumper_STRIP24_BIT_MULTIPLE</a></dd>
+<dd><a href="#pdumper_STRIP16_BIT">pdumper_STRIP16_BIT</a></dd>
+<dd><a href="#pdumper_STRIP24_BIT">pdumper_STRIP24_BIT</a></dd>
+<dd><a href="#pdumper_PASS_NUMBER">pdumper_PASS_NUMBER</a></dd>
+</dl>
+
+<h3 id="pdumper_features">pdumper_features</h3>
+<pre>typedef bits pdumper_features;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#pdumper_FEATURE_HALFTONE_GREY">pdumper_FEATURE_HALFTONE_GREY</a></dd>
+<dd><a href="#pdumper_FEATURE_DIFFUSED_GREY">pdumper_FEATURE_DIFFUSED_GREY</a></dd>
+<dd><a href="#pdumper_FEATURE_HALFTONE_COLOUR">pdumper_FEATURE_HALFTONE_COLOUR</a></dd>
+<dd><a href="#pdumper_FEATURE_DIFFUSED_COLOUR">pdumper_FEATURE_DIFFUSED_COLOUR</a></dd>
+</dl>
+
+<h3 id="pdumper_format">pdumper_format</h3>
+<pre>typedef int pdumper_format;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#pdumper_FORMAT_HALFTONE_GREY">pdumper_FORMAT_HALFTONE_GREY</a></dd>
+<dd><a href="#pdumper_FORMAT_DIFFUSED_GREY">pdumper_FORMAT_DIFFUSED_GREY</a></dd>
+<dd><a href="#pdumper_FORMAT_HALFTONE_COLOUR">pdumper_FORMAT_HALFTONE_COLOUR</a></dd>
+<dd><a href="#pdumper_FORMAT_DIFFUSED_COLOUR">pdumper_FORMAT_DIFFUSED_COLOUR</a></dd>
+<dd><a href="#pdumper_FORMAT_HALFTONE_MULTIPASS_COLOUR">pdumper_FORMAT_HALFTONE_MULTIPASS_COLOUR</a></dd>
+<dd><a href="#pdumper_FORMAT_DIFFUSED_MULTIPASS_COLOUR">pdumper_FORMAT_DIFFUSED_MULTIPASS_COLOUR</a></dd>
+<dd><a href="#pdumper_FORMAT_HALFTONE16_BPP_COLOUR">pdumper_FORMAT_HALFTONE16_BPP_COLOUR</a></dd>
+<dd><a href="#pdumper_FORMAT_DIFFUSED16_BPP_COLOUR">pdumper_FORMAT_DIFFUSED16_BPP_COLOUR</a></dd>
+<dd><a href="#pdumper_FORMAT_HALFTONE32_BPP_COLOUR">pdumper_FORMAT_HALFTONE32_BPP_COLOUR</a></dd>
+<dd><a href="#pdumper_FORMAT_DIFFUSED32_BPP_COLOUR">pdumper_FORMAT_DIFFUSED32_BPP_COLOUR</a></dd>
+</dl>
+
+<h3 id="pdumper_halftone_flags">pdumper_halftone_flags</h3>
+<pre>typedef bits pdumper_halftone_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#pdumper_HALFTONE_XRESOLUTION">pdumper_HALFTONE_XRESOLUTION</a></dd>
+<dd><a href="#pdumper_HALFTONE_YRESOLUTION">pdumper_HALFTONE_YRESOLUTION</a></dd>
+</dl>
+
+<h3 id="error_PDUMPER_UNDECLARED">error_PDUMPER_UNDECLARED</h3>
+<pre>#define error_PDUMPER_UNDECLARED 0x5D7u</pre>
+
+<h3 id="error_PDUMPER_TOO_OLD">error_PDUMPER_TOO_OLD</h3>
+<pre>#define error_PDUMPER_TOO_OLD 0x5D8u</pre>
+
+<h3 id="error_PDUMPER_DUPLICATE_MODULE">error_PDUMPER_DUPLICATE_MODULE</h3>
+<pre>#define error_PDUMPER_DUPLICATE_MODULE 0x5D9u</pre>
+
+<h3 id="error_PDUMPER_BAD_CALL">error_PDUMPER_BAD_CALL</h3>
+<pre>#define error_PDUMPER_BAD_CALL 0x5DAu</pre>
+
+<h3 id="error_PDUMPER_BAD_STRIP">error_PDUMPER_BAD_STRIP</h3>
+<pre>#define error_PDUMPER_BAD_STRIP 0x5DBu</pre>
+
+<h3 id="error_PDUMPER_BAD_PALETTE">error_PDUMPER_BAD_PALETTE</h3>
+<pre>#define error_PDUMPER_BAD_PALETTE 0x5DCu</pre>
+
+<h3 id="error_PDUMPER_NOT_LINKED">error_PDUMPER_NOT_LINKED</h3>
+<pre>#define error_PDUMPER_NOT_LINKED 0x5DDu</pre>
+
+<h3 id="error_PDUMPER_RESERVED">error_PDUMPER_RESERVED</h3>
+<pre>#define error_PDUMPER_RESERVED 0x5DEu</pre>
+
+<h3 id="error_PDUMPER_BAD_OUTPUT_TYPE">error_PDUMPER_BAD_OUTPUT_TYPE</h3>
+<pre>#define error_PDUMPER_BAD_OUTPUT_TYPE 0x5DFu</pre>
+
+<h3 id="error_PDUMPER_BLOCK_NOT_FOUND">error_PDUMPER_BLOCK_NOT_FOUND</h3>
+<pre>#define error_PDUMPER_BLOCK_NOT_FOUND 0x5E0u</pre>
+
+<h3 id="error_PDUMPER_IN_USE">error_PDUMPER_IN_USE</h3>
+<pre>#define error_PDUMPER_IN_USE 0x5E1u</pre>
+
+<h3 id="pdumper_DEVICE_SPRITE_DEVICE">pdumper_DEVICE_SPRITE_DEVICE</h3>
+<pre>#define pdumper_DEVICE_SPRITE_DEVICE ((<a href="#pdumper_device">pdumper_device</a>) 0x0u)</pre>
+
+<h3 id="pdumper_DEVICE_GENERIC_DOT_MATRIX">pdumper_DEVICE_GENERIC_DOT_MATRIX</h3>
+<pre>#define pdumper_DEVICE_GENERIC_DOT_MATRIX ((<a href="#pdumper_device">pdumper_device</a>) 0x1u)</pre>
+
+<h3 id="pdumper_DEVICE_LASERJET">pdumper_DEVICE_LASERJET</h3>
+<pre>#define pdumper_DEVICE_LASERJET ((<a href="#pdumper_device">pdumper_device</a>) 0x2u)</pre>
+
+<h3 id="pdumper_DEVICE_IMAGEWRITER">pdumper_DEVICE_IMAGEWRITER</h3>
+<pre>#define pdumper_DEVICE_IMAGEWRITER ((<a href="#pdumper_device">pdumper_device</a>) 0x3u)</pre>
+
+<h3 id="pdumper_DEVICE24_PIN">pdumper_DEVICE24_PIN</h3>
+<pre>#define pdumper_DEVICE24_PIN ((<a href="#pdumper_device">pdumper_device</a>) 0x4u)</pre>
+
+<h3 id="pdumper_DEVICE_DESKJET">pdumper_DEVICE_DESKJET</h3>
+<pre>#define pdumper_DEVICE_DESKJET ((<a href="#pdumper_device">pdumper_device</a>) 0x5u)</pre>
+
+<h3 id="pdumper_STRIP_MONOCHROME">pdumper_STRIP_MONOCHROME</h3>
+<pre>#define pdumper_STRIP_MONOCHROME ((<a href="#pdumper_strip_type">pdumper_strip_type</a>) 0x0u)</pre>
+
+<h3 id="pdumper_STRIP_GREY_SCALE">pdumper_STRIP_GREY_SCALE</h3>
+<pre>#define pdumper_STRIP_GREY_SCALE ((<a href="#pdumper_strip_type">pdumper_strip_type</a>) 0x1u)</pre>
+
+<h3 id="pdumper_STRIP8_BIT">pdumper_STRIP8_BIT</h3>
+<pre>#define pdumper_STRIP8_BIT ((<a href="#pdumper_strip_type">pdumper_strip_type</a>) 0x2u)</pre>
+
+<h3 id="pdumper_STRIP24_BIT_MULTIPLE">pdumper_STRIP24_BIT_MULTIPLE</h3>
+<pre>#define pdumper_STRIP24_BIT_MULTIPLE ((<a href="#pdumper_strip_type">pdumper_strip_type</a>) 0x3u)</pre>
+
+<h3 id="pdumper_STRIP16_BIT">pdumper_STRIP16_BIT</h3>
+<pre>#define pdumper_STRIP16_BIT ((<a href="#pdumper_strip_type">pdumper_strip_type</a>) 0x4u)</pre>
+
+<h3 id="pdumper_STRIP24_BIT">pdumper_STRIP24_BIT</h3>
+<pre>#define pdumper_STRIP24_BIT ((<a href="#pdumper_strip_type">pdumper_strip_type</a>) 0x5u)</pre>
+
+<h3 id="pdumper_PASS_NUMBER">pdumper_PASS_NUMBER</h3>
+<pre>#define pdumper_PASS_NUMBER ((<a href="#pdumper_strip_type">pdumper_strip_type</a>) 0x7FFFFFu)</pre>
+
+<h3 id="pdumper_FEATURE_HALFTONE_GREY">pdumper_FEATURE_HALFTONE_GREY</h3>
+<pre>#define pdumper_FEATURE_HALFTONE_GREY ((<a href="#pdumper_features">pdumper_features</a>) 0x1u)</pre>
+
+<h3 id="pdumper_FEATURE_DIFFUSED_GREY">pdumper_FEATURE_DIFFUSED_GREY</h3>
+<pre>#define pdumper_FEATURE_DIFFUSED_GREY ((<a href="#pdumper_features">pdumper_features</a>) 0x2u)</pre>
+
+<h3 id="pdumper_FEATURE_HALFTONE_COLOUR">pdumper_FEATURE_HALFTONE_COLOUR</h3>
+<pre>#define pdumper_FEATURE_HALFTONE_COLOUR ((<a href="#pdumper_features">pdumper_features</a>) 0x4u)</pre>
+
+<h3 id="pdumper_FEATURE_DIFFUSED_COLOUR">pdumper_FEATURE_DIFFUSED_COLOUR</h3>
+<pre>#define pdumper_FEATURE_DIFFUSED_COLOUR ((<a href="#pdumper_features">pdumper_features</a>) 0x8u)</pre>
+
+<h3 id="pdumper_FORMAT_HALFTONE_GREY">pdumper_FORMAT_HALFTONE_GREY</h3>
+<pre>#define pdumper_FORMAT_HALFTONE_GREY ((<a href="#pdumper_format">pdumper_format</a>) 0x0u)</pre>
+
+<h3 id="pdumper_FORMAT_DIFFUSED_GREY">pdumper_FORMAT_DIFFUSED_GREY</h3>
+<pre>#define pdumper_FORMAT_DIFFUSED_GREY ((<a href="#pdumper_format">pdumper_format</a>) 0x1u)</pre>
+
+<h3 id="pdumper_FORMAT_HALFTONE_COLOUR">pdumper_FORMAT_HALFTONE_COLOUR</h3>
+<pre>#define pdumper_FORMAT_HALFTONE_COLOUR ((<a href="#pdumper_format">pdumper_format</a>) 0x2u)</pre>
+
+<h3 id="pdumper_FORMAT_DIFFUSED_COLOUR">pdumper_FORMAT_DIFFUSED_COLOUR</h3>
+<pre>#define pdumper_FORMAT_DIFFUSED_COLOUR ((<a href="#pdumper_format">pdumper_format</a>) 0x3u)</pre>
+
+<h3 id="pdumper_FORMAT_HALFTONE_MULTIPASS_COLOUR">pdumper_FORMAT_HALFTONE_MULTIPASS_COLOUR</h3>
+<pre>#define pdumper_FORMAT_HALFTONE_MULTIPASS_COLOUR ((<a href="#pdumper_format">pdumper_format</a>) 0x4u)</pre>
+
+<h3 id="pdumper_FORMAT_DIFFUSED_MULTIPASS_COLOUR">pdumper_FORMAT_DIFFUSED_MULTIPASS_COLOUR</h3>
+<pre>#define pdumper_FORMAT_DIFFUSED_MULTIPASS_COLOUR ((<a href="#pdumper_format">pdumper_format</a>) 0x5u)</pre>
+
+<h3 id="pdumper_FORMAT_HALFTONE16_BPP_COLOUR">pdumper_FORMAT_HALFTONE16_BPP_COLOUR</h3>
+<pre>#define pdumper_FORMAT_HALFTONE16_BPP_COLOUR ((<a href="#pdumper_format">pdumper_format</a>) 0x6u)</pre>
+
+<h3 id="pdumper_FORMAT_DIFFUSED16_BPP_COLOUR">pdumper_FORMAT_DIFFUSED16_BPP_COLOUR</h3>
+<pre>#define pdumper_FORMAT_DIFFUSED16_BPP_COLOUR ((<a href="#pdumper_format">pdumper_format</a>) 0x7u)</pre>
+
+<h3 id="pdumper_FORMAT_HALFTONE32_BPP_COLOUR">pdumper_FORMAT_HALFTONE32_BPP_COLOUR</h3>
+<pre>#define pdumper_FORMAT_HALFTONE32_BPP_COLOUR ((<a href="#pdumper_format">pdumper_format</a>) 0x8u)</pre>
+
+<h3 id="pdumper_FORMAT_DIFFUSED32_BPP_COLOUR">pdumper_FORMAT_DIFFUSED32_BPP_COLOUR</h3>
+<pre>#define pdumper_FORMAT_DIFFUSED32_BPP_COLOUR ((<a href="#pdumper_format">pdumper_format</a>) 0x9u)</pre>
+
+<h3 id="pdumper_HALFTONE_XRESOLUTION">pdumper_HALFTONE_XRESOLUTION</h3>
+<pre>#define pdumper_HALFTONE_XRESOLUTION ((<a href="#pdumper_halftone_flags">pdumper_halftone_flags</a>) 0xFFu)</pre>
+
+<h3 id="pdumper_HALFTONE_XRESOLUTION_SHIFT">pdumper_HALFTONE_XRESOLUTION_SHIFT</h3>
+<pre>#define pdumper_HALFTONE_XRESOLUTION_SHIFT 0</pre>
+
+<h3 id="pdumper_HALFTONE_YRESOLUTION">pdumper_HALFTONE_YRESOLUTION</h3>
+<pre>#define pdumper_HALFTONE_YRESOLUTION ((<a href="#pdumper_halftone_flags">pdumper_halftone_flags</a>) 0xFF00u)</pre>
+
+<h3 id="pdumper_HALFTONE_YRESOLUTION_SHIFT">pdumper_HALFTONE_YRESOLUTION_SHIFT</h3>
+<pre>#define pdumper_HALFTONE_YRESOLUTION_SHIFT 8</pre>
+
+<h3 id="xpdumper_info">xpdumper_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdumper_info (int *version,
+      <a href="#pdumper_features">pdumper_features</a> *features);</pre>
+<p>Returns information about the PDumper support module</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>version</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>features</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="pdumper_info">pdumper_info</h3>
+<pre>extern void pdumper_info (int *version,
+      <a href="#pdumper_features">pdumper_features</a> *features);</pre>
+<p>Returns information about the PDumper support module</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>version</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>features</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xpdumper_claim">xpdumper_claim</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdumper_claim (int *anchor,
+      int size,
+      bits tag,
+      void **blk);</pre>
+<p>Allocates a block of memory and links it into the chain</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>anchor</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>tag</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>blk</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="pdumper_claim">pdumper_claim</h3>
+<pre>extern void *pdumper_claim (int *anchor,
+      int size,
+      bits tag);</pre>
+<p>Allocates a block of memory and links it into the chain</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>anchor</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>tag</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>blk</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xpdumper_free">xpdumper_free</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdumper_free (int *anchor,
+      void *blk);</pre>
+<p>Unlinks a block of memory from the chain and releases it</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>anchor</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>blk</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="pdumper_free">pdumper_free</h3>
+<pre>extern void pdumper_free (int *anchor,
+      void *blk);</pre>
+<p>Unlinks a block of memory from the chain and releases it</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>anchor</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>blk</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xpdumper_find">xpdumper_find</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdumper_find (int *anchor,
+      bits tag,
+      void **blk);</pre>
+<p>Scans the printer dumper's chain for a block of memory with the given tag</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>anchor</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>tag</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>blk</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="pdumper_find">pdumper_find</h3>
+<pre>extern void *pdumper_find (int *anchor,
+      bits tag);</pre>
+<p>Scans the printer dumper's chain for a block of memory with the given tag</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>anchor</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>tag</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>blk</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xpdumper_start_job">xpdumper_start_job</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdumper_start_job (int *anchor,
+      <a href="#pdumper_job_flags">pdumper_job_flags</a> flags,
+      char const *palette_file_name);</pre>
+<p>Sets up any workspace that is required for a job</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>anchor</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>palette_file_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="pdumper_start_job">pdumper_start_job</h3>
+<pre>extern void pdumper_start_job (int *anchor,
+      <a href="#pdumper_job_flags">pdumper_job_flags</a> flags,
+      char const *palette_file_name);</pre>
+<p>Sets up any workspace that is required for a job</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>anchor</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>palette_file_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xpdumper_tidy_job">xpdumper_tidy_job</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdumper_tidy_job (int *anchor,
+      int const *tags,
+      osbool end_of_document);</pre>
+<p>Releases workspace used for a job</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>anchor</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>tags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>end_of_document</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="pdumper_tidy_job">pdumper_tidy_job</h3>
+<pre>extern void pdumper_tidy_job (int *anchor,
+      int const *tags,
+      osbool end_of_document);</pre>
+<p>Releases workspace used for a job</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>anchor</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>tags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>end_of_document</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xpdumper_set_colour">xpdumper_set_colour</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdumper_set_colour (int *anchor,
+      <a href="os.html#os_colour">os_colour</a> colour,
+      <a href="#pdumper_strip_type">pdumper_strip_type</a> strip_type_and_pass_no,
+      <a href="#pdumper_halftone_flags">pdumper_halftone_flags</a> halftone_info,
+      int *col);</pre>
+<p>Processes the colour setting required by the printer dumper</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>anchor</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>strip_type_and_pass_no</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>halftone_info</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>col</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="pdumper_set_colour">pdumper_set_colour</h3>
+<pre>extern int pdumper_set_colour (int *anchor,
+      <a href="os.html#os_colour">os_colour</a> colour,
+      <a href="#pdumper_strip_type">pdumper_strip_type</a> strip_type_and_pass_no,
+      <a href="#pdumper_halftone_flags">pdumper_halftone_flags</a> halftone_info);</pre>
+<p>Processes the colour setting required by the printer dumper</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>anchor</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>strip_type_and_pass_no</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>halftone_info</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>col</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xpdumper_prepare_strip">xpdumper_prepare_strip</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdumper_prepare_strip (int *anchor,
+      byte const *image,
+      <a href="#pdumper_format">pdumper_format</a> format,
+      int width,
+      int height,
+      int stride,
+      <a href="#pdumper_halftone_flags">pdumper_halftone_flags</a> halftone_info);</pre>
+<p>Processes a bitmap into a format suitable for printing</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>anchor</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>image</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>format</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>width</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>stride</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>halftone_info</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="pdumper_prepare_strip">pdumper_prepare_strip</h3>
+<pre>extern void pdumper_prepare_strip (int *anchor,
+      byte const *image,
+      <a href="#pdumper_format">pdumper_format</a> format,
+      int width,
+      int height,
+      int stride,
+      <a href="#pdumper_halftone_flags">pdumper_halftone_flags</a> halftone_info);</pre>
+<p>Processes a bitmap into a format suitable for printing</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>anchor</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>image</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>format</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>width</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>stride</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>halftone_info</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xpdumper_lookup_error">xpdumper_lookup_error</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdumper_lookup_error (<a href="os.html#os_error">os_error</a> const *error,
+      char const *arg0);</pre>
+<p>Accesses the internal error handling routines within the support module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>error</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>arg0</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="pdumper_lookup_error">pdumper_lookup_error</h3>
+<pre>extern void pdumper_lookup_error (<a href="os.html#os_error">os_error</a> const *error,
+      char const *arg0);</pre>
+<p>Accesses the internal error handling routines within the support module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>error</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>arg0</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xpdumper_copy_filename">xpdumper_copy_filename</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpdumper_copy_filename (char *buffer,
+      int size,
+      char const *file_name);</pre>
+<p>Copies a specified file name into a buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="pdumper_copy_filename">pdumper_copy_filename</h3>
+<pre>extern void pdumper_copy_filename (char *buffer,
+      int size,
+      char const *file_name);</pre>
+<p>Copies a specified file name into a buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xservice_pdumper_starting">xservice_pdumper_starting</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_pdumper_starting (void);
+</pre><p>PDriverDP module starting up</p>
+
+
+<table>
+</table>
+
+<h3 id="service_pdumper_starting">service_pdumper_starting</h3>
+<pre>extern void service_pdumper_starting (void);
+</pre><p>PDriverDP module starting up</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_pdumper_dying">xservice_pdumper_dying</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_pdumper_dying (void);
+</pre><p>PDriverDP module dying</p>
+
+
+<table>
+</table>
+
+<h3 id="service_pdumper_dying">service_pdumper_dying</h3>
+<pre>extern void service_pdumper_dying (void);
+</pre><p>PDriverDP module dying</p>
+
+
+<table>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

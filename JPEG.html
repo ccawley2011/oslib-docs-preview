@@ -1,0 +1,540 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; JPEG</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>JPEG</h2>
+
+<pre>#include "oslib/jpeg.h"</pre>
+
+<h3 id="jpeg_info_flags">jpeg_info_flags</h3>
+<pre>typedef bits jpeg_info_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#jpeg_INFO_MONOCHROME">jpeg_INFO_MONOCHROME</a></dd>
+<dd><a href="#jpeg_INFO_NO_TRFM">jpeg_INFO_NO_TRFM</a></dd>
+<dd><a href="#jpeg_INFO_DPI_UNKNOWN">jpeg_INFO_DPI_UNKNOWN</a></dd>
+</dl>
+
+<h3 id="jpeg_scale_flags">jpeg_scale_flags</h3>
+<pre>typedef bits jpeg_scale_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#jpeg_SCALE_DITHERED">jpeg_SCALE_DITHERED</a></dd>
+<dd><a href="#jpeg_SCALE_ERROR_DIFFUSED">jpeg_SCALE_ERROR_DIFFUSED</a></dd>
+<dd><a href="#jpeg_SCALE_GIVEN_COLOUR_MAPPING">jpeg_SCALE_GIVEN_COLOUR_MAPPING</a></dd>
+<dd><a href="#jpeg_SCALE_TRANSLUCENCY">jpeg_SCALE_TRANSLUCENCY</a></dd>
+</dl>
+
+<h3 id="jpeg_transform_flags">jpeg_transform_flags</h3>
+<pre>typedef bits jpeg_transform_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#jpeg_DESTINATION_COORDS">jpeg_DESTINATION_COORDS</a></dd>
+<dd><a href="#jpeg_TRANSFORM_DITHERED">jpeg_TRANSFORM_DITHERED</a></dd>
+<dd><a href="#jpeg_TRANSFORM_ERROR_DIFFUSED">jpeg_TRANSFORM_ERROR_DIFFUSED</a></dd>
+<dd><a href="#jpeg_TRANSFORM_GIVEN_COLOUR_MAPPING">jpeg_TRANSFORM_GIVEN_COLOUR_MAPPING</a></dd>
+<dd><a href="#jpeg_TRANSFORM_TRANSLUCENCY">jpeg_TRANSFORM_TRANSLUCENCY</a></dd>
+</dl>
+
+<h3 id="jpeg_image">jpeg_image</h3>
+<pre>typedef struct
+   {  byte i [...];
+   }
+   jpeg_image;</pre>
+
+<h3 id="jpeg_print_flags">jpeg_print_flags</h3>
+<pre>typedef bits jpeg_print_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#jpeg_PRINT_PLOTTING">jpeg_PRINT_PLOTTING</a></dd>
+<dd><a href="#jpeg_PRINT_USING_TRANS_TAB">jpeg_PRINT_USING_TRANS_TAB</a></dd>
+</dl>
+
+<h3 id="jpeg_INFO_MONOCHROME">jpeg_INFO_MONOCHROME</h3>
+<pre>#define jpeg_INFO_MONOCHROME ((<a href="#jpeg_info_flags">jpeg_info_flags</a>) 0x1u)</pre>
+
+<h3 id="jpeg_INFO_NO_TRFM">jpeg_INFO_NO_TRFM</h3>
+<pre>#define jpeg_INFO_NO_TRFM ((<a href="#jpeg_info_flags">jpeg_info_flags</a>) 0x2u)</pre>
+
+<h3 id="jpeg_INFO_DPI_UNKNOWN">jpeg_INFO_DPI_UNKNOWN</h3>
+<pre>#define jpeg_INFO_DPI_UNKNOWN ((<a href="#jpeg_info_flags">jpeg_info_flags</a>) 0x4u)</pre>
+
+<h3 id="jpeg_SCALE_DITHERED">jpeg_SCALE_DITHERED</h3>
+<pre>#define jpeg_SCALE_DITHERED ((<a href="#jpeg_scale_flags">jpeg_scale_flags</a>) 0x1u)</pre>
+
+<h3 id="jpeg_SCALE_ERROR_DIFFUSED">jpeg_SCALE_ERROR_DIFFUSED</h3>
+<pre>#define jpeg_SCALE_ERROR_DIFFUSED ((<a href="#jpeg_scale_flags">jpeg_scale_flags</a>) 0x2u)</pre>
+
+<h3 id="jpeg_SCALE_GIVEN_COLOUR_MAPPING">jpeg_SCALE_GIVEN_COLOUR_MAPPING</h3>
+<pre>#define jpeg_SCALE_GIVEN_COLOUR_MAPPING ((<a href="#jpeg_scale_flags">jpeg_scale_flags</a>) 0x4u)</pre>
+
+<h3 id="jpeg_SCALE_TRANSLUCENCY">jpeg_SCALE_TRANSLUCENCY</h3>
+<pre>#define jpeg_SCALE_TRANSLUCENCY ((<a href="#jpeg_scale_flags">jpeg_scale_flags</a>) 0xFF0u)</pre>
+
+<h3 id="jpeg_SCALE_TRANSLUCENCY_SHIFT">jpeg_SCALE_TRANSLUCENCY_SHIFT</h3>
+<pre>#define jpeg_SCALE_TRANSLUCENCY_SHIFT 4</pre>
+
+<h3 id="jpeg_DESTINATION_COORDS">jpeg_DESTINATION_COORDS</h3>
+<pre>#define jpeg_DESTINATION_COORDS ((<a href="#jpeg_transform_flags">jpeg_transform_flags</a>) 0x1u)</pre>
+
+<h3 id="jpeg_TRANSFORM_DITHERED">jpeg_TRANSFORM_DITHERED</h3>
+<pre>#define jpeg_TRANSFORM_DITHERED ((<a href="#jpeg_transform_flags">jpeg_transform_flags</a>) 0x2u)</pre>
+
+<h3 id="jpeg_TRANSFORM_ERROR_DIFFUSED">jpeg_TRANSFORM_ERROR_DIFFUSED</h3>
+<pre>#define jpeg_TRANSFORM_ERROR_DIFFUSED ((<a href="#jpeg_transform_flags">jpeg_transform_flags</a>) 0x4u)</pre>
+
+<h3 id="jpeg_TRANSFORM_GIVEN_COLOUR_MAPPING">jpeg_TRANSFORM_GIVEN_COLOUR_MAPPING</h3>
+<pre>#define jpeg_TRANSFORM_GIVEN_COLOUR_MAPPING ((<a href="#jpeg_transform_flags">jpeg_transform_flags</a>) 0x8u)</pre>
+
+<h3 id="jpeg_TRANSFORM_TRANSLUCENCY">jpeg_TRANSFORM_TRANSLUCENCY</h3>
+<pre>#define jpeg_TRANSFORM_TRANSLUCENCY ((<a href="#jpeg_transform_flags">jpeg_transform_flags</a>) 0x1FE0u)</pre>
+
+<h3 id="jpeg_TRANSFORM_TRANSLUCENCY_SHIFT">jpeg_TRANSFORM_TRANSLUCENCY_SHIFT</h3>
+<pre>#define jpeg_TRANSFORM_TRANSLUCENCY_SHIFT 5</pre>
+
+<h3 id="jpeg_FILE_TYPE">jpeg_FILE_TYPE</h3>
+<pre>#define jpeg_FILE_TYPE 0xC85u</pre>
+
+<h3 id="jpeg_PRINT_PLOTTING">jpeg_PRINT_PLOTTING</h3>
+<pre>#define jpeg_PRINT_PLOTTING ((<a href="#jpeg_print_flags">jpeg_print_flags</a>) 0x1u)</pre>
+
+<h3 id="jpeg_PRINT_USING_TRANS_TAB">jpeg_PRINT_USING_TRANS_TAB</h3>
+<pre>#define jpeg_PRINT_USING_TRANS_TAB ((<a href="#jpeg_print_flags">jpeg_print_flags</a>) 0x2u)</pre>
+
+<h3 id="xjpeginfo_dimensions">xjpeginfo_dimensions</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xjpeginfo_dimensions (<a href="#jpeg_image">jpeg_image</a> const *image,
+      int size,
+      <a href="#jpeg_info_flags">jpeg_info_flags</a> *info_flags,
+      int *width,
+      int *height,
+      int *xdpi,
+      int *ydpi,
+      int *workspace_size);</pre>
+<p>Returns the dimensions of a JPEG image in memory - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>info_flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>width</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xdpi</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>ydpi</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>workspace_size</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="jpeginfo_dimensions">jpeginfo_dimensions</h3>
+<pre>extern <a href="#jpeg_info_flags">jpeg_info_flags</a> jpeginfo_dimensions (<a href="#jpeg_image">jpeg_image</a> const *image,
+      int size,
+      int *width,
+      int *height,
+      int *xdpi,
+      int *ydpi,
+      int *workspace_size);</pre>
+<p>Returns the dimensions of a JPEG image in memory - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>width</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xdpi</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>ydpi</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>workspace_size</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>info_flags</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xjpegfileinfo_dimensions">xjpegfileinfo_dimensions</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xjpegfileinfo_dimensions (char const *file_name,
+      <a href="#jpeg_info_flags">jpeg_info_flags</a> *info_flags,
+      int *width,
+      int *height,
+      int *xdpi,
+      int *ydpi,
+      int *workspace_size);</pre>
+<p>Returns the dimensions of a JPEG image in a file - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>info_flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>width</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xdpi</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>ydpi</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>workspace_size</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="jpegfileinfo_dimensions">jpegfileinfo_dimensions</h3>
+<pre>extern <a href="#jpeg_info_flags">jpeg_info_flags</a> jpegfileinfo_dimensions (char const *file_name,
+      int *width,
+      int *height,
+      int *xdpi,
+      int *ydpi,
+      int *workspace_size);</pre>
+<p>Returns the dimensions of a JPEG image in a file - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>width</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xdpi</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>ydpi</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>workspace_size</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>info_flags</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xjpeg_plot_scaled">xjpeg_plot_scaled</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xjpeg_plot_scaled (<a href="#jpeg_image">jpeg_image</a> const *image,
+      int x,
+      int y,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      int size,
+      <a href="#jpeg_scale_flags">jpeg_scale_flags</a> flags);</pre>
+<p>Plots a JPEG image from memory - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="jpeg_plot_scaled">jpeg_plot_scaled</h3>
+<pre>extern void jpeg_plot_scaled (<a href="#jpeg_image">jpeg_image</a> const *image,
+      int x,
+      int y,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      int size,
+      <a href="#jpeg_scale_flags">jpeg_scale_flags</a> flags);</pre>
+<p>Plots a JPEG image from memory - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xjpeg_plot_scaled_mapped">xjpeg_plot_scaled_mapped</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xjpeg_plot_scaled_mapped (<a href="#jpeg_image">jpeg_image</a> const *image,
+      int x,
+      int y,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      int size,
+      <a href="#jpeg_scale_flags">jpeg_scale_flags</a> flags,
+      <a href="osspriteop.html#osspriteop_colour_mapping">osspriteop_colour_mapping</a> const *mapping);</pre>
+<p>Plots a JPEG image from memory with colour mapping - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>mapping</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="jpeg_plot_scaled_mapped">jpeg_plot_scaled_mapped</h3>
+<pre>extern void jpeg_plot_scaled_mapped (<a href="#jpeg_image">jpeg_image</a> const *image,
+      int x,
+      int y,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      int size,
+      <a href="#jpeg_scale_flags">jpeg_scale_flags</a> flags,
+      <a href="osspriteop.html#osspriteop_colour_mapping">osspriteop_colour_mapping</a> const *mapping);</pre>
+<p>Plots a JPEG image from memory with colour mapping - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>mapping</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xjpeg_plot_file_scaled">xjpeg_plot_file_scaled</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xjpeg_plot_file_scaled (char const *file_name,
+      int x,
+      int y,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      <a href="#jpeg_scale_flags">jpeg_scale_flags</a> flags);</pre>
+<p>Plots a JPEG image from a file - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="jpeg_plot_file_scaled">jpeg_plot_file_scaled</h3>
+<pre>extern void jpeg_plot_file_scaled (char const *file_name,
+      int x,
+      int y,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      <a href="#jpeg_scale_flags">jpeg_scale_flags</a> flags);</pre>
+<p>Plots a JPEG image from a file - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xjpeg_plot_file_scaled_mapped">xjpeg_plot_file_scaled_mapped</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xjpeg_plot_file_scaled_mapped (char const *file_name,
+      int x,
+      int y,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      <a href="#jpeg_scale_flags">jpeg_scale_flags</a> flags,
+      <a href="osspriteop.html#osspriteop_colour_mapping">osspriteop_colour_mapping</a> const *mapping);</pre>
+<p>Plots a JPEG image from a file with colour mapping - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>mapping</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="jpeg_plot_file_scaled_mapped">jpeg_plot_file_scaled_mapped</h3>
+<pre>extern void jpeg_plot_file_scaled_mapped (char const *file_name,
+      int x,
+      int y,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      <a href="#jpeg_scale_flags">jpeg_scale_flags</a> flags,
+      <a href="osspriteop.html#osspriteop_colour_mapping">osspriteop_colour_mapping</a> const *mapping);</pre>
+<p>Plots a JPEG image from a file with colour mapping - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>mapping</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xjpeg_plot_transformed">xjpeg_plot_transformed</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xjpeg_plot_transformed (<a href="#jpeg_image">jpeg_image</a> const *image,
+      <a href="#jpeg_transform_flags">jpeg_transform_flags</a> flags,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm_or_rect,
+      int size);</pre>
+<p>Plots a JPEG image from memory using a transformation matrix - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm_or_rect</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="jpeg_plot_transformed">jpeg_plot_transformed</h3>
+<pre>extern void jpeg_plot_transformed (<a href="#jpeg_image">jpeg_image</a> const *image,
+      <a href="#jpeg_transform_flags">jpeg_transform_flags</a> flags,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm_or_rect,
+      int size);</pre>
+<p>Plots a JPEG image from memory using a transformation matrix - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm_or_rect</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xjpeg_plot_transformed_mapped">xjpeg_plot_transformed_mapped</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xjpeg_plot_transformed_mapped (<a href="#jpeg_image">jpeg_image</a> const *image,
+      <a href="#jpeg_transform_flags">jpeg_transform_flags</a> flags,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm_or_rect,
+      int size,
+      <a href="osspriteop.html#osspriteop_colour_mapping">osspriteop_colour_mapping</a> const *mapping);</pre>
+<p>Plots a JPEG image from memory using a transformation matrix with colour mapping - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm_or_rect</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>mapping</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="jpeg_plot_transformed_mapped">jpeg_plot_transformed_mapped</h3>
+<pre>extern void jpeg_plot_transformed_mapped (<a href="#jpeg_image">jpeg_image</a> const *image,
+      <a href="#jpeg_transform_flags">jpeg_transform_flags</a> flags,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm_or_rect,
+      int size,
+      <a href="osspriteop.html#osspriteop_colour_mapping">osspriteop_colour_mapping</a> const *mapping);</pre>
+<p>Plots a JPEG image from memory using a transformation matrix with colour mapping - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm_or_rect</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>mapping</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xjpeg_plot_file_transformed">xjpeg_plot_file_transformed</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xjpeg_plot_file_transformed (char const *file_name,
+      <a href="#jpeg_transform_flags">jpeg_transform_flags</a> flags,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm_or_rect);</pre>
+<p>Plots a JPEG image from a file using a transformation matrix - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm_or_rect</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="jpeg_plot_file_transformed">jpeg_plot_file_transformed</h3>
+<pre>extern void jpeg_plot_file_transformed (char const *file_name,
+      <a href="#jpeg_transform_flags">jpeg_transform_flags</a> flags,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm_or_rect);</pre>
+<p>Plots a JPEG image from a file using a transformation matrix - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm_or_rect</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xjpeg_plot_file_transformed_mapped">xjpeg_plot_file_transformed_mapped</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xjpeg_plot_file_transformed_mapped (char const *file_name,
+      <a href="#jpeg_transform_flags">jpeg_transform_flags</a> flags,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm_or_rect,
+      <a href="osspriteop.html#osspriteop_colour_mapping">osspriteop_colour_mapping</a> const *mapping);</pre>
+<p>Plots a JPEG image from a file using a transformation matrix with colour mapping - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm_or_rect</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>mapping</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="jpeg_plot_file_transformed_mapped">jpeg_plot_file_transformed_mapped</h3>
+<pre>extern void jpeg_plot_file_transformed_mapped (char const *file_name,
+      <a href="#jpeg_transform_flags">jpeg_transform_flags</a> flags,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm_or_rect,
+      <a href="osspriteop.html#osspriteop_colour_mapping">osspriteop_colour_mapping</a> const *mapping);</pre>
+<p>Plots a JPEG image from a file using a transformation matrix with colour mapping - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm_or_rect</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>mapping</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xjpeg_pdriver_intercept">xjpeg_pdriver_intercept</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xjpeg_pdriver_intercept (<a href="#jpeg_print_flags">jpeg_print_flags</a> flags,
+      <a href="#jpeg_print_flags">jpeg_print_flags</a> *flags_out);</pre>
+<p>Requests that JPEG calls are passed to the printer drivers - for internal use only</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags_out</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="jpeg_pdriver_intercept">jpeg_pdriver_intercept</h3>
+<pre>extern <a href="#jpeg_print_flags">jpeg_print_flags</a> jpeg_pdriver_intercept (<a href="#jpeg_print_flags">jpeg_print_flags</a> flags);</pre>
+<p>Requests that JPEG calls are passed to the printer drivers - for internal use only</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>flags_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

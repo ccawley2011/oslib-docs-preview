@@ -1,0 +1,460 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; FilerAction</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>FilerAction</h2>
+
+<pre>#include "oslib/fileraction.h"</pre>
+
+<h3 id="fileraction_operation">fileraction_operation</h3>
+<pre>typedef int fileraction_operation;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#fileraction_COPY">fileraction_COPY</a></dd>
+<dd><a href="#fileraction_MOVE_LOCAL">fileraction_MOVE_LOCAL</a></dd>
+<dd><a href="#fileraction_DELETE">fileraction_DELETE</a></dd>
+<dd><a href="#fileraction_ACCESS">fileraction_ACCESS</a></dd>
+<dd><a href="#fileraction_SET_TYPE">fileraction_SET_TYPE</a></dd>
+<dd><a href="#fileraction_COUNT">fileraction_COUNT</a></dd>
+<dd><a href="#fileraction_MOVE">fileraction_MOVE</a></dd>
+<dd><a href="#fileraction_COPY_LOCAL">fileraction_COPY_LOCAL</a></dd>
+<dd><a href="#fileraction_STAMP">fileraction_STAMP</a></dd>
+<dd><a href="#fileraction_FIND">fileraction_FIND</a></dd>
+</dl>
+
+<h3 id="fileraction_flags">fileraction_flags</h3>
+<pre>typedef bits fileraction_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#fileraction_VERBOSE">fileraction_VERBOSE</a></dd>
+<dd><a href="#fileraction_CONFIRM">fileraction_CONFIRM</a></dd>
+<dd><a href="#fileraction_FORCE">fileraction_FORCE</a></dd>
+<dd><a href="#fileraction_NEWER">fileraction_NEWER</a></dd>
+<dd><a href="#fileraction_RECURSE">fileraction_RECURSE</a></dd>
+<dd><a href="#fileraction_CONFIRM_DELETES_ONLY">fileraction_CONFIRM_DELETES_ONLY</a></dd>
+<dd><a href="#fileraction_FASTER">fileraction_FASTER</a></dd>
+<dd><a href="#fileraction_NEVER_PROXY">fileraction_NEVER_PROXY</a></dd>
+</dl>
+
+<h3 id="fileraction_COPY">fileraction_COPY</h3>
+<pre>#define fileraction_COPY ((<a href="#fileraction_operation">fileraction_operation</a>) 0x0u)</pre>
+
+<h3 id="fileraction_MOVE_LOCAL">fileraction_MOVE_LOCAL</h3>
+<pre>#define fileraction_MOVE_LOCAL ((<a href="#fileraction_operation">fileraction_operation</a>) 0x1u)</pre>
+
+<h3 id="fileraction_DELETE">fileraction_DELETE</h3>
+<pre>#define fileraction_DELETE ((<a href="#fileraction_operation">fileraction_operation</a>) 0x2u)</pre>
+
+<h3 id="fileraction_ACCESS">fileraction_ACCESS</h3>
+<pre>#define fileraction_ACCESS ((<a href="#fileraction_operation">fileraction_operation</a>) 0x3u)</pre>
+
+<h3 id="fileraction_SET_TYPE">fileraction_SET_TYPE</h3>
+<pre>#define fileraction_SET_TYPE ((<a href="#fileraction_operation">fileraction_operation</a>) 0x4u)</pre>
+
+<h3 id="fileraction_COUNT">fileraction_COUNT</h3>
+<pre>#define fileraction_COUNT ((<a href="#fileraction_operation">fileraction_operation</a>) 0x5u)</pre>
+
+<h3 id="fileraction_MOVE">fileraction_MOVE</h3>
+<pre>#define fileraction_MOVE ((<a href="#fileraction_operation">fileraction_operation</a>) 0x6u)</pre>
+
+<h3 id="fileraction_COPY_LOCAL">fileraction_COPY_LOCAL</h3>
+<pre>#define fileraction_COPY_LOCAL ((<a href="#fileraction_operation">fileraction_operation</a>) 0x7u)</pre>
+
+<h3 id="fileraction_STAMP">fileraction_STAMP</h3>
+<pre>#define fileraction_STAMP ((<a href="#fileraction_operation">fileraction_operation</a>) 0x8u)</pre>
+
+<h3 id="fileraction_FIND">fileraction_FIND</h3>
+<pre>#define fileraction_FIND ((<a href="#fileraction_operation">fileraction_operation</a>) 0x9u)</pre>
+
+<h3 id="fileraction_VERBOSE">fileraction_VERBOSE</h3>
+<pre>#define fileraction_VERBOSE ((<a href="#fileraction_flags">fileraction_flags</a>) 0x1u)</pre>
+
+<h3 id="fileraction_CONFIRM">fileraction_CONFIRM</h3>
+<pre>#define fileraction_CONFIRM ((<a href="#fileraction_flags">fileraction_flags</a>) 0x2u)</pre>
+
+<h3 id="fileraction_FORCE">fileraction_FORCE</h3>
+<pre>#define fileraction_FORCE ((<a href="#fileraction_flags">fileraction_flags</a>) 0x4u)</pre>
+
+<h3 id="fileraction_NEWER">fileraction_NEWER</h3>
+<pre>#define fileraction_NEWER ((<a href="#fileraction_flags">fileraction_flags</a>) 0x8u)</pre>
+
+<h3 id="fileraction_RECURSE">fileraction_RECURSE</h3>
+<pre>#define fileraction_RECURSE ((<a href="#fileraction_flags">fileraction_flags</a>) 0x10u)</pre>
+
+<h3 id="fileraction_CONFIRM_DELETES_ONLY">fileraction_CONFIRM_DELETES_ONLY</h3>
+<pre>#define fileraction_CONFIRM_DELETES_ONLY ((<a href="#fileraction_flags">fileraction_flags</a>) 0x20u)</pre>
+
+<p>RISC OS 4+</p>
+
+<h3 id="fileraction_FASTER">fileraction_FASTER</h3>
+<pre>#define fileraction_FASTER ((<a href="#fileraction_flags">fileraction_flags</a>) 0x40u)</pre>
+
+<p>RISC OS 4+</p>
+
+<h3 id="fileraction_NEVER_PROXY">fileraction_NEVER_PROXY</h3>
+<pre>#define fileraction_NEVER_PROXY ((<a href="#fileraction_flags">fileraction_flags</a>) 0x80u)</pre>
+
+<p>RISC OS Select</p>
+
+<h3 id="xfileraction_send_selected_directory">xfileraction_send_selected_directory</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfileraction_send_selected_directory (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      char const *name);</pre>
+<p>Sends a message specifying the directory containing the selection</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="fileraction_send_selected_directory">fileraction_send_selected_directory</h3>
+<pre>extern void fileraction_send_selected_directory (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      char const *name);</pre>
+<p>Sends a message specifying the directory containing the selection</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xfileraction_send_selected_file">xfileraction_send_selected_file</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfileraction_send_selected_file (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      char const *leaf_name);</pre>
+<p>Sends a message specifying a selected file within the given directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>leaf_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="fileraction_send_selected_file">fileraction_send_selected_file</h3>
+<pre>extern void fileraction_send_selected_file (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      char const *leaf_name);</pre>
+<p>Sends a message specifying a selected file within the given directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>leaf_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xfileractionsendstartoperation_copy">xfileractionsendstartoperation_copy</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfileractionsendstartoperation_copy (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="#fileraction_flags">fileraction_flags</a> flags,
+      char const *destination,
+      int size);</pre>
+<p>Sends a message to start a copy</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>destination</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="fileractionsendstartoperation_copy">fileractionsendstartoperation_copy</h3>
+<pre>extern void fileractionsendstartoperation_copy (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="#fileraction_flags">fileraction_flags</a> flags,
+      char const *destination,
+      int size);</pre>
+<p>Sends a message to start a copy</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>destination</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xfileractionsendstartoperation_move_local">xfileractionsendstartoperation_move_local</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfileractionsendstartoperation_move_local (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="#fileraction_flags">fileraction_flags</a> flags,
+      char const *destination,
+      int size);</pre>
+<p>Sends a message to start a move (by renaming)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>destination</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="fileractionsendstartoperation_move_local">fileractionsendstartoperation_move_local</h3>
+<pre>extern void fileractionsendstartoperation_move_local (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="#fileraction_flags">fileraction_flags</a> flags,
+      char const *destination,
+      int size);</pre>
+<p>Sends a message to start a move (by renaming)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>destination</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xfileractionsendstartoperation_delete">xfileractionsendstartoperation_delete</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfileractionsendstartoperation_delete (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="#fileraction_flags">fileraction_flags</a> flags);</pre>
+<p>Sends a message to start a delete</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="fileractionsendstartoperation_delete">fileractionsendstartoperation_delete</h3>
+<pre>extern void fileractionsendstartoperation_delete (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="#fileraction_flags">fileraction_flags</a> flags);</pre>
+<p>Sends a message to start a delete</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xfileractionsendstartoperation_access">xfileractionsendstartoperation_access</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfileractionsendstartoperation_access (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="#fileraction_flags">fileraction_flags</a> flags,
+      int const *access);</pre>
+<p>Sends a message to start an access modification</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>access</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="fileractionsendstartoperation_access">fileractionsendstartoperation_access</h3>
+<pre>extern void fileractionsendstartoperation_access (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="#fileraction_flags">fileraction_flags</a> flags,
+      int const *access);</pre>
+<p>Sends a message to start an access modification</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>access</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xfileractionsendstartoperation_set_type">xfileractionsendstartoperation_set_type</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfileractionsendstartoperation_set_type (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="#fileraction_flags">fileraction_flags</a> flags,
+      bits const *file_type);</pre>
+<p>Sends a message to start a set type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="fileractionsendstartoperation_set_type">fileractionsendstartoperation_set_type</h3>
+<pre>extern void fileractionsendstartoperation_set_type (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="#fileraction_flags">fileraction_flags</a> flags,
+      bits const *file_type);</pre>
+<p>Sends a message to start a set type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xfileractionsendstartoperation_count">xfileractionsendstartoperation_count</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfileractionsendstartoperation_count (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="#fileraction_flags">fileraction_flags</a> flags);</pre>
+<p>Sends a message to start a count</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="fileractionsendstartoperation_count">fileractionsendstartoperation_count</h3>
+<pre>extern void fileractionsendstartoperation_count (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="#fileraction_flags">fileraction_flags</a> flags);</pre>
+<p>Sends a message to start a count</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xfileractionsendstartoperation_move">xfileractionsendstartoperation_move</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfileractionsendstartoperation_move (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="#fileraction_flags">fileraction_flags</a> flags,
+      char const *destination,
+      int size);</pre>
+<p>Sends a message to start a move (by copying and deleting)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>destination</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="fileractionsendstartoperation_move">fileractionsendstartoperation_move</h3>
+<pre>extern void fileractionsendstartoperation_move (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="#fileraction_flags">fileraction_flags</a> flags,
+      char const *destination,
+      int size);</pre>
+<p>Sends a message to start a move (by copying and deleting)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>destination</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xfileractionsendstartoperation_copy_local">xfileractionsendstartoperation_copy_local</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfileractionsendstartoperation_copy_local (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="#fileraction_flags">fileraction_flags</a> flags,
+      char const *destination,
+      int size);</pre>
+<p>Sends a message to start a copy within a directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>destination</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="fileractionsendstartoperation_copy_local">fileractionsendstartoperation_copy_local</h3>
+<pre>extern void fileractionsendstartoperation_copy_local (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="#fileraction_flags">fileraction_flags</a> flags,
+      char const *destination,
+      int size);</pre>
+<p>Sends a message to start a copy within a directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>destination</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xfileractionsendstartoperation_stamp">xfileractionsendstartoperation_stamp</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfileractionsendstartoperation_stamp (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="#fileraction_flags">fileraction_flags</a> flags);</pre>
+<p>Sends a message to start a stamp</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="fileractionsendstartoperation_stamp">fileractionsendstartoperation_stamp</h3>
+<pre>extern void fileractionsendstartoperation_stamp (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="#fileraction_flags">fileraction_flags</a> flags);</pre>
+<p>Sends a message to start a stamp</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xfileractionsendstartoperation_find">xfileractionsendstartoperation_find</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfileractionsendstartoperation_find (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="#fileraction_flags">fileraction_flags</a> flags,
+      char const *file_name,
+      int size);</pre>
+<p>Sends a message to start a file search</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="fileractionsendstartoperation_find">fileractionsendstartoperation_find</h3>
+<pre>extern void fileractionsendstartoperation_find (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="#fileraction_flags">fileraction_flags</a> flags,
+      char const *file_name,
+      int size);</pre>
+<p>Sends a message to start a file search</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

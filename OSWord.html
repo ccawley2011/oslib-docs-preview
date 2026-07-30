@@ -1,0 +1,769 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; OSWord</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>OSWord</h2>
+
+<pre>#include "oslib/osword.h"</pre>
+
+<h3 id="oswordreadclock_op">oswordreadclock_op</h3>
+<pre>typedef byte oswordreadclock_op;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#oswordreadclock_OP_LOCAL_STRING">oswordreadclock_OP_LOCAL_STRING</a></dd>
+<dd><a href="#oswordreadclock_OP_LOCAL_BCD">oswordreadclock_OP_LOCAL_BCD</a></dd>
+<dd><a href="#oswordreadclock_OP_CONVERT_BCD_TO_STRING">oswordreadclock_OP_CONVERT_BCD_TO_STRING</a></dd>
+<dd><a href="#oswordreadclock_OP_UTC">oswordreadclock_OP_UTC</a></dd>
+</dl>
+
+<h3 id="oswordwriteclock_op">oswordwriteclock_op</h3>
+<pre>typedef byte oswordwriteclock_op;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#oswordwriteclock_OP_TIME_LOCAL_STRING">oswordwriteclock_OP_TIME_LOCAL_STRING</a></dd>
+<dd><a href="#oswordwriteclock_OP_DATE_LOCAL_STRING">oswordwriteclock_OP_DATE_LOCAL_STRING</a></dd>
+<dd><a href="#oswordwriteclock_OP_LOCAL_STRING">oswordwriteclock_OP_LOCAL_STRING</a></dd>
+</dl>
+
+<h3 id="oswordpointer_op">oswordpointer_op</h3>
+<pre>typedef byte oswordpointer_op;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#oswordpointer_OP_DEFINE">oswordpointer_OP_DEFINE</a></dd>
+<dd><a href="#oswordpointer_OP_SET_BBOX">oswordpointer_OP_SET_BBOX</a></dd>
+<dd><a href="#oswordpointer_OP_STEP">oswordpointer_OP_STEP</a></dd>
+<dd><a href="#oswordpointer_OP_SET_POSITION">oswordpointer_OP_SET_POSITION</a></dd>
+<dd><a href="#oswordpointer_OP_READ_POSITION">oswordpointer_OP_READ_POSITION</a></dd>
+<dd><a href="#oswordpointer_OP_SET_UNLINKED_POSITION">oswordpointer_OP_SET_UNLINKED_POSITION</a></dd>
+<dd><a href="#oswordpointer_OP_READ_UNLINKED_POSITION">oswordpointer_OP_READ_UNLINKED_POSITION</a></dd>
+<dd><a href="#oswordpointer_OP_READ_BBOX">oswordpointer_OP_READ_BBOX</a></dd>
+</dl>
+
+<h3 id="osword_timer_block">osword_timer_block</h3>
+<pre>typedef struct
+   {  byte b [5];
+   }
+   osword_timer_block;</pre>
+
+<h3 id="osword_char_definition_block">osword_char_definition_block</h3>
+<pre>typedef struct
+   {  char c;
+      byte definition [8];
+   }
+   osword_char_definition_block;</pre>
+
+<h3 id="osword_palette_block">osword_palette_block</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_gcol">os_gcol</a> gcol;
+      byte colour_number;
+      byte r;
+      byte g;
+      byte b;
+   }
+   osword_palette_block;</pre>
+
+<h3 id="osword_cursor_position_block">osword_cursor_position_block</h3>
+<pre>typedef struct
+   {  short xprev;
+      short yprev;
+      short x;
+      short y;
+   }
+   osword_cursor_position_block;</pre>
+
+<h3 id="oswordreadclock_local_string_block">oswordreadclock_local_string_block</h3>
+<pre>typedef union
+   {  <a href="#oswordreadclock_op">oswordreadclock_op</a> op;
+      struct
+      {  char c [...];
+      }
+      string;
+   }
+   oswordreadclock_local_string_block;</pre>
+
+<h3 id="oswordreadclock_local_bcd_block">oswordreadclock_local_bcd_block</h3>
+<pre>typedef union
+   {  <a href="#oswordreadclock_op">oswordreadclock_op</a> op;
+      <a href="os.html#os_bcd_date_and_time">os_bcd_date_and_time</a> date_and_time;
+   }
+   oswordreadclock_local_bcd_block;</pre>
+
+<h3 id="oswordreadclock_convert_bcd_to_string_block">oswordreadclock_convert_bcd_to_string_block</h3>
+<pre>typedef union
+   {  struct
+      {  <a href="#oswordreadclock_op">oswordreadclock_op</a> op;
+         <a href="os.html#os_bcd_date_and_time">os_bcd_date_and_time</a> date_and_time;
+      }
+      bcd;
+      struct
+      {  char c [...];
+      }
+      string;
+   }
+   oswordreadclock_convert_bcd_to_string_block;</pre>
+
+<h3 id="oswordreadclock_utc_block">oswordreadclock_utc_block</h3>
+<pre>typedef union
+   {  <a href="#oswordreadclock_op">oswordreadclock_op</a> op;
+      <a href="os.html#os_date_and_time">os_date_and_time</a> utc;
+   }
+   oswordreadclock_utc_block;</pre>
+
+<h3 id="oswordwriteclock_BLOCK_MEMBERS">oswordwriteclock_BLOCK_MEMBERS</h3>
+<pre>#define oswordwriteclock_BLOCK_MEMBERS \
+   <a href="#oswordwriteclock_op">oswordwriteclock_op</a> op;
+</pre>
+
+<h3 id="oswordwriteclock_block_base">oswordwriteclock_block_base</h3>
+<pre>typedef struct
+   {  <a href="#oswordwriteclock_op">oswordwriteclock_op</a> op;
+   }
+   oswordwriteclock_block_base;</pre>
+
+<h3 id="oswordwriteclock_block">oswordwriteclock_block</h3>
+<pre>typedef struct
+   {  <a href="#oswordwriteclock_op">oswordwriteclock_op</a> op;
+      char string [...];
+   }
+   oswordwriteclock_block;</pre>
+
+<h3 id="oswordpointer_define_block">oswordpointer_define_block</h3>
+<pre>typedef struct
+   {  byte reserved [2];
+      <a href="#oswordpointer_op">oswordpointer_op</a> op;
+      byte shape_no;
+      byte width;
+      byte height;
+      byte xactive;
+      byte yactive;
+      byte *data;
+   }
+   oswordpointer_define_block;</pre>
+
+<h3 id="oswordpointer_bbox_block">oswordpointer_bbox_block</h3>
+<pre>typedef struct
+   {  byte reserved [3];
+      <a href="#oswordpointer_op">oswordpointer_op</a> op;
+      short x0;
+      short y0;
+      short x1;
+      short y1;
+   }
+   oswordpointer_bbox_block;</pre>
+
+
+Fields:	x0 - left 
+ 	y0 - bottom 
+ 	x1 - right 
+ 	y1 - top <h3 id="oswordpointer_step_block">oswordpointer_step_block</h3>
+<pre>typedef struct
+   {  <a href="#oswordpointer_op">oswordpointer_op</a> op;
+      byte xstep;
+      byte ystep;
+   }
+   oswordpointer_step_block;</pre>
+
+<h3 id="oswordpointer_position_block">oswordpointer_position_block</h3>
+<pre>typedef struct
+   {  byte reserved;
+      <a href="#oswordpointer_op">oswordpointer_op</a> op;
+      short x;
+      short y;
+   }
+   oswordpointer_position_block;</pre>
+
+<h3 id="osword_screen_base_block">osword_screen_base_block</h3>
+<pre>typedef struct
+   {  byte reserved [3];
+      byte type;
+      byte *base;
+   }
+   osword_screen_base_block;</pre>
+
+<h3 id="osword_block">osword_block</h3>
+<pre>typedef union
+   {  <a href="#osword_timer_block">osword_timer_block</a> timer;
+      <a href="#osword_char_definition_block">osword_char_definition_block</a> char_definition;
+      <a href="#osword_palette_block">osword_palette_block</a> palette;
+      <a href="#osword_cursor_position_block">osword_cursor_position_block</a> cursor_position;
+      <a href="#oswordreadclock_local_string_block">oswordreadclock_local_string_block</a> string;
+      <a href="#oswordreadclock_local_bcd_block">oswordreadclock_local_bcd_block</a> bcd;
+      <a href="#oswordreadclock_convert_bcd_to_string_block">oswordreadclock_convert_bcd_to_string_block</a> convert_bcd_to_string;
+      <a href="#oswordreadclock_utc_block">oswordreadclock_utc_block</a> utc;
+      <a href="#oswordwriteclock_block">oswordwriteclock_block</a> write_clock;
+      <a href="#oswordpointer_define_block">oswordpointer_define_block</a> pointer_define;
+      <a href="#oswordpointer_bbox_block">oswordpointer_bbox_block</a> pointer_bbox;
+      <a href="#oswordpointer_step_block">oswordpointer_step_block</a> pointer_step;
+      <a href="#oswordpointer_position_block">oswordpointer_position_block</a> pointer_position;
+      <a href="#osword_screen_base_block">osword_screen_base_block</a> screen_base;
+      char reserved [64];
+   }
+   osword_block;</pre>
+
+<h3 id="oswordreadclock_OP_LOCAL_STRING">oswordreadclock_OP_LOCAL_STRING</h3>
+<pre>#define oswordreadclock_OP_LOCAL_STRING ((<a href="#oswordreadclock_op">oswordreadclock_op</a>) 0x0u)</pre>
+
+<h3 id="oswordreadclock_OP_LOCAL_BCD">oswordreadclock_OP_LOCAL_BCD</h3>
+<pre>#define oswordreadclock_OP_LOCAL_BCD ((<a href="#oswordreadclock_op">oswordreadclock_op</a>) 0x1u)</pre>
+
+<h3 id="oswordreadclock_OP_CONVERT_BCD_TO_STRING">oswordreadclock_OP_CONVERT_BCD_TO_STRING</h3>
+<pre>#define oswordreadclock_OP_CONVERT_BCD_TO_STRING ((<a href="#oswordreadclock_op">oswordreadclock_op</a>) 0x2u)</pre>
+
+<h3 id="oswordreadclock_OP_UTC">oswordreadclock_OP_UTC</h3>
+<pre>#define oswordreadclock_OP_UTC ((<a href="#oswordreadclock_op">oswordreadclock_op</a>) 0x3u)</pre>
+
+<h3 id="oswordwriteclock_OP_TIME_LOCAL_STRING">oswordwriteclock_OP_TIME_LOCAL_STRING</h3>
+<pre>#define oswordwriteclock_OP_TIME_LOCAL_STRING ((<a href="#oswordwriteclock_op">oswordwriteclock_op</a>) 0x8u)</pre>
+
+<h3 id="oswordwriteclock_OP_DATE_LOCAL_STRING">oswordwriteclock_OP_DATE_LOCAL_STRING</h3>
+<pre>#define oswordwriteclock_OP_DATE_LOCAL_STRING ((<a href="#oswordwriteclock_op">oswordwriteclock_op</a>) 0xFu)</pre>
+
+<h3 id="oswordwriteclock_OP_LOCAL_STRING">oswordwriteclock_OP_LOCAL_STRING</h3>
+<pre>#define oswordwriteclock_OP_LOCAL_STRING ((<a href="#oswordwriteclock_op">oswordwriteclock_op</a>) 0x18u)</pre>
+
+<h3 id="oswordpointer_OP_DEFINE">oswordpointer_OP_DEFINE</h3>
+<pre>#define oswordpointer_OP_DEFINE ((<a href="#oswordpointer_op">oswordpointer_op</a>) 0x0u)</pre>
+
+<h3 id="oswordpointer_OP_SET_BBOX">oswordpointer_OP_SET_BBOX</h3>
+<pre>#define oswordpointer_OP_SET_BBOX ((<a href="#oswordpointer_op">oswordpointer_op</a>) 0x1u)</pre>
+
+<h3 id="oswordpointer_OP_STEP">oswordpointer_OP_STEP</h3>
+<pre>#define oswordpointer_OP_STEP ((<a href="#oswordpointer_op">oswordpointer_op</a>) 0x2u)</pre>
+
+<h3 id="oswordpointer_OP_SET_POSITION">oswordpointer_OP_SET_POSITION</h3>
+<pre>#define oswordpointer_OP_SET_POSITION ((<a href="#oswordpointer_op">oswordpointer_op</a>) 0x3u)</pre>
+
+<h3 id="oswordpointer_OP_READ_POSITION">oswordpointer_OP_READ_POSITION</h3>
+<pre>#define oswordpointer_OP_READ_POSITION ((<a href="#oswordpointer_op">oswordpointer_op</a>) 0x4u)</pre>
+
+<h3 id="oswordpointer_OP_SET_UNLINKED_POSITION">oswordpointer_OP_SET_UNLINKED_POSITION</h3>
+<pre>#define oswordpointer_OP_SET_UNLINKED_POSITION ((<a href="#oswordpointer_op">oswordpointer_op</a>) 0x5u)</pre>
+
+<h3 id="oswordpointer_OP_READ_UNLINKED_POSITION">oswordpointer_OP_READ_UNLINKED_POSITION</h3>
+<pre>#define oswordpointer_OP_READ_UNLINKED_POSITION ((<a href="#oswordpointer_op">oswordpointer_op</a>) 0x6u)</pre>
+
+<h3 id="oswordpointer_OP_READ_BBOX">oswordpointer_OP_READ_BBOX</h3>
+<pre>#define oswordpointer_OP_READ_BBOX ((<a href="#oswordpointer_op">oswordpointer_op</a>) 0x7u)</pre>
+
+<h3 id="osword_CHAR_DEFINITION_ECF1">osword_CHAR_DEFINITION_ECF1</h3>
+<pre>#define osword_CHAR_DEFINITION_ECF1 ((char) '\x02')</pre>
+
+<h3 id="osword_CHAR_DEFINITION_ECF2">osword_CHAR_DEFINITION_ECF2</h3>
+<pre>#define osword_CHAR_DEFINITION_ECF2 ((char) '\x03')</pre>
+
+<h3 id="osword_CHAR_DEFINITION_ECF3">osword_CHAR_DEFINITION_ECF3</h3>
+<pre>#define osword_CHAR_DEFINITION_ECF3 ((char) '\x04')</pre>
+
+<h3 id="osword_CHAR_DEFINITION_ECF4">osword_CHAR_DEFINITION_ECF4</h3>
+<pre>#define osword_CHAR_DEFINITION_ECF4 ((char) '\x05')</pre>
+
+<h3 id="osword_CHAR_DEFINITION_DOT_DASH_PATTERN">osword_CHAR_DEFINITION_DOT_DASH_PATTERN</h3>
+<pre>#define osword_CHAR_DEFINITION_DOT_DASH_PATTERN ((char) '\x06')</pre>
+
+<h3 id="xosword_read_system_clock">xosword_read_system_clock</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosword_read_system_clock (<a href="#osword_timer_block">osword_timer_block</a> *clock);</pre>
+<p>Reads the system clock</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>clock</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osword_read_system_clock">osword_read_system_clock</h3>
+<pre>extern void osword_read_system_clock (<a href="#osword_timer_block">osword_timer_block</a> *clock);</pre>
+<p>Reads the system clock</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>clock</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosword_write_system_clock">xosword_write_system_clock</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosword_write_system_clock (<a href="#osword_timer_block">osword_timer_block</a> const *clock);</pre>
+<p>Writes the system clock</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>clock</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osword_write_system_clock">osword_write_system_clock</h3>
+<pre>extern void osword_write_system_clock (<a href="#osword_timer_block">osword_timer_block</a> const *clock);</pre>
+<p>Writes the system clock</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>clock</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosword_read_interval_timer">xosword_read_interval_timer</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosword_read_interval_timer (<a href="#osword_timer_block">osword_timer_block</a> *timer);</pre>
+<p>Reads the interval timer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>timer</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osword_read_interval_timer">osword_read_interval_timer</h3>
+<pre>extern void osword_read_interval_timer (<a href="#osword_timer_block">osword_timer_block</a> *timer);</pre>
+<p>Reads the interval timer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>timer</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosword_write_interval_timer">xosword_write_interval_timer</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosword_write_interval_timer (<a href="#osword_timer_block">osword_timer_block</a> const *timer);</pre>
+<p>Writes the interval timer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>timer</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osword_write_interval_timer">osword_write_interval_timer</h3>
+<pre>extern void osword_write_interval_timer (<a href="#osword_timer_block">osword_timer_block</a> const *timer);</pre>
+<p>Writes the interval timer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>timer</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosword_read_char_definition">xosword_read_char_definition</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosword_read_char_definition (<a href="#osword_char_definition_block">osword_char_definition_block</a> *definition);</pre>
+<p>Reads a character definition - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>definition</code></td><td>Partly filled in on entry</td><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osword_read_char_definition">osword_read_char_definition</h3>
+<pre>extern void osword_read_char_definition (<a href="#osword_char_definition_block">osword_char_definition_block</a> *definition);</pre>
+<p>Reads a character definition - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>definition</code></td><td>Partly filled in on entry</td><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosword_read_palette">xosword_read_palette</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosword_read_palette (<a href="#osword_palette_block">osword_palette_block</a> *entry);</pre>
+<p>Reads the palette - Client must partly initialise the parameter block - prefer ColourTrans_ReadPalette</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>entry</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osword_read_palette">osword_read_palette</h3>
+<pre>extern void osword_read_palette (<a href="#osword_palette_block">osword_palette_block</a> *entry);</pre>
+<p>Reads the palette - Client must partly initialise the parameter block - prefer ColourTrans_ReadPalette</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>entry</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosword_write_palette">xosword_write_palette</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosword_write_palette (<a href="#osword_palette_block">osword_palette_block</a> const *entry);</pre>
+<p>Writes the palette - Client must initialise the parameter block - prefer ColourTrans_WritePalette</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>entry</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osword_write_palette">osword_write_palette</h3>
+<pre>extern void osword_write_palette (<a href="#osword_palette_block">osword_palette_block</a> const *entry);</pre>
+<p>Writes the palette - Client must initialise the parameter block - prefer ColourTrans_WritePalette</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>entry</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosword_read_cursor_position">xosword_read_cursor_position</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosword_read_cursor_position (<a href="#osword_cursor_position_block">osword_cursor_position_block</a> *position);</pre>
+<p>Reads the current and previous graphics cursor positions - prefer OS_ReadVduVariables</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>position</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osword_read_cursor_position">osword_read_cursor_position</h3>
+<pre>extern void osword_read_cursor_position (<a href="#osword_cursor_position_block">osword_cursor_position_block</a> *position);</pre>
+<p>Reads the current and previous graphics cursor positions - prefer OS_ReadVduVariables</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>position</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xoswordreadclock_local_string">xoswordreadclock_local_string</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xoswordreadclock_local_string (<a href="#oswordreadclock_local_string_block">oswordreadclock_local_string_block</a> *string);</pre>
+<p>Reads the real-time clock as a string, converting to local time - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>string</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="oswordreadclock_local_string">oswordreadclock_local_string</h3>
+<pre>extern void oswordreadclock_local_string (<a href="#oswordreadclock_local_string_block">oswordreadclock_local_string_block</a> *string);</pre>
+<p>Reads the real-time clock as a string, converting to local time - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>string</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xoswordreadclock_local_bcd">xoswordreadclock_local_bcd</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xoswordreadclock_local_bcd (<a href="#oswordreadclock_local_bcd_block">oswordreadclock_local_bcd_block</a> *bcd);</pre>
+<p>Reads the real-time clock in BCD format, converting to local time - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>bcd</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="oswordreadclock_local_bcd">oswordreadclock_local_bcd</h3>
+<pre>extern void oswordreadclock_local_bcd (<a href="#oswordreadclock_local_bcd_block">oswordreadclock_local_bcd_block</a> *bcd);</pre>
+<p>Reads the real-time clock in BCD format, converting to local time - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>bcd</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xoswordreadclock_convert_bcd_to_string">xoswordreadclock_convert_bcd_to_string</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xoswordreadclock_convert_bcd_to_string (<a href="#oswordreadclock_convert_bcd_to_string_block">oswordreadclock_convert_bcd_to_string_block</a> *convert_bcd_to_String);</pre>
+<p>Converts a BCD clock value into string format - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>convert_bcd_to_String</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="oswordreadclock_convert_bcd_to_string">oswordreadclock_convert_bcd_to_string</h3>
+<pre>extern void oswordreadclock_convert_bcd_to_string (<a href="#oswordreadclock_convert_bcd_to_string_block">oswordreadclock_convert_bcd_to_string_block</a> *convert_bcd_to_String);</pre>
+<p>Converts a BCD clock value into string format - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>convert_bcd_to_String</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xoswordreadclock_utc">xoswordreadclock_utc</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xoswordreadclock_utc (<a href="#oswordreadclock_utc_block">oswordreadclock_utc_block</a> *utc);</pre>
+<p>Reads the real-time clock in 5-byte format - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>utc</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="oswordreadclock_utc">oswordreadclock_utc</h3>
+<pre>extern void oswordreadclock_utc (<a href="#oswordreadclock_utc_block">oswordreadclock_utc_block</a> *utc);</pre>
+<p>Reads the real-time clock in 5-byte format - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>utc</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xoswordwriteclock_time_local_string">xoswordwriteclock_time_local_string</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xoswordwriteclock_time_local_string (<a href="#oswordwriteclock_block">oswordwriteclock_block</a> *time);</pre>
+<p>Writes the real-time clock with a time string, converting from local time - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>time</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="oswordwriteclock_time_local_string">oswordwriteclock_time_local_string</h3>
+<pre>extern void oswordwriteclock_time_local_string (<a href="#oswordwriteclock_block">oswordwriteclock_block</a> *time);</pre>
+<p>Writes the real-time clock with a time string, converting from local time - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>time</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xoswordwriteclock_date_local_string">xoswordwriteclock_date_local_string</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xoswordwriteclock_date_local_string (<a href="#oswordwriteclock_block">oswordwriteclock_block</a> *date);</pre>
+<p>Writes the real-time clock with a date string, converting from local time - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>date</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="oswordwriteclock_date_local_string">oswordwriteclock_date_local_string</h3>
+<pre>extern void oswordwriteclock_date_local_string (<a href="#oswordwriteclock_block">oswordwriteclock_block</a> *date);</pre>
+<p>Writes the real-time clock with a date string, converting from local time - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>date</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xoswordwriteclock_date_and_time_local_string">xoswordwriteclock_date_and_time_local_string</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xoswordwriteclock_date_and_time_local_string (<a href="#oswordwriteclock_block">oswordwriteclock_block</a> *date_and_time);</pre>
+<p>Writes the real-time clock with a time and date string, converting from local time - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>date_and_time</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="oswordwriteclock_date_and_time_local_string">oswordwriteclock_date_and_time_local_string</h3>
+<pre>extern void oswordwriteclock_date_and_time_local_string (<a href="#oswordwriteclock_block">oswordwriteclock_block</a> *date_and_time);</pre>
+<p>Writes the real-time clock with a time and date string, converting from local time - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>date_and_time</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xoswordpointer_define">xoswordpointer_define</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xoswordpointer_define (<a href="#oswordpointer_define_block">oswordpointer_define_block</a> *define);</pre>
+<p>Defines the pointer size, shape and active point - Client must partly initialise the parameter block - prefer OSSpriteOp_SetPointerShape</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>define</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="oswordpointer_define">oswordpointer_define</h3>
+<pre>extern void oswordpointer_define (<a href="#oswordpointer_define_block">oswordpointer_define_block</a> *define);</pre>
+<p>Defines the pointer size, shape and active point - Client must partly initialise the parameter block - prefer OSSpriteOp_SetPointerShape</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>define</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xoswordpointer_set_bbox">xoswordpointer_set_bbox</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xoswordpointer_set_bbox (<a href="#oswordpointer_bbox_block">oswordpointer_bbox_block</a> *bbox);</pre>
+<p>Defines the mouse coordinate bounding box - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>bbox</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="oswordpointer_set_bbox">oswordpointer_set_bbox</h3>
+<pre>extern void oswordpointer_set_bbox (<a href="#oswordpointer_bbox_block">oswordpointer_bbox_block</a> *bbox);</pre>
+<p>Defines the mouse coordinate bounding box - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>bbox</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xoswordpointer_step">xoswordpointer_step</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xoswordpointer_step (<a href="#oswordpointer_step_block">oswordpointer_step_block</a> const *step);</pre>
+<p>Defines the mouse multipliers - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>step</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="oswordpointer_step">oswordpointer_step</h3>
+<pre>extern void oswordpointer_step (<a href="#oswordpointer_step_block">oswordpointer_step_block</a> const *step);</pre>
+<p>Defines the mouse multipliers - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>step</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xoswordpointer_set_position">xoswordpointer_set_position</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xoswordpointer_set_position (<a href="#oswordpointer_position_block">oswordpointer_position_block</a> *pos);</pre>
+<p>Sets the mouse position - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pos</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="oswordpointer_set_position">oswordpointer_set_position</h3>
+<pre>extern void oswordpointer_set_position (<a href="#oswordpointer_position_block">oswordpointer_position_block</a> *pos);</pre>
+<p>Sets the mouse position - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pos</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xoswordpointer_read_position">xoswordpointer_read_position</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xoswordpointer_read_position (<a href="#oswordpointer_position_block">oswordpointer_position_block</a> *pos);</pre>
+<p>Reads the unbuffered mouse position - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pos</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="oswordpointer_read_position">oswordpointer_read_position</h3>
+<pre>extern void oswordpointer_read_position (<a href="#oswordpointer_position_block">oswordpointer_position_block</a> *pos);</pre>
+<p>Reads the unbuffered mouse position - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pos</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xoswordpointer_set_unlinked_position">xoswordpointer_set_unlinked_position</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xoswordpointer_set_unlinked_position (<a href="#oswordpointer_position_block">oswordpointer_position_block</a> *pos);</pre>
+<p>Sets the pointer position - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pos</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="oswordpointer_set_unlinked_position">oswordpointer_set_unlinked_position</h3>
+<pre>extern void oswordpointer_set_unlinked_position (<a href="#oswordpointer_position_block">oswordpointer_position_block</a> *pos);</pre>
+<p>Sets the pointer position - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pos</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xoswordpointer_read_unlinked_position">xoswordpointer_read_unlinked_position</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xoswordpointer_read_unlinked_position (<a href="#oswordpointer_position_block">oswordpointer_position_block</a> *pos);</pre>
+<p>Reads the pointer position - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pos</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="oswordpointer_read_unlinked_position">oswordpointer_read_unlinked_position</h3>
+<pre>extern void oswordpointer_read_unlinked_position (<a href="#oswordpointer_position_block">oswordpointer_position_block</a> *pos);</pre>
+<p>Reads the pointer position - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pos</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xoswordpointer_read_bbox">xoswordpointer_read_bbox</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xoswordpointer_read_bbox (<a href="#oswordpointer_bbox_block">oswordpointer_bbox_block</a> *bbox);</pre>
+<p>Reads the mouse coordinate bounding box - Client must partly initialise the parameter block - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>bbox</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="oswordpointer_read_bbox">oswordpointer_read_bbox</h3>
+<pre>extern void oswordpointer_read_bbox (<a href="#oswordpointer_bbox_block">oswordpointer_bbox_block</a> *bbox);</pre>
+<p>Reads the mouse coordinate bounding box - Client must partly initialise the parameter block - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>bbox</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosword_write_screen_base">xosword_write_screen_base</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosword_write_screen_base (<a href="#osword_screen_base_block">osword_screen_base_block</a> *screen_base);</pre>
+<p>Writes the screen base address - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>screen_base</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osword_write_screen_base">osword_write_screen_base</h3>
+<pre>extern void osword_write_screen_base (<a href="#osword_screen_base_block">osword_screen_base_block</a> *screen_base);</pre>
+<p>Writes the screen base address - Client must partly initialise the parameter block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>screen_base</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,741 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ImageFileRender</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ImageFileRender</h2>
+
+<pre>#include "oslib/imagefilerender.h"</pre>
+
+<h3 id="imagefilerender_sequence_number">imagefilerender_sequence_number</h3>
+<pre>typedef int imagefilerender_sequence_number;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#imagefilerender_DEFAULT_IMAGE">imagefilerender_DEFAULT_IMAGE</a></dd>
+</dl>
+
+<h3 id="imagefilerender_fit_block">imagefilerender_fit_block</h3>
+<pre>typedef struct
+   {  int width;
+      int height;
+      int border;
+      int angle;
+   }
+   imagefilerender_fit_block;</pre>
+
+<h3 id="imagefilerender_transformation_data">imagefilerender_transformation_data</h3>
+<pre>typedef union
+   {  <a href="#imagefilerender_fit_block">imagefilerender_fit_block</a> to_fit;
+      <a href="os.html#os_factors">os_factors</a> scaled;
+      <a href="os.html#os_trfm">os_trfm</a> transformed;
+   }
+   imagefilerender_transformation_data;</pre>
+
+<h3 id="imagefilerender_query_type">imagefilerender_query_type</h3>
+<pre>typedef int imagefilerender_query_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#imagefilerender_BASE_DETAIL_QUERY">imagefilerender_BASE_DETAIL_QUERY</a></dd>
+</dl>
+
+<h3 id="imagefilerender_image_flags">imagefilerender_image_flags</h3>
+<pre>typedef bits imagefilerender_image_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#imagefilerender_IMAGE_IS_SOLID">imagefilerender_IMAGE_IS_SOLID</a></dd>
+</dl>
+
+<h3 id="imagefilerender_base_details">imagefilerender_base_details</h3>
+<pre>typedef struct
+   {  <a href="#imagefilerender_sequence_number">imagefilerender_sequence_number</a> sequence;
+      int xdpi;
+      int ydpi;
+      <a href="osspriteop.html#osspriteop_mode_word">osspriteop_mode_word</a> colour_type;
+      <a href="#imagefilerender_image_flags">imagefilerender_image_flags</a> image_flags;
+   }
+   imagefilerender_base_details;</pre>
+
+<h3 id="imagefilerender_flags">imagefilerender_flags</h3>
+<pre>typedef bits imagefilerender_flags;</pre>
+
+<p>used in ImageFileRender_Render</p>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#imagefilerender_TRANSFORMATION_TYPE">imagefilerender_TRANSFORMATION_TYPE</a></dd>
+<dd><a href="#imagefilerender_COLOUR_MAPPING_SUPPLIED">imagefilerender_COLOUR_MAPPING_SUPPLIED</a></dd>
+<dd><a href="#imagefilerender_IGNORE_DOCUMENT_ORIGIN">imagefilerender_IGNORE_DOCUMENT_ORIGIN</a></dd>
+<dd><a href="#imagefilerender_RETURN_OS_UNITS">imagefilerender_RETURN_OS_UNITS</a></dd>
+<dd><a href="#imagefilerender_QUALITY">imagefilerender_QUALITY</a></dd>
+</dl>
+
+<h3 id="imagefilerender_renderer_flags">imagefilerender_renderer_flags</h3>
+<pre>typedef bits imagefilerender_renderer_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#imagefilerender_TRANSFORMATION_CAPABILITIES">imagefilerender_TRANSFORMATION_CAPABILITIES</a></dd>
+<dd><a href="#imagefilerender_SUPPORTS_COLOUR_MAPPING">imagefilerender_SUPPORTS_COLOUR_MAPPING</a></dd>
+<dd><a href="#imagefilerender_SUPPORTS_IRREGULAR_SHAPES">imagefilerender_SUPPORTS_IRREGULAR_SHAPES</a></dd>
+<dd><a href="#imagefilerender_MAXIMUM_QUALITY_LEVEL">imagefilerender_MAXIMUM_QUALITY_LEVEL</a></dd>
+<dd><a href="#imagefilerender_DEFAULT_QUALITY_LEVEL">imagefilerender_DEFAULT_QUALITY_LEVEL</a></dd>
+</dl>
+
+<h3 id="imagefilerender_magic">imagefilerender_magic</h3>
+<pre>typedef struct {...} *imagefilerender_magic;</pre>
+
+<h3 id="imagefilerender_renderer">imagefilerender_renderer</h3>
+<pre>typedef struct
+   {  int api_version;
+      <a href="#imagefilerender_renderer_flags">imagefilerender_renderer_flags</a> flags;
+      bits file_type;
+      <a href="#imagefilerender_magic">imagefilerender_magic</a> magic;
+      char *name;
+      byte *workspace;
+      asm_routine start;
+      asm_routine stop;
+      asm_routine render;
+      asm_routine bbox;
+      asm_routine declare_fonts;
+      asm_routine info;
+   }
+   imagefilerender_renderer;</pre>
+
+<h3 id="imagefilerender_image_descriptor">imagefilerender_image_descriptor</h3>
+<pre>typedef struct
+   {  byte *data;
+      int size;
+      byte *extension_data;
+      <a href="#imagefilerender_sequence_number">imagefilerender_sequence_number</a> sequence;
+      byte *private_data;
+   }
+   imagefilerender_image_descriptor;</pre>
+
+<h3 id="imagefilerender_rendering_descriptor">imagefilerender_rendering_descriptor</h3>
+<pre>typedef struct
+   {  <a href="#imagefilerender_flags">imagefilerender_flags</a> flags;
+      <a href="os.html#os_trfm">os_trfm</a> trfm;
+      <a href="os.html#os_box">os_box</a> bbox;
+      <a href="osspriteop.html#osspriteop_colour_mapping">osspriteop_colour_mapping</a> mapping;
+   }
+   imagefilerender_rendering_descriptor;</pre>
+
+<h3 id="imagefilerender_bbox_descriptor">imagefilerender_bbox_descriptor</h3>
+<pre>typedef struct
+   {  <a href="#imagefilerender_flags">imagefilerender_flags</a> flags;
+      <a href="os.html#os_trfm">os_trfm</a> trfm;
+      <a href="os.html#os_box">os_box</a> bbox;
+   }
+   imagefilerender_bbox_descriptor;</pre>
+
+<h3 id="imagefilerender_declare_fonts_descriptor">imagefilerender_declare_fonts_descriptor</h3>
+<pre>typedef struct
+   {  <a href="#imagefilerender_flags">imagefilerender_flags</a> flags;
+      <a href="pdriver.html#pdriver_font_flags">pdriver_font_flags</a> pdriver_flags;
+   }
+   imagefilerender_declare_fonts_descriptor;</pre>
+
+<h3 id="imagefilerender_info_descriptor">imagefilerender_info_descriptor</h3>
+<pre>typedef struct
+   {  <a href="#imagefilerender_query_type">imagefilerender_query_type</a> query;
+      int size;
+      byte *data;
+   }
+   imagefilerender_info_descriptor;</pre>
+
+<h3 id="imagefilerender_DEFAULT_IMAGE">imagefilerender_DEFAULT_IMAGE</h3>
+<pre>#define imagefilerender_DEFAULT_IMAGE ((<a href="#imagefilerender_sequence_number">imagefilerender_sequence_number</a>) 0x0u)</pre>
+
+<h3 id="imagefilerender_BASE_DETAIL_QUERY">imagefilerender_BASE_DETAIL_QUERY</h3>
+<pre>#define imagefilerender_BASE_DETAIL_QUERY ((<a href="#imagefilerender_query_type">imagefilerender_query_type</a>) 0x0u)</pre>
+
+<h3 id="imagefilerender_IMAGE_IS_SOLID">imagefilerender_IMAGE_IS_SOLID</h3>
+<pre>#define imagefilerender_IMAGE_IS_SOLID ((<a href="#imagefilerender_image_flags">imagefilerender_image_flags</a>) 0x1u)</pre>
+
+<h3 id="imagefilerender_TRANSFORMATION_TYPE">imagefilerender_TRANSFORMATION_TYPE</h3>
+<pre>#define imagefilerender_TRANSFORMATION_TYPE ((<a href="#imagefilerender_flags">imagefilerender_flags</a>) 0x7u)</pre>
+
+<h3 id="imagefilerender_TRANSFORMATION_TYPE_SHIFT">imagefilerender_TRANSFORMATION_TYPE_SHIFT</h3>
+<pre>#define imagefilerender_TRANSFORMATION_TYPE_SHIFT 0</pre>
+
+<h3 id="imagefilerender_RENDER_TO_FIT">imagefilerender_RENDER_TO_FIT</h3>
+<pre>#define imagefilerender_RENDER_TO_FIT 0</pre>
+
+<h3 id="imagefilerender_RENDER_SCALED">imagefilerender_RENDER_SCALED</h3>
+<pre>#define imagefilerender_RENDER_SCALED 1</pre>
+
+<h3 id="imagefilerender_RENDER_TRANSFORMED">imagefilerender_RENDER_TRANSFORMED</h3>
+<pre>#define imagefilerender_RENDER_TRANSFORMED 2</pre>
+
+<h3 id="imagefilerender_COLOUR_MAPPING_SUPPLIED">imagefilerender_COLOUR_MAPPING_SUPPLIED</h3>
+<pre>#define imagefilerender_COLOUR_MAPPING_SUPPLIED ((<a href="#imagefilerender_flags">imagefilerender_flags</a>) 0x8u)</pre>
+
+<h3 id="imagefilerender_IGNORE_DOCUMENT_ORIGIN">imagefilerender_IGNORE_DOCUMENT_ORIGIN</h3>
+<pre>#define imagefilerender_IGNORE_DOCUMENT_ORIGIN ((<a href="#imagefilerender_flags">imagefilerender_flags</a>) 0x10u)</pre>
+
+<h3 id="imagefilerender_RETURN_OS_UNITS">imagefilerender_RETURN_OS_UNITS</h3>
+<pre>#define imagefilerender_RETURN_OS_UNITS ((<a href="#imagefilerender_flags">imagefilerender_flags</a>) 0x20u)</pre>
+
+<p>only to be used in ImageFileRender_BBox</p>
+
+<h3 id="imagefilerender_QUALITY">imagefilerender_QUALITY</h3>
+<pre>#define imagefilerender_QUALITY ((<a href="#imagefilerender_flags">imagefilerender_flags</a>) 0x1C0u)</pre>
+
+<h3 id="imagefilerender_QUALITY_SHIFT">imagefilerender_QUALITY_SHIFT</h3>
+<pre>#define imagefilerender_QUALITY_SHIFT 6</pre>
+
+<h3 id="imagefilerender_DEFAULT_QUALITY">imagefilerender_DEFAULT_QUALITY</h3>
+<pre>#define imagefilerender_DEFAULT_QUALITY 0</pre>
+
+<h3 id="imagefilerender_LOWEST_QUALITY">imagefilerender_LOWEST_QUALITY</h3>
+<pre>#define imagefilerender_LOWEST_QUALITY 1</pre>
+
+<h3 id="imagefilerender_HIGHEST_QUALITY">imagefilerender_HIGHEST_QUALITY</h3>
+<pre>#define imagefilerender_HIGHEST_QUALITY 15</pre>
+
+<h3 id="imagefilerender_TRANSFORMATION_CAPABILITIES">imagefilerender_TRANSFORMATION_CAPABILITIES</h3>
+<pre>#define imagefilerender_TRANSFORMATION_CAPABILITIES ((<a href="#imagefilerender_renderer_flags">imagefilerender_renderer_flags</a>) 0x3u)</pre>
+
+<h3 id="imagefilerender_TRANSFORMATION_CAPABILITIES_SHIFT">imagefilerender_TRANSFORMATION_CAPABILITIES_SHIFT</h3>
+<pre>#define imagefilerender_TRANSFORMATION_CAPABILITIES_SHIFT 0</pre>
+
+<h3 id="imagefilerender_NO_TRANSFORMATION">imagefilerender_NO_TRANSFORMATION</h3>
+<pre>#define imagefilerender_NO_TRANSFORMATION 0</pre>
+
+<h3 id="imagefilerender_FIXED_ASPECT_RATIO">imagefilerender_FIXED_ASPECT_RATIO</h3>
+<pre>#define imagefilerender_FIXED_ASPECT_RATIO 1</pre>
+
+<h3 id="imagefilerender_ANY_ASPECT_RATIO">imagefilerender_ANY_ASPECT_RATIO</h3>
+<pre>#define imagefilerender_ANY_ASPECT_RATIO 2</pre>
+
+<h3 id="imagefilerender_ANY_TRANSFORMATION">imagefilerender_ANY_TRANSFORMATION</h3>
+<pre>#define imagefilerender_ANY_TRANSFORMATION 3</pre>
+
+<h3 id="imagefilerender_SUPPORTS_COLOUR_MAPPING">imagefilerender_SUPPORTS_COLOUR_MAPPING</h3>
+<pre>#define imagefilerender_SUPPORTS_COLOUR_MAPPING ((<a href="#imagefilerender_renderer_flags">imagefilerender_renderer_flags</a>) 0x4u)</pre>
+
+<h3 id="imagefilerender_SUPPORTS_IRREGULAR_SHAPES">imagefilerender_SUPPORTS_IRREGULAR_SHAPES</h3>
+<pre>#define imagefilerender_SUPPORTS_IRREGULAR_SHAPES ((<a href="#imagefilerender_renderer_flags">imagefilerender_renderer_flags</a>) 0x8u)</pre>
+
+<h3 id="imagefilerender_MAXIMUM_QUALITY_LEVEL">imagefilerender_MAXIMUM_QUALITY_LEVEL</h3>
+<pre>#define imagefilerender_MAXIMUM_QUALITY_LEVEL ((<a href="#imagefilerender_renderer_flags">imagefilerender_renderer_flags</a>) 0xF0u)</pre>
+
+<h3 id="imagefilerender_MAXIMUM_QUALITY_LEVEL_SHIFT">imagefilerender_MAXIMUM_QUALITY_LEVEL_SHIFT</h3>
+<pre>#define imagefilerender_MAXIMUM_QUALITY_LEVEL_SHIFT 4</pre>
+
+<h3 id="imagefilerender_DEFAULT_QUALITY_LEVEL">imagefilerender_DEFAULT_QUALITY_LEVEL</h3>
+<pre>#define imagefilerender_DEFAULT_QUALITY_LEVEL ((<a href="#imagefilerender_renderer_flags">imagefilerender_renderer_flags</a>) 0xF00u)</pre>
+
+<h3 id="imagefilerender_DEFAULT_QUALITY_LEVEL_SHIFT">imagefilerender_DEFAULT_QUALITY_LEVEL_SHIFT</h3>
+<pre>#define imagefilerender_DEFAULT_QUALITY_LEVEL_SHIFT 8</pre>
+
+<h3 id="ximagefilerender_render">ximagefilerender_render</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *ximagefilerender_render (<a href="#imagefilerender_flags">imagefilerender_flags</a> flags,
+      bits file_type,
+      byte const *data,
+      int size,
+      byte const *extension_data,
+      <a href="#imagefilerender_sequence_number">imagefilerender_sequence_number</a> sequence,
+      int xorigin,
+      int yorigin,
+      <a href="#imagefilerender_transformation_data">imagefilerender_transformation_data</a> const *transformation_data,
+      <a href="osspriteop.html#osspriteop_colour_mapping">osspriteop_colour_mapping</a> const *colour_mapping);</pre>
+<p>Render an image file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>extension_data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>sequence</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>xorigin</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>yorigin</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>transformation_data</code></td><td/><td><code>R8</code></td></tr>
+<tr><td><code>colour_mapping</code></td><td/><td><code>R9</code></td></tr>
+</table>
+
+<h3 id="imagefilerender_render">imagefilerender_render</h3>
+<pre>extern void imagefilerender_render (<a href="#imagefilerender_flags">imagefilerender_flags</a> flags,
+      bits file_type,
+      byte const *data,
+      int size,
+      byte const *extension_data,
+      <a href="#imagefilerender_sequence_number">imagefilerender_sequence_number</a> sequence,
+      int xorigin,
+      int yorigin,
+      <a href="#imagefilerender_transformation_data">imagefilerender_transformation_data</a> const *transformation_data,
+      <a href="osspriteop.html#osspriteop_colour_mapping">osspriteop_colour_mapping</a> const *colour_mapping);</pre>
+<p>Render an image file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>extension_data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>sequence</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>xorigin</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>yorigin</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>transformation_data</code></td><td/><td><code>R8</code></td></tr>
+<tr><td><code>colour_mapping</code></td><td/><td><code>R9</code></td></tr>
+</table>
+
+<h3 id="ximagefilerender_bbox">ximagefilerender_bbox</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *ximagefilerender_bbox (<a href="#imagefilerender_flags">imagefilerender_flags</a> flags,
+      bits file_type,
+      byte const *data,
+      int size,
+      byte const *extension_data,
+      <a href="#imagefilerender_sequence_number">imagefilerender_sequence_number</a> sequence,
+      <a href="#imagefilerender_transformation_data">imagefilerender_transformation_data</a> const *transformation_data,
+      <a href="os.html#os_box">os_box</a> *bbox);</pre>
+<p>Calculate the bounding box for a transformation operation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>extension_data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>sequence</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>transformation_data</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>bbox</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="imagefilerender_bbox">imagefilerender_bbox</h3>
+<pre>extern void imagefilerender_bbox (<a href="#imagefilerender_flags">imagefilerender_flags</a> flags,
+      bits file_type,
+      byte const *data,
+      int size,
+      byte const *extension_data,
+      <a href="#imagefilerender_sequence_number">imagefilerender_sequence_number</a> sequence,
+      <a href="#imagefilerender_transformation_data">imagefilerender_transformation_data</a> const *transformation_data,
+      <a href="os.html#os_box">os_box</a> *bbox);</pre>
+<p>Calculate the bounding box for a transformation operation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>extension_data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>sequence</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>transformation_data</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>bbox</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="ximagefilerender_transform">ximagefilerender_transform</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *ximagefilerender_transform (<a href="#imagefilerender_flags">imagefilerender_flags</a> flags,
+      bits file_type,
+      byte const *data,
+      int size,
+      byte const *extension_data,
+      <a href="#imagefilerender_sequence_number">imagefilerender_sequence_number</a> sequence,
+      <a href="#imagefilerender_transformation_data">imagefilerender_transformation_data</a> const *transformation_data,
+      <a href="os.html#os_trfm">os_trfm</a> *trfm,
+      int *xdpi,
+      int *ydpi);</pre>
+<p>Calculate the transformation matrix for an operation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>extension_data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>sequence</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>transformation_data</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>xdpi</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>ydpi</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="imagefilerender_transform">imagefilerender_transform</h3>
+<pre>extern void imagefilerender_transform (<a href="#imagefilerender_flags">imagefilerender_flags</a> flags,
+      bits file_type,
+      byte const *data,
+      int size,
+      byte const *extension_data,
+      <a href="#imagefilerender_sequence_number">imagefilerender_sequence_number</a> sequence,
+      <a href="#imagefilerender_transformation_data">imagefilerender_transformation_data</a> const *transformation_data,
+      <a href="os.html#os_trfm">os_trfm</a> *trfm,
+      int *xdpi,
+      int *ydpi);</pre>
+<p>Calculate the transformation matrix for an operation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>extension_data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>sequence</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>transformation_data</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>xdpi</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>ydpi</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="ximagefilerender_declare_fonts">ximagefilerender_declare_fonts</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *ximagefilerender_declare_fonts (<a href="#imagefilerender_flags">imagefilerender_flags</a> flags,
+      bits file_type,
+      byte const *data,
+      int size,
+      byte const *extension_data,
+      <a href="#imagefilerender_sequence_number">imagefilerender_sequence_number</a> sequence,
+      <a href="pdriver.html#pdriver_font_flags">pdriver_font_flags</a> pdriver_flags);</pre>
+<p>Declare fonts used by an image when printing</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>extension_data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>sequence</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>pdriver_flags</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="imagefilerender_declare_fonts">imagefilerender_declare_fonts</h3>
+<pre>extern void imagefilerender_declare_fonts (<a href="#imagefilerender_flags">imagefilerender_flags</a> flags,
+      bits file_type,
+      byte const *data,
+      int size,
+      byte const *extension_data,
+      <a href="#imagefilerender_sequence_number">imagefilerender_sequence_number</a> sequence,
+      <a href="pdriver.html#pdriver_font_flags">pdriver_font_flags</a> pdriver_flags);</pre>
+<p>Declare fonts used by an image when printing</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>extension_data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>sequence</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>pdriver_flags</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="ximagefilerender_info">ximagefilerender_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *ximagefilerender_info (<a href="#imagefilerender_flags">imagefilerender_flags</a> flags,
+      bits file_type,
+      byte const *data,
+      int size,
+      byte const *extension_data,
+      <a href="#imagefilerender_sequence_number">imagefilerender_sequence_number</a> sequence,
+      <a href="#imagefilerender_query_type">imagefilerender_query_type</a> query,
+      byte *query_data,
+      int query_data_size,
+      int *size_used);</pre>
+<p>Return information on an image</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>extension_data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>sequence</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>query</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>query_data</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>query_data_size</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size_used</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="imagefilerender_info">imagefilerender_info</h3>
+<pre>extern int imagefilerender_info (<a href="#imagefilerender_flags">imagefilerender_flags</a> flags,
+      bits file_type,
+      byte const *data,
+      int size,
+      byte const *extension_data,
+      <a href="#imagefilerender_sequence_number">imagefilerender_sequence_number</a> sequence,
+      <a href="#imagefilerender_query_type">imagefilerender_query_type</a> query,
+      byte *query_data,
+      int query_data_size);</pre>
+<p>Return information on an image</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>extension_data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>sequence</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>query</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>query_data</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>query_data_size</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size_used</td><td></td><td><code>R8<code></td></tr>
+</table>
+
+<h3 id="ximagefilerender_info_base_details">ximagefilerender_info_base_details</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *ximagefilerender_info_base_details (<a href="#imagefilerender_flags">imagefilerender_flags</a> flags,
+      bits file_type,
+      byte const *data,
+      int size,
+      byte const *extension_data,
+      <a href="#imagefilerender_sequence_number">imagefilerender_sequence_number</a> sequence,
+      <a href="#imagefilerender_base_details">imagefilerender_base_details</a> *base_details,
+      int base_details_size,
+      int *size_used);</pre>
+<p>Return basic information on an image</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>extension_data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>sequence</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>base_details</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>base_details_size</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size_used</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="imagefilerender_info_base_details">imagefilerender_info_base_details</h3>
+<pre>extern int imagefilerender_info_base_details (<a href="#imagefilerender_flags">imagefilerender_flags</a> flags,
+      bits file_type,
+      byte const *data,
+      int size,
+      byte const *extension_data,
+      <a href="#imagefilerender_sequence_number">imagefilerender_sequence_number</a> sequence,
+      <a href="#imagefilerender_base_details">imagefilerender_base_details</a> *base_details,
+      int base_details_size);</pre>
+<p>Return basic information on an image</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>extension_data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>sequence</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>base_details</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>base_details_size</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size_used</td><td></td><td><code>R8<code></td></tr>
+</table>
+
+<h3 id="ximagefilerender_renderer_info">ximagefilerender_renderer_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *ximagefilerender_renderer_info (<a href="#imagefilerender_flags">imagefilerender_flags</a> flags,
+      bits file_type,
+      <a href="#imagefilerender_magic">imagefilerender_magic</a> magic,
+      <a href="#imagefilerender_renderer">imagefilerender_renderer</a> **definition,
+      char **name);</pre>
+<p>Return information about a renderer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>magic</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>definition</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="imagefilerender_renderer_info">imagefilerender_renderer_info</h3>
+<pre>extern <a href="#imagefilerender_renderer">imagefilerender_renderer</a> *imagefilerender_renderer_info (<a href="#imagefilerender_flags">imagefilerender_flags</a> flags,
+      bits file_type,
+      <a href="#imagefilerender_magic">imagefilerender_magic</a> magic,
+      char **name);</pre>
+<p>Return information about a renderer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>magic</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>definition</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="ximagefilerender_register">ximagefilerender_register</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *ximagefilerender_register (<a href="#imagefilerender_flags">imagefilerender_flags</a> flags,
+      <a href="#imagefilerender_renderer">imagefilerender_renderer</a> const *definition,
+      int *api_version);</pre>
+<p>Register a new renderer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>definition</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>api_version</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="imagefilerender_register">imagefilerender_register</h3>
+<pre>extern int imagefilerender_register (<a href="#imagefilerender_flags">imagefilerender_flags</a> flags,
+      <a href="#imagefilerender_renderer">imagefilerender_renderer</a> const *definition);</pre>
+<p>Register a new renderer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>definition</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>api_version</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="ximagefilerender_deregister">ximagefilerender_deregister</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *ximagefilerender_deregister (<a href="#imagefilerender_flags">imagefilerender_flags</a> flags,
+      bits file_type,
+      char const *name,
+      <a href="#imagefilerender_magic">imagefilerender_magic</a> magic,
+      int *api_version);</pre>
+<p>Deregister a renderer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>magic</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>api_version</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="imagefilerender_deregister">imagefilerender_deregister</h3>
+<pre>extern int imagefilerender_deregister (<a href="#imagefilerender_flags">imagefilerender_flags</a> flags,
+      bits file_type,
+      char const *name,
+      <a href="#imagefilerender_magic">imagefilerender_magic</a> magic);</pre>
+<p>Deregister a renderer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>magic</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>api_version</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_image_file_render_started">xservice_image_file_render_started</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_image_file_render_started (int api_version);</pre>
+<p>ImageFileRender module has initialised</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>api_version</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="service_image_file_render_started">service_image_file_render_started</h3>
+<pre>extern void service_image_file_render_started (int api_version);</pre>
+<p>ImageFileRender module has initialised</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>api_version</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xservice_image_file_render_dying">xservice_image_file_render_dying</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_image_file_render_dying (int api_version);</pre>
+<p>ImageFileRender module is finalising</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>api_version</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="service_image_file_render_dying">service_image_file_render_dying</h3>
+<pre>extern void service_image_file_render_dying (int api_version);</pre>
+<p>ImageFileRender module is finalising</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>api_version</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xservice_image_file_render_renderer_changed">xservice_image_file_render_renderer_changed</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_image_file_render_renderer_changed (int api_version,
+      bits file_type);</pre>
+<p>Renderer changed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>api_version</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="service_image_file_render_renderer_changed">service_image_file_render_renderer_changed</h3>
+<pre>extern void service_image_file_render_renderer_changed (int api_version,
+      bits file_type);</pre>
+<p>Renderer changed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>api_version</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

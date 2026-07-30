@@ -1,0 +1,2095 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; OSFSControl</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>OSFSControl</h2>
+
+<pre>#include "oslib/osfscontrol.h"</pre>
+
+<h3 id="osfscontrol_id">osfscontrol_id</h3>
+<pre>typedef struct {...} *osfscontrol_id;</pre>
+
+<p>Should be union of fs_no and string, but that's inconvenient since you can't project into unions by cast</p>
+
+<h3 id="osfscontrol_fs_info_block">osfscontrol_fs_info_block</h3>
+<pre>typedef struct
+   {  int name_offset;
+      int banner_offset;
+      int open_offset;
+      int get_bytes;
+      int put_bytes;
+      int args_offset;
+      int close_offset;
+      int file_offset;
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> info;
+      int func_offset;
+      int gbpb_offset;
+      <a href="fileswitch.html#fileswitch_fs_extra_info">fileswitch_fs_extra_info</a> extra_info;
+   }
+   osfscontrol_fs_info_block;</pre>
+
+<h3 id="osfscontrol_copy_flags">osfscontrol_copy_flags</h3>
+<pre>typedef bits osfscontrol_copy_flags;</pre>
+
+<p>for OSFSControl_Copy</p>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osfscontrol_COPY_RECURSE">osfscontrol_COPY_RECURSE</a></dd>
+<dd><a href="#osfscontrol_COPY_FORCE">osfscontrol_COPY_FORCE</a></dd>
+<dd><a href="#osfscontrol_COPY_GIVEN_TIMES">osfscontrol_COPY_GIVEN_TIMES</a></dd>
+<dd><a href="#osfscontrol_COPY_CONFIRM">osfscontrol_COPY_CONFIRM</a></dd>
+<dd><a href="#osfscontrol_COPY_VERBOSE">osfscontrol_COPY_VERBOSE</a></dd>
+<dd><a href="#osfscontrol_COPY_QUICK">osfscontrol_COPY_QUICK</a></dd>
+<dd><a href="#osfscontrol_COPY_PROMPT">osfscontrol_COPY_PROMPT</a></dd>
+<dd><a href="#osfscontrol_COPY_DELETE">osfscontrol_COPY_DELETE</a></dd>
+<dd><a href="#osfscontrol_COPY_ALLOW_PRINT">osfscontrol_COPY_ALLOW_PRINT</a></dd>
+<dd><a href="#osfscontrol_COPY_NO_ATTRIBUTES">osfscontrol_COPY_NO_ATTRIBUTES</a></dd>
+<dd><a href="#osfscontrol_COPY_STAMP">osfscontrol_COPY_STAMP</a></dd>
+<dd><a href="#osfscontrol_COPY_STRUCTURE">osfscontrol_COPY_STRUCTURE</a></dd>
+<dd><a href="#osfscontrol_COPY_NEWER">osfscontrol_COPY_NEWER</a></dd>
+<dd><a href="#osfscontrol_COPY_GIVEN_DESCRIPTOR">osfscontrol_COPY_GIVEN_DESCRIPTOR</a></dd>
+<dd><a href="#osfscontrol_COPY_LOOK">osfscontrol_COPY_LOOK</a></dd>
+</dl>
+
+<h3 id="osfscontrol_descriptor">osfscontrol_descriptor</h3>
+<pre>typedef struct
+   {  byte *addr;
+      int size;
+   }
+   osfscontrol_descriptor;</pre>
+
+<h3 id="osfscontrol_wipe_flags">osfscontrol_wipe_flags</h3>
+<pre>typedef bits osfscontrol_wipe_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osfscontrol_WIPE_RECURSE">osfscontrol_WIPE_RECURSE</a></dd>
+<dd><a href="#osfscontrol_WIPE_FORCE">osfscontrol_WIPE_FORCE</a></dd>
+<dd><a href="#osfscontrol_WIPE_GIVEN_TIMES">osfscontrol_WIPE_GIVEN_TIMES</a></dd>
+<dd><a href="#osfscontrol_WIPE_CONFIRM">osfscontrol_WIPE_CONFIRM</a></dd>
+<dd><a href="#osfscontrol_WIPE_VERBOSE">osfscontrol_WIPE_VERBOSE</a></dd>
+<dd><a href="#osfscontrol_WIPE_ALLOW_PRINT">osfscontrol_WIPE_ALLOW_PRINT</a></dd>
+</dl>
+
+<h3 id="osfscontrol_count_flags">osfscontrol_count_flags</h3>
+<pre>typedef bits osfscontrol_count_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osfscontrol_COUNT_RECURSE">osfscontrol_COUNT_RECURSE</a></dd>
+<dd><a href="#osfscontrol_COUNT_GIVEN_TIMES">osfscontrol_COUNT_GIVEN_TIMES</a></dd>
+<dd><a href="#osfscontrol_COUNT_CONFIRM">osfscontrol_COUNT_CONFIRM</a></dd>
+<dd><a href="#osfscontrol_COUNT_VERBOSE">osfscontrol_COUNT_VERBOSE</a></dd>
+<dd><a href="#osfscontrol_COUNT_ALLOW_PRINT">osfscontrol_COUNT_ALLOW_PRINT</a></dd>
+</dl>
+
+<h3 id="osfscontrol_object_kind">osfscontrol_object_kind</h3>
+<pre>typedef int osfscontrol_object_kind;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osfscontrol_KIND_FREE">osfscontrol_KIND_FREE</a></dd>
+<dd><a href="#osfscontrol_KIND_ALLOCATED">osfscontrol_KIND_ALLOCATED</a></dd>
+<dd><a href="#osfscontrol_KIND_FOUND">osfscontrol_KIND_FOUND</a></dd>
+<dd><a href="#osfscontrol_KIND_SHARABLE">osfscontrol_KIND_SHARABLE</a></dd>
+</dl>
+
+<h3 id="osfscontrol_special_dir">osfscontrol_special_dir</h3>
+<pre>typedef int osfscontrol_special_dir;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osfscontrol_DIR_CSD">osfscontrol_DIR_CSD</a></dd>
+<dd><a href="#osfscontrol_DIR_PSD">osfscontrol_DIR_PSD</a></dd>
+<dd><a href="#osfscontrol_DIR_URD">osfscontrol_DIR_URD</a></dd>
+<dd><a href="#osfscontrol_DIR_LIB">osfscontrol_DIR_LIB</a></dd>
+</dl>
+
+<h3 id="osfscontrol_OPT_RESTORE_DEFAULT">osfscontrol_OPT_RESTORE_DEFAULT</h3>
+<pre>#define osfscontrol_OPT_RESTORE_DEFAULT 0</pre>
+
+<h3 id="osfscontrol_OPT_MESSAGE_LEVEL">osfscontrol_OPT_MESSAGE_LEVEL</h3>
+<pre>#define osfscontrol_OPT_MESSAGE_LEVEL 1</pre>
+
+<h3 id="osfscontrol_OPT_BOOT_ACTION">osfscontrol_OPT_BOOT_ACTION</h3>
+<pre>#define osfscontrol_OPT_BOOT_ACTION 4</pre>
+
+<h3 id="osfscontrol_COPY_RECURSE">osfscontrol_COPY_RECURSE</h3>
+<pre>#define osfscontrol_COPY_RECURSE ((<a href="#osfscontrol_copy_flags">osfscontrol_copy_flags</a>) 0x1u)</pre>
+
+<h3 id="osfscontrol_COPY_FORCE">osfscontrol_COPY_FORCE</h3>
+<pre>#define osfscontrol_COPY_FORCE ((<a href="#osfscontrol_copy_flags">osfscontrol_copy_flags</a>) 0x2u)</pre>
+
+<h3 id="osfscontrol_COPY_GIVEN_TIMES">osfscontrol_COPY_GIVEN_TIMES</h3>
+<pre>#define osfscontrol_COPY_GIVEN_TIMES ((<a href="#osfscontrol_copy_flags">osfscontrol_copy_flags</a>) 0x4u)</pre>
+
+<h3 id="osfscontrol_COPY_CONFIRM">osfscontrol_COPY_CONFIRM</h3>
+<pre>#define osfscontrol_COPY_CONFIRM ((<a href="#osfscontrol_copy_flags">osfscontrol_copy_flags</a>) 0x8u)</pre>
+
+<h3 id="osfscontrol_COPY_VERBOSE">osfscontrol_COPY_VERBOSE</h3>
+<pre>#define osfscontrol_COPY_VERBOSE ((<a href="#osfscontrol_copy_flags">osfscontrol_copy_flags</a>) 0x10u)</pre>
+
+<h3 id="osfscontrol_COPY_QUICK">osfscontrol_COPY_QUICK</h3>
+<pre>#define osfscontrol_COPY_QUICK ((<a href="#osfscontrol_copy_flags">osfscontrol_copy_flags</a>) 0x20u)</pre>
+
+<h3 id="osfscontrol_COPY_PROMPT">osfscontrol_COPY_PROMPT</h3>
+<pre>#define osfscontrol_COPY_PROMPT ((<a href="#osfscontrol_copy_flags">osfscontrol_copy_flags</a>) 0x40u)</pre>
+
+<h3 id="osfscontrol_COPY_DELETE">osfscontrol_COPY_DELETE</h3>
+<pre>#define osfscontrol_COPY_DELETE ((<a href="#osfscontrol_copy_flags">osfscontrol_copy_flags</a>) 0x80u)</pre>
+
+<h3 id="osfscontrol_COPY_ALLOW_PRINT">osfscontrol_COPY_ALLOW_PRINT</h3>
+<pre>#define osfscontrol_COPY_ALLOW_PRINT ((<a href="#osfscontrol_copy_flags">osfscontrol_copy_flags</a>) 0x100u)</pre>
+
+<h3 id="osfscontrol_COPY_NO_ATTRIBUTES">osfscontrol_COPY_NO_ATTRIBUTES</h3>
+<pre>#define osfscontrol_COPY_NO_ATTRIBUTES ((<a href="#osfscontrol_copy_flags">osfscontrol_copy_flags</a>) 0x200u)</pre>
+
+<h3 id="osfscontrol_COPY_STAMP">osfscontrol_COPY_STAMP</h3>
+<pre>#define osfscontrol_COPY_STAMP ((<a href="#osfscontrol_copy_flags">osfscontrol_copy_flags</a>) 0x400u)</pre>
+
+<h3 id="osfscontrol_COPY_STRUCTURE">osfscontrol_COPY_STRUCTURE</h3>
+<pre>#define osfscontrol_COPY_STRUCTURE ((<a href="#osfscontrol_copy_flags">osfscontrol_copy_flags</a>) 0x800u)</pre>
+
+<h3 id="osfscontrol_COPY_NEWER">osfscontrol_COPY_NEWER</h3>
+<pre>#define osfscontrol_COPY_NEWER ((<a href="#osfscontrol_copy_flags">osfscontrol_copy_flags</a>) 0x1000u)</pre>
+
+<h3 id="osfscontrol_COPY_GIVEN_DESCRIPTOR">osfscontrol_COPY_GIVEN_DESCRIPTOR</h3>
+<pre>#define osfscontrol_COPY_GIVEN_DESCRIPTOR ((<a href="#osfscontrol_copy_flags">osfscontrol_copy_flags</a>) 0x2000u)</pre>
+
+<h3 id="osfscontrol_COPY_LOOK">osfscontrol_COPY_LOOK</h3>
+<pre>#define osfscontrol_COPY_LOOK ((<a href="#osfscontrol_copy_flags">osfscontrol_copy_flags</a>) 0x4000u)</pre>
+
+<h3 id="osfscontrol_WIPE_RECURSE">osfscontrol_WIPE_RECURSE</h3>
+<pre>#define osfscontrol_WIPE_RECURSE ((<a href="#osfscontrol_wipe_flags">osfscontrol_wipe_flags</a>) 0x1u)</pre>
+
+<h3 id="osfscontrol_WIPE_FORCE">osfscontrol_WIPE_FORCE</h3>
+<pre>#define osfscontrol_WIPE_FORCE ((<a href="#osfscontrol_wipe_flags">osfscontrol_wipe_flags</a>) 0x2u)</pre>
+
+<h3 id="osfscontrol_WIPE_GIVEN_TIMES">osfscontrol_WIPE_GIVEN_TIMES</h3>
+<pre>#define osfscontrol_WIPE_GIVEN_TIMES ((<a href="#osfscontrol_wipe_flags">osfscontrol_wipe_flags</a>) 0x4u)</pre>
+
+<h3 id="osfscontrol_WIPE_CONFIRM">osfscontrol_WIPE_CONFIRM</h3>
+<pre>#define osfscontrol_WIPE_CONFIRM ((<a href="#osfscontrol_wipe_flags">osfscontrol_wipe_flags</a>) 0x8u)</pre>
+
+<h3 id="osfscontrol_WIPE_VERBOSE">osfscontrol_WIPE_VERBOSE</h3>
+<pre>#define osfscontrol_WIPE_VERBOSE ((<a href="#osfscontrol_wipe_flags">osfscontrol_wipe_flags</a>) 0x10u)</pre>
+
+<h3 id="osfscontrol_WIPE_ALLOW_PRINT">osfscontrol_WIPE_ALLOW_PRINT</h3>
+<pre>#define osfscontrol_WIPE_ALLOW_PRINT ((<a href="#osfscontrol_wipe_flags">osfscontrol_wipe_flags</a>) 0x100u)</pre>
+
+<h3 id="osfscontrol_COUNT_RECURSE">osfscontrol_COUNT_RECURSE</h3>
+<pre>#define osfscontrol_COUNT_RECURSE ((<a href="#osfscontrol_count_flags">osfscontrol_count_flags</a>) 0x1u)</pre>
+
+<h3 id="osfscontrol_COUNT_GIVEN_TIMES">osfscontrol_COUNT_GIVEN_TIMES</h3>
+<pre>#define osfscontrol_COUNT_GIVEN_TIMES ((<a href="#osfscontrol_count_flags">osfscontrol_count_flags</a>) 0x4u)</pre>
+
+<h3 id="osfscontrol_COUNT_CONFIRM">osfscontrol_COUNT_CONFIRM</h3>
+<pre>#define osfscontrol_COUNT_CONFIRM ((<a href="#osfscontrol_count_flags">osfscontrol_count_flags</a>) 0x8u)</pre>
+
+<h3 id="osfscontrol_COUNT_VERBOSE">osfscontrol_COUNT_VERBOSE</h3>
+<pre>#define osfscontrol_COUNT_VERBOSE ((<a href="#osfscontrol_count_flags">osfscontrol_count_flags</a>) 0x10u)</pre>
+
+<h3 id="osfscontrol_COUNT_ALLOW_PRINT">osfscontrol_COUNT_ALLOW_PRINT</h3>
+<pre>#define osfscontrol_COUNT_ALLOW_PRINT ((<a href="#osfscontrol_count_flags">osfscontrol_count_flags</a>) 0x100u)</pre>
+
+<h3 id="osfscontrol_KIND_FREE">osfscontrol_KIND_FREE</h3>
+<pre>#define osfscontrol_KIND_FREE ((<a href="#osfscontrol_object_kind">osfscontrol_object_kind</a>) 0x0u)</pre>
+
+<h3 id="osfscontrol_KIND_ALLOCATED">osfscontrol_KIND_ALLOCATED</h3>
+<pre>#define osfscontrol_KIND_ALLOCATED ((<a href="#osfscontrol_object_kind">osfscontrol_object_kind</a>) 0x1u)</pre>
+
+<h3 id="osfscontrol_KIND_FOUND">osfscontrol_KIND_FOUND</h3>
+<pre>#define osfscontrol_KIND_FOUND ((<a href="#osfscontrol_object_kind">osfscontrol_object_kind</a>) 0x2u)</pre>
+
+<h3 id="osfscontrol_KIND_SHARABLE">osfscontrol_KIND_SHARABLE</h3>
+<pre>#define osfscontrol_KIND_SHARABLE ((<a href="#osfscontrol_object_kind">osfscontrol_object_kind</a>) 0x3u)</pre>
+
+<h3 id="osfscontrol_DIR_CSD">osfscontrol_DIR_CSD</h3>
+<pre>#define osfscontrol_DIR_CSD ((<a href="#osfscontrol_special_dir">osfscontrol_special_dir</a>) 0x0u)</pre>
+
+<h3 id="osfscontrol_DIR_PSD">osfscontrol_DIR_PSD</h3>
+<pre>#define osfscontrol_DIR_PSD ((<a href="#osfscontrol_special_dir">osfscontrol_special_dir</a>) 0x1u)</pre>
+
+<h3 id="osfscontrol_DIR_URD">osfscontrol_DIR_URD</h3>
+<pre>#define osfscontrol_DIR_URD ((<a href="#osfscontrol_special_dir">osfscontrol_special_dir</a>) 0x2u)</pre>
+
+<h3 id="osfscontrol_DIR_LIB">osfscontrol_DIR_LIB</h3>
+<pre>#define osfscontrol_DIR_LIB ((<a href="#osfscontrol_special_dir">osfscontrol_special_dir</a>) 0x3u)</pre>
+
+<h3 id="xosfscontrol_dir">xosfscontrol_dir</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_dir (char const *dir_names);</pre>
+<p>Sets the current directory (CSD) and (optionally) filing system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_names</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_dir">osfscontrol_dir</h3>
+<pre>extern void osfscontrol_dir (char const *dir_names);</pre>
+<p>Sets the current directory (CSD) and (optionally) filing system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_names</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_lib">xosfscontrol_lib</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_lib (char const *dir_names);</pre>
+<p>Sets the library directory (Lib)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_names</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_lib">osfscontrol_lib</h3>
+<pre>extern void osfscontrol_lib (char const *dir_names);</pre>
+<p>Sets the library directory (Lib)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_names</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_start_application">xosfscontrol_start_application</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_start_application (char const *tail,
+      byte *cao,
+      char const *command);</pre>
+<p>Informs RISC OS and the current application that a new application is starting</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tail</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>cao</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>command</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_start_application">osfscontrol_start_application</h3>
+<pre>extern void osfscontrol_start_application (char const *tail,
+      byte *cao,
+      char const *command);</pre>
+<p>Informs RISC OS and the current application that a new application is starting</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tail</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>cao</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>command</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_run">xosfscontrol_run</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_run (char const *file_names);</pre>
+<p>Runs a file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_names</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_run">osfscontrol_run</h3>
+<pre>extern void osfscontrol_run (char const *file_names);</pre>
+<p>Runs a file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_names</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_cat">xosfscontrol_cat</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_cat (char const *dir_names);</pre>
+<p>Catalogues a directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_names</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_cat">osfscontrol_cat</h3>
+<pre>extern void osfscontrol_cat (char const *dir_names);</pre>
+<p>Catalogues a directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_names</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_ex">xosfscontrol_ex</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_ex (char const *dir_names);</pre>
+<p>Examines a directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_names</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_ex">osfscontrol_ex</h3>
+<pre>extern void osfscontrol_ex (char const *dir_names);</pre>
+<p>Examines a directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_names</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_lcat">xosfscontrol_lcat</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_lcat (char const *dir_names);</pre>
+<p>Catalogues the library directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_names</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_lcat">osfscontrol_lcat</h3>
+<pre>extern void osfscontrol_lcat (char const *dir_names);</pre>
+<p>Catalogues the library directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_names</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_lex">xosfscontrol_lex</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_lex (char const *dir_names);</pre>
+<p>Examines the library directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_names</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_lex">osfscontrol_lex</h3>
+<pre>extern void osfscontrol_lex (char const *dir_names);</pre>
+<p>Examines the library directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_names</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_info">xosfscontrol_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_info (char const *file_names);</pre>
+<p>Examines objects</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_names</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_info">osfscontrol_info</h3>
+<pre>extern void osfscontrol_info (char const *file_names);</pre>
+<p>Examines objects</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_names</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_opt">xosfscontrol_opt</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_opt (int opt,
+      int value);</pre>
+<p>Sets filing system options - prefer OSFSControl_WriteBootOption</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>opt</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>value</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_opt">osfscontrol_opt</h3>
+<pre>extern void osfscontrol_opt (int opt,
+      int value);</pre>
+<p>Sets filing system options - prefer OSFSControl_WriteBootOption</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>opt</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>value</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_set_temporary_fs">xosfscontrol_set_temporary_fs</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_set_temporary_fs (char const *file_name,
+      char **file_name_out,
+      <a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> *old_fs_no,
+      char **special);</pre>
+<p>Sets the temporary filing system from a named prefix</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>file_name_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>old_fs_no</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_set_temporary_fs">osfscontrol_set_temporary_fs</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> osfscontrol_set_temporary_fs (char const *file_name,
+      char **file_name_out,
+      char **special);</pre>
+<p>Sets the temporary filing system from a named prefix</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>file_name_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_fs_no</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_add_fs">xosfscontrol_add_fs</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_add_fs (byte const *module,
+      int fs_info_offset,
+      void *workspace);</pre>
+<p>Adds a filing system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fs_info_offset</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_add_fs">osfscontrol_add_fs</h3>
+<pre>extern void osfscontrol_add_fs (byte const *module,
+      int fs_info_offset,
+      void *workspace);</pre>
+<p>Adds a filing system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fs_info_offset</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_lookup_fs">xosfscontrol_lookup_fs</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_lookup_fs (<a href="#osfscontrol_id">osfscontrol_id</a> fs_no_or_name,
+      osbool control_terminated,
+      <a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> *fs_no_out,
+      osbool *fs_found);</pre>
+<p>Checks for the presence of a filing system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_no_or_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>control_terminated</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>fs_no_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fs_found</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_lookup_fs">osfscontrol_lookup_fs</h3>
+<pre>extern osbool osfscontrol_lookup_fs (<a href="#osfscontrol_id">osfscontrol_id</a> fs_no_or_name,
+      osbool control_terminated,
+      <a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> *fs_no_out);</pre>
+<p>Checks for the presence of a filing system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_no_or_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>control_terminated</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>fs_no_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>fs_found</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_select_fs">xosfscontrol_select_fs</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_select_fs (<a href="#osfscontrol_id">osfscontrol_id</a> fs_no_or_name);</pre>
+<p>Switches the current and temporary filing systems to the one specified</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_no_or_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_select_fs">osfscontrol_select_fs</h3>
+<pre>extern void osfscontrol_select_fs (<a href="#osfscontrol_id">osfscontrol_id</a> fs_no_or_name);</pre>
+<p>Switches the current and temporary filing systems to the one specified</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_no_or_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_boot_from_fs">xosfscontrol_boot_from_fs</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_boot_from_fs (void);
+</pre><p>Boots off the currently selected filing system</p>
+
+
+<table>
+</table>
+
+<h3 id="osfscontrol_boot_from_fs">osfscontrol_boot_from_fs</h3>
+<pre>extern void osfscontrol_boot_from_fs (void);
+</pre><p>Boots off the currently selected filing system</p>
+
+
+<table>
+</table>
+
+<h3 id="xosfscontrol_remove_fs">xosfscontrol_remove_fs</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_remove_fs (char const *fs_name);</pre>
+<p>Removes a filing system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_remove_fs">osfscontrol_remove_fs</h3>
+<pre>extern void osfscontrol_remove_fs (char const *fs_name);</pre>
+<p>Removes a filing system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_add_secondary_fs">xosfscontrol_add_secondary_fs</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_add_secondary_fs (char const *fs_name,
+      char const *secondary_name,
+      void *workspace);</pre>
+<p>Adds a secondary module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>secondary_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_add_secondary_fs">osfscontrol_add_secondary_fs</h3>
+<pre>extern void osfscontrol_add_secondary_fs (char const *fs_name,
+      char const *secondary_name,
+      void *workspace);</pre>
+<p>Adds a secondary module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>secondary_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_read_file_type">xosfscontrol_read_file_type</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_read_file_type (bits file_type,
+      bits *name1,
+      bits *name2);</pre>
+<p>Decodes a file type into text</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>name1</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>name2</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_read_file_type">osfscontrol_read_file_type</h3>
+<pre>extern void osfscontrol_read_file_type (bits file_type,
+      bits *name1,
+      bits *name2);</pre>
+<p>Decodes a file type into text</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>name1</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>name2</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_restore_current">xosfscontrol_restore_current</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_restore_current (void);
+</pre><p>Restore the current filing system after OSFSControl_SetTemporaryFS</p>
+
+
+<table>
+</table>
+
+<h3 id="osfscontrol_restore_current">osfscontrol_restore_current</h3>
+<pre>extern void osfscontrol_restore_current (void);
+</pre><p>Restore the current filing system after OSFSControl_SetTemporaryFS</p>
+
+
+<table>
+</table>
+
+<h3 id="xosfscontrol_read_module_base">xosfscontrol_read_module_base</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_read_module_base (byte **module,
+      void **workspace);</pre>
+<p>Reads location of primary module for temporary filing system</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>module</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_read_module_base">osfscontrol_read_module_base</h3>
+<pre>extern void osfscontrol_read_module_base (byte **module,
+      void **workspace);</pre>
+<p>Reads location of primary module for temporary filing system</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>module</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_read_fs_handle">xosfscontrol_read_fs_handle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_read_fs_handle (<a href="os.html#os_f">os_f</a> file,
+      int *fs_handle,
+      int *info_word);</pre>
+<p>Returns a filing system file handle. Prefer OSFSControl_ReadFSHandleW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>fs_handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>info_word</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_read_fs_handle">osfscontrol_read_fs_handle</h3>
+<pre>extern int osfscontrol_read_fs_handle (<a href="os.html#os_f">os_f</a> file,
+      int *info_word);</pre>
+<p>Returns a filing system file handle. Prefer OSFSControl_ReadFSHandleW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>info_word</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>fs_handle</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_read_fs_handlew">xosfscontrol_read_fs_handlew</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_read_fs_handlew (<a href="os.html#os_fw">os_fw</a> file,
+      int *fs_handle,
+      int *info_word);</pre>
+<p>Returns a filing system file handle. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>fs_handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>info_word</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_read_fs_handlew">osfscontrol_read_fs_handlew</h3>
+<pre>extern int osfscontrol_read_fs_handlew (<a href="os.html#os_fw">os_fw</a> file,
+      int *info_word);</pre>
+<p>Returns a filing system file handle. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>info_word</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>fs_handle</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_shut">xosfscontrol_shut</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_shut (void);
+</pre><p>Closes all open files on all filing systems</p>
+
+
+<table>
+</table>
+
+<h3 id="osfscontrol_shut">osfscontrol_shut</h3>
+<pre>extern void osfscontrol_shut (void);
+</pre><p>Closes all open files on all filing systems</p>
+
+
+<table>
+</table>
+
+<h3 id="xosfscontrol_shutdown">xosfscontrol_shutdown</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_shutdown (void);
+</pre><p>Shuts down all filing systems</p>
+
+
+<table>
+</table>
+
+<h3 id="osfscontrol_shutdown">osfscontrol_shutdown</h3>
+<pre>extern void osfscontrol_shutdown (void);
+</pre><p>Shuts down all filing systems</p>
+
+
+<table>
+</table>
+
+<h3 id="xosfscontrol_access">xosfscontrol_access</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_access (char const *file_names,
+      char const *access);</pre>
+<p>Sets the attributes of objects</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_names</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>access</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_access">osfscontrol_access</h3>
+<pre>extern void osfscontrol_access (char const *file_names,
+      char const *access);</pre>
+<p>Sets the attributes of objects</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_names</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>access</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_rename">xosfscontrol_rename</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_rename (char const *file_name,
+      char const *new_file_name);</pre>
+<p>Renames objects</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>new_file_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_rename">osfscontrol_rename</h3>
+<pre>extern void osfscontrol_rename (char const *file_name,
+      char const *new_file_name);</pre>
+<p>Renames objects</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>new_file_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_copy">xosfscontrol_copy</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_copy (char const *from,
+      char const *to,
+      <a href="#osfscontrol_copy_flags">osfscontrol_copy_flags</a> flags,
+      bits start_load,
+      bits start_exec,
+      bits end_load,
+      bits end_exec,
+      <a href="#osfscontrol_descriptor">osfscontrol_descriptor</a> const *descriptor);</pre>
+<p>Copies objects</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>from</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>to</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>start_load</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>start_exec</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>end_load</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>end_exec</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>descriptor</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_copy">osfscontrol_copy</h3>
+<pre>extern void osfscontrol_copy (char const *from,
+      char const *to,
+      <a href="#osfscontrol_copy_flags">osfscontrol_copy_flags</a> flags,
+      bits start_load,
+      bits start_exec,
+      bits end_load,
+      bits end_exec,
+      <a href="#osfscontrol_descriptor">osfscontrol_descriptor</a> const *descriptor);</pre>
+<p>Copies objects</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>from</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>to</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>start_load</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>start_exec</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>end_load</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>end_exec</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>descriptor</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_wipe">xosfscontrol_wipe</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_wipe (char const *file_names,
+      <a href="#osfscontrol_wipe_flags">osfscontrol_wipe_flags</a> flags,
+      bits start_load,
+      bits start_exec,
+      bits end_load,
+      bits end_exec);</pre>
+<p>Wipes objects</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_names</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>start_load</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>start_exec</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>end_load</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>end_exec</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_wipe">osfscontrol_wipe</h3>
+<pre>extern void osfscontrol_wipe (char const *file_names,
+      <a href="#osfscontrol_wipe_flags">osfscontrol_wipe_flags</a> flags,
+      bits start_load,
+      bits start_exec,
+      bits end_load,
+      bits end_exec);</pre>
+<p>Wipes objects</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_names</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>start_load</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>start_exec</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>end_load</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>end_exec</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_count">xosfscontrol_count</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_count (char const *file_names,
+      <a href="#osfscontrol_count_flags">osfscontrol_count_flags</a> flags,
+      bits start_load,
+      bits start_exec,
+      bits end_load,
+      bits end_exec,
+      int *byte_count,
+      int *file_count);</pre>
+<p>Counts objects</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_names</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>start_load</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>start_exec</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>end_load</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>end_exec</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>byte_count</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>file_count</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_count">osfscontrol_count</h3>
+<pre>extern int osfscontrol_count (char const *file_names,
+      <a href="#osfscontrol_count_flags">osfscontrol_count_flags</a> flags,
+      bits start_load,
+      bits start_exec,
+      bits end_load,
+      bits end_exec,
+      int *file_count);</pre>
+<p>Counts objects</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_names</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>start_load</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>start_exec</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>end_load</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>end_exec</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>file_count</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>byte_count</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_read_secondary_fs">xosfscontrol_read_secondary_fs</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_read_secondary_fs (byte **module,
+      void **workspace);</pre>
+<p>Reads location of secondary module for temporary filing system</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>module</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_read_secondary_fs">osfscontrol_read_secondary_fs</h3>
+<pre>extern void osfscontrol_read_secondary_fs (byte **module,
+      void **workspace);</pre>
+<p>Reads location of secondary module for temporary filing system</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>module</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_file_type_from_string">xosfscontrol_file_type_from_string</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_file_type_from_string (char const *file_type_name,
+      bits *file_type);</pre>
+<p>Converts a string giving a file type to a number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_type_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_file_type_from_string">osfscontrol_file_type_from_string</h3>
+<pre>extern bits osfscontrol_file_type_from_string (char const *file_type_name);</pre>
+<p>Converts a string giving a file type to a number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_type_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>file_type</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_file_info">xosfscontrol_file_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_file_info (char const *file_names);</pre>
+<p>Outputs a list of object names and information</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_names</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_file_info">osfscontrol_file_info</h3>
+<pre>extern void osfscontrol_file_info (char const *file_names);</pre>
+<p>Outputs a list of object names and information</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_names</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_read_fs_name">xosfscontrol_read_fs_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_read_fs_name (<a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> fs_no,
+      char *buffer,
+      int size);</pre>
+<p>Converts a filing system number to a filing system name</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_read_fs_name">osfscontrol_read_fs_name</h3>
+<pre>extern void osfscontrol_read_fs_name (<a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> fs_no,
+      char *buffer,
+      int size);</pre>
+<p>Converts a filing system number to a filing system name</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_register_image_fs">xosfscontrol_register_image_fs</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_register_image_fs (byte const *module,
+      int fs_info_offset,
+      void *workspace);</pre>
+<p>Adds an image filing system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fs_info_offset</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_register_image_fs">osfscontrol_register_image_fs</h3>
+<pre>extern void osfscontrol_register_image_fs (byte const *module,
+      int fs_info_offset,
+      void *workspace);</pre>
+<p>Adds an image filing system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fs_info_offset</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_deregister_image_fs">xosfscontrol_deregister_image_fs</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_deregister_image_fs (bits file_type);</pre>
+<p>Removes an image filing system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_deregister_image_fs">osfscontrol_deregister_image_fs</h3>
+<pre>extern void osfscontrol_deregister_image_fs (bits file_type);</pre>
+<p>Removes an image filing system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_canonicalise_path">xosfscontrol_canonicalise_path</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_canonicalise_path (char const *path_name,
+      char *buffer,
+      char const *var,
+      char const *path,
+      int size,
+      int *spare);</pre>
+<p>Converts a path name to a canonical form</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>var</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>spare</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_canonicalise_path">osfscontrol_canonicalise_path</h3>
+<pre>extern int osfscontrol_canonicalise_path (char const *path_name,
+      char *buffer,
+      char const *var,
+      char const *path,
+      int size);</pre>
+<p>Converts a path name to a canonical form</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>var</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>spare</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_info_to_file_type">xosfscontrol_info_to_file_type</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_info_to_file_type (char const *file_name,
+      bits load_addr,
+      bits exec_addr,
+      int size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> obj_type,
+      bits *file_type);</pre>
+<p>Converts file information to an object's file type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_info_to_file_type">osfscontrol_info_to_file_type</h3>
+<pre>extern bits osfscontrol_info_to_file_type (char const *file_name,
+      bits load_addr,
+      bits exec_addr,
+      int size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> obj_type);</pre>
+<p>Converts file information to an object's file type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>file_type</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_urd">xosfscontrol_urd</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_urd (char const *dir_name);</pre>
+<p>Sets the user root directory (URD)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_urd">osfscontrol_urd</h3>
+<pre>extern void osfscontrol_urd (char const *dir_name);</pre>
+<p>Sets the user root directory (URD)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_back">xosfscontrol_back</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_back (void);
+</pre><p>Exchanges the current and previous (PSD) directories</p>
+
+
+<table>
+</table>
+
+<h3 id="osfscontrol_back">osfscontrol_back</h3>
+<pre>extern void osfscontrol_back (void);
+</pre><p>Exchanges the current and previous (PSD) directories</p>
+
+
+<table>
+</table>
+
+<h3 id="xosfscontrol_defect_list">xosfscontrol_defect_list</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_defect_list (char const *image_name,
+      byte *buffer,
+      int size);</pre>
+<p>Returns the defect list for an image</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_defect_list">osfscontrol_defect_list</h3>
+<pre>extern void osfscontrol_defect_list (char const *image_name,
+      byte *buffer,
+      int size);</pre>
+<p>Returns the defect list for an image</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_add_defect">xosfscontrol_add_defect</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_add_defect (char const *image_name,
+      int offset);</pre>
+<p>Maps out a defect from an image</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_add_defect">osfscontrol_add_defect</h3>
+<pre>extern void osfscontrol_add_defect (char const *image_name,
+      int offset);</pre>
+<p>Maps out a defect from an image</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_no_dir">xosfscontrol_no_dir</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_no_dir (void);
+</pre><p>Unsets the current directory (CSD)</p>
+
+
+<table>
+</table>
+
+<h3 id="osfscontrol_no_dir">osfscontrol_no_dir</h3>
+<pre>extern void osfscontrol_no_dir (void);
+</pre><p>Unsets the current directory (CSD)</p>
+
+
+<table>
+</table>
+
+<h3 id="xosfscontrol_no_urd">xosfscontrol_no_urd</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_no_urd (void);
+</pre><p>Unsets the user root directory (URD)</p>
+
+
+<table>
+</table>
+
+<h3 id="osfscontrol_no_urd">osfscontrol_no_urd</h3>
+<pre>extern void osfscontrol_no_urd (void);
+</pre><p>Unsets the user root directory (URD)</p>
+
+
+<table>
+</table>
+
+<h3 id="xosfscontrol_no_lib">xosfscontrol_no_lib</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_no_lib (void);
+</pre><p>Unsets the library directory (Lib)</p>
+
+
+<table>
+</table>
+
+<h3 id="osfscontrol_no_lib">osfscontrol_no_lib</h3>
+<pre>extern void osfscontrol_no_lib (void);
+</pre><p>Unsets the library directory (Lib)</p>
+
+
+<table>
+</table>
+
+<h3 id="xosfscontrol_used_space_map">xosfscontrol_used_space_map</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_used_space_map (char const *image_name,
+      byte *buffer,
+      int size);</pre>
+<p>Returns an image file's used space map</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_used_space_map">osfscontrol_used_space_map</h3>
+<pre>extern void osfscontrol_used_space_map (char const *image_name,
+      byte *buffer,
+      int size);</pre>
+<p>Returns an image file's used space map</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_read_boot_option">xosfscontrol_read_boot_option</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_read_boot_option (char const *file_name,
+      int *boot_option);</pre>
+<p>Reads the boot option of the disc or image file that holds a specified object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>boot_option</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_read_boot_option">osfscontrol_read_boot_option</h3>
+<pre>extern int osfscontrol_read_boot_option (char const *file_name);</pre>
+<p>Reads the boot option of the disc or image file that holds a specified object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>boot_option</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_write_boot_option">xosfscontrol_write_boot_option</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_write_boot_option (char const *file_name,
+      int boot_option);</pre>
+<p>Writes the boot option of the disc or image file that holds a specified object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>boot_option</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_write_boot_option">osfscontrol_write_boot_option</h3>
+<pre>extern void osfscontrol_write_boot_option (char const *file_name,
+      int boot_option);</pre>
+<p>Writes the boot option of the disc or image file that holds a specified object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>boot_option</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_free_space">xosfscontrol_free_space</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_free_space (char const *file_name,
+      int *free,
+      int *max,
+      int *size);</pre>
+<p>Reads the free space on the disc or image file that holds a specified object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>free</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>max</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_free_space">osfscontrol_free_space</h3>
+<pre>extern int osfscontrol_free_space (char const *file_name,
+      int *max,
+      int *size);</pre>
+<p>Reads the free space on the disc or image file that holds a specified object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>max</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>free</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_name_disc">xosfscontrol_name_disc</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_name_disc (char const *file_name,
+      char const *disc_name);</pre>
+<p>Names the disc or image file that holds a specified object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_name_disc">osfscontrol_name_disc</h3>
+<pre>extern void osfscontrol_name_disc (char const *file_name,
+      char const *disc_name);</pre>
+<p>Names the disc or image file that holds a specified object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_stamp_image">xosfscontrol_stamp_image</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_stamp_image (char const *file_name,
+      osbool stamp_now);</pre>
+<p>Used by a handler of discs to request that an image stamp be updated</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>stamp_now</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_stamp_image">osfscontrol_stamp_image</h3>
+<pre>extern void osfscontrol_stamp_image (char const *file_name,
+      osbool stamp_now);</pre>
+<p>Used by a handler of discs to request that an image stamp be updated</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>stamp_now</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_object_at_offset">xosfscontrol_object_at_offset</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_object_at_offset (char const *file_name,
+      int offset,
+      char *buffer,
+      int size,
+      <a href="#osfscontrol_object_kind">osfscontrol_object_kind</a> *obj_kind);</pre>
+<p>Finds the name and kind of an object that uses a particular offset within an image</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_kind</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_object_at_offset">osfscontrol_object_at_offset</h3>
+<pre>extern <a href="#osfscontrol_object_kind">osfscontrol_object_kind</a> osfscontrol_object_at_offset (char const *file_name,
+      int offset,
+      char *buffer,
+      int size);</pre>
+<p>Finds the name and kind of an object that uses a particular offset within an image</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj_kind</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_set_dir">xosfscontrol_set_dir</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_set_dir (char const *path,
+      <a href="#osfscontrol_special_dir">osfscontrol_special_dir</a> dir,
+      char const *fs_name,
+      char const *special);</pre>
+<p>Sets a specified directory to a given path without verification</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dir</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>fs_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_set_dir">osfscontrol_set_dir</h3>
+<pre>extern void osfscontrol_set_dir (char const *path,
+      <a href="#osfscontrol_special_dir">osfscontrol_special_dir</a> dir,
+      char const *fs_name,
+      char const *special);</pre>
+<p>Sets a specified directory to a given path without verification</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dir</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>fs_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_read_dir">xosfscontrol_read_dir</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_read_dir (char *buffer,
+      <a href="#osfscontrol_special_dir">osfscontrol_special_dir</a> dir,
+      char const *fs_name,
+      int size,
+      int *spare,
+      char **special);</pre>
+<p>Reads the path of a specified directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dir</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>fs_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>spare</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_read_dir">osfscontrol_read_dir</h3>
+<pre>extern int osfscontrol_read_dir (char *buffer,
+      <a href="#osfscontrol_special_dir">osfscontrol_special_dir</a> dir,
+      char const *fs_name,
+      int size,
+      char **special);</pre>
+<p>Reads the path of a specified directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dir</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>fs_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>spare</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_free_space64">xosfscontrol_free_space64</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_free_space64 (char const *file_name,
+      bits *free_lo,
+      int *free_hi,
+      int *max,
+      bits *disc_size_lo,
+      bits *disc_size_hi);</pre>
+<p>Reads the 64-bit free space on the disc or image file that holds a specified object - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>free_lo</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>free_hi</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>max</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>disc_size_lo</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>disc_size_hi</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_free_space64">osfscontrol_free_space64</h3>
+<pre>extern void osfscontrol_free_space64 (char const *file_name,
+      bits *free_lo,
+      int *free_hi,
+      int *max,
+      bits *disc_size_lo,
+      bits *disc_size_hi);</pre>
+<p>Reads the 64-bit free space on the disc or image file that holds a specified object - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>free_lo</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>free_hi</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>max</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>disc_size_lo</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>disc_size_hi</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_defect_list64">xosfscontrol_defect_list64</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_defect_list64 (char const *image_name,
+      byte *buffer,
+      int size);</pre>
+<p>Returns the 64-bit defect list for an image - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_defect_list64">osfscontrol_defect_list64</h3>
+<pre>extern void osfscontrol_defect_list64 (char const *image_name,
+      byte *buffer,
+      int size);</pre>
+<p>Returns the 64-bit defect list for an image - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_add_defect64">xosfscontrol_add_defect64</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_add_defect64 (char const *image_name,
+      bits offset_lo,
+      int offset_hi);</pre>
+<p>Maps out a 64-bit defect from an image - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>offset_lo</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset_hi</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_add_defect64">osfscontrol_add_defect64</h3>
+<pre>extern void osfscontrol_add_defect64 (char const *image_name,
+      bits offset_lo,
+      int offset_hi);</pre>
+<p>Maps out a 64-bit defect from an image - RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>image_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>offset_lo</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset_hi</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_enum_file_handles">xosfscontrol_enum_file_handles</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_enum_file_handles (<a href="os.html#os_f">os_f</a> prev_handle,
+      <a href="osargs.html#osargs_stream_status">osargs_stream_status</a> *status,
+      <a href="os.html#os_f">os_f</a> *next_handle,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> *info);</pre>
+<p>Enumerate open file handles - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>prev_handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>next_handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>info</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_enum_file_handles">osfscontrol_enum_file_handles</h3>
+<pre>extern <a href="osargs.html#osargs_stream_status">osargs_stream_status</a> osfscontrol_enum_file_handles (<a href="os.html#os_f">os_f</a> prev_handle,
+      <a href="os.html#os_f">os_f</a> *next_handle,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> *info);</pre>
+<p>Enumerate open file handles - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>prev_handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>info</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_run_absolute_file">xosfscontrol_run_absolute_file</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_run_absolute_file (char const *filename,
+      char const *args,
+      int file_length);</pre>
+<p>Run absolute file - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filename</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>args</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>file_length</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_run_absolute_file">osfscontrol_run_absolute_file</h3>
+<pre>extern void osfscontrol_run_absolute_file (char const *filename,
+      char const *args,
+      int file_length);</pre>
+<p>Run absolute file - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filename</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>args</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>file_length</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_run_untyped_file">xosfscontrol_run_untyped_file</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_run_untyped_file (char const *filename,
+      char const *args,
+      int file_length,
+      bits load_addr,
+      bits exec_addr);</pre>
+<p>Run untyped file - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filename</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>args</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>file_length</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_run_untyped_file">osfscontrol_run_untyped_file</h3>
+<pre>extern void osfscontrol_run_untyped_file (char const *filename,
+      char const *args,
+      int file_length,
+      bits load_addr,
+      bits exec_addr);</pre>
+<p>Run untyped file - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filename</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>args</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>file_length</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xosfscontrol_run_transient_file">xosfscontrol_run_transient_file</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfscontrol_run_transient_file (char const *filename,
+      char const *args);</pre>
+<p>Run transient utility - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filename</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>args</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osfscontrol_run_transient_file">osfscontrol_run_transient_file</h3>
+<pre>extern void osfscontrol_run_transient_file (char const *filename,
+      char const *args);</pre>
+<p>Run transient utility - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filename</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>args</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xupcall_media_not_present">xupcall_media_not_present</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcall_media_not_present (<a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> fs_no,
+      char const *media_name,
+      int device_no,
+      int iteration_count,
+      int timeout,
+      char const *media_type,
+      int *changed);</pre>
+<p>Warns your program that a filing medium is not present</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>media_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>device_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>iteration_count</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>timeout</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>media_type</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>changed</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="upcall_media_not_present">upcall_media_not_present</h3>
+<pre>extern int upcall_media_not_present (<a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> fs_no,
+      char const *media_name,
+      int device_no,
+      int iteration_count,
+      int timeout,
+      char const *media_type);</pre>
+<p>Warns your program that a filing medium is not present</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>media_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>device_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>iteration_count</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>timeout</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>media_type</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>changed</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xupcall_media_not_known">xupcall_media_not_known</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcall_media_not_known (<a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> fs_no,
+      char const *media_name,
+      int device_no,
+      int iteration_count,
+      int timeout,
+      char const *media_type,
+      int *changed);</pre>
+<p>Warns your program that a filing medium is not known</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>media_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>device_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>iteration_count</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>timeout</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>media_type</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>changed</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="upcall_media_not_known">upcall_media_not_known</h3>
+<pre>extern int upcall_media_not_known (<a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> fs_no,
+      char const *media_name,
+      int device_no,
+      int iteration_count,
+      int timeout,
+      char const *media_type);</pre>
+<p>Warns your program that a filing medium is not known</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>media_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>device_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>iteration_count</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>timeout</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>media_type</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>changed</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xupcallfscontrol_set_args_size">xupcallfscontrol_set_args_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcallfscontrol_set_args_size (<a href="os.html#os_f">os_f</a> f,
+      int size,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file's size is being ensured. Prefer UpCallFSControl_SetArgsSizeW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>f</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="upcallfscontrol_set_args_size">upcallfscontrol_set_args_size</h3>
+<pre>extern void upcallfscontrol_set_args_size (<a href="os.html#os_f">os_f</a> f,
+      int size,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file's size is being ensured. Prefer UpCallFSControl_SetArgsSizeW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>f</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xupcallfscontrol_set_args_sizew">xupcallfscontrol_set_args_sizew</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcallfscontrol_set_args_sizew (<a href="os.html#os_fw">os_fw</a> f,
+      int size,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file's size is being ensured. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>f</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="upcallfscontrol_set_args_sizew">upcallfscontrol_set_args_sizew</h3>
+<pre>extern void upcallfscontrol_set_args_sizew (<a href="os.html#os_fw">os_fw</a> f,
+      int size,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file's size is being ensured. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>f</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xupcallfscontrol_rename">xupcallfscontrol_rename</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcallfscontrol_rename (char const *file_name,
+      char const *new_file_name,
+      char const *special,
+      char const *new_special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file is being renamed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>new_file_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>new_special</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="upcallfscontrol_rename">upcallfscontrol_rename</h3>
+<pre>extern void upcallfscontrol_rename (char const *file_name,
+      char const *new_file_name,
+      char const *special,
+      char const *new_special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file is being renamed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>new_file_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>new_special</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xupcallfscontrol_set_attr_string">xupcallfscontrol_set_attr_string</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcallfscontrol_set_attr_string (char const *file_name,
+      char const *attr,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file's attributes are being set</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="upcallfscontrol_set_attr_string">upcallfscontrol_set_attr_string</h3>
+<pre>extern void upcallfscontrol_set_attr_string (char const *file_name,
+      char const *attr,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file's attributes are being set</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xupcall_media_search_end">xupcall_media_search_end</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcall_media_search_end (void);
+</pre><p>Informs your program that a missing filing medium has been supplied, or that an operation involving one has been cancelled</p>
+
+
+<table>
+</table>
+
+<h3 id="upcall_media_search_end">upcall_media_search_end</h3>
+<pre>extern void upcall_media_search_end (void);
+</pre><p>Informs your program that a missing filing medium has been supplied, or that an operation involving one has been cancelled</p>
+
+
+<table>
+</table>
+
+<h3 id="xupcall_new_application">xupcall_new_application</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcall_new_application (byte *cao,
+      osbool *started);</pre>
+<p>Warns your program that a new application is going to be started</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>cao</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>started</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="upcall_new_application">upcall_new_application</h3>
+<pre>extern osbool upcall_new_application (byte *cao);</pre>
+<p>Warns your program that a new application is going to be started</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>cao</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>started</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

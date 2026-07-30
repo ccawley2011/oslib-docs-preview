@@ -1,0 +1,1140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; URL</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>URL</h2>
+
+<pre>#include "oslib/url.h"</pre>
+
+<h3 id="url_s">url_s</h3>
+<pre>typedef struct {...} *url_s;</pre>
+
+<p>Abstract type for session identifers</p>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#url_ALL_SESSIONS">url_ALL_SESSIONS</a></dd>
+</dl>
+
+<h3 id="url_get_url_flags">url_get_url_flags</h3>
+<pre>typedef bits url_get_url_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#url_GET_URL_USER_AGENT_SUPPLIED">url_GET_URL_USER_AGENT_SUPPLIED</a></dd>
+<dd><a href="#url_GET_URL_DATA_LENGTH_SUPPLIED">url_GET_URL_DATA_LENGTH_SUPPLIED</a></dd>
+</dl>
+
+<h3 id="url_parse_url_flags">url_parse_url_flags</h3>
+<pre>typedef bits url_parse_url_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#url_PARSE_URL_DATA_LENGTH_SUPPLIED">url_PARSE_URL_DATA_LENGTH_SUPPLIED</a></dd>
+<dd><a href="#url_PARSE_URL_ESCAPE_CONTROL_CHARS">url_PARSE_URL_ESCAPE_CONTROL_CHARS</a></dd>
+</dl>
+
+<h3 id="url_method">url_method</h3>
+<pre>typedef bits url_method;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#url_METHOD_CODE">url_METHOD_CODE</a></dd>
+<dd><a href="#url_METHOD_FLAGS">url_METHOD_FLAGS</a></dd>
+</dl>
+
+<h3 id="url_method_code">url_method_code</h3>
+<pre>typedef int url_method_code;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#url_GET">url_GET</a></dd>
+<dd><a href="#url_HEAD">url_HEAD</a></dd>
+<dd><a href="#url_OPTIONS">url_OPTIONS</a></dd>
+<dd><a href="#url_POST">url_POST</a></dd>
+<dd><a href="#url_TRACE">url_TRACE</a></dd>
+<dd><a href="#url_PUT">url_PUT</a></dd>
+<dd><a href="#url_DELETE">url_DELETE</a></dd>
+<dd><a href="#url_RETR">url_RETR</a></dd>
+<dd><a href="#url_LIST">url_LIST</a></dd>
+<dd><a href="#url_STOR">url_STOR</a></dd>
+<dd><a href="#url_MKD">url_MKD</a></dd>
+<dd><a href="#url_RMD">url_RMD</a></dd>
+<dd><a href="#url_RNFR">url_RNFR</a></dd>
+<dd><a href="#url_RNTO">url_RNTO</a></dd>
+<dd><a href="#url_DELE">url_DELE</a></dd>
+<dd><a href="#url_STOU">url_STOU</a></dd>
+</dl>
+
+<h3 id="url_method_flags">url_method_flags</h3>
+<pre>typedef bits url_method_flags;</pre>
+
+<h3 id="url_fetch_status">url_fetch_status</h3>
+<pre>typedef bits url_fetch_status;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#url_CONNECTED">url_CONNECTED</a></dd>
+<dd><a href="#url_SENT_REQUEST">url_SENT_REQUEST</a></dd>
+<dd><a href="#url_SENT_DATA">url_SENT_DATA</a></dd>
+<dd><a href="#url_RESPONSE_RECEIVED">url_RESPONSE_RECEIVED</a></dd>
+<dd><a href="#url_TRANSFER_IN_PROGRESS">url_TRANSFER_IN_PROGRESS</a></dd>
+<dd><a href="#url_ALL_DATA_RECEIVED">url_ALL_DATA_RECEIVED</a></dd>
+<dd><a href="#url_TRANSFER_ABORTED">url_TRANSFER_ABORTED</a></dd>
+</dl>
+
+<h3 id="url_components">url_components</h3>
+<pre>typedef struct
+   {  char *full_url;
+      char *scheme;
+      char *host;
+      char *port;
+      char *user;
+      char *password;
+      char *account;
+      char *path;
+      char *query;
+      char *fragment;
+   }
+   url_components;</pre>
+
+<h3 id="url_component_sizes">url_component_sizes</h3>
+<pre>typedef struct
+   {  int full_url;
+      int scheme;
+      int host;
+      int port;
+      int user;
+      int password;
+      int account;
+      int path;
+      int query;
+      int fragment;
+   }
+   url_component_sizes;</pre>
+
+<h3 id="url_protocol_register_flags">url_protocol_register_flags</h3>
+<pre>typedef bits url_protocol_register_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#url_HAS_PROTOCOL_FLAGS">url_HAS_PROTOCOL_FLAGS</a></dd>
+<dd><a href="#url_HAS_DEFAULT_PORT">url_HAS_DEFAULT_PORT</a></dd>
+</dl>
+
+<h3 id="url_protocol_flags">url_protocol_flags</h3>
+<pre>typedef bits url_protocol_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#url_NON_UNIX_PATH">url_NON_UNIX_PATH</a></dd>
+<dd><a href="#url_DONT_PARSE">url_DONT_PARSE</a></dd>
+<dd><a href="#url_ALLOW_USERNAME">url_ALLOW_USERNAME</a></dd>
+<dd><a href="#url_ALLOW_HASH_IN_HOSTNAME">url_ALLOW_HASH_IN_HOSTNAME</a></dd>
+<dd><a href="#url_NO_HOSTNAME">url_NO_HOSTNAME</a></dd>
+<dd><a href="#url_REMOVE_LEADING_UP_COMPONENTS">url_REMOVE_LEADING_UP_COMPONENTS</a></dd>
+</dl>
+
+<h3 id="url_ALL_SESSIONS">url_ALL_SESSIONS</h3>
+<pre>#define url_ALL_SESSIONS ((<a href="#url_s">url_s</a>) 0x0u)</pre>
+
+<h3 id="url_GET_URL_USER_AGENT_SUPPLIED">url_GET_URL_USER_AGENT_SUPPLIED</h3>
+<pre>#define url_GET_URL_USER_AGENT_SUPPLIED ((<a href="#url_get_url_flags">url_get_url_flags</a>) 0x1u)</pre>
+
+<h3 id="url_GET_URL_DATA_LENGTH_SUPPLIED">url_GET_URL_DATA_LENGTH_SUPPLIED</h3>
+<pre>#define url_GET_URL_DATA_LENGTH_SUPPLIED ((<a href="#url_get_url_flags">url_get_url_flags</a>) 0x2u)</pre>
+
+<h3 id="url_PARSE_URL_DATA_LENGTH_SUPPLIED">url_PARSE_URL_DATA_LENGTH_SUPPLIED</h3>
+<pre>#define url_PARSE_URL_DATA_LENGTH_SUPPLIED ((<a href="#url_parse_url_flags">url_parse_url_flags</a>) 0x1u)</pre>
+
+<h3 id="url_PARSE_URL_ESCAPE_CONTROL_CHARS">url_PARSE_URL_ESCAPE_CONTROL_CHARS</h3>
+<pre>#define url_PARSE_URL_ESCAPE_CONTROL_CHARS ((<a href="#url_parse_url_flags">url_parse_url_flags</a>) 0x2u)</pre>
+
+<h3 id="url_METHOD_CODE">url_METHOD_CODE</h3>
+<pre>#define url_METHOD_CODE ((<a href="#url_method">url_method</a>) 0xFFu)</pre>
+
+<h3 id="url_METHOD_CODE_SHIFT">url_METHOD_CODE_SHIFT</h3>
+<pre>#define url_METHOD_CODE_SHIFT 8</pre>
+
+<h3 id="url_METHOD_FLAGS">url_METHOD_FLAGS</h3>
+<pre>#define url_METHOD_FLAGS ((<a href="#url_method">url_method</a>) 0xFF00u)</pre>
+
+<h3 id="url_METHOD_FLAGS_SHIFT">url_METHOD_FLAGS_SHIFT</h3>
+<pre>#define url_METHOD_FLAGS_SHIFT 16</pre>
+
+<h3 id="url_GET">url_GET</h3>
+<pre>#define url_GET ((<a href="#url_method_code">url_method_code</a>) 0x1u)</pre>
+
+<p>Get an object</p>
+
+<h3 id="url_HEAD">url_HEAD</h3>
+<pre>#define url_HEAD ((<a href="#url_method_code">url_method_code</a>) 0x2u)</pre>
+
+<p>Get entity headers</p>
+
+<h3 id="url_OPTIONS">url_OPTIONS</h3>
+<pre>#define url_OPTIONS ((<a href="#url_method_code">url_method_code</a>) 0x3u)</pre>
+
+<p>Get server options</p>
+
+<h3 id="url_POST">url_POST</h3>
+<pre>#define url_POST ((<a href="#url_method_code">url_method_code</a>) 0x4u)</pre>
+
+<p>HTTP POST</p>
+
+<h3 id="url_TRACE">url_TRACE</h3>
+<pre>#define url_TRACE ((<a href="#url_method_code">url_method_code</a>) 0x5u)</pre>
+
+<p>HTTP TRACE</p>
+
+<h3 id="url_PUT">url_PUT</h3>
+<pre>#define url_PUT ((<a href="#url_method_code">url_method_code</a>) 0x8u)</pre>
+
+<p>Store an object</p>
+
+<h3 id="url_DELETE">url_DELETE</h3>
+<pre>#define url_DELETE ((<a href="#url_method_code">url_method_code</a>) 0xCu)</pre>
+
+<p>Delete an object</p>
+
+<h3 id="url_RETR">url_RETR</h3>
+<pre>#define url_RETR ((<a href="#url_method_code">url_method_code</a>) 0x1u)</pre>
+
+<p>Get an object</p>
+
+<h3 id="url_LIST">url_LIST</h3>
+<pre>#define url_LIST ((<a href="#url_method_code">url_method_code</a>) 0x1u)</pre>
+
+<p>Get a directory listing</p>
+
+<h3 id="url_STOR">url_STOR</h3>
+<pre>#define url_STOR ((<a href="#url_method_code">url_method_code</a>) 0x8u)</pre>
+
+<p>Store an object</p>
+
+<h3 id="url_MKD">url_MKD</h3>
+<pre>#define url_MKD ((<a href="#url_method_code">url_method_code</a>) 0x9u)</pre>
+
+<p>Create a directory</p>
+
+<h3 id="url_RMD">url_RMD</h3>
+<pre>#define url_RMD ((<a href="#url_method_code">url_method_code</a>) 0xAu)</pre>
+
+<p>Remove a directory</p>
+
+<h3 id="url_RNFR">url_RNFR</h3>
+<pre>#define url_RNFR ((<a href="#url_method_code">url_method_code</a>) 0xBu)</pre>
+
+<p>Rename an object (original name)</p>
+
+<h3 id="url_RNTO">url_RNTO</h3>
+<pre>#define url_RNTO ((<a href="#url_method_code">url_method_code</a>) 0xBu)</pre>
+
+<p>Rename an object (new name)</p>
+
+<h3 id="url_DELE">url_DELE</h3>
+<pre>#define url_DELE ((<a href="#url_method_code">url_method_code</a>) 0xCu)</pre>
+
+<p>Delete an object</p>
+
+<h3 id="url_STOU">url_STOU</h3>
+<pre>#define url_STOU ((<a href="#url_method_code">url_method_code</a>) 0xDu)</pre>
+
+<p>Store an object with a unique name</p>
+
+<h3 id="url_CONNECTED">url_CONNECTED</h3>
+<pre>#define url_CONNECTED ((<a href="#url_fetch_status">url_fetch_status</a>) 0x1u)</pre>
+
+<h3 id="url_SENT_REQUEST">url_SENT_REQUEST</h3>
+<pre>#define url_SENT_REQUEST ((<a href="#url_fetch_status">url_fetch_status</a>) 0x2u)</pre>
+
+<h3 id="url_SENT_DATA">url_SENT_DATA</h3>
+<pre>#define url_SENT_DATA ((<a href="#url_fetch_status">url_fetch_status</a>) 0x4u)</pre>
+
+<h3 id="url_RESPONSE_RECEIVED">url_RESPONSE_RECEIVED</h3>
+<pre>#define url_RESPONSE_RECEIVED ((<a href="#url_fetch_status">url_fetch_status</a>) 0x8u)</pre>
+
+<h3 id="url_TRANSFER_IN_PROGRESS">url_TRANSFER_IN_PROGRESS</h3>
+<pre>#define url_TRANSFER_IN_PROGRESS ((<a href="#url_fetch_status">url_fetch_status</a>) 0x10u)</pre>
+
+<h3 id="url_ALL_DATA_RECEIVED">url_ALL_DATA_RECEIVED</h3>
+<pre>#define url_ALL_DATA_RECEIVED ((<a href="#url_fetch_status">url_fetch_status</a>) 0x20u)</pre>
+
+<h3 id="url_TRANSFER_ABORTED">url_TRANSFER_ABORTED</h3>
+<pre>#define url_TRANSFER_ABORTED ((<a href="#url_fetch_status">url_fetch_status</a>) 0x40u)</pre>
+
+<h3 id="url_HAS_PROTOCOL_FLAGS">url_HAS_PROTOCOL_FLAGS</h3>
+<pre>#define url_HAS_PROTOCOL_FLAGS ((<a href="#url_protocol_register_flags">url_protocol_register_flags</a>) 0x1u)</pre>
+
+<h3 id="url_HAS_DEFAULT_PORT">url_HAS_DEFAULT_PORT</h3>
+<pre>#define url_HAS_DEFAULT_PORT ((<a href="#url_protocol_register_flags">url_protocol_register_flags</a>) 0x2u)</pre>
+
+<h3 id="url_NON_UNIX_PATH">url_NON_UNIX_PATH</h3>
+<pre>#define url_NON_UNIX_PATH ((<a href="#url_protocol_flags">url_protocol_flags</a>) 0x1u)</pre>
+
+<h3 id="url_DONT_PARSE">url_DONT_PARSE</h3>
+<pre>#define url_DONT_PARSE ((<a href="#url_protocol_flags">url_protocol_flags</a>) 0x2u)</pre>
+
+<h3 id="url_ALLOW_USERNAME">url_ALLOW_USERNAME</h3>
+<pre>#define url_ALLOW_USERNAME ((<a href="#url_protocol_flags">url_protocol_flags</a>) 0x4u)</pre>
+
+<h3 id="url_ALLOW_HASH_IN_HOSTNAME">url_ALLOW_HASH_IN_HOSTNAME</h3>
+<pre>#define url_ALLOW_HASH_IN_HOSTNAME ((<a href="#url_protocol_flags">url_protocol_flags</a>) 0x8u)</pre>
+
+<h3 id="url_NO_HOSTNAME">url_NO_HOSTNAME</h3>
+<pre>#define url_NO_HOSTNAME ((<a href="#url_protocol_flags">url_protocol_flags</a>) 0x10u)</pre>
+
+<h3 id="url_REMOVE_LEADING_UP_COMPONENTS">url_REMOVE_LEADING_UP_COMPONENTS</h3>
+<pre>#define url_REMOVE_LEADING_UP_COMPONENTS ((<a href="#url_protocol_flags">url_protocol_flags</a>) 0x20u)</pre>
+
+<h3 id="error_URL_BAD_SESSION">error_URL_BAD_SESSION</h3>
+<pre>#define error_URL_BAD_SESSION 0x80DE00u</pre>
+
+<p>Bad session handle passed to URL fetcher</p>
+
+<h3 id="error_URL_NO_MEMORY">error_URL_NO_MEMORY</h3>
+<pre>#define error_URL_NO_MEMORY 0x80DE01u</pre>
+
+<p>Out of memory</p>
+
+<h3 id="error_URL_NO_FETCHER">error_URL_NO_FETCHER</h3>
+<pre>#define error_URL_NO_FETCHER 0x80DE02u</pre>
+
+<p>No fetcher could be found</p>
+
+<h3 id="error_URL_UNKNOWN_SWI">error_URL_UNKNOWN_SWI</h3>
+<pre>#define error_URL_UNKNOWN_SWI 0x80DE03u</pre>
+
+<p>Protocol module returned an unknown SWI error</p>
+
+<h3 id="error_URL_BAD_FETCH">error_URL_BAD_FETCH</h3>
+<pre>#define error_URL_BAD_FETCH 0x80DE04u</pre>
+
+<p>Fetch already started in this session</p>
+
+<h3 id="error_URL_FETCH_FINISHED">error_URL_FETCH_FINISHED</h3>
+<pre>#define error_URL_FETCH_FINISHED 0x80DE05u</pre>
+
+<p>Fetch already finished</p>
+
+<h3 id="error_URL_PROTOCOL_CLAIMED">error_URL_PROTOCOL_CLAIMED</h3>
+<pre>#define error_URL_PROTOCOL_CLAIMED 0x80DE06u</pre>
+
+<p>Protocol already claimed</p>
+
+<h3 id="error_URL_NO_FETCH">error_URL_NO_FETCH</h3>
+<pre>#define error_URL_NO_FETCH 0x80DE07u</pre>
+
+<p>No fetch in progress</p>
+
+<h3 id="error_URL_BAD_MESSAGE">error_URL_BAD_MESSAGE</h3>
+<pre>#define error_URL_BAD_MESSAGE 0x80DE08u</pre>
+
+<p>Message not found in messages file</p>
+
+<h3 id="error_URL_NOT_PARSEABLE">error_URL_NOT_PARSEABLE</h3>
+<pre>#define error_URL_NOT_PARSEABLE 0x80DE0Au</pre>
+
+<p>URL could not be parsed</p>
+
+<h3 id="xurl_register">xurl_register</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xurl_register (bits flags,
+      <a href="#url_s">url_s</a> *session);</pre>
+<p>Initialises a client session with the URL module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>session</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="url_register">url_register</h3>
+<pre>extern <a href="#url_s">url_s</a> url_register (bits flags);</pre>
+<p>Initialises a client session with the URL module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>session</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xurl_get_url">xurl_get_url</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xurl_get_url (<a href="#url_get_url_flags">url_get_url_flags</a> flags,
+      <a href="#url_s">url_s</a> session,
+      <a href="#url_method">url_method</a> method,
+      char const *url,
+      byte const *data,
+      int data_length,
+      char const *user_agent,
+      <a href="#url_fetch_status">url_fetch_status</a> *status);</pre>
+<p>Instigates the transfer of data to or from a server</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>session</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>method</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>url</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>data_length</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>user_agent</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="url_get_url">url_get_url</h3>
+<pre>extern <a href="#url_fetch_status">url_fetch_status</a> url_get_url (<a href="#url_get_url_flags">url_get_url_flags</a> flags,
+      <a href="#url_s">url_s</a> session,
+      <a href="#url_method">url_method</a> method,
+      char const *url,
+      byte const *data,
+      int data_length,
+      char const *user_agent);</pre>
+<p>Instigates the transfer of data to or from a server</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>session</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>method</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>url</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>data_length</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>user_agent</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xurl_status">xurl_status</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xurl_status (bits flags,
+      <a href="#url_s">url_s</a> session,
+      <a href="#url_fetch_status">url_fetch_status</a> *status,
+      bits *response_code,
+      int *bytes_read,
+      int *total_size);</pre>
+<p>Checks the status of a URL fetch</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>session</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>response_code</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>bytes_read</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>total_size</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="url_status">url_status</h3>
+<pre>extern <a href="#url_fetch_status">url_fetch_status</a> url_status (bits flags,
+      <a href="#url_s">url_s</a> session,
+      bits *response_code,
+      int *bytes_read,
+      int *total_size);</pre>
+<p>Checks the status of a URL fetch</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>session</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>response_code</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>bytes_read</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>total_size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xurl_read_data">xurl_read_data</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xurl_read_data (bits flags,
+      <a href="#url_s">url_s</a> session,
+      byte *buffer,
+      int buffer_size,
+      <a href="#url_fetch_status">url_fetch_status</a> *status,
+      int *bytes_read,
+      int *bytes_remaining);</pre>
+<p>Reads data from a URL fetch</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>session</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>buffer_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>bytes_read</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>bytes_remaining</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="url_read_data">url_read_data</h3>
+<pre>extern int url_read_data (bits flags,
+      <a href="#url_s">url_s</a> session,
+      byte *buffer,
+      int buffer_size,
+      <a href="#url_fetch_status">url_fetch_status</a> *status,
+      int *bytes_remaining);</pre>
+<p>Reads data from a URL fetch</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>session</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>buffer_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>bytes_remaining</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>bytes_read</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xurl_set_proxy__enable">xurl_set_proxy__enable</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xurl_set_proxy__enable (bits flags,
+      <a href="#url_s">url_s</a> session,
+      char const *proxy_url,
+      char const *scheme,
+      <a href="#url_fetch_status">url_fetch_status</a> *status);</pre>
+<p>Enables use of a proxy for URL fetches</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>session</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>proxy_url</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>scheme</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="url_set_proxy__enable">url_set_proxy__enable</h3>
+<pre>extern <a href="#url_fetch_status">url_fetch_status</a> url_set_proxy__enable (bits flags,
+      <a href="#url_s">url_s</a> session,
+      char const *proxy_url,
+      char const *scheme);</pre>
+<p>Enables use of a proxy for URL fetches</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>session</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>proxy_url</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>scheme</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xurl_set_proxy__disable">xurl_set_proxy__disable</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xurl_set_proxy__disable (bits flags,
+      <a href="#url_s">url_s</a> session,
+      char const *proxy_url,
+      <a href="#url_fetch_status">url_fetch_status</a> *status);</pre>
+<p>Disables use of a proxy for URL fetches</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>session</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>proxy_url</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="url_set_proxy__disable">url_set_proxy__disable</h3>
+<pre>extern <a href="#url_fetch_status">url_fetch_status</a> url_set_proxy__disable (bits flags,
+      <a href="#url_s">url_s</a> session,
+      char const *proxy_url);</pre>
+<p>Disables use of a proxy for URL fetches</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>session</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>proxy_url</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xurl_stop">xurl_stop</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xurl_stop (bits flags,
+      <a href="#url_s">url_s</a> session,
+      <a href="#url_fetch_status">url_fetch_status</a> *status);</pre>
+<p>Aborts a URL fetch</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>session</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="url_stop">url_stop</h3>
+<pre>extern <a href="#url_fetch_status">url_fetch_status</a> url_stop (bits flags,
+      <a href="#url_s">url_s</a> session);</pre>
+<p>Aborts a URL fetch</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>session</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xurl_deregister">xurl_deregister</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xurl_deregister (bits flags,
+      <a href="#url_s">url_s</a> session,
+      <a href="#url_fetch_status">url_fetch_status</a> *status);</pre>
+<p>Terminates a client session with the URL module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>session</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="url_deregister">url_deregister</h3>
+<pre>extern <a href="#url_fetch_status">url_fetch_status</a> url_deregister (bits flags,
+      <a href="#url_s">url_s</a> session);</pre>
+<p>Terminates a client session with the URL module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>session</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xurlparseurl_return_lengths">xurlparseurl_return_lengths</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xurlparseurl_return_lengths (<a href="#url_parse_url_flags">url_parse_url_flags</a> flags,
+      char const *base_url,
+      char const *relative_url,
+      <a href="#url_component_sizes">url_component_sizes</a> *block,
+      int block_size,
+      bits *flags_out);</pre>
+<p>Returns the space needed for each component of a URL</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>base_url</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>relative_url</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>block_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags_out</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="urlparseurl_return_lengths">urlparseurl_return_lengths</h3>
+<pre>extern bits urlparseurl_return_lengths (<a href="#url_parse_url_flags">url_parse_url_flags</a> flags,
+      char const *base_url,
+      char const *relative_url,
+      <a href="#url_component_sizes">url_component_sizes</a> *block,
+      int block_size);</pre>
+<p>Returns the space needed for each component of a URL</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>base_url</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>relative_url</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>block_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>flags_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xurlparseurl_return_data">xurlparseurl_return_data</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xurlparseurl_return_data (<a href="#url_parse_url_flags">url_parse_url_flags</a> flags,
+      char const *base_url,
+      char const *relative_url,
+      <a href="#url_components">url_components</a> const *block,
+      int block_size,
+      bits *flags_out);</pre>
+<p>Returns the components of a URL</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>base_url</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>relative_url</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>block_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags_out</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="urlparseurl_return_data">urlparseurl_return_data</h3>
+<pre>extern bits urlparseurl_return_data (<a href="#url_parse_url_flags">url_parse_url_flags</a> flags,
+      char const *base_url,
+      char const *relative_url,
+      <a href="#url_components">url_components</a> const *block,
+      int block_size);</pre>
+<p>Returns the components of a URL</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>base_url</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>relative_url</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>block_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>flags_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xurlparseurl_compose_from_components">xurlparseurl_compose_from_components</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xurlparseurl_compose_from_components (<a href="#url_parse_url_flags">url_parse_url_flags</a> flags,
+      <a href="#url_components">url_components</a> const *block,
+      int block_size,
+      bits *flags_out);</pre>
+<p>Builds a URL from its components</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>block_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags_out</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="urlparseurl_compose_from_components">urlparseurl_compose_from_components</h3>
+<pre>extern bits urlparseurl_compose_from_components (<a href="#url_parse_url_flags">url_parse_url_flags</a> flags,
+      <a href="#url_components">url_components</a> const *block,
+      int block_size);</pre>
+<p>Builds a URL from its components</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>block_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>flags_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xurlparseurl_quick_resolve">xurlparseurl_quick_resolve</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xurlparseurl_quick_resolve (<a href="#url_parse_url_flags">url_parse_url_flags</a> flags,
+      char const *base_url,
+      char const *relative_url,
+      char *url_buffer,
+      int url_buffer_size,
+      bits *flags_out);</pre>
+<p>Resolves a relative URL</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>base_url</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>relative_url</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>url_buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>url_buffer_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags_out</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="urlparseurl_quick_resolve">urlparseurl_quick_resolve</h3>
+<pre>extern bits urlparseurl_quick_resolve (<a href="#url_parse_url_flags">url_parse_url_flags</a> flags,
+      char const *base_url,
+      char const *relative_url,
+      char *url_buffer,
+      int url_buffer_size);</pre>
+<p>Resolves a relative URL</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>base_url</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>relative_url</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>url_buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>url_buffer_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>flags_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xurl_enumerate_schemes">xurl_enumerate_schemes</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xurl_enumerate_schemes (bits flags,
+      bits context,
+      bits *status,
+      bits *context_out,
+      char **scheme,
+      char **description,
+      bits *swi_base,
+      bits *version);</pre>
+<p>Enumerates the URL schemes known to the URL module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scheme</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>description</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>swi_base</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>version</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="url_enumerate_schemes">url_enumerate_schemes</h3>
+<pre>extern bits url_enumerate_schemes (bits flags,
+      bits context,
+      bits *status,
+      char **scheme,
+      char **description,
+      bits *swi_base,
+      bits *version);</pre>
+<p>Enumerates the URL schemes known to the URL module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>scheme</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>description</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>swi_base</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>version</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_out</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xurl_enumerate_proxies">xurl_enumerate_proxies</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xurl_enumerate_proxies (bits flags,
+      <a href="#url_s">url_s</a> session,
+      bits context,
+      bits *status,
+      bits *context_out,
+      char **scheme,
+      char **proxy_url);</pre>
+<p>Enumerates proxies known to the URL module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>session</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>scheme</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>proxy_url</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="url_enumerate_proxies">url_enumerate_proxies</h3>
+<pre>extern bits url_enumerate_proxies (bits flags,
+      <a href="#url_s">url_s</a> session,
+      bits context,
+      bits *status,
+      char **scheme,
+      char **proxy_url);</pre>
+<p>Enumerates proxies known to the URL module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>session</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>scheme</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>proxy_url</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_out</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xurl_protocol_register">xurl_protocol_register</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xurl_protocol_register (<a href="#url_protocol_register_flags">url_protocol_register_flags</a> flags,
+      bits swi_base,
+      char const *scheme,
+      bits version,
+      char const *name,
+      <a href="#url_protocol_flags">url_protocol_flags</a> protocol_flags,
+      bits default_port,
+      int *flags_out);</pre>
+<p>Registers a protocol with the URL fetcher module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>swi_base</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scheme</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>version</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>name</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>protocol_flags</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>default_port</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags_out</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="url_protocol_register">url_protocol_register</h3>
+<pre>extern int url_protocol_register (<a href="#url_protocol_register_flags">url_protocol_register_flags</a> flags,
+      bits swi_base,
+      char const *scheme,
+      bits version,
+      char const *name,
+      <a href="#url_protocol_flags">url_protocol_flags</a> protocol_flags,
+      bits default_port);</pre>
+<p>Registers a protocol with the URL fetcher module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>swi_base</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scheme</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>version</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>name</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>protocol_flags</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>default_port</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>flags_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xurl_protocol_deregister">xurl_protocol_deregister</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xurl_protocol_deregister (bits flags,
+      bits swi_base,
+      bits *flags_out,
+      bits *sessions_affected);</pre>
+<p>Deregisters a protocol with the URL fetcher module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>swi_base</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>sessions_affected</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="url_protocol_deregister">url_protocol_deregister</h3>
+<pre>extern bits url_protocol_deregister (bits flags,
+      bits swi_base,
+      bits *flags_out);</pre>
+<p>Deregisters a protocol with the URL fetcher module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>swi_base</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>sessions_affected</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_url_module">xservice_url_module</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_url_module (bits reason_code,
+      bits version);</pre>
+<p>Informs URL protocol modules of URL module events</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>reason_code</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>version</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="service_url_module">service_url_module</h3>
+<pre>extern void service_url_module (bits reason_code,
+      bits version);</pre>
+<p>Informs URL protocol modules of URL module events</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>reason_code</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>version</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xservice_url_module_started">xservice_url_module_started</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_url_module_started (bits version);</pre>
+<p>Informs URL protocol modules that the URL module has started</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>version</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="service_url_module_started">service_url_module_started</h3>
+<pre>extern void service_url_module_started (bits version);</pre>
+<p>Informs URL protocol modules that the URL module has started</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>version</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xservice_url_module_dying">xservice_url_module_dying</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_url_module_dying (bits version);</pre>
+<p>Informs URL protocol modules that the URL module is dying</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>version</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="service_url_module_dying">service_url_module_dying</h3>
+<pre>extern void service_url_module_dying (bits version);</pre>
+<p>Informs URL protocol modules that the URL module is dying</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>version</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xservice_url_protocol_module">xservice_url_protocol_module</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_url_protocol_module (bits reason_code,
+      char const *scheme,
+      bits swi_base,
+      char const *description);</pre>
+<p>Informs interested parties of URL protocol module events</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>reason_code</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>scheme</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>swi_base</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>description</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="service_url_protocol_module">service_url_protocol_module</h3>
+<pre>extern void service_url_protocol_module (bits reason_code,
+      char const *scheme,
+      bits swi_base,
+      char const *description);</pre>
+<p>Informs interested parties of URL protocol module events</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>reason_code</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>scheme</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>swi_base</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>description</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xservice_url_protocol_module_started">xservice_url_protocol_module_started</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_url_protocol_module_started (char const *scheme,
+      bits swi_base,
+      char const *description);</pre>
+<p>Informs interested parties that a new URL protocol module has started</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scheme</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>swi_base</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>description</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="service_url_protocol_module_started">service_url_protocol_module_started</h3>
+<pre>extern void service_url_protocol_module_started (char const *scheme,
+      bits swi_base,
+      char const *description);</pre>
+<p>Informs interested parties that a new URL protocol module has started</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scheme</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>swi_base</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>description</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xservice_url_protocol_module_dying">xservice_url_protocol_module_dying</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_url_protocol_module_dying (char const *scheme,
+      bits swi_base,
+      char const *description);</pre>
+<p>Informs interested parties that a URL protocol module is dying</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scheme</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>swi_base</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>description</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="service_url_protocol_module_dying">service_url_protocol_module_dying</h3>
+<pre>extern void service_url_protocol_module_dying (char const *scheme,
+      bits swi_base,
+      char const *description);</pre>
+<p>Informs interested parties that a URL protocol module is dying</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scheme</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>swi_base</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>description</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

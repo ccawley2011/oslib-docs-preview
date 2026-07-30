@@ -1,0 +1,289 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Button</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Button</h2>
+
+<pre>#include "oslib/button.h"</pre>
+
+<h3 id="button_gadget">button_gadget</h3>
+<pre>typedef struct
+   {  bits flags;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> value;
+      int value_limit;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> validation;
+      int validation_limit;
+   }
+   button_gadget;</pre>
+
+<h3 id="button_object">button_object</h3>
+<pre>typedef struct
+   {  <a href="#gadget_OBJECT_MEMBERS">gadget_OBJECT_MEMBERS</a>
+      bits button_flags;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> value;
+      int value_limit;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> validation;
+      int validation_limit;
+   }
+   button_object;</pre>
+
+<h3 id="class_BUTTON">class_BUTTON</h3>
+<pre>#define class_BUTTON ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x3C0u)</pre>
+
+<h3 id="button_TASK_SPRITE_AREA">button_TASK_SPRITE_AREA</h3>
+<pre>#define button_TASK_SPRITE_AREA 0x1u</pre>
+
+<h3 id="button_ALLOW_MENU_CLICKS">button_ALLOW_MENU_CLICKS</h3>
+<pre>#define button_ALLOW_MENU_CLICKS 0x2u</pre>
+
+<h3 id="xbutton_get_flags">xbutton_get_flags</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xbutton_get_flags (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> button,
+      bits *icon_flags);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>button</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>icon_flags</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="button_get_flags">button_get_flags</h3>
+<pre>extern bits button_get_flags (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> button);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>button</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>icon_flags</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xbutton_set_flags">xbutton_set_flags</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xbutton_set_flags (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> button,
+      int clear_word,
+      int eor_word);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>clear_word</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>eor_word</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="button_set_flags">button_set_flags</h3>
+<pre>extern void button_set_flags (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> button,
+      int clear_word,
+      int eor_word);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>clear_word</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>eor_word</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xbutton_set_value">xbutton_set_value</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xbutton_set_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> button,
+      char const *value);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>value</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="button_set_value">button_set_value</h3>
+<pre>extern void button_set_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> button,
+      char const *value);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>value</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xbutton_get_value">xbutton_get_value</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xbutton_get_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> button,
+      char *buffer,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="button_get_value">button_get_value</h3>
+<pre>extern int button_get_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> button,
+      char *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xbutton_set_validation">xbutton_set_validation</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xbutton_set_validation (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> button,
+      char const *validation);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>validation</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="button_set_validation">button_set_validation</h3>
+<pre>extern void button_set_validation (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> button,
+      char const *validation);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>validation</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xbutton_get_validation">xbutton_get_validation</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xbutton_get_validation (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> button,
+      char *buffer,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="button_get_validation">button_get_validation</h3>
+<pre>extern int button_get_validation (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> button,
+      char *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xbutton_set_font">xbutton_set_font</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xbutton_set_font (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> button,
+      char const *font_name,
+      int xsize,
+      int ysize);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>xsize</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>ysize</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="button_set_font">button_set_font</h3>
+<pre>extern void button_set_font (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> button,
+      char const *font_name,
+      int xsize,
+      int ysize);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>button</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>xsize</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>ysize</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

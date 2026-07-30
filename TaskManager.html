@@ -1,0 +1,268 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; TaskManager</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>TaskManager</h2>
+
+<pre>#include "oslib/taskmanager.h"</pre>
+
+<h3 id="taskmanager_flags">taskmanager_flags</h3>
+<pre>typedef bits taskmanager_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#taskmanager_MODULE_TASK">taskmanager_MODULE_TASK</a></dd>
+<dd><a href="#taskmanager_DRAGGABLE_SLOT">taskmanager_DRAGGABLE_SLOT</a></dd>
+</dl>
+
+<h3 id="taskmanager_task">taskmanager_task</h3>
+<pre>typedef struct
+   {  <a href="wimp.html#wimp_t">wimp_t</a> task;
+      char *name;
+      int slot_size;
+      <a href="#taskmanager_flags">taskmanager_flags</a> flags;
+   }
+   taskmanager_task;</pre>
+
+<h3 id="taskmanager_shutdown_flags">taskmanager_shutdown_flags</h3>
+<pre>typedef bits taskmanager_shutdown_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#taskmanager_SHUTDOWN_EXIT_ONLY">taskmanager_SHUTDOWN_EXIT_ONLY</a></dd>
+<dd><a href="#taskmanager_SHUTDOWN_NO_PRE_QUIT">taskmanager_SHUTDOWN_NO_PRE_QUIT</a></dd>
+<dd><a href="#taskmanager_SHUTDOWN_PORTABLE_POWER_DOWN">taskmanager_SHUTDOWN_PORTABLE_POWER_DOWN</a></dd>
+<dd><a href="#taskmanager_SHUTDOWN_SEND_MESSAGE">taskmanager_SHUTDOWN_SEND_MESSAGE</a></dd>
+<dd><a href="#taskmanager_SHUTDOWN_IGNORE_UP_CALLS">taskmanager_SHUTDOWN_IGNORE_UP_CALLS</a></dd>
+<dd><a href="#taskmanager_SHUTDOWN_REBOOT">taskmanager_SHUTDOWN_REBOOT</a></dd>
+<dd><a href="#taskmanager_SHUTDOWN_POWER_OFF">taskmanager_SHUTDOWN_POWER_OFF</a></dd>
+</dl>
+
+<h3 id="taskmanager_group_id">taskmanager_group_id</h3>
+<pre>typedef bits taskmanager_group_id;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#taskmanager_GROUP_OVERVIEW">taskmanager_GROUP_OVERVIEW</a></dd>
+<dd><a href="#taskmanager_GROUP_REQUIRED">taskmanager_GROUP_REQUIRED</a></dd>
+<dd><a href="#taskmanager_GROUP_SUBSIDIARY">taskmanager_GROUP_SUBSIDIARY</a></dd>
+<dd><a href="#taskmanager_GROUP_COMMERCIAL">taskmanager_GROUP_COMMERCIAL</a></dd>
+<dd><a href="#taskmanager_GROUP_FREEWARE">taskmanager_GROUP_FREEWARE</a></dd>
+<dd><a href="#taskmanager_GROUP_USER">taskmanager_GROUP_USER</a></dd>
+<dd><a href="#taskmanager_GROUP_MASK">taskmanager_GROUP_MASK</a></dd>
+</dl>
+
+<h3 id="taskmanager_NAME_LIMIT">taskmanager_NAME_LIMIT</h3>
+<pre>#define taskmanager_NAME_LIMIT 32</pre>
+
+<h3 id="taskmanager_MODULE_TASK">taskmanager_MODULE_TASK</h3>
+<pre>#define taskmanager_MODULE_TASK ((<a href="#taskmanager_flags">taskmanager_flags</a>) 0x1u)</pre>
+
+<h3 id="taskmanager_DRAGGABLE_SLOT">taskmanager_DRAGGABLE_SLOT</h3>
+<pre>#define taskmanager_DRAGGABLE_SLOT ((<a href="#taskmanager_flags">taskmanager_flags</a>) 0x2u)</pre>
+
+<h3 id="taskmanager_SHUTDOWN_EXIT_ONLY">taskmanager_SHUTDOWN_EXIT_ONLY</h3>
+<pre>#define taskmanager_SHUTDOWN_EXIT_ONLY ((<a href="#taskmanager_shutdown_flags">taskmanager_shutdown_flags</a>) 0x1u)</pre>
+
+<h3 id="taskmanager_SHUTDOWN_NO_PRE_QUIT">taskmanager_SHUTDOWN_NO_PRE_QUIT</h3>
+<pre>#define taskmanager_SHUTDOWN_NO_PRE_QUIT ((<a href="#taskmanager_shutdown_flags">taskmanager_shutdown_flags</a>) 0x2u)</pre>
+
+<h3 id="taskmanager_SHUTDOWN_PORTABLE_POWER_DOWN">taskmanager_SHUTDOWN_PORTABLE_POWER_DOWN</h3>
+<pre>#define taskmanager_SHUTDOWN_PORTABLE_POWER_DOWN ((<a href="#taskmanager_shutdown_flags">taskmanager_shutdown_flags</a>) 0x4u)</pre>
+
+<h3 id="taskmanager_SHUTDOWN_SEND_MESSAGE">taskmanager_SHUTDOWN_SEND_MESSAGE</h3>
+<pre>#define taskmanager_SHUTDOWN_SEND_MESSAGE ((<a href="#taskmanager_shutdown_flags">taskmanager_shutdown_flags</a>) 0x8u)</pre>
+
+<h3 id="taskmanager_SHUTDOWN_IGNORE_UP_CALLS">taskmanager_SHUTDOWN_IGNORE_UP_CALLS</h3>
+<pre>#define taskmanager_SHUTDOWN_IGNORE_UP_CALLS ((<a href="#taskmanager_shutdown_flags">taskmanager_shutdown_flags</a>) 0x10u)</pre>
+
+<h3 id="taskmanager_SHUTDOWN_REBOOT">taskmanager_SHUTDOWN_REBOOT</h3>
+<pre>#define taskmanager_SHUTDOWN_REBOOT ((<a href="#taskmanager_shutdown_flags">taskmanager_shutdown_flags</a>) 0x20u)</pre>
+
+<p>RISC OS 4+</p>
+
+<h3 id="taskmanager_SHUTDOWN_POWER_OFF">taskmanager_SHUTDOWN_POWER_OFF</h3>
+<pre>#define taskmanager_SHUTDOWN_POWER_OFF ((<a href="#taskmanager_shutdown_flags">taskmanager_shutdown_flags</a>) 0x40u)</pre>
+
+<p>RISC OS 4+</p>
+
+<h3 id="taskmanager_GROUP_OVERVIEW">taskmanager_GROUP_OVERVIEW</h3>
+<pre>#define taskmanager_GROUP_OVERVIEW ((<a href="#taskmanager_group_id">taskmanager_group_id</a>) 0x0u)</pre>
+
+<p>system overview - for RISCOS Ltd use only</p>
+
+<h3 id="taskmanager_GROUP_REQUIRED">taskmanager_GROUP_REQUIRED</h3>
+<pre>#define taskmanager_GROUP_REQUIRED ((<a href="#taskmanager_group_id">taskmanager_group_id</a>) 0x1000u)</pre>
+
+<p>system required components - for RISCOS Ltd use only</p>
+
+<h3 id="taskmanager_GROUP_SUBSIDIARY">taskmanager_GROUP_SUBSIDIARY</h3>
+<pre>#define taskmanager_GROUP_SUBSIDIARY ((<a href="#taskmanager_group_id">taskmanager_group_id</a>) 0x2000u)</pre>
+
+<p>subsidiary components - for RISCOS Ltd use only</p>
+
+<h3 id="taskmanager_GROUP_COMMERCIAL">taskmanager_GROUP_COMMERCIAL</h3>
+<pre>#define taskmanager_GROUP_COMMERCIAL ((<a href="#taskmanager_group_id">taskmanager_group_id</a>) 0x3000u)</pre>
+
+<p>commercial components</p>
+
+<h3 id="taskmanager_GROUP_FREEWARE">taskmanager_GROUP_FREEWARE</h3>
+<pre>#define taskmanager_GROUP_FREEWARE ((<a href="#taskmanager_group_id">taskmanager_group_id</a>) 0x4000u)</pre>
+
+<p>freeware components</p>
+
+<h3 id="taskmanager_GROUP_USER">taskmanager_GROUP_USER</h3>
+<pre>#define taskmanager_GROUP_USER ((<a href="#taskmanager_group_id">taskmanager_group_id</a>) 0x5000u)</pre>
+
+<p>user components - for private use only</p>
+
+<h3 id="taskmanager_GROUP_MASK">taskmanager_GROUP_MASK</h3>
+<pre>#define taskmanager_GROUP_MASK ((<a href="#taskmanager_group_id">taskmanager_group_id</a>) 0xF000u)</pre>
+
+<h3 id="xtaskmanager_task_name_from_handle">xtaskmanager_task_name_from_handle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtaskmanager_task_name_from_handle (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      char **name);</pre>
+<p>Finds the name of a task</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>name</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="taskmanager_task_name_from_handle">taskmanager_task_name_from_handle</h3>
+<pre>extern char *taskmanager_task_name_from_handle (<a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>Finds the name of a task</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>name</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xtaskmanager_enumerate_tasks">xtaskmanager_enumerate_tasks</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtaskmanager_enumerate_tasks (int context,
+      <a href="#taskmanager_task">taskmanager_task</a> *task,
+      int size,
+      int *context_out,
+      char **end);</pre>
+<p>Enumerates all the currently active tasks</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>end</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="taskmanager_enumerate_tasks">taskmanager_enumerate_tasks</h3>
+<pre>extern int taskmanager_enumerate_tasks (int context,
+      <a href="#taskmanager_task">taskmanager_task</a> *task,
+      int size,
+      char **end);</pre>
+<p>Enumerates all the currently active tasks</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xtaskmanager_shutdown">xtaskmanager_shutdown</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtaskmanager_shutdown (<a href="#taskmanager_shutdown_flags">taskmanager_shutdown_flags</a> flags);</pre>
+<p>Initiates a desktop shutdown</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="taskmanager_shutdown">taskmanager_shutdown</h3>
+<pre>extern void taskmanager_shutdown (<a href="#taskmanager_shutdown_flags">taskmanager_shutdown_flags</a> flags);</pre>
+<p>Initiates a desktop shutdown</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xtaskmanager_start_task">xtaskmanager_start_task</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtaskmanager_start_task (char const *path_name);</pre>
+<p>Starts a new WIMP task - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path_name</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="taskmanager_start_task">taskmanager_start_task</h3>
+<pre>extern void taskmanager_start_task (char const *path_name);</pre>
+<p>Starts a new WIMP task - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path_name</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xservice_task_manager_acknowledgements">xservice_task_manager_acknowledgements</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_task_manager_acknowledgements (asm_routine add_message);</pre>
+<p>Notify Task Manager of licence acknowledgements - RISC OS 4, RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>add_message</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="service_task_manager_acknowledgements">service_task_manager_acknowledgements</h3>
+<pre>extern void service_task_manager_acknowledgements (asm_routine add_message);</pre>
+<p>Notify Task Manager of licence acknowledgements - RISC OS 4, RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>add_message</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

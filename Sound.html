@@ -1,0 +1,1282 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Sound</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Sound</h2>
+
+<pre>#include "oslib/sound.h"</pre>
+
+<h3 id="sound_log_table">sound_log_table</h3>
+<pre>typedef struct
+   {  byte log [8192];
+   }
+   sound_log_table;</pre>
+
+<h3 id="sound_log_scale_table">sound_log_scale_table</h3>
+<pre>typedef struct
+   {  byte log_scale [256];
+   }
+   sound_log_scale_table;</pre>
+
+<h3 id="sound_channel_handler">sound_channel_handler</h3>
+<pre>typedef struct
+   {  asm_routine fill_code;
+      asm_routine overrun_fixup_code;
+      <a href="#sound_log_table">sound_log_table</a> *log_table;
+      <a href="#sound_log_scale_table">sound_log_scale_table</a> *log_scale_table;
+   }
+   sound_channel_handler;</pre>
+
+<h3 id="sound_sccb">sound_sccb</h3>
+<pre>typedef struct
+   {  byte amplitude;
+      byte voice_no;
+      byte voice_instance;
+      byte flags;
+      int pitch;
+      int timbre;
+      int buffer_fill_count;
+      int r4;
+      int r5;
+      int r6;
+      int r7;
+      int r8;
+      int reserved [7];
+      int available [48];
+   }
+   sound_sccb;</pre>
+
+<h3 id="sound_scheduler">sound_scheduler</h3>
+<pre>typedef struct
+   {  asm_routine scheduler;
+   }
+   sound_scheduler;</pre>
+
+<h3 id="sound_voice_generator">sound_voice_generator</h3>
+<pre>typedef struct
+   {  int fill_code;
+      int update_code;
+      int gate_on_code;
+      int gate_off_code;
+      int instantiate_code;
+      int free_code;
+      int install_code;
+      int voice_name_offset;
+   }
+   sound_voice_generator;</pre>
+
+<h3 id="sound_state">sound_state</h3>
+<pre>typedef int sound_state;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#sound_STATE_READ">sound_STATE_READ</a></dd>
+<dd><a href="#sound_STATE_OFF">sound_STATE_OFF</a></dd>
+<dd><a href="#sound_STATE_ON">sound_STATE_ON</a></dd>
+</dl>
+
+<h3 id="sound_configuration">sound_configuration</h3>
+<pre>typedef bits sound_configuration;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#sound_CONFIGURATION_FORMAT">sound_CONFIGURATION_FORMAT</a></dd>
+<dd><a href="#sound_CONFIGURATION_FORMAT16_BIT_ANY">sound_CONFIGURATION_FORMAT16_BIT_ANY</a></dd>
+<dd><a href="#sound_CONFIGURATION_FORMAT16_BIT_MU_LAW">sound_CONFIGURATION_FORMAT16_BIT_MU_LAW</a></dd>
+<dd><a href="#sound_CONFIGURATION_OVERSAMPLING_ENABLED">sound_CONFIGURATION_OVERSAMPLING_ENABLED</a></dd>
+</dl>
+
+<h3 id="sound_linear_handler_flags">sound_linear_handler_flags</h3>
+<pre>typedef bits sound_linear_handler_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#sound_DATA_FLAGS">sound_DATA_FLAGS</a></dd>
+<dd><a href="#sound_DATA_INVALID">sound_DATA_INVALID</a></dd>
+<dd><a href="#sound_DATA_NON_NOUGHT">sound_DATA_NON_NOUGHT</a></dd>
+<dd><a href="#sound_DATA_NOUGHT">sound_DATA_NOUGHT</a></dd>
+<dd><a href="#sound_RESERVED_FLAGS">sound_RESERVED_FLAGS</a></dd>
+</dl>
+
+<h3 id="sound_INSTALL_CODE">sound_INSTALL_CODE</h3>
+<pre>#define sound_INSTALL_CODE (-390234112)</pre>
+
+<p>LDMFD R13!, PC</p>
+
+<h3 id="sound_STATE_READ">sound_STATE_READ</h3>
+<pre>#define sound_STATE_READ ((<a href="#sound_state">sound_state</a>) 0x0u)</pre>
+
+<h3 id="sound_STATE_OFF">sound_STATE_OFF</h3>
+<pre>#define sound_STATE_OFF ((<a href="#sound_state">sound_state</a>) 0x1u)</pre>
+
+<h3 id="sound_STATE_ON">sound_STATE_ON</h3>
+<pre>#define sound_STATE_ON ((<a href="#sound_state">sound_state</a>) 0x2u)</pre>
+
+<h3 id="sound_CONFIGURATION_FORMAT">sound_CONFIGURATION_FORMAT</h3>
+<pre>#define sound_CONFIGURATION_FORMAT ((<a href="#sound_configuration">sound_configuration</a>) 0xFu)</pre>
+
+<h3 id="sound_CONFIGURATION_FORMAT16_BIT_ANY">sound_CONFIGURATION_FORMAT16_BIT_ANY</h3>
+<pre>#define sound_CONFIGURATION_FORMAT16_BIT_ANY ((<a href="#sound_configuration">sound_configuration</a>) 0x1u)</pre>
+
+<h3 id="sound_CONFIGURATION_FORMAT16_BIT_MU_LAW">sound_CONFIGURATION_FORMAT16_BIT_MU_LAW</h3>
+<pre>#define sound_CONFIGURATION_FORMAT16_BIT_MU_LAW ((<a href="#sound_configuration">sound_configuration</a>) 0x2u)</pre>
+
+<h3 id="sound_CONFIGURATION_OVERSAMPLING_ENABLED">sound_CONFIGURATION_OVERSAMPLING_ENABLED</h3>
+<pre>#define sound_CONFIGURATION_OVERSAMPLING_ENABLED ((<a href="#sound_configuration">sound_configuration</a>) 0x10u)</pre>
+
+<h3 id="sound_DATA_FLAGS">sound_DATA_FLAGS</h3>
+<pre>#define sound_DATA_FLAGS ((<a href="#sound_linear_handler_flags">sound_linear_handler_flags</a>) 0x7u)</pre>
+
+<h3 id="sound_DATA_INVALID">sound_DATA_INVALID</h3>
+<pre>#define sound_DATA_INVALID ((<a href="#sound_linear_handler_flags">sound_linear_handler_flags</a>) 0x0u)</pre>
+
+<h3 id="sound_DATA_NON_NOUGHT">sound_DATA_NON_NOUGHT</h3>
+<pre>#define sound_DATA_NON_NOUGHT ((<a href="#sound_linear_handler_flags">sound_linear_handler_flags</a>) 0x1u)</pre>
+
+<h3 id="sound_DATA_NOUGHT">sound_DATA_NOUGHT</h3>
+<pre>#define sound_DATA_NOUGHT ((<a href="#sound_linear_handler_flags">sound_linear_handler_flags</a>) 0x2u)</pre>
+
+<h3 id="sound_RESERVED_FLAGS">sound_RESERVED_FLAGS</h3>
+<pre>#define sound_RESERVED_FLAGS ((<a href="#sound_linear_handler_flags">sound_linear_handler_flags</a>) 0xF8u)</pre>
+
+<h3 id="sound_HZ">sound_HZ</h3>
+<pre>#define sound_HZ 1024</pre>
+
+<p>1Hz in Sound units</p>
+
+<h3 id="xsound_configure">xsound_configure</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_configure (int channel_count,
+      int sample_size,
+      int sample_period,
+      <a href="#sound_channel_handler">sound_channel_handler</a> const *channel_handler,
+      <a href="#sound_scheduler">sound_scheduler</a> const *scheduler,
+      int *channel_count_out,
+      int *sample_size_out,
+      int *sample_period_out,
+      <a href="#sound_channel_handler">sound_channel_handler</a> **channel_handler_out,
+      <a href="#sound_scheduler">sound_scheduler</a> **scheduler_out);</pre>
+<p>Configures the sound system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>channel_count</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>sample_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>sample_period</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>channel_handler</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>scheduler</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>channel_count_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>sample_size_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>sample_period_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>channel_handler_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>scheduler_out</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="sound_configure">sound_configure</h3>
+<pre>extern void sound_configure (int channel_count,
+      int sample_size,
+      int sample_period,
+      <a href="#sound_channel_handler">sound_channel_handler</a> const *channel_handler,
+      <a href="#sound_scheduler">sound_scheduler</a> const *scheduler,
+      int *channel_count_out,
+      int *sample_size_out,
+      int *sample_period_out,
+      <a href="#sound_channel_handler">sound_channel_handler</a> **channel_handler_out,
+      <a href="#sound_scheduler">sound_scheduler</a> **scheduler_out);</pre>
+<p>Configures the sound system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>channel_count</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>sample_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>sample_period</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>channel_handler</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>scheduler</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>channel_count_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>sample_size_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>sample_period_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>channel_handler_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>scheduler_out</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xsound_enable">xsound_enable</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_enable (<a href="#sound_state">sound_state</a> state,
+      <a href="#sound_state">sound_state</a> *state_out);</pre>
+<p>Enables or disables the sound system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>state</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>state_out</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="sound_enable">sound_enable</h3>
+<pre>extern <a href="#sound_state">sound_state</a> sound_enable (<a href="#sound_state">sound_state</a> state);</pre>
+<p>Enables or disables the sound system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>state</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>state_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsound_stereo">xsound_stereo</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_stereo (int channel_no,
+      int position,
+      int *position_out);</pre>
+<p>Sets the stereo position of a channel</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>channel_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>position</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>position_out</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="sound_stereo">sound_stereo</h3>
+<pre>extern int sound_stereo (int channel_no,
+      int position);</pre>
+<p>Sets the stereo position of a channel</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>channel_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>position</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>position_out</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xsound_speaker">xsound_speaker</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_speaker (<a href="#sound_state">sound_state</a> state,
+      <a href="#sound_state">sound_state</a> *state_out);</pre>
+<p>Enables or disables the speaker(s)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>state</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>state_out</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="sound_speaker">sound_speaker</h3>
+<pre>extern <a href="#sound_state">sound_state</a> sound_speaker (<a href="#sound_state">sound_state</a> state);</pre>
+<p>Enables or disables the speaker(s)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>state</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>state_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsoundmode_read_configuration">xsoundmode_read_configuration</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsoundmode_read_configuration (osbool *has_16bit,
+      <a href="#sound_configuration">sound_configuration</a> *configuration);</pre>
+<p>Reads the current sound system configuration</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>has_16bit</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>configuration</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="soundmode_read_configuration">soundmode_read_configuration</h3>
+<pre>extern osbool soundmode_read_configuration (<a href="#sound_configuration">sound_configuration</a> *configuration);</pre>
+<p>Reads the current sound system configuration</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>configuration</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>has_16bit</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsoundmode_set_oversampling">xsoundmode_set_oversampling</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsoundmode_set_oversampling (osbool oversample,
+      osbool *old_oversample);</pre>
+<p>Enables or disables automatic oversampling</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>oversample</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_oversample</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="soundmode_set_oversampling">soundmode_set_oversampling</h3>
+<pre>extern osbool soundmode_set_oversampling (osbool oversample);</pre>
+<p>Enables or disables automatic oversampling</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>oversample</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_oversample</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xsound_linear_handler">xsound_linear_handler</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_linear_handler (osbool install,
+      asm_routine new_handler_code,
+      void *new_workspace,
+      asm_routine *old_handler_code,
+      void **old_workspace);</pre>
+<p>Reads or installs the 16-bit linear stereo sound handler</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>install</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>new_handler_code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>new_workspace</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_handler_code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>old_workspace</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="sound_linear_handler">sound_linear_handler</h3>
+<pre>extern void sound_linear_handler (osbool install,
+      asm_routine new_handler_code,
+      void *new_workspace,
+      asm_routine *old_handler_code,
+      void **old_workspace);</pre>
+<p>Reads or installs the 16-bit linear stereo sound handler</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>install</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>new_handler_code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>new_workspace</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_handler_code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>old_workspace</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xsoundsamplerate_read_count">xsoundsamplerate_read_count</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsoundsamplerate_read_count (int *rate_count);</pre>
+<p>Reads the number of available sample rates</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>rate_count</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="soundsamplerate_read_count">soundsamplerate_read_count</h3>
+<pre>extern int soundsamplerate_read_count (void);
+</pre><p>Reads the number of available sample rates</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>rate_count</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xsoundsamplerate_read_current">xsoundsamplerate_read_current</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsoundsamplerate_read_current (int *rate_index,
+      int *rate);</pre>
+<p>Reads the current sample rate</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>rate_index</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>rate</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="soundsamplerate_read_current">soundsamplerate_read_current</h3>
+<pre>extern int soundsamplerate_read_current (int *rate);</pre>
+<p>Reads the current sample rate</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>rate</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>rate_index</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xsoundsamplerate_lookup">xsoundsamplerate_lookup</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsoundsamplerate_lookup (int rate_index,
+      int *rate);</pre>
+<p>Converts a sample rate index to the corresponding sample rate value</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rate_index</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>rate</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="soundsamplerate_lookup">soundsamplerate_lookup</h3>
+<pre>extern int soundsamplerate_lookup (int rate_index);</pre>
+<p>Converts a sample rate index to the corresponding sample rate value</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rate_index</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>rate</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xsoundsamplerate_select">xsoundsamplerate_select</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsoundsamplerate_select (int rate_index,
+      int *old_rate_index,
+      int *old_rate);</pre>
+<p>Selects a sample rate</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rate_index</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_rate_index</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>old_rate</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="soundsamplerate_select">soundsamplerate_select</h3>
+<pre>extern int soundsamplerate_select (int rate_index,
+      int *old_rate);</pre>
+<p>Selects a sample rate</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rate_index</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_rate</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_rate_index</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xsound_volume">xsound_volume</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_volume (int volume,
+      int *volume_out);</pre>
+<p>Sets the overall volume of the sound system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>volume</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>volume_out</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="sound_volume">sound_volume</h3>
+<pre>extern int sound_volume (int volume);</pre>
+<p>Sets the overall volume of the sound system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>volume</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>volume_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsound_sound_log">xsound_sound_log</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_sound_log (int linear,
+      int *log);</pre>
+<p>Converts a signed integer to a signed logarithm, scaling it by volume</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>linear</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>log</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="sound_sound_log">sound_sound_log</h3>
+<pre>extern int sound_sound_log (int linear);</pre>
+<p>Converts a signed integer to a signed logarithm, scaling it by volume</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>linear</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>log</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsound_log_scale">xsound_log_scale</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_log_scale (int log,
+      int *linear);</pre>
+<p>Scales a signed logarithm by the current volume setting</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>log</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>linear</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="sound_log_scale">sound_log_scale</h3>
+<pre>extern int sound_log_scale (int log);</pre>
+<p>Scales a signed logarithm by the current volume setting</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>log</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>linear</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsound_install_voice">xsound_install_voice</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_install_voice (<a href="#sound_voice_generator">sound_voice_generator</a> const *voice_generator,
+      int voice_no,
+      char **voice_name_out,
+      int *voice_no_out);</pre>
+<p>Adds a voice to the sound system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>voice_generator</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>voice_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>voice_name_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>voice_no_out</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="sound_install_voice">sound_install_voice</h3>
+<pre>extern int sound_install_voice (<a href="#sound_voice_generator">sound_voice_generator</a> const *voice_generator,
+      int voice_no,
+      char **voice_name_out);</pre>
+<p>Adds a voice to the sound system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>voice_generator</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>voice_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>voice_name_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>voice_no_out</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xsoundinstallvoice_read_name">xsoundinstallvoice_read_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsoundinstallvoice_read_name (int voice_no,
+      char **voice_name);</pre>
+<p>Reads the name of the voice installed in the specified slot</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>voice_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>voice_name</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="soundinstallvoice_read_name">soundinstallvoice_read_name</h3>
+<pre>extern char *soundinstallvoice_read_name (int voice_no);</pre>
+<p>Reads the name of the voice installed in the specified slot</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>voice_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>voice_name</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsoundinstallvoice_add_named_voice">xsoundinstallvoice_add_named_voice</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsoundinstallvoice_add_named_voice (int voice_no,
+      <a href="#sound_voice_generator">sound_voice_generator</a> const *voice_generator,
+      char const *voice_name,
+      int *voice_no_out,
+      char **voice_name_out);</pre>
+<p>Adds a voice to the sound system, specifying its name in the local language</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>voice_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>voice_generator</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>voice_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>voice_no_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>voice_name_out</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="soundinstallvoice_add_named_voice">soundinstallvoice_add_named_voice</h3>
+<pre>extern int soundinstallvoice_add_named_voice (int voice_no,
+      <a href="#sound_voice_generator">sound_voice_generator</a> const *voice_generator,
+      char const *voice_name,
+      char **voice_name_out);</pre>
+<p>Adds a voice to the sound system, specifying its name in the local language</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>voice_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>voice_generator</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>voice_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>voice_name_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>voice_no_out</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xsoundinstallvoice_read_local_name">xsoundinstallvoice_read_local_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsoundinstallvoice_read_local_name (int voice_no,
+      char **voice_name_out,
+      char **voice_local_name_out);</pre>
+<p>Reads the name and local name of the voice installed in the specified slot</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>voice_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>voice_name_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>voice_local_name_out</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="soundinstallvoice_read_local_name">soundinstallvoice_read_local_name</h3>
+<pre>extern char *soundinstallvoice_read_local_name (int voice_no,
+      char **voice_local_name_out);</pre>
+<p>Reads the name and local name of the voice installed in the specified slot</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>voice_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>voice_local_name_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>voice_name_out</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xsoundinstallvoice_change_local_name">xsoundinstallvoice_change_local_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsoundinstallvoice_change_local_name (int voice_no,
+      char const *voice_local_name);</pre>
+<p>Changes the local name of the voice installed in the specified slot</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>voice_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>voice_local_name</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="soundinstallvoice_change_local_name">soundinstallvoice_change_local_name</h3>
+<pre>extern void soundinstallvoice_change_local_name (int voice_no,
+      char const *voice_local_name);</pre>
+<p>Changes the local name of the voice installed in the specified slot</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>voice_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>voice_local_name</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xsound_remove_voice">xsound_remove_voice</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_remove_voice (int voice_no,
+      char **voice_name_out,
+      int *voice_no_out);</pre>
+<p>Removes a voice from the sound system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>voice_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>voice_name_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>voice_no_out</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="sound_remove_voice">sound_remove_voice</h3>
+<pre>extern int sound_remove_voice (int voice_no,
+      char **voice_name_out);</pre>
+<p>Removes a voice from the sound system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>voice_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>voice_name_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>voice_no_out</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xsound_attach_voice">xsound_attach_voice</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_attach_voice (int channel_no,
+      int voice_no,
+      int *channel_no_out,
+      int *voice_no_out);</pre>
+<p>Attaches a voice to a channel</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>channel_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>voice_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>channel_no_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>voice_no_out</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="sound_attach_voice">sound_attach_voice</h3>
+<pre>extern void sound_attach_voice (int channel_no,
+      int voice_no,
+      int *channel_no_out,
+      int *voice_no_out);</pre>
+<p>Attaches a voice to a channel</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>channel_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>voice_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>channel_no_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>voice_no_out</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xsound_control_packed">xsound_control_packed</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_control_packed (bits amp_and_channel,
+      bits duration_and_pitch);</pre>
+<p>Makes an immediate sound</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>amp_and_channel</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>duration_and_pitch</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="sound_control_packed">sound_control_packed</h3>
+<pre>extern void sound_control_packed (bits amp_and_channel,
+      bits duration_and_pitch);</pre>
+<p>Makes an immediate sound</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>amp_and_channel</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>duration_and_pitch</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xsound_tuning">xsound_tuning</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_tuning (int tuning,
+      int *tuning_out);</pre>
+<p>Sets the tuning for the sound system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tuning</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>tuning_out</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="sound_tuning">sound_tuning</h3>
+<pre>extern int sound_tuning (int tuning);</pre>
+<p>Sets the tuning for the sound system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tuning</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>tuning_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsound_pitch">xsound_pitch</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_pitch (int pitch,
+      int *accumulator);</pre>
+<p>Converts a pitch to internal format (a phase accumulator value)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pitch</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>accumulator</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="sound_pitch">sound_pitch</h3>
+<pre>extern int sound_pitch (int pitch);</pre>
+<p>Converts a pitch to internal format (a phase accumulator value)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pitch</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>accumulator</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsound_control">xsound_control</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_control (int channel_no,
+      int amplitude,
+      int pitch,
+      int duration);</pre>
+<p>Makes an immediate sound</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>channel_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>amplitude</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>pitch</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>duration</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="sound_control">sound_control</h3>
+<pre>extern void sound_control (int channel_no,
+      int amplitude,
+      int pitch,
+      int duration);</pre>
+<p>Makes an immediate sound</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>channel_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>amplitude</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>pitch</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>duration</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xsound_attach_named_voice">xsound_attach_named_voice</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_attach_named_voice (int channel_no,
+      char const *voice_name);</pre>
+<p>Attaches a named voice to a channel</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>channel_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>voice_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="sound_attach_named_voice">sound_attach_named_voice</h3>
+<pre>extern void sound_attach_named_voice (int channel_no,
+      char const *voice_name);</pre>
+<p>Attaches a named voice to a channel</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>channel_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>voice_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xsound_read_control_block">xsound_read_control_block</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_read_control_block (int channel_no,
+      int offset,
+      int *channel_no_out,
+      int *word);</pre>
+<p>Reads a value from the sound channel control block (SCCB)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>channel_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>channel_no_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>word</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="sound_read_control_block">sound_read_control_block</h3>
+<pre>extern void sound_read_control_block (int channel_no,
+      int offset,
+      int *channel_no_out,
+      int *word);</pre>
+<p>Reads a value from the sound channel control block (SCCB)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>channel_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>channel_no_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>word</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xsound_write_control_block">xsound_write_control_block</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_write_control_block (int channel_no,
+      int offset,
+      int word,
+      int *channel_no_out,
+      int *word_out);</pre>
+<p>Writes a value to the sound channel control block (SCCB)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>channel_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>word</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>channel_no_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>word_out</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="sound_write_control_block">sound_write_control_block</h3>
+<pre>extern void sound_write_control_block (int channel_no,
+      int offset,
+      int word,
+      int *channel_no_out,
+      int *word_out);</pre>
+<p>Writes a value to the sound channel control block (SCCB)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>channel_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>word</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>channel_no_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>word_out</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xsound_qinit">xsound_qinit</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_qinit (void);
+</pre><p>Initialises the scheduler's event queue</p>
+
+
+<table>
+</table>
+
+<h3 id="sound_qinit">sound_qinit</h3>
+<pre>extern void sound_qinit (void);
+</pre><p>Initialises the scheduler's event queue</p>
+
+
+<table>
+</table>
+
+<h3 id="xsound_qschedule">xsound_qschedule</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_qschedule (int period,
+      int swi_no,
+      int swi_r0,
+      int swi_r1,
+      osbool *failed);</pre>
+<p>Schedules a sound SWI on the event queue - prefer Sound_QSchedule32</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>period</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>swi_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>swi_r0</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>swi_r1</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>failed</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="sound_qschedule">sound_qschedule</h3>
+<pre>extern osbool sound_qschedule (int period,
+      int swi_no,
+      int swi_r0,
+      int swi_r1);</pre>
+<p>Schedules a sound SWI on the event queue - prefer Sound_QSchedule32</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>period</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>swi_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>swi_r0</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>swi_r1</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>failed</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsound_qremove">xsound_qremove</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_qremove (void);
+</pre><p>This call is for use by the scheduler only</p>
+
+
+<table>
+</table>
+
+<h3 id="sound_qremove">sound_qremove</h3>
+<pre>extern void sound_qremove (void);
+</pre><p>This call is for use by the scheduler only</p>
+
+
+<table>
+</table>
+
+<h3 id="xsound_qfree">xsound_qfree</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_qfree (int *free_count);</pre>
+<p>Returns the minimum number of free slots in the event queue</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>free_count</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="sound_qfree">sound_qfree</h3>
+<pre>extern int sound_qfree (void);
+</pre><p>Returns the minimum number of free slots in the event queue</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>free_count</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsound_qtempo">xsound_qtempo</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_qtempo (int tempo,
+      int *tempo_out);</pre>
+<p>Sets the tempo for the scheduler</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tempo</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>tempo_out</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="sound_qtempo">sound_qtempo</h3>
+<pre>extern int sound_qtempo (int tempo);</pre>
+<p>Sets the tempo for the scheduler</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tempo</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>tempo_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsound_qbeat">xsound_qbeat</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsound_qbeat (int bar_length,
+      int *bar_length_out);</pre>
+<p>Sets or reads the beat counter or bar length</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>bar_length</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>bar_length_out</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="sound_qbeat">sound_qbeat</h3>
+<pre>extern int sound_qbeat (int bar_length);</pre>
+<p>Sets or reads the beat counter or bar length</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>bar_length</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>bar_length_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsoundqschedule32_call_control_packed">xsoundqschedule32_call_control_packed</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsoundqschedule32_call_control_packed (int period,
+      int data1,
+      int data2,
+      int *error,
+      int *api_check);</pre>
+<p>Schedules a sound SWI on the event queue by calling Sound_ControlPacked (32bit safe) - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>period</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>data1</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data2</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>error</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>api_check</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="soundqschedule32_call_control_packed">soundqschedule32_call_control_packed</h3>
+<pre>extern int soundqschedule32_call_control_packed (int period,
+      int data1,
+      int data2,
+      int *api_check);</pre>
+<p>Schedules a sound SWI on the event queue by calling Sound_ControlPacked (32bit safe) - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>period</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>data1</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data2</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>api_check</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>error</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsoundqschedule32_call_routine">xsoundqschedule32_call_routine</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsoundqschedule32_call_routine (int period,
+      asm_routine routine,
+      int data1,
+      int data2,
+      int *error,
+      int *api_check);</pre>
+<p>Schedules a sound SWI on the event queue by calling a routine (32bit safe) - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>period</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>routine</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data1</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data2</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>error</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>api_check</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="soundqschedule32_call_routine">soundqschedule32_call_routine</h3>
+<pre>extern int soundqschedule32_call_routine (int period,
+      asm_routine routine,
+      int data1,
+      int data2,
+      int *api_check);</pre>
+<p>Schedules a sound SWI on the event queue by calling a routine (32bit safe) - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>period</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>routine</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data1</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data2</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>api_check</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>error</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xsoundqschedule32_call_swi">xsoundqschedule32_call_swi</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsoundqschedule32_call_swi (int period,
+      int swi_number_shift_by_8,
+      int data1,
+      int data2,
+      int *error,
+      int *api_check);</pre>
+<p>Schedules a sound SWI on the event queue by calling SWI (32bit safe) - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>period</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>swi_number_shift_by_8</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data1</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data2</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>error</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>api_check</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="soundqschedule32_call_swi">soundqschedule32_call_swi</h3>
+<pre>extern int soundqschedule32_call_swi (int period,
+      int swi_number_shift_by_8,
+      int data1,
+      int data2,
+      int *api_check);</pre>
+<p>Schedules a sound SWI on the event queue by calling SWI (32bit safe) - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>period</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>swi_number_shift_by_8</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data1</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data2</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>api_check</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>error</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xservice_sound">xservice_sound</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_sound (int part);</pre>
+<p>Parts of the sound system are starting up or dying</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>part</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="service_sound">service_sound</h3>
+<pre>extern void service_sound (int part);</pre>
+<p>Parts of the sound system are starting up or dying</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>part</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xevent_start_of_bar">xevent_start_of_bar</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xevent_start_of_bar (void);
+</pre><p>Sound start of bar event</p>
+
+
+<table>
+</table>
+
+<h3 id="event_start_of_bar">event_start_of_bar</h3>
+<pre>extern void event_start_of_bar (void);
+</pre><p>Sound start of bar event</p>
+
+
+<table>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

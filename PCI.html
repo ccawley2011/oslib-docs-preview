@@ -1,0 +1,868 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; PCI</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>PCI</h2>
+
+<pre>#include "oslib/pci.h"</pre>
+
+<h3 id="pci_id">pci_id</h3>
+<pre>typedef bits pci_id;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#pci_VENDOR_ID">pci_VENDOR_ID</a></dd>
+<dd><a href="#pci_DEVICE_ID">pci_DEVICE_ID</a></dd>
+<dd><a href="#pci_ANY_ID">pci_ANY_ID</a></dd>
+</dl>
+
+<h3 id="pci_class">pci_class</h3>
+<pre>typedef int pci_class;</pre>
+
+<h3 id="pci_function">pci_function</h3>
+<pre>typedef int pci_function;</pre>
+
+<h3 id="pci_access_size">pci_access_size</h3>
+<pre>typedef struct {...} *pci_access_size;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#pci_BYTE_ACCESS">pci_BYTE_ACCESS</a></dd>
+<dd><a href="#pci_HALF_WORD_ACCESS">pci_HALF_WORD_ACCESS</a></dd>
+<dd><a href="#pci_WORD_ACCESS">pci_WORD_ACCESS</a></dd>
+</dl>
+
+<h3 id="pci_address">pci_address</h3>
+<pre>typedef struct {...} *pci_address;</pre>
+
+<h3 id="pci_configuration_address">pci_configuration_address</h3>
+<pre>typedef struct {...} *pci_configuration_address;</pre>
+
+<h3 id="pci_memory_read_flags">pci_memory_read_flags</h3>
+<pre>typedef bits pci_memory_read_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#pci_MEMORY_READ_PREFETCHABLE">pci_MEMORY_READ_PREFETCHABLE</a></dd>
+</dl>
+
+<h3 id="pci_memory_write_flags">pci_memory_write_flags</h3>
+<pre>typedef bits pci_memory_write_flags;</pre>
+
+<h3 id="pci_read_info_flags">pci_read_info_flags</h3>
+<pre>typedef bits pci_read_info_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#pci_READ_INFO_DEVICE_NUMBER">pci_READ_INFO_DEVICE_NUMBER</a></dd>
+<dd><a href="#pci_READ_INFO_FUNCTION_NUMBER">pci_READ_INFO_FUNCTION_NUMBER</a></dd>
+<dd><a href="#pci_READ_INFO_BUS_NUMBER">pci_READ_INFO_BUS_NUMBER</a></dd>
+<dd><a href="#pci_READ_INFO_PARENT_BRIDGE_HANDLE">pci_READ_INFO_PARENT_BRIDGE_HANDLE</a></dd>
+<dd><a href="#pci_READ_INFO_SLOT_NUMBER">pci_READ_INFO_SLOT_NUMBER</a></dd>
+<dd><a href="#pci_READ_INFO_ID">pci_READ_INFO_ID</a></dd>
+<dd><a href="#pci_READ_INFO_REVISION_ID">pci_READ_INFO_REVISION_ID</a></dd>
+<dd><a href="#pci_READ_INFO_SUBSYSTEM_ID">pci_READ_INFO_SUBSYSTEM_ID</a></dd>
+<dd><a href="#pci_READ_INFO_CLASS">pci_READ_INFO_CLASS</a></dd>
+<dd><a href="#pci_READ_INFO_CMOS_ADDRESS">pci_READ_INFO_CMOS_ADDRESS</a></dd>
+<dd><a href="#pci_READ_INFO_CMOS_SIZE">pci_READ_INFO_CMOS_SIZE</a></dd>
+<dd><a href="#pci_READ_INFO_DESCRIPTION">pci_READ_INFO_DESCRIPTION</a></dd>
+<dd><a href="#pci_READ_INFO_DEVICE_VECTOR_NUMBER">pci_READ_INFO_DEVICE_VECTOR_NUMBER</a></dd>
+<dd><a href="#pci_READ_INFO_ETHERNET_ADDRESS_LOW">pci_READ_INFO_ETHERNET_ADDRESS_LOW</a></dd>
+<dd><a href="#pci_READ_INFO_ETHERNET_ADDRESS_HIGH">pci_READ_INFO_ETHERNET_ADDRESS_HIGH</a></dd>
+<dd><a href="#pci_READ_INFO_LOGICAL_DMA_CHANNEL">pci_READ_INFO_LOGICAL_DMA_CHANNEL</a></dd>
+<dd><a href="#pci_READ_INFO_VENDOR_DESCRIPTION">pci_READ_INFO_VENDOR_DESCRIPTION</a></dd>
+</dl>
+
+<h3 id="pci_hardware_address_input_flags">pci_hardware_address_input_flags</h3>
+<pre>typedef bits pci_hardware_address_input_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#pci_HARDWARE_ADDRESS_ACCESS_READ_WRITE">pci_HARDWARE_ADDRESS_ACCESS_READ_WRITE</a></dd>
+<dd><a href="#pci_HARDWARE_ADDRESS_ACCESS_READ_ONLY">pci_HARDWARE_ADDRESS_ACCESS_READ_ONLY</a></dd>
+<dd><a href="#pci_HARDWARE_ADDRESS_ACCESS_NONE">pci_HARDWARE_ADDRESS_ACCESS_NONE</a></dd>
+<dd><a href="#pci_HARDWARE_ADDRESS_ACCESS">pci_HARDWARE_ADDRESS_ACCESS</a></dd>
+<dd><a href="#pci_HARDWARE_ADDRESS_BUFFERABLE">pci_HARDWARE_ADDRESS_BUFFERABLE</a></dd>
+<dd><a href="#pci_HARDWARE_ADDRESS_CACHEABLE">pci_HARDWARE_ADDRESS_CACHEABLE</a></dd>
+<dd><a href="#pci_HARDWARE_ADDRESS_ACCESS_SET">pci_HARDWARE_ADDRESS_ACCESS_SET</a></dd>
+<dd><a href="#pci_HARDWARE_ADDRESS_QUERY_ONLY">pci_HARDWARE_ADDRESS_QUERY_ONLY</a></dd>
+</dl>
+
+<h3 id="pci_hardware_address_output_flags">pci_hardware_address_output_flags</h3>
+<pre>typedef bits pci_hardware_address_output_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#pci_HARDWARE_ADDRESS_IS_IO">pci_HARDWARE_ADDRESS_IS_IO</a></dd>
+<dd><a href="#pci_HARDWARE_ADDRESS_PREFETCHABLE">pci_HARDWARE_ADDRESS_PREFETCHABLE</a></dd>
+</dl>
+
+<h3 id="pci_logical_address_flags">pci_logical_address_flags</h3>
+<pre>typedef bits pci_logical_address_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#pci_LOGICAL_ADDRESS_BUFFERABLE">pci_LOGICAL_ADDRESS_BUFFERABLE</a></dd>
+<dd><a href="#pci_LOGICAL_ADDRESS_IS_IO">pci_LOGICAL_ADDRESS_IS_IO</a></dd>
+</dl>
+
+<h3 id="pci_VENDOR_ID">pci_VENDOR_ID</h3>
+<pre>#define pci_VENDOR_ID ((<a href="#pci_id">pci_id</a>) 0xFFFFu)</pre>
+
+<h3 id="pci_VENDOR_ID_SHIFT">pci_VENDOR_ID_SHIFT</h3>
+<pre>#define pci_VENDOR_ID_SHIFT 0</pre>
+
+<h3 id="pci_DEVICE_ID">pci_DEVICE_ID</h3>
+<pre>#define pci_DEVICE_ID ((<a href="#pci_id">pci_id</a>) 0xFFFF0000u)</pre>
+
+<h3 id="pci_DEVICE_ID_SHIFT">pci_DEVICE_ID_SHIFT</h3>
+<pre>#define pci_DEVICE_ID_SHIFT 16</pre>
+
+<h3 id="pci_ANY_ID">pci_ANY_ID</h3>
+<pre>#define pci_ANY_ID ((<a href="#pci_id">pci_id</a>) 0xFFFFFFFFu)</pre>
+
+<h3 id="pci_BYTE_ACCESS">pci_BYTE_ACCESS</h3>
+<pre>#define pci_BYTE_ACCESS ((<a href="#pci_access_size">pci_access_size</a>) 0x1u)</pre>
+
+<h3 id="pci_HALF_WORD_ACCESS">pci_HALF_WORD_ACCESS</h3>
+<pre>#define pci_HALF_WORD_ACCESS ((<a href="#pci_access_size">pci_access_size</a>) 0x2u)</pre>
+
+<h3 id="pci_WORD_ACCESS">pci_WORD_ACCESS</h3>
+<pre>#define pci_WORD_ACCESS ((<a href="#pci_access_size">pci_access_size</a>) 0x4u)</pre>
+
+<h3 id="pci_MEMORY_READ_PREFETCHABLE">pci_MEMORY_READ_PREFETCHABLE</h3>
+<pre>#define pci_MEMORY_READ_PREFETCHABLE ((<a href="#pci_memory_read_flags">pci_memory_read_flags</a>) 0x8u)</pre>
+
+<h3 id="pci_HARDWARE_ADDRESS_ACCESS_READ_WRITE">pci_HARDWARE_ADDRESS_ACCESS_READ_WRITE</h3>
+<pre>#define pci_HARDWARE_ADDRESS_ACCESS_READ_WRITE ((<a href="#pci_hardware_address_input_flags">pci_hardware_address_input_flags</a>) 0x0u)</pre>
+
+<h3 id="pci_HARDWARE_ADDRESS_ACCESS_READ_ONLY">pci_HARDWARE_ADDRESS_ACCESS_READ_ONLY</h3>
+<pre>#define pci_HARDWARE_ADDRESS_ACCESS_READ_ONLY ((<a href="#pci_hardware_address_input_flags">pci_hardware_address_input_flags</a>) 0x1u)</pre>
+
+<h3 id="pci_HARDWARE_ADDRESS_ACCESS_NONE">pci_HARDWARE_ADDRESS_ACCESS_NONE</h3>
+<pre>#define pci_HARDWARE_ADDRESS_ACCESS_NONE ((<a href="#pci_hardware_address_input_flags">pci_hardware_address_input_flags</a>) 0x2u)</pre>
+
+<h3 id="pci_HARDWARE_ADDRESS_ACCESS">pci_HARDWARE_ADDRESS_ACCESS</h3>
+<pre>#define pci_HARDWARE_ADDRESS_ACCESS ((<a href="#pci_hardware_address_input_flags">pci_hardware_address_input_flags</a>) 0xFu)</pre>
+
+<h3 id="pci_HARDWARE_ADDRESS_ACCESS_SHIFT">pci_HARDWARE_ADDRESS_ACCESS_SHIFT</h3>
+<pre>#define pci_HARDWARE_ADDRESS_ACCESS_SHIFT 0</pre>
+
+<h3 id="pci_HARDWARE_ADDRESS_BUFFERABLE">pci_HARDWARE_ADDRESS_BUFFERABLE</h3>
+<pre>#define pci_HARDWARE_ADDRESS_BUFFERABLE ((<a href="#pci_hardware_address_input_flags">pci_hardware_address_input_flags</a>) 0x10u)</pre>
+
+<h3 id="pci_HARDWARE_ADDRESS_CACHEABLE">pci_HARDWARE_ADDRESS_CACHEABLE</h3>
+<pre>#define pci_HARDWARE_ADDRESS_CACHEABLE ((<a href="#pci_hardware_address_input_flags">pci_hardware_address_input_flags</a>) 0x20u)</pre>
+
+<h3 id="pci_HARDWARE_ADDRESS_ACCESS_SET">pci_HARDWARE_ADDRESS_ACCESS_SET</h3>
+<pre>#define pci_HARDWARE_ADDRESS_ACCESS_SET ((<a href="#pci_hardware_address_input_flags">pci_hardware_address_input_flags</a>) 0x200u)</pre>
+
+<h3 id="pci_HARDWARE_ADDRESS_QUERY_ONLY">pci_HARDWARE_ADDRESS_QUERY_ONLY</h3>
+<pre>#define pci_HARDWARE_ADDRESS_QUERY_ONLY ((<a href="#pci_hardware_address_input_flags">pci_hardware_address_input_flags</a>) 0x80000000u)</pre>
+
+<h3 id="pci_HARDWARE_ADDRESS_IS_IO">pci_HARDWARE_ADDRESS_IS_IO</h3>
+<pre>#define pci_HARDWARE_ADDRESS_IS_IO ((<a href="#pci_hardware_address_output_flags">pci_hardware_address_output_flags</a>) 0x1u)</pre>
+
+<h3 id="pci_HARDWARE_ADDRESS_PREFETCHABLE">pci_HARDWARE_ADDRESS_PREFETCHABLE</h3>
+<pre>#define pci_HARDWARE_ADDRESS_PREFETCHABLE ((<a href="#pci_hardware_address_output_flags">pci_hardware_address_output_flags</a>) 0x8u)</pre>
+
+<h3 id="pci_READ_INFO_DEVICE_NUMBER">pci_READ_INFO_DEVICE_NUMBER</h3>
+<pre>#define pci_READ_INFO_DEVICE_NUMBER ((<a href="#pci_read_info_flags">pci_read_info_flags</a>) 0x1u)</pre>
+
+<h3 id="pci_READ_INFO_FUNCTION_NUMBER">pci_READ_INFO_FUNCTION_NUMBER</h3>
+<pre>#define pci_READ_INFO_FUNCTION_NUMBER ((<a href="#pci_read_info_flags">pci_read_info_flags</a>) 0x1u)</pre>
+
+<h3 id="pci_READ_INFO_BUS_NUMBER">pci_READ_INFO_BUS_NUMBER</h3>
+<pre>#define pci_READ_INFO_BUS_NUMBER ((<a href="#pci_read_info_flags">pci_read_info_flags</a>) 0x2u)</pre>
+
+<h3 id="pci_READ_INFO_PARENT_BRIDGE_HANDLE">pci_READ_INFO_PARENT_BRIDGE_HANDLE</h3>
+<pre>#define pci_READ_INFO_PARENT_BRIDGE_HANDLE ((<a href="#pci_read_info_flags">pci_read_info_flags</a>) 0x4u)</pre>
+
+<h3 id="pci_READ_INFO_SLOT_NUMBER">pci_READ_INFO_SLOT_NUMBER</h3>
+<pre>#define pci_READ_INFO_SLOT_NUMBER ((<a href="#pci_read_info_flags">pci_read_info_flags</a>) 0x8u)</pre>
+
+<h3 id="pci_READ_INFO_ID">pci_READ_INFO_ID</h3>
+<pre>#define pci_READ_INFO_ID ((<a href="#pci_read_info_flags">pci_read_info_flags</a>) 0x10u)</pre>
+
+<h3 id="pci_READ_INFO_REVISION_ID">pci_READ_INFO_REVISION_ID</h3>
+<pre>#define pci_READ_INFO_REVISION_ID ((<a href="#pci_read_info_flags">pci_read_info_flags</a>) 0x20u)</pre>
+
+<h3 id="pci_READ_INFO_SUBSYSTEM_ID">pci_READ_INFO_SUBSYSTEM_ID</h3>
+<pre>#define pci_READ_INFO_SUBSYSTEM_ID ((<a href="#pci_read_info_flags">pci_read_info_flags</a>) 0x40u)</pre>
+
+<h3 id="pci_READ_INFO_CLASS">pci_READ_INFO_CLASS</h3>
+<pre>#define pci_READ_INFO_CLASS ((<a href="#pci_read_info_flags">pci_read_info_flags</a>) 0x80u)</pre>
+
+<h3 id="pci_READ_INFO_CMOS_ADDRESS">pci_READ_INFO_CMOS_ADDRESS</h3>
+<pre>#define pci_READ_INFO_CMOS_ADDRESS ((<a href="#pci_read_info_flags">pci_read_info_flags</a>) 0x100u)</pre>
+
+<h3 id="pci_READ_INFO_CMOS_SIZE">pci_READ_INFO_CMOS_SIZE</h3>
+<pre>#define pci_READ_INFO_CMOS_SIZE ((<a href="#pci_read_info_flags">pci_read_info_flags</a>) 0x200u)</pre>
+
+<h3 id="pci_READ_INFO_DESCRIPTION">pci_READ_INFO_DESCRIPTION</h3>
+<pre>#define pci_READ_INFO_DESCRIPTION ((<a href="#pci_read_info_flags">pci_read_info_flags</a>) 0x400u)</pre>
+
+<h3 id="pci_READ_INFO_DEVICE_VECTOR_NUMBER">pci_READ_INFO_DEVICE_VECTOR_NUMBER</h3>
+<pre>#define pci_READ_INFO_DEVICE_VECTOR_NUMBER ((<a href="#pci_read_info_flags">pci_read_info_flags</a>) 0x800u)</pre>
+
+<h3 id="pci_READ_INFO_ETHERNET_ADDRESS_LOW">pci_READ_INFO_ETHERNET_ADDRESS_LOW</h3>
+<pre>#define pci_READ_INFO_ETHERNET_ADDRESS_LOW ((<a href="#pci_read_info_flags">pci_read_info_flags</a>) 0x1000u)</pre>
+
+<h3 id="pci_READ_INFO_ETHERNET_ADDRESS_HIGH">pci_READ_INFO_ETHERNET_ADDRESS_HIGH</h3>
+<pre>#define pci_READ_INFO_ETHERNET_ADDRESS_HIGH ((<a href="#pci_read_info_flags">pci_read_info_flags</a>) 0x2000u)</pre>
+
+<h3 id="pci_READ_INFO_LOGICAL_DMA_CHANNEL">pci_READ_INFO_LOGICAL_DMA_CHANNEL</h3>
+<pre>#define pci_READ_INFO_LOGICAL_DMA_CHANNEL ((<a href="#pci_read_info_flags">pci_read_info_flags</a>) 0x4000u)</pre>
+
+<h3 id="pci_READ_INFO_VENDOR_DESCRIPTION">pci_READ_INFO_VENDOR_DESCRIPTION</h3>
+<pre>#define pci_READ_INFO_VENDOR_DESCRIPTION ((<a href="#pci_read_info_flags">pci_read_info_flags</a>) 0x8000u)</pre>
+
+<h3 id="pci_LOGICAL_ADDRESS_BUFFERABLE">pci_LOGICAL_ADDRESS_BUFFERABLE</h3>
+<pre>#define pci_LOGICAL_ADDRESS_BUFFERABLE ((<a href="#pci_logical_address_flags">pci_logical_address_flags</a>) 0x10u)</pre>
+
+<h3 id="pci_LOGICAL_ADDRESS_IS_IO">pci_LOGICAL_ADDRESS_IS_IO</h3>
+<pre>#define pci_LOGICAL_ADDRESS_IS_IO ((<a href="#pci_logical_address_flags">pci_logical_address_flags</a>) 0x40000000u)</pre>
+
+<h3 id="xpci_read_id">xpci_read_id</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpci_read_id (<a href="#pci_function">pci_function</a> function,
+      <a href="#pci_id">pci_id</a> *id,
+      <a href="#pci_id">pci_id</a> *subsystem_id);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>function</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>id</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>subsystem_id</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="pci_read_id">pci_read_id</h3>
+<pre>extern <a href="#pci_id">pci_id</a> pci_read_id (<a href="#pci_function">pci_function</a> function,
+      <a href="#pci_id">pci_id</a> *subsystem_id);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>function</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>subsystem_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>id</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xpci_read_header">xpci_read_header</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpci_read_header (byte *buffer,
+      int size,
+      <a href="#pci_function">pci_function</a> function);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>function</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="pci_read_header">pci_read_header</h3>
+<pre>extern void pci_read_header (byte *buffer,
+      int size,
+      <a href="#pci_function">pci_function</a> function);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>function</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xpci_return_number">xpci_return_number</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpci_return_number (<a href="#pci_function">pci_function</a> *used);</pre>
+<p>Returns the number of function handles that have been used</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="pci_return_number">pci_return_number</h3>
+<pre>extern <a href="#pci_function">pci_function</a> pci_return_number (void);
+</pre><p>Returns the number of function handles that have been used</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xpci_enumerate_functions">xpci_enumerate_functions</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpci_enumerate_functions (<a href="#pci_function">pci_function</a> previous_function,
+      <a href="#pci_id">pci_id</a> *id,
+      <a href="#pci_id">pci_id</a> *subsystem_id,
+      <a href="#pci_class">pci_class</a> *pciclass,
+      <a href="#pci_function">pci_function</a> *function);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>previous_function</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>id</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>subsystem_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>pciclass</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>function</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="pci_enumerate_functions">pci_enumerate_functions</h3>
+<pre>extern <a href="#pci_function">pci_function</a> pci_enumerate_functions (<a href="#pci_function">pci_function</a> previous_function,
+      <a href="#pci_id">pci_id</a> *id,
+      <a href="#pci_id">pci_id</a> *subsystem_id,
+      <a href="#pci_class">pci_class</a> *pciclass);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>previous_function</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>id</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>subsystem_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>pciclass</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>function</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xpci_io_read">xpci_io_read</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpci_io_read (<a href="#pci_address">pci_address</a> address,
+      <a href="#pci_access_size">pci_access_size</a> access_size,
+      int *value);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>access_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>value</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="pci_io_read">pci_io_read</h3>
+<pre>extern int pci_io_read (<a href="#pci_address">pci_address</a> address,
+      <a href="#pci_access_size">pci_access_size</a> access_size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>access_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>value</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xpci_io_write">xpci_io_write</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpci_io_write (<a href="#pci_address">pci_address</a> address,
+      int value,
+      <a href="#pci_access_size">pci_access_size</a> access_size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>value</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>access_size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="pci_io_write">pci_io_write</h3>
+<pre>extern void pci_io_write (<a href="#pci_address">pci_address</a> address,
+      int value,
+      <a href="#pci_access_size">pci_access_size</a> access_size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>value</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>access_size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xpci_memory_read">xpci_memory_read</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpci_memory_read (<a href="#pci_address">pci_address</a> address,
+      int size,
+      byte *buffer,
+      <a href="#pci_memory_read_flags">pci_memory_read_flags</a> flags);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="pci_memory_read">pci_memory_read</h3>
+<pre>extern void pci_memory_read (<a href="#pci_address">pci_address</a> address,
+      int size,
+      byte *buffer,
+      <a href="#pci_memory_read_flags">pci_memory_read_flags</a> flags);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xpci_memory_write">xpci_memory_write</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpci_memory_write (<a href="#pci_address">pci_address</a> address,
+      int size,
+      byte const *buffer,
+      <a href="#pci_memory_write_flags">pci_memory_write_flags</a> flags);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="pci_memory_write">pci_memory_write</h3>
+<pre>extern void pci_memory_write (<a href="#pci_address">pci_address</a> address,
+      int size,
+      byte const *buffer,
+      <a href="#pci_memory_write_flags">pci_memory_write_flags</a> flags);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xpci_configuration_read">xpci_configuration_read</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpci_configuration_read (<a href="#pci_configuration_address">pci_configuration_address</a> address,
+      <a href="#pci_access_size">pci_access_size</a> access_size,
+      <a href="#pci_function">pci_function</a> function,
+      int *value);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>access_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>function</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>value</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="pci_configuration_read">pci_configuration_read</h3>
+<pre>extern int pci_configuration_read (<a href="#pci_configuration_address">pci_configuration_address</a> address,
+      <a href="#pci_access_size">pci_access_size</a> access_size,
+      <a href="#pci_function">pci_function</a> function);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>access_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>function</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>value</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xpci_configuration_write">xpci_configuration_write</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpci_configuration_write (<a href="#pci_configuration_address">pci_configuration_address</a> address,
+      int value,
+      <a href="#pci_access_size">pci_access_size</a> access_size,
+      <a href="#pci_function">pci_function</a> function);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>value</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>access_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>function</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="pci_configuration_write">pci_configuration_write</h3>
+<pre>extern void pci_configuration_write (<a href="#pci_configuration_address">pci_configuration_address</a> address,
+      int value,
+      <a href="#pci_access_size">pci_access_size</a> access_size,
+      <a href="#pci_function">pci_function</a> function);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>value</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>access_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>function</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xpci_hardware_address">xpci_hardware_address</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpci_hardware_address (<a href="#pci_hardware_address_input_flags">pci_hardware_address_input_flags</a> flags,
+      int address_index,
+      <a href="#pci_function">pci_function</a> function,
+      <a href="#pci_hardware_address_output_flags">pci_hardware_address_output_flags</a> *flags_out,
+      <a href="#pci_address">pci_address</a> *pci_address,
+      int *length,
+      byte **logical_address);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address_index</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>function</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>pci_address</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>logical_address</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="pci_hardware_address">pci_hardware_address</h3>
+<pre>extern <a href="#pci_address">pci_address</a> pci_hardware_address (<a href="#pci_hardware_address_input_flags">pci_hardware_address_input_flags</a> flags,
+      int address_index,
+      <a href="#pci_function">pci_function</a> function,
+      <a href="#pci_hardware_address_output_flags">pci_hardware_address_output_flags</a> *flags_out,
+      int *length,
+      byte **logical_address);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address_index</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>function</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>logical_address</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>pci_address</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xpci_read_info">xpci_read_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpci_read_info (<a href="#pci_read_info_flags">pci_read_info_flags</a> flags,
+      byte *buffer,
+      int size,
+      <a href="#pci_function">pci_function</a> function,
+      int *length);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>function</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>length</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="pci_read_info">pci_read_info</h3>
+<pre>extern int pci_read_info (<a href="#pci_read_info_flags">pci_read_info_flags</a> flags,
+      byte *buffer,
+      int size,
+      <a href="#pci_function">pci_function</a> function);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>function</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>length</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xpci_special_cycle">xpci_special_cycle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpci_special_cycle (int bus,
+      byte const *message);</pre>
+<p>Issues a special cycle on the PCI bus</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>bus</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>message</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="pci_special_cycle">pci_special_cycle</h3>
+<pre>extern void pci_special_cycle (int bus,
+      byte const *message);</pre>
+<p>Issues a special cycle on the PCI bus</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>bus</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>message</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xpci_find_by_location">xpci_find_by_location</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpci_find_by_location (int bus,
+      int device_or_function,
+      <a href="#pci_function">pci_function</a> *function);</pre>
+<p>Finds a function handle based on the specified topology</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>bus</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>device_or_function</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>function</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="pci_find_by_location">pci_find_by_location</h3>
+<pre>extern <a href="#pci_function">pci_function</a> pci_find_by_location (int bus,
+      int device_or_function);</pre>
+<p>Finds a function handle based on the specified topology</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>bus</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>device_or_function</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>function</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xpci_find_by_id">xpci_find_by_id</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpci_find_by_id (<a href="#pci_id">pci_id</a> vendor_id,
+      <a href="#pci_id">pci_id</a> device_id,
+      <a href="#pci_id">pci_id</a> subsystem_vendor_id,
+      <a href="#pci_function">pci_function</a> previous_function,
+      <a href="#pci_id">pci_id</a> subsystem_id,
+      <a href="#pci_function">pci_function</a> *function);</pre>
+<p>Finds a function handle based on the specified IDs</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>vendor_id</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>subsystem_vendor_id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>previous_function</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>subsystem_id</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>function</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="pci_find_by_id">pci_find_by_id</h3>
+<pre>extern <a href="#pci_function">pci_function</a> pci_find_by_id (<a href="#pci_id">pci_id</a> vendor_id,
+      <a href="#pci_id">pci_id</a> device_id,
+      <a href="#pci_id">pci_id</a> subsystem_vendor_id,
+      <a href="#pci_function">pci_function</a> previous_function,
+      <a href="#pci_id">pci_id</a> subsystem_id);</pre>
+<p>Finds a function handle based on the specified IDs</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>vendor_id</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>subsystem_vendor_id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>previous_function</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>subsystem_id</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>function</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xpci_find_by_class">xpci_find_by_class</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpci_find_by_class (<a href="#pci_class">pci_class</a> pciclass,
+      <a href="#pci_class">pci_class</a> class_mask,
+      <a href="#pci_function">pci_function</a> previous_function,
+      <a href="#pci_function">pci_function</a> *function);</pre>
+<p>Finds a function handle hased on the specified class</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pciclass</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>class_mask</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>previous_function</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>function</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="pci_find_by_class">pci_find_by_class</h3>
+<pre>extern <a href="#pci_function">pci_function</a> pci_find_by_class (<a href="#pci_class">pci_class</a> pciclass,
+      <a href="#pci_class">pci_class</a> class_mask,
+      <a href="#pci_function">pci_function</a> previous_function);</pre>
+<p>Finds a function handle hased on the specified class</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pciclass</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>class_mask</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>previous_function</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>function</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xpci_ram_alloc">xpci_ram_alloc</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpci_ram_alloc (int size,
+      int alignment,
+      int boundary_limitation,
+      byte **logical_address,
+      <a href="#pci_address">pci_address</a> *pci_address);</pre>
+<p>Allocates memory from a fixed, contiguous memory pool, suitable for use by other bus masters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>alignment</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>boundary_limitation</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>logical_address</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>pci_address</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="pci_ram_alloc">pci_ram_alloc</h3>
+<pre>extern void pci_ram_alloc (int size,
+      int alignment,
+      int boundary_limitation,
+      byte **logical_address,
+      <a href="#pci_address">pci_address</a> *pci_address);</pre>
+<p>Allocates memory from a fixed, contiguous memory pool, suitable for use by other bus masters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>alignment</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>boundary_limitation</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>logical_address</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>pci_address</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xpci_ram_free">xpci_ram_free</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpci_ram_free (byte *logical_address);</pre>
+<p>Free memory allocated with PCI_RAMAlloc</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>logical_address</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="pci_ram_free">pci_ram_free</h3>
+<pre>extern void pci_ram_free (byte *logical_address);</pre>
+<p>Free memory allocated with PCI_RAMAlloc</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>logical_address</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xpci_logical_address">xpci_logical_address</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpci_logical_address (<a href="#pci_logical_address_flags">pci_logical_address_flags</a> flags,
+      <a href="#pci_address">pci_address</a> pci_address,
+      int length,
+      byte **logical_address);</pre>
+<p>Maps a given PCI address into the logical memory map</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>pci_address</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>logical_address</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="pci_logical_address">pci_logical_address</h3>
+<pre>extern byte *pci_logical_address (<a href="#pci_logical_address_flags">pci_logical_address_flags</a> flags,
+      <a href="#pci_address">pci_address</a> pci_address,
+      int length);</pre>
+<p>Maps a given PCI address into the logical memory map</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>pci_address</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>logical_address</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xservice_pci_lookup_description">xservice_pci_lookup_description</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_pci_lookup_description (<a href="#pci_function">pci_function</a> function,
+      osbool *unclaimed,
+      char **description);</pre>
+<p>Lookup description</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>function</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>description</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="service_pci_lookup_description">service_pci_lookup_description</h3>
+<pre>extern osbool service_pci_lookup_description (<a href="#pci_function">pci_function</a> function,
+      char **description);</pre>
+<p>Lookup description</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>function</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>description</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_pci_lookup_vendor_description">xservice_pci_lookup_vendor_description</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_pci_lookup_vendor_description (<a href="#pci_id">pci_id</a> vendir,
+      osbool *unclaimed,
+      char **description);</pre>
+<p>Lookup vendor description</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>vendir</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>description</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="service_pci_lookup_vendor_description">service_pci_lookup_vendor_description</h3>
+<pre>extern osbool service_pci_lookup_vendor_description (<a href="#pci_id">pci_id</a> vendir,
+      char **description);</pre>
+<p>Lookup vendor description</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>vendir</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>description</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,426 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ResEd</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ResEd</h2>
+
+<pre>#include "oslib/resed.h"</pre>
+
+<h3 id="resed_d">resed_d</h3>
+<pre>typedef struct {...} *resed_d;</pre>
+
+<p>Abstract type for Document IDs</p>
+
+<h3 id="resed_o">resed_o</h3>
+<pre>typedef struct {...} *resed_o;</pre>
+
+<p>Abstract type for Object IDs</p>
+
+<h3 id="resed_object_load_flags">resed_object_load_flags</h3>
+<pre>typedef bits resed_object_load_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#resed_FORCE_LOAD">resed_FORCE_LOAD</a></dd>
+</dl>
+
+<h3 id="resed_object_loaded_flags">resed_object_loaded_flags</h3>
+<pre>typedef bits resed_object_loaded_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#resed_LOAD_FAILED">resed_LOAD_FAILED</a></dd>
+</dl>
+
+<h3 id="resed_object_sending_flags">resed_object_sending_flags</h3>
+<pre>typedef bits resed_object_sending_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#resed_CANNOT_SEND">resed_CANNOT_SEND</a></dd>
+</dl>
+
+<h3 id="resed_object_send_flags">resed_object_send_flags</h3>
+<pre>typedef bits resed_object_send_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#resed_DELETE_AFTER_SEND">resed_DELETE_AFTER_SEND</a></dd>
+</dl>
+
+<h3 id="resed_keycut_details_flags">resed_keycut_details_flags</h3>
+<pre>typedef bits resed_keycut_details_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#resed_KEYCUT_RAISES_EVENT">resed_KEYCUT_RAISES_EVENT</a></dd>
+<dd><a href="#resed_KEYCUT_SHOWS_OBJECT">resed_KEYCUT_SHOWS_OBJECT</a></dd>
+<dd><a href="#resed_KEYCUT_SHOWS_TRANSIENT">resed_KEYCUT_SHOWS_TRANSIENT</a></dd>
+</dl>
+
+<h3 id="resed_error">resed_error</h3>
+<pre>typedef int resed_error;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#resed_ERROR_NO_MEMORY">resed_ERROR_NO_MEMORY</a></dd>
+<dd><a href="#resed_ERROR_UK_VERSION">resed_ERROR_UK_VERSION</a></dd>
+<dd><a href="#resed_ERROR_UK_OBJECT">resed_ERROR_UK_OBJECT</a></dd>
+<dd><a href="#resed_ERROR_CORRUPT_DATA">resed_ERROR_CORRUPT_DATA</a></dd>
+<dd><a href="#resed_ERROR_NON_FATAL_INTERNAL_ERROR">resed_ERROR_NON_FATAL_INTERNAL_ERROR</a></dd>
+<dd><a href="#resed_ERROR_FATAL_INTERNAL_ERROR">resed_ERROR_FATAL_INTERNAL_ERROR</a></dd>
+</dl>
+
+<h3 id="resed_message_object_load">resed_message_object_load</h3>
+<pre>typedef struct
+   {  <a href="#resed_object_load_flags">resed_object_load_flags</a> flags;
+      <a href="#resed_d">resed_d</a> doc_id;
+      <a href="#resed_o">resed_o</a> obj_id;
+      <a href="toolbox.html#toolbox_class">toolbox_class</a> obj_class;
+      int version;
+      byte *address;
+      int obj_size;
+      char name [208];
+   }
+   resed_message_object_load;</pre>
+
+
+Fields:	address - In sender's address space<h3 id="resed_message_object_loaded">resed_message_object_loaded</h3>
+<pre>typedef struct
+   {  <a href="#resed_object_loaded_flags">resed_object_loaded_flags</a> flags;
+      <a href="#resed_d">resed_d</a> doc_id;
+      <a href="#resed_o">resed_o</a> obj_id;
+      <a href="#resed_error">resed_error</a> error;
+   }
+   resed_message_object_loaded;</pre>
+
+
+Fields:	error - Present if flags bit 0 set<h3 id="resed_message_object_sending">resed_message_object_sending</h3>
+<pre>typedef struct
+   {  <a href="#resed_object_sending_flags">resed_object_sending_flags</a> flags;
+      <a href="#resed_d">resed_d</a> doc_id;
+      <a href="#resed_o">resed_o</a> obj_id;
+      byte *address;
+      int obj_size;
+      <a href="#resed_error">resed_error</a> error;
+   }
+   resed_message_object_sending;</pre>
+
+
+Fields:	address - In sender's address space
+ 	error - Present if flags bit 0 set<h3 id="resed_message_object_send">resed_message_object_send</h3>
+<pre>typedef struct
+   {  <a href="#resed_object_send_flags">resed_object_send_flags</a> flags;
+      <a href="#resed_d">resed_d</a> doc_id;
+      <a href="#resed_o">resed_o</a> obj_id;
+   }
+   resed_message_object_send;</pre>
+
+<h3 id="resed_message_object_renamed">resed_message_object_renamed</h3>
+<pre>typedef struct
+   {  bits flags;
+      <a href="#resed_d">resed_d</a> doc_id;
+      <a href="#resed_o">resed_o</a> obj_id;
+      char new_name [224];
+   }
+   resed_message_object_renamed;</pre>
+
+<h3 id="resed_message_object_deleted">resed_message_object_deleted</h3>
+<pre>typedef struct
+   {  bits flags;
+      <a href="#resed_d">resed_d</a> doc_id;
+      <a href="#resed_o">resed_o</a> obj_id;
+   }
+   resed_message_object_deleted;</pre>
+
+<h3 id="resed_message_object_modified">resed_message_object_modified</h3>
+<pre>typedef struct
+   {  bits flags;
+      <a href="#resed_d">resed_d</a> doc_id;
+      <a href="#resed_o">resed_o</a> obj_id;
+   }
+   resed_message_object_modified;</pre>
+
+<h3 id="resed_message_object_closed">resed_message_object_closed</h3>
+<pre>typedef struct
+   {  bits flags;
+      <a href="#resed_d">resed_d</a> doc_id;
+      <a href="#resed_o">resed_o</a> obj_id;
+   }
+   resed_message_object_closed;</pre>
+
+<h3 id="resed_message_sprites_changed">resed_message_sprites_changed</h3>
+<pre>typedef struct
+   {  bits flags;
+   }
+   resed_message_sprites_changed;</pre>
+
+<h3 id="resed_message_object_name_request">resed_message_object_name_request</h3>
+<pre>typedef struct
+   {  bits flags;
+      <a href="#resed_d">resed_d</a> doc_id;
+      <a href="#resed_o">resed_o</a> obj_id;
+      <a href="wimp.html#wimp_w">wimp_w</a> window;
+      <a href="wimp.html#wimp_i">wimp_i</a> icon;
+   }
+   resed_message_object_name_request;</pre>
+
+<h3 id="resed_message_object_name">resed_message_object_name</h3>
+<pre>typedef struct
+   {  bits flags;
+      <a href="#resed_d">resed_d</a> doc_id;
+      <a href="#resed_o">resed_o</a> obj_id;
+      <a href="wimp.html#wimp_w">wimp_w</a> window;
+      <a href="wimp.html#wimp_i">wimp_i</a> icon;
+      <a href="toolbox.html#toolbox_class">toolbox_class</a> obj_class;
+      char name [212];
+   }
+   resed_message_object_name;</pre>
+
+<h3 id="resed_message_keycut_details">resed_message_keycut_details</h3>
+<pre>typedef struct
+   {  <a href="#resed_keycut_details_flags">resed_keycut_details_flags</a> flags;
+      <a href="wimp.html#wimp_t">wimp_t</a> shell;
+      <a href="wimp.html#wimp_w">wimp_w</a> window;
+      <a href="wimp.html#wimp_key_no">wimp_key_no</a> key;
+      <a href="toolbox.html#toolbox_action">toolbox_action</a> key_action;
+      char names [216];
+   }
+   resed_message_keycut_details;</pre>
+
+
+Fields:	key_action - Only if flags bit 0 set
+ 	names - Key name followed by Object name<h3 id="resed_full_message_object_load">resed_full_message_object_load</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#resed_object_load_flags">resed_object_load_flags</a> flags;
+      <a href="#resed_d">resed_d</a> doc_id;
+      <a href="#resed_o">resed_o</a> obj_id;
+      <a href="toolbox.html#toolbox_class">toolbox_class</a> obj_class;
+      int version;
+      byte *address;
+      int obj_size;
+      char name [208];
+   }
+   resed_full_message_object_load;</pre>
+
+
+Fields:	address - In sender's address space<h3 id="resed_full_message_object_loaded">resed_full_message_object_loaded</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#resed_object_loaded_flags">resed_object_loaded_flags</a> flags;
+      <a href="#resed_d">resed_d</a> doc_id;
+      <a href="#resed_o">resed_o</a> obj_id;
+      <a href="#resed_error">resed_error</a> error;
+   }
+   resed_full_message_object_loaded;</pre>
+
+
+Fields:	error - Present if flags bit 0 set<h3 id="resed_full_message_object_sending">resed_full_message_object_sending</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#resed_object_sending_flags">resed_object_sending_flags</a> flags;
+      <a href="#resed_d">resed_d</a> doc_id;
+      <a href="#resed_o">resed_o</a> obj_id;
+      byte *address;
+      int obj_size;
+      <a href="#resed_error">resed_error</a> error;
+   }
+   resed_full_message_object_sending;</pre>
+
+
+Fields:	address - In sender's address space
+ 	error - Present if flags bit 0 set<h3 id="resed_full_message_object_send">resed_full_message_object_send</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#resed_object_send_flags">resed_object_send_flags</a> flags;
+      <a href="#resed_d">resed_d</a> doc_id;
+      <a href="#resed_o">resed_o</a> obj_id;
+   }
+   resed_full_message_object_send;</pre>
+
+<h3 id="resed_full_message_object_renamed">resed_full_message_object_renamed</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      bits flags;
+      <a href="#resed_d">resed_d</a> doc_id;
+      <a href="#resed_o">resed_o</a> obj_id;
+      char new_name [224];
+   }
+   resed_full_message_object_renamed;</pre>
+
+<h3 id="resed_full_message_object_deleted">resed_full_message_object_deleted</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      bits flags;
+      <a href="#resed_d">resed_d</a> doc_id;
+      <a href="#resed_o">resed_o</a> obj_id;
+   }
+   resed_full_message_object_deleted;</pre>
+
+<h3 id="resed_full_message_object_modified">resed_full_message_object_modified</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      bits flags;
+      <a href="#resed_d">resed_d</a> doc_id;
+      <a href="#resed_o">resed_o</a> obj_id;
+   }
+   resed_full_message_object_modified;</pre>
+
+<h3 id="resed_full_message_object_closed">resed_full_message_object_closed</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      bits flags;
+      <a href="#resed_d">resed_d</a> doc_id;
+      <a href="#resed_o">resed_o</a> obj_id;
+   }
+   resed_full_message_object_closed;</pre>
+
+<h3 id="resed_full_message_sprites_changed">resed_full_message_sprites_changed</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      bits flags;
+   }
+   resed_full_message_sprites_changed;</pre>
+
+<h3 id="resed_full_message_object_name_request">resed_full_message_object_name_request</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      bits flags;
+      <a href="#resed_d">resed_d</a> doc_id;
+      <a href="#resed_o">resed_o</a> obj_id;
+      <a href="wimp.html#wimp_w">wimp_w</a> window;
+      <a href="wimp.html#wimp_i">wimp_i</a> icon;
+   }
+   resed_full_message_object_name_request;</pre>
+
+<h3 id="resed_full_message_object_name">resed_full_message_object_name</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      bits flags;
+      <a href="#resed_d">resed_d</a> doc_id;
+      <a href="#resed_o">resed_o</a> obj_id;
+      <a href="wimp.html#wimp_w">wimp_w</a> window;
+      <a href="wimp.html#wimp_i">wimp_i</a> icon;
+      <a href="toolbox.html#toolbox_class">toolbox_class</a> obj_class;
+      char name [212];
+   }
+   resed_full_message_object_name;</pre>
+
+<h3 id="resed_full_message_keycut_details">resed_full_message_keycut_details</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#resed_keycut_details_flags">resed_keycut_details_flags</a> flags;
+      <a href="wimp.html#wimp_t">wimp_t</a> shell;
+      <a href="wimp.html#wimp_w">wimp_w</a> window;
+      <a href="wimp.html#wimp_key_no">wimp_key_no</a> key;
+      <a href="toolbox.html#toolbox_action">toolbox_action</a> key_action;
+      char names [216];
+   }
+   resed_full_message_keycut_details;</pre>
+
+
+Fields:	key_action - Only if flags bit 0 set
+ 	names - Key name followed by Object name<h3 id="message_RESED_OBJECT_LOAD">message_RESED_OBJECT_LOAD</h3>
+<pre>#define message_RESED_OBJECT_LOAD 0x83340u</pre>
+
+<h3 id="message_RESED_OBJECT_LOADED">message_RESED_OBJECT_LOADED</h3>
+<pre>#define message_RESED_OBJECT_LOADED 0x83341u</pre>
+
+<h3 id="message_RESED_OBJECT_SEND">message_RESED_OBJECT_SEND</h3>
+<pre>#define message_RESED_OBJECT_SEND 0x83342u</pre>
+
+<h3 id="message_RESED_OBJECT_SENDING">message_RESED_OBJECT_SENDING</h3>
+<pre>#define message_RESED_OBJECT_SENDING 0x83343u</pre>
+
+<h3 id="message_RESED_OBJECT_RENAMED">message_RESED_OBJECT_RENAMED</h3>
+<pre>#define message_RESED_OBJECT_RENAMED 0x83344u</pre>
+
+<h3 id="message_RESED_OBJECT_DELETED">message_RESED_OBJECT_DELETED</h3>
+<pre>#define message_RESED_OBJECT_DELETED 0x83345u</pre>
+
+<h3 id="message_RESED_OBJECT_MODIFIED">message_RESED_OBJECT_MODIFIED</h3>
+<pre>#define message_RESED_OBJECT_MODIFIED 0x83346u</pre>
+
+<h3 id="message_RESED_OBJECT_CLOSED">message_RESED_OBJECT_CLOSED</h3>
+<pre>#define message_RESED_OBJECT_CLOSED 0x83347u</pre>
+
+<h3 id="message_RESED_SPRITES_CHANGED">message_RESED_SPRITES_CHANGED</h3>
+<pre>#define message_RESED_SPRITES_CHANGED 0x83348u</pre>
+
+<h3 id="message_RESED_OBJECT_NAME_REQUEST">message_RESED_OBJECT_NAME_REQUEST</h3>
+<pre>#define message_RESED_OBJECT_NAME_REQUEST 0x83349u</pre>
+
+<h3 id="message_RESED_OBJECT_NAME">message_RESED_OBJECT_NAME</h3>
+<pre>#define message_RESED_OBJECT_NAME 0x8334Au</pre>
+
+<h3 id="message_RESED_KEYCUT_DETAILS">message_RESED_KEYCUT_DETAILS</h3>
+<pre>#define message_RESED_KEYCUT_DETAILS 0x8334Bu</pre>
+
+<h3 id="resed_FORCE_LOAD">resed_FORCE_LOAD</h3>
+<pre>#define resed_FORCE_LOAD ((<a href="#resed_object_load_flags">resed_object_load_flags</a>) 0x1u)</pre>
+
+<h3 id="resed_LOAD_FAILED">resed_LOAD_FAILED</h3>
+<pre>#define resed_LOAD_FAILED ((<a href="#resed_object_loaded_flags">resed_object_loaded_flags</a>) 0x1u)</pre>
+
+<h3 id="resed_CANNOT_SEND">resed_CANNOT_SEND</h3>
+<pre>#define resed_CANNOT_SEND ((<a href="#resed_object_sending_flags">resed_object_sending_flags</a>) 0x1u)</pre>
+
+<h3 id="resed_DELETE_AFTER_SEND">resed_DELETE_AFTER_SEND</h3>
+<pre>#define resed_DELETE_AFTER_SEND ((<a href="#resed_object_send_flags">resed_object_send_flags</a>) 0x1u)</pre>
+
+<h3 id="resed_KEYCUT_RAISES_EVENT">resed_KEYCUT_RAISES_EVENT</h3>
+<pre>#define resed_KEYCUT_RAISES_EVENT ((<a href="#resed_keycut_details_flags">resed_keycut_details_flags</a>) 0x1u)</pre>
+
+<h3 id="resed_KEYCUT_SHOWS_OBJECT">resed_KEYCUT_SHOWS_OBJECT</h3>
+<pre>#define resed_KEYCUT_SHOWS_OBJECT ((<a href="#resed_keycut_details_flags">resed_keycut_details_flags</a>) 0x2u)</pre>
+
+<h3 id="resed_KEYCUT_SHOWS_TRANSIENT">resed_KEYCUT_SHOWS_TRANSIENT</h3>
+<pre>#define resed_KEYCUT_SHOWS_TRANSIENT ((<a href="#resed_keycut_details_flags">resed_keycut_details_flags</a>) 0x4u)</pre>
+
+<h3 id="resed_ERROR_NO_MEMORY">resed_ERROR_NO_MEMORY</h3>
+<pre>#define resed_ERROR_NO_MEMORY ((<a href="#resed_error">resed_error</a>) 0x0u)</pre>
+
+<h3 id="resed_ERROR_UK_VERSION">resed_ERROR_UK_VERSION</h3>
+<pre>#define resed_ERROR_UK_VERSION ((<a href="#resed_error">resed_error</a>) 0x1u)</pre>
+
+<p>object_load message</p>
+
+<h3 id="resed_ERROR_UK_OBJECT">resed_ERROR_UK_OBJECT</h3>
+<pre>#define resed_ERROR_UK_OBJECT ((<a href="#resed_error">resed_error</a>) 0x1u)</pre>
+
+<p>object_sending message</p>
+
+<h3 id="resed_ERROR_CORRUPT_DATA">resed_ERROR_CORRUPT_DATA</h3>
+<pre>#define resed_ERROR_CORRUPT_DATA ((<a href="#resed_error">resed_error</a>) 0x2u)</pre>
+
+<h3 id="resed_ERROR_NON_FATAL_INTERNAL_ERROR">resed_ERROR_NON_FATAL_INTERNAL_ERROR</h3>
+<pre>#define resed_ERROR_NON_FATAL_INTERNAL_ERROR ((<a href="#resed_error">resed_error</a>) 0x3u)</pre>
+
+<h3 id="resed_ERROR_FATAL_INTERNAL_ERROR">resed_ERROR_FATAL_INTERNAL_ERROR</h3>
+<pre>#define resed_ERROR_FATAL_INTERNAL_ERROR ((<a href="#resed_error">resed_error</a>) 0x4u)</pre>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

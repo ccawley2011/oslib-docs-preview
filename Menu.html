@@ -1,0 +1,1118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Menu</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Menu</h2>
+
+<pre>#include "oslib/menu.h"</pre>
+
+<h3 id="menu_flags">menu_flags</h3>
+<pre>typedef bits menu_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#menu_GENERATE_ABOUT_TO_BE_SHOWN">menu_GENERATE_ABOUT_TO_BE_SHOWN</a></dd>
+<dd><a href="#menu_GENERATE_DIALOGUE_COMPLETED">menu_GENERATE_DIALOGUE_COMPLETED</a></dd>
+<dd><a href="#menu_GENERATE_HAS_BEEN_HIDDEN">menu_GENERATE_HAS_BEEN_HIDDEN</a></dd>
+</dl>
+
+<h3 id="menu_entry_flags">menu_entry_flags</h3>
+<pre>typedef bits menu_entry_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#menu_ENTRY_TICKED">menu_ENTRY_TICKED</a></dd>
+<dd><a href="#menu_ENTRY_SEPARATE">menu_ENTRY_SEPARATE</a></dd>
+<dd><a href="#menu_ENTRY_FADED">menu_ENTRY_FADED</a></dd>
+<dd><a href="#menu_ENTRY_IS_SPRITE">menu_ENTRY_IS_SPRITE</a></dd>
+<dd><a href="#menu_ENTRY_SUB_MENU">menu_ENTRY_SUB_MENU</a></dd>
+<dd><a href="#menu_ENTRY_GENERATE_SUB_MENU_ACTION">menu_ENTRY_GENERATE_SUB_MENU_ACTION</a></dd>
+<dd><a href="#menu_ENTRY_IS_MENU">menu_ENTRY_IS_MENU</a></dd>
+</dl>
+
+<h3 id="menu_entry_object">menu_entry_object</h3>
+<pre>typedef struct
+   {  <a href="#menu_entry_flags">menu_entry_flags</a> flags;
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> cmp;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> text;
+      int text_limit;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> click_object_name;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> sub_menu_object_name;
+      bits sub_menu_action;
+      bits click_action;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> help;
+      int help_limit;
+   }
+   menu_entry_object;</pre>
+
+<h3 id="menu_OBJECT_MEMBERS">menu_OBJECT_MEMBERS</h3>
+<pre>#define menu_OBJECT_MEMBERS \
+   <a href="#menu_flags">menu_flags</a> flags; \
+   <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> title; \
+   int title_limit; \
+   <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> help; \
+   int help_limit; \
+   bits show_action; \
+   bits hide_action; \
+   int entry_count;
+</pre>
+
+<h3 id="menu_object_base">menu_object_base</h3>
+<pre>typedef struct
+   {  <a href="#menu_flags">menu_flags</a> flags;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> title;
+      int title_limit;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> help;
+      int help_limit;
+      bits show_action;
+      bits hide_action;
+      int entry_count;
+   }
+   menu_object_base;</pre>
+
+<p>Structure to describe Object for in-memory construction - referenced from Toolbox_Template</p>
+
+<h3 id="menu_object">menu_object</h3>
+<pre>typedef struct
+   {  <a href="#menu_flags">menu_flags</a> flags;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> title;
+      int title_limit;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> help;
+      int help_limit;
+      bits show_action;
+      bits hide_action;
+      int entry_count;
+      <a href="#menu_entry_object">menu_entry_object</a> entries [...];
+   }
+   menu_object;</pre>
+
+<p>Structure to describe Object for in-memory construction - referenced from Toolbox_Template</p>
+
+<h3 id="menu_OBJECT_TEMPLATE_MEMBERS">menu_OBJECT_TEMPLATE_MEMBERS</h3>
+<pre>#define menu_OBJECT_TEMPLATE_MEMBERS \
+   toolbox_RESOURCE_FILE_OBJECT_MEMBERS \
+   <a href="#menu_flags">menu_flags</a> objectflags; \
+   <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> title; \
+   int title_limit; \
+   <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> help; \
+   int help_limit; \
+   bits show_action; \
+   bits hide_action; \
+   int entry_count;
+</pre>
+
+<h3 id="menu_object_template_base">menu_object_template_base</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_RESOURCE_FILE_OBJECT_MEMBERS">toolbox_RESOURCE_FILE_OBJECT_MEMBERS</a>
+      <a href="#menu_flags">menu_flags</a> objectflags;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> title;
+      int title_limit;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> help;
+      int help_limit;
+      bits show_action;
+      bits hide_action;
+      int entry_count;
+   }
+   menu_object_template_base;</pre>
+
+<h3 id="menu_object_template">menu_object_template</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_RESOURCE_FILE_OBJECT_MEMBERS">toolbox_RESOURCE_FILE_OBJECT_MEMBERS</a>
+      <a href="#menu_flags">menu_flags</a> objectflags;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> title;
+      int title_limit;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> help;
+      int help_limit;
+      bits show_action;
+      bits hide_action;
+      int entry_count;
+      <a href="#menu_entry_object">menu_entry_object</a> entries [...];
+   }
+   menu_object_template;</pre>
+
+<h3 id="menu_full">menu_full</h3>
+<pre>typedef <a href="os.html#os_coord">os_coord</a> menu_full;</pre>
+
+<h3 id="menu_action_about_to_be_shown_block">menu_action_about_to_be_shown_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#menu_full">menu_full</a> full;
+      }
+      position;
+   }
+   menu_action_about_to_be_shown_block;</pre>
+
+<h3 id="menu_action_about_to_be_shown">menu_action_about_to_be_shown</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#menu_full">menu_full</a> full;
+      }
+      position;
+   }
+   menu_action_about_to_be_shown;</pre>
+
+<p>Prefer Menu_ActionAboutToBeShownBlock</p>
+
+<h3 id="menu_action_has_been_hidden_block">menu_action_has_been_hidden_block</h3>
+<pre>typedef <a href="toolbox.html#toolbox_action_header_base">toolbox_action_header_base</a> menu_action_has_been_hidden_block;</pre>
+
+<p>Prefer Menu_ActionDialogueCompletedBlock</p>
+
+<h3 id="menu_action_dialogue_completed_block">menu_action_dialogue_completed_block</h3>
+<pre>typedef <a href="toolbox.html#toolbox_action_header_base">toolbox_action_header_base</a> menu_action_dialogue_completed_block;</pre>
+
+<h3 id="menu_action_sub_menu">menu_action_sub_menu</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_coord">os_coord</a> pos;
+   }
+   menu_action_sub_menu;</pre>
+
+<p>Prefer Menu_ActionSubMenuBlock</p>
+
+<h3 id="menu_action_sub_menu_block">menu_action_sub_menu_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      <a href="os.html#os_coord">os_coord</a> pos;
+   }
+   menu_action_sub_menu_block;</pre>
+
+<h3 id="menu_action_selection_block">menu_action_selection_block</h3>
+<pre>typedef <a href="toolbox.html#toolbox_action_header_base">toolbox_action_header_base</a> menu_action_selection_block;</pre>
+
+<h3 id="menu_show_flags">menu_show_flags</h3>
+<pre>typedef bits menu_show_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#menu_SHOW_PERSISTENT">menu_SHOW_PERSISTENT</a></dd>
+<dd><a href="#menu_SHOW_TRANSIENT">menu_SHOW_TRANSIENT</a></dd>
+</dl>
+
+<h3 id="menu_add_flags">menu_add_flags</h3>
+<pre>typedef bits menu_add_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#menu_ADD_BEFORE">menu_ADD_BEFORE</a></dd>
+</dl>
+
+<h3 id="menu_add_at">menu_add_at</h3>
+<pre>typedef <a href="toolbox.html#toolbox_c">toolbox_c</a> menu_add_at;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#menu_ADD_AT_START">menu_ADD_AT_START</a></dd>
+<dd><a href="#menu_ADD_AT_END">menu_ADD_AT_END</a></dd>
+</dl>
+
+<h3 id="class_MENU">class_MENU</h3>
+<pre>#define class_MENU ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x828C0u)</pre>
+
+<h3 id="menu_GENERATE_ABOUT_TO_BE_SHOWN">menu_GENERATE_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define menu_GENERATE_ABOUT_TO_BE_SHOWN ((<a href="#menu_flags">menu_flags</a>) 0x1u)</pre>
+
+<h3 id="menu_GENERATE_DIALOGUE_COMPLETED">menu_GENERATE_DIALOGUE_COMPLETED</h3>
+<pre>#define menu_GENERATE_DIALOGUE_COMPLETED ((<a href="#menu_flags">menu_flags</a>) 0x2u)</pre>
+
+<h3 id="menu_GENERATE_HAS_BEEN_HIDDEN">menu_GENERATE_HAS_BEEN_HIDDEN</h3>
+<pre>#define menu_GENERATE_HAS_BEEN_HIDDEN ((<a href="#menu_flags">menu_flags</a>) 0x2u)</pre>
+
+<h3 id="menu_ENTRY_TICKED">menu_ENTRY_TICKED</h3>
+<pre>#define menu_ENTRY_TICKED ((<a href="#menu_entry_flags">menu_entry_flags</a>) 0x1u)</pre>
+
+<h3 id="menu_ENTRY_SEPARATE">menu_ENTRY_SEPARATE</h3>
+<pre>#define menu_ENTRY_SEPARATE ((<a href="#menu_entry_flags">menu_entry_flags</a>) 0x2u)</pre>
+
+<h3 id="menu_ENTRY_FADED">menu_ENTRY_FADED</h3>
+<pre>#define menu_ENTRY_FADED ((<a href="#menu_entry_flags">menu_entry_flags</a>) 0x100u)</pre>
+
+<h3 id="menu_ENTRY_IS_SPRITE">menu_ENTRY_IS_SPRITE</h3>
+<pre>#define menu_ENTRY_IS_SPRITE ((<a href="#menu_entry_flags">menu_entry_flags</a>) 0x200u)</pre>
+
+<h3 id="menu_ENTRY_SUB_MENU">menu_ENTRY_SUB_MENU</h3>
+<pre>#define menu_ENTRY_SUB_MENU ((<a href="#menu_entry_flags">menu_entry_flags</a>) 0x400u)</pre>
+
+<h3 id="menu_ENTRY_GENERATE_SUB_MENU_ACTION">menu_ENTRY_GENERATE_SUB_MENU_ACTION</h3>
+<pre>#define menu_ENTRY_GENERATE_SUB_MENU_ACTION ((<a href="#menu_entry_flags">menu_entry_flags</a>) 0x800u)</pre>
+
+<h3 id="menu_ENTRY_IS_MENU">menu_ENTRY_IS_MENU</h3>
+<pre>#define menu_ENTRY_IS_MENU ((<a href="#menu_entry_flags">menu_entry_flags</a>) 0x1000u)</pre>
+
+<h3 id="action_MENU_ABOUT_TO_BE_SHOWN">action_MENU_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define action_MENU_ABOUT_TO_BE_SHOWN 0x828C0u</pre>
+
+<h3 id="action_MENU_DIALOGUE_COMPLETED">action_MENU_DIALOGUE_COMPLETED</h3>
+<pre>#define action_MENU_DIALOGUE_COMPLETED 0x828C1u</pre>
+
+<h3 id="action_MENU_HAS_BEEN_HIDDEN">action_MENU_HAS_BEEN_HIDDEN</h3>
+<pre>#define action_MENU_HAS_BEEN_HIDDEN 0x828C1u</pre>
+
+<h3 id="action_MENU_SUB_MENU">action_MENU_SUB_MENU</h3>
+<pre>#define action_MENU_SUB_MENU 0x828C2u</pre>
+
+<h3 id="action_MENU_SELECTION">action_MENU_SELECTION</h3>
+<pre>#define action_MENU_SELECTION 0x828C3u</pre>
+
+<h3 id="error_MENU_TASKS_ACTIVE">error_MENU_TASKS_ACTIVE</h3>
+<pre>#define error_MENU_TASKS_ACTIVE 0x80AA00u</pre>
+
+<h3 id="error_MENU_ALLOC_FAILED">error_MENU_ALLOC_FAILED</h3>
+<pre>#define error_MENU_ALLOC_FAILED 0x80AA01u</pre>
+
+<h3 id="error_MENU_SHORT_BUFFER">error_MENU_SHORT_BUFFER</h3>
+<pre>#define error_MENU_SHORT_BUFFER 0x80AA02u</pre>
+
+<h3 id="error_MENU_NO_SUCH_TASK">error_MENU_NO_SUCH_TASK</h3>
+<pre>#define error_MENU_NO_SUCH_TASK 0x80AA11u</pre>
+
+<h3 id="error_MENU_NO_SUCH_METHOD">error_MENU_NO_SUCH_METHOD</h3>
+<pre>#define error_MENU_NO_SUCH_METHOD 0x80AA12u</pre>
+
+<h3 id="error_MENU_NO_SUCH_MISC_OP_METHOD">error_MENU_NO_SUCH_MISC_OP_METHOD</h3>
+<pre>#define error_MENU_NO_SUCH_MISC_OP_METHOD 0x80AA13u</pre>
+
+<h3 id="error_MENU_NO_SUCH_COMPONENT">error_MENU_NO_SUCH_COMPONENT</h3>
+<pre>#define error_MENU_NO_SUCH_COMPONENT 0x80AA14u</pre>
+
+<h3 id="error_MENU_SPRITE_NOT_TEXT">error_MENU_SPRITE_NOT_TEXT</h3>
+<pre>#define error_MENU_SPRITE_NOT_TEXT 0x80AA21u</pre>
+
+<h3 id="error_MENU_TEXT_NOT_SPRITE">error_MENU_TEXT_NOT_SPRITE</h3>
+<pre>#define error_MENU_TEXT_NOT_SPRITE 0x80AA22u</pre>
+
+<h3 id="error_MENU_NO_TOP_MENU">error_MENU_NO_TOP_MENU</h3>
+<pre>#define error_MENU_NO_TOP_MENU 0x80AA31u</pre>
+
+<h3 id="error_MENU_UNKNOWN_SUB_MENU">error_MENU_UNKNOWN_SUB_MENU</h3>
+<pre>#define error_MENU_UNKNOWN_SUB_MENU 0x80AA32u</pre>
+
+<h3 id="error_MENU_NO_SPRITE_NAME">error_MENU_NO_SPRITE_NAME</h3>
+<pre>#define error_MENU_NO_SPRITE_NAME 0x80AA33u</pre>
+
+<h3 id="menu_SHOW_PERSISTENT">menu_SHOW_PERSISTENT</h3>
+<pre>#define menu_SHOW_PERSISTENT ((<a href="#menu_show_flags">menu_show_flags</a>) 0x0u)</pre>
+
+<h3 id="menu_SHOW_TRANSIENT">menu_SHOW_TRANSIENT</h3>
+<pre>#define menu_SHOW_TRANSIENT ((<a href="#menu_show_flags">menu_show_flags</a>) 0x1u)</pre>
+
+<h3 id="menu_ADD_BEFORE">menu_ADD_BEFORE</h3>
+<pre>#define menu_ADD_BEFORE ((<a href="#menu_add_flags">menu_add_flags</a>) 0x1u)</pre>
+
+<h3 id="menu_ADD_AT_START">menu_ADD_AT_START</h3>
+<pre>#define menu_ADD_AT_START ((<a href="#menu_add_at">menu_add_at</a>) 0xFFFFFFFFu)</pre>
+
+<h3 id="menu_ADD_AT_END">menu_ADD_AT_END</h3>
+<pre>#define menu_ADD_AT_END ((<a href="#menu_add_at">menu_add_at</a>) 0xFFFFFFFEu)</pre>
+
+<h3 id="xmenu_update_tree">xmenu_update_tree</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_update_tree (bits flags);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="menu_update_tree">menu_update_tree</h3>
+<pre>extern void menu_update_tree (bits flags);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xmenu_set_tick">xmenu_set_tick</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_set_tick (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      osbool tick);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>tick</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="menu_set_tick">menu_set_tick</h3>
+<pre>extern void menu_set_tick (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      osbool tick);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>tick</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xmenu_get_tick">xmenu_get_tick</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_get_tick (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      osbool *tick);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>tick</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="menu_get_tick">menu_get_tick</h3>
+<pre>extern osbool menu_get_tick (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>tick</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xmenu_set_fade">xmenu_set_fade</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_set_fade (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      osbool fade);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>fade</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="menu_set_fade">menu_set_fade</h3>
+<pre>extern void menu_set_fade (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      osbool fade);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>fade</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xmenu_get_fade">xmenu_get_fade</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_get_fade (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      osbool *fade);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>fade</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="menu_get_fade">menu_get_fade</h3>
+<pre>extern osbool menu_get_fade (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>fade</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xmenu_set_entry_text">xmenu_set_entry_text</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_set_entry_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      char const *text);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>text</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="menu_set_entry_text">menu_set_entry_text</h3>
+<pre>extern void menu_set_entry_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      char const *text);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>text</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xmenu_get_entry_text">xmenu_get_entry_text</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_get_entry_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      char *buffer,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="menu_get_entry_text">menu_get_entry_text</h3>
+<pre>extern int menu_get_entry_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      char *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xmenu_set_entry_sprite">xmenu_set_entry_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_set_entry_sprite (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      char const *sprite_name);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="menu_set_entry_sprite">menu_set_entry_sprite</h3>
+<pre>extern void menu_set_entry_sprite (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      char const *sprite_name);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xmenu_get_entry_sprite">xmenu_get_entry_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_get_entry_sprite (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      char *buffer,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="menu_get_entry_sprite">menu_get_entry_sprite</h3>
+<pre>extern int menu_get_entry_sprite (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      char *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xmenu_set_sub_menu_show">xmenu_set_sub_menu_show</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_set_sub_menu_show (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> sub_menu);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>sub_menu</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="menu_set_sub_menu_show">menu_set_sub_menu_show</h3>
+<pre>extern void menu_set_sub_menu_show (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> sub_menu);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>sub_menu</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xmenu_get_sub_menu_show">xmenu_get_sub_menu_show</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_get_sub_menu_show (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *sub_menu);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>sub_menu</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="menu_get_sub_menu_show">menu_get_sub_menu_show</h3>
+<pre>extern <a href="toolbox.html#toolbox_o">toolbox_o</a> menu_get_sub_menu_show (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>sub_menu</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xmenu_set_sub_menu_action">xmenu_set_sub_menu_action</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_set_sub_menu_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      bits action);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="menu_set_sub_menu_action">menu_set_sub_menu_action</h3>
+<pre>extern void menu_set_sub_menu_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      bits action);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xmenu_get_sub_menu_action">xmenu_get_sub_menu_action</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_get_sub_menu_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      bits *action);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>action</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="menu_get_sub_menu_action">menu_get_sub_menu_action</h3>
+<pre>extern bits menu_get_sub_menu_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>action</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xmenu_set_click_show">xmenu_set_click_show</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_set_click_show (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> show,
+      <a href="#menu_show_flags">menu_show_flags</a> show_flags);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>show</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>show_flags</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="menu_set_click_show">menu_set_click_show</h3>
+<pre>extern void menu_set_click_show (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> show,
+      <a href="#menu_show_flags">menu_show_flags</a> show_flags);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>show</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>show_flags</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xmenu_get_click_show">xmenu_get_click_show</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_get_click_show (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *show,
+      <a href="#menu_show_flags">menu_show_flags</a> *show_flags);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>show</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>show_flags</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="menu_get_click_show">menu_get_click_show</h3>
+<pre>extern <a href="toolbox.html#toolbox_o">toolbox_o</a> menu_get_click_show (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      <a href="#menu_show_flags">menu_show_flags</a> *show_flags);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>show_flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>show</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xmenu_set_click_action">xmenu_set_click_action</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_set_click_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      bits action);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="menu_set_click_action">menu_set_click_action</h3>
+<pre>extern void menu_set_click_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      bits action);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xmenu_get_click_action">xmenu_get_click_action</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_get_click_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      bits *action);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>action</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="menu_get_click_action">menu_get_click_action</h3>
+<pre>extern bits menu_get_click_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>action</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xmenu_set_help_message">xmenu_set_help_message</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_set_help_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      char const *help);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>help</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="menu_set_help_message">menu_set_help_message</h3>
+<pre>extern void menu_set_help_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      char const *help);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>help</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xmenu_get_help_message">xmenu_get_help_message</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_get_help_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      char *buffer,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="menu_get_help_message">menu_get_help_message</h3>
+<pre>extern int menu_get_help_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      char *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xmenu_set_entry_help_message">xmenu_set_entry_help_message</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_set_entry_help_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      char const *help);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>help</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="menu_set_entry_help_message">menu_set_entry_help_message</h3>
+<pre>extern void menu_set_entry_help_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      char const *help);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>help</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xmenu_get_entry_help_message">xmenu_get_entry_help_message</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_get_entry_help_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      char *buffer,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="menu_get_entry_help_message">menu_get_entry_help_message</h3>
+<pre>extern int menu_get_entry_help_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry,
+      char *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xmenu_add_entry">xmenu_add_entry</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_add_entry (<a href="#menu_add_flags">menu_add_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="#menu_add_at">menu_add_at</a> at,
+      <a href="#menu_entry_object">menu_entry_object</a> const *entry,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> *entry_out);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>at</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>entry_out</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="menu_add_entry">menu_add_entry</h3>
+<pre>extern <a href="toolbox.html#toolbox_c">toolbox_c</a> menu_add_entry (<a href="#menu_add_flags">menu_add_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="#menu_add_at">menu_add_at</a> at,
+      <a href="#menu_entry_object">menu_entry_object</a> const *entry);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>at</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>entry_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xmenu_remove_entry">xmenu_remove_entry</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_remove_entry (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="menu_remove_entry">menu_remove_entry</h3>
+<pre>extern void menu_remove_entry (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> entry);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>entry</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xmenu_get_height">xmenu_get_height</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_get_height (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      int *height);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>height</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="menu_get_height">menu_get_height</h3>
+<pre>extern int menu_get_height (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>height</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xmenu_get_width">xmenu_get_width</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_get_width (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      int *width);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>width</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="menu_get_width">menu_get_width</h3>
+<pre>extern int menu_get_width (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>width</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xmenu_set_title">xmenu_set_title</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_set_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      char const *title);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="menu_set_title">menu_set_title</h3>
+<pre>extern void menu_set_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      char const *title);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xmenu_get_title">xmenu_get_title</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmenu_get_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      char *buffer,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="menu_get_title">menu_get_title</h3>
+<pre>extern int menu_get_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu,
+      char *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

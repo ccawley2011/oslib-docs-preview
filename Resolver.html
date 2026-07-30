@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Resolver</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Resolver</h2>
+
+<pre>#include "oslib/resolver.h"</pre>
+
+<h3 id="resolver_host_details">resolver_host_details</h3>
+<pre>typedef struct
+   {  char *name;
+      char **aliases;
+      <a href="socket.html#socket_af">socket_af</a> address_type;
+      int address_size;
+      byte **addresses;
+   }
+   resolver_host_details;</pre>
+
+<h3 id="resolvercachecontrol_reason">resolvercachecontrol_reason</h3>
+<pre>typedef int resolvercachecontrol_reason;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#resolvercachecontrolreason_FLUSH_FAILED">resolvercachecontrolreason_FLUSH_FAILED</a></dd>
+<dd><a href="#resolvercachecontrolreason_FLUSH_ALL">resolvercachecontrolreason_FLUSH_ALL</a></dd>
+<dd><a href="#resolvercachecontrolreason_FLUSH_HOST">resolvercachecontrolreason_FLUSH_HOST</a></dd>
+<dd><a href="#resolvercachecontrolreason_REREAD_CONFIG">resolvercachecontrolreason_REREAD_CONFIG</a></dd>
+<dd><a href="#resolvercachecontrolreason_NO_CACHE_FAILED">resolvercachecontrolreason_NO_CACHE_FAILED</a></dd>
+<dd><a href="#resolvercachecontrolreason_DO_CACHE_FAILED">resolvercachecontrolreason_DO_CACHE_FAILED</a></dd>
+</dl>
+
+<h3 id="resolvercachecontrolreason_FLUSH_FAILED">resolvercachecontrolreason_FLUSH_FAILED</h3>
+<pre>#define resolvercachecontrolreason_FLUSH_FAILED ((<a href="#resolvercachecontrol_reason">resolvercachecontrol_reason</a>) 0x0u)</pre>
+
+<h3 id="resolvercachecontrolreason_FLUSH_ALL">resolvercachecontrolreason_FLUSH_ALL</h3>
+<pre>#define resolvercachecontrolreason_FLUSH_ALL ((<a href="#resolvercachecontrol_reason">resolvercachecontrol_reason</a>) 0x1u)</pre>
+
+<h3 id="resolvercachecontrolreason_FLUSH_HOST">resolvercachecontrolreason_FLUSH_HOST</h3>
+<pre>#define resolvercachecontrolreason_FLUSH_HOST ((<a href="#resolvercachecontrol_reason">resolvercachecontrol_reason</a>) 0x2u)</pre>
+
+<h3 id="resolvercachecontrolreason_REREAD_CONFIG">resolvercachecontrolreason_REREAD_CONFIG</h3>
+<pre>#define resolvercachecontrolreason_REREAD_CONFIG ((<a href="#resolvercachecontrol_reason">resolvercachecontrol_reason</a>) 0x3u)</pre>
+
+<h3 id="resolvercachecontrolreason_NO_CACHE_FAILED">resolvercachecontrolreason_NO_CACHE_FAILED</h3>
+<pre>#define resolvercachecontrolreason_NO_CACHE_FAILED ((<a href="#resolvercachecontrol_reason">resolvercachecontrol_reason</a>) 0x8u)</pre>
+
+<h3 id="resolvercachecontrolreason_DO_CACHE_FAILED">resolvercachecontrolreason_DO_CACHE_FAILED</h3>
+<pre>#define resolvercachecontrolreason_DO_CACHE_FAILED ((<a href="#resolvercachecontrol_reason">resolvercachecontrol_reason</a>) 0x9u)</pre>
+
+<h3 id="xresolver_get_host_by_name">xresolver_get_host_by_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xresolver_get_host_by_name (char const *host_name,
+      int *errno,
+      <a href="#resolver_host_details">resolver_host_details</a> **host_details);</pre>
+<p>Lookup a hostname string (single-tasking)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>host_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>errno</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>host_details</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="resolver_get_host_by_name">resolver_get_host_by_name</h3>
+<pre>extern <a href="#resolver_host_details">resolver_host_details</a> *resolver_get_host_by_name (char const *host_name,
+      int *errno);</pre>
+<p>Lookup a hostname string (single-tasking)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>host_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>errno</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>host_details</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xresolver_get_host">xresolver_get_host</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xresolver_get_host (char const *host_name,
+      int *errno,
+      <a href="#resolver_host_details">resolver_host_details</a> **host_details);</pre>
+<p>Lookup a hostname string (multi-tasking)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>host_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>errno</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>host_details</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="resolver_get_host">resolver_get_host</h3>
+<pre>extern <a href="#resolver_host_details">resolver_host_details</a> *resolver_get_host (char const *host_name,
+      int *errno);</pre>
+<p>Lookup a hostname string (multi-tasking)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>host_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>errno</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>host_details</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xresolver_cache_control">xresolver_cache_control</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xresolver_cache_control (<a href="#resolvercachecontrol_reason">resolvercachecontrol_reason</a> reason);</pre>
+<p>Allow a calling application to control the Resolver cache in a limited way</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>reason</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="resolver_cache_control">resolver_cache_control</h3>
+<pre>extern void resolver_cache_control (<a href="#resolvercachecontrol_reason">resolvercachecontrol_reason</a> reason);</pre>
+<p>Allow a calling application to control the Resolver cache in a limited way</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>reason</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xeventinternet_dns_resolve_complete">xeventinternet_dns_resolve_complete</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeventinternet_dns_resolve_complete (char const *host_name,
+      int ip_address,
+      int errno,
+      <a href="#resolver_host_details">resolver_host_details</a> const *host_details);</pre>
+<p>A Resolver resolution request completes, either successfully or by timing out</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>host_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ip_address</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>errno</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>host_details</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="eventinternet_dns_resolve_complete">eventinternet_dns_resolve_complete</h3>
+<pre>extern void eventinternet_dns_resolve_complete (char const *host_name,
+      int ip_address,
+      int errno,
+      <a href="#resolver_host_details">resolver_host_details</a> const *host_details);</pre>
+<p>A Resolver resolution request completes, either successfully or by timing out</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>host_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ip_address</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>errno</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>host_details</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ConvertSprite</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ConvertSprite</h2>
+
+<pre>#include "oslib/convertsprite.h"</pre>
+
+<h3 id="convertspritecreatesprite_flags">convertspritecreatesprite_flags</h3>
+<pre>typedef bits convertspritecreatesprite_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#convertspritecreatespriteflags_USE_MASK">convertspritecreatespriteflags_USE_MASK</a></dd>
+</dl>
+
+<h3 id="convertspritecreatesprite_registers">convertspritecreatesprite_registers</h3>
+<pre>typedef int convertspritecreatesprite_registers [10];</pre>
+
+<h3 id="convertspritecreatespriteflags_USE_MASK">convertspritecreatespriteflags_USE_MASK</h3>
+<pre>#define convertspritecreatespriteflags_USE_MASK ((<a href="#convertspritecreatesprite_flags">convertspritecreatesprite_flags</a>) 0x1u)</pre>
+
+<h3 id="xconvertsprite_create_sprite">xconvertsprite_create_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xconvertsprite_create_sprite (<a href="#convertspritecreatesprite_flags">convertspritecreatesprite_flags</a> flags,
+      int width,
+      int height,
+      <a href="os.html#os_mode">os_mode</a> mode,
+      <a href="os.html#os_sprite_palette">os_sprite_palette</a> const *palette,
+      <a href="osspriteop.html#osspriteop_header">osspriteop_header</a> *buf,
+      int buf_size_in,
+      int swinumber,
+      <a href="#convertspritecreatesprite_registers">convertspritecreatesprite_registers</a> *regs,
+      <a href="os.html#os_colour">os_colour</a> background,
+      int *buf_size_out);</pre>
+<p>Create a sprite of a given type using any arbitrary rendering routine</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>width</code></td><td>OS units</td><td><code>R1</code></td></tr>
+<tr><td><code>height</code></td><td>OS units</td><td><code>R2</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>palette</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>buf</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>buf_size_in</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>swinumber</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>regs</code></td><td/><td><code>R8</code></td></tr>
+<tr><td><code>background</code></td><td/><td><code>R9</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>buf_size_out</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="convertsprite_create_sprite">convertsprite_create_sprite</h3>
+<pre>extern void convertsprite_create_sprite (<a href="#convertspritecreatesprite_flags">convertspritecreatesprite_flags</a> flags,
+      int width,
+      int height,
+      <a href="os.html#os_mode">os_mode</a> mode,
+      <a href="os.html#os_sprite_palette">os_sprite_palette</a> const *palette,
+      <a href="osspriteop.html#osspriteop_header">osspriteop_header</a> *buf,
+      int buf_size_in,
+      int swinumber,
+      <a href="#convertspritecreatesprite_registers">convertspritecreatesprite_registers</a> *regs,
+      <a href="os.html#os_colour">os_colour</a> background,
+      int *buf_size_out);</pre>
+<p>Create a sprite of a given type using any arbitrary rendering routine</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>width</code></td><td>OS units</td><td><code>R1</code></td></tr>
+<tr><td><code>height</code></td><td>OS units</td><td><code>R2</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>palette</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>buf</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>buf_size_in</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>swinumber</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>regs</code></td><td/><td><code>R8</code></td></tr>
+<tr><td><code>background</code></td><td/><td><code>R9</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>buf_size_out</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

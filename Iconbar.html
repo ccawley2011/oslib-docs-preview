@@ -1,0 +1,643 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Iconbar</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Iconbar</h2>
+
+<pre>#include "oslib/iconbar.h"</pre>
+
+<h3 id="iconbar_flags">iconbar_flags</h3>
+<pre>typedef bits iconbar_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#iconbar_GENERATE_SELECT_ABOUT_TO_BE_SHOWN">iconbar_GENERATE_SELECT_ABOUT_TO_BE_SHOWN</a></dd>
+<dd><a href="#iconbar_GENERATE_ADJUST_ABOUT_TO_BE_SHOWN">iconbar_GENERATE_ADJUST_ABOUT_TO_BE_SHOWN</a></dd>
+<dd><a href="#iconbar_SELECT_IS_MENU">iconbar_SELECT_IS_MENU</a></dd>
+<dd><a href="#iconbar_ADJUST_IS_MENU">iconbar_ADJUST_IS_MENU</a></dd>
+<dd><a href="#iconbar_HAS_TEXT">iconbar_HAS_TEXT</a></dd>
+<dd><a href="#iconbar_GENERATE_SELECT_CLICKED">iconbar_GENERATE_SELECT_CLICKED</a></dd>
+<dd><a href="#iconbar_GENERATE_ADJUST_CLICKED">iconbar_GENERATE_ADJUST_CLICKED</a></dd>
+<dd><a href="#iconbar_SHOW_SELECT_CENTERED">iconbar_SHOW_SELECT_CENTERED</a></dd>
+<dd><a href="#iconbar_SHOW_ADJUST_CENTERED">iconbar_SHOW_ADJUST_CENTERED</a></dd>
+<dd><a href="#iconbar_SHOW_SELECT_AT_POINTER">iconbar_SHOW_SELECT_AT_POINTER</a></dd>
+<dd><a href="#iconbar_SHOW_ADJUST_AT_POINTER">iconbar_SHOW_ADJUST_AT_POINTER</a></dd>
+</dl>
+
+<h3 id="iconbar_object">iconbar_object</h3>
+<pre>typedef struct
+   {  <a href="#iconbar_flags">iconbar_flags</a> flags;
+      int position;
+      int priority;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> sprite_name;
+      int sprite_limit;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> text;
+      int text_limit;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> menu;
+      bits select_action;
+      bits adjust_action;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> select_show;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> adjust_show;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> help_message;
+      int help_limit;
+   }
+   iconbar_object;</pre>
+
+<p>Structure to describe Object for in-memory construction - referenced from Toolbox_Template</p>
+
+<h3 id="iconbar_object_template">iconbar_object_template</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_RESOURCE_FILE_OBJECT_MEMBERS">toolbox_RESOURCE_FILE_OBJECT_MEMBERS</a>
+      <a href="#iconbar_flags">iconbar_flags</a> objectflags;
+      int position;
+      int priority;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> sprite_name;
+      int sprite_limit;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> text;
+      int text_limit;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> menu;
+      bits select_action;
+      bits adjust_action;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> select_show;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> adjust_show;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> help_message;
+      int help_limit;
+   }
+   iconbar_object_template;</pre>
+
+<h3 id="iconbar_full">iconbar_full</h3>
+<pre>typedef <a href="toolbox.html#toolbox_full">toolbox_full</a> iconbar_full;</pre>
+
+<h3 id="iconbar_action_clicked_block">iconbar_action_clicked_block</h3>
+<pre>typedef <a href="toolbox.html#toolbox_action_header_base">toolbox_action_header_base</a> iconbar_action_clicked_block;</pre>
+
+<h3 id="iconbar_action_about_to_be_shown">iconbar_action_about_to_be_shown</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#iconbar_full">iconbar_full</a> full;
+      }
+      position;
+   }
+   iconbar_action_about_to_be_shown;</pre>
+
+<p>Prefer Iconbar_ActionSelectAboutToBeShownBlock; Iconbar_ActionAdjustAboutToBeShownBlock</p>
+
+<h3 id="iconbar_action_select_about_to_be_shown">iconbar_action_select_about_to_be_shown</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_o">toolbox_o</a> o;
+   }
+   iconbar_action_select_about_to_be_shown;</pre>
+
+<h3 id="iconbar_action_adjust_about_to_be_shown">iconbar_action_adjust_about_to_be_shown</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_o">toolbox_o</a> o;
+   }
+   iconbar_action_adjust_about_to_be_shown;</pre>
+
+<h3 id="iconbar_action_select_about_to_be_shown_block">iconbar_action_select_about_to_be_shown_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> o;
+   }
+   iconbar_action_select_about_to_be_shown_block;</pre>
+
+<h3 id="iconbar_action_adjust_about_to_be_shown_block">iconbar_action_adjust_about_to_be_shown_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> o;
+   }
+   iconbar_action_adjust_about_to_be_shown_block;</pre>
+
+<h3 id="iconbar_set_button">iconbar_set_button</h3>
+<pre>typedef bits iconbar_set_button;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#iconbar_SELECT">iconbar_SELECT</a></dd>
+<dd><a href="#iconbar_ADJUST">iconbar_ADJUST</a></dd>
+</dl>
+
+<h3 id="class_ICONBAR">class_ICONBAR</h3>
+<pre>#define class_ICONBAR ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x82900u)</pre>
+
+<h3 id="error_ICONBAR_ALLOC_FAILED">error_ICONBAR_ALLOC_FAILED</h3>
+<pre>#define error_ICONBAR_ALLOC_FAILED 0x80AB01u</pre>
+
+<h3 id="error_ICONBAR_SHORT_BUFFER">error_ICONBAR_SHORT_BUFFER</h3>
+<pre>#define error_ICONBAR_SHORT_BUFFER 0x80AB02u</pre>
+
+<h3 id="error_ICONBAR_BAD_OBJECT_VERSION">error_ICONBAR_BAD_OBJECT_VERSION</h3>
+<pre>#define error_ICONBAR_BAD_OBJECT_VERSION 0x80AB03u</pre>
+
+<h3 id="error_ICONBAR_BAD_FLAGS">error_ICONBAR_BAD_FLAGS</h3>
+<pre>#define error_ICONBAR_BAD_FLAGS 0x80AB04u</pre>
+
+<h3 id="error_ICONBAR_NO_SUCH_TASK">error_ICONBAR_NO_SUCH_TASK</h3>
+<pre>#define error_ICONBAR_NO_SUCH_TASK 0x80AB11u</pre>
+
+<h3 id="error_ICONBAR_NO_SUCH_METHOD">error_ICONBAR_NO_SUCH_METHOD</h3>
+<pre>#define error_ICONBAR_NO_SUCH_METHOD 0x80AB12u</pre>
+
+<h3 id="error_ICONBAR_NO_SUCH_MISC_OP_METHOD">error_ICONBAR_NO_SUCH_MISC_OP_METHOD</h3>
+<pre>#define error_ICONBAR_NO_SUCH_MISC_OP_METHOD 0x80AB13u</pre>
+
+<h3 id="error_ICONBAR_WRONG_SHOW_TYPE">error_ICONBAR_WRONG_SHOW_TYPE</h3>
+<pre>#define error_ICONBAR_WRONG_SHOW_TYPE 0x80AB14u</pre>
+
+<h3 id="error_ICONBAR_NO_TEXT">error_ICONBAR_NO_TEXT</h3>
+<pre>#define error_ICONBAR_NO_TEXT 0x80AB20u</pre>
+
+<h3 id="error_ICONBAR_TASKS_ACTIVE">error_ICONBAR_TASKS_ACTIVE</h3>
+<pre>#define error_ICONBAR_TASKS_ACTIVE 0x80AB21u</pre>
+
+<h3 id="iconbar_GENERATE_SELECT_ABOUT_TO_BE_SHOWN">iconbar_GENERATE_SELECT_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define iconbar_GENERATE_SELECT_ABOUT_TO_BE_SHOWN ((<a href="#iconbar_flags">iconbar_flags</a>) 0x1u)</pre>
+
+<h3 id="iconbar_GENERATE_ADJUST_ABOUT_TO_BE_SHOWN">iconbar_GENERATE_ADJUST_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define iconbar_GENERATE_ADJUST_ABOUT_TO_BE_SHOWN ((<a href="#iconbar_flags">iconbar_flags</a>) 0x2u)</pre>
+
+<h3 id="iconbar_SELECT_IS_MENU">iconbar_SELECT_IS_MENU</h3>
+<pre>#define iconbar_SELECT_IS_MENU ((<a href="#iconbar_flags">iconbar_flags</a>) 0x4u)</pre>
+
+<h3 id="iconbar_ADJUST_IS_MENU">iconbar_ADJUST_IS_MENU</h3>
+<pre>#define iconbar_ADJUST_IS_MENU ((<a href="#iconbar_flags">iconbar_flags</a>) 0x8u)</pre>
+
+<h3 id="iconbar_HAS_TEXT">iconbar_HAS_TEXT</h3>
+<pre>#define iconbar_HAS_TEXT ((<a href="#iconbar_flags">iconbar_flags</a>) 0x10u)</pre>
+
+<p>Reserved bit - not settable by client</p>
+
+<h3 id="iconbar_GENERATE_SELECT_CLICKED">iconbar_GENERATE_SELECT_CLICKED</h3>
+<pre>#define iconbar_GENERATE_SELECT_CLICKED ((<a href="#iconbar_flags">iconbar_flags</a>) 0x20u)</pre>
+
+<h3 id="iconbar_GENERATE_ADJUST_CLICKED">iconbar_GENERATE_ADJUST_CLICKED</h3>
+<pre>#define iconbar_GENERATE_ADJUST_CLICKED ((<a href="#iconbar_flags">iconbar_flags</a>) 0x40u)</pre>
+
+<h3 id="iconbar_SHOW_SELECT_CENTERED">iconbar_SHOW_SELECT_CENTERED</h3>
+<pre>#define iconbar_SHOW_SELECT_CENTERED ((<a href="#iconbar_flags">iconbar_flags</a>) 0x80u)</pre>
+
+<h3 id="iconbar_SHOW_ADJUST_CENTERED">iconbar_SHOW_ADJUST_CENTERED</h3>
+<pre>#define iconbar_SHOW_ADJUST_CENTERED ((<a href="#iconbar_flags">iconbar_flags</a>) 0x100u)</pre>
+
+<h3 id="iconbar_SHOW_SELECT_AT_POINTER">iconbar_SHOW_SELECT_AT_POINTER</h3>
+<pre>#define iconbar_SHOW_SELECT_AT_POINTER ((<a href="#iconbar_flags">iconbar_flags</a>) 0x200u)</pre>
+
+<h3 id="iconbar_SHOW_ADJUST_AT_POINTER">iconbar_SHOW_ADJUST_AT_POINTER</h3>
+<pre>#define iconbar_SHOW_ADJUST_AT_POINTER ((<a href="#iconbar_flags">iconbar_flags</a>) 0x400u)</pre>
+
+<h3 id="action_ICONBAR_CLICKED">action_ICONBAR_CLICKED</h3>
+<pre>#define action_ICONBAR_CLICKED 0x82900u</pre>
+
+<h3 id="action_ICONBAR_SELECT_ABOUT_TO_BE_SHOWN">action_ICONBAR_SELECT_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define action_ICONBAR_SELECT_ABOUT_TO_BE_SHOWN 0x82901u</pre>
+
+<h3 id="action_ICONBAR_ADJUST_ABOUT_TO_BE_SHOWN">action_ICONBAR_ADJUST_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define action_ICONBAR_ADJUST_ABOUT_TO_BE_SHOWN 0x82902u</pre>
+
+<h3 id="iconbar_SELECT">iconbar_SELECT</h3>
+<pre>#define iconbar_SELECT ((<a href="#iconbar_set_button">iconbar_set_button</a>) 0x1u)</pre>
+
+<h3 id="iconbar_ADJUST">iconbar_ADJUST</h3>
+<pre>#define iconbar_ADJUST ((<a href="#iconbar_set_button">iconbar_set_button</a>) 0x2u)</pre>
+
+<h3 id="iconbar_CLICKED_ADJUST">iconbar_CLICKED_ADJUST</h3>
+<pre>#define iconbar_CLICKED_ADJUST 0x1u</pre>
+
+<h3 id="iconbar_CLICKED_SELECT">iconbar_CLICKED_SELECT</h3>
+<pre>#define iconbar_CLICKED_SELECT 0x4u</pre>
+
+<h3 id="xiconbar_get_icon_handle">xiconbar_get_icon_handle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xiconbar_get_icon_handle (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      <a href="wimp.html#wimp_i">wimp_i</a> *i);</pre>
+<p>Gets the icon handle for the iconbar object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>i</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="iconbar_get_icon_handle">iconbar_get_icon_handle</h3>
+<pre>extern <a href="wimp.html#wimp_i">wimp_i</a> iconbar_get_icon_handle (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar);</pre>
+<p>Gets the icon handle for the iconbar object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>i</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xiconbar_set_menu">xiconbar_set_menu</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xiconbar_set_menu (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu);</pre>
+<p>Sets the menu which will be displayed when MENU is clicked over iconbar object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="iconbar_set_menu">iconbar_set_menu</h3>
+<pre>extern void iconbar_set_menu (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu);</pre>
+<p>Sets the menu which will be displayed when MENU is clicked over iconbar object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xiconbar_get_menu">xiconbar_get_menu</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xiconbar_get_menu (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *menu);</pre>
+<p>Gets the menu which will be displayed when MENU is clicked over iconbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>menu</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="iconbar_get_menu">iconbar_get_menu</h3>
+<pre>extern <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar_get_menu (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar);</pre>
+<p>Gets the menu which will be displayed when MENU is clicked over iconbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>menu</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xiconbar_set_action">xiconbar_set_action</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xiconbar_set_action (<a href="#iconbar_set_button">iconbar_set_button</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      bits select_action,
+      bits adjust_action);</pre>
+<p>Sets actions that will be raised when SELECT/ADJUST are clicked on iconbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>select_action</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>adjust_action</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="iconbar_set_action">iconbar_set_action</h3>
+<pre>extern void iconbar_set_action (<a href="#iconbar_set_button">iconbar_set_button</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      bits select_action,
+      bits adjust_action);</pre>
+<p>Sets actions that will be raised when SELECT/ADJUST are clicked on iconbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>select_action</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>adjust_action</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xiconbar_get_action">xiconbar_get_action</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xiconbar_get_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      int *select_action,
+      int *adjust_action);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>select_action</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>adjust_action</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="iconbar_get_action">iconbar_get_action</h3>
+<pre>extern void iconbar_get_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      int *select_action,
+      int *adjust_action);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>select_action</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>adjust_action</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xiconbar_set_show">xiconbar_set_show</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xiconbar_set_show (<a href="#iconbar_set_button">iconbar_set_button</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> select,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> adjust);</pre>
+<p>Sets objects to be shown which SELECT/ADJUST are clicked on iconbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>select</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>adjust</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="iconbar_set_show">iconbar_set_show</h3>
+<pre>extern void iconbar_set_show (<a href="#iconbar_set_button">iconbar_set_button</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> select,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> adjust);</pre>
+<p>Sets objects to be shown which SELECT/ADJUST are clicked on iconbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>select</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>adjust</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xiconbar_get_show">xiconbar_get_show</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xiconbar_get_show (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *select,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *adjust);</pre>
+<p>Gets the objects that will be shown when SELECT/ADJUST are clicked on iconbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>select</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>adjust</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="iconbar_get_show">iconbar_get_show</h3>
+<pre>extern void iconbar_get_show (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *select,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *adjust);</pre>
+<p>Gets the objects that will be shown when SELECT/ADJUST are clicked on iconbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>select</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>adjust</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xiconbar_set_help_message">xiconbar_set_help_message</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xiconbar_set_help_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      char const *help_message);</pre>
+<p>Sets the iconbar objects interactive help message</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>help_message</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="iconbar_set_help_message">iconbar_set_help_message</h3>
+<pre>extern void iconbar_set_help_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      char const *help_message);</pre>
+<p>Sets the iconbar objects interactive help message</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>help_message</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xiconbar_get_help_message">xiconbar_get_help_message</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xiconbar_get_help_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      char *buffer,
+      int size,
+      int *used);</pre>
+<p>Gets the iconbar objects interactive help message</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="iconbar_get_help_message">iconbar_get_help_message</h3>
+<pre>extern int iconbar_get_help_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      char *buffer,
+      int size);</pre>
+<p>Gets the iconbar objects interactive help message</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xiconbar_set_text">xiconbar_set_text</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xiconbar_set_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      char const *text);</pre>
+<p>Sets the text string that will be used for text & sprite iconbar objects</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="iconbar_set_text">iconbar_set_text</h3>
+<pre>extern void iconbar_set_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      char const *text);</pre>
+<p>Sets the text string that will be used for text & sprite iconbar objects</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>text</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xiconbar_get_text">xiconbar_get_text</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xiconbar_get_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      char *buffer,
+      int size,
+      int *used);</pre>
+<p>Gets the text string that will be used for text & sprite iconbar objects</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="iconbar_get_text">iconbar_get_text</h3>
+<pre>extern int iconbar_get_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      char *buffer,
+      int size);</pre>
+<p>Gets the text string that will be used for text & sprite iconbar objects</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xiconbar_set_sprite">xiconbar_set_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xiconbar_set_sprite (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      char const *sprite_name);</pre>
+<p>Sets the sprite to be used for the iconbar object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="iconbar_set_sprite">iconbar_set_sprite</h3>
+<pre>extern void iconbar_set_sprite (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      char const *sprite_name);</pre>
+<p>Sets the sprite to be used for the iconbar object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xiconbar_get_sprite">xiconbar_get_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xiconbar_get_sprite (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      char *buffer,
+      int size,
+      int *used);</pre>
+<p>Gets the sprite that is used for the iconbar object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="iconbar_get_sprite">iconbar_get_sprite</h3>
+<pre>extern int iconbar_get_sprite (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> iconbar,
+      char *buffer,
+      int size);</pre>
+<p>Gets the sprite that is used for the iconbar object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>iconbar</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

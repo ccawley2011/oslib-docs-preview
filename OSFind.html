@@ -1,0 +1,473 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; OSFind</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>OSFind</h2>
+
+<pre>#include "oslib/osfind.h"</pre>
+
+<h3 id="osfind_flags">osfind_flags</h3>
+<pre>typedef bits osfind_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osfind_PATH">osfind_PATH</a></dd>
+<dd><a href="#osfind_PATH_VAR">osfind_PATH_VAR</a></dd>
+<dd><a href="#osfind_NO_PATH">osfind_NO_PATH</a></dd>
+<dd><a href="#osfind_ERROR_IF_ABSENT">osfind_ERROR_IF_ABSENT</a></dd>
+<dd><a href="#osfind_ERROR_IF_DIR">osfind_ERROR_IF_DIR</a></dd>
+</dl>
+
+<h3 id="osfind_PATH">osfind_PATH</h3>
+<pre>#define osfind_PATH ((<a href="#osfind_flags">osfind_flags</a>) 0x1u)</pre>
+
+<h3 id="osfind_PATH_VAR">osfind_PATH_VAR</h3>
+<pre>#define osfind_PATH_VAR ((<a href="#osfind_flags">osfind_flags</a>) 0x2u)</pre>
+
+<h3 id="osfind_NO_PATH">osfind_NO_PATH</h3>
+<pre>#define osfind_NO_PATH ((<a href="#osfind_flags">osfind_flags</a>) 0x3u)</pre>
+
+<h3 id="osfind_ERROR_IF_ABSENT">osfind_ERROR_IF_ABSENT</h3>
+<pre>#define osfind_ERROR_IF_ABSENT ((<a href="#osfind_flags">osfind_flags</a>) 0x8u)</pre>
+
+<h3 id="osfind_ERROR_IF_DIR">osfind_ERROR_IF_DIR</h3>
+<pre>#define osfind_ERROR_IF_DIR ((<a href="#osfind_flags">osfind_flags</a>) 0x4u)</pre>
+
+<h3 id="xosfind_openin">xosfind_openin</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfind_openin (<a href="#osfind_flags">osfind_flags</a> flags,
+      char const *file_name,
+      char const *path,
+      <a href="os.html#os_f">os_f</a> *file);</pre>
+<p>Opens an existing file with read access only. Prefer OSFind_OpeninW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="osfind_openin">osfind_openin</h3>
+<pre>extern <a href="os.html#os_f">os_f</a> osfind_openin (<a href="#osfind_flags">osfind_flags</a> flags,
+      char const *file_name,
+      char const *path);</pre>
+<p>Opens an existing file with read access only. Prefer OSFind_OpeninW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>file</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfind_openinw">xosfind_openinw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfind_openinw (<a href="#osfind_flags">osfind_flags</a> flags,
+      char const *file_name,
+      char const *path,
+      <a href="os.html#os_fw">os_fw</a> *file);</pre>
+<p>Opens an existing file with read access only. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="osfind_openinw">osfind_openinw</h3>
+<pre>extern <a href="os.html#os_fw">os_fw</a> osfind_openinw (<a href="#osfind_flags">osfind_flags</a> flags,
+      char const *file_name,
+      char const *path);</pre>
+<p>Opens an existing file with read access only. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>file</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfind_openout">xosfind_openout</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfind_openout (<a href="#osfind_flags">osfind_flags</a> flags,
+      char const *file_name,
+      char const *path,
+      <a href="os.html#os_f">os_f</a> *file);</pre>
+<p>Creates a new file with read/write access. Prefer OSFind_OpenoutW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="osfind_openout">osfind_openout</h3>
+<pre>extern <a href="os.html#os_f">os_f</a> osfind_openout (<a href="#osfind_flags">osfind_flags</a> flags,
+      char const *file_name,
+      char const *path);</pre>
+<p>Creates a new file with read/write access. Prefer OSFind_OpenoutW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>file</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfind_openoutw">xosfind_openoutw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfind_openoutw (<a href="#osfind_flags">osfind_flags</a> flags,
+      char const *file_name,
+      char const *path,
+      <a href="os.html#os_fw">os_fw</a> *file);</pre>
+<p>Creates a new file with read/write access. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="osfind_openoutw">osfind_openoutw</h3>
+<pre>extern <a href="os.html#os_fw">os_fw</a> osfind_openoutw (<a href="#osfind_flags">osfind_flags</a> flags,
+      char const *file_name,
+      char const *path);</pre>
+<p>Creates a new file with read/write access. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>file</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfind_openup">xosfind_openup</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfind_openup (<a href="#osfind_flags">osfind_flags</a> flags,
+      char const *file_name,
+      char const *path,
+      <a href="os.html#os_f">os_f</a> *file);</pre>
+<p>Opens an existing file with read/write access. Prefer OSFind_OpenupW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="osfind_openup">osfind_openup</h3>
+<pre>extern <a href="os.html#os_f">os_f</a> osfind_openup (<a href="#osfind_flags">osfind_flags</a> flags,
+      char const *file_name,
+      char const *path);</pre>
+<p>Opens an existing file with read/write access. Prefer OSFind_OpenupW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>file</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfind_openupw">xosfind_openupw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfind_openupw (<a href="#osfind_flags">osfind_flags</a> flags,
+      char const *file_name,
+      char const *path,
+      <a href="os.html#os_fw">os_fw</a> *file);</pre>
+<p>Opens an existing file with read/write access. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="osfind_openupw">osfind_openupw</h3>
+<pre>extern <a href="os.html#os_fw">os_fw</a> osfind_openupw (<a href="#osfind_flags">osfind_flags</a> flags,
+      char const *file_name,
+      char const *path);</pre>
+<p>Opens an existing file with read/write access. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>file</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosfind_close">xosfind_close</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfind_close (<a href="os.html#os_f">os_f</a> file);</pre>
+<p>Closes a file or files. Prefer OSFind_CloseW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osfind_close">osfind_close</h3>
+<pre>extern void osfind_close (<a href="os.html#os_f">os_f</a> file);</pre>
+<p>Closes a file or files. Prefer OSFind_CloseW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosfind_closew">xosfind_closew</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosfind_closew (<a href="os.html#os_fw">os_fw</a> file);</pre>
+<p>Closes a file or files. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osfind_closew">osfind_closew</h3>
+<pre>extern void osfind_closew (<a href="os.html#os_fw">os_fw</a> file);</pre>
+<p>Closes a file or files. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xupcallfind_create_openup">xupcallfind_create_openup</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcallfind_create_openup (char const *file_name,
+      <a href="os.html#os_f">os_f</a> file,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file is being created and opened for update. Prefer UpCallFind_CreateOpenupW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="upcallfind_create_openup">upcallfind_create_openup</h3>
+<pre>extern void upcallfind_create_openup (char const *file_name,
+      <a href="os.html#os_f">os_f</a> file,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file is being created and opened for update. Prefer UpCallFind_CreateOpenupW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xupcallfind_create_openupw">xupcallfind_create_openupw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcallfind_create_openupw (char const *file_name,
+      <a href="os.html#os_fw">os_fw</a> file,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file is being created and opened for update. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="upcallfind_create_openupw">upcallfind_create_openupw</h3>
+<pre>extern void upcallfind_create_openupw (char const *file_name,
+      <a href="os.html#os_fw">os_fw</a> file,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file is being created and opened for update. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xupcallfind_openup">xupcallfind_openup</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcallfind_openup (char const *file_name,
+      <a href="os.html#os_f">os_f</a> file,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file is being opened for update. Prefer UpCallFind_OpenupW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="upcallfind_openup">upcallfind_openup</h3>
+<pre>extern void upcallfind_openup (char const *file_name,
+      <a href="os.html#os_f">os_f</a> file,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file is being opened for update. Prefer UpCallFind_OpenupW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xupcallfind_openupw">xupcallfind_openupw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcallfind_openupw (char const *file_name,
+      <a href="os.html#os_fw">os_fw</a> file,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file is being opened for update. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="upcallfind_openupw">upcallfind_openupw</h3>
+<pre>extern void upcallfind_openupw (char const *file_name,
+      <a href="os.html#os_fw">os_fw</a> file,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file is being opened for update. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xupcallfind_close">xupcallfind_close</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcallfind_close (<a href="os.html#os_f">os_f</a> file,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file is being closed. Prefer UpCallFind_CloseW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="upcallfind_close">upcallfind_close</h3>
+<pre>extern void upcallfind_close (<a href="os.html#os_f">os_f</a> file,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file is being closed. Prefer UpCallFind_CloseW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xupcallfind_closew">xupcallfind_closew</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcallfind_closew (<a href="os.html#os_fw">os_fw</a> file,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file is being closed. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="upcallfind_closew">upcallfind_closew</h3>
+<pre>extern void upcallfind_closew (<a href="os.html#os_fw">os_fw</a> file,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> fs_info);</pre>
+<p>Warns your program that a file is being closed. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

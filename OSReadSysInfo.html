@@ -1,0 +1,840 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; OSReadSysInfo</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>OSReadSysInfo</h2>
+
+<pre>#include "oslib/osreadsysinfo.h"</pre>
+
+<h3 id="osreadsysinfo_flags0">osreadsysinfo_flags0</h3>
+<pre>typedef bits osreadsysinfo_flags0;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osreadsysinfo_SPECIAL_FUNCTION">osreadsysinfo_SPECIAL_FUNCTION</a></dd>
+<dd><a href="#osreadsysinfo_SPECIAL_FUNCTION_NONE">osreadsysinfo_SPECIAL_FUNCTION_NONE</a></dd>
+<dd><a href="#osreadsysinfo_SPECIAL_FUNCTION_IOEB">osreadsysinfo_SPECIAL_FUNCTION_IOEB</a></dd>
+<dd><a href="#osreadsysinfo_IO_CONTROL">osreadsysinfo_IO_CONTROL</a></dd>
+<dd><a href="#osreadsysinfo_IO_CONTROL_IOC">osreadsysinfo_IO_CONTROL_IOC</a></dd>
+<dd><a href="#osreadsysinfo_IO_CONTROL_IOMD">osreadsysinfo_IO_CONTROL_IOMD</a></dd>
+<dd><a href="#osreadsysinfo_IO_CONTROL_UNDEFINED">osreadsysinfo_IO_CONTROL_UNDEFINED</a></dd>
+<dd><a href="#osreadsysinfo_MEMORY_CONTROL">osreadsysinfo_MEMORY_CONTROL</a></dd>
+<dd><a href="#osreadsysinfo_MEMORY_CONTROL_MEMC1">osreadsysinfo_MEMORY_CONTROL_MEMC1</a></dd>
+<dd><a href="#osreadsysinfo_MEMORY_CONTROL_IOMD">osreadsysinfo_MEMORY_CONTROL_IOMD</a></dd>
+<dd><a href="#osreadsysinfo_MEMORY_CONTROL_UNDEFINED">osreadsysinfo_MEMORY_CONTROL_UNDEFINED</a></dd>
+<dd><a href="#osreadsysinfo_VIDEO_CONTROL">osreadsysinfo_VIDEO_CONTROL</a></dd>
+<dd><a href="#osreadsysinfo_VIDEO_CONTROL_VIDC_1A">osreadsysinfo_VIDEO_CONTROL_VIDC_1A</a></dd>
+<dd><a href="#osreadsysinfo_VIDEO_CONTROL_VIDC20">osreadsysinfo_VIDEO_CONTROL_VIDC20</a></dd>
+<dd><a href="#osreadsysinfo_VIDEO_CONTROL_UNDEFINED">osreadsysinfo_VIDEO_CONTROL_UNDEFINED</a></dd>
+</dl>
+
+<h3 id="osreadsysinfo_flags1">osreadsysinfo_flags1</h3>
+<pre>typedef bits osreadsysinfo_flags1;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osreadsysinfo_IO">osreadsysinfo_IO</a></dd>
+<dd><a href="#osreadsysinfo_IO_NONE">osreadsysinfo_IO_NONE</a></dd>
+<dd><a href="#osreadsysinfo_IO82C710">osreadsysinfo_IO82C710</a></dd>
+</dl>
+
+<h3 id="osreadsysinfo_flags2">osreadsysinfo_flags2</h3>
+<pre>typedef bits osreadsysinfo_flags2;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osreadsysinfo_LCD_CONTROL">osreadsysinfo_LCD_CONTROL</a></dd>
+<dd><a href="#osreadsysinfo_LCD_CONTROL_NONE">osreadsysinfo_LCD_CONTROL_NONE</a></dd>
+<dd><a href="#osreadsysinfo_LCD_CONTROL_TYPE1">osreadsysinfo_LCD_CONTROL_TYPE1</a></dd>
+<dd><a href="#osreadsysinfo_LCD_CONTROL_TYPE2">osreadsysinfo_LCD_CONTROL_TYPE2</a></dd>
+<dd><a href="#osreadsysinfo_IOMD_TYPE">osreadsysinfo_IOMD_TYPE</a></dd>
+<dd><a href="#osreadsysinfo_IOMD_TYPE_IOMD">osreadsysinfo_IOMD_TYPE_IOMD</a></dd>
+<dd><a href="#osreadsysinfo_IOMD_TYPE_IOMDL">osreadsysinfo_IOMD_TYPE_IOMDL</a></dd>
+<dd><a href="#osreadsysinfo_IOMD_TYPE_NONE">osreadsysinfo_IOMD_TYPE_NONE</a></dd>
+<dd><a href="#osreadsysinfo_IIC2_HIGH_SPEED">osreadsysinfo_IIC2_HIGH_SPEED</a></dd>
+<dd><a href="#osreadsysinfo_IO_CLOCK_STATE_AT_IDLE">osreadsysinfo_IO_CLOCK_STATE_AT_IDLE</a></dd>
+</dl>
+
+<h3 id="osreadsysinfo_platform">osreadsysinfo_platform</h3>
+<pre>typedef int osreadsysinfo_platform;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osreadsysinfo_PLATFORM_UNKNOWN">osreadsysinfo_PLATFORM_UNKNOWN</a></dd>
+<dd><a href="#osreadsysinfo_PLATFORM_RISC_PC">osreadsysinfo_PLATFORM_RISC_PC</a></dd>
+<dd><a href="#osreadsysinfo_PLATFORM_A7000">osreadsysinfo_PLATFORM_A7000</a></dd>
+<dd><a href="#osreadsysinfo_PLATFORM_A7000_PLUS">osreadsysinfo_PLATFORM_A7000_PLUS</a></dd>
+<dd><a href="#osreadsysinfo_PLATFORM_PHOEBE">osreadsysinfo_PLATFORM_PHOEBE</a></dd>
+<dd><a href="#osreadsysinfo_PLATFORM_HAL">osreadsysinfo_PLATFORM_HAL</a></dd>
+<dd><a href="#osreadsysinfo_PLATFORM_VIRTUAL_RPC">osreadsysinfo_PLATFORM_VIRTUAL_RPC</a></dd>
+<dd><a href="#osreadsysinfo_PLATFORM_A9">osreadsysinfo_PLATFORM_A9</a></dd>
+</dl>
+
+<h3 id="osreadsysinfo_platform_flags">osreadsysinfo_platform_flags</h3>
+<pre>typedef bits osreadsysinfo_platform_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osreadsysinfo_PLATFORM_SUPPORTS_PODULES">osreadsysinfo_PLATFORM_SUPPORTS_PODULES</a></dd>
+<dd><a href="#osreadsysinfo_PLATFORM_SUPPORTS_PCI">osreadsysinfo_PLATFORM_SUPPORTS_PCI</a></dd>
+<dd><a href="#osreadsysinfo_PLATFORM_SUPPORTS_MULTI_CPU">osreadsysinfo_PLATFORM_SUPPORTS_MULTI_CPU</a></dd>
+<dd><a href="#osreadsysinfo_PLATFORM_HAS_SOFT_POWER_CONTROL">osreadsysinfo_PLATFORM_HAS_SOFT_POWER_CONTROL</a></dd>
+<dd><a href="#osreadsysinfo_PLATFORM_RUNS_OS_FROM_RAM">osreadsysinfo_PLATFORM_RUNS_OS_FROM_RAM</a></dd>
+</dl>
+
+<h3 id="osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</h3>
+<pre>typedef bits osreadsysinfo_kernel_value_id;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osreadsysinfokernelvalueid_OS_PAGE_TABLE">osreadsysinfokernelvalueid_OS_PAGE_TABLE</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_HIGEST_OS_PAGE_TABLE_PTR">osreadsysinfokernelvalueid_HIGEST_OS_PAGE_TABLE_PTR</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_UNAVAILABLE_PAGES_PPL">osreadsysinfokernelvalueid_UNAVAILABLE_PAGES_PPL</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_PHYS_MEM_TABLE">osreadsysinfokernelvalueid_PHYS_MEM_TABLE</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_CACHE_CLEANER_FLIP_FLOP">osreadsysinfokernelvalueid_CACHE_CLEANER_FLIP_FLOP</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_INTERNAL_TICKER_CHAIN">osreadsysinfokernelvalueid_INTERNAL_TICKER_CHAIN</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_ROM_MODUE_CHAIN">osreadsysinfokernelvalueid_ROM_MODUE_CHAIN</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_DA_LIST">osreadsysinfokernelvalueid_DA_LIST</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_DA_SPACE_NODE">osreadsysinfokernelvalueid_DA_SPACE_NODE</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_MODULE_CHAIN">osreadsysinfokernelvalueid_MODULE_CHAIN</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_SWI_HASH_TABLE_ENTRIES">osreadsysinfokernelvalueid_SWI_HASH_TABLE_ENTRIES</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_SWI_HASH_TABLE">osreadsysinfokernelvalueid_SWI_HASH_TABLE</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_IO_SYSTEM_TYPE_FLAGS">osreadsysinfokernelvalueid_IO_SYSTEM_TYPE_FLAGS</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_L1_PAGE_TABLE">osreadsysinfokernelvalueid_L1_PAGE_TABLE</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_L2_PAGE_TABLE">osreadsysinfokernelvalueid_L2_PAGE_TABLE</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_TOP_UND_MODE_STACK">osreadsysinfokernelvalueid_TOP_UND_MODE_STACK</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_TOP_SVC_MODE_STACK">osreadsysinfokernelvalueid_TOP_SVC_MODE_STACK</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_START_SYSTEM_HEAP">osreadsysinfokernelvalueid_START_SYSTEM_HEAP</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_KERNEL_MSG_TRANS_BLOCK">osreadsysinfokernelvalueid_KERNEL_MSG_TRANS_BLOCK</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_ERROR_SEMAPHORE">osreadsysinfokernelvalueid_ERROR_SEMAPHORE</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_PRETTY_PRINT_DICT">osreadsysinfokernelvalueid_PRETTY_PRINT_DICT</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_TIMER0_LATCH_VALUE">osreadsysinfokernelvalueid_TIMER0_LATCH_VALUE</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_FAST_TICKER_VSPEED">osreadsysinfokernelvalueid_FAST_TICKER_VSPEED</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_VECTOR_CLAIMANTS_TABLE">osreadsysinfokernelvalueid_VECTOR_CLAIMANTS_TABLE</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_NUM_VECTORS">osreadsysinfokernelvalueid_NUM_VECTORS</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_TOP_IRQ_MODE_STACK">osreadsysinfokernelvalueid_TOP_IRQ_MODE_STACK</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_SWI_DISPATCH_TABLE">osreadsysinfokernelvalueid_SWI_DISPATCH_TABLE</a></dd>
+<dd><a href="#osreadsysinfokernelvalueid_BRANCH_AFTER_SWI">osreadsysinfokernelvalueid_BRANCH_AFTER_SWI</a></dd>
+</dl>
+
+<h3 id="osreadsysinfo_rom_information_code">osreadsysinfo_rom_information_code</h3>
+<pre>typedef int osreadsysinfo_rom_information_code;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osreadsysinfo_OS_NAME">osreadsysinfo_OS_NAME</a></dd>
+<dd><a href="#osreadsysinfo_PART_NUMBER">osreadsysinfo_PART_NUMBER</a></dd>
+<dd><a href="#osreadsysinfo_BUILD_TIME">osreadsysinfo_BUILD_TIME</a></dd>
+<dd><a href="#osreadsysinfo_DEALER_NAME">osreadsysinfo_DEALER_NAME</a></dd>
+<dd><a href="#osreadsysinfo_USER_NAME">osreadsysinfo_USER_NAME</a></dd>
+<dd><a href="#osreadsysinfo_USER_ADDRESS">osreadsysinfo_USER_ADDRESS</a></dd>
+<dd><a href="#osreadsysinfo_OS_DESCRIPTION">osreadsysinfo_OS_DESCRIPTION</a></dd>
+</dl>
+
+<h3 id="osreadsysinfo_SPECIAL_FUNCTION">osreadsysinfo_SPECIAL_FUNCTION</h3>
+<pre>#define osreadsysinfo_SPECIAL_FUNCTION ((<a href="#osreadsysinfo_flags0">osreadsysinfo_flags0</a>) 0xFFu)</pre>
+
+<h3 id="osreadsysinfo_SPECIAL_FUNCTION_SHIFT">osreadsysinfo_SPECIAL_FUNCTION_SHIFT</h3>
+<pre>#define osreadsysinfo_SPECIAL_FUNCTION_SHIFT 0</pre>
+
+<h3 id="osreadsysinfo_SPECIAL_FUNCTION_NONE">osreadsysinfo_SPECIAL_FUNCTION_NONE</h3>
+<pre>#define osreadsysinfo_SPECIAL_FUNCTION_NONE ((<a href="#osreadsysinfo_flags0">osreadsysinfo_flags0</a>) 0x0u)</pre>
+
+<h3 id="osreadsysinfo_SPECIAL_FUNCTION_IOEB">osreadsysinfo_SPECIAL_FUNCTION_IOEB</h3>
+<pre>#define osreadsysinfo_SPECIAL_FUNCTION_IOEB ((<a href="#osreadsysinfo_flags0">osreadsysinfo_flags0</a>) 0x1u)</pre>
+
+<h3 id="osreadsysinfo_IO_CONTROL">osreadsysinfo_IO_CONTROL</h3>
+<pre>#define osreadsysinfo_IO_CONTROL ((<a href="#osreadsysinfo_flags0">osreadsysinfo_flags0</a>) 0xFF00u)</pre>
+
+<h3 id="osreadsysinfo_IO_CONTROL_SHIFT">osreadsysinfo_IO_CONTROL_SHIFT</h3>
+<pre>#define osreadsysinfo_IO_CONTROL_SHIFT 8</pre>
+
+<h3 id="osreadsysinfo_IO_CONTROL_IOC">osreadsysinfo_IO_CONTROL_IOC</h3>
+<pre>#define osreadsysinfo_IO_CONTROL_IOC ((<a href="#osreadsysinfo_flags0">osreadsysinfo_flags0</a>) 0x0u)</pre>
+
+<h3 id="osreadsysinfo_IO_CONTROL_IOMD">osreadsysinfo_IO_CONTROL_IOMD</h3>
+<pre>#define osreadsysinfo_IO_CONTROL_IOMD ((<a href="#osreadsysinfo_flags0">osreadsysinfo_flags0</a>) 0x1u)</pre>
+
+<h3 id="osreadsysinfo_IO_CONTROL_UNDEFINED">osreadsysinfo_IO_CONTROL_UNDEFINED</h3>
+<pre>#define osreadsysinfo_IO_CONTROL_UNDEFINED ((<a href="#osreadsysinfo_flags0">osreadsysinfo_flags0</a>) 0xFFu)</pre>
+
+<p>RISC OS 6</p>
+
+<h3 id="osreadsysinfo_MEMORY_CONTROL">osreadsysinfo_MEMORY_CONTROL</h3>
+<pre>#define osreadsysinfo_MEMORY_CONTROL ((<a href="#osreadsysinfo_flags0">osreadsysinfo_flags0</a>) 0xFF0000u)</pre>
+
+<h3 id="osreadsysinfo_MEMORY_CONTROL_SHIFT">osreadsysinfo_MEMORY_CONTROL_SHIFT</h3>
+<pre>#define osreadsysinfo_MEMORY_CONTROL_SHIFT 16</pre>
+
+<h3 id="osreadsysinfo_MEMORY_CONTROL_MEMC1">osreadsysinfo_MEMORY_CONTROL_MEMC1</h3>
+<pre>#define osreadsysinfo_MEMORY_CONTROL_MEMC1 ((<a href="#osreadsysinfo_flags0">osreadsysinfo_flags0</a>) 0x0u)</pre>
+
+<h3 id="osreadsysinfo_MEMORY_CONTROL_IOMD">osreadsysinfo_MEMORY_CONTROL_IOMD</h3>
+<pre>#define osreadsysinfo_MEMORY_CONTROL_IOMD ((<a href="#osreadsysinfo_flags0">osreadsysinfo_flags0</a>) 0x1u)</pre>
+
+<h3 id="osreadsysinfo_MEMORY_CONTROL_UNDEFINED">osreadsysinfo_MEMORY_CONTROL_UNDEFINED</h3>
+<pre>#define osreadsysinfo_MEMORY_CONTROL_UNDEFINED ((<a href="#osreadsysinfo_flags0">osreadsysinfo_flags0</a>) 0xFFu)</pre>
+
+<p>RISC OS 6</p>
+
+<h3 id="osreadsysinfo_VIDEO_CONTROL">osreadsysinfo_VIDEO_CONTROL</h3>
+<pre>#define osreadsysinfo_VIDEO_CONTROL ((<a href="#osreadsysinfo_flags0">osreadsysinfo_flags0</a>) 0xFF000000u)</pre>
+
+<h3 id="osreadsysinfo_VIDEO_CONTROL_SHIFT">osreadsysinfo_VIDEO_CONTROL_SHIFT</h3>
+<pre>#define osreadsysinfo_VIDEO_CONTROL_SHIFT 24</pre>
+
+<h3 id="osreadsysinfo_VIDEO_CONTROL_VIDC_1A">osreadsysinfo_VIDEO_CONTROL_VIDC_1A</h3>
+<pre>#define osreadsysinfo_VIDEO_CONTROL_VIDC_1A ((<a href="#osreadsysinfo_flags0">osreadsysinfo_flags0</a>) 0x0u)</pre>
+
+<h3 id="osreadsysinfo_VIDEO_CONTROL_VIDC20">osreadsysinfo_VIDEO_CONTROL_VIDC20</h3>
+<pre>#define osreadsysinfo_VIDEO_CONTROL_VIDC20 ((<a href="#osreadsysinfo_flags0">osreadsysinfo_flags0</a>) 0x1u)</pre>
+
+<h3 id="osreadsysinfo_VIDEO_CONTROL_UNDEFINED">osreadsysinfo_VIDEO_CONTROL_UNDEFINED</h3>
+<pre>#define osreadsysinfo_VIDEO_CONTROL_UNDEFINED ((<a href="#osreadsysinfo_flags0">osreadsysinfo_flags0</a>) 0xFFu)</pre>
+
+<p>RISC OS 6</p>
+
+<h3 id="osreadsysinfo_IO">osreadsysinfo_IO</h3>
+<pre>#define osreadsysinfo_IO ((<a href="#osreadsysinfo_flags1">osreadsysinfo_flags1</a>) 0xFFu)</pre>
+
+<h3 id="osreadsysinfo_IO_SHIFT">osreadsysinfo_IO_SHIFT</h3>
+<pre>#define osreadsysinfo_IO_SHIFT 0</pre>
+
+<h3 id="osreadsysinfo_IO_NONE">osreadsysinfo_IO_NONE</h3>
+<pre>#define osreadsysinfo_IO_NONE ((<a href="#osreadsysinfo_flags1">osreadsysinfo_flags1</a>) 0x0u)</pre>
+
+<h3 id="osreadsysinfo_IO82C710">osreadsysinfo_IO82C710</h3>
+<pre>#define osreadsysinfo_IO82C710 ((<a href="#osreadsysinfo_flags1">osreadsysinfo_flags1</a>) 0x1u)</pre>
+
+<p>82C710/711, or SMC'665 or similar</p>
+
+<h3 id="osreadsysinfo_LCD_CONTROL">osreadsysinfo_LCD_CONTROL</h3>
+<pre>#define osreadsysinfo_LCD_CONTROL ((<a href="#osreadsysinfo_flags2">osreadsysinfo_flags2</a>) 0xFFu)</pre>
+
+<h3 id="osreadsysinfo_LCD_CONTROL_SHIFT">osreadsysinfo_LCD_CONTROL_SHIFT</h3>
+<pre>#define osreadsysinfo_LCD_CONTROL_SHIFT 0</pre>
+
+<h3 id="osreadsysinfo_LCD_CONTROL_NONE">osreadsysinfo_LCD_CONTROL_NONE</h3>
+<pre>#define osreadsysinfo_LCD_CONTROL_NONE ((<a href="#osreadsysinfo_flags2">osreadsysinfo_flags2</a>) 0x0u)</pre>
+
+<h3 id="osreadsysinfo_LCD_CONTROL_TYPE1">osreadsysinfo_LCD_CONTROL_TYPE1</h3>
+<pre>#define osreadsysinfo_LCD_CONTROL_TYPE1 ((<a href="#osreadsysinfo_flags2">osreadsysinfo_flags2</a>) 0x1u)</pre>
+
+<p>A4 controller</p>
+
+<h3 id="osreadsysinfo_LCD_CONTROL_TYPE2">osreadsysinfo_LCD_CONTROL_TYPE2</h3>
+<pre>#define osreadsysinfo_LCD_CONTROL_TYPE2 ((<a href="#osreadsysinfo_flags2">osreadsysinfo_flags2</a>) 0x2u)</pre>
+
+<p>'Stork' controller</p>
+
+<h3 id="osreadsysinfo_IOMD_TYPE">osreadsysinfo_IOMD_TYPE</h3>
+<pre>#define osreadsysinfo_IOMD_TYPE ((<a href="#osreadsysinfo_flags2">osreadsysinfo_flags2</a>) 0xFF00u)</pre>
+
+<h3 id="osreadsysinfo_IOMD_TYPE_SHIFT">osreadsysinfo_IOMD_TYPE_SHIFT</h3>
+<pre>#define osreadsysinfo_IOMD_TYPE_SHIFT 8</pre>
+
+<h3 id="osreadsysinfo_IOMD_TYPE_IOMD">osreadsysinfo_IOMD_TYPE_IOMD</h3>
+<pre>#define osreadsysinfo_IOMD_TYPE_IOMD ((<a href="#osreadsysinfo_flags2">osreadsysinfo_flags2</a>) 0x0u)</pre>
+
+<h3 id="osreadsysinfo_IOMD_TYPE_IOMDL">osreadsysinfo_IOMD_TYPE_IOMDL</h3>
+<pre>#define osreadsysinfo_IOMD_TYPE_IOMDL ((<a href="#osreadsysinfo_flags2">osreadsysinfo_flags2</a>) 0x1u)</pre>
+
+<h3 id="osreadsysinfo_IOMD_TYPE_NONE">osreadsysinfo_IOMD_TYPE_NONE</h3>
+<pre>#define osreadsysinfo_IOMD_TYPE_NONE ((<a href="#osreadsysinfo_flags2">osreadsysinfo_flags2</a>) 0xFFu)</pre>
+
+<p>RISC OS 6</p>
+
+<h3 id="osreadsysinfo_IIC2_HIGH_SPEED">osreadsysinfo_IIC2_HIGH_SPEED</h3>
+<pre>#define osreadsysinfo_IIC2_HIGH_SPEED ((<a href="#osreadsysinfo_flags2">osreadsysinfo_flags2</a>) 0x1000000u)</pre>
+
+<p>RISC OS 6</p>
+
+<h3 id="osreadsysinfo_IO_CLOCK_STATE_AT_IDLE">osreadsysinfo_IO_CLOCK_STATE_AT_IDLE</h3>
+<pre>#define osreadsysinfo_IO_CLOCK_STATE_AT_IDLE ((<a href="#osreadsysinfo_flags2">osreadsysinfo_flags2</a>) 0x2000000u)</pre>
+
+<p>RISC OS 6</p>
+
+<h3 id="osreadsysinfo_PLATFORM_UNKNOWN">osreadsysinfo_PLATFORM_UNKNOWN</h3>
+<pre>#define osreadsysinfo_PLATFORM_UNKNOWN ((<a href="#osreadsysinfo_platform">osreadsysinfo_platform</a>) 0x0u)</pre>
+
+<h3 id="osreadsysinfo_PLATFORM_RISC_PC">osreadsysinfo_PLATFORM_RISC_PC</h3>
+<pre>#define osreadsysinfo_PLATFORM_RISC_PC ((<a href="#osreadsysinfo_platform">osreadsysinfo_platform</a>) 0x1u)</pre>
+
+<h3 id="osreadsysinfo_PLATFORM_A7000">osreadsysinfo_PLATFORM_A7000</h3>
+<pre>#define osreadsysinfo_PLATFORM_A7000 ((<a href="#osreadsysinfo_platform">osreadsysinfo_platform</a>) 0x2u)</pre>
+
+<h3 id="osreadsysinfo_PLATFORM_A7000_PLUS">osreadsysinfo_PLATFORM_A7000_PLUS</h3>
+<pre>#define osreadsysinfo_PLATFORM_A7000_PLUS ((<a href="#osreadsysinfo_platform">osreadsysinfo_platform</a>) 0x3u)</pre>
+
+<h3 id="osreadsysinfo_PLATFORM_PHOEBE">osreadsysinfo_PLATFORM_PHOEBE</h3>
+<pre>#define osreadsysinfo_PLATFORM_PHOEBE ((<a href="#osreadsysinfo_platform">osreadsysinfo_platform</a>) 0x4u)</pre>
+
+<h3 id="osreadsysinfo_PLATFORM_HAL">osreadsysinfo_PLATFORM_HAL</h3>
+<pre>#define osreadsysinfo_PLATFORM_HAL ((<a href="#osreadsysinfo_platform">osreadsysinfo_platform</a>) 0x5u)</pre>
+
+<h3 id="osreadsysinfo_PLATFORM_VIRTUAL_RPC">osreadsysinfo_PLATFORM_VIRTUAL_RPC</h3>
+<pre>#define osreadsysinfo_PLATFORM_VIRTUAL_RPC ((<a href="#osreadsysinfo_platform">osreadsysinfo_platform</a>) 0x6u)</pre>
+
+<h3 id="osreadsysinfo_PLATFORM_A9">osreadsysinfo_PLATFORM_A9</h3>
+<pre>#define osreadsysinfo_PLATFORM_A9 ((<a href="#osreadsysinfo_platform">osreadsysinfo_platform</a>) 0x7u)</pre>
+
+<h3 id="osreadsysinfo_PLATFORM_SUPPORTS_PODULES">osreadsysinfo_PLATFORM_SUPPORTS_PODULES</h3>
+<pre>#define osreadsysinfo_PLATFORM_SUPPORTS_PODULES ((<a href="#osreadsysinfo_platform_flags">osreadsysinfo_platform_flags</a>) 0x1u)</pre>
+
+<h3 id="osreadsysinfo_PLATFORM_SUPPORTS_PCI">osreadsysinfo_PLATFORM_SUPPORTS_PCI</h3>
+<pre>#define osreadsysinfo_PLATFORM_SUPPORTS_PCI ((<a href="#osreadsysinfo_platform_flags">osreadsysinfo_platform_flags</a>) 0x2u)</pre>
+
+<h3 id="osreadsysinfo_PLATFORM_SUPPORTS_MULTI_CPU">osreadsysinfo_PLATFORM_SUPPORTS_MULTI_CPU</h3>
+<pre>#define osreadsysinfo_PLATFORM_SUPPORTS_MULTI_CPU ((<a href="#osreadsysinfo_platform_flags">osreadsysinfo_platform_flags</a>) 0x4u)</pre>
+
+<h3 id="osreadsysinfo_PLATFORM_HAS_SOFT_POWER_CONTROL">osreadsysinfo_PLATFORM_HAS_SOFT_POWER_CONTROL</h3>
+<pre>#define osreadsysinfo_PLATFORM_HAS_SOFT_POWER_CONTROL ((<a href="#osreadsysinfo_platform_flags">osreadsysinfo_platform_flags</a>) 0x8u)</pre>
+
+<h3 id="osreadsysinfo_PLATFORM_RUNS_OS_FROM_RAM">osreadsysinfo_PLATFORM_RUNS_OS_FROM_RAM</h3>
+<pre>#define osreadsysinfo_PLATFORM_RUNS_OS_FROM_RAM ((<a href="#osreadsysinfo_platform_flags">osreadsysinfo_platform_flags</a>) 0x10u)</pre>
+
+<h3 id="osreadsysinfokernelvalueid_OS_PAGE_TABLE">osreadsysinfokernelvalueid_OS_PAGE_TABLE</h3>
+<pre>#define osreadsysinfokernelvalueid_OS_PAGE_TABLE ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0x0u)</pre>
+
+<h3 id="osreadsysinfokernelvalueid_HIGEST_OS_PAGE_TABLE_PTR">osreadsysinfokernelvalueid_HIGEST_OS_PAGE_TABLE_PTR</h3>
+<pre>#define osreadsysinfokernelvalueid_HIGEST_OS_PAGE_TABLE_PTR ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0x1u)</pre>
+
+<h3 id="osreadsysinfokernelvalueid_UNAVAILABLE_PAGES_PPL">osreadsysinfokernelvalueid_UNAVAILABLE_PAGES_PPL</h3>
+<pre>#define osreadsysinfokernelvalueid_UNAVAILABLE_PAGES_PPL ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0x2u)</pre>
+
+<h3 id="osreadsysinfokernelvalueid_PHYS_MEM_TABLE">osreadsysinfokernelvalueid_PHYS_MEM_TABLE</h3>
+<pre>#define osreadsysinfokernelvalueid_PHYS_MEM_TABLE ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0x3u)</pre>
+
+<h3 id="osreadsysinfokernelvalueid_CACHE_CLEANER_FLIP_FLOP">osreadsysinfokernelvalueid_CACHE_CLEANER_FLIP_FLOP</h3>
+<pre>#define osreadsysinfokernelvalueid_CACHE_CLEANER_FLIP_FLOP ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0x4u)</pre>
+
+<h3 id="osreadsysinfokernelvalueid_INTERNAL_TICKER_CHAIN">osreadsysinfokernelvalueid_INTERNAL_TICKER_CHAIN</h3>
+<pre>#define osreadsysinfokernelvalueid_INTERNAL_TICKER_CHAIN ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0x5u)</pre>
+
+<h3 id="osreadsysinfokernelvalueid_ROM_MODUE_CHAIN">osreadsysinfokernelvalueid_ROM_MODUE_CHAIN</h3>
+<pre>#define osreadsysinfokernelvalueid_ROM_MODUE_CHAIN ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0x6u)</pre>
+
+<h3 id="osreadsysinfokernelvalueid_DA_LIST">osreadsysinfokernelvalueid_DA_LIST</h3>
+<pre>#define osreadsysinfokernelvalueid_DA_LIST ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0x7u)</pre>
+
+<h3 id="osreadsysinfokernelvalueid_DA_SPACE_NODE">osreadsysinfokernelvalueid_DA_SPACE_NODE</h3>
+<pre>#define osreadsysinfokernelvalueid_DA_SPACE_NODE ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0x8u)</pre>
+
+<h3 id="osreadsysinfokernelvalueid_MODULE_CHAIN">osreadsysinfokernelvalueid_MODULE_CHAIN</h3>
+<pre>#define osreadsysinfokernelvalueid_MODULE_CHAIN ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0x9u)</pre>
+
+<h3 id="osreadsysinfokernelvalueid_SWI_HASH_TABLE_ENTRIES">osreadsysinfokernelvalueid_SWI_HASH_TABLE_ENTRIES</h3>
+<pre>#define osreadsysinfokernelvalueid_SWI_HASH_TABLE_ENTRIES ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0xAu)</pre>
+
+<h3 id="osreadsysinfokernelvalueid_SWI_HASH_TABLE">osreadsysinfokernelvalueid_SWI_HASH_TABLE</h3>
+<pre>#define osreadsysinfokernelvalueid_SWI_HASH_TABLE ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0xBu)</pre>
+
+<h3 id="osreadsysinfokernelvalueid_IO_SYSTEM_TYPE_FLAGS">osreadsysinfokernelvalueid_IO_SYSTEM_TYPE_FLAGS</h3>
+<pre>#define osreadsysinfokernelvalueid_IO_SYSTEM_TYPE_FLAGS ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0xCu)</pre>
+
+<h3 id="osreadsysinfokernelvalueid_L1_PAGE_TABLE">osreadsysinfokernelvalueid_L1_PAGE_TABLE</h3>
+<pre>#define osreadsysinfokernelvalueid_L1_PAGE_TABLE ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0xDu)</pre>
+
+<p>Obsolete, see SystemDAs</p>
+
+<h3 id="osreadsysinfokernelvalueid_L2_PAGE_TABLE">osreadsysinfokernelvalueid_L2_PAGE_TABLE</h3>
+<pre>#define osreadsysinfokernelvalueid_L2_PAGE_TABLE ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0xEu)</pre>
+
+<p>Obsolete, see SystemDAs</p>
+
+<h3 id="osreadsysinfokernelvalueid_TOP_UND_MODE_STACK">osreadsysinfokernelvalueid_TOP_UND_MODE_STACK</h3>
+<pre>#define osreadsysinfokernelvalueid_TOP_UND_MODE_STACK ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0xFu)</pre>
+
+<p>Obsolete, see SystemDAs</p>
+
+<h3 id="osreadsysinfokernelvalueid_TOP_SVC_MODE_STACK">osreadsysinfokernelvalueid_TOP_SVC_MODE_STACK</h3>
+<pre>#define osreadsysinfokernelvalueid_TOP_SVC_MODE_STACK ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0x10u)</pre>
+
+<p>Obsolte, see SystemDAs</p>
+
+<h3 id="osreadsysinfokernelvalueid_START_SYSTEM_HEAP">osreadsysinfokernelvalueid_START_SYSTEM_HEAP</h3>
+<pre>#define osreadsysinfokernelvalueid_START_SYSTEM_HEAP ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0x11u)</pre>
+
+<h3 id="osreadsysinfokernelvalueid_KERNEL_MSG_TRANS_BLOCK">osreadsysinfokernelvalueid_KERNEL_MSG_TRANS_BLOCK</h3>
+<pre>#define osreadsysinfokernelvalueid_KERNEL_MSG_TRANS_BLOCK ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0x12u)</pre>
+
+<h3 id="osreadsysinfokernelvalueid_ERROR_SEMAPHORE">osreadsysinfokernelvalueid_ERROR_SEMAPHORE</h3>
+<pre>#define osreadsysinfokernelvalueid_ERROR_SEMAPHORE ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0x13u)</pre>
+
+<h3 id="osreadsysinfokernelvalueid_PRETTY_PRINT_DICT">osreadsysinfokernelvalueid_PRETTY_PRINT_DICT</h3>
+<pre>#define osreadsysinfokernelvalueid_PRETTY_PRINT_DICT ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0x14u)</pre>
+
+<p>Obsolete, see OS_PrettyPrint</p>
+
+<h3 id="osreadsysinfokernelvalueid_TIMER0_LATCH_VALUE">osreadsysinfokernelvalueid_TIMER0_LATCH_VALUE</h3>
+<pre>#define osreadsysinfokernelvalueid_TIMER0_LATCH_VALUE ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0x15u)</pre>
+
+<h3 id="osreadsysinfokernelvalueid_FAST_TICKER_VSPEED">osreadsysinfokernelvalueid_FAST_TICKER_VSPEED</h3>
+<pre>#define osreadsysinfokernelvalueid_FAST_TICKER_VSPEED ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0x16u)</pre>
+
+<h3 id="osreadsysinfokernelvalueid_VECTOR_CLAIMANTS_TABLE">osreadsysinfokernelvalueid_VECTOR_CLAIMANTS_TABLE</h3>
+<pre>#define osreadsysinfokernelvalueid_VECTOR_CLAIMANTS_TABLE ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0x17u)</pre>
+
+<h3 id="osreadsysinfokernelvalueid_NUM_VECTORS">osreadsysinfokernelvalueid_NUM_VECTORS</h3>
+<pre>#define osreadsysinfokernelvalueid_NUM_VECTORS ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0x18u)</pre>
+
+<h3 id="osreadsysinfokernelvalueid_TOP_IRQ_MODE_STACK">osreadsysinfokernelvalueid_TOP_IRQ_MODE_STACK</h3>
+<pre>#define osreadsysinfokernelvalueid_TOP_IRQ_MODE_STACK ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0x19u)</pre>
+
+<p>Obsolte, see SystemDAs</p>
+
+<h3 id="osreadsysinfokernelvalueid_SWI_DISPATCH_TABLE">osreadsysinfokernelvalueid_SWI_DISPATCH_TABLE</h3>
+<pre>#define osreadsysinfokernelvalueid_SWI_DISPATCH_TABLE ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0x1Au)</pre>
+
+<h3 id="osreadsysinfokernelvalueid_BRANCH_AFTER_SWI">osreadsysinfokernelvalueid_BRANCH_AFTER_SWI</h3>
+<pre>#define osreadsysinfokernelvalueid_BRANCH_AFTER_SWI ((<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a>) 0x1Bu)</pre>
+
+<h3 id="osreadsysinfo_OS_NAME">osreadsysinfo_OS_NAME</h3>
+<pre>#define osreadsysinfo_OS_NAME ((<a href="#osreadsysinfo_rom_information_code">osreadsysinfo_rom_information_code</a>) 0x0u)</pre>
+
+<p>OS name in form <OS name> <version> <comments></p>
+
+<h3 id="osreadsysinfo_PART_NUMBER">osreadsysinfo_PART_NUMBER</h3>
+<pre>#define osreadsysinfo_PART_NUMBER ((<a href="#osreadsysinfo_rom_information_code">osreadsysinfo_rom_information_code</a>) 0x1u)</pre>
+
+<p>Part number in form <part>[-<comments>]</p>
+
+<h3 id="osreadsysinfo_BUILD_TIME">osreadsysinfo_BUILD_TIME</h3>
+<pre>#define osreadsysinfo_BUILD_TIME ((<a href="#osreadsysinfo_rom_information_code">osreadsysinfo_rom_information_code</a>) 0x2u)</pre>
+
+<p>Build time, eg Tue,18 Jan 2000.10:36:40</p>
+
+<h3 id="osreadsysinfo_DEALER_NAME">osreadsysinfo_DEALER_NAME</h3>
+<pre>#define osreadsysinfo_DEALER_NAME ((<a href="#osreadsysinfo_rom_information_code">osreadsysinfo_rom_information_code</a>) 0x3u)</pre>
+
+<p>Dealer name - this is the supplier of the ROMs</p>
+
+<h3 id="osreadsysinfo_USER_NAME">osreadsysinfo_USER_NAME</h3>
+<pre>#define osreadsysinfo_USER_NAME ((<a href="#osreadsysinfo_rom_information_code">osreadsysinfo_rom_information_code</a>) 0x4u)</pre>
+
+<p>User name - this is the name of the owner of the ROMs</p>
+
+<h3 id="osreadsysinfo_USER_ADDRESS">osreadsysinfo_USER_ADDRESS</h3>
+<pre>#define osreadsysinfo_USER_ADDRESS ((<a href="#osreadsysinfo_rom_information_code">osreadsysinfo_rom_information_code</a>) 0x5u)</pre>
+
+<p>User address - this is the address of the owner of the ROMs</p>
+
+<h3 id="osreadsysinfo_OS_DESCRIPTION">osreadsysinfo_OS_DESCRIPTION</h3>
+<pre>#define osreadsysinfo_OS_DESCRIPTION ((<a href="#osreadsysinfo_rom_information_code">osreadsysinfo_rom_information_code</a>) 0x6u)</pre>
+
+<p>Printable OS description</p>
+
+<h3 id="xosreadsysinfo_screen_size">xosreadsysinfo_screen_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosreadsysinfo_screen_size (int *screen_size);</pre>
+<p>Reads the configured screen size - deprecated in RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>screen_size</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="osreadsysinfo_screen_size">osreadsysinfo_screen_size</h3>
+<pre>extern int osreadsysinfo_screen_size (void);
+</pre><p>Reads the configured screen size - deprecated in RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>screen_size</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosreadsysinfo_mode">xosreadsysinfo_mode</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosreadsysinfo_mode (<a href="os.html#os_mode">os_mode</a> *mode,
+      int *monitor_type,
+      int *sync);</pre>
+<p>Reads the configured Mode/WimpMode, MonitorType and Sync</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>monitor_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>sync</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osreadsysinfo_mode">osreadsysinfo_mode</h3>
+<pre>extern <a href="os.html#os_mode">os_mode</a> osreadsysinfo_mode (int *monitor_type,
+      int *sync);</pre>
+<p>Reads the configured Mode/WimpMode, MonitorType and Sync</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>monitor_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>sync</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>mode</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosreadsysinfo_machine_id">xosreadsysinfo_machine_id</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosreadsysinfo_machine_id (<a href="#osreadsysinfo_flags0">osreadsysinfo_flags0</a> *config0,
+      <a href="#osreadsysinfo_flags1">osreadsysinfo_flags1</a> *config1,
+      <a href="#osreadsysinfo_flags2">osreadsysinfo_flags2</a> *config2,
+      bits *id_lo,
+      bits *id_hi);</pre>
+<p>Reads the presence of various chips and unique machine id</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>config0</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>config1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>config2</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>id_lo</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>id_hi</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="osreadsysinfo_machine_id">osreadsysinfo_machine_id</h3>
+<pre>extern void osreadsysinfo_machine_id (<a href="#osreadsysinfo_flags0">osreadsysinfo_flags0</a> *config0,
+      <a href="#osreadsysinfo_flags1">osreadsysinfo_flags1</a> *config1,
+      <a href="#osreadsysinfo_flags2">osreadsysinfo_flags2</a> *config2,
+      bits *id_lo,
+      bits *id_hi);</pre>
+<p>Reads the presence of various chips and unique machine id</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>config0</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>config1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>config2</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>id_lo</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>id_hi</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xosreadsysinfo_71x_features">xosreadsysinfo_71x_features</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosreadsysinfo_71x_features (bits *features,
+      bits *features_extended0,
+      bits *features_extended1,
+      bits *features_extended2,
+      bits *features_extended3);</pre>
+<p>Reads features mask for 82C710 chip family</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>features</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>features_extended0</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>features_extended1</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>features_extended2</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>features_extended3</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="osreadsysinfo_71x_features">osreadsysinfo_71x_features</h3>
+<pre>extern void osreadsysinfo_71x_features (bits *features,
+      bits *features_extended0,
+      bits *features_extended1,
+      bits *features_extended2,
+      bits *features_extended3);</pre>
+<p>Reads features mask for 82C710 chip family</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>features</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>features_extended0</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>features_extended1</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>features_extended2</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>features_extended3</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xosreadsysinfo_ethernet_address">xosreadsysinfo_ethernet_address</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosreadsysinfo_ethernet_address (bits *address_lo,
+      bits *address_hi);</pre>
+<p>Reads the ethernet address - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>address_lo</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address_hi</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osreadsysinfo_ethernet_address">osreadsysinfo_ethernet_address</h3>
+<pre>extern void osreadsysinfo_ethernet_address (bits *address_lo,
+      bits *address_hi);</pre>
+<p>Reads the ethernet address - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>address_lo</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address_hi</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosreadsysinfo_raw_machine_id">xosreadsysinfo_raw_machine_id</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosreadsysinfo_raw_machine_id (bits *id_lo,
+      bits *id_hi);</pre>
+<p>Reads the raw unique machine id - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>id_lo</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>id_hi</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osreadsysinfo_raw_machine_id">osreadsysinfo_raw_machine_id</h3>
+<pre>extern void osreadsysinfo_raw_machine_id (bits *id_lo,
+      bits *id_hi);</pre>
+<p>Reads the raw unique machine id - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>id_lo</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>id_hi</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosreadsysinfo_kernel_value">xosreadsysinfo_kernel_value</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosreadsysinfo_kernel_value (<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a> item,
+      int *value);</pre>
+<p>Reads a kernel data value - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>item</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>value</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osreadsysinfo_kernel_value">osreadsysinfo_kernel_value</h3>
+<pre>extern int osreadsysinfo_kernel_value (<a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a> item);</pre>
+<p>Reads a kernel data value - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>item</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>value</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosreadsysinfo_kernel_values">xosreadsysinfo_kernel_values</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosreadsysinfo_kernel_values (int const *item_list,
+      <a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a> *value_buffer);</pre>
+<p>Reads a list of kernel data values - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>item_list</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>value_buffer</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osreadsysinfo_kernel_values">osreadsysinfo_kernel_values</h3>
+<pre>extern void osreadsysinfo_kernel_values (int const *item_list,
+      <a href="#osreadsysinfo_kernel_value_id">osreadsysinfo_kernel_value_id</a> *value_buffer);</pre>
+<p>Reads a list of kernel data values - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>item_list</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>value_buffer</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosreadsysinfokernelvalue_svcstk">xosreadsysinfokernelvalue_svcstk</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosreadsysinfokernelvalue_svcstk (byte **stack_top);</pre>
+<p>Reads the address of the top of the SVC stack - obsolete, see SystemDAs - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>stack_top</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osreadsysinfokernelvalue_svcstk">osreadsysinfokernelvalue_svcstk</h3>
+<pre>extern byte *osreadsysinfokernelvalue_svcstk (void);
+</pre><p>Reads the address of the top of the SVC stack - obsolete, see SystemDAs - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>stack_top</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosreadsysinfokernelvalue_swi_dispatch_table">xosreadsysinfokernelvalue_swi_dispatch_table</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosreadsysinfokernelvalue_swi_dispatch_table (byte **dispatch_table);</pre>
+<p>Reads the address of the SWI dispatch table - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>dispatch_table</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osreadsysinfokernelvalue_swi_dispatch_table">osreadsysinfokernelvalue_swi_dispatch_table</h3>
+<pre>extern byte *osreadsysinfokernelvalue_swi_dispatch_table (void);
+</pre><p>Reads the address of the SWI dispatch table - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>dispatch_table</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosreadsysinfo_last_abort_info">xosreadsysinfo_last_abort_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosreadsysinfo_last_abort_info (byte **abort_pc,
+      byte **abort_psr,
+      byte **fault_address);</pre>
+<p>Read information for last unexpected abort (data or prefetch) - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>abort_pc</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>abort_psr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>fault_address</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osreadsysinfo_last_abort_info">osreadsysinfo_last_abort_info</h3>
+<pre>extern byte *osreadsysinfo_last_abort_info (byte **abort_pc,
+      byte **abort_psr);</pre>
+<p>Read information for last unexpected abort (data or prefetch) - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>abort_pc</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>abort_psr</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>fault_address</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xosreadsysinfo_platform_class">xosreadsysinfo_platform_class</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosreadsysinfo_platform_class (<a href="#osreadsysinfo_platform">osreadsysinfo_platform</a> *platform_class,
+      <a href="#osreadsysinfo_platform_flags">osreadsysinfo_platform_flags</a> *flags,
+      <a href="#osreadsysinfo_platform_flags">osreadsysinfo_platform_flags</a> *valid_flags);</pre>
+<p>Reads the platform class - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>platform_class</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>valid_flags</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osreadsysinfo_platform_class">osreadsysinfo_platform_class</h3>
+<pre>extern <a href="#osreadsysinfo_platform">osreadsysinfo_platform</a> osreadsysinfo_platform_class (<a href="#osreadsysinfo_platform_flags">osreadsysinfo_platform_flags</a> *flags,
+      <a href="#osreadsysinfo_platform_flags">osreadsysinfo_platform_flags</a> *valid_flags);</pre>
+<p>Reads the platform class - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>valid_flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>platform_class</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosreadsysinfo_rom_information">xosreadsysinfo_rom_information</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosreadsysinfo_rom_information (<a href="#osreadsysinfo_rom_information_code">osreadsysinfo_rom_information_code</a> code,
+      char **information);</pre>
+<p>Read information about the currently installed ROM - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>information</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="osreadsysinfo_rom_information">osreadsysinfo_rom_information</h3>
+<pre>extern char *osreadsysinfo_rom_information (<a href="#osreadsysinfo_rom_information_code">osreadsysinfo_rom_information_code</a> code);</pre>
+<p>Read information about the currently installed ROM - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>information</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosreadsysinfo_read_os_version">xosreadsysinfo_read_os_version</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosreadsysinfo_read_os_version (int *os_version,
+      int *kernel_version,
+      int *sysinit_version_and_type);</pre>
+<p>Read OS version - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>os_version</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>kernel_version</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>sysinit_version_and_type</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osreadsysinfo_read_os_version">osreadsysinfo_read_os_version</h3>
+<pre>extern int osreadsysinfo_read_os_version (int *kernel_version,
+      int *sysinit_version_and_type);</pre>
+<p>Read OS version - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>kernel_version</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>sysinit_version_and_type</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>os_version</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosreadsysinfo_read_debug_info">xosreadsysinfo_read_debug_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosreadsysinfo_read_debug_info (asm_routine *write_dbg,
+      asm_routine *read_dbg);</pre>
+<p>Read debug information</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>write_dbg</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>read_dbg</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osreadsysinfo_read_debug_info">osreadsysinfo_read_debug_info</h3>
+<pre>extern void osreadsysinfo_read_debug_info (asm_routine *write_dbg,
+      asm_routine *read_dbg);</pre>
+<p>Read debug information</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>write_dbg</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>read_dbg</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

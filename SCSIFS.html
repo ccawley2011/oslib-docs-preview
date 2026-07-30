@@ -1,0 +1,586 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; SCSIFS</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>SCSIFS</h2>
+
+<pre>#include "oslib/scsifs.h"</pre>
+
+<h3 id="scsifs_drive_status">scsifs_drive_status</h3>
+<pre>typedef int scsifs_drive_status;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#scsifs_DRIVE_ABSENT">scsifs_DRIVE_ABSENT</a></dd>
+<dd><a href="#scsifs_DRIVE_UNREADY">scsifs_DRIVE_UNREADY</a></dd>
+<dd><a href="#scsifs_DRIVE_READY">scsifs_DRIVE_READY</a></dd>
+</dl>
+
+<h3 id="scsifs_DRIVE_ABSENT">scsifs_DRIVE_ABSENT</h3>
+<pre>#define scsifs_DRIVE_ABSENT ((<a href="#scsifs_drive_status">scsifs_drive_status</a>) 0x0u)</pre>
+
+<p>drive not present</p>
+
+<h3 id="scsifs_DRIVE_UNREADY">scsifs_DRIVE_UNREADY</h3>
+<pre>#define scsifs_DRIVE_UNREADY ((<a href="#scsifs_drive_status">scsifs_drive_status</a>) 0x1u)</pre>
+
+<p>not present, or present but not ready</p>
+
+<h3 id="scsifs_DRIVE_READY">scsifs_DRIVE_READY</h3>
+<pre>#define scsifs_DRIVE_READY ((<a href="#scsifs_drive_status">scsifs_drive_status</a>) 0x2u)</pre>
+
+<p>drive present and ready</p>
+
+<h3 id="xscsifsdiscop_verify">xscsifsdiscop_verify</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsifsdiscop_verify (bits flags,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> disc_addr,
+      int size,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> *next_disc_addr,
+      int *unverified);</pre>
+<p>Verifies a disc</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>unverified</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="scsifsdiscop_verify">scsifsdiscop_verify</h3>
+<pre>extern int scsifsdiscop_verify (bits flags,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> disc_addr,
+      int size,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> *next_disc_addr);</pre>
+<p>Verifies a disc</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unverified</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xscsifsdiscop_read_sectors">xscsifsdiscop_read_sectors</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsifsdiscop_read_sectors (bits flags,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> disc_addr,
+      byte *data,
+      int size,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> *next_disc_addr,
+      byte **next_data,
+      int *unread);</pre>
+<p>Reads sectors from a disc</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>next_data</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>unread</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="scsifsdiscop_read_sectors">scsifsdiscop_read_sectors</h3>
+<pre>extern int scsifsdiscop_read_sectors (bits flags,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> disc_addr,
+      byte *data,
+      int size,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> *next_disc_addr,
+      byte **next_data);</pre>
+<p>Reads sectors from a disc</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>next_data</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unread</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xscsifsdiscop_write_sectors">xscsifsdiscop_write_sectors</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsifsdiscop_write_sectors (bits flags,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> disc_addr,
+      byte const *data,
+      int size,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> *next_disc_addr,
+      byte **next_data,
+      int *unwritten);</pre>
+<p>Writes sectors to a disc</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>next_data</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>unwritten</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="scsifsdiscop_write_sectors">scsifsdiscop_write_sectors</h3>
+<pre>extern int scsifsdiscop_write_sectors (bits flags,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> disc_addr,
+      byte const *data,
+      int size,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> *next_disc_addr,
+      byte **next_data);</pre>
+<p>Writes sectors to a disc</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>next_data</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unwritten</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xscsifsdiscop_read_track">xscsifsdiscop_read_track</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsifsdiscop_read_track (bits flags,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> disc_addr,
+      byte *data);</pre>
+<p>Reads a track from a floppy disc</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="scsifsdiscop_read_track">scsifsdiscop_read_track</h3>
+<pre>extern void scsifsdiscop_read_track (bits flags,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> disc_addr,
+      byte *data);</pre>
+<p>Reads a track from a floppy disc</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xscsifsdiscop_read_id">xscsifsdiscop_read_id</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsifsdiscop_read_id (bits flags,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> disc_addr,
+      byte *data);</pre>
+<p>Reads a hard disc ID</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="scsifsdiscop_read_id">scsifsdiscop_read_id</h3>
+<pre>extern void scsifsdiscop_read_id (bits flags,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> disc_addr,
+      byte *data);</pre>
+<p>Reads a hard disc ID</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xscsifsdiscop_write_track">xscsifsdiscop_write_track</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsifsdiscop_write_track (bits flags,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> disc_addr,
+      byte const *data);</pre>
+<p>Writes a track to a disc</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="scsifsdiscop_write_track">scsifsdiscop_write_track</h3>
+<pre>extern void scsifsdiscop_write_track (bits flags,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> disc_addr,
+      byte const *data);</pre>
+<p>Writes a track to a disc</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xscsifsdiscop_format_track">xscsifsdiscop_format_track</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsifsdiscop_format_track (bits flags,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> disc_addr,
+      <a href="filecore.html#filecore_track_format">filecore_track_format</a> const *format);</pre>
+<p>Formats a track of a disc</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>format</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="scsifsdiscop_format_track">scsifsdiscop_format_track</h3>
+<pre>extern void scsifsdiscop_format_track (bits flags,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> disc_addr,
+      <a href="filecore.html#filecore_track_format">filecore_track_format</a> const *format);</pre>
+<p>Formats a track of a disc</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>format</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xscsifsdiscop_seek">xscsifsdiscop_seek</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsifsdiscop_seek (bits flags,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> disc_addr);</pre>
+<p>Seeks to a disc location</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_addr</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="scsifsdiscop_seek">scsifsdiscop_seek</h3>
+<pre>extern void scsifsdiscop_seek (bits flags,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> disc_addr);</pre>
+<p>Seeks to a disc location</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_addr</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xscsifsdiscop_restore">xscsifsdiscop_restore</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsifsdiscop_restore (bits flags,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> disc_addr);</pre>
+<p>Does a restore operation for a disc</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_addr</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="scsifsdiscop_restore">scsifsdiscop_restore</h3>
+<pre>extern void scsifsdiscop_restore (bits flags,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> disc_addr);</pre>
+<p>Does a restore operation for a disc</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_addr</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xscsifsdiscop_read_sectors_via_cache">xscsifsdiscop_read_sectors_via_cache</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsifsdiscop_read_sectors_via_cache (bits flags,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> disc_addr,
+      byte *data,
+      int size,
+      int cache_handle,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> *next_disc_addr,
+      byte **next_data,
+      int *unread,
+      int *cache_handle_out);</pre>
+<p>Reads sectors of a disc using the RMA cache</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>cache_handle</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>next_data</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>unread</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>cache_handle_out</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="scsifsdiscop_read_sectors_via_cache">scsifsdiscop_read_sectors_via_cache</h3>
+<pre>extern int scsifsdiscop_read_sectors_via_cache (bits flags,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> disc_addr,
+      byte *data,
+      int size,
+      int cache_handle,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> *next_disc_addr,
+      byte **next_data,
+      int *cache_handle_out);</pre>
+<p>Reads sectors of a disc using the RMA cache</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>cache_handle</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_disc_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>next_data</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>cache_handle_out</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unread</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xscsifsdiscop_specify">xscsifsdiscop_specify</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsifsdiscop_specify (bits flags,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> disc_addr);</pre>
+<p>Does a specify operation on a hard disc</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_addr</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="scsifsdiscop_specify">scsifsdiscop_specify</h3>
+<pre>extern void scsifsdiscop_specify (bits flags,
+      <a href="filecore.html#filecore_disc_address">filecore_disc_address</a> disc_addr);</pre>
+<p>Does a specify operation on a hard disc</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_addr</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xscsifs_drives">xscsifs_drives</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsifs_drives (int *default_drive,
+      int *floppy_count,
+      int *hard_disc_count);</pre>
+<p>Returns information on SCSIFS' drives</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>default_drive</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>floppy_count</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>hard_disc_count</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="scsifs_drives">scsifs_drives</h3>
+<pre>extern void scsifs_drives (int *default_drive,
+      int *floppy_count,
+      int *hard_disc_count);</pre>
+<p>Returns information on SCSIFS' drives</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>default_drive</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>floppy_count</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>hard_disc_count</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xscsifs_free_space">xscsifs_free_space</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsifs_free_space (char const *disc_name,
+      int *free,
+      int *max);</pre>
+<p>Returns information on a disc's free space</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>disc_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>free</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>max</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="scsifs_free_space">scsifs_free_space</h3>
+<pre>extern int scsifs_free_space (char const *disc_name,
+      int *max);</pre>
+<p>Returns information on a disc's free space</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>disc_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>max</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>free</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xscsifs_describe_disc">xscsifs_describe_disc</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsifs_describe_disc (char const *disc_name,
+      <a href="filecore.html#filecore_disc">filecore_disc</a> *disc);</pre>
+<p>Returns a disc record describing a disc's shape and format</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>disc_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>disc</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="scsifs_describe_disc">scsifs_describe_disc</h3>
+<pre>extern void scsifs_describe_disc (char const *disc_name,
+      <a href="filecore.html#filecore_disc">filecore_disc</a> *disc);</pre>
+<p>Returns a disc record describing a disc's shape and format</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>disc_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>disc</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xscsifs_test_ready">xscsifs_test_ready</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsifs_test_ready (int drive_no,
+      <a href="#scsifs_drive_status">scsifs_drive_status</a> *status);</pre>
+<p>Tests whether a drive is ready</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>drive_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="scsifs_test_ready">scsifs_test_ready</h3>
+<pre>extern <a href="#scsifs_drive_status">scsifs_drive_status</a> scsifs_test_ready (int drive_no);</pre>
+<p>Tests whether a drive is ready</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>drive_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xscsifs_test_mounted">xscsifs_test_mounted</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsifs_test_mounted (bits *flags);</pre>
+<p>Determines which devices are currently mounted</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="scsifs_test_mounted">scsifs_test_mounted</h3>
+<pre>extern bits scsifs_test_mounted (void);
+</pre><p>Determines which devices are currently mounted</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>flags</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xscsifs_free_space64">xscsifs_free_space64</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsifs_free_space64 (char const *disc_name,
+      bits *free_lo,
+      int *free_hi,
+      int *max);</pre>
+<p>Returns 64-bit information on a disc's free space - needs FileCore 2.94+ or RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>disc_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>free_lo</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>free_hi</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>max</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="scsifs_free_space64">scsifs_free_space64</h3>
+<pre>extern void scsifs_free_space64 (char const *disc_name,
+      bits *free_lo,
+      int *free_hi,
+      int *max);</pre>
+<p>Returns 64-bit information on a disc's free space - needs FileCore 2.94+ or RISC OS 3.6+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>disc_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>free_lo</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>free_hi</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>max</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

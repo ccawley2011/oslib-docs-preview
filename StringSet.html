@@ -1,0 +1,337 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; StringSet</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>StringSet</h2>
+
+<pre>#include "oslib/stringset.h"</pre>
+
+<h3 id="stringset_gadget">stringset_gadget</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> string_set;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> title;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> initial_selected_string;
+      int selected_string_limit;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> allowable;
+      int allowable_limit;
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> prev;
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> next;
+   }
+   stringset_gadget;</pre>
+
+<h3 id="stringset_object">stringset_object</h3>
+<pre>typedef struct
+   {  <a href="#gadget_OBJECT_MEMBERS">gadget_OBJECT_MEMBERS</a>
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> string_set;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> title;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> initial_selected_string;
+      int selected_string_limit;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> allowable;
+      int allowable_limit;
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> prev;
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> next;
+   }
+   stringset_object;</pre>
+
+<h3 id="stringset_action_value_changed">stringset_action_value_changed</h3>
+<pre>typedef struct
+   {  char value [216];
+   }
+   stringset_action_value_changed;</pre>
+
+<p>Prefer StringSet_ActionValueChangedBlock</p>
+
+<h3 id="stringset_action_value_changed_block">stringset_action_value_changed_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      char value [216];
+   }
+   stringset_action_value_changed_block;</pre>
+
+<h3 id="stringset_action_about_to_be_shown_block">stringset_action_about_to_be_shown_block</h3>
+<pre>typedef <a href="toolbox.html#toolbox_action_header_base">toolbox_action_header_base</a> stringset_action_about_to_be_shown_block;</pre>
+
+<h3 id="class_STRING_SET">class_STRING_SET</h3>
+<pre>#define class_STRING_SET ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x380u)</pre>
+
+<h3 id="stringset_GENERATE_USER_VALUE_CHANGED">stringset_GENERATE_USER_VALUE_CHANGED</h3>
+<pre>#define stringset_GENERATE_USER_VALUE_CHANGED ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x1u)</pre>
+
+<h3 id="stringset_GENERATE_SET_VALUE_CHANGED">stringset_GENERATE_SET_VALUE_CHANGED</h3>
+<pre>#define stringset_GENERATE_SET_VALUE_CHANGED ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x2u)</pre>
+
+<h3 id="stringset_WRITABLE">stringset_WRITABLE</h3>
+<pre>#define stringset_WRITABLE ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x4u)</pre>
+
+<h3 id="stringset_GENERATE_ABOUT_TO_BE_SHOWN">stringset_GENERATE_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define stringset_GENERATE_ABOUT_TO_BE_SHOWN ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x8u)</pre>
+
+<h3 id="stringset_NO_DISPLAY">stringset_NO_DISPLAY</h3>
+<pre>#define stringset_NO_DISPLAY ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x10u)</pre>
+
+<h3 id="stringset_JUSTIFICATION">stringset_JUSTIFICATION</h3>
+<pre>#define stringset_JUSTIFICATION ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x60u)</pre>
+
+<h3 id="stringset_JUSTIFICATION_SHIFT">stringset_JUSTIFICATION_SHIFT</h3>
+<pre>#define stringset_JUSTIFICATION_SHIFT 5</pre>
+
+<h3 id="stringset_JUSTIFICATION_LEFT">stringset_JUSTIFICATION_LEFT</h3>
+<pre>#define stringset_JUSTIFICATION_LEFT 0x0u</pre>
+
+<h3 id="stringset_JUSTIFICATION_RIGHT">stringset_JUSTIFICATION_RIGHT</h3>
+<pre>#define stringset_JUSTIFICATION_RIGHT 0x1u</pre>
+
+<h3 id="stringset_JUSTIFICATION_CENTRED">stringset_JUSTIFICATION_CENTRED</h3>
+<pre>#define stringset_JUSTIFICATION_CENTRED 0x2u</pre>
+
+<h3 id="stringset_GET_ALPHANUMERIC_FIELD">stringset_GET_ALPHANUMERIC_FIELD</h3>
+<pre>#define stringset_GET_ALPHANUMERIC_FIELD 0x1u</pre>
+
+<h3 id="stringset_GET_POP_UP_MENU">stringset_GET_POP_UP_MENU</h3>
+<pre>#define stringset_GET_POP_UP_MENU 0x2u</pre>
+
+<h3 id="action_STRING_SET_VALUE_CHANGED">action_STRING_SET_VALUE_CHANGED</h3>
+<pre>#define action_STRING_SET_VALUE_CHANGED 0x8288Eu</pre>
+
+<h3 id="action_STRING_SET_ABOUT_TO_BE_SHOWN">action_STRING_SET_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define action_STRING_SET_ABOUT_TO_BE_SHOWN 0x8288Fu</pre>
+
+<h3 id="stringset_VALUE_TOO_LONG">stringset_VALUE_TOO_LONG</h3>
+<pre>#define stringset_VALUE_TOO_LONG 0x1u</pre>
+
+<h3 id="xstringset_set_available">xstringset_set_available</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xstringset_set_available (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> string_set,
+      char const *set);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>string_set</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>set</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="stringset_set_available">stringset_set_available</h3>
+<pre>extern void stringset_set_available (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> string_set,
+      char const *set);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>string_set</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>set</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xstringset_set_selected_string">xstringset_set_selected_string</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xstringset_set_selected_string (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> string_set,
+      char const *selection);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>string_set</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>selection</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="stringset_set_selected_string">stringset_set_selected_string</h3>
+<pre>extern void stringset_set_selected_string (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> string_set,
+      char const *selection);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>string_set</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>selection</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xstringset_set_selected_index">xstringset_set_selected_index</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xstringset_set_selected_index (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> string_set,
+      int index);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>string_set</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>index</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="stringset_set_selected_index">stringset_set_selected_index</h3>
+<pre>extern void stringset_set_selected_index (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> string_set,
+      int index);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>string_set</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>index</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xstringset_get_selected_string">xstringset_get_selected_string</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xstringset_get_selected_string (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> string_set,
+      char *buffer,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>string_set</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="stringset_get_selected_string">stringset_get_selected_string</h3>
+<pre>extern int stringset_get_selected_string (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> string_set,
+      char *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>string_set</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xstringset_get_selected_index">xstringset_get_selected_index</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xstringset_get_selected_index (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> string_set,
+      int *index);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>string_set</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>index</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="stringset_get_selected_index">stringset_get_selected_index</h3>
+<pre>extern int stringset_get_selected_index (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> string_set);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>string_set</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>index</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xstringset_set_allowable">xstringset_set_allowable</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xstringset_set_allowable (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> string_set,
+      char const *allowable);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>string_set</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>allowable</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="stringset_set_allowable">stringset_set_allowable</h3>
+<pre>extern void stringset_set_allowable (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> string_set,
+      char const *allowable);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>string_set</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>allowable</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xstringset_get_components">xstringset_get_components</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xstringset_get_components (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> string_set,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> *alphanumeric_field,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> *popup_menu);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>string_set</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>alphanumeric_field</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>popup_menu</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="stringset_get_components">stringset_get_components</h3>
+<pre>extern void stringset_get_components (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> string_set,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> *alphanumeric_field,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> *popup_menu);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>string_set</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>alphanumeric_field</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>popup_menu</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

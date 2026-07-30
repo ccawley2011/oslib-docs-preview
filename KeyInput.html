@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; KeyInput</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>KeyInput</h2>
+
+<pre>#include "oslib/keyinput.h"</pre>
+
+<h3 id="keyinputcheck_flags">keyinputcheck_flags</h3>
+<pre>typedef bits keyinputcheck_flags;</pre>
+
+<h3 id="keyinputcheckmultiple_flags">keyinputcheckmultiple_flags</h3>
+<pre>typedef bits keyinputcheckmultiple_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#keyinputcheckmultipleflags_RETURN_TIME">keyinputcheckmultipleflags_RETURN_TIME</a></dd>
+</dl>
+
+<h3 id="keyinputscan_flags">keyinputscan_flags</h3>
+<pre>typedef bits keyinputscan_flags;</pre>
+
+<h3 id="keyinputscanmultiple_flags">keyinputscanmultiple_flags</h3>
+<pre>typedef bits keyinputscanmultiple_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#keyinputscanmultipleflags_RETURN_TIME">keyinputscanmultipleflags_RETURN_TIME</a></dd>
+</dl>
+
+<h3 id="keyinputcheckmultipleflags_RETURN_TIME">keyinputcheckmultipleflags_RETURN_TIME</h3>
+<pre>#define keyinputcheckmultipleflags_RETURN_TIME ((<a href="#keyinputcheckmultiple_flags">keyinputcheckmultiple_flags</a>) 0x1u)</pre>
+
+<h3 id="keyinputscanmultipleflags_RETURN_TIME">keyinputscanmultipleflags_RETURN_TIME</h3>
+<pre>#define keyinputscanmultipleflags_RETURN_TIME ((<a href="#keyinputscanmultiple_flags">keyinputscanmultiple_flags</a>) 0x1u)</pre>
+
+<h3 id="xkeyinput_check">xkeyinput_check</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xkeyinput_check (<a href="#keyinputcheck_flags">keyinputcheck_flags</a> flags,
+      int usage,
+      int *state,
+      int *time);</pre>
+<p>Read the state of a particular key</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>usage</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>state</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>time</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="keyinput_check">keyinput_check</h3>
+<pre>extern void keyinput_check (<a href="#keyinputcheck_flags">keyinputcheck_flags</a> flags,
+      int usage,
+      int *state,
+      int *time);</pre>
+<p>Read the state of a particular key</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>usage</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>state</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>time</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xkeyinput_check_multiple">xkeyinput_check_multiple</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xkeyinput_check_multiple (<a href="#keyinputcheckmultiple_flags">keyinputcheckmultiple_flags</a> flags,
+      int *buf,
+      int num_entries_to_fill,
+      int *num_entries_filled);</pre>
+<p>Read the state of a number of defined keys</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buf</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>num_entries_to_fill</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>num_entries_filled</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="keyinput_check_multiple">keyinput_check_multiple</h3>
+<pre>extern void keyinput_check_multiple (<a href="#keyinputcheckmultiple_flags">keyinputcheckmultiple_flags</a> flags,
+      int *buf,
+      int num_entries_to_fill,
+      int *num_entries_filled);</pre>
+<p>Read the state of a number of defined keys</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buf</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>num_entries_to_fill</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>num_entries_filled</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xkeyinput_scan">xkeyinput_scan</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xkeyinput_scan (<a href="#keyinputscan_flags">keyinputscan_flags</a> flags,
+      int initial_code,
+      int *next_code,
+      int *state,
+      int *time);</pre>
+<p>Read the currently pressed key information</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>initial_code</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>state</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>time</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="keyinput_scan">keyinput_scan</h3>
+<pre>extern void keyinput_scan (<a href="#keyinputscan_flags">keyinputscan_flags</a> flags,
+      int initial_code,
+      int *next_code,
+      int *state,
+      int *time);</pre>
+<p>Read the currently pressed key information</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>initial_code</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>state</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>time</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xkeyinput_scan_multiple">xkeyinput_scan_multiple</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xkeyinput_scan_multiple (<a href="#keyinputscanmultiple_flags">keyinputscanmultiple_flags</a> flags,
+      int initial_code,
+      int *buf,
+      int num_entries_to_fill,
+      int *next_code,
+      int *num_entries_filled);</pre>
+<p>Read the state of keys to a buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>initial_code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buf</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>num_entries_to_fill</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>num_entries_filled</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="keyinput_scan_multiple">keyinput_scan_multiple</h3>
+<pre>extern void keyinput_scan_multiple (<a href="#keyinputscanmultiple_flags">keyinputscanmultiple_flags</a> flags,
+      int initial_code,
+      int *buf,
+      int num_entries_to_fill,
+      int *next_code,
+      int *num_entries_filled);</pre>
+<p>Read the state of keys to a buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>initial_code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buf</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>num_entries_to_fill</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>num_entries_filled</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

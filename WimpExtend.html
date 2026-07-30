@@ -1,0 +1,331 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; WimpExtend</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>WimpExtend</h2>
+
+<pre>#include "oslib/wimpextend.h"</pre>
+
+<h3 id="wimpextend_furniture_sizes">wimpextend_furniture_sizes</h3>
+<pre>typedef struct
+   {  <a href="wimp.html#wimp_w">wimp_w</a> w;
+      <a href="os.html#os_box">os_box</a> border_widths;
+      int back_width;
+      int close_width;
+      int reserved1;
+      int title_width;
+      int reserved2;
+      int iconise_width;
+      int toggle_size_width;
+      int toggle_size_height;
+      int vertical_scroll_upper_gap;
+      int up_arrow_height;
+      int vertical_scroll_well_height;
+      int down_arrow_height;
+      int vertical_scroll_lower_gap;
+      int adjust_size_height;
+      int adjust_size_width;
+      int horizontal_scroll_right_gap;
+      int right_arrow_width;
+      int horizontal_scroll_well_width;
+      int left_arrow_width;
+      int horizontal_scroll_left_gap;
+   }
+   wimpextend_furniture_sizes;</pre>
+
+<h3 id="wimpextendgetspritecolourmap_flags">wimpextendgetspritecolourmap_flags</h3>
+<pre>typedef bits wimpextendgetspritecolourmap_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#wimpextendgetspritecolourmapflags_SELECTED_ITEM">wimpextendgetspritecolourmapflags_SELECTED_ITEM</a></dd>
+<dd><a href="#wimpextendgetspritecolourmapflags_FADED_ITEM">wimpextendgetspritecolourmapflags_FADED_ITEM</a></dd>
+<dd><a href="#wimpextendgetspritecolourmapflags_PTR_OVER">wimpextendgetspritecolourmapflags_PTR_OVER</a></dd>
+</dl>
+
+<h3 id="wimpextendgetspritecolourmapflags_SELECTED_ITEM">wimpextendgetspritecolourmapflags_SELECTED_ITEM</h3>
+<pre>#define wimpextendgetspritecolourmapflags_SELECTED_ITEM ((<a href="#wimpextendgetspritecolourmap_flags">wimpextendgetspritecolourmap_flags</a>) 0x200000u)</pre>
+
+<h3 id="wimpextendgetspritecolourmapflags_FADED_ITEM">wimpextendgetspritecolourmapflags_FADED_ITEM</h3>
+<pre>#define wimpextendgetspritecolourmapflags_FADED_ITEM ((<a href="#wimpextendgetspritecolourmap_flags">wimpextendgetspritecolourmap_flags</a>) 0x400000u)</pre>
+
+<h3 id="wimpextendgetspritecolourmapflags_PTR_OVER">wimpextendgetspritecolourmapflags_PTR_OVER</h3>
+<pre>#define wimpextendgetspritecolourmapflags_PTR_OVER ((<a href="#wimpextendgetspritecolourmap_flags">wimpextendgetspritecolourmap_flags</a>) 0x800000u)</pre>
+
+<h3 id="wimpextendgetspritecolourmapflags_FG_COLOUR_SHIFT">wimpextendgetspritecolourmapflags_FG_COLOUR_SHIFT</h3>
+<pre>#define wimpextendgetspritecolourmapflags_FG_COLOUR_SHIFT 24</pre>
+
+<h3 id="wimpextendgetspritecolourmapflags_BG_COLOUR_SHIFT">wimpextendgetspritecolourmapflags_BG_COLOUR_SHIFT</h3>
+<pre>#define wimpextendgetspritecolourmapflags_BG_COLOUR_SHIFT 28</pre>
+
+<h3 id="xwimpextend_get_parent">xwimpextend_get_parent</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpextend_get_parent (<a href="wimp.html#wimp_w">wimp_w</a> w,
+      <a href="wimp.html#wimp_w">wimp_w</a> *parent);</pre>
+<p>Finds the window's parent - nested Wimp / RISC OS 3.8+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>w</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>parent</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="wimpextend_get_parent">wimpextend_get_parent</h3>
+<pre>extern <a href="wimp.html#wimp_w">wimp_w</a> wimpextend_get_parent (<a href="wimp.html#wimp_w">wimp_w</a> w);</pre>
+<p>Finds the window's parent - nested Wimp / RISC OS 3.8+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>w</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>parent</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwimpextend_get_front_child">xwimpextend_get_front_child</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpextend_get_front_child (<a href="wimp.html#wimp_w">wimp_w</a> w,
+      <a href="wimp.html#wimp_w">wimp_w</a> *child);</pre>
+<p>Finds the window's frontmost child; this call may also be used to enquire about the top-level stack - nested Wimp / RISC OS 3.8+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>w</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>child</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="wimpextend_get_front_child">wimpextend_get_front_child</h3>
+<pre>extern <a href="wimp.html#wimp_w">wimp_w</a> wimpextend_get_front_child (<a href="wimp.html#wimp_w">wimp_w</a> w);</pre>
+<p>Finds the window's frontmost child; this call may also be used to enquire about the top-level stack - nested Wimp / RISC OS 3.8+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>w</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>child</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwimpextend_get_back_child">xwimpextend_get_back_child</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpextend_get_back_child (<a href="wimp.html#wimp_w">wimp_w</a> w,
+      <a href="wimp.html#wimp_w">wimp_w</a> *child);</pre>
+<p>Finds the window's backmost child; this call may also be used to enquire about the top-level stack - nested Wimp / RISC OS 3.8+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>w</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>child</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="wimpextend_get_back_child">wimpextend_get_back_child</h3>
+<pre>extern <a href="wimp.html#wimp_w">wimp_w</a> wimpextend_get_back_child (<a href="wimp.html#wimp_w">wimp_w</a> w);</pre>
+<p>Finds the window's backmost child; this call may also be used to enquire about the top-level stack - nested Wimp / RISC OS 3.8+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>w</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>child</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwimpextend_get_sibling_under">xwimpextend_get_sibling_under</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpextend_get_sibling_under (<a href="wimp.html#wimp_w">wimp_w</a> w,
+      <a href="wimp.html#wimp_w">wimp_w</a> *sibling);</pre>
+<p>Finds the window's sibling that's immediately behind - nested Wimp / RISC OS 3.8+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>w</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>sibling</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="wimpextend_get_sibling_under">wimpextend_get_sibling_under</h3>
+<pre>extern <a href="wimp.html#wimp_w">wimp_w</a> wimpextend_get_sibling_under (<a href="wimp.html#wimp_w">wimp_w</a> w);</pre>
+<p>Finds the window's sibling that's immediately behind - nested Wimp / RISC OS 3.8+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>w</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>sibling</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwimpextend_get_sibling_over">xwimpextend_get_sibling_over</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpextend_get_sibling_over (<a href="wimp.html#wimp_w">wimp_w</a> w,
+      <a href="wimp.html#wimp_w">wimp_w</a> *sibling);</pre>
+<p>Finds the window's sibling that's immediately in front - nested Wimp / RISC OS 3.8+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>w</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>sibling</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="wimpextend_get_sibling_over">wimpextend_get_sibling_over</h3>
+<pre>extern <a href="wimp.html#wimp_w">wimp_w</a> wimpextend_get_sibling_over (<a href="wimp.html#wimp_w">wimp_w</a> w);</pre>
+<p>Finds the window's sibling that's immediately in front - nested Wimp / RISC OS 3.8+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>w</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>sibling</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xwimpextend_get_furniture_sizes">xwimpextend_get_furniture_sizes</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpextend_get_furniture_sizes (<a href="#wimpextend_furniture_sizes">wimpextend_furniture_sizes</a> *sizes);</pre>
+<p>Finds the sizes of the window's various items of furniture - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sizes</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="wimpextend_get_furniture_sizes">wimpextend_get_furniture_sizes</h3>
+<pre>extern void wimpextend_get_furniture_sizes (<a href="#wimpextend_furniture_sizes">wimpextend_furniture_sizes</a> *sizes);</pre>
+<p>Finds the sizes of the window's various items of furniture - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sizes</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xwimpextend_get_sprite_address">xwimpextend_get_sprite_address</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpextend_get_sprite_address (<a href="osspriteop.html#osspriteop_area">osspriteop_area</a> const *sprite_area,
+      char const *sprite_name,
+      <a href="osspriteop.html#osspriteop_area">osspriteop_area</a> **area,
+      <a href="osspriteop.html#osspriteop_header">osspriteop_header</a> **sprite);</pre>
+<p>Lookup a sprite using the same algorithm as the Window Manager - RISC OS Select</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>sprite</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="wimpextend_get_sprite_address">wimpextend_get_sprite_address</h3>
+<pre>extern void wimpextend_get_sprite_address (<a href="osspriteop.html#osspriteop_area">osspriteop_area</a> const *sprite_area,
+      char const *sprite_name,
+      <a href="osspriteop.html#osspriteop_area">osspriteop_area</a> **area,
+      <a href="osspriteop.html#osspriteop_header">osspriteop_header</a> **sprite);</pre>
+<p>Lookup a sprite using the same algorithm as the Window Manager - RISC OS Select</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>sprite_area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>sprite</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xwimpextend_get_mode_suffix">xwimpextend_get_mode_suffix</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpextend_get_mode_suffix (char *filename,
+      char **buffer1,
+      char **buffer2);</pre>
+<p>Append filename with mode suffix - RISC OS Select</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filename</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>buffer1</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer2</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="wimpextend_get_mode_suffix">wimpextend_get_mode_suffix</h3>
+<pre>extern void wimpextend_get_mode_suffix (char *filename,
+      char **buffer1,
+      char **buffer2);</pre>
+<p>Append filename with mode suffix - RISC OS Select</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filename</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>buffer1</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer2</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xwimpextend_get_sprite_colour_map">xwimpextend_get_sprite_colour_map</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xwimpextend_get_sprite_colour_map (<a href="#wimpextendgetspritecolourmap_flags">wimpextendgetspritecolourmap_flags</a> flags,
+      <a href="wimp.html#wimp_w">wimp_w</a> w,
+      char const *validation,
+      <a href="os.html#os_colour">os_colour</a> background,
+      <a href="osspriteop.html#osspriteop_colour_mapping">osspriteop_colour_mapping</a> **colourmap);</pre>
+<p>Read colourmap translation for rendering sprite - RISC OS Select</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>w</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>validation</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>background</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>colourmap</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="wimpextend_get_sprite_colour_map">wimpextend_get_sprite_colour_map</h3>
+<pre>extern void wimpextend_get_sprite_colour_map (<a href="#wimpextendgetspritecolourmap_flags">wimpextendgetspritecolourmap_flags</a> flags,
+      <a href="wimp.html#wimp_w">wimp_w</a> w,
+      char const *validation,
+      <a href="os.html#os_colour">os_colour</a> background,
+      <a href="osspriteop.html#osspriteop_colour_mapping">osspriteop_colour_mapping</a> **colourmap);</pre>
+<p>Read colourmap translation for rendering sprite - RISC OS Select</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>w</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>validation</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>background</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>colourmap</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

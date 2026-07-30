@@ -1,0 +1,654 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ScrollList</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ScrollList</h2>
+
+<pre>#include "oslib/scrolllist.h"</pre>
+
+<h3 id="scrolllist_gadget">scrolllist_gadget</h3>
+<pre>typedef struct
+   {  int event;
+      <a href="os.html#os_colour">os_colour</a> foreground;
+      <a href="os.html#os_colour">os_colour</a> background;
+   }
+   scrolllist_gadget;</pre>
+
+<h3 id="scrolllist_object">scrolllist_object</h3>
+<pre>typedef struct
+   {  <a href="#gadget_OBJECT_MEMBERS">gadget_OBJECT_MEMBERS</a>
+      int event;
+      <a href="os.html#os_colour">os_colour</a> foreground;
+      <a href="os.html#os_colour">os_colour</a> background;
+   }
+   scrolllist_object;</pre>
+
+<h3 id="scrolllist_selection">scrolllist_selection</h3>
+<pre>typedef struct
+   {  bits flags;
+      int item;
+   }
+   scrolllist_selection;</pre>
+
+<p>Prefer ScrollList_ActionSelectionBlock</p>
+
+<h3 id="scrolllist_action_selection">scrolllist_action_selection</h3>
+<pre>typedef struct
+   {  bits flags;
+      int item;
+   }
+   scrolllist_action_selection;</pre>
+
+<p>Prefer ScrollList_ActionSelectionBlock</p>
+
+<h3 id="scrolllist_action_selection_block">scrolllist_action_selection_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      bits objectflags;
+      int item;
+   }
+   scrolllist_action_selection_block;</pre>
+
+<h3 id="scrolllist_state">scrolllist_state</h3>
+<pre>typedef bits scrolllist_state;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#scrolllist_STATE_ALLOW_MULTIPLE_SELECTIONS">scrolllist_STATE_ALLOW_MULTIPLE_SELECTIONS</a></dd>
+</dl>
+
+<h3 id="scrolllist_add_item_flags">scrolllist_add_item_flags</h3>
+<pre>typedef bits scrolllist_add_item_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#scrolllist_ADD_ITEM_SPRITE_INFO">scrolllist_ADD_ITEM_SPRITE_INFO</a></dd>
+<dd><a href="#scrolllist_ADD_ITEM_PLOT_SPRITE_HALF_SIZE">scrolllist_ADD_ITEM_PLOT_SPRITE_HALF_SIZE</a></dd>
+</dl>
+
+<h3 id="scrolllist_select_item_flags">scrolllist_select_item_flags</h3>
+<pre>typedef bits scrolllist_select_item_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#scrolllist_SELECT_ITEM_UNIQUE">scrolllist_SELECT_ITEM_UNIQUE</a></dd>
+</dl>
+
+<h3 id="scrolllist_set_colour_flags">scrolllist_set_colour_flags</h3>
+<pre>typedef bits scrolllist_set_colour_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#scrolllist_SET_COLOUR_DESKTOP">scrolllist_SET_COLOUR_DESKTOP</a></dd>
+</dl>
+
+<h3 id="scrolllist_colour">scrolllist_colour</h3>
+<pre>typedef union
+   {  <a href="os.html#os_colour">os_colour</a> real;
+      <a href="wimp.html#wimp_colour">wimp_colour</a> desktop;
+   }
+   scrolllist_colour;</pre>
+
+<h3 id="class_SCROLL_LIST">class_SCROLL_LIST</h3>
+<pre>#define class_SCROLL_LIST ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x401Au)</pre>
+
+<h3 id="action_SCROLL_LIST_SELECTION">action_SCROLL_LIST_SELECTION</h3>
+<pre>#define action_SCROLL_LIST_SELECTION 0x140181u</pre>
+
+<h3 id="scrolllist_STATE_ALLOW_MULTIPLE_SELECTIONS">scrolllist_STATE_ALLOW_MULTIPLE_SELECTIONS</h3>
+<pre>#define scrolllist_STATE_ALLOW_MULTIPLE_SELECTIONS ((<a href="#scrolllist_state">scrolllist_state</a>) 0x1u)</pre>
+
+<h3 id="scrolllist_ADD_ITEM_SPRITE_INFO">scrolllist_ADD_ITEM_SPRITE_INFO</h3>
+<pre>#define scrolllist_ADD_ITEM_SPRITE_INFO ((<a href="#scrolllist_add_item_flags">scrolllist_add_item_flags</a>) 0x3u)</pre>
+
+<h3 id="scrolllist_ADD_ITEM_SPRITE_INFO_SHIFT">scrolllist_ADD_ITEM_SPRITE_INFO_SHIFT</h3>
+<pre>#define scrolllist_ADD_ITEM_SPRITE_INFO_SHIFT 0</pre>
+
+<h3 id="scrolllist_ADD_ITEM_SPRITE_INFO_SYSTEM_SPRITE_NAME">scrolllist_ADD_ITEM_SPRITE_INFO_SYSTEM_SPRITE_NAME</h3>
+<pre>#define scrolllist_ADD_ITEM_SPRITE_INFO_SYSTEM_SPRITE_NAME 0</pre>
+
+<h3 id="scrolllist_ADD_ITEM_SPRITE_INFO_USER_SPRITE_NAME">scrolllist_ADD_ITEM_SPRITE_INFO_USER_SPRITE_NAME</h3>
+<pre>#define scrolllist_ADD_ITEM_SPRITE_INFO_USER_SPRITE_NAME 1</pre>
+
+<h3 id="scrolllist_ADD_ITEM_SPRITE_INFO_USER_SPRITE_POINTER">scrolllist_ADD_ITEM_SPRITE_INFO_USER_SPRITE_POINTER</h3>
+<pre>#define scrolllist_ADD_ITEM_SPRITE_INFO_USER_SPRITE_POINTER 2</pre>
+
+<h3 id="scrolllist_ADD_ITEM_PLOT_SPRITE_HALF_SIZE">scrolllist_ADD_ITEM_PLOT_SPRITE_HALF_SIZE</h3>
+<pre>#define scrolllist_ADD_ITEM_PLOT_SPRITE_HALF_SIZE ((<a href="#scrolllist_add_item_flags">scrolllist_add_item_flags</a>) 0x4u)</pre>
+
+<h3 id="scrolllist_SELECT_ITEM_UNIQUE">scrolllist_SELECT_ITEM_UNIQUE</h3>
+<pre>#define scrolllist_SELECT_ITEM_UNIQUE ((<a href="#scrolllist_select_item_flags">scrolllist_select_item_flags</a>) 0x1u)</pre>
+
+<h3 id="scrolllist_SET_COLOUR_DESKTOP">scrolllist_SET_COLOUR_DESKTOP</h3>
+<pre>#define scrolllist_SET_COLOUR_DESKTOP ((<a href="#scrolllist_set_colour_flags">scrolllist_set_colour_flags</a>) 0x1u)</pre>
+
+<h3 id="xscrolllist_get_state">xscrolllist_get_state</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrolllist_get_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      <a href="#scrolllist_state">scrolllist_state</a> *state);</pre>
+<p>Reads the state of the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>state</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="scrolllist_get_state">scrolllist_get_state</h3>
+<pre>extern <a href="#scrolllist_state">scrolllist_state</a> scrolllist_get_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list);</pre>
+<p>Reads the state of the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>state</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xscrolllist_set_state">xscrolllist_set_state</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrolllist_set_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      <a href="#scrolllist_state">scrolllist_state</a> state);</pre>
+<p>Sets the state of the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>state</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="scrolllist_set_state">scrolllist_set_state</h3>
+<pre>extern void scrolllist_set_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      <a href="#scrolllist_state">scrolllist_state</a> state);</pre>
+<p>Sets the state of the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>state</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xscrolllist_add_item">xscrolllist_add_item</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrolllist_add_item (<a href="#scrolllist_add_item_flags">scrolllist_add_item_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      char const *text,
+      <a href="osspriteop.html#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="osspriteop.html#osspriteop_id">osspriteop_id</a> id,
+      int index);</pre>
+<p>Add an item to the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>text</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>index</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="scrolllist_add_item">scrolllist_add_item</h3>
+<pre>extern void scrolllist_add_item (<a href="#scrolllist_add_item_flags">scrolllist_add_item_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      char const *text,
+      <a href="osspriteop.html#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="osspriteop.html#osspriteop_id">osspriteop_id</a> id,
+      int index);</pre>
+<p>Add an item to the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>text</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>index</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xscrolllist_delete_items">xscrolllist_delete_items</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrolllist_delete_items (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      int start_index,
+      int end_index);</pre>
+<p>Deletes a range of items from the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>start_index</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>end_index</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="scrolllist_delete_items">scrolllist_delete_items</h3>
+<pre>extern void scrolllist_delete_items (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      int start_index,
+      int end_index);</pre>
+<p>Deletes a range of items from the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>start_index</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>end_index</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xscrolllist_select_item">xscrolllist_select_item</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrolllist_select_item (<a href="#scrolllist_select_item_flags">scrolllist_select_item_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      int index);</pre>
+<p>Selects an item in the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>index</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="scrolllist_select_item">scrolllist_select_item</h3>
+<pre>extern void scrolllist_select_item (<a href="#scrolllist_select_item_flags">scrolllist_select_item_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      int index);</pre>
+<p>Selects an item in the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>index</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xscrolllist_deselect_item">xscrolllist_deselect_item</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrolllist_deselect_item (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      int index);</pre>
+<p>Deselects an item in the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>index</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="scrolllist_deselect_item">scrolllist_deselect_item</h3>
+<pre>extern void scrolllist_deselect_item (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      int index);</pre>
+<p>Deselects an item in the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>index</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xscrolllist_get_selected">xscrolllist_get_selected</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrolllist_get_selected (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      int offset,
+      int *new_offset);</pre>
+<p>Returns the selected item(s) in the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>new_offset</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="scrolllist_get_selected">scrolllist_get_selected</h3>
+<pre>extern int scrolllist_get_selected (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      int offset);</pre>
+<p>Returns the selected item(s) in the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>new_offset</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xscrolllist_make_visible">xscrolllist_make_visible</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrolllist_make_visible (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      int index);</pre>
+<p>Ensures that index is in the visible section of the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>index</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="scrolllist_make_visible">scrolllist_make_visible</h3>
+<pre>extern void scrolllist_make_visible (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      int index);</pre>
+<p>Ensures that index is in the visible section of the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>index</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xscrolllist_set_colour">xscrolllist_set_colour</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrolllist_set_colour (<a href="#scrolllist_set_colour_flags">scrolllist_set_colour_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      <a href="#scrolllist_colour">scrolllist_colour</a> foreground,
+      <a href="#scrolllist_colour">scrolllist_colour</a> background);</pre>
+<p>Sets the foreground and background colours of the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>foreground</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>background</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="scrolllist_set_colour">scrolllist_set_colour</h3>
+<pre>extern void scrolllist_set_colour (<a href="#scrolllist_set_colour_flags">scrolllist_set_colour_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      <a href="#scrolllist_colour">scrolllist_colour</a> foreground,
+      <a href="#scrolllist_colour">scrolllist_colour</a> background);</pre>
+<p>Sets the foreground and background colours of the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>foreground</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>background</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xscrolllist_get_colour">xscrolllist_get_colour</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrolllist_get_colour (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      <a href="os.html#os_colour">os_colour</a> *foreground,
+      <a href="os.html#os_colour">os_colour</a> *background);</pre>
+<p>Gets the foreground and background colours of the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>foreground</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>background</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="scrolllist_get_colour">scrolllist_get_colour</h3>
+<pre>extern void scrolllist_get_colour (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      <a href="os.html#os_colour">os_colour</a> *foreground,
+      <a href="os.html#os_colour">os_colour</a> *background);</pre>
+<p>Gets the foreground and background colours of the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>foreground</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>background</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xscrolllist_set_font">xscrolllist_set_font</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrolllist_set_font (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      char const *font_name,
+      int width,
+      int height);</pre>
+<p>Sets the font details for the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>width</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="scrolllist_set_font">scrolllist_set_font</h3>
+<pre>extern void scrolllist_set_font (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      char const *font_name,
+      int width,
+      int height);</pre>
+<p>Sets the font details for the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>width</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xscrolllist_get_item_text">xscrolllist_get_item_text</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrolllist_get_item_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      char *buffer,
+      int buffer_size,
+      int index,
+      int *size);</pre>
+<p>Gets the text of a ScrollList entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>buffer_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>index</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="scrolllist_get_item_text">scrolllist_get_item_text</h3>
+<pre>extern int scrolllist_get_item_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      char *buffer,
+      int buffer_size,
+      int index);</pre>
+<p>Gets the text of a ScrollList entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>buffer_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>index</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xscrolllist_count_items">xscrolllist_count_items</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrolllist_count_items (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      int *items);</pre>
+<p>Returns the number of items in the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>items</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="scrolllist_count_items">scrolllist_count_items</h3>
+<pre>extern int scrolllist_count_items (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list);</pre>
+<p>Returns the number of items in the ScrollList</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>items</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xscrolllist_set_item_text">xscrolllist_set_item_text</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrolllist_set_item_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      char const *text,
+      int index);</pre>
+<p>Sets the text of a ScrollList entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>text</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>index</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="scrolllist_set_item_text">scrolllist_set_item_text</h3>
+<pre>extern void scrolllist_set_item_text (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_list,
+      char const *text,
+      int index);</pre>
+<p>Sets the text of a ScrollList entry</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_list</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>text</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>index</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

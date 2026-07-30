@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; TextGadgets</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>TextGadgets</h2>
+
+<pre>#include "oslib/textgadgets.h"</pre>
+
+<h3 id="textgadgets_window">textgadgets_window</h3>
+<pre>typedef union
+   {  <a href="toolbox.html#toolbox_o">toolbox_o</a> toolbox;
+      <a href="wimp.html#wimp_w">wimp_w</a> wimp;
+   }
+   textgadgets_window;</pre>
+
+<h3 id="textgadgets_redraw_all_flags">textgadgets_redraw_all_flags</h3>
+<pre>typedef bits textgadgets_redraw_all_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#textgadgets_REDRAW_ALL_WIMP_HANDLE">textgadgets_REDRAW_ALL_WIMP_HANDLE</a></dd>
+</dl>
+
+<h3 id="textgadgets_REDRAW_ALL_WIMP_HANDLE">textgadgets_REDRAW_ALL_WIMP_HANDLE</h3>
+<pre>#define textgadgets_REDRAW_ALL_WIMP_HANDLE ((<a href="#textgadgets_redraw_all_flags">textgadgets_redraw_all_flags</a>) 0x1u)</pre>
+
+<h3 id="xtextgadgets_redraw_all">xtextgadgets_redraw_all</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtextgadgets_redraw_all (<a href="#textgadgets_redraw_all_flags">textgadgets_redraw_all_flags</a> flags,
+      <a href="#textgadgets_window">textgadgets_window</a> window);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="textgadgets_redraw_all">textgadgets_redraw_all</h3>
+<pre>extern void textgadgets_redraw_all (<a href="#textgadgets_redraw_all_flags">textgadgets_redraw_all_flags</a> flags,
+      <a href="#textgadgets_window">textgadgets_window</a> window);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

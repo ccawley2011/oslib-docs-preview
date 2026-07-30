@@ -1,0 +1,1775 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; CD</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>CD</h2>
+
+<pre>#include "oslib/cd.h"</pre>
+
+<h3 id="cd_address">cd_address</h3>
+<pre>typedef bits cd_address;</pre>
+
+<h3 id="cd_address_mode">cd_address_mode</h3>
+<pre>typedef int cd_address_mode;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#cd_LOGICAL_BLOCK_ADDRESSING">cd_LOGICAL_BLOCK_ADDRESSING</a></dd>
+<dd><a href="#cd_RED_BOOK_ADDRESSING">cd_RED_BOOK_ADDRESSING</a></dd>
+<dd><a href="#cd_PHYSICAL_BLOCK_ADDRESSING">cd_PHYSICAL_BLOCK_ADDRESSING</a></dd>
+</dl>
+
+<h3 id="cd_control_block">cd_control_block</h3>
+<pre>typedef struct
+   {  int reserved [5];
+   }
+   cd_control_block;</pre>
+
+<h3 id="cd_audio_flags">cd_audio_flags</h3>
+<pre>typedef byte cd_audio_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#cd_AUDIO">cd_AUDIO</a></dd>
+<dd><a href="#cd_DATA">cd_DATA</a></dd>
+<dd><a href="#cd_FOUR_CHANNEL">cd_FOUR_CHANNEL</a></dd>
+<dd><a href="#cd_TWO_CHANNEL">cd_TWO_CHANNEL</a></dd>
+</dl>
+
+<h3 id="cd_version_block">cd_version_block</h3>
+<pre>typedef struct
+   {  int version_number;
+      char version_string [256];
+   }
+   cd_version_block;</pre>
+
+<h3 id="cd_status">cd_status</h3>
+<pre>typedef int cd_status;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#cd_DRIVE_STATUS_OK">cd_DRIVE_STATUS_OK</a></dd>
+<dd><a href="#cd_DRIVE_STATUS_BUSY">cd_DRIVE_STATUS_BUSY</a></dd>
+<dd><a href="#cd_DRIVE_STATUS_NOT_READY">cd_DRIVE_STATUS_NOT_READY</a></dd>
+<dd><a href="#cd_DRIVE_STATUS_UNAVAILABLE">cd_DRIVE_STATUS_UNAVAILABLE</a></dd>
+</dl>
+
+<h3 id="cd_readiness">cd_readiness</h3>
+<pre>typedef int cd_readiness;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#cd_DRIVE_READY">cd_DRIVE_READY</a></dd>
+<dd><a href="#cd_DRIVE_NOT_READY">cd_DRIVE_NOT_READY</a></dd>
+</dl>
+
+<h3 id="cd_multiplier">cd_multiplier</h3>
+<pre>typedef int cd_multiplier;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#cd_MULTIPLIER_DEFAULT">cd_MULTIPLIER_DEFAULT</a></dd>
+<dd><a href="#cd_MULTIPLIER_EIGHTH_SEC">cd_MULTIPLIER_EIGHTH_SEC</a></dd>
+<dd><a href="#cd_MULTIPLIER_QUARTER_SEC">cd_MULTIPLIER_QUARTER_SEC</a></dd>
+<dd><a href="#cd_MULTIPLIER_HALF_SEC">cd_MULTIPLIER_HALF_SEC</a></dd>
+<dd><a href="#cd_MULTIPLIER_ONE_SEC">cd_MULTIPLIER_ONE_SEC</a></dd>
+<dd><a href="#cd_MULTIPLIER_TWO_SEC">cd_MULTIPLIER_TWO_SEC</a></dd>
+<dd><a href="#cd_MULTIPLIER_FOUR_SEC">cd_MULTIPLIER_FOUR_SEC</a></dd>
+<dd><a href="#cd_MULTIPLIER_EIGHT_SEC">cd_MULTIPLIER_EIGHT_SEC</a></dd>
+<dd><a href="#cd_MULTIPLIER_SIXTEEN_SEC">cd_MULTIPLIER_SIXTEEN_SEC</a></dd>
+<dd><a href="#cd_MULTIPLIER_THIRTY_TWO_SEC">cd_MULTIPLIER_THIRTY_TWO_SEC</a></dd>
+<dd><a href="#cd_MULTIPLIER_ONE_MIN">cd_MULTIPLIER_ONE_MIN</a></dd>
+<dd><a href="#cd_MULTIPLIER_TWO_MIN">cd_MULTIPLIER_TWO_MIN</a></dd>
+<dd><a href="#cd_MULTIPLIER_FOUR_MIN">cd_MULTIPLIER_FOUR_MIN</a></dd>
+<dd><a href="#cd_MULTIPLIER_EIGHT_MIN">cd_MULTIPLIER_EIGHT_MIN</a></dd>
+<dd><a href="#cd_MULTIPLIER_SIXTEEN_MIN">cd_MULTIPLIER_SIXTEEN_MIN</a></dd>
+<dd><a href="#cd_MULTIPLIER_THIRTY_TWO_MIN">cd_MULTIPLIER_THIRTY_TWO_MIN</a></dd>
+</dl>
+
+<h3 id="cd_data_mode">cd_data_mode</h3>
+<pre>typedef int cd_data_mode;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#cd_MODE_AUDIO">cd_MODE_AUDIO</a></dd>
+<dd><a href="#cd_MODE1">cd_MODE1</a></dd>
+<dd><a href="#cd_MODE2_FORM2">cd_MODE2_FORM2</a></dd>
+<dd><a href="#cd_MODE2_FORM1">cd_MODE2_FORM1</a></dd>
+</dl>
+
+<h3 id="cd_speed">cd_speed</h3>
+<pre>typedef int cd_speed;</pre>
+
+<h3 id="cd_parameter_block">cd_parameter_block</h3>
+<pre>typedef struct
+   {  <a href="#cd_multiplier">cd_multiplier</a> inactivity_timer;
+      int retry_count;
+      <a href="#cd_data_mode">cd_data_mode</a> mode;
+      <a href="#cd_speed">cd_speed</a> speed;
+   }
+   cd_parameter_block;</pre>
+
+<h3 id="cd_play_to_what">cd_play_to_what</h3>
+<pre>typedef int cd_play_to_what;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#cd_PLAY_TO_END_OF_TRACK">cd_PLAY_TO_END_OF_TRACK</a></dd>
+<dd><a href="#cd_PLAY_TO_END_OF_DISC">cd_PLAY_TO_END_OF_DISC</a></dd>
+</dl>
+
+<h3 id="cd_enquire_all_tracks_block">cd_enquire_all_tracks_block</h3>
+<pre>typedef struct
+   {  byte first_track;
+      byte last_track;
+      byte reserved0;
+      byte reserved1;
+      byte reserved2;
+   }
+   cd_enquire_all_tracks_block;</pre>
+
+<h3 id="cd_enquire_one_track_block">cd_enquire_one_track_block</h3>
+<pre>typedef struct
+   {  <a href="#cd_address">cd_address</a> address;
+      <a href="#cd_audio_flags">cd_audio_flags</a> audio_control;
+   }
+   cd_enquire_one_track_block;</pre>
+
+<h3 id="cd_sub_channel_block">cd_sub_channel_block</h3>
+<pre>typedef struct
+   {  <a href="#cd_address">cd_address</a> relative_lba;
+      <a href="#cd_address">cd_address</a> absolute_lba;
+      <a href="#cd_audio_flags">cd_audio_flags</a> audio_control;
+      byte track_number;
+      byte index_number;
+   }
+   cd_sub_channel_block;</pre>
+
+<h3 id="cd_disc_used_block">cd_disc_used_block</h3>
+<pre>typedef struct
+   {  int block_count;
+      int block_size;
+   }
+   cd_disc_used_block;</pre>
+
+<h3 id="cd_audio">cd_audio</h3>
+<pre>typedef int cd_audio;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#cd_AUDIO_PLAYING">cd_AUDIO_PLAYING</a></dd>
+<dd><a href="#cd_AUDIO_PAUSED">cd_AUDIO_PAUSED</a></dd>
+<dd><a href="#cd_AUDIO_COMPLETED">cd_AUDIO_COMPLETED</a></dd>
+<dd><a href="#cd_AUDIO_ERROR">cd_AUDIO_ERROR</a></dd>
+<dd><a href="#cd_AUDIO_STOPPED">cd_AUDIO_STOPPED</a></dd>
+</dl>
+
+<h3 id="cd_inquiry_block">cd_inquiry_block</h3>
+<pre>typedef struct
+   {  byte i [36];
+   }
+   cd_inquiry_block;</pre>
+
+<h3 id="cd_error_response_level">cd_error_response_level</h3>
+<pre>typedef int cd_error_response_level;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#cd_CHECK_ERROR">cd_CHECK_ERROR</a></dd>
+<dd><a href="#cd_CHECK_SENSE">cd_CHECK_SENSE</a></dd>
+<dd><a href="#cd_CHECK_RETRY">cd_CHECK_RETRY</a></dd>
+</dl>
+
+<h3 id="cd_flags">cd_flags</h3>
+<pre>typedef bits cd_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#cd_SUPPORTED_AUDIO_CONTROL">cd_SUPPORTED_AUDIO_CONTROL</a></dd>
+<dd><a href="#cd_SUPPORTED_PREFETCH">cd_SUPPORTED_PREFETCH</a></dd>
+<dd><a href="#cd_SUPPORTED_CLOSE_DRAWER">cd_SUPPORTED_CLOSE_DRAWER</a></dd>
+<dd><a href="#cd_SUPPORTED_AUDIO_LEVEL">cd_SUPPORTED_AUDIO_LEVEL</a></dd>
+<dd><a href="#cd_SUPPORTED_SPEED_MULTIPLIER">cd_SUPPORTED_SPEED_MULTIPLIER</a></dd>
+<dd><a href="#cd_SUPPORTED_READ_AUDIO">cd_SUPPORTED_READ_AUDIO</a></dd>
+<dd><a href="#cd_SUPPORTED_AUDIO_PARAMS">cd_SUPPORTED_AUDIO_PARAMS</a></dd>
+</dl>
+
+<h3 id="cd_register_flags">cd_register_flags</h3>
+<pre>typedef bits cd_register_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#cd_USE_OLD_READ">cd_USE_OLD_READ</a></dd>
+<dd><a href="#cd_USE_OLD_SEEK">cd_USE_OLD_SEEK</a></dd>
+<dd><a href="#cd_USE_OLD_INQUIRY">cd_USE_OLD_INQUIRY</a></dd>
+<dd><a href="#cd_USE_OLD_CAPACITY">cd_USE_OLD_CAPACITY</a></dd>
+<dd><a href="#cd_USE_OLD_READY">cd_USE_OLD_READY</a></dd>
+<dd><a href="#cd_USE_OLD_STOP_OPEN">cd_USE_OLD_STOP_OPEN</a></dd>
+<dd><a href="#cd_USE_OLD_CHECK">cd_USE_OLD_CHECK</a></dd>
+<dd><a href="#cd_USE_OLD_STATUS">cd_USE_OLD_STATUS</a></dd>
+<dd><a href="#cd_USE_OLD_CONTROL">cd_USE_OLD_CONTROL</a></dd>
+<dd><a href="#cd_USE_OLD_PREFETCH">cd_USE_OLD_PREFETCH</a></dd>
+<dd><a href="#cd_USE_OLD_RESET">cd_USE_OLD_RESET</a></dd>
+<dd><a href="#cd_USE_READ_DATA_PROPRIETARY">cd_USE_READ_DATA_PROPRIETARY</a></dd>
+<dd><a href="#cd_USE_READ_DATA_SCATTER">cd_USE_READ_DATA_SCATTER</a></dd>
+<dd><a href="#cd_USE_SEEK_DATA_PROPRIETARY">cd_USE_SEEK_DATA_PROPRIETARY</a></dd>
+<dd><a href="#cd_USE_SEEK_DATA_SCATTER">cd_USE_SEEK_DATA_SCATTER</a></dd>
+<dd><a href="#cd_USE_SCSI_OP">cd_USE_SCSI_OP</a></dd>
+</dl>
+
+<h3 id="cd_register_block">cd_register_block</h3>
+<pre>typedef struct
+   {  <a href="#cd_register_flags">cd_register_flags</a> flags;
+      int registration_count;
+      int drive_type_count;
+   }
+   cd_register_block;</pre>
+
+<h3 id="cd_drive_type">cd_drive_type</h3>
+<pre>typedef int cd_drive_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#cd_DRIVE_TYPE_UNKNOWN">cd_DRIVE_TYPE_UNKNOWN</a></dd>
+</dl>
+
+<h3 id="cd_audio_completion">cd_audio_completion</h3>
+<pre>typedef int cd_audio_completion;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#cd_AUDIO_DONE">cd_AUDIO_DONE</a></dd>
+</dl>
+
+<h3 id="cd_volume_block">cd_volume_block</h3>
+<pre>typedef struct
+   {  int volume [2];
+   }
+   cd_volume_block;</pre>
+
+<h3 id="error_CD_BASE">error_CD_BASE</h3>
+<pre>#define error_CD_BASE 0x803400u</pre>
+
+<h3 id="error_CD_BAD_ALIGNMENT">error_CD_BAD_ALIGNMENT</h3>
+<pre>#define error_CD_BAD_ALIGNMENT 0x803401u</pre>
+
+<h3 id="error_CD_DRIVE_NOT_SUPPORTED">error_CD_DRIVE_NOT_SUPPORTED</h3>
+<pre>#define error_CD_DRIVE_NOT_SUPPORTED 0x803402u</pre>
+
+<h3 id="error_CD_BAD_MODE">error_CD_BAD_MODE</h3>
+<pre>#define error_CD_BAD_MODE 0x803403u</pre>
+
+<h3 id="error_CD_INVALID_PARAMETER">error_CD_INVALID_PARAMETER</h3>
+<pre>#define error_CD_INVALID_PARAMETER 0x803404u</pre>
+
+<h3 id="error_CD_NOT_AUDIO_TRACK">error_CD_NOT_AUDIO_TRACK</h3>
+<pre>#define error_CD_NOT_AUDIO_TRACK 0x803405u</pre>
+
+<h3 id="error_CD_NO_CADDY">error_CD_NO_CADDY</h3>
+<pre>#define error_CD_NO_CADDY 0x803406u</pre>
+
+<h3 id="error_CD_NO_DRIVE">error_CD_NO_DRIVE</h3>
+<pre>#define error_CD_NO_DRIVE 0x803407u</pre>
+
+<h3 id="error_CD_INVALID_FORMAT">error_CD_INVALID_FORMAT</h3>
+<pre>#define error_CD_INVALID_FORMAT 0x803408u</pre>
+
+<h3 id="error_CD_BAD_MINUTES">error_CD_BAD_MINUTES</h3>
+<pre>#define error_CD_BAD_MINUTES 0x803409u</pre>
+
+<h3 id="error_CD_BAD_SECONDS">error_CD_BAD_SECONDS</h3>
+<pre>#define error_CD_BAD_SECONDS 0x80340Au</pre>
+
+<h3 id="error_CD_BAD_BLOCKS">error_CD_BAD_BLOCKS</h3>
+<pre>#define error_CD_BAD_BLOCKS 0x80340Bu</pre>
+
+<h3 id="error_CD_PHYSICAL_BLOCK_BAD">error_CD_PHYSICAL_BLOCK_BAD</h3>
+<pre>#define error_CD_PHYSICAL_BLOCK_BAD 0x80340Cu</pre>
+
+<h3 id="error_CD_DRAWER_LOCKED">error_CD_DRAWER_LOCKED</h3>
+<pre>#define error_CD_DRAWER_LOCKED 0x80340Du</pre>
+
+<h3 id="error_CD_WRONG_DATA_MODE">error_CD_WRONG_DATA_MODE</h3>
+<pre>#define error_CD_WRONG_DATA_MODE 0x80340Eu</pre>
+
+<h3 id="error_CD_CHANNEL_NOT_SUPPORTED">error_CD_CHANNEL_NOT_SUPPORTED</h3>
+<pre>#define error_CD_CHANNEL_NOT_SUPPORTED 0x80340Fu</pre>
+
+<h3 id="error_CD_BAD_DEVICE_ID">error_CD_BAD_DEVICE_ID</h3>
+<pre>#define error_CD_BAD_DEVICE_ID 0x803410u</pre>
+
+<h3 id="error_CD_BAD_CARD_NUMBER">error_CD_BAD_CARD_NUMBER</h3>
+<pre>#define error_CD_BAD_CARD_NUMBER 0x803411u</pre>
+
+<h3 id="error_CD_BAD_LUN_NUMBER">error_CD_BAD_LUN_NUMBER</h3>
+<pre>#define error_CD_BAD_LUN_NUMBER 0x803412u</pre>
+
+<h3 id="error_CD_NO_SUCH_TRACK">error_CD_NO_SUCH_TRACK</h3>
+<pre>#define error_CD_NO_SUCH_TRACK 0x803413u</pre>
+
+<h3 id="error_CD_FAULTY_DISC">error_CD_FAULTY_DISC</h3>
+<pre>#define error_CD_FAULTY_DISC 0x803414u</pre>
+
+<h3 id="error_CD_NO_SUCH_BLOCK">error_CD_NO_SUCH_BLOCK</h3>
+<pre>#define error_CD_NO_SUCH_BLOCK 0x803415u</pre>
+
+<h3 id="error_CD_NOT_SUPPORTED">error_CD_NOT_SUPPORTED</h3>
+<pre>#define error_CD_NOT_SUPPORTED 0x803416u</pre>
+
+<h3 id="error_CD_DRIVER_NOT_PRESENT">error_CD_DRIVER_NOT_PRESENT</h3>
+<pre>#define error_CD_DRIVER_NOT_PRESENT 0x803417u</pre>
+
+<h3 id="error_CD_SWI_NOT_SUPPORTED">error_CD_SWI_NOT_SUPPORTED</h3>
+<pre>#define error_CD_SWI_NOT_SUPPORTED 0x803418u</pre>
+
+<h3 id="error_CD_TOO_MANY_DRIVERS">error_CD_TOO_MANY_DRIVERS</h3>
+<pre>#define error_CD_TOO_MANY_DRIVERS 0x803419u</pre>
+
+<h3 id="error_CD_NOT_REGISTERED">error_CD_NOT_REGISTERED</h3>
+<pre>#define error_CD_NOT_REGISTERED 0x80341Au</pre>
+
+<h3 id="cd_LOGICAL_BLOCK_ADDRESSING">cd_LOGICAL_BLOCK_ADDRESSING</h3>
+<pre>#define cd_LOGICAL_BLOCK_ADDRESSING ((<a href="#cd_address_mode">cd_address_mode</a>) 0x0u)</pre>
+
+<h3 id="cd_RED_BOOK_ADDRESSING">cd_RED_BOOK_ADDRESSING</h3>
+<pre>#define cd_RED_BOOK_ADDRESSING ((<a href="#cd_address_mode">cd_address_mode</a>) 0x1u)</pre>
+
+<h3 id="cd_PHYSICAL_BLOCK_ADDRESSING">cd_PHYSICAL_BLOCK_ADDRESSING</h3>
+<pre>#define cd_PHYSICAL_BLOCK_ADDRESSING ((<a href="#cd_address_mode">cd_address_mode</a>) 0x2u)</pre>
+
+<h3 id="cd_AUDIO">cd_AUDIO</h3>
+<pre>#define cd_AUDIO ((<a href="#cd_audio_flags">cd_audio_flags</a>) 0x0u)</pre>
+
+<h3 id="cd_DATA">cd_DATA</h3>
+<pre>#define cd_DATA ((<a href="#cd_audio_flags">cd_audio_flags</a>) 0x1u)</pre>
+
+<h3 id="cd_FOUR_CHANNEL">cd_FOUR_CHANNEL</h3>
+<pre>#define cd_FOUR_CHANNEL ((<a href="#cd_audio_flags">cd_audio_flags</a>) 0x0u)</pre>
+
+<h3 id="cd_TWO_CHANNEL">cd_TWO_CHANNEL</h3>
+<pre>#define cd_TWO_CHANNEL ((<a href="#cd_audio_flags">cd_audio_flags</a>) 0x2u)</pre>
+
+<h3 id="cd_READ_AUDIO_READ">cd_READ_AUDIO_READ</h3>
+<pre>#define cd_READ_AUDIO_READ ((byte) 0)</pre>
+
+<h3 id="cd_READ_AUDIO_REASON_MASK">cd_READ_AUDIO_REASON_MASK</h3>
+<pre>#define cd_READ_AUDIO_REASON_MASK 0xFFu</pre>
+
+<h3 id="cd_DRIVE_STATUS_OK">cd_DRIVE_STATUS_OK</h3>
+<pre>#define cd_DRIVE_STATUS_OK ((<a href="#cd_status">cd_status</a>) 0x1u)</pre>
+
+<h3 id="cd_DRIVE_STATUS_BUSY">cd_DRIVE_STATUS_BUSY</h3>
+<pre>#define cd_DRIVE_STATUS_BUSY ((<a href="#cd_status">cd_status</a>) 0x2u)</pre>
+
+<h3 id="cd_DRIVE_STATUS_NOT_READY">cd_DRIVE_STATUS_NOT_READY</h3>
+<pre>#define cd_DRIVE_STATUS_NOT_READY ((<a href="#cd_status">cd_status</a>) 0x4u)</pre>
+
+<h3 id="cd_DRIVE_STATUS_UNAVAILABLE">cd_DRIVE_STATUS_UNAVAILABLE</h3>
+<pre>#define cd_DRIVE_STATUS_UNAVAILABLE ((<a href="#cd_status">cd_status</a>) 0x8u)</pre>
+
+<h3 id="cd_DRIVE_READY">cd_DRIVE_READY</h3>
+<pre>#define cd_DRIVE_READY ((<a href="#cd_readiness">cd_readiness</a>) 0x0u)</pre>
+
+<h3 id="cd_DRIVE_NOT_READY">cd_DRIVE_NOT_READY</h3>
+<pre>#define cd_DRIVE_NOT_READY ((<a href="#cd_readiness">cd_readiness</a>) 0x1u)</pre>
+
+<h3 id="cd_MULTIPLIER_DEFAULT">cd_MULTIPLIER_DEFAULT</h3>
+<pre>#define cd_MULTIPLIER_DEFAULT ((<a href="#cd_multiplier">cd_multiplier</a>) 0x0u)</pre>
+
+<h3 id="cd_MULTIPLIER_EIGHTH_SEC">cd_MULTIPLIER_EIGHTH_SEC</h3>
+<pre>#define cd_MULTIPLIER_EIGHTH_SEC ((<a href="#cd_multiplier">cd_multiplier</a>) 0x1u)</pre>
+
+<h3 id="cd_MULTIPLIER_QUARTER_SEC">cd_MULTIPLIER_QUARTER_SEC</h3>
+<pre>#define cd_MULTIPLIER_QUARTER_SEC ((<a href="#cd_multiplier">cd_multiplier</a>) 0x2u)</pre>
+
+<h3 id="cd_MULTIPLIER_HALF_SEC">cd_MULTIPLIER_HALF_SEC</h3>
+<pre>#define cd_MULTIPLIER_HALF_SEC ((<a href="#cd_multiplier">cd_multiplier</a>) 0x3u)</pre>
+
+<h3 id="cd_MULTIPLIER_ONE_SEC">cd_MULTIPLIER_ONE_SEC</h3>
+<pre>#define cd_MULTIPLIER_ONE_SEC ((<a href="#cd_multiplier">cd_multiplier</a>) 0x4u)</pre>
+
+<h3 id="cd_MULTIPLIER_TWO_SEC">cd_MULTIPLIER_TWO_SEC</h3>
+<pre>#define cd_MULTIPLIER_TWO_SEC ((<a href="#cd_multiplier">cd_multiplier</a>) 0x5u)</pre>
+
+<h3 id="cd_MULTIPLIER_FOUR_SEC">cd_MULTIPLIER_FOUR_SEC</h3>
+<pre>#define cd_MULTIPLIER_FOUR_SEC ((<a href="#cd_multiplier">cd_multiplier</a>) 0x6u)</pre>
+
+<h3 id="cd_MULTIPLIER_EIGHT_SEC">cd_MULTIPLIER_EIGHT_SEC</h3>
+<pre>#define cd_MULTIPLIER_EIGHT_SEC ((<a href="#cd_multiplier">cd_multiplier</a>) 0x7u)</pre>
+
+<h3 id="cd_MULTIPLIER_SIXTEEN_SEC">cd_MULTIPLIER_SIXTEEN_SEC</h3>
+<pre>#define cd_MULTIPLIER_SIXTEEN_SEC ((<a href="#cd_multiplier">cd_multiplier</a>) 0x8u)</pre>
+
+<h3 id="cd_MULTIPLIER_THIRTY_TWO_SEC">cd_MULTIPLIER_THIRTY_TWO_SEC</h3>
+<pre>#define cd_MULTIPLIER_THIRTY_TWO_SEC ((<a href="#cd_multiplier">cd_multiplier</a>) 0x9u)</pre>
+
+<h3 id="cd_MULTIPLIER_ONE_MIN">cd_MULTIPLIER_ONE_MIN</h3>
+<pre>#define cd_MULTIPLIER_ONE_MIN ((<a href="#cd_multiplier">cd_multiplier</a>) 0xAu)</pre>
+
+<h3 id="cd_MULTIPLIER_TWO_MIN">cd_MULTIPLIER_TWO_MIN</h3>
+<pre>#define cd_MULTIPLIER_TWO_MIN ((<a href="#cd_multiplier">cd_multiplier</a>) 0xBu)</pre>
+
+<h3 id="cd_MULTIPLIER_FOUR_MIN">cd_MULTIPLIER_FOUR_MIN</h3>
+<pre>#define cd_MULTIPLIER_FOUR_MIN ((<a href="#cd_multiplier">cd_multiplier</a>) 0xCu)</pre>
+
+<h3 id="cd_MULTIPLIER_EIGHT_MIN">cd_MULTIPLIER_EIGHT_MIN</h3>
+<pre>#define cd_MULTIPLIER_EIGHT_MIN ((<a href="#cd_multiplier">cd_multiplier</a>) 0xDu)</pre>
+
+<h3 id="cd_MULTIPLIER_SIXTEEN_MIN">cd_MULTIPLIER_SIXTEEN_MIN</h3>
+<pre>#define cd_MULTIPLIER_SIXTEEN_MIN ((<a href="#cd_multiplier">cd_multiplier</a>) 0xEu)</pre>
+
+<h3 id="cd_MULTIPLIER_THIRTY_TWO_MIN">cd_MULTIPLIER_THIRTY_TWO_MIN</h3>
+<pre>#define cd_MULTIPLIER_THIRTY_TWO_MIN ((<a href="#cd_multiplier">cd_multiplier</a>) 0xFu)</pre>
+
+<h3 id="cd_MODE_AUDIO">cd_MODE_AUDIO</h3>
+<pre>#define cd_MODE_AUDIO ((<a href="#cd_data_mode">cd_data_mode</a>) 0x0u)</pre>
+
+<h3 id="cd_MODE1">cd_MODE1</h3>
+<pre>#define cd_MODE1 ((<a href="#cd_data_mode">cd_data_mode</a>) 0x1u)</pre>
+
+<h3 id="cd_MODE2_FORM2">cd_MODE2_FORM2</h3>
+<pre>#define cd_MODE2_FORM2 ((<a href="#cd_data_mode">cd_data_mode</a>) 0x2u)</pre>
+
+<h3 id="cd_MODE2_FORM1">cd_MODE2_FORM1</h3>
+<pre>#define cd_MODE2_FORM1 ((<a href="#cd_data_mode">cd_data_mode</a>) 0x3u)</pre>
+
+<h3 id="cd_SPEED_UNCHANGED">cd_SPEED_UNCHANGED</h3>
+<pre>#define cd_SPEED_UNCHANGED 0</pre>
+
+<h3 id="cd_SPEED_STANDARD">cd_SPEED_STANDARD</h3>
+<pre>#define cd_SPEED_STANDARD 1</pre>
+
+<h3 id="cd_SPEED_DOUBLE">cd_SPEED_DOUBLE</h3>
+<pre>#define cd_SPEED_DOUBLE 2</pre>
+
+<h3 id="cd_SPEED_MAX">cd_SPEED_MAX</h3>
+<pre>#define cd_SPEED_MAX 255</pre>
+
+<h3 id="cd_PLAY_TO_END_OF_TRACK">cd_PLAY_TO_END_OF_TRACK</h3>
+<pre>#define cd_PLAY_TO_END_OF_TRACK ((<a href="#cd_play_to_what">cd_play_to_what</a>) 0xFEu)</pre>
+
+<h3 id="cd_PLAY_TO_END_OF_DISC">cd_PLAY_TO_END_OF_DISC</h3>
+<pre>#define cd_PLAY_TO_END_OF_DISC ((<a href="#cd_play_to_what">cd_play_to_what</a>) 0xFFu)</pre>
+
+<h3 id="cd_AUDIO_PLAYING">cd_AUDIO_PLAYING</h3>
+<pre>#define cd_AUDIO_PLAYING ((<a href="#cd_audio">cd_audio</a>) 0x0u)</pre>
+
+<h3 id="cd_AUDIO_PAUSED">cd_AUDIO_PAUSED</h3>
+<pre>#define cd_AUDIO_PAUSED ((<a href="#cd_audio">cd_audio</a>) 0x1u)</pre>
+
+<h3 id="cd_AUDIO_COMPLETED">cd_AUDIO_COMPLETED</h3>
+<pre>#define cd_AUDIO_COMPLETED ((<a href="#cd_audio">cd_audio</a>) 0x3u)</pre>
+
+<h3 id="cd_AUDIO_ERROR">cd_AUDIO_ERROR</h3>
+<pre>#define cd_AUDIO_ERROR ((<a href="#cd_audio">cd_audio</a>) 0x4u)</pre>
+
+<h3 id="cd_AUDIO_STOPPED">cd_AUDIO_STOPPED</h3>
+<pre>#define cd_AUDIO_STOPPED ((<a href="#cd_audio">cd_audio</a>) 0x5u)</pre>
+
+<h3 id="cd_CHECK_ERROR">cd_CHECK_ERROR</h3>
+<pre>#define cd_CHECK_ERROR ((<a href="#cd_error_response_level">cd_error_response_level</a>) 0x0u)</pre>
+
+<h3 id="cd_CHECK_SENSE">cd_CHECK_SENSE</h3>
+<pre>#define cd_CHECK_SENSE ((<a href="#cd_error_response_level">cd_error_response_level</a>) 0x1u)</pre>
+
+<h3 id="cd_CHECK_RETRY">cd_CHECK_RETRY</h3>
+<pre>#define cd_CHECK_RETRY ((<a href="#cd_error_response_level">cd_error_response_level</a>) 0x2u)</pre>
+
+<h3 id="cd_SUPPORTED_AUDIO_CONTROL">cd_SUPPORTED_AUDIO_CONTROL</h3>
+<pre>#define cd_SUPPORTED_AUDIO_CONTROL ((<a href="#cd_flags">cd_flags</a>) 0x7u)</pre>
+
+<h3 id="cd_SUPPORTED_PREFETCH">cd_SUPPORTED_PREFETCH</h3>
+<pre>#define cd_SUPPORTED_PREFETCH ((<a href="#cd_flags">cd_flags</a>) 0x8u)</pre>
+
+<h3 id="cd_SUPPORTED_CLOSE_DRAWER">cd_SUPPORTED_CLOSE_DRAWER</h3>
+<pre>#define cd_SUPPORTED_CLOSE_DRAWER ((<a href="#cd_flags">cd_flags</a>) 0x10u)</pre>
+
+<h3 id="cd_SUPPORTED_AUDIO_LEVEL">cd_SUPPORTED_AUDIO_LEVEL</h3>
+<pre>#define cd_SUPPORTED_AUDIO_LEVEL ((<a href="#cd_flags">cd_flags</a>) 0x20u)</pre>
+
+<h3 id="cd_SUPPORTED_SPEED_MULTIPLIER">cd_SUPPORTED_SPEED_MULTIPLIER</h3>
+<pre>#define cd_SUPPORTED_SPEED_MULTIPLIER ((<a href="#cd_flags">cd_flags</a>) 0x3FC0u)</pre>
+
+<h3 id="cd_SUPPORTED_READ_AUDIO">cd_SUPPORTED_READ_AUDIO</h3>
+<pre>#define cd_SUPPORTED_READ_AUDIO ((<a href="#cd_flags">cd_flags</a>) 0x4000u)</pre>
+
+<h3 id="cd_SUPPORTED_AUDIO_PARAMS">cd_SUPPORTED_AUDIO_PARAMS</h3>
+<pre>#define cd_SUPPORTED_AUDIO_PARAMS ((<a href="#cd_flags">cd_flags</a>) 0x8000u)</pre>
+
+<h3 id="cd_USE_OLD_READ">cd_USE_OLD_READ</h3>
+<pre>#define cd_USE_OLD_READ ((<a href="#cd_register_flags">cd_register_flags</a>) 0x40u)</pre>
+
+<h3 id="cd_USE_OLD_SEEK">cd_USE_OLD_SEEK</h3>
+<pre>#define cd_USE_OLD_SEEK ((<a href="#cd_register_flags">cd_register_flags</a>) 0x80u)</pre>
+
+<h3 id="cd_USE_OLD_INQUIRY">cd_USE_OLD_INQUIRY</h3>
+<pre>#define cd_USE_OLD_INQUIRY ((<a href="#cd_register_flags">cd_register_flags</a>) 0x100u)</pre>
+
+<h3 id="cd_USE_OLD_CAPACITY">cd_USE_OLD_CAPACITY</h3>
+<pre>#define cd_USE_OLD_CAPACITY ((<a href="#cd_register_flags">cd_register_flags</a>) 0x200u)</pre>
+
+<h3 id="cd_USE_OLD_READY">cd_USE_OLD_READY</h3>
+<pre>#define cd_USE_OLD_READY ((<a href="#cd_register_flags">cd_register_flags</a>) 0x400u)</pre>
+
+<h3 id="cd_USE_OLD_STOP_OPEN">cd_USE_OLD_STOP_OPEN</h3>
+<pre>#define cd_USE_OLD_STOP_OPEN ((<a href="#cd_register_flags">cd_register_flags</a>) 0x800u)</pre>
+
+<h3 id="cd_USE_OLD_CHECK">cd_USE_OLD_CHECK</h3>
+<pre>#define cd_USE_OLD_CHECK ((<a href="#cd_register_flags">cd_register_flags</a>) 0x1000u)</pre>
+
+<h3 id="cd_USE_OLD_STATUS">cd_USE_OLD_STATUS</h3>
+<pre>#define cd_USE_OLD_STATUS ((<a href="#cd_register_flags">cd_register_flags</a>) 0x2000u)</pre>
+
+<h3 id="cd_USE_OLD_CONTROL">cd_USE_OLD_CONTROL</h3>
+<pre>#define cd_USE_OLD_CONTROL ((<a href="#cd_register_flags">cd_register_flags</a>) 0x4000u)</pre>
+
+<h3 id="cd_USE_OLD_PREFETCH">cd_USE_OLD_PREFETCH</h3>
+<pre>#define cd_USE_OLD_PREFETCH ((<a href="#cd_register_flags">cd_register_flags</a>) 0x8000u)</pre>
+
+<h3 id="cd_USE_OLD_RESET">cd_USE_OLD_RESET</h3>
+<pre>#define cd_USE_OLD_RESET ((<a href="#cd_register_flags">cd_register_flags</a>) 0x10000u)</pre>
+
+<h3 id="cd_USE_READ_DATA_PROPRIETARY">cd_USE_READ_DATA_PROPRIETARY</h3>
+<pre>#define cd_USE_READ_DATA_PROPRIETARY ((<a href="#cd_register_flags">cd_register_flags</a>) 0x20000u)</pre>
+
+<h3 id="cd_USE_READ_DATA_SCATTER">cd_USE_READ_DATA_SCATTER</h3>
+<pre>#define cd_USE_READ_DATA_SCATTER ((<a href="#cd_register_flags">cd_register_flags</a>) 0x40000u)</pre>
+
+<h3 id="cd_USE_SEEK_DATA_PROPRIETARY">cd_USE_SEEK_DATA_PROPRIETARY</h3>
+<pre>#define cd_USE_SEEK_DATA_PROPRIETARY ((<a href="#cd_register_flags">cd_register_flags</a>) 0x80000u)</pre>
+
+<h3 id="cd_USE_SEEK_DATA_SCATTER">cd_USE_SEEK_DATA_SCATTER</h3>
+<pre>#define cd_USE_SEEK_DATA_SCATTER ((<a href="#cd_register_flags">cd_register_flags</a>) 0x100000u)</pre>
+
+<h3 id="cd_USE_SCSI_OP">cd_USE_SCSI_OP</h3>
+<pre>#define cd_USE_SCSI_OP ((<a href="#cd_register_flags">cd_register_flags</a>) 0x200000u)</pre>
+
+<p>RISC OS 5+</p>
+
+<h3 id="cd_DRIVE_TYPE_UNKNOWN">cd_DRIVE_TYPE_UNKNOWN</h3>
+<pre>#define cd_DRIVE_TYPE_UNKNOWN ((<a href="#cd_drive_type">cd_drive_type</a>) 0xFFFFFFFFu)</pre>
+
+<h3 id="cd_AUDIO_DONE">cd_AUDIO_DONE</h3>
+<pre>#define cd_AUDIO_DONE ((<a href="#cd_audio_completion">cd_audio_completion</a>) 0xFFFFFFFFu)</pre>
+
+<h3 id="cd_VOLUME_LIMIT">cd_VOLUME_LIMIT</h3>
+<pre>#define cd_VOLUME_LIMIT 65535</pre>
+
+<h3 id="xcd_version">xcd_version</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_version (<a href="#cd_version_block">cd_version_block</a> **version);</pre>
+<p>Reads version string</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>version</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="cd_version">cd_version</h3>
+<pre>extern <a href="#cd_version_block">cd_version_block</a> *cd_version (void);
+</pre><p>Reads version string</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>version</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcd_read_data">xcd_read_data</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_read_data (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_address">cd_address</a> start_address,
+      int block_count,
+      byte *buffer,
+      int size,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Reads data from CD-ROM - do not use</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>start_address</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>block_count</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="cd_read_data">cd_read_data</h3>
+<pre>extern void cd_read_data (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_address">cd_address</a> start_address,
+      int block_count,
+      byte *buffer,
+      int size,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Reads data from CD-ROM - do not use</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>start_address</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>block_count</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xcd_seek_to">xcd_seek_to</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_seek_to (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_address">cd_address</a> seek,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Seeks head to given position</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>seek</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="cd_seek_to">cd_seek_to</h3>
+<pre>extern void cd_seek_to (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_address">cd_address</a> seek,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Seeks head to given position</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>seek</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xcd_drive_status">xcd_drive_status</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_drive_status (<a href="#cd_control_block">cd_control_block</a> const *control,
+      <a href="#cd_status">cd_status</a> *status);</pre>
+<p>Reads drive status</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="cd_drive_status">cd_drive_status</h3>
+<pre>extern <a href="#cd_status">cd_status</a> cd_drive_status (<a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Reads drive status</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcd_drive_ready">xcd_drive_ready</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_drive_ready (<a href="#cd_control_block">cd_control_block</a> const *control,
+      <a href="#cd_readiness">cd_readiness</a> *ready);</pre>
+<p>Checks if drive is ready - prefer CD_DriveStatus</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>ready</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="cd_drive_ready">cd_drive_ready</h3>
+<pre>extern <a href="#cd_readiness">cd_readiness</a> cd_drive_ready (<a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Checks if drive is ready - prefer CD_DriveStatus</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>ready</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcd_get_parameters">xcd_get_parameters</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_get_parameters (<a href="#cd_parameter_block">cd_parameter_block</a> *params,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Reads drive setup parameters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>params</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="cd_get_parameters">cd_get_parameters</h3>
+<pre>extern void cd_get_parameters (<a href="#cd_parameter_block">cd_parameter_block</a> *params,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Reads drive setup parameters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>params</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xcd_set_parameters">xcd_set_parameters</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_set_parameters (<a href="#cd_parameter_block">cd_parameter_block</a> const *params,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Sets drive setup paramters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>params</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="cd_set_parameters">cd_set_parameters</h3>
+<pre>extern void cd_set_parameters (<a href="#cd_parameter_block">cd_parameter_block</a> const *params,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Sets drive setup paramters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>params</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xcd_open_drawer">xcd_open_drawer</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_open_drawer (<a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Stops the disc, opens the drawer and ejects the disc</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="cd_open_drawer">cd_open_drawer</h3>
+<pre>extern void cd_open_drawer (<a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Stops the disc, opens the drawer and ejects the disc</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xcd_eject_button">xcd_eject_button</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_eject_button (osbool disable,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Controls the effect of the eject button and *Eject command</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>disable</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="cd_eject_button">cd_eject_button</h3>
+<pre>extern void cd_eject_button (osbool disable,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Controls the effect of the eject button and *Eject command</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>disable</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xcd_enquire_address">xcd_enquire_address</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_enquire_address (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_control_block">cd_control_block</a> const *control,
+      <a href="#cd_address">cd_address</a> *address);</pre>
+<p>Reads current head position</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>address</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="cd_enquire_address">cd_enquire_address</h3>
+<pre>extern <a href="#cd_address">cd_address</a> cd_enquire_address (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Reads current head position</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>address</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcd_enquire_data_mode">xcd_enquire_data_mode</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_enquire_data_mode (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_address">cd_address</a> address,
+      <a href="#cd_control_block">cd_control_block</a> const *control,
+      <a href="#cd_data_mode">cd_data_mode</a> *data_mode);</pre>
+<p>Finds data mode at given address</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>data_mode</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="cd_enquire_data_mode">cd_enquire_data_mode</h3>
+<pre>extern <a href="#cd_data_mode">cd_data_mode</a> cd_enquire_data_mode (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_address">cd_address</a> address,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Finds data mode at given address</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>data_mode</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcd_play_audio">xcd_play_audio</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_play_audio (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_address">cd_address</a> start,
+      <a href="#cd_address">cd_address</a> end,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Plays selected section of audio</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>start</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>end</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="cd_play_audio">cd_play_audio</h3>
+<pre>extern void cd_play_audio (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_address">cd_address</a> start,
+      <a href="#cd_address">cd_address</a> end,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Plays selected section of audio</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>start</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>end</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xcd_play_track">xcd_play_track</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_play_track (int track,
+      <a href="#cd_play_to_what">cd_play_to_what</a> play_to,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Plays one or more tracks</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>track</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>play_to</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="cd_play_track">cd_play_track</h3>
+<pre>extern void cd_play_track (int track,
+      <a href="#cd_play_to_what">cd_play_to_what</a> play_to,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Plays one or more tracks</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>track</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>play_to</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xcd_audio_pause">xcd_audio_pause</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_audio_pause (osbool pause,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Controls pausing of audio playing</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pause</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="cd_audio_pause">cd_audio_pause</h3>
+<pre>extern void cd_audio_pause (osbool pause,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Controls pausing of audio playing</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pause</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xcd_enquire_all_tracks">xcd_enquire_all_tracks</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_enquire_all_tracks (<a href="#cd_enquire_all_tracks_block">cd_enquire_all_tracks_block</a> *info,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Reads information on all tracks</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="cd_enquire_all_tracks">cd_enquire_all_tracks</h3>
+<pre>extern void cd_enquire_all_tracks (<a href="#cd_enquire_all_tracks_block">cd_enquire_all_tracks_block</a> *info,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Reads information on all tracks</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xcd_enquire_one_track">xcd_enquire_one_track</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_enquire_one_track (int track,
+      <a href="#cd_enquire_one_track_block">cd_enquire_one_track_block</a> *info,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Reads information on a given track</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>track</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="cd_enquire_one_track">cd_enquire_one_track</h3>
+<pre>extern void cd_enquire_one_track (int track,
+      <a href="#cd_enquire_one_track_block">cd_enquire_one_track_block</a> *info,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Reads information on a given track</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>track</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xcd_read_sub_channel">xcd_read_sub_channel</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_read_sub_channel (<a href="#cd_sub_channel_block">cd_sub_channel_block</a> *block,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="cd_read_sub_channel">cd_read_sub_channel</h3>
+<pre>extern void cd_read_sub_channel (<a href="#cd_sub_channel_block">cd_sub_channel_block</a> *block,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xcd_check_drive">xcd_check_drive</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_check_drive (<a href="#cd_control_block">cd_control_block</a> const *control,
+      bits *status);</pre>
+<p>Returns SCSI diagnostic information - should not nomally be used</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="cd_check_drive">cd_check_drive</h3>
+<pre>extern bits cd_check_drive (<a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Returns SCSI diagnostic information - should not nomally be used</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcd_disc_changed">xcd_disc_changed</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_disc_changed (<a href="#cd_control_block">cd_control_block</a> const *control,
+      osbool *changed);</pre>
+<p>Checks whether the disc has changed - do not use</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>changed</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="cd_disc_changed">cd_disc_changed</h3>
+<pre>extern osbool cd_disc_changed (<a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Checks whether the disc has changed - do not use</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>changed</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcd_stop_disc">xcd_stop_disc</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_stop_disc (<a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Stops the disc</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="cd_stop_disc">cd_stop_disc</h3>
+<pre>extern void cd_stop_disc (<a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Stops the disc</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xcd_disc_used">xcd_disc_used</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_disc_used (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_disc_used_block">cd_disc_used_block</a> *info,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="cd_disc_used">cd_disc_used</h3>
+<pre>extern void cd_disc_used (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_disc_used_block">cd_disc_used_block</a> *info,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xcd_audio_status">xcd_audio_status</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_audio_status (<a href="#cd_control_block">cd_control_block</a> const *control,
+      <a href="#cd_audio">cd_audio</a> *status);</pre>
+<p>Returns the current audio status of the drive</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="cd_audio_status">cd_audio_status</h3>
+<pre>extern <a href="#cd_audio">cd_audio</a> cd_audio_status (<a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Returns the current audio status of the drive</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcd_inquiry">xcd_inquiry</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_inquiry (<a href="#cd_inquiry_block">cd_inquiry_block</a> *data,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Reads info on drive - should not normally be used</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>data</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="cd_inquiry">cd_inquiry</h3>
+<pre>extern void cd_inquiry (<a href="#cd_inquiry_block">cd_inquiry_block</a> *data,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Reads info on drive - should not normally be used</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>data</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xcd_disc_has_changed">xcd_disc_has_changed</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_disc_has_changed (<a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Marks disc as having changed - should not normally be used</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="cd_disc_has_changed">cd_disc_has_changed</h3>
+<pre>extern void cd_disc_has_changed (<a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Marks disc as having changed - should not normally be used</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xcd_control">xcd_control</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_control (<a href="#cd_error_response_level">cd_error_response_level</a> level,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Controls retry on Unit Attention - do not use</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>level</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="cd_control">cd_control</h3>
+<pre>extern void cd_control (<a href="#cd_error_response_level">cd_error_response_level</a> level,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Controls retry on Unit Attention - do not use</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>level</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xcd_supported">xcd_supported</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_supported (<a href="#cd_control_block">cd_control_block</a> const *control,
+      <a href="#cd_flags">cd_flags</a> *flags);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="cd_supported">cd_supported</h3>
+<pre>extern <a href="#cd_flags">cd_flags</a> cd_supported (<a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>flags</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcd_prefetch">xcd_prefetch</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_prefetch (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_address">cd_address</a> address,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Causes cacheing on drives where this is supported</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="cd_prefetch">cd_prefetch</h3>
+<pre>extern void cd_prefetch (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_address">cd_address</a> address,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Causes cacheing on drives where this is supported</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xcd_reset">xcd_reset</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_reset (<a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Resets the drive</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="cd_reset">cd_reset</h3>
+<pre>extern void cd_reset (<a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Resets the drive</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xcd_close_drawer">xcd_close_drawer</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_close_drawer (<a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Closes the drawer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="cd_close_drawer">cd_close_drawer</h3>
+<pre>extern void cd_close_drawer (<a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Closes the drawer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xcd_is_drawer_locked">xcd_is_drawer_locked</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_is_drawer_locked (<a href="#cd_control_block">cd_control_block</a> const *control,
+      osbool *locked);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>locked</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="cd_is_drawer_locked">cd_is_drawer_locked</h3>
+<pre>extern osbool cd_is_drawer_locked (<a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>locked</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcd_audio_control">xcd_audio_control</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_audio_control (int control,
+      <a href="#cd_control_block">cd_control_block</a> const *control_block);</pre>
+<p>Do not use</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>control_block</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="cd_audio_control">cd_audio_control</h3>
+<pre>extern void cd_audio_control (int control,
+      <a href="#cd_control_block">cd_control_block</a> const *control_block);</pre>
+<p>Do not use</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>control_block</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xcd_last_error">xcd_last_error</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_last_error (int *errnum);</pre>
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>errnum</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="cd_last_error">cd_last_error</h3>
+<pre>extern int cd_last_error (void);
+</pre>
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>errnum</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcd_audio_level">xcd_audio_level</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_audio_level (<a href="#cd_control_block">cd_control_block</a> const *control,
+      <a href="os.html#os_error">os_error</a> **error);</pre>
+<p>Do not use</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>error</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="cd_audio_level">cd_audio_level</h3>
+<pre>extern void cd_audio_level (<a href="#cd_control_block">cd_control_block</a> const *control,
+      <a href="os.html#os_error">os_error</a> **error);</pre>
+<p>Do not use</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>error</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xcd_register">xcd_register</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_register (<a href="#cd_register_block">cd_register_block</a> const *info,
+      asm_routine driver_code,
+      void *driver_workspace);</pre>
+<p>version 2.20+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>info</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>driver_code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>driver_workspace</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="cd_register">cd_register</h3>
+<pre>extern void cd_register (<a href="#cd_register_block">cd_register_block</a> const *info,
+      asm_routine driver_code,
+      void *driver_workspace);</pre>
+<p>version 2.20+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>info</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>driver_code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>driver_workspace</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xcd_unregister">xcd_unregister</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_unregister (<a href="#cd_register_block">cd_register_block</a> const *info,
+      asm_routine driver_code);</pre>
+<p>version 2.20+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>info</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>driver_code</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="cd_unregister">cd_unregister</h3>
+<pre>extern void cd_unregister (<a href="#cd_register_block">cd_register_block</a> const *info,
+      asm_routine driver_code);</pre>
+<p>version 2.20+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>info</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>driver_code</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xcd_byte_copy">xcd_byte_copy</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_byte_copy (byte const *source,
+      byte *destination,
+      int size);</pre>
+<p>A fast memory copy routine - version 2.20+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>source</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>destination</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="cd_byte_copy">cd_byte_copy</h3>
+<pre>extern void cd_byte_copy (byte const *source,
+      byte *destination,
+      int size);</pre>
+<p>A fast memory copy routine - version 2.20+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>source</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>destination</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xcd_identify">xcd_identify</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_identify (<a href="#cd_control_block">cd_control_block</a> const *control,
+      <a href="#cd_drive_type">cd_drive_type</a> *drive_type);</pre>
+<p>version 2.20+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>drive_type</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="cd_identify">cd_identify</h3>
+<pre>extern <a href="#cd_drive_type">cd_drive_type</a> cd_identify (<a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>version 2.20+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>drive_type</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xcd_convert_to_lba">xcd_convert_to_lba</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_convert_to_lba (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_address">cd_address</a> address,
+      <a href="#cd_address">cd_address</a> *new_address);</pre>
+<p>Converts an audio CD disc address to a logical block address - version 2.20+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>new_address</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="cd_convert_to_lba">cd_convert_to_lba</h3>
+<pre>extern <a href="#cd_address">cd_address</a> cd_convert_to_lba (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_address">cd_address</a> address);</pre>
+<p>Converts an audio CD disc address to a logical block address - version 2.20+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>new_address</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xcd_convert_to_msf">xcd_convert_to_msf</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_convert_to_msf (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_address">cd_address</a> address,
+      <a href="#cd_address">cd_address</a> *new_address);</pre>
+<p>Converts an audio CD disc address to a red book format address - version 2.20+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>new_address</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="cd_convert_to_msf">cd_convert_to_msf</h3>
+<pre>extern <a href="#cd_address">cd_address</a> cd_convert_to_msf (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_address">cd_address</a> address);</pre>
+<p>Converts an audio CD disc address to a red book format address - version 2.20+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>new_address</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xcd_read_audio">xcd_read_audio</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_read_audio (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_address">cd_address</a> address,
+      int block_count,
+      byte *buffer,
+      bits flags,
+      <a href="#cd_control_block">cd_control_block</a> const *control,
+      <a href="#cd_drive_type">cd_drive_type</a> *drive_type);</pre>
+<p>Reads data from digitial audio tracks - version 2.22+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>block_count</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>drive_type</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="cd_read_audio">cd_read_audio</h3>
+<pre>extern <a href="#cd_drive_type">cd_drive_type</a> cd_read_audio (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_address">cd_address</a> address,
+      int block_count,
+      byte *buffer,
+      bits flags,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Reads data from digitial audio tracks - version 2.22+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>block_count</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>drive_type</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xcd_read_user_data">xcd_read_user_data</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_read_user_data (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_address">cd_address</a> address,
+      int size,
+      byte *buffer,
+      int offset,
+      <a href="#cd_control_block">cd_control_block</a> const *control,
+      <a href="#cd_address">cd_address</a> *last,
+      int *next_offset);</pre>
+<p>Do not use - version 2.22+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>last</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>next_offset</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="cd_read_user_data">cd_read_user_data</h3>
+<pre>extern <a href="#cd_address">cd_address</a> cd_read_user_data (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_address">cd_address</a> address,
+      int size,
+      byte *buffer,
+      int offset,
+      <a href="#cd_control_block">cd_control_block</a> const *control,
+      int *next_offset);</pre>
+<p>Do not use - version 2.22+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_offset</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>last</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xcd_seek_user_data">xcd_seek_user_data</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_seek_user_data (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_address">cd_address</a> address,
+      int offset,
+      <a href="#cd_control_block">cd_control_block</a> const *control,
+      <a href="#cd_address">cd_address</a> *found,
+      int *offset_out);</pre>
+<p>FIXME - version 2.22+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>found</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>offset_out</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="cd_seek_user_data">cd_seek_user_data</h3>
+<pre>extern <a href="#cd_address">cd_address</a> cd_seek_user_data (<a href="#cd_address_mode">cd_address_mode</a> address_mode,
+      <a href="#cd_address">cd_address</a> address,
+      int offset,
+      <a href="#cd_control_block">cd_control_block</a> const *control,
+      int *offset_out);</pre>
+<p>FIXME - version 2.22+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>address_mode</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>address</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>offset_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>found</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xcdgetaudioparms_volume_block">xcdgetaudioparms_volume_block</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcdgetaudioparms_volume_block (<a href="#cd_volume_block">cd_volume_block</a> *block,
+      <a href="#cd_control_block">cd_control_block</a> const *control,
+      <a href="#cd_audio_completion">cd_audio_completion</a> *cmp);</pre>
+<p>Returns the volume level of each channel - version 2.22+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>cmp</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="cdgetaudioparms_volume_block">cdgetaudioparms_volume_block</h3>
+<pre>extern <a href="#cd_audio_completion">cd_audio_completion</a> cdgetaudioparms_volume_block (<a href="#cd_volume_block">cd_volume_block</a> *block,
+      <a href="#cd_control_block">cd_control_block</a> const *control);</pre>
+<p>Returns the volume level of each channel - version 2.22+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>block</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>cmp</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcd_scsi_user_op">xcd_scsi_user_op</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcd_scsi_user_op (bits op,
+      int block_size,
+      <a href="scsi.html#scsi_op_block">scsi_op_block</a> const *block,
+      byte *start_addr,
+      int length,
+      int timeout,
+      <a href="#cd_control_block">cd_control_block</a> const *control,
+      byte **next_addr,
+      int *undone);</pre>
+<p>RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>op</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>block_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>start_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>timeout</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>undone</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="cd_scsi_user_op">cd_scsi_user_op</h3>
+<pre>extern int cd_scsi_user_op (bits op,
+      int block_size,
+      <a href="scsi.html#scsi_op_block">scsi_op_block</a> const *block,
+      byte *start_addr,
+      int length,
+      int timeout,
+      <a href="#cd_control_block">cd_control_block</a> const *control,
+      byte **next_addr);</pre>
+<p>RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>op</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>block_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>start_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>timeout</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>control</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>undone</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

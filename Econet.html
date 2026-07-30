@@ -1,0 +1,1828 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Econet</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Econet</h2>
+
+<pre>#include "oslib/econet.h"</pre>
+
+<h3 id="econet_status">econet_status</h3>
+<pre>typedef int econet_status;</pre>
+
+<p>Completion statuses</p>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#econet_STATUS_TRANSMITTED">econet_STATUS_TRANSMITTED</a></dd>
+<dd><a href="#econet_STATUS_LINE_JAMMED">econet_STATUS_LINE_JAMMED</a></dd>
+<dd><a href="#econet_STATUS_NET_ERROR">econet_STATUS_NET_ERROR</a></dd>
+<dd><a href="#econet_STATUS_NOT_LISTENING">econet_STATUS_NOT_LISTENING</a></dd>
+<dd><a href="#econet_STATUS_NO_CLOCK">econet_STATUS_NO_CLOCK</a></dd>
+<dd><a href="#econet_STATUS_TX_READY">econet_STATUS_TX_READY</a></dd>
+<dd><a href="#econet_STATUS_TRANSMITTING">econet_STATUS_TRANSMITTING</a></dd>
+<dd><a href="#econet_STATUS_RX_READY">econet_STATUS_RX_READY</a></dd>
+<dd><a href="#econet_STATUS_RECEIVING">econet_STATUS_RECEIVING</a></dd>
+<dd><a href="#econet_STATUS_RECEIVED">econet_STATUS_RECEIVED</a></dd>
+<dd><a href="#econet_STATUS_NO_REPLY">econet_STATUS_NO_REPLY</a></dd>
+<dd><a href="#econet_STATUS_ESCAPE">econet_STATUS_ESCAPE</a></dd>
+<dd><a href="#econet_STATUS_NOT_PRESENT">econet_STATUS_NOT_PRESENT</a></dd>
+</dl>
+
+<h3 id="econet_immediate_op">econet_immediate_op</h3>
+<pre>typedef int econet_immediate_op;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#econet_IMMEDIATE_PEEK">econet_IMMEDIATE_PEEK</a></dd>
+<dd><a href="#econet_IMMEDIATE_POKE">econet_IMMEDIATE_POKE</a></dd>
+<dd><a href="#econet_IMMEDIATE_JSR">econet_IMMEDIATE_JSR</a></dd>
+<dd><a href="#econet_IMMEDIATE_USER_PROCEDURE_CALL">econet_IMMEDIATE_USER_PROCEDURE_CALL</a></dd>
+<dd><a href="#econet_IMMEDIATE_OS_PROCEDURE_CALL">econet_IMMEDIATE_OS_PROCEDURE_CALL</a></dd>
+<dd><a href="#econet_IMMEDIATE_HALT">econet_IMMEDIATE_HALT</a></dd>
+<dd><a href="#econet_IMMEDIATE_CONTINUE">econet_IMMEDIATE_CONTINUE</a></dd>
+<dd><a href="#econet_IMMEDIATE_MACHINE_PEEK">econet_IMMEDIATE_MACHINE_PEEK</a></dd>
+<dd><a href="#econet_IMMEDIATE_GET_REGISTERS">econet_IMMEDIATE_GET_REGISTERS</a></dd>
+</dl>
+
+<h3 id="econet_immediate_os_procedure">econet_immediate_os_procedure</h3>
+<pre>typedef asm_routine econet_immediate_os_procedure;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#econet_OS_CHAR_FROM_NOTIFY">econet_OS_CHAR_FROM_NOTIFY</a></dd>
+<dd><a href="#econet_OS_INITIALISE_REMOTE">econet_OS_INITIALISE_REMOTE</a></dd>
+<dd><a href="#econet_OS_GET_VIEW_PARAMETERS">econet_OS_GET_VIEW_PARAMETERS</a></dd>
+<dd><a href="#econet_OS_CAUSE_FATAL_ERROR">econet_OS_CAUSE_FATAL_ERROR</a></dd>
+<dd><a href="#econet_OS_CHAR_FROM_REMOTE">econet_OS_CHAR_FROM_REMOTE</a></dd>
+</dl>
+
+<h3 id="econet_protection">econet_protection</h3>
+<pre>typedef bits econet_protection;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#econet_PROTECTION_PEEK">econet_PROTECTION_PEEK</a></dd>
+<dd><a href="#econet_PROTECTION_POKE">econet_PROTECTION_POKE</a></dd>
+<dd><a href="#econet_PROTECTION_JSR">econet_PROTECTION_JSR</a></dd>
+<dd><a href="#econet_PROTECTION_USER_PROCEDURE_CALL">econet_PROTECTION_USER_PROCEDURE_CALL</a></dd>
+<dd><a href="#econet_PROTECTION_OS_PROCEDURE_CALL">econet_PROTECTION_OS_PROCEDURE_CALL</a></dd>
+<dd><a href="#econet_PROTECTION_HALT">econet_PROTECTION_HALT</a></dd>
+<dd><a href="#econet_PROTECTION_CONTINUE">econet_PROTECTION_CONTINUE</a></dd>
+<dd><a href="#econet_PROTECTION_MACHINE_PEEK">econet_PROTECTION_MACHINE_PEEK</a></dd>
+<dd><a href="#econet_PROTECTION_GET_REGISTERS">econet_PROTECTION_GET_REGISTERS</a></dd>
+<dd><a href="#econet_PROTECTION_WRITE_CMOS">econet_PROTECTION_WRITE_CMOS</a></dd>
+</dl>
+
+<h3 id="econet_transport_type">econet_transport_type</h3>
+<pre>typedef int econet_transport_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#econet_TRANSPORT_NOT_KNOWN">econet_TRANSPORT_NOT_KNOWN</a></dd>
+<dd><a href="#econet_TRANSPORT_INTERNET">econet_TRANSPORT_INTERNET</a></dd>
+<dd><a href="#econet_TRANSPORT_ECONET">econet_TRANSPORT_ECONET</a></dd>
+<dd><a href="#econet_TRANSPORT_NEXUS">econet_TRANSPORT_NEXUS</a></dd>
+</dl>
+
+<h3 id="econet_state">econet_state</h3>
+<pre>typedef int econet_state;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#econet_STATE_OK">econet_STATE_OK</a></dd>
+<dd><a href="#econet_STATE_NO_CLOCK">econet_STATE_NO_CLOCK</a></dd>
+</dl>
+
+<h3 id="econet_rx_cb">econet_rx_cb</h3>
+<pre>typedef struct {...} *econet_rx_cb;</pre>
+
+<h3 id="econet_tx_cb">econet_tx_cb</h3>
+<pre>typedef struct {...} *econet_tx_cb;</pre>
+
+<h3 id="econet_action">econet_action</h3>
+<pre>typedef int econet_action;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#econet_NET_FS_START_LOAD">econet_NET_FS_START_LOAD</a></dd>
+<dd><a href="#econet_NET_FS_PART_LOAD">econet_NET_FS_PART_LOAD</a></dd>
+<dd><a href="#econet_NET_FS_FINISH_LOAD">econet_NET_FS_FINISH_LOAD</a></dd>
+<dd><a href="#econet_NET_FS_START_SAVE">econet_NET_FS_START_SAVE</a></dd>
+<dd><a href="#econet_NET_FS_PART_SAVE">econet_NET_FS_PART_SAVE</a></dd>
+<dd><a href="#econet_NET_FS_FINISH_SAVE">econet_NET_FS_FINISH_SAVE</a></dd>
+<dd><a href="#econet_NET_FS_START_CREATE">econet_NET_FS_START_CREATE</a></dd>
+<dd><a href="#econet_NET_FS_PART_CREATE">econet_NET_FS_PART_CREATE</a></dd>
+<dd><a href="#econet_NET_FS_FINISH_CREATE">econet_NET_FS_FINISH_CREATE</a></dd>
+<dd><a href="#econet_NET_FS_START_GET_BYTES">econet_NET_FS_START_GET_BYTES</a></dd>
+<dd><a href="#econet_NET_FS_PART_GET_BYTES">econet_NET_FS_PART_GET_BYTES</a></dd>
+<dd><a href="#econet_NET_FS_FINISH_GET_BYTES">econet_NET_FS_FINISH_GET_BYTES</a></dd>
+<dd><a href="#econet_NET_FS_START_PUT_BYTES">econet_NET_FS_START_PUT_BYTES</a></dd>
+<dd><a href="#econet_NET_FS_PART_PUT_BYTES">econet_NET_FS_PART_PUT_BYTES</a></dd>
+<dd><a href="#econet_NET_FS_FINISH_PUT_BYTES">econet_NET_FS_FINISH_PUT_BYTES</a></dd>
+<dd><a href="#econet_NET_FS_START_WAIT">econet_NET_FS_START_WAIT</a></dd>
+<dd><a href="#econet_NET_FS_FINISH_WAIT">econet_NET_FS_FINISH_WAIT</a></dd>
+<dd><a href="#econet_NET_FS_START_BROADCAST_LOAD">econet_NET_FS_START_BROADCAST_LOAD</a></dd>
+<dd><a href="#econet_NET_FS_PART_BROADCAST_LOAD">econet_NET_FS_PART_BROADCAST_LOAD</a></dd>
+<dd><a href="#econet_NET_FS_FINISH_BROADCAST_LOAD">econet_NET_FS_FINISH_BROADCAST_LOAD</a></dd>
+<dd><a href="#econet_NET_FS_START_BROADCAST_SAVE">econet_NET_FS_START_BROADCAST_SAVE</a></dd>
+<dd><a href="#econet_NET_FS_PART_BROADCAST_SAVE">econet_NET_FS_PART_BROADCAST_SAVE</a></dd>
+<dd><a href="#econet_NET_FS_FINISH_BROADCAST_SAVE">econet_NET_FS_FINISH_BROADCAST_SAVE</a></dd>
+<dd><a href="#econet_ECONET_START_TRANSMISSION">econet_ECONET_START_TRANSMISSION</a></dd>
+<dd><a href="#econet_ECONET_FINISH_TRANSMISSION">econet_ECONET_FINISH_TRANSMISSION</a></dd>
+<dd><a href="#econet_ECONET_START_RECEPTION">econet_ECONET_START_RECEPTION</a></dd>
+<dd><a href="#econet_ECONET_FINISH_RECEPTION">econet_ECONET_FINISH_RECEPTION</a></dd>
+</dl>
+
+<h3 id="econet_map_flags">econet_map_flags</h3>
+<pre>typedef bits econet_map_flags;</pre>
+
+<h3 id="econet_STATUS_TRANSMITTED">econet_STATUS_TRANSMITTED</h3>
+<pre>#define econet_STATUS_TRANSMITTED ((<a href="#econet_status">econet_status</a>) 0x0u)</pre>
+
+<h3 id="econet_STATUS_LINE_JAMMED">econet_STATUS_LINE_JAMMED</h3>
+<pre>#define econet_STATUS_LINE_JAMMED ((<a href="#econet_status">econet_status</a>) 0x1u)</pre>
+
+<h3 id="econet_STATUS_NET_ERROR">econet_STATUS_NET_ERROR</h3>
+<pre>#define econet_STATUS_NET_ERROR ((<a href="#econet_status">econet_status</a>) 0x2u)</pre>
+
+<h3 id="econet_STATUS_NOT_LISTENING">econet_STATUS_NOT_LISTENING</h3>
+<pre>#define econet_STATUS_NOT_LISTENING ((<a href="#econet_status">econet_status</a>) 0x3u)</pre>
+
+<h3 id="econet_STATUS_NO_CLOCK">econet_STATUS_NO_CLOCK</h3>
+<pre>#define econet_STATUS_NO_CLOCK ((<a href="#econet_status">econet_status</a>) 0x4u)</pre>
+
+<h3 id="econet_STATUS_TX_READY">econet_STATUS_TX_READY</h3>
+<pre>#define econet_STATUS_TX_READY ((<a href="#econet_status">econet_status</a>) 0x5u)</pre>
+
+<h3 id="econet_STATUS_TRANSMITTING">econet_STATUS_TRANSMITTING</h3>
+<pre>#define econet_STATUS_TRANSMITTING ((<a href="#econet_status">econet_status</a>) 0x6u)</pre>
+
+<h3 id="econet_STATUS_RX_READY">econet_STATUS_RX_READY</h3>
+<pre>#define econet_STATUS_RX_READY ((<a href="#econet_status">econet_status</a>) 0x7u)</pre>
+
+<h3 id="econet_STATUS_RECEIVING">econet_STATUS_RECEIVING</h3>
+<pre>#define econet_STATUS_RECEIVING ((<a href="#econet_status">econet_status</a>) 0x8u)</pre>
+
+<h3 id="econet_STATUS_RECEIVED">econet_STATUS_RECEIVED</h3>
+<pre>#define econet_STATUS_RECEIVED ((<a href="#econet_status">econet_status</a>) 0x9u)</pre>
+
+<h3 id="econet_STATUS_NO_REPLY">econet_STATUS_NO_REPLY</h3>
+<pre>#define econet_STATUS_NO_REPLY ((<a href="#econet_status">econet_status</a>) 0xAu)</pre>
+
+<h3 id="econet_STATUS_ESCAPE">econet_STATUS_ESCAPE</h3>
+<pre>#define econet_STATUS_ESCAPE ((<a href="#econet_status">econet_status</a>) 0xBu)</pre>
+
+<h3 id="econet_STATUS_NOT_PRESENT">econet_STATUS_NOT_PRESENT</h3>
+<pre>#define econet_STATUS_NOT_PRESENT ((<a href="#econet_status">econet_status</a>) 0xCu)</pre>
+
+<h3 id="error_ECONET_TX_READY">error_ECONET_TX_READY</h3>
+<pre>#define error_ECONET_TX_READY 0x300u</pre>
+
+<p>Tx ready</p>
+
+<h3 id="error_ECONET_TRANSMITTING">error_ECONET_TRANSMITTING</h3>
+<pre>#define error_ECONET_TRANSMITTING 0x301u</pre>
+
+<p>Transmitting </p>
+
+<h3 id="error_ECONET_RX_READY">error_ECONET_RX_READY</h3>
+<pre>#define error_ECONET_RX_READY 0x302u</pre>
+
+<p>Receive block open</p>
+
+<h3 id="error_ECONET_RECEIVING">error_ECONET_RECEIVING</h3>
+<pre>#define error_ECONET_RECEIVING 0x303u</pre>
+
+<p>Receiving </p>
+
+<h3 id="error_ECONET_RECEIVED">error_ECONET_RECEIVED</h3>
+<pre>#define error_ECONET_RECEIVED 0x304u</pre>
+
+<p>Received </p>
+
+<h3 id="error_ECONET_TRANSMITTED">error_ECONET_TRANSMITTED</h3>
+<pre>#define error_ECONET_TRANSMITTED 0x305u</pre>
+
+<p>Transmitted OK</p>
+
+<h3 id="error_ECONET_BAD_STATION">error_ECONET_BAD_STATION</h3>
+<pre>#define error_ECONET_BAD_STATION 0x306u</pre>
+
+<p>Bad station number</p>
+
+<h3 id="error_ECONET_BAD_NETWORK">error_ECONET_BAD_NETWORK</h3>
+<pre>#define error_ECONET_BAD_NETWORK 0x307u</pre>
+
+<p>Bad network number</p>
+
+<h3 id="error_ECONET_UNABLE_TO_DEFAULT">error_ECONET_UNABLE_TO_DEFAULT</h3>
+<pre>#define error_ECONET_UNABLE_TO_DEFAULT 0x308u</pre>
+
+<p>Full net address required</p>
+
+<h3 id="error_ECONET_BAD_PORT">error_ECONET_BAD_PORT</h3>
+<pre>#define error_ECONET_BAD_PORT 0x309u</pre>
+
+<p>Bad port number</p>
+
+<h3 id="error_ECONET_BAD_CONTROL">error_ECONET_BAD_CONTROL</h3>
+<pre>#define error_ECONET_BAD_CONTROL 0x30Au</pre>
+
+<p>Bad flag byte value</p>
+
+<h3 id="error_ECONET_BAD_BUFFER">error_ECONET_BAD_BUFFER</h3>
+<pre>#define error_ECONET_BAD_BUFFER 0x30Bu</pre>
+
+<p>Bad buffer address</p>
+
+<h3 id="error_ECONET_BAD_SIZE">error_ECONET_BAD_SIZE</h3>
+<pre>#define error_ECONET_BAD_SIZE 0x30Cu</pre>
+
+<p>Bad buffer size</p>
+
+<h3 id="error_ECONET_BAD_MASK">error_ECONET_BAD_MASK</h3>
+<pre>#define error_ECONET_BAD_MASK 0x30Du</pre>
+
+<p>Bad mask</p>
+
+<h3 id="error_ECONET_BAD_COUNT">error_ECONET_BAD_COUNT</h3>
+<pre>#define error_ECONET_BAD_COUNT 0x30Eu</pre>
+
+<p>Bad count</p>
+
+<h3 id="error_ECONET_BAD_DELAY">error_ECONET_BAD_DELAY</h3>
+<pre>#define error_ECONET_BAD_DELAY 0x30Fu</pre>
+
+<p>Bad delay</p>
+
+<h3 id="error_ECONET_BAD_STATUS">error_ECONET_BAD_STATUS</h3>
+<pre>#define error_ECONET_BAD_STATUS 0x310u</pre>
+
+<p>Bad status</p>
+
+<h3 id="error_ECONET_NO_HARDWARE">error_ECONET_NO_HARDWARE</h3>
+<pre>#define error_ECONET_NO_HARDWARE 0x311u</pre>
+
+<p>No Econet hardware</p>
+
+<h3 id="error_ECONET_NO_ECONET">error_ECONET_NO_ECONET</h3>
+<pre>#define error_ECONET_NO_ECONET 0x312u</pre>
+
+<p>No 'Econet' installed</p>
+
+<h3 id="error_ECONET_NO_MORE_DOMAINS">error_ECONET_NO_MORE_DOMAINS</h3>
+<pre>#define error_ECONET_NO_MORE_DOMAINS 0x313u</pre>
+
+<p>No more domains</p>
+
+<h3 id="error_ECONET_BAD_DOMAIN">error_ECONET_BAD_DOMAIN</h3>
+<pre>#define error_ECONET_BAD_DOMAIN 0x314u</pre>
+
+<p>Bad domain number</p>
+
+<h3 id="error_ECONET_UN_REGISTERED_DOMAIN">error_ECONET_UN_REGISTERED_DOMAIN</h3>
+<pre>#define error_ECONET_UN_REGISTERED_DOMAIN 0x315u</pre>
+
+<p>Unknown domain</p>
+
+<h3 id="error_ECONET_PORT_NOT_ALLOCATED">error_ECONET_PORT_NOT_ALLOCATED</h3>
+<pre>#define error_ECONET_PORT_NOT_ALLOCATED 0x316u</pre>
+
+<p>Port not already allocated</p>
+
+<h3 id="error_ECONET_PORT_ALLOCATED">error_ECONET_PORT_ALLOCATED</h3>
+<pre>#define error_ECONET_PORT_ALLOCATED 0x317u</pre>
+
+<p>Port not unallocated</p>
+
+<h3 id="error_ECONET_NO_MORE_PORTS">error_ECONET_NO_MORE_PORTS</h3>
+<pre>#define error_ECONET_NO_MORE_PORTS 0x318u</pre>
+
+<p>All ports allocated</p>
+
+<h3 id="econet_IMMEDIATE_PEEK">econet_IMMEDIATE_PEEK</h3>
+<pre>#define econet_IMMEDIATE_PEEK ((<a href="#econet_immediate_op">econet_immediate_op</a>) 0x1u)</pre>
+
+<h3 id="econet_IMMEDIATE_POKE">econet_IMMEDIATE_POKE</h3>
+<pre>#define econet_IMMEDIATE_POKE ((<a href="#econet_immediate_op">econet_immediate_op</a>) 0x2u)</pre>
+
+<h3 id="econet_IMMEDIATE_JSR">econet_IMMEDIATE_JSR</h3>
+<pre>#define econet_IMMEDIATE_JSR ((<a href="#econet_immediate_op">econet_immediate_op</a>) 0x3u)</pre>
+
+<h3 id="econet_IMMEDIATE_USER_PROCEDURE_CALL">econet_IMMEDIATE_USER_PROCEDURE_CALL</h3>
+<pre>#define econet_IMMEDIATE_USER_PROCEDURE_CALL ((<a href="#econet_immediate_op">econet_immediate_op</a>) 0x4u)</pre>
+
+<h3 id="econet_IMMEDIATE_OS_PROCEDURE_CALL">econet_IMMEDIATE_OS_PROCEDURE_CALL</h3>
+<pre>#define econet_IMMEDIATE_OS_PROCEDURE_CALL ((<a href="#econet_immediate_op">econet_immediate_op</a>) 0x5u)</pre>
+
+<h3 id="econet_IMMEDIATE_HALT">econet_IMMEDIATE_HALT</h3>
+<pre>#define econet_IMMEDIATE_HALT ((<a href="#econet_immediate_op">econet_immediate_op</a>) 0x6u)</pre>
+
+<h3 id="econet_IMMEDIATE_CONTINUE">econet_IMMEDIATE_CONTINUE</h3>
+<pre>#define econet_IMMEDIATE_CONTINUE ((<a href="#econet_immediate_op">econet_immediate_op</a>) 0x7u)</pre>
+
+<h3 id="econet_IMMEDIATE_MACHINE_PEEK">econet_IMMEDIATE_MACHINE_PEEK</h3>
+<pre>#define econet_IMMEDIATE_MACHINE_PEEK ((<a href="#econet_immediate_op">econet_immediate_op</a>) 0x8u)</pre>
+
+<h3 id="econet_IMMEDIATE_GET_REGISTERS">econet_IMMEDIATE_GET_REGISTERS</h3>
+<pre>#define econet_IMMEDIATE_GET_REGISTERS ((<a href="#econet_immediate_op">econet_immediate_op</a>) 0x9u)</pre>
+
+<h3 id="econet_OS_CHAR_FROM_NOTIFY">econet_OS_CHAR_FROM_NOTIFY</h3>
+<pre>#define econet_OS_CHAR_FROM_NOTIFY ((<a href="#econet_immediate_os_procedure">econet_immediate_os_procedure</a>) 0x0u)</pre>
+
+<h3 id="econet_OS_INITIALISE_REMOTE">econet_OS_INITIALISE_REMOTE</h3>
+<pre>#define econet_OS_INITIALISE_REMOTE ((<a href="#econet_immediate_os_procedure">econet_immediate_os_procedure</a>) 0x1u)</pre>
+
+<h3 id="econet_OS_GET_VIEW_PARAMETERS">econet_OS_GET_VIEW_PARAMETERS</h3>
+<pre>#define econet_OS_GET_VIEW_PARAMETERS ((<a href="#econet_immediate_os_procedure">econet_immediate_os_procedure</a>) 0x2u)</pre>
+
+<h3 id="econet_OS_CAUSE_FATAL_ERROR">econet_OS_CAUSE_FATAL_ERROR</h3>
+<pre>#define econet_OS_CAUSE_FATAL_ERROR ((<a href="#econet_immediate_os_procedure">econet_immediate_os_procedure</a>) 0x3u)</pre>
+
+<h3 id="econet_OS_CHAR_FROM_REMOTE">econet_OS_CHAR_FROM_REMOTE</h3>
+<pre>#define econet_OS_CHAR_FROM_REMOTE ((<a href="#econet_immediate_os_procedure">econet_immediate_os_procedure</a>) 0x4u)</pre>
+
+<h3 id="econet_PROTECTION_PEEK">econet_PROTECTION_PEEK</h3>
+<pre>#define econet_PROTECTION_PEEK ((<a href="#econet_protection">econet_protection</a>) 0x1u)</pre>
+
+<h3 id="econet_PROTECTION_POKE">econet_PROTECTION_POKE</h3>
+<pre>#define econet_PROTECTION_POKE ((<a href="#econet_protection">econet_protection</a>) 0x2u)</pre>
+
+<h3 id="econet_PROTECTION_JSR">econet_PROTECTION_JSR</h3>
+<pre>#define econet_PROTECTION_JSR ((<a href="#econet_protection">econet_protection</a>) 0x4u)</pre>
+
+<h3 id="econet_PROTECTION_USER_PROCEDURE_CALL">econet_PROTECTION_USER_PROCEDURE_CALL</h3>
+<pre>#define econet_PROTECTION_USER_PROCEDURE_CALL ((<a href="#econet_protection">econet_protection</a>) 0x8u)</pre>
+
+<h3 id="econet_PROTECTION_OS_PROCEDURE_CALL">econet_PROTECTION_OS_PROCEDURE_CALL</h3>
+<pre>#define econet_PROTECTION_OS_PROCEDURE_CALL ((<a href="#econet_protection">econet_protection</a>) 0x10u)</pre>
+
+<h3 id="econet_PROTECTION_HALT">econet_PROTECTION_HALT</h3>
+<pre>#define econet_PROTECTION_HALT ((<a href="#econet_protection">econet_protection</a>) 0x20u)</pre>
+
+<h3 id="econet_PROTECTION_CONTINUE">econet_PROTECTION_CONTINUE</h3>
+<pre>#define econet_PROTECTION_CONTINUE ((<a href="#econet_protection">econet_protection</a>) 0x40u)</pre>
+
+<h3 id="econet_PROTECTION_MACHINE_PEEK">econet_PROTECTION_MACHINE_PEEK</h3>
+<pre>#define econet_PROTECTION_MACHINE_PEEK ((<a href="#econet_protection">econet_protection</a>) 0x80u)</pre>
+
+<h3 id="econet_PROTECTION_GET_REGISTERS">econet_PROTECTION_GET_REGISTERS</h3>
+<pre>#define econet_PROTECTION_GET_REGISTERS ((<a href="#econet_protection">econet_protection</a>) 0x100u)</pre>
+
+<h3 id="econet_PROTECTION_WRITE_CMOS">econet_PROTECTION_WRITE_CMOS</h3>
+<pre>#define econet_PROTECTION_WRITE_CMOS ((<a href="#econet_protection">econet_protection</a>) 0x80000000u)</pre>
+
+<h3 id="econet_TRANSPORT_NOT_KNOWN">econet_TRANSPORT_NOT_KNOWN</h3>
+<pre>#define econet_TRANSPORT_NOT_KNOWN ((<a href="#econet_transport_type">econet_transport_type</a>) 0x0u)</pre>
+
+<h3 id="econet_TRANSPORT_INTERNET">econet_TRANSPORT_INTERNET</h3>
+<pre>#define econet_TRANSPORT_INTERNET ((<a href="#econet_transport_type">econet_transport_type</a>) 0x1u)</pre>
+
+<h3 id="econet_TRANSPORT_ECONET">econet_TRANSPORT_ECONET</h3>
+<pre>#define econet_TRANSPORT_ECONET ((<a href="#econet_transport_type">econet_transport_type</a>) 0x2u)</pre>
+
+<h3 id="econet_TRANSPORT_NEXUS">econet_TRANSPORT_NEXUS</h3>
+<pre>#define econet_TRANSPORT_NEXUS ((<a href="#econet_transport_type">econet_transport_type</a>) 0x3u)</pre>
+
+<h3 id="econet_STATE_OK">econet_STATE_OK</h3>
+<pre>#define econet_STATE_OK ((<a href="#econet_state">econet_state</a>) 0x0u)</pre>
+
+<h3 id="econet_STATE_NO_CLOCK">econet_STATE_NO_CLOCK</h3>
+<pre>#define econet_STATE_NO_CLOCK ((<a href="#econet_state">econet_state</a>) 0x1u)</pre>
+
+<h3 id="econet_NET_FS_START_LOAD">econet_NET_FS_START_LOAD</h3>
+<pre>#define econet_NET_FS_START_LOAD ((<a href="#econet_action">econet_action</a>) 0x10u)</pre>
+
+<h3 id="econet_NET_FS_PART_LOAD">econet_NET_FS_PART_LOAD</h3>
+<pre>#define econet_NET_FS_PART_LOAD ((<a href="#econet_action">econet_action</a>) 0x11u)</pre>
+
+<h3 id="econet_NET_FS_FINISH_LOAD">econet_NET_FS_FINISH_LOAD</h3>
+<pre>#define econet_NET_FS_FINISH_LOAD ((<a href="#econet_action">econet_action</a>) 0x12u)</pre>
+
+<h3 id="econet_NET_FS_START_SAVE">econet_NET_FS_START_SAVE</h3>
+<pre>#define econet_NET_FS_START_SAVE ((<a href="#econet_action">econet_action</a>) 0x20u)</pre>
+
+<h3 id="econet_NET_FS_PART_SAVE">econet_NET_FS_PART_SAVE</h3>
+<pre>#define econet_NET_FS_PART_SAVE ((<a href="#econet_action">econet_action</a>) 0x21u)</pre>
+
+<h3 id="econet_NET_FS_FINISH_SAVE">econet_NET_FS_FINISH_SAVE</h3>
+<pre>#define econet_NET_FS_FINISH_SAVE ((<a href="#econet_action">econet_action</a>) 0x22u)</pre>
+
+<h3 id="econet_NET_FS_START_CREATE">econet_NET_FS_START_CREATE</h3>
+<pre>#define econet_NET_FS_START_CREATE ((<a href="#econet_action">econet_action</a>) 0x30u)</pre>
+
+<h3 id="econet_NET_FS_PART_CREATE">econet_NET_FS_PART_CREATE</h3>
+<pre>#define econet_NET_FS_PART_CREATE ((<a href="#econet_action">econet_action</a>) 0x31u)</pre>
+
+<h3 id="econet_NET_FS_FINISH_CREATE">econet_NET_FS_FINISH_CREATE</h3>
+<pre>#define econet_NET_FS_FINISH_CREATE ((<a href="#econet_action">econet_action</a>) 0x32u)</pre>
+
+<h3 id="econet_NET_FS_START_GET_BYTES">econet_NET_FS_START_GET_BYTES</h3>
+<pre>#define econet_NET_FS_START_GET_BYTES ((<a href="#econet_action">econet_action</a>) 0x40u)</pre>
+
+<h3 id="econet_NET_FS_PART_GET_BYTES">econet_NET_FS_PART_GET_BYTES</h3>
+<pre>#define econet_NET_FS_PART_GET_BYTES ((<a href="#econet_action">econet_action</a>) 0x41u)</pre>
+
+<h3 id="econet_NET_FS_FINISH_GET_BYTES">econet_NET_FS_FINISH_GET_BYTES</h3>
+<pre>#define econet_NET_FS_FINISH_GET_BYTES ((<a href="#econet_action">econet_action</a>) 0x42u)</pre>
+
+<h3 id="econet_NET_FS_START_PUT_BYTES">econet_NET_FS_START_PUT_BYTES</h3>
+<pre>#define econet_NET_FS_START_PUT_BYTES ((<a href="#econet_action">econet_action</a>) 0x50u)</pre>
+
+<h3 id="econet_NET_FS_PART_PUT_BYTES">econet_NET_FS_PART_PUT_BYTES</h3>
+<pre>#define econet_NET_FS_PART_PUT_BYTES ((<a href="#econet_action">econet_action</a>) 0x51u)</pre>
+
+<h3 id="econet_NET_FS_FINISH_PUT_BYTES">econet_NET_FS_FINISH_PUT_BYTES</h3>
+<pre>#define econet_NET_FS_FINISH_PUT_BYTES ((<a href="#econet_action">econet_action</a>) 0x52u)</pre>
+
+<h3 id="econet_NET_FS_START_WAIT">econet_NET_FS_START_WAIT</h3>
+<pre>#define econet_NET_FS_START_WAIT ((<a href="#econet_action">econet_action</a>) 0x60u)</pre>
+
+<h3 id="econet_NET_FS_FINISH_WAIT">econet_NET_FS_FINISH_WAIT</h3>
+<pre>#define econet_NET_FS_FINISH_WAIT ((<a href="#econet_action">econet_action</a>) 0x62u)</pre>
+
+<h3 id="econet_NET_FS_START_BROADCAST_LOAD">econet_NET_FS_START_BROADCAST_LOAD</h3>
+<pre>#define econet_NET_FS_START_BROADCAST_LOAD ((<a href="#econet_action">econet_action</a>) 0x70u)</pre>
+
+<h3 id="econet_NET_FS_PART_BROADCAST_LOAD">econet_NET_FS_PART_BROADCAST_LOAD</h3>
+<pre>#define econet_NET_FS_PART_BROADCAST_LOAD ((<a href="#econet_action">econet_action</a>) 0x71u)</pre>
+
+<h3 id="econet_NET_FS_FINISH_BROADCAST_LOAD">econet_NET_FS_FINISH_BROADCAST_LOAD</h3>
+<pre>#define econet_NET_FS_FINISH_BROADCAST_LOAD ((<a href="#econet_action">econet_action</a>) 0x72u)</pre>
+
+<h3 id="econet_NET_FS_START_BROADCAST_SAVE">econet_NET_FS_START_BROADCAST_SAVE</h3>
+<pre>#define econet_NET_FS_START_BROADCAST_SAVE ((<a href="#econet_action">econet_action</a>) 0x80u)</pre>
+
+<h3 id="econet_NET_FS_PART_BROADCAST_SAVE">econet_NET_FS_PART_BROADCAST_SAVE</h3>
+<pre>#define econet_NET_FS_PART_BROADCAST_SAVE ((<a href="#econet_action">econet_action</a>) 0x81u)</pre>
+
+<h3 id="econet_NET_FS_FINISH_BROADCAST_SAVE">econet_NET_FS_FINISH_BROADCAST_SAVE</h3>
+<pre>#define econet_NET_FS_FINISH_BROADCAST_SAVE ((<a href="#econet_action">econet_action</a>) 0x82u)</pre>
+
+<h3 id="econet_ECONET_START_TRANSMISSION">econet_ECONET_START_TRANSMISSION</h3>
+<pre>#define econet_ECONET_START_TRANSMISSION ((<a href="#econet_action">econet_action</a>) 0xC0u)</pre>
+
+<h3 id="econet_ECONET_FINISH_TRANSMISSION">econet_ECONET_FINISH_TRANSMISSION</h3>
+<pre>#define econet_ECONET_FINISH_TRANSMISSION ((<a href="#econet_action">econet_action</a>) 0xC2u)</pre>
+
+<h3 id="econet_ECONET_START_RECEPTION">econet_ECONET_START_RECEPTION</h3>
+<pre>#define econet_ECONET_START_RECEPTION ((<a href="#econet_action">econet_action</a>) 0xD0u)</pre>
+
+<h3 id="econet_ECONET_FINISH_RECEPTION">econet_ECONET_FINISH_RECEPTION</h3>
+<pre>#define econet_ECONET_FINISH_RECEPTION ((<a href="#econet_action">econet_action</a>) 0xD2u)</pre>
+
+<h3 id="econet_SECOND">econet_SECOND</h3>
+<pre>#define econet_SECOND 4000000</pre>
+
+<p>1s in Econet units</p>
+
+<h3 id="econet_KHZ">econet_KHZ</h3>
+<pre>#define econet_KHZ 1</pre>
+
+<p>1kHz in Econet units</p>
+
+<h3 id="xeconet_create_receive">xeconet_create_receive</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_create_receive (byte port,
+      byte station,
+      byte net,
+      byte *buffer,
+      int size,
+      <a href="#econet_rx_cb">econet_rx_cb</a> *rx_cb,
+      osbool *nonlocal);</pre>
+<p>Creates a receive control block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>port</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>rx_cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>nonlocal</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="econet_create_receive">econet_create_receive</h3>
+<pre>extern <a href="#econet_rx_cb">econet_rx_cb</a> econet_create_receive (byte port,
+      byte station,
+      byte net,
+      byte *buffer,
+      int size,
+      osbool *nonlocal);</pre>
+<p>Creates a receive control block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>port</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>nonlocal</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>rx_cb</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xeconet_examine_receive">xeconet_examine_receive</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_examine_receive (<a href="#econet_rx_cb">econet_rx_cb</a> rx_cb,
+      <a href="#econet_status">econet_status</a> *status);</pre>
+<p>Reads the status of a receive control block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rx_cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="econet_examine_receive">econet_examine_receive</h3>
+<pre>extern <a href="#econet_status">econet_status</a> econet_examine_receive (<a href="#econet_rx_cb">econet_rx_cb</a> rx_cb);</pre>
+<p>Reads the status of a receive control block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rx_cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xeconet_read_receive">xeconet_read_receive</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_read_receive (<a href="#econet_rx_cb">econet_rx_cb</a> rx_cb,
+      <a href="#econet_status">econet_status</a> *status,
+      byte *flag,
+      byte *port,
+      byte *station,
+      byte *net,
+      byte **buffer,
+      int *size);</pre>
+<p>Reads information about a reception, including the size of data</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rx_cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flag</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>port</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="econet_read_receive">econet_read_receive</h3>
+<pre>extern <a href="#econet_status">econet_status</a> econet_read_receive (<a href="#econet_rx_cb">econet_rx_cb</a> rx_cb,
+      byte *flag,
+      byte *port,
+      byte *station,
+      byte *net,
+      byte **buffer,
+      int *size);</pre>
+<p>Reads information about a reception, including the size of data</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rx_cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flag</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>port</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xeconet_abandon_receive">xeconet_abandon_receive</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_abandon_receive (<a href="#econet_rx_cb">econet_rx_cb</a> rx_cb,
+      <a href="#econet_status">econet_status</a> *status);</pre>
+<p>Abandons a receive control block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rx_cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="econet_abandon_receive">econet_abandon_receive</h3>
+<pre>extern <a href="#econet_status">econet_status</a> econet_abandon_receive (<a href="#econet_rx_cb">econet_rx_cb</a> rx_cb);</pre>
+<p>Abandons a receive control block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rx_cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xeconet_wait_for_reception">xeconet_wait_for_reception</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_wait_for_reception (<a href="#econet_rx_cb">econet_rx_cb</a> rx_cb,
+      int delay,
+      osbool abort_on_escape,
+      <a href="#econet_status">econet_status</a> *status,
+      byte *flag,
+      byte *port,
+      byte *station,
+      byte *net,
+      byte **buffer,
+      int *size);</pre>
+<p>Polls a receive control block, reads its status, and abandons it</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rx_cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>delay</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>abort_on_escape</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flag</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>port</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="econet_wait_for_reception">econet_wait_for_reception</h3>
+<pre>extern <a href="#econet_status">econet_status</a> econet_wait_for_reception (<a href="#econet_rx_cb">econet_rx_cb</a> rx_cb,
+      int delay,
+      osbool abort_on_escape,
+      byte *flag,
+      byte *port,
+      byte *station,
+      byte *net,
+      byte **buffer,
+      int *size);</pre>
+<p>Polls a receive control block, reads its status, and abandons it</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rx_cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>delay</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>abort_on_escape</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flag</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>port</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xeconet_enumerate_receive">xeconet_enumerate_receive</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_enumerate_receive (int rx_cb_no,
+      <a href="#econet_rx_cb">econet_rx_cb</a> *rx_cb);</pre>
+<p>Returns the handles of open receive control blocks</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rx_cb_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>rx_cb</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="econet_enumerate_receive">econet_enumerate_receive</h3>
+<pre>extern <a href="#econet_rx_cb">econet_rx_cb</a> econet_enumerate_receive (int rx_cb_no);</pre>
+<p>Returns the handles of open receive control blocks</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rx_cb_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>rx_cb</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xeconet_start_transmit">xeconet_start_transmit</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_start_transmit (byte flags,
+      byte port,
+      byte station,
+      byte net,
+      byte *buffer,
+      int size,
+      int count,
+      int delay,
+      <a href="#econet_tx_cb">econet_tx_cb</a> *tx_cb,
+      osbool *nonlocal);</pre>
+<p>Creates a transmit control block and starts a transmission</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>port</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>delay</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>tx_cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>nonlocal</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="econet_start_transmit">econet_start_transmit</h3>
+<pre>extern <a href="#econet_tx_cb">econet_tx_cb</a> econet_start_transmit (byte flags,
+      byte port,
+      byte station,
+      byte net,
+      byte *buffer,
+      int size,
+      int count,
+      int delay,
+      osbool *nonlocal);</pre>
+<p>Creates a transmit control block and starts a transmission</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>port</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>delay</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>nonlocal</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>tx_cb</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xeconet_poll_transmit">xeconet_poll_transmit</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_poll_transmit (<a href="#econet_tx_cb">econet_tx_cb</a> tx_cb,
+      <a href="#econet_status">econet_status</a> *status);</pre>
+<p>Reads the status of a transmit control block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tx_cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="econet_poll_transmit">econet_poll_transmit</h3>
+<pre>extern <a href="#econet_status">econet_status</a> econet_poll_transmit (<a href="#econet_tx_cb">econet_tx_cb</a> tx_cb);</pre>
+<p>Reads the status of a transmit control block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tx_cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xeconet_abandon_transmit">xeconet_abandon_transmit</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_abandon_transmit (<a href="#econet_tx_cb">econet_tx_cb</a> tx_cb,
+      <a href="#econet_status">econet_status</a> *status);</pre>
+<p>Abandons a transmit control block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tx_cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="econet_abandon_transmit">econet_abandon_transmit</h3>
+<pre>extern <a href="#econet_status">econet_status</a> econet_abandon_transmit (<a href="#econet_tx_cb">econet_tx_cb</a> tx_cb);</pre>
+<p>Abandons a transmit control block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tx_cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xeconet_do_transmit">xeconet_do_transmit</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_do_transmit (byte flags,
+      byte port,
+      byte station,
+      byte net,
+      byte *buffer,
+      int size,
+      int count,
+      int delay,
+      <a href="#econet_status">econet_status</a> *status,
+      osbool *nonlocal);</pre>
+<p>Creates a transmit control block, polls it, reads its status, and abandons it</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>port</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>delay</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>nonlocal</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="econet_do_transmit">econet_do_transmit</h3>
+<pre>extern <a href="#econet_status">econet_status</a> econet_do_transmit (byte flags,
+      byte port,
+      byte station,
+      byte net,
+      byte *buffer,
+      int size,
+      int count,
+      int delay,
+      osbool *nonlocal);</pre>
+<p>Creates a transmit control block, polls it, reads its status, and abandons it</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>port</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>delay</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>nonlocal</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xeconet_read_local_station_and_net">xeconet_read_local_station_and_net</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_read_local_station_and_net (byte *station,
+      byte *net);</pre>
+<p>Returns a computer's station number and net number</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>station</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="econet_read_local_station_and_net">econet_read_local_station_and_net</h3>
+<pre>extern void econet_read_local_station_and_net (byte *station,
+      byte *net);</pre>
+<p>Returns a computer's station number and net number</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>station</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xeconet_convert_status_to_string">xeconet_convert_status_to_string</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_convert_status_to_string (<a href="#econet_status">econet_status</a> status,
+      char *buffer,
+      int size,
+      byte station,
+      byte net,
+      char **end);</pre>
+<p>Converts a status to a string</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="econet_convert_status_to_string">econet_convert_status_to_string</h3>
+<pre>extern char *econet_convert_status_to_string (<a href="#econet_status">econet_status</a> status,
+      char *buffer,
+      int size,
+      byte station,
+      byte net);</pre>
+<p>Converts a status to a string</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>end</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xeconet_convert_status_to_error">xeconet_convert_status_to_error</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_convert_status_to_error (<a href="#econet_status">econet_status</a> status,
+      <a href="os.html#os_error">os_error</a> *buffer,
+      int size,
+      byte station,
+      byte net);</pre>
+<p>Converts a status to a string, and then generates an error</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="econet_convert_status_to_error">econet_convert_status_to_error</h3>
+<pre>extern void econet_convert_status_to_error (<a href="#econet_status">econet_status</a> status,
+      <a href="os.html#os_error">os_error</a> *buffer,
+      int size,
+      byte station,
+      byte net);</pre>
+<p>Converts a status to a string, and then generates an error</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xeconet_read_protection">xeconet_read_protection</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_read_protection (<a href="#econet_protection">econet_protection</a> *protection);</pre>
+<p>Reads the current protection word for immediate operations</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>protection</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="econet_read_protection">econet_read_protection</h3>
+<pre>extern <a href="#econet_protection">econet_protection</a> econet_read_protection (void);
+</pre><p>Reads the current protection word for immediate operations</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>protection</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xeconet_set_protection">xeconet_set_protection</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_set_protection (<a href="#econet_protection">econet_protection</a> eor_mask,
+      <a href="#econet_protection">econet_protection</a> and_mask,
+      <a href="#econet_protection">econet_protection</a> *old_protection);</pre>
+<p>Sets or reads the protection word for immediate operations</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>eor_mask</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>and_mask</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_protection</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="econet_set_protection">econet_set_protection</h3>
+<pre>extern <a href="#econet_protection">econet_protection</a> econet_set_protection (<a href="#econet_protection">econet_protection</a> eor_mask,
+      <a href="#econet_protection">econet_protection</a> and_mask);</pre>
+<p>Sets or reads the protection word for immediate operations</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>eor_mask</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>and_mask</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_protection</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xeconet_read_station_number">xeconet_read_station_number</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_read_station_number (char const *s,
+      char **end,
+      int *station,
+      int *net);</pre>
+<p>Extracts a station and/or net number from a specified string</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>station</code></td><td>Station number, or -1 (not specified)</td><td><code>R2</code></td></tr>
+<tr><td><code>net</code></td><td>Net number, or -1 (not specified)</td><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="econet_read_station_number">econet_read_station_number</h3>
+<pre>extern char *econet_read_station_number (char const *s,
+      int *station,
+      int *net);</pre>
+<p>Extracts a station and/or net number from a specified string</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>station</code></td><td>Station number, or -1 (not specified)</td><td><code>R2</code></td></tr>
+<tr><td><code>net</code></td><td>Net number, or -1 (not specified)</td><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>end</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xeconet_print_banner">xeconet_print_banner</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_print_banner (void);
+</pre><p>Prints an Econet message followed by a new line</p>
+
+
+<table>
+</table>
+
+<h3 id="econet_print_banner">econet_print_banner</h3>
+<pre>extern void econet_print_banner (void);
+</pre><p>Prints an Econet message followed by a new line</p>
+
+
+<table>
+</table>
+
+<h3 id="xeconet_read_transport_type">xeconet_read_transport_type</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_read_transport_type (byte station,
+      byte net,
+      <a href="#econet_transport_type">econet_transport_type</a> *transport_type);</pre>
+<p>Returns the underlying transport type to a given station</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>station</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>transport_type</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="econet_read_transport_type">econet_read_transport_type</h3>
+<pre>extern <a href="#econet_transport_type">econet_transport_type</a> econet_read_transport_type (byte station,
+      byte net);</pre>
+<p>Returns the underlying transport type to a given station</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>station</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>transport_type</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xeconet_release_port">xeconet_release_port</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_release_port (byte port);</pre>
+<p>Releases a port number that was previously claimed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>port</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="econet_release_port">econet_release_port</h3>
+<pre>extern void econet_release_port (byte port);</pre>
+<p>Releases a port number that was previously claimed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>port</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xeconet_allocate_port">xeconet_allocate_port</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_allocate_port (byte *port);</pre>
+<p>Allocates a unique port number</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>port</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="econet_allocate_port">econet_allocate_port</h3>
+<pre>extern byte econet_allocate_port (void);
+</pre><p>Allocates a unique port number</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>port</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xeconet_de_allocate_port">xeconet_de_allocate_port</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_de_allocate_port (byte port);</pre>
+<p>Deallocates a port number that was previously allocated</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>port</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="econet_de_allocate_port">econet_de_allocate_port</h3>
+<pre>extern void econet_de_allocate_port (byte port);</pre>
+<p>Deallocates a port number that was previously allocated</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>port</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xeconet_claim_port">xeconet_claim_port</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_claim_port (byte port);</pre>
+<p>Claims a specific port number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>port</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="econet_claim_port">econet_claim_port</h3>
+<pre>extern void econet_claim_port (byte port);</pre>
+<p>Claims a specific port number</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>port</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xeconet_start_immediate">xeconet_start_immediate</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_start_immediate (<a href="#econet_immediate_op">econet_immediate_op</a> op_type,
+      <a href="#econet_immediate_os_procedure">econet_immediate_os_procedure</a> procedure,
+      byte station,
+      byte net,
+      byte *buffer,
+      int size,
+      int count,
+      int delay,
+      <a href="#econet_tx_cb">econet_tx_cb</a> *tx_cb,
+      osbool *nonlocal);</pre>
+<p>Creates a transmit control block and starts an immediate operation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>op_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>procedure</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>delay</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>tx_cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>nonlocal</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="econet_start_immediate">econet_start_immediate</h3>
+<pre>extern <a href="#econet_tx_cb">econet_tx_cb</a> econet_start_immediate (<a href="#econet_immediate_op">econet_immediate_op</a> op_type,
+      <a href="#econet_immediate_os_procedure">econet_immediate_os_procedure</a> procedure,
+      byte station,
+      byte net,
+      byte *buffer,
+      int size,
+      int count,
+      int delay,
+      osbool *nonlocal);</pre>
+<p>Creates a transmit control block and starts an immediate operation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>op_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>procedure</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>delay</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>nonlocal</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>tx_cb</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xeconet_do_immediate">xeconet_do_immediate</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_do_immediate (<a href="#econet_immediate_op">econet_immediate_op</a> op_type,
+      <a href="#econet_immediate_os_procedure">econet_immediate_os_procedure</a> procedure,
+      byte station,
+      byte net,
+      byte *buffer,
+      int size,
+      int count,
+      int delay,
+      <a href="#econet_status">econet_status</a> *status,
+      osbool *nonlocal);</pre>
+<p>Creates a transmit control block for an immediate operation, polls it, reads its status, and abandons it</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>op_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>procedure</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>delay</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>nonlocal</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="econet_do_immediate">econet_do_immediate</h3>
+<pre>extern <a href="#econet_status">econet_status</a> econet_do_immediate (<a href="#econet_immediate_op">econet_immediate_op</a> op_type,
+      <a href="#econet_immediate_os_procedure">econet_immediate_os_procedure</a> procedure,
+      byte station,
+      byte net,
+      byte *buffer,
+      int size,
+      int count,
+      int delay,
+      osbool *nonlocal);</pre>
+<p>Creates a transmit control block for an immediate operation, polls it, reads its status, and abandons it</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>op_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>procedure</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>delay</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>nonlocal</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xeconet_abandon_and_read_receive">xeconet_abandon_and_read_receive</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_abandon_and_read_receive (<a href="#econet_rx_cb">econet_rx_cb</a> rx_cb,
+      <a href="#econet_status">econet_status</a> *status,
+      byte *flag,
+      byte *port,
+      byte *station,
+      byte *net,
+      byte **buffer,
+      int *size);</pre>
+<p>Abandons a reception and returns information about it, including the size of data</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rx_cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flag</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>port</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="econet_abandon_and_read_receive">econet_abandon_and_read_receive</h3>
+<pre>extern <a href="#econet_status">econet_status</a> econet_abandon_and_read_receive (<a href="#econet_rx_cb">econet_rx_cb</a> rx_cb,
+      byte *flag,
+      byte *port,
+      byte *station,
+      byte *net,
+      byte **buffer,
+      int *size);</pre>
+<p>Abandons a reception and returns information about it, including the size of data</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rx_cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flag</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>port</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xeconet_version">xeconet_version</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_version (byte station,
+      byte net,
+      int *version);</pre>
+<p>Returns the version of software for the underlying transport to a given station</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>station</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>version</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="econet_version">econet_version</h3>
+<pre>extern int econet_version (byte station,
+      byte net);</pre>
+<p>Returns the version of software for the underlying transport to a given station</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>station</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>version</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xeconet_network_state">xeconet_network_state</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_network_state (byte station,
+      byte net,
+      <a href="#econet_state">econet_state</a> *state);</pre>
+<p>Returns the state of the underlying transport to a given station</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>station</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>state</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="econet_network_state">econet_network_state</h3>
+<pre>extern <a href="#econet_state">econet_state</a> econet_network_state (byte station,
+      byte net);</pre>
+<p>Returns the state of the underlying transport to a given station</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>station</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>state</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xeconet_packet_size">xeconet_packet_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_packet_size (byte station,
+      byte net,
+      int *packet_limit);</pre>
+<p>Returns the maximum packet size recommended on the underlying transport to a given station</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>station</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>packet_limit</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="econet_packet_size">econet_packet_size</h3>
+<pre>extern int econet_packet_size (byte station,
+      byte net);</pre>
+<p>Returns the maximum packet size recommended on the underlying transport to a given station</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>station</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>packet_limit</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xeconet_read_transport_name">xeconet_read_transport_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_read_transport_name (byte station,
+      byte net,
+      char **transport_name);</pre>
+<p>Returns the name of the underlying transport to a given station</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>station</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>transport_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="econet_read_transport_name">econet_read_transport_name</h3>
+<pre>extern char *econet_read_transport_name (byte station,
+      byte net);</pre>
+<p>Returns the name of the underlying transport to a given station</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>station</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>transport_name</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xeconet_enumerate_map">xeconet_enumerate_map</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_enumerate_map (<a href="#econet_map_flags">econet_map_flags</a> flags,
+      int context,
+      byte *net,
+      char **net_name,
+      int *ip_subnetwork_address,
+      int *context_out);</pre>
+<p>Enumerates subnetwork addresses within an AUN site network - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>net</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>net_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ip_subnetwork_address</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="econet_enumerate_map">econet_enumerate_map</h3>
+<pre>extern int econet_enumerate_map (<a href="#econet_map_flags">econet_map_flags</a> flags,
+      int context,
+      byte *net,
+      char **net_name,
+      int *ip_subnetwork_address);</pre>
+<p>Enumerates subnetwork addresses within an AUN site network - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>net</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>net_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ip_subnetwork_address</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_out</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xeconet_enumerate_transmit">xeconet_enumerate_transmit</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_enumerate_transmit (int tx_cb_no,
+      <a href="#econet_tx_cb">econet_tx_cb</a> *tx_cb);</pre>
+<p>Returns the handles of open transmit blocks - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tx_cb_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>tx_cb</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="econet_enumerate_transmit">econet_enumerate_transmit</h3>
+<pre>extern <a href="#econet_tx_cb">econet_tx_cb</a> econet_enumerate_transmit (int tx_cb_no);</pre>
+<p>Returns the handles of open transmit blocks - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tx_cb_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>tx_cb</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xeconet_hardware_addresses">xeconet_hardware_addresses</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_hardware_addresses (byte **hardware_address,
+      byte **register_address,
+      bits *register_mask);</pre>
+<p>Returns the address of the Econet hardware and interrupt control registers - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>hardware_address</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>register_address</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>register_mask</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="econet_hardware_addresses">econet_hardware_addresses</h3>
+<pre>extern void econet_hardware_addresses (byte **hardware_address,
+      byte **register_address,
+      bits *register_mask);</pre>
+<p>Returns the address of the Econet hardware and interrupt control registers - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>hardware_address</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>register_address</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>register_mask</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xeconet_network_parameters">xeconet_network_parameters</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconet_network_parameters (int *period,
+      int *frequency);</pre>
+<p>Returns the Econet clock period and frequency - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>period</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>frequency</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="econet_network_parameters">econet_network_parameters</h3>
+<pre>extern void econet_network_parameters (int *period,
+      int *frequency);</pre>
+<p>Returns the Econet clock period and frequency - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>period</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>frequency</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xeconetv">xeconetv</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xeconetv (<a href="#econet_action">econet_action</a> action,
+      int count);</pre>
+<p>Calls EconetV vector directly</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>action</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="econetv">econetv</h3>
+<pre>extern void econetv (<a href="#econet_action">econet_action</a> action,
+      int count);</pre>
+<p>Calls EconetV vector directly</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>action</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xservice_reallocate_ports">xservice_reallocate_ports</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_reallocate_ports (void);
+</pre><p>Econet restarting</p>
+
+
+<table>
+</table>
+
+<h3 id="service_reallocate_ports">service_reallocate_ports</h3>
+<pre>extern void service_reallocate_ports (void);
+</pre><p>Econet restarting</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_econet_dying">xservice_econet_dying</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_econet_dying (void);
+</pre><p>Econet is about to leave</p>
+
+
+<table>
+</table>
+
+<h3 id="service_econet_dying">service_econet_dying</h3>
+<pre>extern void service_econet_dying (void);
+</pre><p>Econet is about to leave</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_protocol_dying">xservice_protocol_dying</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_protocol_dying (void);
+</pre><p>Part of the AUN driver control interface</p>
+
+
+<table>
+</table>
+
+<h3 id="service_protocol_dying">service_protocol_dying</h3>
+<pre>extern void service_protocol_dying (void);
+</pre><p>Part of the AUN driver control interface</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_find_network_driver">xservice_find_network_driver</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_find_network_driver (void);
+</pre><p>Part of the AUN driver control interface</p>
+
+
+<table>
+</table>
+
+<h3 id="service_find_network_driver">service_find_network_driver</h3>
+<pre>extern void service_find_network_driver (void);
+</pre><p>Part of the AUN driver control interface</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_network_driver_status">xservice_network_driver_status</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_network_driver_status (void);
+</pre><p>Part of the AUN driver control interface</p>
+
+
+<table>
+</table>
+
+<h3 id="service_network_driver_status">service_network_driver_status</h3>
+<pre>extern void service_network_driver_status (void);
+</pre><p>Part of the AUN driver control interface</p>
+
+
+<table>
+</table>
+
+<h3 id="xevent_econet_user_rpc">xevent_econet_user_rpc</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xevent_econet_user_rpc (byte const *args,
+      <a href="#econet_immediate_os_procedure">econet_immediate_os_procedure</a> procedure,
+      byte station,
+      byte net);</pre>
+<p>Econet user remote procedure event</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>args</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>procedure</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="event_econet_user_rpc">event_econet_user_rpc</h3>
+<pre>extern void event_econet_user_rpc (byte const *args,
+      <a href="#econet_immediate_os_procedure">econet_immediate_os_procedure</a> procedure,
+      byte station,
+      byte net);</pre>
+<p>Econet user remote procedure event</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>args</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>procedure</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xevent_econet_rx">xevent_econet_rx</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xevent_econet_rx (<a href="#econet_rx_cb">econet_rx_cb</a> rx_cb,
+      <a href="#econet_status">econet_status</a> status);</pre>
+<p>Econet receive event</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rx_cb</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>status</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="event_econet_rx">event_econet_rx</h3>
+<pre>extern void event_econet_rx (<a href="#econet_rx_cb">econet_rx_cb</a> rx_cb,
+      <a href="#econet_status">econet_status</a> status);</pre>
+<p>Econet receive event</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rx_cb</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>status</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xevent_econet_tx">xevent_econet_tx</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xevent_econet_tx (<a href="#econet_tx_cb">econet_tx_cb</a> tx_cb,
+      <a href="#econet_status">econet_status</a> status);</pre>
+<p>Econet transmit event</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tx_cb</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>status</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="event_econet_tx">event_econet_tx</h3>
+<pre>extern void event_econet_tx (<a href="#econet_tx_cb">econet_tx_cb</a> tx_cb,
+      <a href="#econet_status">econet_status</a> status);</pre>
+<p>Econet transmit event</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tx_cb</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>status</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xevent_econet_os_proc">xevent_econet_os_proc</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xevent_econet_os_proc (byte const *args,
+      <a href="#econet_immediate_os_procedure">econet_immediate_os_procedure</a> procedure,
+      byte station,
+      byte net);</pre>
+<p>Econet OS remote procedure event</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>args</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>procedure</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="event_econet_os_proc">event_econet_os_proc</h3>
+<pre>extern void event_econet_os_proc (byte const *args,
+      <a href="#econet_immediate_os_procedure">econet_immediate_os_procedure</a> procedure,
+      byte station,
+      byte net);</pre>
+<p>Econet OS remote procedure event</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>args</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>procedure</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

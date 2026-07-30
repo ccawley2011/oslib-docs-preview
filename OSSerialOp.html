@@ -1,0 +1,424 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; OSSerialOp</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>OSSerialOp</h2>
+
+<pre>#include "oslib/osserialop.h"</pre>
+
+<h3 id="osserialop_rs423_status">osserialop_rs423_status</h3>
+<pre>typedef bits osserialop_rs423_status;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osserialop_RS423_PARITY_ERROR">osserialop_RS423_PARITY_ERROR</a></dd>
+<dd><a href="#osserialop_RS423_OVERRUN_ERROR">osserialop_RS423_OVERRUN_ERROR</a></dd>
+<dd><a href="#osserialop_RS423_FRAMING_ERROR">osserialop_RS423_FRAMING_ERROR</a></dd>
+</dl>
+
+<h3 id="osserialop_format_flags">osserialop_format_flags</h3>
+<pre>typedef bits osserialop_format_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osserialop_DATA_FORMAT_WORD_SIZE">osserialop_DATA_FORMAT_WORD_SIZE</a></dd>
+<dd><a href="#osserialop_DATA_FORMAT_EXTRA_STOP_BITS">osserialop_DATA_FORMAT_EXTRA_STOP_BITS</a></dd>
+<dd><a href="#osserialop_DATA_FORMAT_PARITY_ENABLE">osserialop_DATA_FORMAT_PARITY_ENABLE</a></dd>
+<dd><a href="#osserialop_DATA_FORMAT_PARITY">osserialop_DATA_FORMAT_PARITY</a></dd>
+</dl>
+
+<h3 id="osserialop_baud_rate">osserialop_baud_rate</h3>
+<pre>typedef int osserialop_baud_rate;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osserialop_BAUD_RATE9600">osserialop_BAUD_RATE9600</a></dd>
+<dd><a href="#osserialop_BAUD_RATE75">osserialop_BAUD_RATE75</a></dd>
+<dd><a href="#osserialop_BAUD_RATE150">osserialop_BAUD_RATE150</a></dd>
+<dd><a href="#osserialop_BAUD_RATE300">osserialop_BAUD_RATE300</a></dd>
+<dd><a href="#osserialop_BAUD_RATE1200">osserialop_BAUD_RATE1200</a></dd>
+<dd><a href="#osserialop_BAUD_RATE2400">osserialop_BAUD_RATE2400</a></dd>
+<dd><a href="#osserialop_BAUD_RATE4800">osserialop_BAUD_RATE4800</a></dd>
+<dd><a href="#osserialop_BAUD_RATE19200">osserialop_BAUD_RATE19200</a></dd>
+<dd><a href="#osserialop_BAUD_RATE50">osserialop_BAUD_RATE50</a></dd>
+<dd><a href="#osserialop_BAUD_RATE110">osserialop_BAUD_RATE110</a></dd>
+<dd><a href="#osserialop_BAUD_RATE134PT5">osserialop_BAUD_RATE134PT5</a></dd>
+<dd><a href="#osserialop_BAUD_RATE600">osserialop_BAUD_RATE600</a></dd>
+<dd><a href="#osserialop_BAUD_RATE1800">osserialop_BAUD_RATE1800</a></dd>
+<dd><a href="#osserialop_BAUD_RATE3600">osserialop_BAUD_RATE3600</a></dd>
+<dd><a href="#osserialop_BAUD_RATE7200">osserialop_BAUD_RATE7200</a></dd>
+<dd><a href="#osserialop_BAUD_RATE38400">osserialop_BAUD_RATE38400</a></dd>
+<dd><a href="#osserialop_BAUD_RATE57600">osserialop_BAUD_RATE57600</a></dd>
+<dd><a href="#osserialop_BAUD_RATE115200">osserialop_BAUD_RATE115200</a></dd>
+</dl>
+
+<h3 id="osserialop_RS423_PARITY_ERROR">osserialop_RS423_PARITY_ERROR</h3>
+<pre>#define osserialop_RS423_PARITY_ERROR ((<a href="#osserialop_rs423_status">osserialop_rs423_status</a>) 0x20u)</pre>
+
+<h3 id="osserialop_RS423_OVERRUN_ERROR">osserialop_RS423_OVERRUN_ERROR</h3>
+<pre>#define osserialop_RS423_OVERRUN_ERROR ((<a href="#osserialop_rs423_status">osserialop_rs423_status</a>) 0x10u)</pre>
+
+<h3 id="osserialop_RS423_FRAMING_ERROR">osserialop_RS423_FRAMING_ERROR</h3>
+<pre>#define osserialop_RS423_FRAMING_ERROR ((<a href="#osserialop_rs423_status">osserialop_rs423_status</a>) 0x8u)</pre>
+
+<h3 id="osserialop_DATA_FORMAT_WORD_SIZE">osserialop_DATA_FORMAT_WORD_SIZE</h3>
+<pre>#define osserialop_DATA_FORMAT_WORD_SIZE ((<a href="#osserialop_format_flags">osserialop_format_flags</a>) 0x3u)</pre>
+
+<h3 id="osserialop_DATA_FORMAT_WORD_SIZE_SHIFT">osserialop_DATA_FORMAT_WORD_SIZE_SHIFT</h3>
+<pre>#define osserialop_DATA_FORMAT_WORD_SIZE_SHIFT 0</pre>
+
+<h3 id="osserialop_DATA_FORMAT_WORD_SIZE8_BIT">osserialop_DATA_FORMAT_WORD_SIZE8_BIT</h3>
+<pre>#define osserialop_DATA_FORMAT_WORD_SIZE8_BIT 0</pre>
+
+<h3 id="osserialop_DATA_FORMAT_WORD_SIZE7_BIT">osserialop_DATA_FORMAT_WORD_SIZE7_BIT</h3>
+<pre>#define osserialop_DATA_FORMAT_WORD_SIZE7_BIT 1</pre>
+
+<h3 id="osserialop_DATA_FORMAT_WORD_SIZE6_BIT">osserialop_DATA_FORMAT_WORD_SIZE6_BIT</h3>
+<pre>#define osserialop_DATA_FORMAT_WORD_SIZE6_BIT 3</pre>
+
+<h3 id="osserialop_DATA_FORMAT_EXTRA_STOP_BITS">osserialop_DATA_FORMAT_EXTRA_STOP_BITS</h3>
+<pre>#define osserialop_DATA_FORMAT_EXTRA_STOP_BITS ((<a href="#osserialop_format_flags">osserialop_format_flags</a>) 0x4u)</pre>
+
+<h3 id="osserialop_DATA_FORMAT_PARITY_ENABLE">osserialop_DATA_FORMAT_PARITY_ENABLE</h3>
+<pre>#define osserialop_DATA_FORMAT_PARITY_ENABLE ((<a href="#osserialop_format_flags">osserialop_format_flags</a>) 0x8u)</pre>
+
+<h3 id="osserialop_DATA_FORMAT_PARITY">osserialop_DATA_FORMAT_PARITY</h3>
+<pre>#define osserialop_DATA_FORMAT_PARITY ((<a href="#osserialop_format_flags">osserialop_format_flags</a>) 0x30u)</pre>
+
+<h3 id="osserialop_DATA_FORMAT_PARITY_SHIFT">osserialop_DATA_FORMAT_PARITY_SHIFT</h3>
+<pre>#define osserialop_DATA_FORMAT_PARITY_SHIFT 4</pre>
+
+<h3 id="osserialop_DATA_FORMAT_PARITY_ODD">osserialop_DATA_FORMAT_PARITY_ODD</h3>
+<pre>#define osserialop_DATA_FORMAT_PARITY_ODD 0</pre>
+
+<h3 id="osserialop_DATA_FORMAT_PARITY_EVEN">osserialop_DATA_FORMAT_PARITY_EVEN</h3>
+<pre>#define osserialop_DATA_FORMAT_PARITY_EVEN 1</pre>
+
+<h3 id="osserialop_DATA_FORMAT_PARITY1">osserialop_DATA_FORMAT_PARITY1</h3>
+<pre>#define osserialop_DATA_FORMAT_PARITY1 2</pre>
+
+<h3 id="osserialop_DATA_FORMAT_PARITY0">osserialop_DATA_FORMAT_PARITY0</h3>
+<pre>#define osserialop_DATA_FORMAT_PARITY0 3</pre>
+
+<h3 id="osserialop_BAUD_RATE9600">osserialop_BAUD_RATE9600</h3>
+<pre>#define osserialop_BAUD_RATE9600 ((<a href="#osserialop_baud_rate">osserialop_baud_rate</a>) 0x7u)</pre>
+
+<h3 id="osserialop_BAUD_RATE75">osserialop_BAUD_RATE75</h3>
+<pre>#define osserialop_BAUD_RATE75 ((<a href="#osserialop_baud_rate">osserialop_baud_rate</a>) 0x1u)</pre>
+
+<h3 id="osserialop_BAUD_RATE150">osserialop_BAUD_RATE150</h3>
+<pre>#define osserialop_BAUD_RATE150 ((<a href="#osserialop_baud_rate">osserialop_baud_rate</a>) 0x2u)</pre>
+
+<h3 id="osserialop_BAUD_RATE300">osserialop_BAUD_RATE300</h3>
+<pre>#define osserialop_BAUD_RATE300 ((<a href="#osserialop_baud_rate">osserialop_baud_rate</a>) 0x3u)</pre>
+
+<h3 id="osserialop_BAUD_RATE1200">osserialop_BAUD_RATE1200</h3>
+<pre>#define osserialop_BAUD_RATE1200 ((<a href="#osserialop_baud_rate">osserialop_baud_rate</a>) 0x4u)</pre>
+
+<h3 id="osserialop_BAUD_RATE2400">osserialop_BAUD_RATE2400</h3>
+<pre>#define osserialop_BAUD_RATE2400 ((<a href="#osserialop_baud_rate">osserialop_baud_rate</a>) 0x5u)</pre>
+
+<h3 id="osserialop_BAUD_RATE4800">osserialop_BAUD_RATE4800</h3>
+<pre>#define osserialop_BAUD_RATE4800 ((<a href="#osserialop_baud_rate">osserialop_baud_rate</a>) 0x6u)</pre>
+
+<h3 id="osserialop_BAUD_RATE19200">osserialop_BAUD_RATE19200</h3>
+<pre>#define osserialop_BAUD_RATE19200 ((<a href="#osserialop_baud_rate">osserialop_baud_rate</a>) 0x8u)</pre>
+
+<h3 id="osserialop_BAUD_RATE50">osserialop_BAUD_RATE50</h3>
+<pre>#define osserialop_BAUD_RATE50 ((<a href="#osserialop_baud_rate">osserialop_baud_rate</a>) 0x9u)</pre>
+
+<h3 id="osserialop_BAUD_RATE110">osserialop_BAUD_RATE110</h3>
+<pre>#define osserialop_BAUD_RATE110 ((<a href="#osserialop_baud_rate">osserialop_baud_rate</a>) 0xAu)</pre>
+
+<h3 id="osserialop_BAUD_RATE134PT5">osserialop_BAUD_RATE134PT5</h3>
+<pre>#define osserialop_BAUD_RATE134PT5 ((<a href="#osserialop_baud_rate">osserialop_baud_rate</a>) 0xBu)</pre>
+
+<h3 id="osserialop_BAUD_RATE600">osserialop_BAUD_RATE600</h3>
+<pre>#define osserialop_BAUD_RATE600 ((<a href="#osserialop_baud_rate">osserialop_baud_rate</a>) 0xCu)</pre>
+
+<h3 id="osserialop_BAUD_RATE1800">osserialop_BAUD_RATE1800</h3>
+<pre>#define osserialop_BAUD_RATE1800 ((<a href="#osserialop_baud_rate">osserialop_baud_rate</a>) 0xDu)</pre>
+
+<h3 id="osserialop_BAUD_RATE3600">osserialop_BAUD_RATE3600</h3>
+<pre>#define osserialop_BAUD_RATE3600 ((<a href="#osserialop_baud_rate">osserialop_baud_rate</a>) 0xEu)</pre>
+
+<h3 id="osserialop_BAUD_RATE7200">osserialop_BAUD_RATE7200</h3>
+<pre>#define osserialop_BAUD_RATE7200 ((<a href="#osserialop_baud_rate">osserialop_baud_rate</a>) 0xFu)</pre>
+
+<h3 id="osserialop_BAUD_RATE38400">osserialop_BAUD_RATE38400</h3>
+<pre>#define osserialop_BAUD_RATE38400 ((<a href="#osserialop_baud_rate">osserialop_baud_rate</a>) 0x10u)</pre>
+
+<h3 id="osserialop_BAUD_RATE57600">osserialop_BAUD_RATE57600</h3>
+<pre>#define osserialop_BAUD_RATE57600 ((<a href="#osserialop_baud_rate">osserialop_baud_rate</a>) 0x11u)</pre>
+
+<h3 id="osserialop_BAUD_RATE115200">osserialop_BAUD_RATE115200</h3>
+<pre>#define osserialop_BAUD_RATE115200 ((<a href="#osserialop_baud_rate">osserialop_baud_rate</a>) 0x12u)</pre>
+
+<h3 id="xosserialop_status">xosserialop_status</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosserialop_status (bits eor_mask,
+      bits and_mask,
+      bits *old_value,
+      bits *new_value);</pre>
+<p>Reads/writes the serial status</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>eor_mask</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>and_mask</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_value</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>new_value</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osserialop_status">osserialop_status</h3>
+<pre>extern bits osserialop_status (bits eor_mask,
+      bits and_mask,
+      bits *new_value);</pre>
+<p>Reads/writes the serial status</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>eor_mask</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>and_mask</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>new_value</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_value</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xosserialop_data_format">xosserialop_data_format</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosserialop_data_format (<a href="#osserialop_format_flags">osserialop_format_flags</a> data_format,
+      <a href="#osserialop_format_flags">osserialop_format_flags</a> *old_value);</pre>
+<p>Reads/writes the data format</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>data_format</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_value</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osserialop_data_format">osserialop_data_format</h3>
+<pre>extern <a href="#osserialop_format_flags">osserialop_format_flags</a> osserialop_data_format (<a href="#osserialop_format_flags">osserialop_format_flags</a> data_format);</pre>
+<p>Reads/writes the data format</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>data_format</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_value</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xosserialop_break">xosserialop_break</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosserialop_break (int period);</pre>
+<p>Sends a break</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>period</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osserialop_break">osserialop_break</h3>
+<pre>extern void osserialop_break (int period);</pre>
+<p>Sends a break</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>period</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosserialop_bput">xosserialop_bput</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosserialop_bput (byte c,
+      bits *psr);</pre>
+<p>Sends a byte</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osserialop_bput">osserialop_bput</h3>
+<pre>extern bits osserialop_bput (byte c);</pre>
+<p>Sends a byte</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td colspan="3">processor status register</td></tr>
+</table>
+
+<h3 id="xosserialop_bget">xosserialop_bget</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosserialop_bget (byte *c,
+      bits *psr);</pre>
+<p>Gets a byte from the serial buffer</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osserialop_bget">osserialop_bget</h3>
+<pre>extern bits osserialop_bget (byte *c);</pre>
+<p>Gets a byte from the serial buffer</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td colspan="3">processor status register</td></tr>
+</table>
+
+<h3 id="xosserialop_rx_baud_rate">xosserialop_rx_baud_rate</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosserialop_rx_baud_rate (<a href="#osserialop_baud_rate">osserialop_baud_rate</a> rx_rate,
+      <a href="#osserialop_baud_rate">osserialop_baud_rate</a> *old_rx_rate);</pre>
+<p>Reads/writes the receive baud rate</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rx_rate</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_rx_rate</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osserialop_rx_baud_rate">osserialop_rx_baud_rate</h3>
+<pre>extern <a href="#osserialop_baud_rate">osserialop_baud_rate</a> osserialop_rx_baud_rate (<a href="#osserialop_baud_rate">osserialop_baud_rate</a> rx_rate);</pre>
+<p>Reads/writes the receive baud rate</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rx_rate</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_rx_rate</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xosserialop_tx_baud_rate">xosserialop_tx_baud_rate</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosserialop_tx_baud_rate (<a href="#osserialop_baud_rate">osserialop_baud_rate</a> tx_rate,
+      <a href="#osserialop_baud_rate">osserialop_baud_rate</a> *old_tx_rate);</pre>
+<p>Reads/writes the transmit baud rate</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tx_rate</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_tx_rate</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osserialop_tx_baud_rate">osserialop_tx_baud_rate</h3>
+<pre>extern <a href="#osserialop_baud_rate">osserialop_baud_rate</a> osserialop_tx_baud_rate (<a href="#osserialop_baud_rate">osserialop_baud_rate</a> tx_rate);</pre>
+<p>Reads/writes the transmit baud rate</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tx_rate</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_tx_rate</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xosserialop_rx_threshold">xosserialop_rx_threshold</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosserialop_rx_threshold (bits rx_threshold,
+      bits *old_rx_threshold);</pre>
+<p>Sets the receive threshold - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rx_threshold</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_rx_threshold</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osserialop_rx_threshold">osserialop_rx_threshold</h3>
+<pre>extern bits osserialop_rx_threshold (bits rx_threshold);</pre>
+<p>Sets the receive threshold - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>rx_threshold</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_rx_threshold</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xosserialop_enumerate_baud_rates">xosserialop_enumerate_baud_rates</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosserialop_enumerate_baud_rates (int **table,
+      int *table_size);</pre>
+<p>Enumerates the available serial port speeds - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>table</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>table_size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osserialop_enumerate_baud_rates">osserialop_enumerate_baud_rates</h3>
+<pre>extern void osserialop_enumerate_baud_rates (int **table,
+      int *table_size);</pre>
+<p>Enumerates the available serial port speeds - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>table</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>table_size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xevent_rs423_error">xevent_rs423_error</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xevent_rs423_error (<a href="#osserialop_rs423_status">osserialop_rs423_status</a> status,
+      byte b);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>b</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="event_rs423_error">event_rs423_error</h3>
+<pre>extern void event_rs423_error (<a href="#osserialop_rs423_status">osserialop_rs423_status</a> status,
+      byte b);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>b</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

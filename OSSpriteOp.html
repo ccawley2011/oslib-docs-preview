@@ -1,0 +1,2668 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; OSSpriteOp</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>OSSpriteOp</h2>
+
+<pre>#include "oslib/osspriteop.h"</pre>
+
+<h3 id="osspriteop_trans_tab">osspriteop_trans_tab</h3>
+<pre>typedef struct
+   {  byte c [...];
+   }
+   osspriteop_trans_tab;</pre>
+
+<h3 id="osspriteop_colour_mapping">osspriteop_colour_mapping</h3>
+<pre>typedef struct
+   {  byte *workspace;
+      asm_routine function;
+   }
+   osspriteop_colour_mapping;</pre>
+
+<h3 id="osspriteop_area">osspriteop_area</h3>
+<pre>typedef struct
+   {  int size;
+      int sprite_count;
+      int first;
+      int used;
+   }
+   osspriteop_area;</pre>
+
+<h3 id="osspriteop_header">osspriteop_header</h3>
+<pre>typedef struct
+   {  int size;
+      char name [12];
+      int width;
+      int height;
+      int left_bit;
+      int right_bit;
+      int image;
+      int mask;
+      <a href="os.html#os_mode">os_mode</a> mode;
+   }
+   osspriteop_header;</pre>
+
+<h3 id="osspriteop_flags">osspriteop_flags</h3>
+<pre>typedef bits osspriteop_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osspriteop_SYSTEM_AREA">osspriteop_SYSTEM_AREA</a></dd>
+<dd><a href="#osspriteop_USER_AREA">osspriteop_USER_AREA</a></dd>
+<dd><a href="#osspriteop_NAME">osspriteop_NAME</a></dd>
+<dd><a href="#osspriteop_PTR">osspriteop_PTR</a></dd>
+</dl>
+
+<h3 id="osspriteop_mode_word">osspriteop_mode_word</h3>
+<pre>typedef bits osspriteop_mode_word;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osspriteop_NEW_STYLE">osspriteop_NEW_STYLE</a></dd>
+<dd><a href="#osspriteop_XRES">osspriteop_XRES</a></dd>
+<dd><a href="#osspriteop_YRES">osspriteop_YRES</a></dd>
+<dd><a href="#osspriteop_TYPE">osspriteop_TYPE</a></dd>
+<dd><a href="#osspriteop_ALPHA_MASK">osspriteop_ALPHA_MASK</a></dd>
+<dd><a href="#osspriteop_TYPE_OLD">osspriteop_TYPE_OLD</a></dd>
+<dd><a href="#osspriteop_TYPE1BPP">osspriteop_TYPE1BPP</a></dd>
+<dd><a href="#osspriteop_TYPE2BPP">osspriteop_TYPE2BPP</a></dd>
+<dd><a href="#osspriteop_TYPE4BPP">osspriteop_TYPE4BPP</a></dd>
+<dd><a href="#osspriteop_TYPE8BPP">osspriteop_TYPE8BPP</a></dd>
+<dd><a href="#osspriteop_TYPE16BPP">osspriteop_TYPE16BPP</a></dd>
+<dd><a href="#osspriteop_TYPE32BPP">osspriteop_TYPE32BPP</a></dd>
+<dd><a href="#osspriteop_TYPE_CMYK">osspriteop_TYPE_CMYK</a></dd>
+<dd><a href="#osspriteop_TYPE16BPP64K">osspriteop_TYPE16BPP64K</a></dd>
+</dl>
+
+<h3 id="osspriteop_id">osspriteop_id</h3>
+<pre>typedef struct {...} *osspriteop_id;</pre>
+
+<p>Should be union of name and header, but that's inconvenient since you can't project into unions by cast</p>
+
+<h3 id="osspriteop_save_area">osspriteop_save_area</h3>
+<pre>typedef struct
+   {  int a [...];
+   }
+   osspriteop_save_area;</pre>
+
+<h3 id="osspriteop_action">osspriteop_action</h3>
+<pre>typedef <a href="os.html#os_action">os_action</a> osspriteop_action;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osspriteop_USE_MASK">osspriteop_USE_MASK</a></dd>
+<dd><a href="#osspriteop_USE_PALETTE">osspriteop_USE_PALETTE</a></dd>
+<dd><a href="#osspriteop_GIVEN_WIDE_ENTRIES">osspriteop_GIVEN_WIDE_ENTRIES</a></dd>
+<dd><a href="#osspriteop_DITHERED">osspriteop_DITHERED</a></dd>
+<dd><a href="#osspriteop_GIVEN_COLOUR_MAPPING">osspriteop_GIVEN_COLOUR_MAPPING</a></dd>
+<dd><a href="#osspriteop_TRANSLUCENCY">osspriteop_TRANSLUCENCY</a></dd>
+</dl>
+
+<h3 id="osspriteop_pointer_flags">osspriteop_pointer_flags</h3>
+<pre>typedef bits osspriteop_pointer_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osspriteop_POINTER_SHAPE">osspriteop_POINTER_SHAPE</a></dd>
+<dd><a href="#osspriteop_POINTER_IGNORE_SHAPE_DATA">osspriteop_POINTER_IGNORE_SHAPE_DATA</a></dd>
+<dd><a href="#osspriteop_POINTER_IGNORE_PALETTE">osspriteop_POINTER_IGNORE_PALETTE</a></dd>
+<dd><a href="#osspriteop_POINTER_IGNORE_SHAPE">osspriteop_POINTER_IGNORE_SHAPE</a></dd>
+</dl>
+
+<h3 id="osspriteopremovealphachannel_flags">osspriteopremovealphachannel_flags</h3>
+<pre>typedef bits osspriteopremovealphachannel_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osspriteopremovealphachannelflags_REMOVE_MASK">osspriteopremovealphachannelflags_REMOVE_MASK</a></dd>
+</dl>
+
+<h3 id="osspriteopaddalphachannel_flags">osspriteopaddalphachannel_flags</h3>
+<pre>typedef bits osspriteopaddalphachannel_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osspriteopaddalphachannelflags_ADD">osspriteopaddalphachannelflags_ADD</a></dd>
+</dl>
+
+<h3 id="osspriteop_trfm_flags">osspriteop_trfm_flags</h3>
+<pre>typedef bits osspriteop_trfm_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osspriteop_DESTINATION_COORDS">osspriteop_DESTINATION_COORDS</a></dd>
+<dd><a href="#osspriteop_SOURCE_RECTANGLE">osspriteop_SOURCE_RECTANGLE</a></dd>
+</dl>
+
+<h3 id="servicespritereregister_type">servicespritereregister_type</h3>
+<pre>typedef bits servicespritereregister_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#servicespritereregistertype_SOFTWARE_EXT">servicespritereregistertype_SOFTWARE_EXT</a></dd>
+<dd><a href="#servicespritereregistertype_ACCELERATION_EXT">servicespritereregistertype_ACCELERATION_EXT</a></dd>
+<dd><a href="#servicespritereregistertype_MONITOR_OR_VECTOR_EXT">servicespritereregistertype_MONITOR_OR_VECTOR_EXT</a></dd>
+</dl>
+
+<h3 id="osspriteop_NAME_LIMIT">osspriteop_NAME_LIMIT</h3>
+<pre>#define osspriteop_NAME_LIMIT 12</pre>
+
+<h3 id="osspriteop_SYSTEM_AREA">osspriteop_SYSTEM_AREA</h3>
+<pre>#define osspriteop_SYSTEM_AREA ((<a href="#osspriteop_flags">osspriteop_flags</a>) 0x0u)</pre>
+
+<h3 id="osspriteop_USER_AREA">osspriteop_USER_AREA</h3>
+<pre>#define osspriteop_USER_AREA ((<a href="#osspriteop_flags">osspriteop_flags</a>) 0x100u)</pre>
+
+<h3 id="osspriteop_NAME">osspriteop_NAME</h3>
+<pre>#define osspriteop_NAME ((<a href="#osspriteop_flags">osspriteop_flags</a>) 0x100u)</pre>
+
+<h3 id="osspriteop_PTR">osspriteop_PTR</h3>
+<pre>#define osspriteop_PTR ((<a href="#osspriteop_flags">osspriteop_flags</a>) 0x200u)</pre>
+
+<h3 id="osspriteop_NEW_STYLE">osspriteop_NEW_STYLE</h3>
+<pre>#define osspriteop_NEW_STYLE ((<a href="#osspriteop_mode_word">osspriteop_mode_word</a>) 0x1u)</pre>
+
+<h3 id="osspriteop_XRES">osspriteop_XRES</h3>
+<pre>#define osspriteop_XRES ((<a href="#osspriteop_mode_word">osspriteop_mode_word</a>) 0x3FFEu)</pre>
+
+<h3 id="osspriteop_XRES_SHIFT">osspriteop_XRES_SHIFT</h3>
+<pre>#define osspriteop_XRES_SHIFT 1</pre>
+
+<h3 id="osspriteop_YRES">osspriteop_YRES</h3>
+<pre>#define osspriteop_YRES ((<a href="#osspriteop_mode_word">osspriteop_mode_word</a>) 0x7FFC000u)</pre>
+
+<h3 id="osspriteop_YRES_SHIFT">osspriteop_YRES_SHIFT</h3>
+<pre>#define osspriteop_YRES_SHIFT 14</pre>
+
+<h3 id="osspriteop_TYPE">osspriteop_TYPE</h3>
+<pre>#define osspriteop_TYPE ((<a href="#osspriteop_mode_word">osspriteop_mode_word</a>) 0x78000000u)</pre>
+
+<h3 id="osspriteop_TYPE_SHIFT">osspriteop_TYPE_SHIFT</h3>
+<pre>#define osspriteop_TYPE_SHIFT 27</pre>
+
+<h3 id="osspriteop_ALPHA_MASK">osspriteop_ALPHA_MASK</h3>
+<pre>#define osspriteop_ALPHA_MASK ((<a href="#osspriteop_mode_word">osspriteop_mode_word</a>) 0x80000000u)</pre>
+
+<p>RISC OS Select</p>
+
+<h3 id="osspriteop_TYPE_OLD">osspriteop_TYPE_OLD</h3>
+<pre>#define osspriteop_TYPE_OLD ((<a href="#osspriteop_mode_word">osspriteop_mode_word</a>) 0x0u)</pre>
+
+<h3 id="osspriteop_TYPE1BPP">osspriteop_TYPE1BPP</h3>
+<pre>#define osspriteop_TYPE1BPP ((<a href="#osspriteop_mode_word">osspriteop_mode_word</a>) 0x1u)</pre>
+
+<h3 id="osspriteop_TYPE2BPP">osspriteop_TYPE2BPP</h3>
+<pre>#define osspriteop_TYPE2BPP ((<a href="#osspriteop_mode_word">osspriteop_mode_word</a>) 0x2u)</pre>
+
+<h3 id="osspriteop_TYPE4BPP">osspriteop_TYPE4BPP</h3>
+<pre>#define osspriteop_TYPE4BPP ((<a href="#osspriteop_mode_word">osspriteop_mode_word</a>) 0x3u)</pre>
+
+<h3 id="osspriteop_TYPE8BPP">osspriteop_TYPE8BPP</h3>
+<pre>#define osspriteop_TYPE8BPP ((<a href="#osspriteop_mode_word">osspriteop_mode_word</a>) 0x4u)</pre>
+
+<h3 id="osspriteop_TYPE16BPP">osspriteop_TYPE16BPP</h3>
+<pre>#define osspriteop_TYPE16BPP ((<a href="#osspriteop_mode_word">osspriteop_mode_word</a>) 0x5u)</pre>
+
+<h3 id="osspriteop_TYPE32BPP">osspriteop_TYPE32BPP</h3>
+<pre>#define osspriteop_TYPE32BPP ((<a href="#osspriteop_mode_word">osspriteop_mode_word</a>) 0x6u)</pre>
+
+<h3 id="osspriteop_TYPE_CMYK">osspriteop_TYPE_CMYK</h3>
+<pre>#define osspriteop_TYPE_CMYK ((<a href="#osspriteop_mode_word">osspriteop_mode_word</a>) 0x7u)</pre>
+
+<h3 id="osspriteop_TYPE16BPP64K">osspriteop_TYPE16BPP64K</h3>
+<pre>#define osspriteop_TYPE16BPP64K ((<a href="#osspriteop_mode_word">osspriteop_mode_word</a>) 0xAu)</pre>
+
+<p>RISC OS 6</p>
+
+<h3 id="osspriteop_UNSPECIFIED">osspriteop_UNSPECIFIED</h3>
+<pre>#define osspriteop_UNSPECIFIED ((<a href="#osspriteop_area">osspriteop_area</a> *) 0x100u)</pre>
+
+<h3 id="error_SPRITE_OP_NO_WORK_SPACE">error_SPRITE_OP_NO_WORK_SPACE</h3>
+<pre>#define error_SPRITE_OP_NO_WORK_SPACE 0x80u</pre>
+
+<h3 id="error_SPRITE_OP_NOT_GRAPHICS">error_SPRITE_OP_NOT_GRAPHICS</h3>
+<pre>#define error_SPRITE_OP_NOT_GRAPHICS 0x81u</pre>
+
+<h3 id="error_SPRITE_OP_NO_ROOM">error_SPRITE_OP_NO_ROOM</h3>
+<pre>#define error_SPRITE_OP_NO_ROOM 0x82u</pre>
+
+<h3 id="error_SPRITE_OP_NO_SPRITES">error_SPRITE_OP_NO_SPRITES</h3>
+<pre>#define error_SPRITE_OP_NO_SPRITES 0x83u</pre>
+
+<h3 id="error_SPRITE_OP_NOT_ENOUGH_ROOM">error_SPRITE_OP_NOT_ENOUGH_ROOM</h3>
+<pre>#define error_SPRITE_OP_NOT_ENOUGH_ROOM 0x85u</pre>
+
+<h3 id="error_SPRITE_OP_DOESNT_EXIST">error_SPRITE_OP_DOESNT_EXIST</h3>
+<pre>#define error_SPRITE_OP_DOESNT_EXIST 0x86u</pre>
+
+<h3 id="error_SPRITE_OP_BAD_SPRITE_FILE">error_SPRITE_OP_BAD_SPRITE_FILE</h3>
+<pre>#define error_SPRITE_OP_BAD_SPRITE_FILE 0x700u</pre>
+
+<h3 id="error_SPRITE_OP_NO_ROOM_TO_MERGE">error_SPRITE_OP_NO_ROOM_TO_MERGE</h3>
+<pre>#define error_SPRITE_OP_NO_ROOM_TO_MERGE 0x701u</pre>
+
+<h3 id="error_SPRITE_OP_INVALID_SECOND_PTR">error_SPRITE_OP_INVALID_SECOND_PTR</h3>
+<pre>#define error_SPRITE_OP_INVALID_SECOND_PTR 0x702u</pre>
+
+<h3 id="error_SPRITE_OP_INVALID_ROW_OR_COL">error_SPRITE_OP_INVALID_ROW_OR_COL</h3>
+<pre>#define error_SPRITE_OP_INVALID_ROW_OR_COL 0x703u</pre>
+
+<h3 id="error_SPRITE_OP_INVALID_HEIGHT">error_SPRITE_OP_INVALID_HEIGHT</h3>
+<pre>#define error_SPRITE_OP_INVALID_HEIGHT 0x704u</pre>
+
+<h3 id="error_SPRITE_OP_INVALID_WIDTH">error_SPRITE_OP_INVALID_WIDTH</h3>
+<pre>#define error_SPRITE_OP_INVALID_WIDTH 0x705u</pre>
+
+<h3 id="error_SPRITE_OP_NO_ROOM_TO_INSERT">error_SPRITE_OP_NO_ROOM_TO_INSERT</h3>
+<pre>#define error_SPRITE_OP_NO_ROOM_TO_INSERT 0x706u</pre>
+
+<h3 id="error_SPRITE_OP_SPRITE_ALREADY_EXISTS">error_SPRITE_OP_SPRITE_ALREADY_EXISTS</h3>
+<pre>#define error_SPRITE_OP_SPRITE_ALREADY_EXISTS 0x707u</pre>
+
+<h3 id="error_SPRITE_OP_INVALID_SPRITE_MODE">error_SPRITE_OP_INVALID_SPRITE_MODE</h3>
+<pre>#define error_SPRITE_OP_INVALID_SPRITE_MODE 0x708u</pre>
+
+<h3 id="error_SPRITE_OP_BAD_REASON_CODE">error_SPRITE_OP_BAD_REASON_CODE</h3>
+<pre>#define error_SPRITE_OP_BAD_REASON_CODE 0x709u</pre>
+
+<h3 id="error_SPRITE_OP_CANT_DO_SYSTEM">error_SPRITE_OP_CANT_DO_SYSTEM</h3>
+<pre>#define error_SPRITE_OP_CANT_DO_SYSTEM 0x70Au</pre>
+
+<h3 id="error_SPRITE_OP_BAD_TRANSLATION">error_SPRITE_OP_BAD_TRANSLATION</h3>
+<pre>#define error_SPRITE_OP_BAD_TRANSLATION 0x70Bu</pre>
+
+<h3 id="error_SPRITE_OP_BAD_GREY_SCALE">error_SPRITE_OP_BAD_GREY_SCALE</h3>
+<pre>#define error_SPRITE_OP_BAD_GREY_SCALE 0x70Cu</pre>
+
+<h3 id="error_SPRITE_OP_BAD_POINTER_SHAPE">error_SPRITE_OP_BAD_POINTER_SHAPE</h3>
+<pre>#define error_SPRITE_OP_BAD_POINTER_SHAPE 0x70Du</pre>
+
+<h3 id="error_SPRITE_OP_BAD_APPEND">error_SPRITE_OP_BAD_APPEND</h3>
+<pre>#define error_SPRITE_OP_BAD_APPEND 0x70Eu</pre>
+
+<h3 id="error_SPRITE_OP_CANT_IN_TELETEXT">error_SPRITE_OP_CANT_IN_TELETEXT</h3>
+<pre>#define error_SPRITE_OP_CANT_IN_TELETEXT 0x70Fu</pre>
+
+<h3 id="error_SPRITE_OP_INVALID_SAVE_AREA">error_SPRITE_OP_INVALID_SAVE_AREA</h3>
+<pre>#define error_SPRITE_OP_INVALID_SAVE_AREA 0x710u</pre>
+
+<h3 id="error_SPRITE_OP_SPRITE_IS_CURRENT_DEST">error_SPRITE_OP_SPRITE_IS_CURRENT_DEST</h3>
+<pre>#define error_SPRITE_OP_SPRITE_IS_CURRENT_DEST 0x711u</pre>
+
+<h3 id="error_SPRITE_OP_BAD_FLAGS">error_SPRITE_OP_BAD_FLAGS</h3>
+<pre>#define error_SPRITE_OP_BAD_FLAGS 0x712u</pre>
+
+<h3 id="error_SPRITE_OP_BAD_COORD_BLOCK">error_SPRITE_OP_BAD_COORD_BLOCK</h3>
+<pre>#define error_SPRITE_OP_BAD_COORD_BLOCK 0x713u</pre>
+
+<h3 id="error_SPRITE_OP_BAD_SOURCE_RECTANGLE">error_SPRITE_OP_BAD_SOURCE_RECTANGLE</h3>
+<pre>#define error_SPRITE_OP_BAD_SOURCE_RECTANGLE 0x714u</pre>
+
+<h3 id="error_SPRITE_OP_BAD_TRANSFORMATION">error_SPRITE_OP_BAD_TRANSFORMATION</h3>
+<pre>#define error_SPRITE_OP_BAD_TRANSFORMATION 0x715u</pre>
+
+<h3 id="error_SPRITE_OP_BAD_DEPTH">error_SPRITE_OP_BAD_DEPTH</h3>
+<pre>#define error_SPRITE_OP_BAD_DEPTH 0x716u</pre>
+
+<h3 id="error_SPRITE_OP_BAD_SWITCH_DEPTH">error_SPRITE_OP_BAD_SWITCH_DEPTH</h3>
+<pre>#define error_SPRITE_OP_BAD_SWITCH_DEPTH 0x717u</pre>
+
+<h3 id="error_SPRITE_OP_BAD_COLOUR_MAP">error_SPRITE_OP_BAD_COLOUR_MAP</h3>
+<pre>#define error_SPRITE_OP_BAD_COLOUR_MAP 0x720u</pre>
+
+<h3 id="error_SPRITE_OP_BAD_JPEG_UNSUPPORTED">error_SPRITE_OP_BAD_JPEG_UNSUPPORTED</h3>
+<pre>#define error_SPRITE_OP_BAD_JPEG_UNSUPPORTED 0x721u</pre>
+
+<h3 id="error_SPRITE_OP_BAD_JPEG_PROGRESSIVE">error_SPRITE_OP_BAD_JPEG_PROGRESSIVE</h3>
+<pre>#define error_SPRITE_OP_BAD_JPEG_PROGRESSIVE 0x722u</pre>
+
+<h3 id="error_SPRITE_OP_BAD_TYPE">error_SPRITE_OP_BAD_TYPE</h3>
+<pre>#define error_SPRITE_OP_BAD_TYPE 0x723u</pre>
+
+<h3 id="osspriteop_USE_MASK">osspriteop_USE_MASK</h3>
+<pre>#define osspriteop_USE_MASK ((<a href="#osspriteop_action">osspriteop_action</a>) 0x8u)</pre>
+
+<h3 id="osspriteop_USE_PALETTE">osspriteop_USE_PALETTE</h3>
+<pre>#define osspriteop_USE_PALETTE ((<a href="#osspriteop_action">osspriteop_action</a>) 0x10u)</pre>
+
+<p>RISC OS 3.5+</p>
+
+<h3 id="osspriteop_GIVEN_WIDE_ENTRIES">osspriteop_GIVEN_WIDE_ENTRIES</h3>
+<pre>#define osspriteop_GIVEN_WIDE_ENTRIES ((<a href="#osspriteop_action">osspriteop_action</a>) 0x20u)</pre>
+
+<p>RISC OS 3.6+</p>
+
+<h3 id="osspriteop_DITHERED">osspriteop_DITHERED</h3>
+<pre>#define osspriteop_DITHERED ((<a href="#osspriteop_action">osspriteop_action</a>) 0x40u)</pre>
+
+<p>RISC OS 3.6+</p>
+
+<h3 id="osspriteop_GIVEN_COLOUR_MAPPING">osspriteop_GIVEN_COLOUR_MAPPING</h3>
+<pre>#define osspriteop_GIVEN_COLOUR_MAPPING ((<a href="#osspriteop_action">osspriteop_action</a>) 0x80u)</pre>
+
+<p>RISC OS 4+</p>
+
+<h3 id="osspriteop_TRANSLUCENCY">osspriteop_TRANSLUCENCY</h3>
+<pre>#define osspriteop_TRANSLUCENCY ((<a href="#osspriteop_action">osspriteop_action</a>) 0xFF00u)</pre>
+
+<p>RISC OS 4+</p>
+
+<h3 id="osspriteop_TRANSLUCENCY_SHIFT">osspriteop_TRANSLUCENCY_SHIFT</h3>
+<pre>#define osspriteop_TRANSLUCENCY_SHIFT 8</pre>
+
+<p>RISC OS 4+</p>
+
+<h3 id="osspriteop_POINTER_SHAPE">osspriteop_POINTER_SHAPE</h3>
+<pre>#define osspriteop_POINTER_SHAPE ((<a href="#osspriteop_pointer_flags">osspriteop_pointer_flags</a>) 0xFu)</pre>
+
+<h3 id="osspriteop_POINTER_SHAPE_SHIFT">osspriteop_POINTER_SHAPE_SHIFT</h3>
+<pre>#define osspriteop_POINTER_SHAPE_SHIFT 0</pre>
+
+<h3 id="osspriteop_POINTER_IGNORE_SHAPE_DATA">osspriteop_POINTER_IGNORE_SHAPE_DATA</h3>
+<pre>#define osspriteop_POINTER_IGNORE_SHAPE_DATA ((<a href="#osspriteop_pointer_flags">osspriteop_pointer_flags</a>) 0x10u)</pre>
+
+<h3 id="osspriteop_POINTER_IGNORE_PALETTE">osspriteop_POINTER_IGNORE_PALETTE</h3>
+<pre>#define osspriteop_POINTER_IGNORE_PALETTE ((<a href="#osspriteop_pointer_flags">osspriteop_pointer_flags</a>) 0x20u)</pre>
+
+<h3 id="osspriteop_POINTER_IGNORE_SHAPE">osspriteop_POINTER_IGNORE_SHAPE</h3>
+<pre>#define osspriteop_POINTER_IGNORE_SHAPE ((<a href="#osspriteop_pointer_flags">osspriteop_pointer_flags</a>) 0x40u)</pre>
+
+<h3 id="osspriteopremovealphachannelflags_CUT_OFF_POINT_SHIFT">osspriteopremovealphachannelflags_CUT_OFF_POINT_SHIFT</h3>
+<pre>#define osspriteopremovealphachannelflags_CUT_OFF_POINT_SHIFT 0</pre>
+
+<h3 id="osspriteopremovealphachannelflags_CUT_OFF_POINT_MASK">osspriteopremovealphachannelflags_CUT_OFF_POINT_MASK</h3>
+<pre>#define osspriteopremovealphachannelflags_CUT_OFF_POINT_MASK 255</pre>
+
+<h3 id="osspriteopremovealphachannelflags_REMOVE_MASK">osspriteopremovealphachannelflags_REMOVE_MASK</h3>
+<pre>#define osspriteopremovealphachannelflags_REMOVE_MASK ((<a href="#osspriteopremovealphachannel_flags">osspriteopremovealphachannel_flags</a>) 0x100u)</pre>
+
+<h3 id="osspriteopaddalphachannelflags_ADD">osspriteopaddalphachannelflags_ADD</h3>
+<pre>#define osspriteopaddalphachannelflags_ADD ((<a href="#osspriteopaddalphachannel_flags">osspriteopaddalphachannel_flags</a>) 0x80000000u)</pre>
+
+<h3 id="osspriteop_DESTINATION_COORDS">osspriteop_DESTINATION_COORDS</h3>
+<pre>#define osspriteop_DESTINATION_COORDS ((<a href="#osspriteop_trfm_flags">osspriteop_trfm_flags</a>) 0x1u)</pre>
+
+<h3 id="osspriteop_SOURCE_RECTANGLE">osspriteop_SOURCE_RECTANGLE</h3>
+<pre>#define osspriteop_SOURCE_RECTANGLE ((<a href="#osspriteop_trfm_flags">osspriteop_trfm_flags</a>) 0x2u)</pre>
+
+<h3 id="servicespritereregistertype_SOFTWARE_EXT">servicespritereregistertype_SOFTWARE_EXT</h3>
+<pre>#define servicespritereregistertype_SOFTWARE_EXT ((<a href="servicespritereregister.html#servicespritereregister_type">servicespritereregister_type</a>) 0x0u)</pre>
+
+<h3 id="servicespritereregistertype_ACCELERATION_EXT">servicespritereregistertype_ACCELERATION_EXT</h3>
+<pre>#define servicespritereregistertype_ACCELERATION_EXT ((<a href="servicespritereregister.html#servicespritereregister_type">servicespritereregister_type</a>) 0x1u)</pre>
+
+<h3 id="servicespritereregistertype_MONITOR_OR_VECTOR_EXT">servicespritereregistertype_MONITOR_OR_VECTOR_EXT</h3>
+<pre>#define servicespritereregistertype_MONITOR_OR_VECTOR_EXT ((<a href="servicespritereregister.html#servicespritereregister_type">servicespritereregister_type</a>) 0x2u)</pre>
+
+<h3 id="xosspriteop_screen_save">xosspriteop_screen_save</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_screen_save (char const *file_name,
+      osbool save_palette);</pre>
+<p>Screen saves</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>save_palette</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osspriteop_screen_save">osspriteop_screen_save</h3>
+<pre>extern void osspriteop_screen_save (char const *file_name,
+      osbool save_palette);</pre>
+<p>Screen saves</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>save_palette</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_screen_load">xosspriteop_screen_load</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_screen_load (char const *file_name);</pre>
+<p>Screen loads</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osspriteop_screen_load">osspriteop_screen_load</h3>
+<pre>extern void osspriteop_screen_load (char const *file_name);</pre>
+<p>Screen loads</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_read_area_cb">xosspriteop_read_area_cb</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_read_area_cb (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      int *size,
+      int *count,
+      int *first,
+      int *used);</pre>
+<p>Reads area control block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>first</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>used</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osspriteop_read_area_cb">osspriteop_read_area_cb</h3>
+<pre>extern void osspriteop_read_area_cb (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      int *size,
+      int *count,
+      int *first,
+      int *used);</pre>
+<p>Reads area control block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>first</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>used</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_clear_sprites">xosspriteop_clear_sprites</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_clear_sprites (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area);</pre>
+<p>Initialises sprite area</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osspriteop_clear_sprites">osspriteop_clear_sprites</h3>
+<pre>extern void osspriteop_clear_sprites (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area);</pre>
+<p>Initialises sprite area</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_load_sprite_file">xosspriteop_load_sprite_file</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_load_sprite_file (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      char const *file_name);</pre>
+<p>Loads sprite file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osspriteop_load_sprite_file">osspriteop_load_sprite_file</h3>
+<pre>extern void osspriteop_load_sprite_file (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      char const *file_name);</pre>
+<p>Loads sprite file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_merge_sprite_file">xosspriteop_merge_sprite_file</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_merge_sprite_file (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      char const *file_name);</pre>
+<p>Merges sprite file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osspriteop_merge_sprite_file">osspriteop_merge_sprite_file</h3>
+<pre>extern void osspriteop_merge_sprite_file (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      char const *file_name);</pre>
+<p>Merges sprite file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_save_sprite_file">xosspriteop_save_sprite_file</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_save_sprite_file (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      char const *file_name);</pre>
+<p>Saves sprite file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osspriteop_save_sprite_file">osspriteop_save_sprite_file</h3>
+<pre>extern void osspriteop_save_sprite_file (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      char const *file_name);</pre>
+<p>Saves sprite file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_return_name">xosspriteop_return_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_return_name (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      char *buffer,
+      int size,
+      int sprite_no,
+      int *used);</pre>
+<p>Returns sprite name</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>sprite_no</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osspriteop_return_name">osspriteop_return_name</h3>
+<pre>extern int osspriteop_return_name (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      char *buffer,
+      int size,
+      int sprite_no);</pre>
+<p>Returns sprite name</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>sprite_no</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xosspriteop_get_sprite">xosspriteop_get_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_get_sprite (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      char const *sprite_name,
+      osbool get_palette,
+      <a href="#osspriteop_header">osspriteop_header</a> **header);</pre>
+<p>Gets sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>get_palette</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>header</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osspriteop_get_sprite">osspriteop_get_sprite</h3>
+<pre>extern <a href="#osspriteop_header">osspriteop_header</a> *osspriteop_get_sprite (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      char const *sprite_name,
+      osbool get_palette);</pre>
+<p>Gets sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>get_palette</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>header</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosspriteop_create_sprite">xosspriteop_create_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_create_sprite (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      char const *sprite_name,
+      osbool create_palette,
+      int width,
+      int height,
+      <a href="os.html#os_mode">os_mode</a> mode);</pre>
+<p>Creates sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>create_palette</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>width</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="osspriteop_create_sprite">osspriteop_create_sprite</h3>
+<pre>extern void osspriteop_create_sprite (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      char const *sprite_name,
+      osbool create_palette,
+      int width,
+      int height,
+      <a href="os.html#os_mode">os_mode</a> mode);</pre>
+<p>Creates sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>create_palette</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>width</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_get_sprite_user_coords">xosspriteop_get_sprite_user_coords</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_get_sprite_user_coords (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      char const *sprite_name,
+      osbool get_palette,
+      int x0,
+      int y0,
+      int x1,
+      int y1);</pre>
+<p>Gets sprite from user coordinates</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>get_palette</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>x0</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>y0</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>x1</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>y1</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="osspriteop_get_sprite_user_coords">osspriteop_get_sprite_user_coords</h3>
+<pre>extern void osspriteop_get_sprite_user_coords (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      char const *sprite_name,
+      osbool get_palette,
+      int x0,
+      int y0,
+      int x1,
+      int y1);</pre>
+<p>Gets sprite from user coordinates</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>get_palette</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>x0</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>y0</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>x1</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>y1</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_verify_area">xosspriteop_verify_area</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_verify_area (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area);</pre>
+<p>Verifies that a region of memory contains a valid sprite area</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osspriteop_verify_area">osspriteop_verify_area</h3>
+<pre>extern void osspriteop_verify_area (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area);</pre>
+<p>Verifies that a region of memory contains a valid sprite area</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_select_sprite">xosspriteop_select_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_select_sprite (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      <a href="#osspriteop_header">osspriteop_header</a> **header);</pre>
+<p>Selects sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>header</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osspriteop_select_sprite">osspriteop_select_sprite</h3>
+<pre>extern <a href="#osspriteop_header">osspriteop_header</a> *osspriteop_select_sprite (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id);</pre>
+<p>Selects sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>header</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosspriteop_delete_sprite">xosspriteop_delete_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_delete_sprite (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id);</pre>
+<p>Deletes sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osspriteop_delete_sprite">osspriteop_delete_sprite</h3>
+<pre>extern void osspriteop_delete_sprite (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id);</pre>
+<p>Deletes sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_rename_sprite">xosspriteop_rename_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_rename_sprite (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      char const *sprite_name);</pre>
+<p>Renames sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osspriteop_rename_sprite">osspriteop_rename_sprite</h3>
+<pre>extern void osspriteop_rename_sprite (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      char const *sprite_name);</pre>
+<p>Renames sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_copy_sprite">xosspriteop_copy_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_copy_sprite (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      char const *sprite_name);</pre>
+<p>Copies sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osspriteop_copy_sprite">osspriteop_copy_sprite</h3>
+<pre>extern void osspriteop_copy_sprite (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      char const *sprite_name);</pre>
+<p>Copies sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>sprite_name</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_put_sprite">xosspriteop_put_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_put_sprite (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      <a href="os.html#os_action">os_action</a> action);</pre>
+<p>Puts sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osspriteop_put_sprite">osspriteop_put_sprite</h3>
+<pre>extern void osspriteop_put_sprite (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      <a href="os.html#os_action">os_action</a> action);</pre>
+<p>Puts sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_create_mask">xosspriteop_create_mask</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_create_mask (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id);</pre>
+<p>Creates mask</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osspriteop_create_mask">osspriteop_create_mask</h3>
+<pre>extern void osspriteop_create_mask (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id);</pre>
+<p>Creates mask</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_remove_mask">xosspriteop_remove_mask</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_remove_mask (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id);</pre>
+<p>Removes mask</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osspriteop_remove_mask">osspriteop_remove_mask</h3>
+<pre>extern void osspriteop_remove_mask (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id);</pre>
+<p>Removes mask</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_insert_row">xosspriteop_insert_row</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_insert_row (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int row);</pre>
+<p>Inserts row</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>row</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osspriteop_insert_row">osspriteop_insert_row</h3>
+<pre>extern void osspriteop_insert_row (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int row);</pre>
+<p>Inserts row</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>row</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_delete_row">xosspriteop_delete_row</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_delete_row (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int row);</pre>
+<p>Deletes row</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>row</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osspriteop_delete_row">osspriteop_delete_row</h3>
+<pre>extern void osspriteop_delete_row (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int row);</pre>
+<p>Deletes row</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>row</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_flip_about_xaxis">xosspriteop_flip_about_xaxis</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_flip_about_xaxis (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id);</pre>
+<p>Flips about x axis</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osspriteop_flip_about_xaxis">osspriteop_flip_about_xaxis</h3>
+<pre>extern void osspriteop_flip_about_xaxis (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id);</pre>
+<p>Flips about x axis</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_put_sprite_user_coords">xosspriteop_put_sprite_user_coords</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_put_sprite_user_coords (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      <a href="os.html#os_action">os_action</a> action);</pre>
+<p>Puts sprite at user coordinates</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osspriteop_put_sprite_user_coords">osspriteop_put_sprite_user_coords</h3>
+<pre>extern void osspriteop_put_sprite_user_coords (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      <a href="os.html#os_action">os_action</a> action);</pre>
+<p>Puts sprite at user coordinates</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_append_sprite">xosspriteop_append_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_append_sprite (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id0,
+      <a href="#osspriteop_id">osspriteop_id</a> id1,
+      osbool append_vertically);</pre>
+<p>Appends sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id0</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>id1</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>append_vertically</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="osspriteop_append_sprite">osspriteop_append_sprite</h3>
+<pre>extern void osspriteop_append_sprite (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id0,
+      <a href="#osspriteop_id">osspriteop_id</a> id1,
+      osbool append_vertically);</pre>
+<p>Appends sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id0</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>id1</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>append_vertically</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_set_pointer_shape">xosspriteop_set_pointer_shape</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_set_pointer_shape (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      <a href="#osspriteop_pointer_flags">osspriteop_pointer_flags</a> pointer_flags,
+      int xactive,
+      int yactive,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      <a href="#osspriteop_trans_tab">osspriteop_trans_tab</a> const *trans_tab);</pre>
+<p>Sets pointer shape</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>pointer_flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xactive</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>yactive</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="osspriteop_set_pointer_shape">osspriteop_set_pointer_shape</h3>
+<pre>extern void osspriteop_set_pointer_shape (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      <a href="#osspriteop_pointer_flags">osspriteop_pointer_flags</a> pointer_flags,
+      int xactive,
+      int yactive,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      <a href="#osspriteop_trans_tab">osspriteop_trans_tab</a> const *trans_tab);</pre>
+<p>Sets pointer shape</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>pointer_flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xactive</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>yactive</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_read_palette_size">xosspriteop_read_palette_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_read_palette_size (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int *size,
+      <a href="os.html#os_sprite_palette">os_sprite_palette</a> **palette,
+      <a href="os.html#os_mode">os_mode</a> *mode);</pre>
+<p>Reads palette size</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>palette</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osspriteop_read_palette_size">osspriteop_read_palette_size</h3>
+<pre>extern void osspriteop_read_palette_size (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int *size,
+      <a href="os.html#os_sprite_palette">os_sprite_palette</a> **palette,
+      <a href="os.html#os_mode">os_mode</a> *mode);</pre>
+<p>Reads palette size</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>palette</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_remove_palette">xosspriteop_remove_palette</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_remove_palette (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id);</pre>
+<p>Removes palette</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osspriteop_remove_palette">osspriteop_remove_palette</h3>
+<pre>extern void osspriteop_remove_palette (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id);</pre>
+<p>Removes palette</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_create_palette">xosspriteop_create_palette</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_create_palette (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id);</pre>
+<p>Creates palette</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osspriteop_create_palette">osspriteop_create_palette</h3>
+<pre>extern void osspriteop_create_palette (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id);</pre>
+<p>Creates palette</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_create_true_palette">xosspriteop_create_true_palette</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_create_true_palette (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id);</pre>
+<p>Creates palette with true colours</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osspriteop_create_true_palette">osspriteop_create_true_palette</h3>
+<pre>extern void osspriteop_create_true_palette (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id);</pre>
+<p>Creates palette with true colours</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_remove_alpha_channel">xosspriteop_remove_alpha_channel</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_remove_alpha_channel (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      <a href="#osspriteopremovealphachannel_flags">osspriteopremovealphachannel_flags</a> aflags);</pre>
+<p>Remove alpha-channel mask - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>aflags</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osspriteop_remove_alpha_channel">osspriteop_remove_alpha_channel</h3>
+<pre>extern void osspriteop_remove_alpha_channel (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      <a href="#osspriteopremovealphachannel_flags">osspriteopremovealphachannel_flags</a> aflags);</pre>
+<p>Remove alpha-channel mask - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>aflags</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_add_alpha_channel">xosspriteop_add_alpha_channel</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_add_alpha_channel (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      <a href="#osspriteopaddalphachannel_flags">osspriteopaddalphachannel_flags</a> aflags);</pre>
+<p>Add alpha-channel mask - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>aflags</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osspriteop_add_alpha_channel">osspriteop_add_alpha_channel</h3>
+<pre>extern void osspriteop_add_alpha_channel (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      <a href="#osspriteopaddalphachannel_flags">osspriteopaddalphachannel_flags</a> aflags);</pre>
+<p>Add alpha-channel mask - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>aflags</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_read_sprite_info">xosspriteop_read_sprite_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_read_sprite_info (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int *width,
+      int *height,
+      osbool *mask,
+      <a href="os.html#os_mode">os_mode</a> *mode);</pre>
+<p>Reads sprite information</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>width</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>mask</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="osspriteop_read_sprite_info">osspriteop_read_sprite_info</h3>
+<pre>extern void osspriteop_read_sprite_info (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int *width,
+      int *height,
+      osbool *mask,
+      <a href="os.html#os_mode">os_mode</a> *mode);</pre>
+<p>Reads sprite information</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>width</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>mask</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_read_pixel_colour">xosspriteop_read_pixel_colour</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_read_pixel_colour (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      <a href="os.html#os_gcol">os_gcol</a> *gcol,
+      <a href="os.html#os_tint">os_tint</a> *tint);</pre>
+<p>Reads pixel colour</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>gcol</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>tint</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="osspriteop_read_pixel_colour">osspriteop_read_pixel_colour</h3>
+<pre>extern void osspriteop_read_pixel_colour (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      <a href="os.html#os_gcol">os_gcol</a> *gcol,
+      <a href="os.html#os_tint">os_tint</a> *tint);</pre>
+<p>Reads pixel colour</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>gcol</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>tint</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_read_pixel_colour_deep">xosspriteop_read_pixel_colour_deep</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_read_pixel_colour_deep (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      bits *gcol,
+      <a href="os.html#os_tint">os_tint</a> *tint);</pre>
+<p>Reads pixel colour into 24-bit RGB value</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>gcol</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>tint</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="osspriteop_read_pixel_colour_deep">osspriteop_read_pixel_colour_deep</h3>
+<pre>extern void osspriteop_read_pixel_colour_deep (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      bits *gcol,
+      <a href="os.html#os_tint">os_tint</a> *tint);</pre>
+<p>Reads pixel colour into 24-bit RGB value</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>gcol</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>tint</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_write_pixel_colour">xosspriteop_write_pixel_colour</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_write_pixel_colour (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      <a href="os.html#os_gcol">os_gcol</a> gcol,
+      <a href="os.html#os_tint">os_tint</a> tint);</pre>
+<p>Writes pixel colour</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>gcol</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>tint</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="osspriteop_write_pixel_colour">osspriteop_write_pixel_colour</h3>
+<pre>extern void osspriteop_write_pixel_colour (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      <a href="os.html#os_gcol">os_gcol</a> gcol,
+      <a href="os.html#os_tint">os_tint</a> tint);</pre>
+<p>Writes pixel colour</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>gcol</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>tint</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_write_pixel_colour_deep">xosspriteop_write_pixel_colour_deep</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_write_pixel_colour_deep (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      bits gcol,
+      <a href="os.html#os_tint">os_tint</a> tint);</pre>
+<p>Writes pixel colour using 24-bit RGB value</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>gcol</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>tint</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="osspriteop_write_pixel_colour_deep">osspriteop_write_pixel_colour_deep</h3>
+<pre>extern void osspriteop_write_pixel_colour_deep (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      bits gcol,
+      <a href="os.html#os_tint">os_tint</a> tint);</pre>
+<p>Writes pixel colour using 24-bit RGB value</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>gcol</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>tint</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_read_pixel_mask">xosspriteop_read_pixel_mask</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_read_pixel_mask (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      osbool *solid);</pre>
+<p>Reads pixel mask</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>solid</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osspriteop_read_pixel_mask">osspriteop_read_pixel_mask</h3>
+<pre>extern osbool osspriteop_read_pixel_mask (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y);</pre>
+<p>Reads pixel mask</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>solid</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xosspriteop_read_pixel_mask_alpha">xosspriteop_read_pixel_mask_alpha</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_read_pixel_mask_alpha (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      int *opacity);</pre>
+<p>Reads pixel mask with alpha channel support - RISC OS Select</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>opacity</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osspriteop_read_pixel_mask_alpha">osspriteop_read_pixel_mask_alpha</h3>
+<pre>extern int osspriteop_read_pixel_mask_alpha (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y);</pre>
+<p>Reads pixel mask with alpha channel support - RISC OS Select</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>opacity</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xosspriteop_write_pixel_mask">xosspriteop_write_pixel_mask</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_write_pixel_mask (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      osbool solid);</pre>
+<p>Writes pixel mask</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>solid</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osspriteop_write_pixel_mask">osspriteop_write_pixel_mask</h3>
+<pre>extern void osspriteop_write_pixel_mask (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      osbool solid);</pre>
+<p>Writes pixel mask</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>solid</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_write_pixel_mask_alpha">xosspriteop_write_pixel_mask_alpha</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_write_pixel_mask_alpha (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      int opacity);</pre>
+<p>Writes pixel mask with alpha channel support - RISC OS Select</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>opacity</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osspriteop_write_pixel_mask_alpha">osspriteop_write_pixel_mask_alpha</h3>
+<pre>extern void osspriteop_write_pixel_mask_alpha (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      int opacity);</pre>
+<p>Writes pixel mask with alpha channel support - RISC OS Select</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>opacity</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_insert_column">xosspriteop_insert_column</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_insert_column (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int column);</pre>
+<p>Inserts column</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>column</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osspriteop_insert_column">osspriteop_insert_column</h3>
+<pre>extern void osspriteop_insert_column (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int column);</pre>
+<p>Inserts column</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>column</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_delete_column">xosspriteop_delete_column</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_delete_column (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int column);</pre>
+<p>Deletes column</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>column</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osspriteop_delete_column">osspriteop_delete_column</h3>
+<pre>extern void osspriteop_delete_column (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int column);</pre>
+<p>Deletes column</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>column</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_flip_about_yaxis">xosspriteop_flip_about_yaxis</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_flip_about_yaxis (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id);</pre>
+<p>Flips about y axis</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osspriteop_flip_about_yaxis">osspriteop_flip_about_yaxis</h3>
+<pre>extern void osspriteop_flip_about_yaxis (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id);</pre>
+<p>Flips about y axis</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_plot_mask">xosspriteop_plot_mask</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_plot_mask (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id);</pre>
+<p>Plots sprite mask</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osspriteop_plot_mask">osspriteop_plot_mask</h3>
+<pre>extern void osspriteop_plot_mask (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id);</pre>
+<p>Plots sprite mask</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_plot_mask_user_coords">xosspriteop_plot_mask_user_coords</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_plot_mask_user_coords (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y);</pre>
+<p>Plots sprite mask at user coordinates</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="osspriteop_plot_mask_user_coords">osspriteop_plot_mask_user_coords</h3>
+<pre>extern void osspriteop_plot_mask_user_coords (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y);</pre>
+<p>Plots sprite mask at user coordinates</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_plot_mask_scaled">xosspriteop_plot_mask_scaled</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_plot_mask_scaled (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      <a href="os.html#os_factors">os_factors</a> const *factors);</pre>
+<p>Plots mask scaled</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osspriteop_plot_mask_scaled">osspriteop_plot_mask_scaled</h3>
+<pre>extern void osspriteop_plot_mask_scaled (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      <a href="os.html#os_factors">os_factors</a> const *factors);</pre>
+<p>Plots mask scaled</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_paint_char_scaled">xosspriteop_paint_char_scaled</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_paint_char_scaled (char c,
+      int x,
+      int y,
+      <a href="os.html#os_factors">os_factors</a> const *factors);</pre>
+<p>Paints character scaled</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="osspriteop_paint_char_scaled">osspriteop_paint_char_scaled</h3>
+<pre>extern void osspriteop_paint_char_scaled (char c,
+      int x,
+      int y,
+      <a href="os.html#os_factors">os_factors</a> const *factors);</pre>
+<p>Paints character scaled</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_put_sprite_scaled">xosspriteop_put_sprite_scaled</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_put_sprite_scaled (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      <a href="#osspriteop_action">osspriteop_action</a> action,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      <a href="#osspriteop_trans_tab">osspriteop_trans_tab</a> const *trans_tab);</pre>
+<p>Puts sprite scaled</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="osspriteop_put_sprite_scaled">osspriteop_put_sprite_scaled</h3>
+<pre>extern void osspriteop_put_sprite_scaled (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      <a href="#osspriteop_action">osspriteop_action</a> action,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      <a href="#osspriteop_trans_tab">osspriteop_trans_tab</a> const *trans_tab);</pre>
+<p>Puts sprite scaled</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_put_sprite_scaled_mapped">xosspriteop_put_sprite_scaled_mapped</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_put_sprite_scaled_mapped (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      <a href="#osspriteop_action">osspriteop_action</a> action,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      <a href="#osspriteop_colour_mapping">osspriteop_colour_mapping</a> const *mapping);</pre>
+<p>Puts sprite scaled with colour mapping - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>mapping</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="osspriteop_put_sprite_scaled_mapped">osspriteop_put_sprite_scaled_mapped</h3>
+<pre>extern void osspriteop_put_sprite_scaled_mapped (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      <a href="#osspriteop_action">osspriteop_action</a> action,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      <a href="#osspriteop_colour_mapping">osspriteop_colour_mapping</a> const *mapping);</pre>
+<p>Puts sprite scaled with colour mapping - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>mapping</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_put_sprite_grey_scaled">xosspriteop_put_sprite_grey_scaled</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_put_sprite_grey_scaled (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      <a href="#osspriteop_trans_tab">osspriteop_trans_tab</a> const *trans_tab);</pre>
+<p>Puts sprite scaled and anti-aliased - not RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="osspriteop_put_sprite_grey_scaled">osspriteop_put_sprite_grey_scaled</h3>
+<pre>extern void osspriteop_put_sprite_grey_scaled (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      <a href="#osspriteop_trans_tab">osspriteop_trans_tab</a> const *trans_tab);</pre>
+<p>Puts sprite scaled and anti-aliased - not RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_remove_left_hand_wastage">xosspriteop_remove_left_hand_wastage</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_remove_left_hand_wastage (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id);</pre>
+<p>Removes left hand wastage</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osspriteop_remove_left_hand_wastage">osspriteop_remove_left_hand_wastage</h3>
+<pre>extern void osspriteop_remove_left_hand_wastage (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id);</pre>
+<p>Removes left hand wastage</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_plot_mask_trfm">xosspriteop_plot_mask_trfm</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_plot_mask_trfm (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      <a href="#osspriteop_trfm_flags">osspriteop_trfm_flags</a> trfm_flags,
+      <a href="os.html#os_box">os_box</a> const *source_rect,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm);</pre>
+<p>Plots sprite mask transformed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>trfm_flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>source_rect</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="osspriteop_plot_mask_trfm">osspriteop_plot_mask_trfm</h3>
+<pre>extern void osspriteop_plot_mask_trfm (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      <a href="#osspriteop_trfm_flags">osspriteop_trfm_flags</a> trfm_flags,
+      <a href="os.html#os_box">os_box</a> const *source_rect,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm);</pre>
+<p>Plots sprite mask transformed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>trfm_flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>source_rect</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_put_sprite_trfm">xosspriteop_put_sprite_trfm</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_put_sprite_trfm (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      <a href="#osspriteop_trfm_flags">osspriteop_trfm_flags</a> trfm_flags,
+      <a href="os.html#os_box">os_box</a> const *source_rect,
+      <a href="#osspriteop_action">osspriteop_action</a> action,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      <a href="#osspriteop_trans_tab">osspriteop_trans_tab</a> const *trans_tab);</pre>
+<p>Puts sprite transformed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>trfm_flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>source_rect</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="osspriteop_put_sprite_trfm">osspriteop_put_sprite_trfm</h3>
+<pre>extern void osspriteop_put_sprite_trfm (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      <a href="#osspriteop_trfm_flags">osspriteop_trfm_flags</a> trfm_flags,
+      <a href="os.html#os_box">os_box</a> const *source_rect,
+      <a href="#osspriteop_action">osspriteop_action</a> action,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      <a href="#osspriteop_trans_tab">osspriteop_trans_tab</a> const *trans_tab);</pre>
+<p>Puts sprite transformed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>trfm_flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>source_rect</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_put_sprite_trfm_mapped">xosspriteop_put_sprite_trfm_mapped</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_put_sprite_trfm_mapped (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      <a href="#osspriteop_trfm_flags">osspriteop_trfm_flags</a> trfm_flags,
+      <a href="os.html#os_box">os_box</a> const *source_rect,
+      <a href="#osspriteop_action">osspriteop_action</a> action,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      <a href="#osspriteop_colour_mapping">osspriteop_colour_mapping</a> const *mapping);</pre>
+<p>Puts sprite transformed with colour mapping - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>trfm_flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>source_rect</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>mapping</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="osspriteop_put_sprite_trfm_mapped">osspriteop_put_sprite_trfm_mapped</h3>
+<pre>extern void osspriteop_put_sprite_trfm_mapped (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      <a href="#osspriteop_trfm_flags">osspriteop_trfm_flags</a> trfm_flags,
+      <a href="os.html#os_box">os_box</a> const *source_rect,
+      <a href="#osspriteop_action">osspriteop_action</a> action,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      <a href="#osspriteop_colour_mapping">osspriteop_colour_mapping</a> const *mapping);</pre>
+<p>Puts sprite transformed with colour mapping - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>trfm_flags</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>source_rect</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>mapping</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_insert_delete_rows">xosspriteop_insert_delete_rows</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_insert_delete_rows (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int row_no,
+      int row_count);</pre>
+<p>Inserts/deletes rows from a sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>row_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>row_count</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="osspriteop_insert_delete_rows">osspriteop_insert_delete_rows</h3>
+<pre>extern void osspriteop_insert_delete_rows (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int row_no,
+      int row_count);</pre>
+<p>Inserts/deletes rows from a sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>row_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>row_count</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_insert_delete_columns">xosspriteop_insert_delete_columns</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_insert_delete_columns (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int column_no,
+      int column_count);</pre>
+<p>Inserts/deletes columns from a sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>column_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>column_count</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="osspriteop_insert_delete_columns">osspriteop_insert_delete_columns</h3>
+<pre>extern void osspriteop_insert_delete_columns (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int column_no,
+      int column_count);</pre>
+<p>Inserts/deletes columns from a sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>column_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>column_count</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_switch_output_to_sprite">xosspriteop_switch_output_to_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_switch_output_to_sprite (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      <a href="#osspriteop_save_area">osspriteop_save_area</a> *save_area,
+      int *context0,
+      int *context1,
+      int *context2,
+      int *context3);</pre>
+<p>Switches output to sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>save_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>context0</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>context1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>context2</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>context3</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osspriteop_switch_output_to_sprite">osspriteop_switch_output_to_sprite</h3>
+<pre>extern void osspriteop_switch_output_to_sprite (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      <a href="#osspriteop_save_area">osspriteop_save_area</a> *save_area,
+      int *context0,
+      int *context1,
+      int *context2,
+      int *context3);</pre>
+<p>Switches output to sprite</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>save_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>context0</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>context1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>context2</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>context3</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_switch_output_to_mask">xosspriteop_switch_output_to_mask</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_switch_output_to_mask (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      <a href="#osspriteop_save_area">osspriteop_save_area</a> *save_area,
+      int *context0,
+      int *context1,
+      int *context2,
+      int *context3);</pre>
+<p>Switches output to mask</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>save_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>context0</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>context1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>context2</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>context3</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osspriteop_switch_output_to_mask">osspriteop_switch_output_to_mask</h3>
+<pre>extern void osspriteop_switch_output_to_mask (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      <a href="#osspriteop_save_area">osspriteop_save_area</a> *save_area,
+      int *context0,
+      int *context1,
+      int *context2,
+      int *context3);</pre>
+<p>Switches output to mask</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>save_area</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>context0</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>context1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>context2</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>context3</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_read_save_area_size">xosspriteop_read_save_area_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_read_save_area_size (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int *size);</pre>
+<p>Reads save area size</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osspriteop_read_save_area_size">osspriteop_read_save_area_size</h3>
+<pre>extern int osspriteop_read_save_area_size (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id);</pre>
+<p>Reads save area size</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xosspriteop_unswitch_output">xosspriteop_unswitch_output</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_unswitch_output (int context0,
+      int context1,
+      int context2,
+      int context3);</pre>
+<p>Switches output back to previous destination</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context0</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>context1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>context2</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>context3</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osspriteop_unswitch_output">osspriteop_unswitch_output</h3>
+<pre>extern void osspriteop_unswitch_output (int context0,
+      int context1,
+      int context2,
+      int context3);</pre>
+<p>Switches output back to previous destination</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context0</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>context1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>context2</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>context3</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosspriteop_plot_tiled_sprite">xosspriteop_plot_tiled_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosspriteop_plot_tiled_sprite (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      <a href="#osspriteop_action">osspriteop_action</a> action,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      <a href="#osspriteop_trans_tab">osspriteop_trans_tab</a> const *trans_tab);</pre>
+<p>Tile a sprite across the graphics window - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="osspriteop_plot_tiled_sprite">osspriteop_plot_tiled_sprite</h3>
+<pre>extern void osspriteop_plot_tiled_sprite (<a href="#osspriteop_flags">osspriteop_flags</a> flags,
+      <a href="#osspriteop_area">osspriteop_area</a> const *area,
+      <a href="#osspriteop_id">osspriteop_id</a> id,
+      int x,
+      int y,
+      <a href="#osspriteop_action">osspriteop_action</a> action,
+      <a href="os.html#os_factors">os_factors</a> const *factors,
+      <a href="#osspriteop_trans_tab">osspriteop_trans_tab</a> const *trans_tab);</pre>
+<p>Tile a sprite across the graphics window - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>area</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>factors</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>trans_tab</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xservice_switching_output_to_sprite">xservice_switching_output_to_sprite</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_switching_output_to_sprite (void);
+</pre><p>Output switched to sprite, mask or screen</p>
+
+
+<table>
+</table>
+
+<h3 id="service_switching_output_to_sprite">service_switching_output_to_sprite</h3>
+<pre>extern void service_switching_output_to_sprite (void);
+</pre><p>Output switched to sprite, mask or screen</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_sprite_reregister">xservice_sprite_reregister</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_sprite_reregister (<a href="servicespritereregister.html#servicespritereregister_type">servicespritereregister_type</a> type);</pre>
+<p>SpriteExtend has claimed SpriteV</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>type</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="service_sprite_reregister">service_sprite_reregister</h3>
+<pre>extern void service_sprite_reregister (<a href="servicespritereregister.html#servicespritereregister_type">servicespritereregister_type</a> type);</pre>
+<p>SpriteExtend has claimed SpriteV</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>type</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

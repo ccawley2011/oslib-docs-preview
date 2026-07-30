@@ -1,0 +1,1396 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ZLib</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ZLib</h2>
+
+<pre>#include "oslib/zlib.h"</pre>
+
+<h3 id="zlib_data_type">zlib_data_type</h3>
+<pre>typedef int zlib_data_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#zlib_BINARY_DATA">zlib_BINARY_DATA</a></dd>
+<dd><a href="#zlib_ASCII_DATA">zlib_ASCII_DATA</a></dd>
+<dd><a href="#zlib_UNKNOWN_DATA">zlib_UNKNOWN_DATA</a></dd>
+</dl>
+
+<h3 id="zlib_flush_type">zlib_flush_type</h3>
+<pre>typedef int zlib_flush_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#zlib_NO_FLUSH">zlib_NO_FLUSH</a></dd>
+<dd><a href="#zlib_PARTIAL_FLUSH">zlib_PARTIAL_FLUSH</a></dd>
+<dd><a href="#zlib_SYNC_FLUSH">zlib_SYNC_FLUSH</a></dd>
+<dd><a href="#zlib_FULL_FLUSH">zlib_FULL_FLUSH</a></dd>
+<dd><a href="#zlib_FINISH">zlib_FINISH</a></dd>
+</dl>
+
+<h3 id="zlib_compression_level">zlib_compression_level</h3>
+<pre>typedef int zlib_compression_level;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#zlib_NO_COMPRESSION">zlib_NO_COMPRESSION</a></dd>
+<dd><a href="#zlib_BEST_SPEED">zlib_BEST_SPEED</a></dd>
+<dd><a href="#zlib_BEST_COMPRESSION">zlib_BEST_COMPRESSION</a></dd>
+<dd><a href="#zlib_DEFAULT_COMPRESSION">zlib_DEFAULT_COMPRESSION</a></dd>
+</dl>
+
+<h3 id="zlib_compression_strategy">zlib_compression_strategy</h3>
+<pre>typedef int zlib_compression_strategy;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#zlib_DEFAULT_STRATEGY">zlib_DEFAULT_STRATEGY</a></dd>
+<dd><a href="#zlib_FILTERED">zlib_FILTERED</a></dd>
+<dd><a href="#zlib_HUFFMAN_ONLY">zlib_HUFFMAN_ONLY</a></dd>
+</dl>
+
+<h3 id="zlib_compression_method">zlib_compression_method</h3>
+<pre>typedef int zlib_compression_method;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#zlib_DEFLATED">zlib_DEFLATED</a></dd>
+</dl>
+
+<h3 id="zlib_memory_level">zlib_memory_level</h3>
+<pre>typedef int zlib_memory_level;</pre>
+
+<h3 id="zlib_window_bits">zlib_window_bits</h3>
+<pre>typedef int zlib_window_bits;</pre>
+
+<h3 id="zlib_return_code">zlib_return_code</h3>
+<pre>typedef int zlib_return_code;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#zlib_OK">zlib_OK</a></dd>
+<dd><a href="#zlib_STREAM_END">zlib_STREAM_END</a></dd>
+<dd><a href="#zlib_NEED_DICT">zlib_NEED_DICT</a></dd>
+<dd><a href="#zlib_ERRNO">zlib_ERRNO</a></dd>
+<dd><a href="#zlib_STREAM_ERROR">zlib_STREAM_ERROR</a></dd>
+<dd><a href="#zlib_DATA_ERROR">zlib_DATA_ERROR</a></dd>
+<dd><a href="#zlib_MEM_ERROR">zlib_MEM_ERROR</a></dd>
+<dd><a href="#zlib_BUF_ERROR">zlib_BUF_ERROR</a></dd>
+<dd><a href="#zlib_VERSION_ERROR">zlib_VERSION_ERROR</a></dd>
+</dl>
+
+<h3 id="zlib_seek_type">zlib_seek_type</h3>
+<pre>typedef int zlib_seek_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#zlib_SEEK_ABSOLUTE">zlib_SEEK_ABSOLUTE</a></dd>
+<dd><a href="#zlib_SEEK_RELATIVE">zlib_SEEK_RELATIVE</a></dd>
+</dl>
+
+<h3 id="zlib_stream_control_block">zlib_stream_control_block</h3>
+<pre>typedef struct
+   {  int next_in;
+      int avail_in;
+      int total_in;
+      int next_out;
+      int avail_out;
+      int total_out;
+      char *msg;
+      int state;
+      byte *zalloc;
+      byte *zfree;
+      byte *opaque;
+      <a href="#zlib_data_type">zlib_data_type</a> data_type;
+      int adler;
+      int reserved;
+   }
+   zlib_stream_control_block;</pre>
+
+
+Fields:	state - Private value for internal use<h3 id="zlib_gzip_handle">zlib_gzip_handle</h3>
+<pre>typedef struct {...} *zlib_gzip_handle;</pre>
+
+<h3 id="zlib_BINARY_DATA">zlib_BINARY_DATA</h3>
+<pre>#define zlib_BINARY_DATA ((<a href="#zlib_data_type">zlib_data_type</a>) 0x0u)</pre>
+
+<h3 id="zlib_ASCII_DATA">zlib_ASCII_DATA</h3>
+<pre>#define zlib_ASCII_DATA ((<a href="#zlib_data_type">zlib_data_type</a>) 0x1u)</pre>
+
+<h3 id="zlib_UNKNOWN_DATA">zlib_UNKNOWN_DATA</h3>
+<pre>#define zlib_UNKNOWN_DATA ((<a href="#zlib_data_type">zlib_data_type</a>) 0x2u)</pre>
+
+<h3 id="zlib_NO_FLUSH">zlib_NO_FLUSH</h3>
+<pre>#define zlib_NO_FLUSH ((<a href="#zlib_flush_type">zlib_flush_type</a>) 0x0u)</pre>
+
+<h3 id="zlib_PARTIAL_FLUSH">zlib_PARTIAL_FLUSH</h3>
+<pre>#define zlib_PARTIAL_FLUSH ((<a href="#zlib_flush_type">zlib_flush_type</a>) 0x1u)</pre>
+
+<h3 id="zlib_SYNC_FLUSH">zlib_SYNC_FLUSH</h3>
+<pre>#define zlib_SYNC_FLUSH ((<a href="#zlib_flush_type">zlib_flush_type</a>) 0x2u)</pre>
+
+<h3 id="zlib_FULL_FLUSH">zlib_FULL_FLUSH</h3>
+<pre>#define zlib_FULL_FLUSH ((<a href="#zlib_flush_type">zlib_flush_type</a>) 0x3u)</pre>
+
+<h3 id="zlib_FINISH">zlib_FINISH</h3>
+<pre>#define zlib_FINISH ((<a href="#zlib_flush_type">zlib_flush_type</a>) 0x4u)</pre>
+
+<h3 id="zlib_NO_COMPRESSION">zlib_NO_COMPRESSION</h3>
+<pre>#define zlib_NO_COMPRESSION ((<a href="#zlib_compression_level">zlib_compression_level</a>) 0x0u)</pre>
+
+<h3 id="zlib_BEST_SPEED">zlib_BEST_SPEED</h3>
+<pre>#define zlib_BEST_SPEED ((<a href="#zlib_compression_level">zlib_compression_level</a>) 0x1u)</pre>
+
+<h3 id="zlib_BEST_COMPRESSION">zlib_BEST_COMPRESSION</h3>
+<pre>#define zlib_BEST_COMPRESSION ((<a href="#zlib_compression_level">zlib_compression_level</a>) 0x9u)</pre>
+
+<h3 id="zlib_DEFAULT_COMPRESSION">zlib_DEFAULT_COMPRESSION</h3>
+<pre>#define zlib_DEFAULT_COMPRESSION ((<a href="#zlib_compression_level">zlib_compression_level</a>) 0xFFFFFFFFu)</pre>
+
+<h3 id="zlib_DEFAULT_STRATEGY">zlib_DEFAULT_STRATEGY</h3>
+<pre>#define zlib_DEFAULT_STRATEGY ((<a href="#zlib_compression_strategy">zlib_compression_strategy</a>) 0x0u)</pre>
+
+<h3 id="zlib_FILTERED">zlib_FILTERED</h3>
+<pre>#define zlib_FILTERED ((<a href="#zlib_compression_strategy">zlib_compression_strategy</a>) 0x1u)</pre>
+
+<h3 id="zlib_HUFFMAN_ONLY">zlib_HUFFMAN_ONLY</h3>
+<pre>#define zlib_HUFFMAN_ONLY ((<a href="#zlib_compression_strategy">zlib_compression_strategy</a>) 0x2u)</pre>
+
+<h3 id="zlib_DEFLATED">zlib_DEFLATED</h3>
+<pre>#define zlib_DEFLATED ((<a href="#zlib_compression_method">zlib_compression_method</a>) 0x8u)</pre>
+
+<h3 id="zlib_OK">zlib_OK</h3>
+<pre>#define zlib_OK ((<a href="#zlib_return_code">zlib_return_code</a>) 0x0u)</pre>
+
+<h3 id="zlib_STREAM_END">zlib_STREAM_END</h3>
+<pre>#define zlib_STREAM_END ((<a href="#zlib_return_code">zlib_return_code</a>) 0x1u)</pre>
+
+<h3 id="zlib_NEED_DICT">zlib_NEED_DICT</h3>
+<pre>#define zlib_NEED_DICT ((<a href="#zlib_return_code">zlib_return_code</a>) 0x2u)</pre>
+
+<h3 id="zlib_ERRNO">zlib_ERRNO</h3>
+<pre>#define zlib_ERRNO ((<a href="#zlib_return_code">zlib_return_code</a>) 0xFFFFFFFFu)</pre>
+
+<h3 id="zlib_STREAM_ERROR">zlib_STREAM_ERROR</h3>
+<pre>#define zlib_STREAM_ERROR ((<a href="#zlib_return_code">zlib_return_code</a>) 0xFFFFFFFEu)</pre>
+
+<h3 id="zlib_DATA_ERROR">zlib_DATA_ERROR</h3>
+<pre>#define zlib_DATA_ERROR ((<a href="#zlib_return_code">zlib_return_code</a>) 0xFFFFFFFDu)</pre>
+
+<h3 id="zlib_MEM_ERROR">zlib_MEM_ERROR</h3>
+<pre>#define zlib_MEM_ERROR ((<a href="#zlib_return_code">zlib_return_code</a>) 0xFFFFFFFCu)</pre>
+
+<h3 id="zlib_BUF_ERROR">zlib_BUF_ERROR</h3>
+<pre>#define zlib_BUF_ERROR ((<a href="#zlib_return_code">zlib_return_code</a>) 0xFFFFFFFBu)</pre>
+
+<h3 id="zlib_VERSION_ERROR">zlib_VERSION_ERROR</h3>
+<pre>#define zlib_VERSION_ERROR ((<a href="#zlib_return_code">zlib_return_code</a>) 0xFFFFFFFAu)</pre>
+
+<h3 id="zlib_SEEK_ABSOLUTE">zlib_SEEK_ABSOLUTE</h3>
+<pre>#define zlib_SEEK_ABSOLUTE ((<a href="#zlib_seek_type">zlib_seek_type</a>) 0x0u)</pre>
+
+<h3 id="zlib_SEEK_RELATIVE">zlib_SEEK_RELATIVE</h3>
+<pre>#define zlib_SEEK_RELATIVE ((<a href="#zlib_seek_type">zlib_seek_type</a>) 0x1u)</pre>
+
+<h3 id="xzlib_compress_return_sizes">xzlib_compress_return_sizes</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_compress_return_sizes (int input_size,
+      int *workspace_size,
+      int *output_size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>workspace_size</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="zlib_compress_return_sizes">zlib_compress_return_sizes</h3>
+<pre>extern void zlib_compress_return_sizes (int input_size,
+      int *workspace_size,
+      int *output_size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>workspace_size</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xzlib_compress">xzlib_compress</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_compress (bits flags,
+      byte *workspace,
+      byte const *input,
+      int input_size,
+      byte *output,
+      int output_size,
+      bits *status,
+      byte **unused_input,
+      int *unused_input_size,
+      byte **unused_output,
+      int *unused_output_size);</pre>
+<p>Simple Squash-like compression</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>input</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>output</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>unused_input</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>unused_input_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>unused_output</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>unused_output_size</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="zlib_compress">zlib_compress</h3>
+<pre>extern bits zlib_compress (bits flags,
+      byte *workspace,
+      byte const *input,
+      int input_size,
+      byte *output,
+      int output_size,
+      byte **unused_input,
+      int *unused_input_size,
+      byte **unused_output,
+      int *unused_output_size);</pre>
+<p>Simple Squash-like compression</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>input</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>output</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unused_input</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>unused_input_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>unused_output</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>unused_output_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_decompress_return_sizes">xzlib_decompress_return_sizes</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_decompress_return_sizes (int input_size,
+      int *workspace_size,
+      int *output_size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>workspace_size</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="zlib_decompress_return_sizes">zlib_decompress_return_sizes</h3>
+<pre>extern void zlib_decompress_return_sizes (int input_size,
+      int *workspace_size,
+      int *output_size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>workspace_size</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xzlib_decompress">xzlib_decompress</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_decompress (bits flags,
+      byte *workspace,
+      byte const *input,
+      int input_size,
+      byte *output,
+      int output_size,
+      bits *status,
+      byte **unused_input,
+      int *unused_input_size,
+      byte **unused_output,
+      int *unused_output_size);</pre>
+<p>Simple Squash-like decompression</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>input</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>output</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>unused_input</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>unused_input_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>unused_output</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>unused_output_size</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="zlib_decompress">zlib_decompress</h3>
+<pre>extern bits zlib_decompress (bits flags,
+      byte *workspace,
+      byte const *input,
+      int input_size,
+      byte *output,
+      int output_size,
+      byte **unused_input,
+      int *unused_input_size,
+      byte **unused_output,
+      int *unused_output_size);</pre>
+<p>Simple Squash-like decompression</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>input</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>output</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unused_input</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>unused_input_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>unused_output</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>unused_output_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_crc32">xzlib_crc32</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_crc32 (int continuation_value,
+      byte const *data_start,
+      byte const *data_end,
+      int *crc32);</pre>
+<p>Calculate a CRC32 checksum for a given data buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>continuation_value</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>data_start</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data_end</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>crc32</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_crc32">zlib_crc32</h3>
+<pre>extern int zlib_crc32 (int continuation_value,
+      byte const *data_start,
+      byte const *data_end);</pre>
+<p>Calculate a CRC32 checksum for a given data buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>continuation_value</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>data_start</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data_end</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>crc32</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_adler32">xzlib_adler32</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_adler32 (int continuation_value,
+      byte const *data_start,
+      byte const *data_end,
+      int *crc32);</pre>
+<p>Calculate a Adler32 checksum for a given data buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>continuation_value</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>data_start</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data_end</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>crc32</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_adler32">zlib_adler32</h3>
+<pre>extern int zlib_adler32 (int continuation_value,
+      byte const *data_start,
+      byte const *data_end);</pre>
+<p>Calculate a Adler32 checksum for a given data buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>continuation_value</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>data_start</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data_end</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>crc32</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_version">xzlib_version</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_version (char **version);</pre>
+<p>Return the version of ZLib in use</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>version</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_version">zlib_version</h3>
+<pre>extern void zlib_version (char **version);</pre>
+<p>Return the version of ZLib in use</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>version</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xzlib_zcompress">xzlib_zcompress</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_zcompress (byte *output,
+      int output_size,
+      byte const *input,
+      int input_size,
+      <a href="#zlib_return_code">zlib_return_code</a> *return_code,
+      int *output_used);</pre>
+<p>Compress a source buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>output</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>input</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>return_code</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>output_used</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="zlib_zcompress">zlib_zcompress</h3>
+<pre>extern <a href="#zlib_return_code">zlib_return_code</a> zlib_zcompress (byte *output,
+      int output_size,
+      byte const *input,
+      int input_size,
+      int *output_used);</pre>
+<p>Compress a source buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>output</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>input</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>output_used</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>return_code</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_zcompress2">xzlib_zcompress2</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_zcompress2 (byte *output,
+      int output_size,
+      byte const *input,
+      int input_size,
+      <a href="#zlib_compression_level">zlib_compression_level</a> compression_level,
+      <a href="#zlib_return_code">zlib_return_code</a> *return_code,
+      int *output_used);</pre>
+<p>Compress a source buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>output</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>input</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>compression_level</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>return_code</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>output_used</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="zlib_zcompress2">zlib_zcompress2</h3>
+<pre>extern <a href="#zlib_return_code">zlib_return_code</a> zlib_zcompress2 (byte *output,
+      int output_size,
+      byte const *input,
+      int input_size,
+      <a href="#zlib_compression_level">zlib_compression_level</a> compression_level,
+      int *output_used);</pre>
+<p>Compress a source buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>output</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>input</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>compression_level</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>output_used</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>return_code</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_zuncompress">xzlib_zuncompress</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_zuncompress (byte *output,
+      int output_size,
+      byte const *input,
+      int input_size,
+      <a href="#zlib_return_code">zlib_return_code</a> *return_code,
+      int *output_used);</pre>
+<p>Uncompress a source buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>output</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>input</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>return_code</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>output_used</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="zlib_zuncompress">zlib_zuncompress</h3>
+<pre>extern <a href="#zlib_return_code">zlib_return_code</a> zlib_zuncompress (byte *output,
+      int output_size,
+      byte const *input,
+      int input_size,
+      int *output_used);</pre>
+<p>Uncompress a source buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>output</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>output_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>input</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>input_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>output_used</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>return_code</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_deflate_init">xzlib_deflate_init</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_deflate_init (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb,
+      <a href="#zlib_compression_level">zlib_compression_level</a> compression_level,
+      char const *version_expected,
+      int scb_size,
+      <a href="#zlib_return_code">zlib_return_code</a> *return_code);</pre>
+<p>Initialise a stream for compression</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>compression_level</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>version_expected</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>scb_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>return_code</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_deflate_init">zlib_deflate_init</h3>
+<pre>extern <a href="#zlib_return_code">zlib_return_code</a> zlib_deflate_init (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb,
+      <a href="#zlib_compression_level">zlib_compression_level</a> compression_level,
+      char const *version_expected,
+      int scb_size);</pre>
+<p>Initialise a stream for compression</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>compression_level</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>version_expected</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>scb_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>return_code</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_inflate_init">xzlib_inflate_init</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_inflate_init (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb,
+      char const *version_expected,
+      int scb_size,
+      <a href="#zlib_return_code">zlib_return_code</a> *return_code);</pre>
+<p>Initialise a stream for decompression</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>version_expected</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scb_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>return_code</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_inflate_init">zlib_inflate_init</h3>
+<pre>extern <a href="#zlib_return_code">zlib_return_code</a> zlib_inflate_init (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb,
+      char const *version_expected,
+      int scb_size);</pre>
+<p>Initialise a stream for decompression</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>version_expected</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scb_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>return_code</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_deflate_init2">xzlib_deflate_init2</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_deflate_init2 (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb,
+      <a href="#zlib_compression_level">zlib_compression_level</a> compression_level,
+      <a href="#zlib_compression_method">zlib_compression_method</a> compression_method,
+      <a href="#zlib_window_bits">zlib_window_bits</a> window_bits,
+      <a href="#zlib_memory_level">zlib_memory_level</a> memory_level,
+      <a href="#zlib_compression_strategy">zlib_compression_strategy</a> compression_strategy,
+      char const *version_expected,
+      int scb_size,
+      <a href="#zlib_return_code">zlib_return_code</a> *return_code);</pre>
+<p>Initialise a stream for compression with control over parameters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>compression_level</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>compression_method</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>window_bits</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>memory_level</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>compression_strategy</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>version_expected</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>scb_size</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>return_code</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_deflate_init2">zlib_deflate_init2</h3>
+<pre>extern <a href="#zlib_return_code">zlib_return_code</a> zlib_deflate_init2 (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb,
+      <a href="#zlib_compression_level">zlib_compression_level</a> compression_level,
+      <a href="#zlib_compression_method">zlib_compression_method</a> compression_method,
+      <a href="#zlib_window_bits">zlib_window_bits</a> window_bits,
+      <a href="#zlib_memory_level">zlib_memory_level</a> memory_level,
+      <a href="#zlib_compression_strategy">zlib_compression_strategy</a> compression_strategy,
+      char const *version_expected,
+      int scb_size);</pre>
+<p>Initialise a stream for compression with control over parameters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>compression_level</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>compression_method</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>window_bits</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>memory_level</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>compression_strategy</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>version_expected</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>scb_size</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>return_code</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_inflate_init2">xzlib_inflate_init2</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_inflate_init2 (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb,
+      <a href="#zlib_window_bits">zlib_window_bits</a> window_bits,
+      char const *version_expected,
+      int scb_size,
+      <a href="#zlib_return_code">zlib_return_code</a> *return_code);</pre>
+<p>Initialise a stream for decompression with control over parameters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window_bits</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>version_expected</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>scb_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>return_code</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_inflate_init2">zlib_inflate_init2</h3>
+<pre>extern <a href="#zlib_return_code">zlib_return_code</a> zlib_inflate_init2 (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb,
+      <a href="#zlib_window_bits">zlib_window_bits</a> window_bits,
+      char const *version_expected,
+      int scb_size);</pre>
+<p>Initialise a stream for decompression with control over parameters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window_bits</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>version_expected</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>scb_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>return_code</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_deflate">xzlib_deflate</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_deflate (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb,
+      <a href="#zlib_flush_type">zlib_flush_type</a> flush_type,
+      <a href="#zlib_return_code">zlib_return_code</a> *return_code);</pre>
+<p>Continue a stream compression</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flush_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>return_code</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_deflate">zlib_deflate</h3>
+<pre>extern <a href="#zlib_return_code">zlib_return_code</a> zlib_deflate (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb,
+      <a href="#zlib_flush_type">zlib_flush_type</a> flush_type);</pre>
+<p>Continue a stream compression</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flush_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>return_code</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_deflate_end">xzlib_deflate_end</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_deflate_end (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb,
+      <a href="#zlib_return_code">zlib_return_code</a> *return_code);</pre>
+<p>Terminate a stream compression</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>return_code</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_deflate_end">zlib_deflate_end</h3>
+<pre>extern <a href="#zlib_return_code">zlib_return_code</a> zlib_deflate_end (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb);</pre>
+<p>Terminate a stream compression</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>return_code</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_inflate">xzlib_inflate</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_inflate (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb,
+      <a href="#zlib_flush_type">zlib_flush_type</a> flush_type,
+      <a href="#zlib_return_code">zlib_return_code</a> *return_code);</pre>
+<p>Continue a stream decompression</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flush_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>return_code</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_inflate">zlib_inflate</h3>
+<pre>extern <a href="#zlib_return_code">zlib_return_code</a> zlib_inflate (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb,
+      <a href="#zlib_flush_type">zlib_flush_type</a> flush_type);</pre>
+<p>Continue a stream decompression</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flush_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>return_code</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_inflate_end">xzlib_inflate_end</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_inflate_end (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb,
+      <a href="#zlib_return_code">zlib_return_code</a> *return_code);</pre>
+<p>Terminate a stream decompression</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>return_code</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_inflate_end">zlib_inflate_end</h3>
+<pre>extern <a href="#zlib_return_code">zlib_return_code</a> zlib_inflate_end (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb);</pre>
+<p>Terminate a stream decompression</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>return_code</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_deflate_set_dictionary">xzlib_deflate_set_dictionary</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_deflate_set_dictionary (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb,
+      byte const *dictionary,
+      int dictionary_size,
+      <a href="#zlib_return_code">zlib_return_code</a> *return_code);</pre>
+<p>Initialise a string dictionary for a stream compression</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>dictionary</code></td><td>pointer to a dictionary block</td><td><code>R1</code></td></tr>
+<tr><td><code>dictionary_size</code></td><td>length of block in bytes</td><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>return_code</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_deflate_set_dictionary">zlib_deflate_set_dictionary</h3>
+<pre>extern <a href="#zlib_return_code">zlib_return_code</a> zlib_deflate_set_dictionary (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb,
+      byte const *dictionary,
+      int dictionary_size);</pre>
+<p>Initialise a string dictionary for a stream compression</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>dictionary</code></td><td>pointer to a dictionary block</td><td><code>R1</code></td></tr>
+<tr><td><code>dictionary_size</code></td><td>length of block in bytes</td><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>return_code</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_deflate_copy">xzlib_deflate_copy</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_deflate_copy (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *destination,
+      <a href="#zlib_stream_control_block">zlib_stream_control_block</a> const *source,
+      <a href="#zlib_return_code">zlib_return_code</a> *return_code);</pre>
+<p>Copy the compression state</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>destination</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>source</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>return_code</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_deflate_copy">zlib_deflate_copy</h3>
+<pre>extern <a href="#zlib_return_code">zlib_return_code</a> zlib_deflate_copy (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *destination,
+      <a href="#zlib_stream_control_block">zlib_stream_control_block</a> const *source);</pre>
+<p>Copy the compression state</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>destination</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>source</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>return_code</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_deflate_reset">xzlib_deflate_reset</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_deflate_reset (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb,
+      <a href="#zlib_return_code">zlib_return_code</a> *return_code);</pre>
+<p>Reset the internal compression state</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>return_code</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_deflate_reset">zlib_deflate_reset</h3>
+<pre>extern <a href="#zlib_return_code">zlib_return_code</a> zlib_deflate_reset (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb);</pre>
+<p>Reset the internal compression state</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>return_code</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_deflate_params">xzlib_deflate_params</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_deflate_params (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb,
+      <a href="#zlib_compression_level">zlib_compression_level</a> compression_level,
+      <a href="#zlib_compression_strategy">zlib_compression_strategy</a> compression_strategy,
+      <a href="#zlib_return_code">zlib_return_code</a> *return_code);</pre>
+<p>Modifies compression parameters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>compression_level</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>compression_strategy</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>return_code</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_deflate_params">zlib_deflate_params</h3>
+<pre>extern <a href="#zlib_return_code">zlib_return_code</a> zlib_deflate_params (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb,
+      <a href="#zlib_compression_level">zlib_compression_level</a> compression_level,
+      <a href="#zlib_compression_strategy">zlib_compression_strategy</a> compression_strategy);</pre>
+<p>Modifies compression parameters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>compression_level</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>compression_strategy</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>return_code</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_inflate_set_dictionary">xzlib_inflate_set_dictionary</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_inflate_set_dictionary (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb,
+      byte const *dictionary,
+      int dictionary_size,
+      <a href="#zlib_return_code">zlib_return_code</a> *return_code);</pre>
+<p>Initialise a string dictionary for a decompression stream</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>dictionary</code></td><td>pointer to a dictionary block</td><td><code>R1</code></td></tr>
+<tr><td><code>dictionary_size</code></td><td>length of block in bytes</td><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>return_code</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_inflate_set_dictionary">zlib_inflate_set_dictionary</h3>
+<pre>extern <a href="#zlib_return_code">zlib_return_code</a> zlib_inflate_set_dictionary (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb,
+      byte const *dictionary,
+      int dictionary_size);</pre>
+<p>Initialise a string dictionary for a decompression stream</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>dictionary</code></td><td>pointer to a dictionary block</td><td><code>R1</code></td></tr>
+<tr><td><code>dictionary_size</code></td><td>length of block in bytes</td><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>return_code</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_inflate_sync">xzlib_inflate_sync</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_inflate_sync (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb,
+      <a href="#zlib_return_code">zlib_return_code</a> *return_code);</pre>
+<p>Re-synchronise decompression stream</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>return_code</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_inflate_sync">zlib_inflate_sync</h3>
+<pre>extern <a href="#zlib_return_code">zlib_return_code</a> zlib_inflate_sync (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb);</pre>
+<p>Re-synchronise decompression stream</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>return_code</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_inflate_reset">xzlib_inflate_reset</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_inflate_reset (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb,
+      <a href="#zlib_return_code">zlib_return_code</a> *return_code);</pre>
+<p>Reset the decompression stream state</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>return_code</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_inflate_reset">zlib_inflate_reset</h3>
+<pre>extern <a href="#zlib_return_code">zlib_return_code</a> zlib_inflate_reset (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb);</pre>
+<p>Reset the decompression stream state</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>return_code</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_gz_open">xzlib_gz_open</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_gz_open (char const *filename,
+      char const *mode,
+      bits load_address_in,
+      bits exec_address_in,
+      int size_in,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr_in,
+      <a href="#zlib_gzip_handle">zlib_gzip_handle</a> *handle,
+      bits *load_address_out,
+      bits *exec_address_out,
+      int *size_out,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr_out);</pre>
+<p>Open a GZip file for reading or writing</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filename</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>load_address_in</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_address_in</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size_in</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr_in</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_address_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_address_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr_out</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="zlib_gz_open">zlib_gz_open</h3>
+<pre>extern <a href="#zlib_gzip_handle">zlib_gzip_handle</a> zlib_gz_open (char const *filename,
+      char const *mode,
+      bits load_address_in,
+      bits exec_address_in,
+      int size_in,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr_in,
+      bits *load_address_out,
+      bits *exec_address_out,
+      int *size_out,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr_out);</pre>
+<p>Open a GZip file for reading or writing</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filename</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>mode</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>load_address_in</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_address_in</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size_in</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr_in</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>load_address_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_address_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr_out</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>handle</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_gz_read">xzlib_gz_read</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_gz_read (<a href="#zlib_gzip_handle">zlib_gzip_handle</a> handle,
+      byte *data,
+      int size,
+      int *read);</pre>
+<p>Read data from a GZip file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>read</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_gz_read">zlib_gz_read</h3>
+<pre>extern int zlib_gz_read (<a href="#zlib_gzip_handle">zlib_gzip_handle</a> handle,
+      byte *data,
+      int size);</pre>
+<p>Read data from a GZip file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>read</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_gz_write">xzlib_gz_write</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_gz_write (<a href="#zlib_gzip_handle">zlib_gzip_handle</a> handle,
+      byte const *data,
+      int size,
+      int *written);</pre>
+<p>Write data to a GZip file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>written</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_gz_write">zlib_gz_write</h3>
+<pre>extern int zlib_gz_write (<a href="#zlib_gzip_handle">zlib_gzip_handle</a> handle,
+      byte const *data,
+      int size);</pre>
+<p>Write data to a GZip file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>written</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_gz_flush">xzlib_gz_flush</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_gz_flush (<a href="#zlib_gzip_handle">zlib_gzip_handle</a> handle,
+      <a href="#zlib_flush_type">zlib_flush_type</a> flush_type,
+      <a href="#zlib_return_code">zlib_return_code</a> *return_code);</pre>
+<p>Flush all pending data to a GZip file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flush_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>return_code</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_gz_flush">zlib_gz_flush</h3>
+<pre>extern <a href="#zlib_return_code">zlib_return_code</a> zlib_gz_flush (<a href="#zlib_gzip_handle">zlib_gzip_handle</a> handle,
+      <a href="#zlib_flush_type">zlib_flush_type</a> flush_type);</pre>
+<p>Flush all pending data to a GZip file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flush_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>return_code</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_gz_close">xzlib_gz_close</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_gz_close (<a href="#zlib_gzip_handle">zlib_gzip_handle</a> handle,
+      <a href="#zlib_return_code">zlib_return_code</a> *return_code);</pre>
+<p>Close a GZip file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>return_code</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_gz_close">zlib_gz_close</h3>
+<pre>extern <a href="#zlib_return_code">zlib_return_code</a> zlib_gz_close (<a href="#zlib_gzip_handle">zlib_gzip_handle</a> handle);</pre>
+<p>Close a GZip file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>return_code</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_gz_error">xzlib_gz_error</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_gz_error (<a href="#zlib_gzip_handle">zlib_gzip_handle</a> handle,
+      char **message,
+      <a href="#zlib_return_code">zlib_return_code</a> *return_code);</pre>
+<p>Return the last error message returned by a GZip operation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>message</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>return_code</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="zlib_gz_error">zlib_gz_error</h3>
+<pre>extern char *zlib_gz_error (<a href="#zlib_gzip_handle">zlib_gzip_handle</a> handle,
+      <a href="#zlib_return_code">zlib_return_code</a> *return_code);</pre>
+<p>Return the last error message returned by a GZip operation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>return_code</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>message</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_gz_seek">xzlib_gz_seek</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_gz_seek (<a href="#zlib_gzip_handle">zlib_gzip_handle</a> handle,
+      int position,
+      <a href="#zlib_seek_type">zlib_seek_type</a> seek_type,
+      int *new_position);</pre>
+<p>Move to a specific location in a GZip file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>position</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>seek_type</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>new_position</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_gz_seek">zlib_gz_seek</h3>
+<pre>extern int zlib_gz_seek (<a href="#zlib_gzip_handle">zlib_gzip_handle</a> handle,
+      int position,
+      <a href="#zlib_seek_type">zlib_seek_type</a> seek_type);</pre>
+<p>Move to a specific location in a GZip file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>position</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>seek_type</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>new_position</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_gz_tell">xzlib_gz_tell</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_gz_tell (<a href="#zlib_gzip_handle">zlib_gzip_handle</a> handle,
+      int *position);</pre>
+<p>Return the current position in a GZip file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>position</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_gz_tell">zlib_gz_tell</h3>
+<pre>extern int zlib_gz_tell (<a href="#zlib_gzip_handle">zlib_gzip_handle</a> handle);</pre>
+<p>Return the current position in a GZip file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>position</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_gzeof">xzlib_gzeof</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_gzeof (<a href="#zlib_gzip_handle">zlib_gzip_handle</a> handle,
+      osbool *eof);</pre>
+<p>Check whether the end of file has been reached</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>eof</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_gzeof">zlib_gzeof</h3>
+<pre>extern osbool zlib_gzeof (<a href="#zlib_gzip_handle">zlib_gzip_handle</a> handle);</pre>
+<p>Check whether the end of file has been reached</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>eof</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xzlib_task_associate">xzlib_task_associate</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzlib_task_associate (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb);</pre>
+<p>Check whether the end of file has been reached</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zlib_task_associate">zlib_task_associate</h3>
+<pre>extern void zlib_task_associate (<a href="#zlib_stream_control_block">zlib_stream_control_block</a> *scb);</pre>
+<p>Check whether the end of file has been reached</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>scb</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

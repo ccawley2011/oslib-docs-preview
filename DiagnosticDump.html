@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; DiagnosticDump</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>DiagnosticDump</h2>
+
+<pre>#include "oslib/diagnosticdump.h"</pre>
+
+<h3 id="diagnosticdumpwrite_flags">diagnosticdumpwrite_flags</h3>
+<pre>typedef bits diagnosticdumpwrite_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#diagnosticdumpwriteflags_APP_ACC_NONE">diagnosticdumpwriteflags_APP_ACC_NONE</a></dd>
+<dd><a href="#diagnosticdumpwriteflags_APP_ACC_READ">diagnosticdumpwriteflags_APP_ACC_READ</a></dd>
+<dd><a href="#diagnosticdumpwriteflags_APP_ACC_READ_TRACE">diagnosticdumpwriteflags_APP_ACC_READ_TRACE</a></dd>
+<dd><a href="#diagnosticdumpwriteflags_APP_ACC_READ_TRACE_RECORD">diagnosticdumpwriteflags_APP_ACC_READ_TRACE_RECORD</a></dd>
+<dd><a href="#diagnosticdumpwriteflags_FULL_FILENAME">diagnosticdumpwriteflags_FULL_FILENAME</a></dd>
+<dd><a href="#diagnosticdumpwriteflags_OPEN_DUMP_DIR">diagnosticdumpwriteflags_OPEN_DUMP_DIR</a></dd>
+</dl>
+
+<h3 id="diagnosticdumpwriteflags_APP_ACC_NONE">diagnosticdumpwriteflags_APP_ACC_NONE</h3>
+<pre>#define diagnosticdumpwriteflags_APP_ACC_NONE ((<a href="#diagnosticdumpwrite_flags">diagnosticdumpwrite_flags</a>) 0x0u)</pre>
+
+<h3 id="diagnosticdumpwriteflags_APP_ACC_READ">diagnosticdumpwriteflags_APP_ACC_READ</h3>
+<pre>#define diagnosticdumpwriteflags_APP_ACC_READ ((<a href="#diagnosticdumpwrite_flags">diagnosticdumpwrite_flags</a>) 0x1u)</pre>
+
+<h3 id="diagnosticdumpwriteflags_APP_ACC_READ_TRACE">diagnosticdumpwriteflags_APP_ACC_READ_TRACE</h3>
+<pre>#define diagnosticdumpwriteflags_APP_ACC_READ_TRACE ((<a href="#diagnosticdumpwrite_flags">diagnosticdumpwrite_flags</a>) 0x2u)</pre>
+
+<h3 id="diagnosticdumpwriteflags_APP_ACC_READ_TRACE_RECORD">diagnosticdumpwriteflags_APP_ACC_READ_TRACE_RECORD</h3>
+<pre>#define diagnosticdumpwriteflags_APP_ACC_READ_TRACE_RECORD ((<a href="#diagnosticdumpwrite_flags">diagnosticdumpwrite_flags</a>) 0x3u)</pre>
+
+<h3 id="diagnosticdumpwriteflags_FULL_FILENAME">diagnosticdumpwriteflags_FULL_FILENAME</h3>
+<pre>#define diagnosticdumpwriteflags_FULL_FILENAME ((<a href="#diagnosticdumpwrite_flags">diagnosticdumpwrite_flags</a>) 0x4u)</pre>
+
+<h3 id="diagnosticdumpwriteflags_OPEN_DUMP_DIR">diagnosticdumpwriteflags_OPEN_DUMP_DIR</h3>
+<pre>#define diagnosticdumpwriteflags_OPEN_DUMP_DIR ((<a href="#diagnosticdumpwrite_flags">diagnosticdumpwrite_flags</a>) 0x8u)</pre>
+
+<h3 id="xdiagnosticdump_write">xdiagnosticdump_write</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdiagnosticdump_write (<a href="#diagnosticdumpwrite_flags">diagnosticdumpwrite_flags</a> flags,
+      char const *filename,
+      <a href="os.html#os_register_block">os_register_block</a> const *regs);</pre>
+<p>Write, or buffer for later writing, a diagnostic dump for the current system state - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>regs</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="diagnosticdump_write">diagnosticdump_write</h3>
+<pre>extern void diagnosticdump_write (<a href="#diagnosticdumpwrite_flags">diagnosticdumpwrite_flags</a> flags,
+      char const *filename,
+      <a href="os.html#os_register_block">os_register_block</a> const *regs);</pre>
+<p>Write, or buffer for later writing, a diagnostic dump for the current system state - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>regs</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Parallel</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Parallel</h2>
+
+<pre>#include "oslib/parallel.h"</pre>
+
+<h3 id="xparallelop_read">xparallelop_read</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xparallelop_read (bits *data_register,
+      bits *status_register);</pre>
+<p>Reads the data and status registers</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>data_register</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>status_register</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="parallelop_read">parallelop_read</h3>
+<pre>extern void parallelop_read (bits *data_register,
+      bits *status_register);</pre>
+<p>Reads the data and status registers</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>data_register</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>status_register</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xparallelop_write_data">xparallelop_write_data</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xparallelop_write_data (bits data);</pre>
+<p>Writes the data register</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>data</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="parallelop_write_data">parallelop_write_data</h3>
+<pre>extern void parallelop_write_data (bits data);</pre>
+<p>Writes the data register</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>data</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xparallelop_write_control">xparallelop_write_control</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xparallelop_write_control (bits eor_mask,
+      bits and_mask,
+      bits *old_control,
+      bits *new_control);</pre>
+<p>Reads/writes the control register</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>eor_mask</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>and_mask</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_control</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>new_control</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="parallelop_write_control">parallelop_write_control</h3>
+<pre>extern bits parallelop_write_control (bits eor_mask,
+      bits and_mask,
+      bits *new_control);</pre>
+<p>Reads/writes the control register</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>eor_mask</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>and_mask</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>new_control</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_control</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

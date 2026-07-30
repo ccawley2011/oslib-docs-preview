@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; PathUtils</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>PathUtils</h2>
+
+<pre>#include "oslib/pathutils.h"</pre>
+
+<h3 id="pathutilsenumeratepath_flags">pathutilsenumeratepath_flags</h3>
+<pre>typedef bits pathutilsenumeratepath_flags;</pre>
+
+<h3 id="pathutilsjoinpath_flags">pathutilsjoinpath_flags</h3>
+<pre>typedef bits pathutilsjoinpath_flags;</pre>
+
+<h3 id="pathutilsremovepath_flags">pathutilsremovepath_flags</h3>
+<pre>typedef bits pathutilsremovepath_flags;</pre>
+
+<h3 id="pathutilsenumeratepathflags_ALL_PATH_COMPONENTS">pathutilsenumeratepathflags_ALL_PATH_COMPONENTS</h3>
+<pre>#define pathutilsenumeratepathflags_ALL_PATH_COMPONENTS ((<a href="#pathutils_enumerate_path_flags">pathutils_enumerate_path_flags</a>) 0x1u)</pre>
+
+<h3 id="pathutilsjoinpathflags_APPEND">pathutilsjoinpathflags_APPEND</h3>
+<pre>#define pathutilsjoinpathflags_APPEND ((<a href="#pathutils_join_path_flags">pathutils_join_path_flags</a>) 0x1u)</pre>
+
+<p>Set for appending, clear for prepending</p>
+
+<h3 id="xpathutils_enumerate_path">xpathutils_enumerate_path</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpathutils_enumerate_path (<a href="#pathutilsenumeratepath_flags">pathutilsenumeratepath_flags</a> flags,
+      char const *path,
+      char *output_buf,
+      int output_buf_size,
+      int context,
+      int *spare_bytes,
+      int *new_context,
+      <a href="os.html#os_var_type">os_var_type</a> *var_type,
+      int *depth);</pre>
+<p>Enumerate the components of a path variables - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>output_buf</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>output_buf_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>spare_bytes</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>new_context</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>var_type</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>depth</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="pathutils_enumerate_path">pathutils_enumerate_path</h3>
+<pre>extern void pathutils_enumerate_path (<a href="#pathutilsenumeratepath_flags">pathutilsenumeratepath_flags</a> flags,
+      char const *path,
+      char *output_buf,
+      int output_buf_size,
+      int context,
+      int *spare_bytes,
+      int *new_context,
+      <a href="os.html#os_var_type">os_var_type</a> *var_type,
+      int *depth);</pre>
+<p>Enumerate the components of a path variables - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>path</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>output_buf</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>output_buf_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>spare_bytes</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>new_context</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>var_type</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>depth</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xpathutils_join_path">xpathutils_join_path</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpathutils_join_path (<a href="#pathutilsjoinpath_flags">pathutilsjoinpath_flags</a> flags,
+      char const *path_var_name,
+      char const *value_to_join);</pre>
+<p>Add a component to a path variable - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>path_var_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>value_to_join</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="pathutils_join_path">pathutils_join_path</h3>
+<pre>extern void pathutils_join_path (<a href="#pathutilsjoinpath_flags">pathutilsjoinpath_flags</a> flags,
+      char const *path_var_name,
+      char const *value_to_join);</pre>
+<p>Add a component to a path variable - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>path_var_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>value_to_join</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xpathutils_remove_path">xpathutils_remove_path</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpathutils_remove_path (<a href="#pathutilsremovepath_flags">pathutilsremovepath_flags</a> flags,
+      char const *path_var_name,
+      char const *value_to_remove);</pre>
+<p>Remove a component from a path variable - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>path_var_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>value_to_remove</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="pathutils_remove_path">pathutils_remove_path</h3>
+<pre>extern void pathutils_remove_path (<a href="#pathutilsremovepath_flags">pathutilsremovepath_flags</a> flags,
+      char const *path_var_name,
+      char const *value_to_remove);</pre>
+<p>Remove a component from a path variable - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>path_var_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>value_to_remove</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

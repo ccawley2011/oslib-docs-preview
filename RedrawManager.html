@@ -1,0 +1,239 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; RedrawManager</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>RedrawManager</h2>
+
+<pre>#include "oslib/redrawmanager.h"</pre>
+
+<h3 id="redrawaddremovecallback_flags">redrawaddremovecallback_flags</h3>
+<pre>typedef bits redrawaddremovecallback_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#redrawaddremovecallbackflags_SETUP_GRAPH_RECT">redrawaddremovecallbackflags_SETUP_GRAPH_RECT</a></dd>
+<dd><a href="#redrawaddremovecallbackflags_SCREEN_COORDS">redrawaddremovecallbackflags_SCREEN_COORDS</a></dd>
+<dd><a href="#redrawaddremovecallbackflags_AFTER_ICON_PLOT">redrawaddremovecallbackflags_AFTER_ICON_PLOT</a></dd>
+</dl>
+
+<h3 id="redrawaddremovecallbackflags_SETUP_GRAPH_RECT">redrawaddremovecallbackflags_SETUP_GRAPH_RECT</h3>
+<pre>#define redrawaddremovecallbackflags_SETUP_GRAPH_RECT ((<a href="redrawaddremovecallback.html#redrawaddremovecallback_flags">redrawaddremovecallback_flags</a>) 0x2u)</pre>
+
+<h3 id="redrawaddremovecallbackflags_SCREEN_COORDS">redrawaddremovecallbackflags_SCREEN_COORDS</h3>
+<pre>#define redrawaddremovecallbackflags_SCREEN_COORDS ((<a href="redrawaddremovecallback.html#redrawaddremovecallback_flags">redrawaddremovecallback_flags</a>) 0x4u)</pre>
+
+<h3 id="redrawaddremovecallbackflags_AFTER_ICON_PLOT">redrawaddremovecallbackflags_AFTER_ICON_PLOT</h3>
+<pre>#define redrawaddremovecallbackflags_AFTER_ICON_PLOT ((<a href="redrawaddremovecallback.html#redrawaddremovecallback_flags">redrawaddremovecallback_flags</a>) 0x8u)</pre>
+
+<h3 id="xredrawaddcallback_swi">xredrawaddcallback_swi</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xredrawaddcallback_swi (<a href="redrawaddremovecallback.html#redrawaddremovecallback_flags">redrawaddremovecallback_flags</a> flags,
+      <a href="wimp.html#wimp_w">wimp_w</a> window_handle,
+      int swi,
+      <a href="os.html#os_box">os_box</a> const *region,
+      int region_data);</pre>
+<p>Add SWI based callback to the RedrawManager</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window_handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>swi</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>region</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>region_data</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="redrawaddcallback_swi">redrawaddcallback_swi</h3>
+<pre>extern void redrawaddcallback_swi (<a href="redrawaddremovecallback.html#redrawaddremovecallback_flags">redrawaddremovecallback_flags</a> flags,
+      <a href="wimp.html#wimp_w">wimp_w</a> window_handle,
+      int swi,
+      <a href="os.html#os_box">os_box</a> const *region,
+      int region_data);</pre>
+<p>Add SWI based callback to the RedrawManager</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window_handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>swi</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>region</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>region_data</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xredrawaddcallback_address">xredrawaddcallback_address</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xredrawaddcallback_address (<a href="redrawaddremovecallback.html#redrawaddremovecallback_flags">redrawaddremovecallback_flags</a> flags,
+      <a href="wimp.html#wimp_w">wimp_w</a> window_handle,
+      asm_routine callback,
+      <a href="os.html#os_box">os_box</a> const *region,
+      int region_data,
+      int private_word);</pre>
+<p>Add address based callback to the RedrawManager</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window_handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>callback</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>region</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>region_data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>private_word</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="redrawaddcallback_address">redrawaddcallback_address</h3>
+<pre>extern void redrawaddcallback_address (<a href="redrawaddremovecallback.html#redrawaddremovecallback_flags">redrawaddremovecallback_flags</a> flags,
+      <a href="wimp.html#wimp_w">wimp_w</a> window_handle,
+      asm_routine callback,
+      <a href="os.html#os_box">os_box</a> const *region,
+      int region_data,
+      int private_word);</pre>
+<p>Add address based callback to the RedrawManager</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window_handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>callback</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>region</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>region_data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>private_word</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xredrawremovecallback_swi">xredrawremovecallback_swi</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xredrawremovecallback_swi (<a href="redrawaddremovecallback.html#redrawaddremovecallback_flags">redrawaddremovecallback_flags</a> flags,
+      <a href="wimp.html#wimp_w">wimp_w</a> window_handle,
+      int swi,
+      <a href="os.html#os_box">os_box</a> const *region,
+      int region_data);</pre>
+<p>Remove SWI based callback to the RedrawManager</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window_handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>swi</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>region</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>region_data</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="redrawremovecallback_swi">redrawremovecallback_swi</h3>
+<pre>extern void redrawremovecallback_swi (<a href="redrawaddremovecallback.html#redrawaddremovecallback_flags">redrawaddremovecallback_flags</a> flags,
+      <a href="wimp.html#wimp_w">wimp_w</a> window_handle,
+      int swi,
+      <a href="os.html#os_box">os_box</a> const *region,
+      int region_data);</pre>
+<p>Remove SWI based callback to the RedrawManager</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window_handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>swi</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>region</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>region_data</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xredrawremovecallback_address">xredrawremovecallback_address</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xredrawremovecallback_address (<a href="redrawaddremovecallback.html#redrawaddremovecallback_flags">redrawaddremovecallback_flags</a> flags,
+      <a href="wimp.html#wimp_w">wimp_w</a> window_handle,
+      asm_routine callback,
+      <a href="os.html#os_box">os_box</a> const *region,
+      int region_data,
+      int private_word);</pre>
+<p>Remove address based callback to the RedrawManager</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window_handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>callback</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>region</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>region_data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>private_word</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="redrawremovecallback_address">redrawremovecallback_address</h3>
+<pre>extern void redrawremovecallback_address (<a href="redrawaddremovecallback.html#redrawaddremovecallback_flags">redrawaddremovecallback_flags</a> flags,
+      <a href="wimp.html#wimp_w">wimp_w</a> window_handle,
+      asm_routine callback,
+      <a href="os.html#os_box">os_box</a> const *region,
+      int region_data,
+      int private_word);</pre>
+<p>Remove address based callback to the RedrawManager</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window_handle</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>callback</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>region</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>region_data</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>private_word</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xservice_redraw_manager_installed">xservice_redraw_manager_installed</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_redraw_manager_installed (int version);</pre>
+<p>Redraw Manager starts up</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>version</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="service_redraw_manager_installed">service_redraw_manager_installed</h3>
+<pre>extern void service_redraw_manager_installed (int version);</pre>
+<p>Redraw Manager starts up</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>version</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xservice_redraw_manager_dying">xservice_redraw_manager_dying</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_redraw_manager_dying (void);
+</pre><p>Redraw Manager is about to die</p>
+
+
+<table>
+</table>
+
+<h3 id="service_redraw_manager_dying">service_redraw_manager_dying</h3>
+<pre>extern void service_redraw_manager_dying (void);
+</pre><p>Redraw Manager is about to die</p>
+
+
+<table>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

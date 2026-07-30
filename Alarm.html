@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Alarm</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Alarm</h2>
+
+<pre>#include "oslib/alarm.h"</pre>
+
+<h3 id="alarm_reason">alarm_reason</h3>
+<pre>typedef int alarm_reason;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#alarm_REASON_SET_LOCAL">alarm_REASON_SET_LOCAL</a></dd>
+<dd><a href="#alarm_REASON_SET_UTC">alarm_REASON_SET_UTC</a></dd>
+<dd><a href="#alarm_REASON_CANCEL">alarm_REASON_CANCEL</a></dd>
+</dl>
+
+<h3 id="alarm_date_and_time">alarm_date_and_time</h3>
+<pre>typedef struct
+   {  short year;
+      byte month;
+      byte date;
+      byte hour;
+      byte minute;
+   }
+   alarm_date_and_time;</pre>
+
+<h3 id="alarm_message_set">alarm_message_set</h3>
+<pre>typedef struct
+   {  <a href="#alarm_reason">alarm_reason</a> set_reason;
+      union
+      {  <a href="os.html#os_date_and_time">os_date_and_time</a> utc;
+         <a href="#alarm_date_and_time">alarm_date_and_time</a> local;
+      }
+      time;
+      char sender [40];
+      char alarm_name [40];
+   }
+   alarm_message_set;</pre>
+
+
+Fields:	set_reason - 0 or 1<h3 id="alarm_message_cancel">alarm_message_cancel</h3>
+<pre>typedef struct
+   {  <a href="#alarm_reason">alarm_reason</a> cancel;
+      char sender [40];
+      char alarm_name [40];
+   }
+   alarm_message_cancel;</pre>
+
+
+Fields:	cancel - 2 <h3 id="alarm_message_gone_off">alarm_message_gone_off</h3>
+<pre>typedef struct
+   {  char sender [40];
+      char alarm_name [40];
+   }
+   alarm_message_gone_off;</pre>
+
+<h3 id="alarm_full_message_set">alarm_full_message_set</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#alarm_reason">alarm_reason</a> set_reason;
+      union
+      {  <a href="os.html#os_date_and_time">os_date_and_time</a> utc;
+         <a href="#alarm_date_and_time">alarm_date_and_time</a> local;
+      }
+      time;
+      char sender_name [40];
+      char alarm_name [40];
+   }
+   alarm_full_message_set;</pre>
+
+
+Fields:	set_reason - 0 or 1<h3 id="alarm_full_message_cancel">alarm_full_message_cancel</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#alarm_reason">alarm_reason</a> cancel;
+      char sender_name [40];
+      char alarm_name [40];
+   }
+   alarm_full_message_cancel;</pre>
+
+
+Fields:	cancel - 2 <h3 id="alarm_full_message_gone_off">alarm_full_message_gone_off</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      char sender_name [40];
+      char alarm_name [40];
+   }
+   alarm_full_message_gone_off;</pre>
+
+<h3 id="alarm_NAME_LIMIT">alarm_NAME_LIMIT</h3>
+<pre>#define alarm_NAME_LIMIT 40</pre>
+
+<h3 id="message_ALARM_SET">message_ALARM_SET</h3>
+<pre>#define message_ALARM_SET 0x500u</pre>
+
+<h3 id="message_ALARM_GONE_OFF">message_ALARM_GONE_OFF</h3>
+<pre>#define message_ALARM_GONE_OFF 0x501u</pre>
+
+<h3 id="alarm_REASON_SET_LOCAL">alarm_REASON_SET_LOCAL</h3>
+<pre>#define alarm_REASON_SET_LOCAL ((<a href="#alarm_reason">alarm_reason</a>) 0x0u)</pre>
+
+<h3 id="alarm_REASON_SET_UTC">alarm_REASON_SET_UTC</h3>
+<pre>#define alarm_REASON_SET_UTC ((<a href="#alarm_reason">alarm_reason</a>) 0x1u)</pre>
+
+<h3 id="alarm_REASON_CANCEL">alarm_REASON_CANCEL</h3>
+<pre>#define alarm_REASON_CANCEL ((<a href="#alarm_reason">alarm_reason</a>) 0x2u)</pre>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

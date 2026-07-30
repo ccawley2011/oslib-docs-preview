@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; InetSuite</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>InetSuite</h2>
+
+<pre>#include "oslib/inetsuite.h"</pre>
+
+<h3 id="inetsuite_open_url_flags">inetsuite_open_url_flags</h3>
+<pre>typedef bits inetsuite_open_url_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#inetsuite_USE_MIME_TYPE">inetsuite_USE_MIME_TYPE</a></dd>
+</dl>
+
+<h3 id="inetsuite_message_open_url">inetsuite_message_open_url</h3>
+<pre>typedef union
+   {  char url [236];
+      struct
+      {  int tag;
+         <a href="os.html#os_string_value">os_string_value</a> url;
+         <a href="#inetsuite_open_url_flags">inetsuite_open_url_flags</a> flags;
+         <a href="os.html#os_string_value">os_string_value</a> body_file;
+         <a href="os.html#os_string_value">os_string_value</a> target;
+         <a href="os.html#os_string_value">os_string_value</a> body_mimetype;
+      }
+      indirect;
+   }
+   inetsuite_message_open_url;</pre>
+
+<h3 id="inetsuite_full_message_open_url_direct">inetsuite_full_message_open_url_direct</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      char url [236];
+   }
+   inetsuite_full_message_open_url_direct;</pre>
+
+<h3 id="inetsuite_full_message_open_url_indirect">inetsuite_full_message_open_url_indirect</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      int tag;
+      <a href="os.html#os_string_value">os_string_value</a> url;
+      <a href="#inetsuite_open_url_flags">inetsuite_open_url_flags</a> flags;
+      <a href="os.html#os_string_value">os_string_value</a> body_file;
+      <a href="os.html#os_string_value">os_string_value</a> target;
+      <a href="os.html#os_string_value">os_string_value</a> body_mimetype;
+   }
+   inetsuite_full_message_open_url_indirect;</pre>
+
+<h3 id="inetsuite_full_message_open_url">inetsuite_full_message_open_url</h3>
+<pre>typedef union
+   {  <a href="#inetsuite_full_message_open_url_direct">inetsuite_full_message_open_url_direct</a> direct;
+      <a href="#inetsuite_full_message_open_url_indirect">inetsuite_full_message_open_url_indirect</a> indirect;
+   }
+   inetsuite_full_message_open_url;</pre>
+
+<h3 id="message_INET_SUITE_OPEN_URL">message_INET_SUITE_OPEN_URL</h3>
+<pre>#define message_INET_SUITE_OPEN_URL 0x4AF80u</pre>
+
+<h3 id="inetsuite_USE_MIME_TYPE">inetsuite_USE_MIME_TYPE</h3>
+<pre>#define inetsuite_USE_MIME_TYPE ((<a href="#inetsuite_open_url_flags">inetsuite_open_url_flags</a>) 0x1u)</pre>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Cache</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Cache</h2>
+
+<pre>#include "oslib/cache.h"</pre>
+
+<h3 id="xcache_control">xcache_control</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcache_control (bits eor_mask,
+      bits and_mask,
+      bits *old_state);</pre>
+<p>Turns the cache on or off - RISC OS 3.1</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>eor_mask</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>and_mask</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_state</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="cache_control">cache_control</h3>
+<pre>extern bits cache_control (bits eor_mask,
+      bits and_mask);</pre>
+<p>Turns the cache on or off - RISC OS 3.1</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>eor_mask</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>and_mask</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_state</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcache_cacheable">xcache_cacheable</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcache_cacheable (bits eor_mask,
+      bits and_mask,
+      bits *old_state);</pre>
+<p>Controls which area of memory may be cached - RISC OS 3.1</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>eor_mask</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>and_mask</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_state</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="cache_cacheable">cache_cacheable</h3>
+<pre>extern bits cache_cacheable (bits eor_mask,
+      bits and_mask);</pre>
+<p>Controls which area of memory may be cached - RISC OS 3.1</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>eor_mask</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>and_mask</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_state</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcache_updateable">xcache_updateable</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcache_updateable (bits eor_mask,
+      bits and_mask,
+      bits *old_state);</pre>
+<p>Controls which area of memory will be automatically updated in the cache - RISC OS 3.1</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>eor_mask</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>and_mask</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_state</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="cache_updateable">cache_updateable</h3>
+<pre>extern bits cache_updateable (bits eor_mask,
+      bits and_mask);</pre>
+<p>Controls which area of memory will be automatically updated in the cache - RISC OS 3.1</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>eor_mask</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>and_mask</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_state</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcache_disruptive">xcache_disruptive</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcache_disruptive (bits eor_mask,
+      bits and_mask,
+      bits *old_state);</pre>
+<p>Controls which areas of memory cause automatic flushing of the cache on a write - RISC OS 3.1</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>eor_mask</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>and_mask</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_state</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="cache_disruptive">cache_disruptive</h3>
+<pre>extern bits cache_disruptive (bits eor_mask,
+      bits and_mask);</pre>
+<p>Controls which areas of memory cause automatic flushing of the cache on a write - RISC OS 3.1</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>eor_mask</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>and_mask</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_state</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcache_flush">xcache_flush</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcache_flush (void);
+</pre><p>Flushes the cache - RISC OS 3.1</p>
+
+
+<table>
+</table>
+
+<h3 id="cache_flush">cache_flush</h3>
+<pre>extern void cache_flush (void);
+</pre><p>Flushes the cache - RISC OS 3.1</p>
+
+
+<table>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

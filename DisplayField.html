@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; DisplayField</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>DisplayField</h2>
+
+<pre>#include "oslib/displayfield.h"</pre>
+
+<h3 id="displayfield_gadget">displayfield_gadget</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> text;
+      int text_limit;
+   }
+   displayfield_gadget;</pre>
+
+<h3 id="displayfield_object">displayfield_object</h3>
+<pre>typedef struct
+   {  <a href="#gadget_OBJECT_MEMBERS">gadget_OBJECT_MEMBERS</a>
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> text;
+      int text_limit;
+   }
+   displayfield_object;</pre>
+
+<h3 id="class_DISPLAY_FIELD">class_DISPLAY_FIELD</h3>
+<pre>#define class_DISPLAY_FIELD ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x1C0u)</pre>
+
+<h3 id="displayfield_RJUSTIFIED">displayfield_RJUSTIFIED</h3>
+<pre>#define displayfield_RJUSTIFIED ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x2u)</pre>
+
+<h3 id="displayfield_HCENTRED">displayfield_HCENTRED</h3>
+<pre>#define displayfield_HCENTRED ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x4u)</pre>
+
+<h3 id="xdisplayfield_set_value">xdisplayfield_set_value</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdisplayfield_set_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> display_field,
+      char const *text);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>display_field</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>text</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="displayfield_set_value">displayfield_set_value</h3>
+<pre>extern void displayfield_set_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> display_field,
+      char const *text);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>display_field</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>text</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xdisplayfield_get_value">xdisplayfield_get_value</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdisplayfield_get_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> display_field,
+      char *buffer,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>display_field</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="displayfield_get_value">displayfield_get_value</h3>
+<pre>extern int displayfield_get_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> display_field,
+      char *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>display_field</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xdisplayfield_set_font">xdisplayfield_set_font</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdisplayfield_set_font (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> display_field,
+      char const *font,
+      int width,
+      int height);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>display_field</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>font</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>width</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="displayfield_set_font">displayfield_set_font</h3>
+<pre>extern void displayfield_set_font (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> display_field,
+      char const *font,
+      int width,
+      int height);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>display_field</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>font</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>width</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,620 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; PrintDbox</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>PrintDbox</h2>
+
+<pre>#include "oslib/printdbox.h"</pre>
+
+<h3 id="printdbox_flags">printdbox_flags</h3>
+<pre>typedef bits printdbox_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#printdbox_GENERATE_ABOUT_TO_BE_SHOWN">printdbox_GENERATE_ABOUT_TO_BE_SHOWN</a></dd>
+<dd><a href="#printdbox_GENERATE_DIALOGUE_COMPLETED">printdbox_GENERATE_DIALOGUE_COMPLETED</a></dd>
+<dd><a href="#printdbox_GENERATE_SHOW_SETUP_ACTION">printdbox_GENERATE_SHOW_SETUP_ACTION</a></dd>
+<dd><a href="#printdbox_INCLUDE_ALL_FROM_TO">printdbox_INCLUDE_ALL_FROM_TO</a></dd>
+<dd><a href="#printdbox_INCLUDE_COPIES">printdbox_INCLUDE_COPIES</a></dd>
+<dd><a href="#printdbox_INCLUDE_SCALE">printdbox_INCLUDE_SCALE</a></dd>
+<dd><a href="#printdbox_INCLUDE_ORIENTATION">printdbox_INCLUDE_ORIENTATION</a></dd>
+<dd><a href="#printdbox_INCLUDE_SAVE">printdbox_INCLUDE_SAVE</a></dd>
+<dd><a href="#printdbox_INCLUDE_SET_UP">printdbox_INCLUDE_SET_UP</a></dd>
+<dd><a href="#printdbox_INCLUDE_DRAFT">printdbox_INCLUDE_DRAFT</a></dd>
+<dd><a href="#printdbox_SELECT_FROM_TO">printdbox_SELECT_FROM_TO</a></dd>
+<dd><a href="#printdbox_SELECT_SIDEWAYS">printdbox_SELECT_SIDEWAYS</a></dd>
+<dd><a href="#printdbox_SELECT_DRAFT">printdbox_SELECT_DRAFT</a></dd>
+</dl>
+
+<h3 id="printdbox_object">printdbox_object</h3>
+<pre>typedef struct
+   {  <a href="#printdbox_flags">printdbox_flags</a> flags;
+      int from;
+      int to;
+      int copies;
+      int scale;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> further_options;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> alternative_window_name;
+   }
+   printdbox_object;</pre>
+
+<p>Structure to describe Object for in-memory construction - referenced from Toolbox_Template</p>
+
+<h3 id="printdbox_object_template">printdbox_object_template</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_RESOURCE_FILE_OBJECT_MEMBERS">toolbox_RESOURCE_FILE_OBJECT_MEMBERS</a>
+      <a href="#printdbox_flags">printdbox_flags</a> objectflags;
+      int from;
+      int to;
+      int copies;
+      int scale;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> further_options;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> alternative_window_name;
+   }
+   printdbox_object_template;</pre>
+
+<h3 id="printdbox_full">printdbox_full</h3>
+<pre>typedef <a href="toolbox.html#toolbox_full">toolbox_full</a> printdbox_full;</pre>
+
+<h3 id="printdbox_action_about_to_be_shown">printdbox_action_about_to_be_shown</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#printdbox_full">printdbox_full</a> full;
+      }
+      position;
+   }
+   printdbox_action_about_to_be_shown;</pre>
+
+<p>Prefer PrintDbox_ActionAboutToBeShownBlock</p>
+
+<h3 id="printdbox_action_about_to_be_shown_block">printdbox_action_about_to_be_shown_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#printdbox_full">printdbox_full</a> full;
+      }
+      position;
+   }
+   printdbox_action_about_to_be_shown_block;</pre>
+
+<h3 id="printdbox_action_dialogue_completed_block">printdbox_action_dialogue_completed_block</h3>
+<pre>typedef <a href="toolbox.html#toolbox_action_header_base">toolbox_action_header_base</a> printdbox_action_dialogue_completed_block;</pre>
+
+<h3 id="printdbox_action_setup_about_to_be_shown">printdbox_action_setup_about_to_be_shown</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_o">toolbox_o</a> setup;
+      <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#printdbox_full">printdbox_full</a> full;
+      }
+      position;
+   }
+   printdbox_action_setup_about_to_be_shown;</pre>
+
+<p>Prefer PrintDbox_ActionSetupAboutToBeShownBlock</p>
+
+<h3 id="printdbox_action_setup_about_to_be_shown_block">printdbox_action_setup_about_to_be_shown_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> setup;
+      <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#printdbox_full">printdbox_full</a> full;
+      }
+      position;
+   }
+   printdbox_action_setup_about_to_be_shown_block;</pre>
+
+<h3 id="printdbox_action_save">printdbox_action_save</h3>
+<pre>typedef struct
+   {  int start;
+      int finish;
+      int copies;
+      int scale_factor;
+   }
+   printdbox_action_save;</pre>
+
+<p>Prefer PrintDbox_ActionSaveBlock</p>
+
+<h3 id="printdbox_action_save_block">printdbox_action_save_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      int start;
+      int finish;
+      int copies;
+      int scale_factor;
+   }
+   printdbox_action_save_block;</pre>
+
+<h3 id="printdbox_action_print">printdbox_action_print</h3>
+<pre>typedef struct
+   {  int start;
+      int finish;
+      int copies;
+      int scale_factor;
+   }
+   printdbox_action_print;</pre>
+
+<p>Prefer PrintDbox_ActionPrintBlock</p>
+
+<h3 id="printdbox_action_print_block">printdbox_action_print_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      int start;
+      int finish;
+      int copies;
+      int scale_factor;
+   }
+   printdbox_action_print_block;</pre>
+
+<h3 id="class_PRINT_DBOX">class_PRINT_DBOX</h3>
+<pre>#define class_PRINT_DBOX ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x82B00u)</pre>
+
+<h3 id="printdbox_GENERATE_ABOUT_TO_BE_SHOWN">printdbox_GENERATE_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define printdbox_GENERATE_ABOUT_TO_BE_SHOWN ((<a href="#printdbox_flags">printdbox_flags</a>) 0x1u)</pre>
+
+<h3 id="printdbox_GENERATE_DIALOGUE_COMPLETED">printdbox_GENERATE_DIALOGUE_COMPLETED</h3>
+<pre>#define printdbox_GENERATE_DIALOGUE_COMPLETED ((<a href="#printdbox_flags">printdbox_flags</a>) 0x2u)</pre>
+
+<h3 id="printdbox_GENERATE_SHOW_SETUP_ACTION">printdbox_GENERATE_SHOW_SETUP_ACTION</h3>
+<pre>#define printdbox_GENERATE_SHOW_SETUP_ACTION ((<a href="#printdbox_flags">printdbox_flags</a>) 0x4u)</pre>
+
+<h3 id="printdbox_INCLUDE_ALL_FROM_TO">printdbox_INCLUDE_ALL_FROM_TO</h3>
+<pre>#define printdbox_INCLUDE_ALL_FROM_TO ((<a href="#printdbox_flags">printdbox_flags</a>) 0x8u)</pre>
+
+<h3 id="printdbox_INCLUDE_COPIES">printdbox_INCLUDE_COPIES</h3>
+<pre>#define printdbox_INCLUDE_COPIES ((<a href="#printdbox_flags">printdbox_flags</a>) 0x10u)</pre>
+
+<h3 id="printdbox_INCLUDE_SCALE">printdbox_INCLUDE_SCALE</h3>
+<pre>#define printdbox_INCLUDE_SCALE ((<a href="#printdbox_flags">printdbox_flags</a>) 0x20u)</pre>
+
+<h3 id="printdbox_INCLUDE_ORIENTATION">printdbox_INCLUDE_ORIENTATION</h3>
+<pre>#define printdbox_INCLUDE_ORIENTATION ((<a href="#printdbox_flags">printdbox_flags</a>) 0x40u)</pre>
+
+<h3 id="printdbox_INCLUDE_SAVE">printdbox_INCLUDE_SAVE</h3>
+<pre>#define printdbox_INCLUDE_SAVE ((<a href="#printdbox_flags">printdbox_flags</a>) 0x80u)</pre>
+
+<h3 id="printdbox_INCLUDE_SET_UP">printdbox_INCLUDE_SET_UP</h3>
+<pre>#define printdbox_INCLUDE_SET_UP ((<a href="#printdbox_flags">printdbox_flags</a>) 0x100u)</pre>
+
+<h3 id="printdbox_INCLUDE_DRAFT">printdbox_INCLUDE_DRAFT</h3>
+<pre>#define printdbox_INCLUDE_DRAFT ((<a href="#printdbox_flags">printdbox_flags</a>) 0x200u)</pre>
+
+<h3 id="printdbox_SELECT_FROM_TO">printdbox_SELECT_FROM_TO</h3>
+<pre>#define printdbox_SELECT_FROM_TO ((<a href="#printdbox_flags">printdbox_flags</a>) 0x400u)</pre>
+
+<h3 id="printdbox_SELECT_SIDEWAYS">printdbox_SELECT_SIDEWAYS</h3>
+<pre>#define printdbox_SELECT_SIDEWAYS ((<a href="#printdbox_flags">printdbox_flags</a>) 0x800u)</pre>
+
+<h3 id="printdbox_SELECT_DRAFT">printdbox_SELECT_DRAFT</h3>
+<pre>#define printdbox_SELECT_DRAFT ((<a href="#printdbox_flags">printdbox_flags</a>) 0x1000u)</pre>
+
+<h3 id="printdbox_PRINT">printdbox_PRINT</h3>
+<pre>#define printdbox_PRINT ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B0000u)</pre>
+
+<h3 id="printdbox_SAVE">printdbox_SAVE</h3>
+<pre>#define printdbox_SAVE ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B0001u)</pre>
+
+<h3 id="printdbox_CANCEL">printdbox_CANCEL</h3>
+<pre>#define printdbox_CANCEL ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B0002u)</pre>
+
+<h3 id="printdbox_FROM_TO">printdbox_FROM_TO</h3>
+<pre>#define printdbox_FROM_TO ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B0003u)</pre>
+
+<h3 id="printdbox_ALL">printdbox_ALL</h3>
+<pre>#define printdbox_ALL ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B0004u)</pre>
+
+<h3 id="printdbox_FROM">printdbox_FROM</h3>
+<pre>#define printdbox_FROM ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B0005u)</pre>
+
+<h3 id="printdbox_TO">printdbox_TO</h3>
+<pre>#define printdbox_TO ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B000Du)</pre>
+
+<h3 id="printdbox_COPIES">printdbox_COPIES</h3>
+<pre>#define printdbox_COPIES ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B000Eu)</pre>
+
+<h3 id="printdbox_SCALE">printdbox_SCALE</h3>
+<pre>#define printdbox_SCALE ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B000Fu)</pre>
+
+<h3 id="printdbox_UPRIGHT">printdbox_UPRIGHT</h3>
+<pre>#define printdbox_UPRIGHT ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B0009u)</pre>
+
+<h3 id="printdbox_SIDEWAYS">printdbox_SIDEWAYS</h3>
+<pre>#define printdbox_SIDEWAYS ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B000Au)</pre>
+
+<h3 id="printdbox_DRAFT">printdbox_DRAFT</h3>
+<pre>#define printdbox_DRAFT ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B000Bu)</pre>
+
+<h3 id="printdbox_SET_UP">printdbox_SET_UP</h3>
+<pre>#define printdbox_SET_UP ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B000Cu)</pre>
+
+<h3 id="printdbox_PERCENT">printdbox_PERCENT</h3>
+<pre>#define printdbox_PERCENT ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82B0010u)</pre>
+
+<h3 id="action_PRINT_DBOX_ABOUT_TO_BE_SHOWN">action_PRINT_DBOX_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define action_PRINT_DBOX_ABOUT_TO_BE_SHOWN 0x82B00u</pre>
+
+<h3 id="action_PRINT_DBOX_DIALOGUE_COMPLETED">action_PRINT_DBOX_DIALOGUE_COMPLETED</h3>
+<pre>#define action_PRINT_DBOX_DIALOGUE_COMPLETED 0x82B01u</pre>
+
+<h3 id="action_PRINT_DBOX_SET_UP_ABOUT_TO_BE_SHOWN">action_PRINT_DBOX_SET_UP_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define action_PRINT_DBOX_SET_UP_ABOUT_TO_BE_SHOWN 0x82B02u</pre>
+
+<h3 id="action_PRINT_DBOX_SAVE">action_PRINT_DBOX_SAVE</h3>
+<pre>#define action_PRINT_DBOX_SAVE 0x82B03u</pre>
+
+<h3 id="action_PRINT_DBOX_SET_UP">action_PRINT_DBOX_SET_UP</h3>
+<pre>#define action_PRINT_DBOX_SET_UP 0x82B04u</pre>
+
+<h3 id="action_PRINT_DBOX_PRINT">action_PRINT_DBOX_PRINT</h3>
+<pre>#define action_PRINT_DBOX_PRINT 0x82B05u</pre>
+
+<h3 id="printdbox_PRINT_SIDEWAYS">printdbox_PRINT_SIDEWAYS</h3>
+<pre>#define printdbox_PRINT_SIDEWAYS 0x1u</pre>
+
+<h3 id="printdbox_PRINT_DRAFT">printdbox_PRINT_DRAFT</h3>
+<pre>#define printdbox_PRINT_DRAFT 0x2u</pre>
+
+<h3 id="error_PRINT_DBOX_TASKS_ACTIVE">error_PRINT_DBOX_TASKS_ACTIVE</h3>
+<pre>#define error_PRINT_DBOX_TASKS_ACTIVE 0x80B300u</pre>
+
+<h3 id="error_PRINT_DBOX_ALLOC_FAILED">error_PRINT_DBOX_ALLOC_FAILED</h3>
+<pre>#define error_PRINT_DBOX_ALLOC_FAILED 0x80B301u</pre>
+
+<h3 id="error_PRINT_DBOX_SHORT_BUFFER">error_PRINT_DBOX_SHORT_BUFFER</h3>
+<pre>#define error_PRINT_DBOX_SHORT_BUFFER 0x80B302u</pre>
+
+<h3 id="error_PRINT_DBOX_NO_SUCH_TASK">error_PRINT_DBOX_NO_SUCH_TASK</h3>
+<pre>#define error_PRINT_DBOX_NO_SUCH_TASK 0x80B311u</pre>
+
+<h3 id="error_PRINT_DBOX_NO_SUCH_METHOD">error_PRINT_DBOX_NO_SUCH_METHOD</h3>
+<pre>#define error_PRINT_DBOX_NO_SUCH_METHOD 0x80B312u</pre>
+
+<h3 id="error_PRINT_DBOX_NO_SUCH_MISC_OP_METHOD">error_PRINT_DBOX_NO_SUCH_MISC_OP_METHOD</h3>
+<pre>#define error_PRINT_DBOX_NO_SUCH_MISC_OP_METHOD 0x80B313u</pre>
+
+<h3 id="printdbox_PAGE_RANGE_ALL">printdbox_PAGE_RANGE_ALL</h3>
+<pre>#define printdbox_PAGE_RANGE_ALL (-1)</pre>
+
+<h3 id="xprintdbox_get_window_id">xprintdbox_get_window_id</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xprintdbox_get_window_id (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *window);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>window</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="printdbox_get_window_id">printdbox_get_window_id</h3>
+<pre>extern <a href="toolbox.html#toolbox_o">toolbox_o</a> printdbox_get_window_id (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>window</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xprintdbox_set_page_range">xprintdbox_set_page_range</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xprintdbox_set_page_range (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox,
+      int start,
+      int end);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>start</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>end</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="printdbox_set_page_range">printdbox_set_page_range</h3>
+<pre>extern void printdbox_set_page_range (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox,
+      int start,
+      int end);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>start</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>end</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xprintdbox_get_page_range">xprintdbox_get_page_range</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xprintdbox_get_page_range (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox,
+      int *start,
+      int *end);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>start</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>end</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="printdbox_get_page_range">printdbox_get_page_range</h3>
+<pre>extern void printdbox_get_page_range (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox,
+      int *start,
+      int *end);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>start</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>end</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xprintdbox_set_copies">xprintdbox_set_copies</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xprintdbox_set_copies (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox,
+      int copy_count);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>copy_count</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="printdbox_set_copies">printdbox_set_copies</h3>
+<pre>extern void printdbox_set_copies (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox,
+      int copy_count);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>copy_count</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xprintdbox_get_copies">xprintdbox_get_copies</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xprintdbox_get_copies (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox,
+      int *copy_count);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>copy_count</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="printdbox_get_copies">printdbox_get_copies</h3>
+<pre>extern int printdbox_get_copies (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>copy_count</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xprintdbox_set_scale">xprintdbox_set_scale</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xprintdbox_set_scale (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox,
+      int scale);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scale</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="printdbox_set_scale">printdbox_set_scale</h3>
+<pre>extern void printdbox_set_scale (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox,
+      int scale);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scale</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xprintdbox_get_scale">xprintdbox_get_scale</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xprintdbox_get_scale (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox,
+      int *scale);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>scale</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="printdbox_get_scale">printdbox_get_scale</h3>
+<pre>extern int printdbox_get_scale (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>scale</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xprintdbox_set_orientation">xprintdbox_set_orientation</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xprintdbox_set_orientation (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox,
+      osbool landscape);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>landscape</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="printdbox_set_orientation">printdbox_set_orientation</h3>
+<pre>extern void printdbox_set_orientation (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox,
+      osbool landscape);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>landscape</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xprintdbox_get_orientation">xprintdbox_get_orientation</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xprintdbox_get_orientation (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox,
+      osbool *landscape);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>landscape</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="printdbox_get_orientation">printdbox_get_orientation</h3>
+<pre>extern osbool printdbox_get_orientation (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>landscape</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xprintdbox_get_title">xprintdbox_get_title</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xprintdbox_get_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox,
+      char *buffer,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="printdbox_get_title">printdbox_get_title</h3>
+<pre>extern int printdbox_get_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox,
+      char *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xprintdbox_set_draft">xprintdbox_set_draft</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xprintdbox_set_draft (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox,
+      osbool draft);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>draft</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="printdbox_set_draft">printdbox_set_draft</h3>
+<pre>extern void printdbox_set_draft (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox,
+      osbool draft);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>draft</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xprintdbox_get_draft">xprintdbox_get_draft</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xprintdbox_get_draft (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox,
+      osbool *draft);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>draft</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="printdbox_get_draft">printdbox_get_draft</h3>
+<pre>extern osbool printdbox_get_draft (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> print_dbox);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>print_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>draft</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

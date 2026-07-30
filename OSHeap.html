@@ -1,0 +1,281 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; OSHeap</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>OSHeap</h2>
+
+<pre>#include "oslib/osheap.h"</pre>
+
+<h3 id="error_HEAP_BAD_REASON">error_HEAP_BAD_REASON</h3>
+<pre>#define error_HEAP_BAD_REASON 0x180u</pre>
+
+<h3 id="error_HEAP_INIT">error_HEAP_INIT</h3>
+<pre>#define error_HEAP_INIT 0x181u</pre>
+
+<h3 id="error_HEAP_BAD_DESC">error_HEAP_BAD_DESC</h3>
+<pre>#define error_HEAP_BAD_DESC 0x182u</pre>
+
+<h3 id="error_HEAP_BAD_LINK">error_HEAP_BAD_LINK</h3>
+<pre>#define error_HEAP_BAD_LINK 0x183u</pre>
+
+<h3 id="error_HEAP_ALLOC">error_HEAP_ALLOC</h3>
+<pre>#define error_HEAP_ALLOC 0x184u</pre>
+
+<h3 id="error_HEAP_NOT_ABLOCK">error_HEAP_NOT_ABLOCK</h3>
+<pre>#define error_HEAP_NOT_ABLOCK 0x185u</pre>
+
+<h3 id="error_HEAP_BAD_EXTEND">error_HEAP_BAD_EXTEND</h3>
+<pre>#define error_HEAP_BAD_EXTEND 0x186u</pre>
+
+<h3 id="error_HEAP_EXCESSIVE_SHRINK">error_HEAP_EXCESSIVE_SHRINK</h3>
+<pre>#define error_HEAP_EXCESSIVE_SHRINK 0x187u</pre>
+
+<h3 id="error_HEAP_HEAP_LOCKED">error_HEAP_HEAP_LOCKED</h3>
+<pre>#define error_HEAP_HEAP_LOCKED 0x188u</pre>
+
+<h3 id="xosheap_resize_no_fail">xosheap_resize_no_fail</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosheap_resize_no_fail (byte *heap,
+      int size_increase,
+      int *size_increase_out);</pre>
+<p>Extends or shrinks a heap without throwing an error if shrink failed (PRM 1-375)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>heap</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size_increase</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size_increase_out</code></td><td>number of bytes actually increased (negative if shrunk)</td><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osheap_resize_no_fail">osheap_resize_no_fail</h3>
+<pre>extern int osheap_resize_no_fail (byte *heap,
+      int size_increase);</pre>
+<p>Extends or shrinks a heap without throwing an error if shrink failed (PRM 1-375)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>heap</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size_increase</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size_increase_out</td><td>number of bytes actually increased (negative if shrunk)</td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xosheap_initialise">xosheap_initialise</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosheap_initialise (byte *heap,
+      int size);</pre>
+<p>Initialises a heap (PRM 1-370)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>heap</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osheap_initialise">osheap_initialise</h3>
+<pre>extern void osheap_initialise (byte *heap,
+      int size);</pre>
+<p>Initialises a heap (PRM 1-370)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>heap</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosheap_describe">xosheap_describe</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosheap_describe (byte const *heap,
+      int *max,
+      int *free);</pre>
+<p>Describes a heap (PRM 1-371)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>heap</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>max</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>free</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osheap_describe">osheap_describe</h3>
+<pre>extern int osheap_describe (byte const *heap,
+      int *max);</pre>
+<p>Describes a heap (PRM 1-371)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>heap</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>max</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>free</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xosheap_alloc">xosheap_alloc</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosheap_alloc (byte *heap,
+      int size,
+      void **blk);</pre>
+<p>Gets a heap block (PRM 1-372)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>heap</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>blk</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osheap_alloc">osheap_alloc</h3>
+<pre>extern void *osheap_alloc (byte *heap,
+      int size);</pre>
+<p>Gets a heap block (PRM 1-372)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>heap</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>blk</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosheap_free">xosheap_free</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosheap_free (byte *heap,
+      void *blk);</pre>
+<p>Frees a heap block (PRM 1-373)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>heap</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>blk</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osheap_free">osheap_free</h3>
+<pre>extern void osheap_free (byte *heap,
+      void *blk);</pre>
+<p>Frees a heap block (PRM 1-373)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>heap</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>blk</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosheap_realloc">xosheap_realloc</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosheap_realloc (byte *heap,
+      void *blk,
+      int size_increase,
+      void **blk_out);</pre>
+<p>Extends or shrinks a heap block (PRM 1-374)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>heap</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>blk</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size_increase</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>blk_out</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osheap_realloc">osheap_realloc</h3>
+<pre>extern void *osheap_realloc (byte *heap,
+      void *blk,
+      int size_increase);</pre>
+<p>Extends or shrinks a heap block (PRM 1-374)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>heap</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>blk</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size_increase</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>blk_out</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosheap_resize">xosheap_resize</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosheap_resize (byte *heap,
+      int size_increase);</pre>
+<p>Extends or shrinks a heap (PRM 1-375)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>heap</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size_increase</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osheap_resize">osheap_resize</h3>
+<pre>extern void osheap_resize (byte *heap,
+      int size_increase);</pre>
+<p>Extends or shrinks a heap (PRM 1-375)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>heap</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size_increase</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosheap_read_size">xosheap_read_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosheap_read_size (byte const *heap,
+      void *blk,
+      int *size);</pre>
+<p>Reads a heap block size (PRM 1-376)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>heap</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>blk</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osheap_read_size">osheap_read_size</h3>
+<pre>extern int osheap_read_size (byte const *heap,
+      void *blk);</pre>
+<p>Reads a heap block size (PRM 1-376)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>heap</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>blk</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

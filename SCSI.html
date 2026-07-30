@@ -1,0 +1,682 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; SCSI</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>SCSI</h2>
+
+<pre>#include "oslib/scsi.h"</pre>
+
+<h3 id="scsi_software_features">scsi_software_features</h3>
+<pre>typedef bits scsi_software_features;</pre>
+
+<h3 id="scsi_hardware_features">scsi_hardware_features</h3>
+<pre>typedef bits scsi_hardware_features;</pre>
+
+<h3 id="scsi_device_type">scsi_device_type</h3>
+<pre>typedef byte scsi_device_type;</pre>
+
+<h3 id="scsi_device_flags">scsi_device_flags</h3>
+<pre>typedef byte scsi_device_flags;</pre>
+
+<h3 id="scsi_device_version">scsi_device_version</h3>
+<pre>typedef byte scsi_device_version;</pre>
+
+<h3 id="scsi_device_description">scsi_device_description</h3>
+<pre>typedef struct
+   {  <a href="#scsi_device_type">scsi_device_type</a> type;
+      <a href="#scsi_device_flags">scsi_device_flags</a> flags;
+      <a href="#scsi_device_version">scsi_device_version</a> version;
+      byte reserved0;
+      byte length;
+      byte reserved1;
+      byte reserved2;
+      byte reserved3;
+      int block_count;
+      int block_size;
+   }
+   scsi_device_description;</pre>
+
+<h3 id="scsi_error_response_level">scsi_error_response_level</h3>
+<pre>typedef int scsi_error_response_level;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#scsi_CHECK_NO_CHANGE">scsi_CHECK_NO_CHANGE</a></dd>
+<dd><a href="#scsi_CHECK_ERROR">scsi_CHECK_ERROR</a></dd>
+<dd><a href="#scsi_CHECK_SENSE">scsi_CHECK_SENSE</a></dd>
+<dd><a href="#scsi_CHECK_RETRY">scsi_CHECK_RETRY</a></dd>
+</dl>
+
+<h3 id="scsi_queue_behaviour">scsi_queue_behaviour</h3>
+<pre>typedef int scsi_queue_behaviour;</pre>
+
+<h3 id="scsi_disconnection">scsi_disconnection</h3>
+<pre>typedef int scsi_disconnection;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#scsi_DISCONNECT_NO_CHANGE">scsi_DISCONNECT_NO_CHANGE</a></dd>
+<dd><a href="#scsi_DISCONNECT_ALLOWED">scsi_DISCONNECT_ALLOWED</a></dd>
+<dd><a href="#scsi_DISCONNECT_INHIBITED_BY_BLOCKING">scsi_DISCONNECT_INHIBITED_BY_BLOCKING</a></dd>
+</dl>
+
+<h3 id="scsi_op_block">scsi_op_block</h3>
+<pre>typedef struct
+   {  int o [...];
+   }
+   scsi_op_block;</pre>
+
+<h3 id="scsi_device_status">scsi_device_status</h3>
+<pre>typedef int scsi_device_status;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#scsi_DEVICE_STATUS_IDLE">scsi_DEVICE_STATUS_IDLE</a></dd>
+<dd><a href="#scsi_DEVICE_STATUS_BUSY">scsi_DEVICE_STATUS_BUSY</a></dd>
+</dl>
+
+<h3 id="scsi_card_address_list">scsi_card_address_list</h3>
+<pre>typedef struct
+   {  byte *addr [...];
+   }
+   scsi_card_address_list;</pre>
+
+<h3 id="scsi_CHECK_NO_CHANGE">scsi_CHECK_NO_CHANGE</h3>
+<pre>#define scsi_CHECK_NO_CHANGE ((<a href="#scsi_error_response_level">scsi_error_response_level</a>) 0xFFFFFFFFu)</pre>
+
+<p>No action, return previous setting</p>
+
+<h3 id="scsi_CHECK_ERROR">scsi_CHECK_ERROR</h3>
+<pre>#define scsi_CHECK_ERROR ((<a href="#scsi_error_response_level">scsi_error_response_level</a>) 0x0u)</pre>
+
+<p>If device returns check condition, return that as an error message. This is for badly-behaved devices with non-standard request-sense return blocks</p>
+
+<h3 id="scsi_CHECK_SENSE">scsi_CHECK_SENSE</h3>
+<pre>#define scsi_CHECK_SENSE ((<a href="#scsi_error_response_level">scsi_error_response_level</a>) 0x1u)</pre>
+
+<p>If device returns check condition, do the request sense automatically, report the error</p>
+
+<h3 id="scsi_CHECK_RETRY">scsi_CHECK_RETRY</h3>
+<pre>#define scsi_CHECK_RETRY ((<a href="#scsi_error_response_level">scsi_error_response_level</a>) 0x2u)</pre>
+
+<p>If device returns check condition, do a request sense automatically, if unit attention, ignore it and reissue the command, else report the error</p>
+
+<h3 id="scsi_BEHAVIOUR_NO_CHANGE">scsi_BEHAVIOUR_NO_CHANGE</h3>
+<pre>#define scsi_BEHAVIOUR_NO_CHANGE ((<a href="#scsi_queue_behaviour_level">scsi_queue_behaviour_level</a>) 0xFFFFFFFFu)</pre>
+
+<p>No action, return previous setting</p>
+
+<h3 id="scsi_BEHAVIOUR_WAIT">scsi_BEHAVIOUR_WAIT</h3>
+<pre>#define scsi_BEHAVIOUR_WAIT ((<a href="#scsi_queue_behaviour_level">scsi_queue_behaviour_level</a>) 0x0u)</pre>
+
+<p>Queue the command, waiting until a slot becomes free if necessary</p>
+
+<h3 id="scsi_BEHAVIOUR_AWAIT_QUEUE">scsi_BEHAVIOUR_AWAIT_QUEUE</h3>
+<pre>#define scsi_BEHAVIOUR_AWAIT_QUEUE ((<a href="#scsi_queue_behaviour_level">scsi_queue_behaviour_level</a>) 0x1u)</pre>
+
+<p>Queue the command if there is room in the queue</p>
+
+<h3 id="scsi_BEHAVIOUR_AWAIT_DEVICE">scsi_BEHAVIOUR_AWAIT_DEVICE</h3>
+<pre>#define scsi_BEHAVIOUR_AWAIT_DEVICE ((<a href="#scsi_queue_behaviour_level">scsi_queue_behaviour_level</a>) 0x2u)</pre>
+
+<p>Perform the command if the device is ready</p>
+
+<h3 id="scsi_BEHAVIOUR_AWAIT_CARD">scsi_BEHAVIOUR_AWAIT_CARD</h3>
+<pre>#define scsi_BEHAVIOUR_AWAIT_CARD ((<a href="#scsi_queue_behaviour_level">scsi_queue_behaviour_level</a>) 0x3u)</pre>
+
+<p>Perform the command if the card is ready</p>
+
+<h3 id="scsi_DISCONNECT_NO_CHANGE">scsi_DISCONNECT_NO_CHANGE</h3>
+<pre>#define scsi_DISCONNECT_NO_CHANGE ((<a href="#scsi_disconnection">scsi_disconnection</a>) 0xFFFFFFFFu)</pre>
+
+<h3 id="scsi_DISCONNECT_ALLOWED">scsi_DISCONNECT_ALLOWED</h3>
+<pre>#define scsi_DISCONNECT_ALLOWED ((<a href="#scsi_disconnection">scsi_disconnection</a>) 0x0u)</pre>
+
+<h3 id="scsi_DISCONNECT_INHIBITED_BY_BLOCKING">scsi_DISCONNECT_INHIBITED_BY_BLOCKING</h3>
+<pre>#define scsi_DISCONNECT_INHIBITED_BY_BLOCKING ((<a href="#scsi_disconnection">scsi_disconnection</a>) 0x1u)</pre>
+
+<h3 id="scsi_DISCONNECT_INHIBITED">scsi_DISCONNECT_INHIBITED</h3>
+<pre>#define scsi_DISCONNECT_INHIBITED ((<a href="#scsicontrol_disconnection">scsicontrol_disconnection</a>) 0x2u)</pre>
+
+<h3 id="scsi_DEVICE_STATUS_IDLE">scsi_DEVICE_STATUS_IDLE</h3>
+<pre>#define scsi_DEVICE_STATUS_IDLE ((<a href="#scsi_device_status">scsi_device_status</a>) 0x1u)</pre>
+
+<h3 id="scsi_DEVICE_STATUS_BUSY">scsi_DEVICE_STATUS_BUSY</h3>
+<pre>#define scsi_DEVICE_STATUS_BUSY ((<a href="#scsi_device_status">scsi_device_status</a>) 0x2u)</pre>
+
+<h3 id="xscsi_version">xscsi_version</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsi_version (bits *software_version,
+      <a href="#scsi_software_features">scsi_software_features</a> *software_features,
+      bits *hardware_version,
+      <a href="#scsi_hardware_features">scsi_hardware_features</a> *hardware_features);</pre>
+<p>Determines the version number of the drivers</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>software_version</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>software_features</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>hardware_version</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>hardware_features</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="scsi_version">scsi_version</h3>
+<pre>extern void scsi_version (bits *software_version,
+      <a href="#scsi_software_features">scsi_software_features</a> *software_features,
+      bits *hardware_version,
+      <a href="#scsi_hardware_features">scsi_hardware_features</a> *hardware_features);</pre>
+<p>Determines the version number of the drivers</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>software_version</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>software_features</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>hardware_version</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>hardware_features</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xscsiinitialise_reset_bus">xscsiinitialise_reset_bus</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsiinitialise_reset_bus (int host_id);</pre>
+<p>Resets all options set by SCSI_Control to their default states and removes device reservations</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>host_id</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="scsiinitialise_reset_bus">scsiinitialise_reset_bus</h3>
+<pre>extern void scsiinitialise_reset_bus (int host_id);</pre>
+<p>Resets all options set by SCSI_Control to their default states and removes device reservations</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>host_id</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xscsiinitialise_reset_device">xscsiinitialise_reset_device</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsiinitialise_reset_device (int device_id,
+      int access_key);</pre>
+<p>Initiates the reset operation for a device and returns immediately</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>access_key</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="scsiinitialise_reset_device">scsiinitialise_reset_device</h3>
+<pre>extern void scsiinitialise_reset_device (int device_id,
+      int access_key);</pre>
+<p>Initiates the reset operation for a device and returns immediately</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>access_key</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xscsiinitialise_determine_device">xscsiinitialise_determine_device</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsiinitialise_determine_device (int device_id,
+      <a href="#scsi_device_description">scsi_device_description</a> *description);</pre>
+<p>Sees what type the device is and then performs the appropriate read-capacity commands</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>description</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="scsiinitialise_determine_device">scsiinitialise_determine_device</h3>
+<pre>extern void scsiinitialise_determine_device (int device_id,
+      <a href="#scsi_device_description">scsi_device_description</a> *description);</pre>
+<p>Sees what type the device is and then performs the appropriate read-capacity commands</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>description</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xscsiinitialise_enumerate_device">xscsiinitialise_enumerate_device</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsiinitialise_enumerate_device (int device_id,
+      char *description,
+      int size);</pre>
+<p>Sees what type the device is and then performs the appropriate read-capacity commands, formatting the result as text</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>description</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="scsiinitialise_enumerate_device">scsiinitialise_enumerate_device</h3>
+<pre>extern void scsiinitialise_enumerate_device (int device_id,
+      char *description,
+      int size);</pre>
+<p>Sees what type the device is and then performs the appropriate read-capacity commands, formatting the result as text</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>description</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xscsicontrol_abort_device">xscsicontrol_abort_device</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsicontrol_abort_device (int device_id,
+      int access_key);</pre>
+<p>Cancels any outstanding operation on a device</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>access_key</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="scsicontrol_abort_device">scsicontrol_abort_device</h3>
+<pre>extern void scsicontrol_abort_device (int device_id,
+      int access_key);</pre>
+<p>Cancels any outstanding operation on a device</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>access_key</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xscsicontrol_abort_op">xscsicontrol_abort_op</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsicontrol_abort_op (int device_id,
+      int op_id,
+      int access_key);</pre>
+<p>Cancels a particular operation on a device</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>op_id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>access_key</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="scsicontrol_abort_op">scsicontrol_abort_op</h3>
+<pre>extern void scsicontrol_abort_op (int device_id,
+      int op_id,
+      int access_key);</pre>
+<p>Cancels a particular operation on a device</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>op_id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>access_key</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xscsicontrol_set_timeout">xscsicontrol_set_timeout</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsicontrol_set_timeout (int device_id,
+      int timeout,
+      int access_key,
+      int *old_timeout);</pre>
+<p>Sets the default timeout for a device</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>timeout</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>access_key</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_timeout</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="scsicontrol_set_timeout">scsicontrol_set_timeout</h3>
+<pre>extern int scsicontrol_set_timeout (int device_id,
+      int timeout,
+      int access_key);</pre>
+<p>Sets the default timeout for a device</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>timeout</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>access_key</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_timeout</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xscsicontrol_set_error_response">xscsicontrol_set_error_response</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsicontrol_set_error_response (int device_id,
+      <a href="#scsi_error_response_level">scsi_error_response_level</a> level,
+      int access_key,
+      int *old_level);</pre>
+<p>Controls the behaviour of the device on receipt of a check condition status</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>level</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>access_key</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_level</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="scsicontrol_set_error_response">scsicontrol_set_error_response</h3>
+<pre>extern int scsicontrol_set_error_response (int device_id,
+      <a href="#scsi_error_response_level">scsi_error_response_level</a> level,
+      int access_key);</pre>
+<p>Controls the behaviour of the device on receipt of a check condition status</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>level</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>access_key</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_level</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xscsicontrol_set_queue_behaviour">xscsicontrol_set_queue_behaviour</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsicontrol_set_queue_behaviour (int device_id,
+      <a href="#scsi_queue_behaviour">scsi_queue_behaviour</a> behaviour,
+      int access_key,
+      int *old_level);</pre>
+<p>Sets queue behaviour</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>behaviour</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>access_key</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_level</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="scsicontrol_set_queue_behaviour">scsicontrol_set_queue_behaviour</h3>
+<pre>extern int scsicontrol_set_queue_behaviour (int device_id,
+      <a href="#scsi_queue_behaviour">scsi_queue_behaviour</a> behaviour,
+      int access_key);</pre>
+<p>Sets queue behaviour</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>behaviour</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>access_key</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_level</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xscsicontrol_disconnect">xscsicontrol_disconnect</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsicontrol_disconnect (int device_id,
+      <a href="#scsi_disconnection">scsi_disconnection</a> disconnection,
+      int *old_disconnection,
+      int *access_key);</pre>
+<p>Allows/inhibits disconnection/reselection. Device must be idle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disconnection</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_disconnection</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>access_key</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="scsicontrol_disconnect">scsicontrol_disconnect</h3>
+<pre>extern int scsicontrol_disconnect (int device_id,
+      <a href="#scsi_disconnection">scsi_disconnection</a> disconnection,
+      int *access_key);</pre>
+<p>Allows/inhibits disconnection/reselection. Device must be idle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disconnection</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>access_key</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_disconnection</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xscsi_op">xscsi_op</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsi_op (bits op,
+      int block_size,
+      <a href="#scsi_op_block">scsi_op_block</a> const *block,
+      byte *start_addr,
+      int length,
+      int timeout,
+      asm_routine callback_code,
+      void *workspace,
+      int access_key,
+      int *op_id,
+      byte **next_addr,
+      int *undone);</pre>
+<p>Issues a SCSI command to a device and can be called in the background</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>op</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>block_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>start_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>timeout</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>callback_code</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>access_key</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>op_id</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>next_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>undone</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="scsi_op">scsi_op</h3>
+<pre>extern int scsi_op (bits op,
+      int block_size,
+      <a href="#scsi_op_block">scsi_op_block</a> const *block,
+      byte *start_addr,
+      int length,
+      int timeout,
+      asm_routine callback_code,
+      void *workspace,
+      int access_key,
+      int *op_id,
+      byte **next_addr);</pre>
+<p>Issues a SCSI command to a device and can be called in the background</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>op</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>block_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>start_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>timeout</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>callback_code</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>access_key</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>op_id</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>next_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>undone</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xscsistatus_check_device">xscsistatus_check_device</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsistatus_check_device (int device_id,
+      <a href="#scsi_device_status">scsi_device_status</a> *status);</pre>
+<p>Returns the status of the selected device</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="scsistatus_check_device">scsistatus_check_device</h3>
+<pre>extern <a href="#scsi_device_status">scsi_device_status</a> scsistatus_check_device (int device_id);</pre>
+<p>Returns the status of the selected device</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xscsireserve_claim">xscsireserve_claim</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsireserve_claim (int device_id,
+      asm_routine release_code,
+      void *workspace,
+      int access_key);</pre>
+<p>Claims exclusive use of a device</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>release_code</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>access_key</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="scsireserve_claim">scsireserve_claim</h3>
+<pre>extern void scsireserve_claim (int device_id,
+      asm_routine release_code,
+      void *workspace,
+      int access_key);</pre>
+<p>Claims exclusive use of a device</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>release_code</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>access_key</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xscsireserve_force_claim">xscsireserve_force_claim</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsireserve_force_claim (int device_id,
+      asm_routine release_code,
+      void *workspace,
+      int access_key);</pre>
+<p>Claims exclusive use of a device, and if the device is already claimed, calls the release code for the current claimant</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>release_code</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>access_key</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="scsireserve_force_claim">scsireserve_force_claim</h3>
+<pre>extern void scsireserve_force_claim (int device_id,
+      asm_routine release_code,
+      void *workspace,
+      int access_key);</pre>
+<p>Claims exclusive use of a device, and if the device is already claimed, calls the release code for the current claimant</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>release_code</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>access_key</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xscsireserve_release">xscsireserve_release</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsireserve_release (int device_id,
+      int access_key);</pre>
+<p>Removes the claim to a device</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>access_key</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="scsireserve_release">scsireserve_release</h3>
+<pre>extern void scsireserve_release (int device_id,
+      int access_key);</pre>
+<p>Removes the claim to a device</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>device_id</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>access_key</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="xscsi_list">xscsi_list</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscsi_list (<a href="#scsi_card_address_list">scsi_card_address_list</a> const *list);</pre>
+<p>Used by SCSILog as part of the multiple SCSI-card initialisation sequence</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>list</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="scsi_list">scsi_list</h3>
+<pre>extern void scsi_list (<a href="#scsi_card_address_list">scsi_card_address_list</a> const *list);</pre>
+<p>Used by SCSILog as part of the multiple SCSI-card initialisation sequence</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>list</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

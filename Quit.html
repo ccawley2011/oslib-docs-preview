@@ -1,0 +1,272 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Quit</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Quit</h2>
+
+<pre>#include "oslib/quit.h"</pre>
+
+<h3 id="quit_flags">quit_flags</h3>
+<pre>typedef bits quit_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#quit_GENERATE_ABOUT_TO_BE_SHOWN">quit_GENERATE_ABOUT_TO_BE_SHOWN</a></dd>
+<dd><a href="#quit_GENERATE_DIALOGUE_COMPLETED">quit_GENERATE_DIALOGUE_COMPLETED</a></dd>
+</dl>
+
+<h3 id="quit_object">quit_object</h3>
+<pre>typedef struct
+   {  <a href="#quit_flags">quit_flags</a> flags;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> title;
+      int title_limit;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> message;
+      int message_limit;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> alternative_window_name;
+   }
+   quit_object;</pre>
+
+<p>Structure to describe Object for in-memory construction - referenced from Toolbox_Template</p>
+
+<h3 id="quit_object_template">quit_object_template</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_RESOURCE_FILE_OBJECT_MEMBERS">toolbox_RESOURCE_FILE_OBJECT_MEMBERS</a>
+      <a href="#quit_flags">quit_flags</a> objectflags;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> title;
+      int title_limit;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> message;
+      int message_limit;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> alternative_window_name;
+   }
+   quit_object_template;</pre>
+
+<h3 id="quit_full">quit_full</h3>
+<pre>typedef <a href="os.html#os_coord">os_coord</a> quit_full;</pre>
+
+<h3 id="quit_action_about_to_be_shown">quit_action_about_to_be_shown</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#quit_full">quit_full</a> full;
+      }
+      position;
+   }
+   quit_action_about_to_be_shown;</pre>
+
+<p>Prefer Quit_ActionAboutToBeShownBlock</p>
+
+<h3 id="quit_action_about_to_be_shown_block">quit_action_about_to_be_shown_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#quit_full">quit_full</a> full;
+      }
+      position;
+   }
+   quit_action_about_to_be_shown_block;</pre>
+
+<h3 id="quit_action_quit_block">quit_action_quit_block</h3>
+<pre>typedef <a href="toolbox.html#toolbox_action_header_base">toolbox_action_header_base</a> quit_action_quit_block;</pre>
+
+<h3 id="quit_action_dialogue_completed_block">quit_action_dialogue_completed_block</h3>
+<pre>typedef <a href="toolbox.html#toolbox_action_header_base">toolbox_action_header_base</a> quit_action_dialogue_completed_block;</pre>
+
+<h3 id="quit_action_cancel_block">quit_action_cancel_block</h3>
+<pre>typedef <a href="toolbox.html#toolbox_action_header_base">toolbox_action_header_base</a> quit_action_cancel_block;</pre>
+
+<h3 id="class_QUIT">class_QUIT</h3>
+<pre>#define class_QUIT ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x82A90u)</pre>
+
+<h3 id="quit_GENERATE_ABOUT_TO_BE_SHOWN">quit_GENERATE_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define quit_GENERATE_ABOUT_TO_BE_SHOWN ((<a href="#quit_flags">quit_flags</a>) 0x1u)</pre>
+
+<h3 id="quit_GENERATE_DIALOGUE_COMPLETED">quit_GENERATE_DIALOGUE_COMPLETED</h3>
+<pre>#define quit_GENERATE_DIALOGUE_COMPLETED ((<a href="#quit_flags">quit_flags</a>) 0x2u)</pre>
+
+<h3 id="quit_FILE_TYPE_ICON">quit_FILE_TYPE_ICON</h3>
+<pre>#define quit_FILE_TYPE_ICON ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82A900u)</pre>
+
+<h3 id="quit_QUIT">quit_QUIT</h3>
+<pre>#define quit_QUIT ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82A901u)</pre>
+
+<h3 id="quit_CANCEL">quit_CANCEL</h3>
+<pre>#define quit_CANCEL ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82A902u)</pre>
+
+<h3 id="action_QUIT_ABOUT_TO_BE_SHOWN">action_QUIT_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define action_QUIT_ABOUT_TO_BE_SHOWN 0x82A90u</pre>
+
+<h3 id="action_QUIT_QUIT">action_QUIT_QUIT</h3>
+<pre>#define action_QUIT_QUIT 0x82A91u</pre>
+
+<h3 id="action_QUIT_DIALOGUE_COMPLETED">action_QUIT_DIALOGUE_COMPLETED</h3>
+<pre>#define action_QUIT_DIALOGUE_COMPLETED 0x82A92u</pre>
+
+<h3 id="action_QUIT_CANCEL">action_QUIT_CANCEL</h3>
+<pre>#define action_QUIT_CANCEL 0x82A93u</pre>
+
+<h3 id="xquit_get_window_id">xquit_get_window_id</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xquit_get_window_id (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> quit,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *window);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>quit</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>window</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="quit_get_window_id">quit_get_window_id</h3>
+<pre>extern <a href="toolbox.html#toolbox_o">toolbox_o</a> quit_get_window_id (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> quit);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>quit</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>window</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xquit_set_message">xquit_set_message</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xquit_set_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> quit,
+      char const *message);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>quit</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>message</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="quit_set_message">quit_set_message</h3>
+<pre>extern void quit_set_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> quit,
+      char const *message);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>quit</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>message</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xquit_get_message">xquit_get_message</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xquit_get_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> quit,
+      char *buffer,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>quit</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="quit_get_message">quit_get_message</h3>
+<pre>extern int quit_get_message (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> quit,
+      char *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>quit</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xquit_set_title">xquit_set_title</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xquit_set_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> quit,
+      char const *title);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>quit</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="quit_set_title">quit_set_title</h3>
+<pre>extern void quit_set_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> quit,
+      char const *title);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>quit</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xquit_get_title">xquit_get_title</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xquit_get_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> quit,
+      char *buffer,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>quit</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="quit_get_title">quit_get_title</h3>
+<pre>extern int quit_get_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> quit,
+      char *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>quit</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

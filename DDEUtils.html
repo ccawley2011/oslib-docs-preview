@@ -1,0 +1,366 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; DDEUtils</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>DDEUtils</h2>
+
+<pre>#include "oslib/ddeutils.h"</pre>
+
+<h3 id="ddeutils_message_processing_file">ddeutils_message_processing_file</h3>
+<pre>typedef struct
+   {  char file_name [236];
+   }
+   ddeutils_message_processing_file;</pre>
+
+<h3 id="ddeutils_message_errors_in">ddeutils_message_errors_in</h3>
+<pre>typedef struct
+   {  char file_name [236];
+   }
+   ddeutils_message_errors_in;</pre>
+
+<h3 id="ddeutils_message_error_details">ddeutils_message_error_details</h3>
+<pre>typedef struct
+   {  int line_no;
+      int severity;
+      char message [228];
+   }
+   ddeutils_message_error_details;</pre>
+
+<h3 id="ddeutils_message_info_for_file">ddeutils_message_info_for_file</h3>
+<pre>typedef struct
+   {  char file_name [236];
+   }
+   ddeutils_message_info_for_file;</pre>
+
+<h3 id="ddeutils_message_info_details">ddeutils_message_info_details</h3>
+<pre>typedef struct
+   {  int line_no;
+      int severity;
+      char message [228];
+   }
+   ddeutils_message_info_details;</pre>
+
+<h3 id="ddeutils_full_message_processing_file">ddeutils_full_message_processing_file</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      char file_name [236];
+   }
+   ddeutils_full_message_processing_file;</pre>
+
+<h3 id="ddeutils_full_message_errors_in">ddeutils_full_message_errors_in</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      char file_name [236];
+   }
+   ddeutils_full_message_errors_in;</pre>
+
+<h3 id="ddeutils_full_message_error_details">ddeutils_full_message_error_details</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      int line_no;
+      int severity;
+      char message [228];
+   }
+   ddeutils_full_message_error_details;</pre>
+
+<h3 id="ddeutils_full_message_info_for_file">ddeutils_full_message_info_for_file</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      char file_name [236];
+   }
+   ddeutils_full_message_info_for_file;</pre>
+
+<h3 id="ddeutils_full_message_info_details">ddeutils_full_message_info_details</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      int line_no;
+      int severity;
+      char message [228];
+   }
+   ddeutils_full_message_info_details;</pre>
+
+<h3 id="ddeutils_SEVERITY_WARNING">ddeutils_SEVERITY_WARNING</h3>
+<pre>#define ddeutils_SEVERITY_WARNING 0</pre>
+
+<h3 id="ddeutils_SEVERITY_ERROR">ddeutils_SEVERITY_ERROR</h3>
+<pre>#define ddeutils_SEVERITY_ERROR 1</pre>
+
+<h3 id="ddeutils_SEVERITY_SERIOUS_ERROR">ddeutils_SEVERITY_SERIOUS_ERROR</h3>
+<pre>#define ddeutils_SEVERITY_SERIOUS_ERROR 2</pre>
+
+<h3 id="ddeutils_THROWBACK_PROCESSING">ddeutils_THROWBACK_PROCESSING</h3>
+<pre>#define ddeutils_THROWBACK_PROCESSING 0</pre>
+
+<h3 id="ddeutils_THROWBACK_ERROR_DETAILS">ddeutils_THROWBACK_ERROR_DETAILS</h3>
+<pre>#define ddeutils_THROWBACK_ERROR_DETAILS 1</pre>
+
+<h3 id="ddeutils_THROWBACK_INFO_DETAILS">ddeutils_THROWBACK_INFO_DETAILS</h3>
+<pre>#define ddeutils_THROWBACK_INFO_DETAILS 2</pre>
+
+<h3 id="error_DDE_UTILS_UNKNOWN_SWI">error_DDE_UTILS_UNKNOWN_SWI</h3>
+<pre>#define error_DDE_UTILS_UNKNOWN_SWI 0x20600u</pre>
+
+<p>Unknown DDEUtils SWI</p>
+
+<h3 id="error_DDE_UTILS_NO_CLI_BUFFER">error_DDE_UTILS_NO_CLI_BUFFER</h3>
+<pre>#define error_DDE_UTILS_NO_CLI_BUFFER 0x20601u</pre>
+
+<p>CLI buffer not set</p>
+
+<h3 id="error_DDE_UTILS_NOT_DESKTOP">error_DDE_UTILS_NOT_DESKTOP</h3>
+<pre>#define error_DDE_UTILS_NOT_DESKTOP 0x20602u</pre>
+
+<p>Throwback not available outside the desktop</p>
+
+<h3 id="error_DDE_UTILS_NO_TASK">error_DDE_UTILS_NO_TASK</h3>
+<pre>#define error_DDE_UTILS_NO_TASK 0x20603u</pre>
+
+<p>No task registered for throwback</p>
+
+<h3 id="error_DDE_UTILS_ALREADY_REGISTERED">error_DDE_UTILS_ALREADY_REGISTERED</h3>
+<pre>#define error_DDE_UTILS_ALREADY_REGISTERED 0x20604u</pre>
+
+<p>Another task is registered for throwback</p>
+
+<h3 id="error_DDE_UTILS_NOT_REGISTERED">error_DDE_UTILS_NOT_REGISTERED</h3>
+<pre>#define error_DDE_UTILS_NOT_REGISTERED 0x20605u</pre>
+
+<p>Task not registered for throwback</p>
+
+<h3 id="message_DDE_UTILS_THROWBACK_START">message_DDE_UTILS_THROWBACK_START</h3>
+<pre>#define message_DDE_UTILS_THROWBACK_START 0x42580u</pre>
+
+<h3 id="message_DDE_UTILS_PROCESSING_FILE">message_DDE_UTILS_PROCESSING_FILE</h3>
+<pre>#define message_DDE_UTILS_PROCESSING_FILE 0x42581u</pre>
+
+<h3 id="message_DDE_UTILS_ERRORS_IN">message_DDE_UTILS_ERRORS_IN</h3>
+<pre>#define message_DDE_UTILS_ERRORS_IN 0x42582u</pre>
+
+<h3 id="message_DDE_UTILS_ERROR_DETAILS">message_DDE_UTILS_ERROR_DETAILS</h3>
+<pre>#define message_DDE_UTILS_ERROR_DETAILS 0x42583u</pre>
+
+<h3 id="message_DDE_UTILS_THROWBACK_END">message_DDE_UTILS_THROWBACK_END</h3>
+<pre>#define message_DDE_UTILS_THROWBACK_END 0x42584u</pre>
+
+<h3 id="message_DDE_UTILS_INFO_FOR_FILE">message_DDE_UTILS_INFO_FOR_FILE</h3>
+<pre>#define message_DDE_UTILS_INFO_FOR_FILE 0x42585u</pre>
+
+<h3 id="message_DDE_UTILS_INFO_DETAILS">message_DDE_UTILS_INFO_DETAILS</h3>
+<pre>#define message_DDE_UTILS_INFO_DETAILS 0x42586u</pre>
+
+<h3 id="xddeutils_prefix">xddeutils_prefix</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xddeutils_prefix (char const *dir_name);</pre>
+<p>Sets a directory name to be prefixed to all relative file names used by this task</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_name</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="ddeutils_prefix">ddeutils_prefix</h3>
+<pre>extern void ddeutils_prefix (char const *dir_name);</pre>
+<p>Sets a directory name to be prefixed to all relative file names used by this task</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_name</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xddeutils_set_cl_size">xddeutils_set_cl_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xddeutils_set_cl_size (int size);</pre>
+<p>Allocates a buffer for an extended command line of the given size</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="ddeutils_set_cl_size">ddeutils_set_cl_size</h3>
+<pre>extern void ddeutils_set_cl_size (int size);</pre>
+<p>Allocates a buffer for an extended command line of the given size</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xddeutils_set_cl">xddeutils_set_cl</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xddeutils_set_cl (char const *tail);</pre>
+<p>Copies a command line tail into the (previously allocated) extended command line buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tail</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="ddeutils_set_cl">ddeutils_set_cl</h3>
+<pre>extern void ddeutils_set_cl (char const *tail);</pre>
+<p>Copies a command line tail into the (previously allocated) extended command line buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tail</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xddeutils_get_cl_size">xddeutils_get_cl_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xddeutils_get_cl_size (int *size);</pre>
+<p>Reads length of the extended command line</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="ddeutils_get_cl_size">ddeutils_get_cl_size</h3>
+<pre>extern int ddeutils_get_cl_size (void);
+</pre><p>Reads length of the extended command line</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xddeutils_get_cl">xddeutils_get_cl</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xddeutils_get_cl (char *tail);</pre>
+<p>Fetches a program's extended command line</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tail</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="ddeutils_get_cl">ddeutils_get_cl</h3>
+<pre>extern void ddeutils_get_cl (char *tail);</pre>
+<p>Fetches a program's extended command line</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tail</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xddeutils_throwback_register">xddeutils_throwback_register</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xddeutils_throwback_register (<a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>Registers the task which will receive any throwback messages issued by the DDEUtils module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="ddeutils_throwback_register">ddeutils_throwback_register</h3>
+<pre>extern void ddeutils_throwback_register (<a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>Registers the task which will receive any throwback messages issued by the DDEUtils module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xddeutils_throwback_un_register">xddeutils_throwback_un_register</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xddeutils_throwback_un_register (<a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="ddeutils_throwback_un_register">ddeutils_throwback_un_register</h3>
+<pre>extern void ddeutils_throwback_un_register (<a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xddeutils_throwback_start">xddeutils_throwback_start</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xddeutils_throwback_start (void);
+</pre>
+<table>
+</table>
+
+<h3 id="ddeutils_throwback_start">ddeutils_throwback_start</h3>
+<pre>extern void ddeutils_throwback_start (void);
+</pre>
+<table>
+</table>
+
+<h3 id="xddeutils_throwback_send">xddeutils_throwback_send</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xddeutils_throwback_send (int reason,
+      char const *file_name,
+      int line_no,
+      int severity,
+      char const *message);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>reason</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>line_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>severity</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>message</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="ddeutils_throwback_send">ddeutils_throwback_send</h3>
+<pre>extern void ddeutils_throwback_send (int reason,
+      char const *file_name,
+      int line_no,
+      int severity,
+      char const *message);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>reason</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>line_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>severity</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>message</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xddeutils_throwback_end">xddeutils_throwback_end</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xddeutils_throwback_end (void);
+</pre>
+<table>
+</table>
+
+<h3 id="ddeutils_throwback_end">ddeutils_throwback_end</h3>
+<pre>extern void ddeutils_throwback_end (void);
+</pre>
+<table>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1431 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; OSModule</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>OSModule</h2>
+
+<pre>#include "oslib/osmodule.h"</pre>
+
+<h3 id="osmodule_section_no">osmodule_section_no</h3>
+<pre>typedef int osmodule_section_no;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osmodule_SECTION_SYSTEM">osmodule_SECTION_SYSTEM</a></dd>
+<dd><a href="#osmodule_SECTION_CARD0">osmodule_SECTION_CARD0</a></dd>
+<dd><a href="#osmodule_SECTION_CARD1">osmodule_SECTION_CARD1</a></dd>
+<dd><a href="#osmodule_SECTION_CARD2">osmodule_SECTION_CARD2</a></dd>
+<dd><a href="#osmodule_SECTION_CARD3">osmodule_SECTION_CARD3</a></dd>
+<dd><a href="#osmodule_SECTION_ROM1">osmodule_SECTION_ROM1</a></dd>
+<dd><a href="#osmodule_SECTION_ROM2">osmodule_SECTION_ROM2</a></dd>
+<dd><a href="#osmodule_SECTION_ROM3">osmodule_SECTION_ROM3</a></dd>
+<dd><a href="#osmodule_SECTION_ROM4">osmodule_SECTION_ROM4</a></dd>
+</dl>
+
+<h3 id="osmodule_status">osmodule_status</h3>
+<pre>typedef int osmodule_status;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osmodule_STATUS_UNSUITABLE">osmodule_STATUS_UNSUITABLE</a></dd>
+<dd><a href="#osmodule_STATUS_UNPLUGGED">osmodule_STATUS_UNPLUGGED</a></dd>
+<dd><a href="#osmodule_STATUS_DORMANT">osmodule_STATUS_DORMANT</a></dd>
+<dd><a href="#osmodule_STATUS_ACTIVE">osmodule_STATUS_ACTIVE</a></dd>
+<dd><a href="#osmodule_STATUS_RUNNING">osmodule_STATUS_RUNNING</a></dd>
+</dl>
+
+<h3 id="osmodule_info_flags">osmodule_info_flags</h3>
+<pre>typedef bits osmodule_info_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osmodule_INFO_FS_COMMAND">osmodule_INFO_FS_COMMAND</a></dd>
+<dd><a href="#osmodule_INFO_CONFIGURATION">osmodule_INFO_CONFIGURATION</a></dd>
+<dd><a href="#osmodule_INFO_HELP">osmodule_INFO_HELP</a></dd>
+<dd><a href="#osmodule_INFO_LOOKUP_STRINGS">osmodule_INFO_LOOKUP_STRINGS</a></dd>
+</dl>
+
+<h3 id="osmodule_flags">osmodule_flags</h3>
+<pre>typedef bits osmodule_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osmodule_32_BIT_COMPATIBLE">osmodule_32_BIT_COMPATIBLE</a></dd>
+<dd><a href="#osmodule_EARLY_ROM_INITIALISATION">osmodule_EARLY_ROM_INITIALISATION</a></dd>
+</dl>
+
+<h3 id="osmodule_state_action">osmodule_state_action</h3>
+<pre>typedef int osmodule_state_action;</pre>
+
+<p>Used in OSModule_ChangeState</p>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osmodule_ACTION_UNPLUG">osmodule_ACTION_UNPLUG</a></dd>
+<dd><a href="#osmodule_ACTION_INSERT">osmodule_ACTION_INSERT</a></dd>
+</dl>
+
+<h3 id="osmodule_state_event">osmodule_state_event</h3>
+<pre>typedef int osmodule_state_event;</pre>
+
+<p>Used in Service_ModuleStatus and Service_ModuleStatusInstanceRenamed</p>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osmodule_EVENT_INITIALISATION">osmodule_EVENT_INITIALISATION</a></dd>
+<dd><a href="#osmodule_EVENT_FINALISATION">osmodule_EVENT_FINALISATION</a></dd>
+<dd><a href="#osmodule_EVENT_CHANGED_PREFERRED_INSTANCE">osmodule_EVENT_CHANGED_PREFERRED_INSTANCE</a></dd>
+<dd><a href="#osmodule_EVENT_RENAMED_INSTANCE">osmodule_EVENT_RENAMED_INSTANCE</a></dd>
+</dl>
+
+<h3 id="osmodule_ENTRY_START">osmodule_ENTRY_START</h3>
+<pre>#define osmodule_ENTRY_START 0</pre>
+
+<p>Offset to start entry point</p>
+
+<h3 id="osmodule_ENTRY_INIT">osmodule_ENTRY_INIT</h3>
+<pre>#define osmodule_ENTRY_INIT 4</pre>
+
+<p>Offset to initialisation entry point</p>
+
+<h3 id="osmodule_ENTRY_DIE">osmodule_ENTRY_DIE</h3>
+<pre>#define osmodule_ENTRY_DIE 8</pre>
+
+<p>Offset to termination entry point</p>
+
+<h3 id="osmodule_ENTRY_SERVICE">osmodule_ENTRY_SERVICE</h3>
+<pre>#define osmodule_ENTRY_SERVICE 12</pre>
+
+<p>Offset to service entry point</p>
+
+<h3 id="osmodule_ENTRY_TITLE">osmodule_ENTRY_TITLE</h3>
+<pre>#define osmodule_ENTRY_TITLE 16</pre>
+
+<p>Offset to title</p>
+
+<h3 id="osmodule_ENTRY_HELP">osmodule_ENTRY_HELP</h3>
+<pre>#define osmodule_ENTRY_HELP 20</pre>
+
+<p>Offset to help</p>
+
+<h3 id="osmodule_ENTRY_TABLE">osmodule_ENTRY_TABLE</h3>
+<pre>#define osmodule_ENTRY_TABLE 24</pre>
+
+<p>Offset to help table</p>
+
+<h3 id="osmodule_ENTRY_SWI_CHUNK">osmodule_ENTRY_SWI_CHUNK</h3>
+<pre>#define osmodule_ENTRY_SWI_CHUNK 28</pre>
+
+<p>Offset to SWI chunk number</p>
+
+<h3 id="osmodule_ENTRY_SWI_ENTRY">osmodule_ENTRY_SWI_ENTRY</h3>
+<pre>#define osmodule_ENTRY_SWI_ENTRY 32</pre>
+
+<p>Offset to SWI entry point</p>
+
+<h3 id="osmodule_ENTRY_NAME_TABLE">osmodule_ENTRY_NAME_TABLE</h3>
+<pre>#define osmodule_ENTRY_NAME_TABLE 36</pre>
+
+<p>Offset to SWI name table</p>
+
+<h3 id="osmodule_ENTRY_NAME_CODE">osmodule_ENTRY_NAME_CODE</h3>
+<pre>#define osmodule_ENTRY_NAME_CODE 40</pre>
+
+<p>Offset to SWI name code</p>
+
+<h3 id="osmodule_ENTRY_MESSAGE_FILE">osmodule_ENTRY_MESSAGE_FILE</h3>
+<pre>#define osmodule_ENTRY_MESSAGE_FILE 44</pre>
+
+<p>Offset to messages file name - RISC OS 3.6+</p>
+
+<h3 id="osmodule_ENTRY_FLAGS_OFFSET">osmodule_ENTRY_FLAGS_OFFSET</h3>
+<pre>#define osmodule_ENTRY_FLAGS_OFFSET 48</pre>
+
+<p>Offset to flag word(s), see OSModule_Flags</p>
+
+<h3 id="osmodule_SWI_CHUNK_SIZE">osmodule_SWI_CHUNK_SIZE</h3>
+<pre>#define osmodule_SWI_CHUNK_SIZE 64</pre>
+
+<h3 id="osmodule_SWI_SYSTEM_BASE">osmodule_SWI_SYSTEM_BASE</h3>
+<pre>#define osmodule_SWI_SYSTEM_BASE 262144</pre>
+
+<h3 id="osmodule_SWI_APPLICATION_BASE">osmodule_SWI_APPLICATION_BASE</h3>
+<pre>#define osmodule_SWI_APPLICATION_BASE 524288</pre>
+
+<h3 id="osmodule_SWI_USER_BASE">osmodule_SWI_USER_BASE</h3>
+<pre>#define osmodule_SWI_USER_BASE 786432</pre>
+
+<h3 id="osmodule_SECTION_SYSTEM">osmodule_SECTION_SYSTEM</h3>
+<pre>#define osmodule_SECTION_SYSTEM ((<a href="#osmodule_section_no">osmodule_section_no</a>) 0xFFFFFFFFu)</pre>
+
+<h3 id="osmodule_SECTION_CARD0">osmodule_SECTION_CARD0</h3>
+<pre>#define osmodule_SECTION_CARD0 ((<a href="#osmodule_section_no">osmodule_section_no</a>) 0x0u)</pre>
+
+<h3 id="osmodule_SECTION_CARD1">osmodule_SECTION_CARD1</h3>
+<pre>#define osmodule_SECTION_CARD1 ((<a href="#osmodule_section_no">osmodule_section_no</a>) 0x1u)</pre>
+
+<h3 id="osmodule_SECTION_CARD2">osmodule_SECTION_CARD2</h3>
+<pre>#define osmodule_SECTION_CARD2 ((<a href="#osmodule_section_no">osmodule_section_no</a>) 0x2u)</pre>
+
+<h3 id="osmodule_SECTION_CARD3">osmodule_SECTION_CARD3</h3>
+<pre>#define osmodule_SECTION_CARD3 ((<a href="#osmodule_section_no">osmodule_section_no</a>) 0x3u)</pre>
+
+<h3 id="osmodule_SECTION_ROM1">osmodule_SECTION_ROM1</h3>
+<pre>#define osmodule_SECTION_ROM1 ((<a href="#osmodule_section_no">osmodule_section_no</a>) 0xFFFFFFFEu)</pre>
+
+<h3 id="osmodule_SECTION_ROM2">osmodule_SECTION_ROM2</h3>
+<pre>#define osmodule_SECTION_ROM2 ((<a href="#osmodule_section_no">osmodule_section_no</a>) 0xFFFFFFFDu)</pre>
+
+<h3 id="osmodule_SECTION_ROM3">osmodule_SECTION_ROM3</h3>
+<pre>#define osmodule_SECTION_ROM3 ((<a href="#osmodule_section_no">osmodule_section_no</a>) 0xFFFFFFFCu)</pre>
+
+<h3 id="osmodule_SECTION_ROM4">osmodule_SECTION_ROM4</h3>
+<pre>#define osmodule_SECTION_ROM4 ((<a href="#osmodule_section_no">osmodule_section_no</a>) 0xFFFFFFFBu)</pre>
+
+<h3 id="osmodule_STATUS_UNSUITABLE">osmodule_STATUS_UNSUITABLE</h3>
+<pre>#define osmodule_STATUS_UNSUITABLE ((<a href="#osmodule_status">osmodule_status</a>) 0xFFFFFFFEu)</pre>
+
+<p>RISC OS 6</p>
+
+<h3 id="osmodule_STATUS_UNPLUGGED">osmodule_STATUS_UNPLUGGED</h3>
+<pre>#define osmodule_STATUS_UNPLUGGED ((<a href="#osmodule_status">osmodule_status</a>) 0xFFFFFFFFu)</pre>
+
+<h3 id="osmodule_STATUS_DORMANT">osmodule_STATUS_DORMANT</h3>
+<pre>#define osmodule_STATUS_DORMANT ((<a href="#osmodule_status">osmodule_status</a>) 0x0u)</pre>
+
+<h3 id="osmodule_STATUS_ACTIVE">osmodule_STATUS_ACTIVE</h3>
+<pre>#define osmodule_STATUS_ACTIVE ((<a href="#osmodule_status">osmodule_status</a>) 0x1u)</pre>
+
+<h3 id="osmodule_STATUS_RUNNING">osmodule_STATUS_RUNNING</h3>
+<pre>#define osmodule_STATUS_RUNNING ((<a href="#osmodule_status">osmodule_status</a>) 0x2u)</pre>
+
+<h3 id="osmodule_INFO_FS_COMMAND">osmodule_INFO_FS_COMMAND</h3>
+<pre>#define osmodule_INFO_FS_COMMAND ((<a href="#osmodule_info_flags">osmodule_info_flags</a>) 0x80u)</pre>
+
+<h3 id="osmodule_INFO_CONFIGURATION">osmodule_INFO_CONFIGURATION</h3>
+<pre>#define osmodule_INFO_CONFIGURATION ((<a href="#osmodule_info_flags">osmodule_info_flags</a>) 0x40u)</pre>
+
+<h3 id="osmodule_INFO_HELP">osmodule_INFO_HELP</h3>
+<pre>#define osmodule_INFO_HELP ((<a href="#osmodule_info_flags">osmodule_info_flags</a>) 0x20u)</pre>
+
+<h3 id="osmodule_INFO_LOOKUP_STRINGS">osmodule_INFO_LOOKUP_STRINGS</h3>
+<pre>#define osmodule_INFO_LOOKUP_STRINGS ((<a href="#osmodule_info_flags">osmodule_info_flags</a>) 0x10u)</pre>
+
+<p>RISC OS 3.6+</p>
+
+<h3 id="osmodule_32_BIT_COMPATIBLE">osmodule_32_BIT_COMPATIBLE</h3>
+<pre>#define osmodule_32_BIT_COMPATIBLE ((<a href="#osmodule_flags">osmodule_flags</a>) 0x1u)</pre>
+
+<h3 id="osmodule_EARLY_ROM_INITIALISATION">osmodule_EARLY_ROM_INITIALISATION</h3>
+<pre>#define osmodule_EARLY_ROM_INITIALISATION ((<a href="#osmodule_flags">osmodule_flags</a>) 0x2u)</pre>
+
+<p>RISC OS 6</p>
+
+<h3 id="osmodule_ACTION_UNPLUG">osmodule_ACTION_UNPLUG</h3>
+<pre>#define osmodule_ACTION_UNPLUG ((<a href="#osmodule_state_action">osmodule_state_action</a>) 0x0u)</pre>
+
+<h3 id="osmodule_ACTION_INSERT">osmodule_ACTION_INSERT</h3>
+<pre>#define osmodule_ACTION_INSERT ((<a href="#osmodule_state_action">osmodule_state_action</a>) 0x1u)</pre>
+
+<h3 id="osmodule_EVENT_INITIALISATION">osmodule_EVENT_INITIALISATION</h3>
+<pre>#define osmodule_EVENT_INITIALISATION ((<a href="#osmodule_state_event">osmodule_state_event</a>) 0x0u)</pre>
+
+<h3 id="osmodule_EVENT_FINALISATION">osmodule_EVENT_FINALISATION</h3>
+<pre>#define osmodule_EVENT_FINALISATION ((<a href="#osmodule_state_event">osmodule_state_event</a>) 0x1u)</pre>
+
+<h3 id="osmodule_EVENT_CHANGED_PREFERRED_INSTANCE">osmodule_EVENT_CHANGED_PREFERRED_INSTANCE</h3>
+<pre>#define osmodule_EVENT_CHANGED_PREFERRED_INSTANCE ((<a href="#osmodule_state_event">osmodule_state_event</a>) 0x2u)</pre>
+
+<h3 id="osmodule_EVENT_RENAMED_INSTANCE">osmodule_EVENT_RENAMED_INSTANCE</h3>
+<pre>#define osmodule_EVENT_RENAMED_INSTANCE ((<a href="#osmodule_state_event">osmodule_state_event</a>) 0x3u)</pre>
+
+<h3 id="error_MODULE_NOT_MOD">error_MODULE_NOT_MOD</h3>
+<pre>#define error_MODULE_NOT_MOD 0x100u</pre>
+
+<h3 id="error_MODULE_MH_NO_ROOM">error_MODULE_MH_NO_ROOM</h3>
+<pre>#define error_MODULE_MH_NO_ROOM 0x101u</pre>
+
+<h3 id="error_MODULE_RM_NOT_FOUND">error_MODULE_RM_NOT_FOUND</h3>
+<pre>#define error_MODULE_RM_NOT_FOUND 0x102u</pre>
+
+<h3 id="error_MODULE_CANT_KILL">error_MODULE_CANT_KILL</h3>
+<pre>#define error_MODULE_CANT_KILL 0x103u</pre>
+
+<h3 id="error_MODULE_CANT_KILL2">error_MODULE_CANT_KILL2</h3>
+<pre>#define error_MODULE_CANT_KILL2 0x103u</pre>
+
+<h3 id="error_MODULE_WIMP_CANT_KILL">error_MODULE_WIMP_CANT_KILL</h3>
+<pre>#define error_MODULE_WIMP_CANT_KILL 0x104u</pre>
+
+<h3 id="error_MODULE_BAD_MODULE_REASON">error_MODULE_BAD_MODULE_REASON</h3>
+<pre>#define error_MODULE_BAD_MODULE_REASON 0x105u</pre>
+
+<h3 id="error_MODULE_BAD_DYNAMIC_AREA">error_MODULE_BAD_DYNAMIC_AREA</h3>
+<pre>#define error_MODULE_BAD_DYNAMIC_AREA 0x105u</pre>
+
+<h3 id="error_MODULE_RM_NOT_FOUND_IN_ROM">error_MODULE_RM_NOT_FOUND_IN_ROM</h3>
+<pre>#define error_MODULE_RM_NOT_FOUND_IN_ROM 0x106u</pre>
+
+<h3 id="error_MODULE_MODULE_POSTFIX">error_MODULE_MODULE_POSTFIX</h3>
+<pre>#define error_MODULE_MODULE_POSTFIX 0x107u</pre>
+
+<h3 id="error_MODULE_NO_MORE_MODULES">error_MODULE_NO_MORE_MODULES</h3>
+<pre>#define error_MODULE_NO_MORE_MODULES 0x108u</pre>
+
+<h3 id="error_MODULE_NO_MORE_INCARNATIONS">error_MODULE_NO_MORE_INCARNATIONS</h3>
+<pre>#define error_MODULE_NO_MORE_INCARNATIONS 0x109u</pre>
+
+<h3 id="error_MODULE_POSTFIX_NEEDED">error_MODULE_POSTFIX_NEEDED</h3>
+<pre>#define error_MODULE_POSTFIX_NEEDED 0x109u</pre>
+
+<h3 id="error_MODULE_INCARNATION_EXISTS">error_MODULE_INCARNATION_EXISTS</h3>
+<pre>#define error_MODULE_INCARNATION_EXISTS 0x10Bu</pre>
+
+<h3 id="error_MODULE_INCARNATION_NOT_FOUND">error_MODULE_INCARNATION_NOT_FOUND</h3>
+<pre>#define error_MODULE_INCARNATION_NOT_FOUND 0x10Cu</pre>
+
+<h3 id="error_MODULE_CHUNK_NOT_RM">error_MODULE_CHUNK_NOT_RM</h3>
+<pre>#define error_MODULE_CHUNK_NOT_RM 0x10Du</pre>
+
+<h3 id="error_MODULE_BAD_RM_HEADER_FIELD">error_MODULE_BAD_RM_HEADER_FIELD</h3>
+<pre>#define error_MODULE_BAD_RM_HEADER_FIELD 0x10Eu</pre>
+
+<h3 id="error_MODULE_MODULE_TOO_OLD">error_MODULE_MODULE_TOO_OLD</h3>
+<pre>#define error_MODULE_MODULE_TOO_OLD 0x10Fu</pre>
+
+<h3 id="error_MODULE_MODULE_BAD_SWI">error_MODULE_MODULE_BAD_SWI</h3>
+<pre>#define error_MODULE_MODULE_BAD_SWI 0x110u</pre>
+
+<h3 id="error_MODULE_MODULE_IN_USE">error_MODULE_MODULE_IN_USE</h3>
+<pre>#define error_MODULE_MODULE_IN_USE 0x111u</pre>
+
+<h3 id="error_MODULE_BAD_FILING_SYSTEM_OPERATION">error_MODULE_BAD_FILING_SYSTEM_OPERATION</h3>
+<pre>#define error_MODULE_BAD_FILING_SYSTEM_OPERATION 0x112u</pre>
+
+<h3 id="error_MODULE_FILING_SYSTEM_READ_ONLY">error_MODULE_FILING_SYSTEM_READ_ONLY</h3>
+<pre>#define error_MODULE_FILING_SYSTEM_READ_ONLY 0x113u</pre>
+
+<h3 id="error_MODULE_NOT_ADIR">error_MODULE_NOT_ADIR</h3>
+<pre>#define error_MODULE_NOT_ADIR 0x114u</pre>
+
+<h3 id="xosmodule_run">xosmodule_run</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosmodule_run (char const *tail);</pre>
+<p>Loads, initialises and enters a module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tail</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osmodule_run">osmodule_run</h3>
+<pre>extern void osmodule_run (char const *tail);</pre>
+<p>Loads, initialises and enters a module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tail</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosmodule_load">xosmodule_load</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosmodule_load (char const *tail);</pre>
+<p>Loads a module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tail</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osmodule_load">osmodule_load</h3>
+<pre>extern void osmodule_load (char const *tail);</pre>
+<p>Loads a module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tail</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosmodule_enter">xosmodule_enter</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosmodule_enter (char const *module_name,
+      char const *args);</pre>
+<p>Enters a module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>args</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osmodule_enter">osmodule_enter</h3>
+<pre>extern void osmodule_enter (char const *module_name,
+      char const *args);</pre>
+<p>Enters a module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>args</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosmodule_reinit">xosmodule_reinit</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosmodule_reinit (char const *tail);</pre>
+<p>Reloads a module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tail</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osmodule_reinit">osmodule_reinit</h3>
+<pre>extern void osmodule_reinit (char const *tail);</pre>
+<p>Reloads a module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tail</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosmodule_kill">xosmodule_kill</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosmodule_kill (char const *module_name);</pre>
+<p>Deletes a module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osmodule_kill">osmodule_kill</h3>
+<pre>extern void osmodule_kill (char const *module_name);</pre>
+<p>Deletes a module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosmodule_info">xosmodule_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosmodule_info (int *max,
+      int *free);</pre>
+<p>Describes the RMA</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>max</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>free</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osmodule_info">osmodule_info</h3>
+<pre>extern int osmodule_info (int *max);</pre>
+<p>Describes the RMA</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>max</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>free</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xosmodule_alloc">xosmodule_alloc</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosmodule_alloc (int size,
+      void **blk);</pre>
+<p>Claims a block of workspace in the RMA</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>blk</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osmodule_alloc">osmodule_alloc</h3>
+<pre>extern void *osmodule_alloc (int size);</pre>
+<p>Claims a block of workspace in the RMA</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>blk</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosmodule_free">xosmodule_free</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosmodule_free (void *blk);</pre>
+<p>Frees a block of workspace in the RMA</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>blk</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osmodule_free">osmodule_free</h3>
+<pre>extern void osmodule_free (void *blk);</pre>
+<p>Frees a block of workspace in the RMA</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>blk</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosmodule_tidy">xosmodule_tidy</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosmodule_tidy (void);
+</pre><p>Tidies modules</p>
+
+
+<table>
+</table>
+
+<h3 id="osmodule_tidy">osmodule_tidy</h3>
+<pre>extern void osmodule_tidy (void);
+</pre><p>Tidies modules</p>
+
+
+<table>
+</table>
+
+<h3 id="xosmodule_clear">xosmodule_clear</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosmodule_clear (void);
+</pre><p>Clears all modules</p>
+
+
+<table>
+</table>
+
+<h3 id="osmodule_clear">osmodule_clear</h3>
+<pre>extern void osmodule_clear (void);
+</pre><p>Clears all modules</p>
+
+
+<table>
+</table>
+
+<h3 id="xosmodule_add_area">xosmodule_add_area</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosmodule_add_area (byte const *module);</pre>
+<p>Inserts a module from memory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osmodule_add_area">osmodule_add_area</h3>
+<pre>extern void osmodule_add_area (byte const *module);</pre>
+<p>Inserts a module from memory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosmodule_copy_area">xosmodule_copy_area</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosmodule_copy_area (byte const *module,
+      int size);</pre>
+<p>Inserts a module from memory and moves it into the RMA</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osmodule_copy_area">osmodule_copy_area</h3>
+<pre>extern void osmodule_copy_area (byte const *module,
+      int size);</pre>
+<p>Inserts a module from memory and moves it into the RMA</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosmodule_enumerate">xosmodule_enumerate</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosmodule_enumerate (int module_no,
+      int instance_no,
+      int *module_no_out,
+      int *instance_no_out,
+      byte **module,
+      void **workspace,
+      char **postfix);</pre>
+<p>Extracts module information</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>instance_no</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>module_no_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>instance_no_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>module</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>postfix</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osmodule_enumerate">osmodule_enumerate</h3>
+<pre>extern int osmodule_enumerate (int module_no,
+      int instance_no,
+      int *instance_no_out,
+      byte **module,
+      void **workspace,
+      char **postfix);</pre>
+<p>Extracts module information</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>instance_no</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>instance_no_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>module</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>postfix</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>module_no_out</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xosmodule_realloc">xosmodule_realloc</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosmodule_realloc (void *blk,
+      int size_increase,
+      void **blk_out);</pre>
+<p>Extends a block of workspace in the RMA by a given size</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>blk</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size_increase</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>blk_out</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osmodule_realloc">osmodule_realloc</h3>
+<pre>extern void *osmodule_realloc (void *blk,
+      int size_increase);</pre>
+<p>Extends a block of workspace in the RMA by a given size</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>blk</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size_increase</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>blk_out</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosmodule_instantiate">xosmodule_instantiate</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosmodule_instantiate (char const *instance_name);</pre>
+<p>Creates a new instance of a module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>instance_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osmodule_instantiate">osmodule_instantiate</h3>
+<pre>extern void osmodule_instantiate (char const *instance_name);</pre>
+<p>Creates a new instance of a module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>instance_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosmodule_rename">xosmodule_rename</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosmodule_rename (char const *old_name,
+      char const *new_postfix);</pre>
+<p>Renames an instance of a module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>old_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>new_postfix</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osmodule_rename">osmodule_rename</h3>
+<pre>extern void osmodule_rename (char const *old_name,
+      char const *new_postfix);</pre>
+<p>Renames an instance of a module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>old_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>new_postfix</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosmodule_prefer">xosmodule_prefer</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosmodule_prefer (char const *instance_name);</pre>
+<p>Selects the preferred instance of a particular module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>instance_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osmodule_prefer">osmodule_prefer</h3>
+<pre>extern void osmodule_prefer (char const *instance_name);</pre>
+<p>Selects the preferred instance of a particular module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>instance_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosmodule_add_podule_area">xosmodule_add_podule_area</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosmodule_add_podule_area (char const *environment,
+      int chunk,
+      <a href="#osmodule_section_no">osmodule_section_no</a> rom_section);</pre>
+<p>Adds an expansion card module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>environment</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>chunk</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>rom_section</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osmodule_add_podule_area">osmodule_add_podule_area</h3>
+<pre>extern void osmodule_add_podule_area (char const *environment,
+      int chunk,
+      <a href="#osmodule_section_no">osmodule_section_no</a> rom_section);</pre>
+<p>Adds an expansion card module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>environment</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>chunk</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>rom_section</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xosmodule_lookup">xosmodule_lookup</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosmodule_lookup (char const *module_name,
+      int *module_no,
+      int *instance_no,
+      byte **module,
+      void **workspace,
+      char **postfix);</pre>
+<p>Looks up a module name</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>module_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>instance_no</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>module</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>postfix</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osmodule_lookup">osmodule_lookup</h3>
+<pre>extern int osmodule_lookup (char const *module_name,
+      int *instance_no,
+      byte **module,
+      void **workspace,
+      char **postfix);</pre>
+<p>Looks up a module name</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>instance_no</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>module</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>postfix</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>module_no</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xosmodule_enumerate_rom">xosmodule_enumerate_rom</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosmodule_enumerate_rom (int module_no,
+      <a href="#osmodule_section_no">osmodule_section_no</a> section,
+      int *module_no_out,
+      <a href="#osmodule_section_no">osmodule_section_no</a> *section_out,
+      char **module_name,
+      <a href="#osmodule_status">osmodule_status</a> *status,
+      int *chunk_no);</pre>
+<p>Enumerates ROM modules</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>section</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>module_no_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>section_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>module_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>status</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>chunk_no</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osmodule_enumerate_rom">osmodule_enumerate_rom</h3>
+<pre>extern int osmodule_enumerate_rom (int module_no,
+      <a href="#osmodule_section_no">osmodule_section_no</a> section,
+      <a href="#osmodule_section_no">osmodule_section_no</a> *section_out,
+      char **module_name,
+      <a href="#osmodule_status">osmodule_status</a> *status,
+      int *chunk_no);</pre>
+<p>Enumerates ROM modules</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>section</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>section_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>module_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>status</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>chunk_no</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>module_no_out</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xosmodule_enumerate_rom_with_info">xosmodule_enumerate_rom_with_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosmodule_enumerate_rom_with_info (int module_no,
+      <a href="#osmodule_section_no">osmodule_section_no</a> section,
+      int *module_no_out,
+      <a href="#osmodule_section_no">osmodule_section_no</a> *section_out,
+      char **module_name,
+      <a href="#osmodule_status">osmodule_status</a> *status,
+      int *chunk_no,
+      int *bcd_version);</pre>
+<p>Enumerates ROM modules with version</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>section</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>module_no_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>section_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>module_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>status</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>chunk_no</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>bcd_version</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="osmodule_enumerate_rom_with_info">osmodule_enumerate_rom_with_info</h3>
+<pre>extern int osmodule_enumerate_rom_with_info (int module_no,
+      <a href="#osmodule_section_no">osmodule_section_no</a> section,
+      <a href="#osmodule_section_no">osmodule_section_no</a> *section_out,
+      char **module_name,
+      <a href="#osmodule_status">osmodule_status</a> *status,
+      int *chunk_no,
+      int *bcd_version);</pre>
+<p>Enumerates ROM modules with version</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>section</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>section_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>module_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>status</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>chunk_no</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>bcd_version</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>module_no_out</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xosmodule_enumerate_with_private_word">xosmodule_enumerate_with_private_word</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosmodule_enumerate_with_private_word (int module_no,
+      int incarnation_number,
+      int *module_no_out,
+      int *incarnation_number_out,
+      byte **module_code,
+      int **private_word,
+      char **postfix);</pre>
+<p>Enumerate modules with private word pointer - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>incarnation_number</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>module_no_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>incarnation_number_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>module_code</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>private_word</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>postfix</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osmodule_enumerate_with_private_word">osmodule_enumerate_with_private_word</h3>
+<pre>extern int osmodule_enumerate_with_private_word (int module_no,
+      int incarnation_number,
+      int *incarnation_number_out,
+      byte **module_code,
+      int **private_word,
+      char **postfix);</pre>
+<p>Enumerate modules with private word pointer - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>incarnation_number</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>incarnation_number_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>module_code</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>private_word</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>postfix</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>module_no_out</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xosmodule_change_state">xosmodule_change_state</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosmodule_change_state (char const *module_name,
+      <a href="#osmodule_state_action">osmodule_state_action</a> action,
+      int podule_number);</pre>
+<p>Unplug or insert modules - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>podule_number</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osmodule_change_state">osmodule_change_state</h3>
+<pre>extern void osmodule_change_state (char const *module_name,
+      <a href="#osmodule_state_action">osmodule_state_action</a> action,
+      int podule_number);</pre>
+<p>Unplug or insert modules - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>action</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>podule_number</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xservice_uk_command">xservice_uk_command</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_uk_command (char const *command,
+      <a href="os.html#os_error">os_error</a> **error,
+      osbool *unclaimed);</pre>
+<p>Unknown command</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>command</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>error</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="service_uk_command">service_uk_command</h3>
+<pre>extern osbool service_uk_command (char const *command,
+      <a href="os.html#os_error">os_error</a> **error);</pre>
+<p>Unknown command</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>command</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>error</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_error">xservice_error</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_error (<a href="os.html#os_error">os_error</a> const *error);</pre>
+<p>An error has occurred</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>error</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="service_error">service_error</h3>
+<pre>extern void service_error (<a href="os.html#os_error">os_error</a> const *error);</pre>
+<p>An error has occurred</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>error</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xservice_uk_byte">xservice_uk_byte</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_uk_byte (int byte,
+      int arg0,
+      int arg1,
+      osbool *unclaimed,
+      int *res0,
+      int *res1);</pre>
+<p>Unknown OS_Byte</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>byte</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>arg0</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>arg1</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>res0</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>res1</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="service_uk_byte">service_uk_byte</h3>
+<pre>extern osbool service_uk_byte (int byte,
+      int arg0,
+      int arg1,
+      int *res0,
+      int *res1);</pre>
+<p>Unknown OS_Byte</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>byte</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>arg0</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>arg1</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>res0</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>res1</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_uk_word">xservice_uk_word</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_uk_word (int word,
+      byte const *block,
+      osbool *unclaimed);</pre>
+<p>Unknown OS_Word</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>word</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="service_uk_word">service_uk_word</h3>
+<pre>extern osbool service_uk_word (int word,
+      byte const *block);</pre>
+<p>Unknown OS_Word</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>word</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_help">xservice_help</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_help (char const *command,
+      osbool *unclaimed);</pre>
+<p>*Help has been called</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>command</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="service_help">service_help</h3>
+<pre>extern osbool service_help (char const *command);</pre>
+<p>*Help has been called</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>command</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_uk_config">xservice_uk_config</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_uk_config (char const *tail,
+      <a href="os.html#os_error">os_error</a> **error,
+      osbool *unclaimed);</pre>
+<p>Unknown *Configure</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tail</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>error</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="service_uk_config">service_uk_config</h3>
+<pre>extern osbool service_uk_config (char const *tail,
+      <a href="os.html#os_error">os_error</a> **error);</pre>
+<p>Unknown *Configure</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tail</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>error</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_uk_status">xservice_uk_status</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_uk_status (char const *tail,
+      osbool *unclaimed);</pre>
+<p>Unknown *Status</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tail</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="service_uk_status">service_uk_status</h3>
+<pre>extern osbool service_uk_status (char const *tail);</pre>
+<p>Unknown *Status</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>tail</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_new_application">xservice_new_application</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_new_application (osbool *unclaimed);</pre>
+<p>Application about to start</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="service_new_application">service_new_application</h3>
+<pre>extern osbool service_new_application (void);
+</pre><p>Application about to start</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_lookup_file_type">xservice_lookup_file_type</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_lookup_file_type (bits file_type,
+      osbool *unclaimed,
+      bits *name1,
+      bits *name2);</pre>
+<p>Look up file type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>name1</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>name2</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="service_lookup_file_type">service_lookup_file_type</h3>
+<pre>extern osbool service_lookup_file_type (bits file_type,
+      bits *name1,
+      bits *name2);</pre>
+<p>Look up file type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_type</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>name1</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>name2</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_post_init">xservice_post_init</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_post_init (void);
+</pre><p>All modules have been initialised</p>
+
+
+<table>
+</table>
+
+<h3 id="service_post_init">service_post_init</h3>
+<pre>extern void service_post_init (void);
+</pre><p>All modules have been initialised</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_syntax_error">xservice_syntax_error</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_syntax_error (int const *offset,
+      byte *base,
+      char const *command,
+      <a href="os.html#os_error">os_error</a> **error,
+      osbool *unclaimed);</pre>
+<p>Syntax error translation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>offset</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>base</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>command</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>error</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="service_syntax_error">service_syntax_error</h3>
+<pre>extern osbool service_syntax_error (int const *offset,
+      byte *base,
+      char const *command,
+      <a href="os.html#os_error">os_error</a> **error);</pre>
+<p>Syntax error translation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>offset</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>base</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>command</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>error</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_module_pre_init">xservice_module_pre_init</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_module_pre_init (byte const *module,
+      int length_plus_four);</pre>
+<p>A module is about to initialise - RISC OS 3.7+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>length_plus_four</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="service_module_pre_init">service_module_pre_init</h3>
+<pre>extern void service_module_pre_init (byte const *module,
+      int length_plus_four);</pre>
+<p>A module is about to initialise - RISC OS 3.7+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>length_plus_four</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xservice_module_status">xservice_module_status</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_module_status (<a href="#osmodule_state_event">osmodule_state_event</a> event,
+      byte const *module,
+      int const *private_word,
+      char const *title,
+      char const *postfix);</pre>
+<p>A significant event has occurred to a module - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>event</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>module</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>private_word</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>postfix</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="service_module_status">service_module_status</h3>
+<pre>extern void service_module_status (<a href="#osmodule_state_event">osmodule_state_event</a> event,
+      byte const *module,
+      int const *private_word,
+      char const *title,
+      char const *postfix);</pre>
+<p>A significant event has occurred to a module - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>event</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>module</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>private_word</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>postfix</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xservice_module_status_instance_renamed">xservice_module_status_instance_renamed</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_module_status_instance_renamed (byte const *module,
+      int const *private_word,
+      char const *title,
+      char const *postfix,
+      char const *new_instance_name);</pre>
+<p>A module instance has been renamed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>private_word</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>postfix</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>new_instance_name</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="service_module_status_instance_renamed">service_module_status_instance_renamed</h3>
+<pre>extern void service_module_status_instance_renamed (byte const *module,
+      int const *private_word,
+      char const *title,
+      char const *postfix,
+      char const *new_instance_name);</pre>
+<p>A module instance has been renamed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>private_word</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>postfix</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>new_instance_name</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xservice_module_post_init">xservice_module_post_init</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_module_post_init (byte const *module,
+      char const *title,
+      char const *postfix,
+      int bcd_version);</pre>
+<p>A module has been succesfully initialised - RISC OS 5</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>postfix</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bcd_version</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="service_module_post_init">service_module_post_init</h3>
+<pre>extern void service_module_post_init (byte const *module,
+      char const *title,
+      char const *postfix,
+      int bcd_version);</pre>
+<p>A module has been succesfully initialised - RISC OS 5</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>postfix</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bcd_version</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xservice_module_post_final">xservice_module_post_final</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_module_post_final (byte const *module,
+      char const *title,
+      char const *postfix,
+      int bcd_version);</pre>
+<p>A module has been succesfully finalised - RISC OS 5</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>postfix</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bcd_version</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="service_module_post_final">service_module_post_final</h3>
+<pre>extern void service_module_post_final (byte const *module,
+      char const *title,
+      char const *postfix,
+      int bcd_version);</pre>
+<p>A module has been succesfully finalised - RISC OS 5</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>module</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>postfix</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bcd_version</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

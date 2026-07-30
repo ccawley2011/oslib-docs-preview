@@ -1,0 +1,247 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; DOSFS</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>DOSFS</h2>
+
+<pre>#include "oslib/dosfs.h"</pre>
+
+<h3 id="dosfs_format_specifier">dosfs_format_specifier</h3>
+<pre>typedef int dosfs_format_specifier;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#dosfs_FORMAT_DOSQ">dosfs_FORMAT_DOSQ</a></dd>
+<dd><a href="#dosfs_FORMAT_DOSM">dosfs_FORMAT_DOSM</a></dd>
+<dd><a href="#dosfs_FORMAT_DOSH">dosfs_FORMAT_DOSH</a></dd>
+<dd><a href="#dosfs_FORMAT_DOSN">dosfs_FORMAT_DOSN</a></dd>
+<dd><a href="#dosfs_FORMAT_DOSP">dosfs_FORMAT_DOSP</a></dd>
+<dd><a href="#dosfs_FORMAT_DOST">dosfs_FORMAT_DOST</a></dd>
+<dd><a href="#dosfs_FORMAT_DOSU">dosfs_FORMAT_DOSU</a></dd>
+<dd><a href="#dosfs_FORMAT_ATARIM">dosfs_FORMAT_ATARIM</a></dd>
+<dd><a href="#dosfs_FORMAT_ATARIN">dosfs_FORMAT_ATARIN</a></dd>
+<dd><a href="#dosfs_FORMAT_PCMCIA">dosfs_FORMAT_PCMCIA</a></dd>
+</dl>
+
+<h3 id="dosfs_FORMAT_DOSQ">dosfs_FORMAT_DOSQ</h3>
+<pre>#define dosfs_FORMAT_DOSQ ((<a href="#dosfs_format_specifier">dosfs_format_specifier</a>) 0x0u)</pre>
+
+<h3 id="dosfs_FORMAT_DOSM">dosfs_FORMAT_DOSM</h3>
+<pre>#define dosfs_FORMAT_DOSM ((<a href="#dosfs_format_specifier">dosfs_format_specifier</a>) 0x1u)</pre>
+
+<h3 id="dosfs_FORMAT_DOSH">dosfs_FORMAT_DOSH</h3>
+<pre>#define dosfs_FORMAT_DOSH ((<a href="#dosfs_format_specifier">dosfs_format_specifier</a>) 0x2u)</pre>
+
+<h3 id="dosfs_FORMAT_DOSN">dosfs_FORMAT_DOSN</h3>
+<pre>#define dosfs_FORMAT_DOSN ((<a href="#dosfs_format_specifier">dosfs_format_specifier</a>) 0x3u)</pre>
+
+<h3 id="dosfs_FORMAT_DOSP">dosfs_FORMAT_DOSP</h3>
+<pre>#define dosfs_FORMAT_DOSP ((<a href="#dosfs_format_specifier">dosfs_format_specifier</a>) 0x4u)</pre>
+
+<h3 id="dosfs_FORMAT_DOST">dosfs_FORMAT_DOST</h3>
+<pre>#define dosfs_FORMAT_DOST ((<a href="#dosfs_format_specifier">dosfs_format_specifier</a>) 0x5u)</pre>
+
+<h3 id="dosfs_FORMAT_DOSU">dosfs_FORMAT_DOSU</h3>
+<pre>#define dosfs_FORMAT_DOSU ((<a href="#dosfs_format_specifier">dosfs_format_specifier</a>) 0x6u)</pre>
+
+<h3 id="dosfs_FORMAT_ATARIM">dosfs_FORMAT_ATARIM</h3>
+<pre>#define dosfs_FORMAT_ATARIM ((<a href="#dosfs_format_specifier">dosfs_format_specifier</a>) 0x7u)</pre>
+
+<h3 id="dosfs_FORMAT_ATARIN">dosfs_FORMAT_ATARIN</h3>
+<pre>#define dosfs_FORMAT_ATARIN ((<a href="#dosfs_format_specifier">dosfs_format_specifier</a>) 0x8u)</pre>
+
+<h3 id="dosfs_FORMAT_PCMCIA">dosfs_FORMAT_PCMCIA</h3>
+<pre>#define dosfs_FORMAT_PCMCIA ((<a href="#dosfs_format_specifier">dosfs_format_specifier</a>) 0x9u)</pre>
+
+<h3 id="xdosfs_disc_format">xdosfs_disc_format</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdosfs_disc_format (<a href="filecore.html#filecore_format">filecore_format</a> *buffer,
+      int vet_format_swi,
+      int vet_format_handle,
+      <a href="#dosfs_format_specifier">dosfs_format_specifier</a> format);</pre>
+<p>Fills in a disc format structure with parameters for the specified format</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>vet_format_swi</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>vet_format_handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>format</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="dosfs_disc_format">dosfs_disc_format</h3>
+<pre>extern void dosfs_disc_format (<a href="filecore.html#filecore_format">filecore_format</a> *buffer,
+      int vet_format_swi,
+      int vet_format_handle,
+      <a href="#dosfs_format_specifier">dosfs_format_specifier</a> format);</pre>
+<p>Fills in a disc format structure with parameters for the specified format</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>vet_format_swi</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>vet_format_handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>format</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xdosfs_layout_structure">xdosfs_layout_structure</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdosfs_layout_structure (<a href="#dosfs_format_specifier">dosfs_format_specifier</a> format,
+      <a href="filecore.html#filecore_defect_list">filecore_defect_list</a> const *defect_list,
+      char const *disc_name,
+      <a href="os.html#os_f">os_f</a> image_file);</pre>
+<p>Lays out into the specified image a set of structures for its format. Prefer DOSFS_LayoutStructureW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>format</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>defect_list</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>image_file</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="dosfs_layout_structure">dosfs_layout_structure</h3>
+<pre>extern void dosfs_layout_structure (<a href="#dosfs_format_specifier">dosfs_format_specifier</a> format,
+      <a href="filecore.html#filecore_defect_list">filecore_defect_list</a> const *defect_list,
+      char const *disc_name,
+      <a href="os.html#os_f">os_f</a> image_file);</pre>
+<p>Lays out into the specified image a set of structures for its format. Prefer DOSFS_LayoutStructureW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>format</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>defect_list</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>image_file</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xdosfs_layout_structurew">xdosfs_layout_structurew</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdosfs_layout_structurew (<a href="#dosfs_format_specifier">dosfs_format_specifier</a> format,
+      <a href="filecore.html#filecore_defect_list">filecore_defect_list</a> const *defect_list,
+      char const *disc_name,
+      <a href="os.html#os_fw">os_fw</a> image_file);</pre>
+<p>Lays out into the specified image a set of structures for its format. Uses 32-bit file handle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>format</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>defect_list</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>image_file</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="dosfs_layout_structurew">dosfs_layout_structurew</h3>
+<pre>extern void dosfs_layout_structurew (<a href="#dosfs_format_specifier">dosfs_format_specifier</a> format,
+      <a href="filecore.html#filecore_defect_list">filecore_defect_list</a> const *defect_list,
+      char const *disc_name,
+      <a href="os.html#os_fw">os_fw</a> image_file);</pre>
+<p>Lays out into the specified image a set of structures for its format. Uses 32-bit file handle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>format</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>defect_list</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>image_file</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xdosfs_layout_structure_given_size">xdosfs_layout_structure_given_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdosfs_layout_structure_given_size (<a href="#dosfs_format_specifier">dosfs_format_specifier</a> format,
+      <a href="filecore.html#filecore_defect_list">filecore_defect_list</a> const *defect_list,
+      char const *disc_name,
+      <a href="os.html#os_f">os_f</a> image_file,
+      int size);</pre>
+<p>Lays out into the specified image a set of structures for its format. Prefer DOSFS_LayoutStructureGivenSizeW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>format</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>defect_list</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>image_file</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="dosfs_layout_structure_given_size">dosfs_layout_structure_given_size</h3>
+<pre>extern void dosfs_layout_structure_given_size (<a href="#dosfs_format_specifier">dosfs_format_specifier</a> format,
+      <a href="filecore.html#filecore_defect_list">filecore_defect_list</a> const *defect_list,
+      char const *disc_name,
+      <a href="os.html#os_f">os_f</a> image_file,
+      int size);</pre>
+<p>Lays out into the specified image a set of structures for its format. Prefer DOSFS_LayoutStructureGivenSizeW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>format</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>defect_list</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>image_file</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xdosfs_layout_structure_given_sizew">xdosfs_layout_structure_given_sizew</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdosfs_layout_structure_given_sizew (<a href="#dosfs_format_specifier">dosfs_format_specifier</a> format,
+      <a href="filecore.html#filecore_defect_list">filecore_defect_list</a> const *defect_list,
+      char const *disc_name,
+      <a href="os.html#os_fw">os_fw</a> image_file,
+      int size);</pre>
+<p>Lays out into the specified image a set of structures for its format</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>format</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>defect_list</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>image_file</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="dosfs_layout_structure_given_sizew">dosfs_layout_structure_given_sizew</h3>
+<pre>extern void dosfs_layout_structure_given_sizew (<a href="#dosfs_format_specifier">dosfs_format_specifier</a> format,
+      <a href="filecore.html#filecore_defect_list">filecore_defect_list</a> const *defect_list,
+      char const *disc_name,
+      <a href="os.html#os_fw">os_fw</a> image_file,
+      int size);</pre>
+<p>Lays out into the specified image a set of structures for its format</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>format</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>defect_list</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>disc_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>image_file</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

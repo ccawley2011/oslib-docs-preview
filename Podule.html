@@ -1,0 +1,855 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Podule</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Podule</h2>
+
+<pre>#include "oslib/podule.h"</pre>
+
+<h3 id="podule_section">podule_section</h3>
+<pre>typedef int podule_section;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#podule_SECTION_SYSTEM_ROM">podule_SECTION_SYSTEM_ROM</a></dd>
+<dd><a href="#podule_SECTION_EXPANSION_CARD0">podule_SECTION_EXPANSION_CARD0</a></dd>
+<dd><a href="#podule_SECTION_EXPANSION_CARD1">podule_SECTION_EXPANSION_CARD1</a></dd>
+<dd><a href="#podule_SECTION_EXPANSION_CARD2">podule_SECTION_EXPANSION_CARD2</a></dd>
+<dd><a href="#podule_SECTION_EXPANSION_CARD3">podule_SECTION_EXPANSION_CARD3</a></dd>
+<dd><a href="#podule_SECTION_EXTENSION_ROM1">podule_SECTION_EXTENSION_ROM1</a></dd>
+</dl>
+
+<h3 id="podule_header">podule_header</h3>
+<pre>typedef struct
+   {  byte b [16];
+   }
+   podule_header;</pre>
+
+<h3 id="podule_SECTION_SYSTEM_ROM">podule_SECTION_SYSTEM_ROM</h3>
+<pre>#define podule_SECTION_SYSTEM_ROM ((<a href="#podule_section">podule_section</a>) 0xFFFFFFFFu)</pre>
+
+<h3 id="podule_SECTION_EXPANSION_CARD0">podule_SECTION_EXPANSION_CARD0</h3>
+<pre>#define podule_SECTION_EXPANSION_CARD0 ((<a href="#podule_section">podule_section</a>) 0x0u)</pre>
+
+<h3 id="podule_SECTION_EXPANSION_CARD1">podule_SECTION_EXPANSION_CARD1</h3>
+<pre>#define podule_SECTION_EXPANSION_CARD1 ((<a href="#podule_section">podule_section</a>) 0x1u)</pre>
+
+<h3 id="podule_SECTION_EXPANSION_CARD2">podule_SECTION_EXPANSION_CARD2</h3>
+<pre>#define podule_SECTION_EXPANSION_CARD2 ((<a href="#podule_section">podule_section</a>) 0x2u)</pre>
+
+<h3 id="podule_SECTION_EXPANSION_CARD3">podule_SECTION_EXPANSION_CARD3</h3>
+<pre>#define podule_SECTION_EXPANSION_CARD3 ((<a href="#podule_section">podule_section</a>) 0x3u)</pre>
+
+<h3 id="podule_SECTION_EXTENSION_ROM1">podule_SECTION_EXTENSION_ROM1</h3>
+<pre>#define podule_SECTION_EXTENSION_ROM1 ((<a href="#podule_section">podule_section</a>) 0xFFFFFFFEu)</pre>
+
+<h3 id="error_PODULE_BAD_POD">error_PODULE_BAD_POD</h3>
+<pre>#define error_PODULE_BAD_POD 0x500u</pre>
+
+<p>Bad expansion card identifier</p>
+
+<h3 id="error_PODULE_BAD_SPEED">error_PODULE_BAD_SPEED</h3>
+<pre>#define error_PODULE_BAD_SPEED 0x501u</pre>
+
+<p>Bad access speed</p>
+
+<h3 id="error_PODULE_NO_POD">error_PODULE_NO_POD</h3>
+<pre>#define error_PODULE_NO_POD 0x502u</pre>
+
+<p>No installed expansion card</p>
+
+<h3 id="error_PODULE_NOT_EXT">error_PODULE_NOT_EXT</h3>
+<pre>#define error_PODULE_NOT_EXT 0x503u</pre>
+
+<p>Expansion card identity is not extended</p>
+
+<h3 id="error_PODULE_NOT_ACRN">error_PODULE_NOT_ACRN</h3>
+<pre>#define error_PODULE_NOT_ACRN 0x504u</pre>
+
+<p>Expansion card is not Acorn conformant</p>
+
+<h3 id="error_PODULE_NO_LDR">error_PODULE_NO_LDR</h3>
+<pre>#define error_PODULE_NO_LDR 0x505u</pre>
+
+<p>No loader to call</p>
+
+<h3 id="error_PODULE_IN_LDR">error_PODULE_IN_LDR</h3>
+<pre>#define error_PODULE_IN_LDR 0x506u</pre>
+
+<p>Unknown error in loader</p>
+
+<h3 id="error_PODULE_BAD_CHNK">error_PODULE_BAD_CHNK</h3>
+<pre>#define error_PODULE_BAD_CHNK 0x507u</pre>
+
+<p>Bad chunk number</p>
+
+<h3 id="error_PODULE_BAD_DEVICE_NUMBER">error_PODULE_BAD_DEVICE_NUMBER</h3>
+<pre>#define error_PODULE_BAD_DEVICE_NUMBER 0x508u</pre>
+
+<p>Bad device number</p>
+
+<h3 id="error_PODULE_BAD_DEVICE_TYPE">error_PODULE_BAD_DEVICE_TYPE</h3>
+<pre>#define error_PODULE_BAD_DEVICE_TYPE 0x509u</pre>
+
+<p>Bad device type</p>
+
+<h3 id="error_PODULE_RAM_CONFIG_SYNTAX">error_PODULE_RAM_CONFIG_SYNTAX</h3>
+<pre>#define error_PODULE_RAM_CONFIG_SYNTAX 0x50Au</pre>
+
+<p>Syntax: *RAMConfig <expansion card number> [<device> [<type>]], ErrorNumber_Syntax</p>
+
+<h3 id="error_PODULE_WRONG_PODULE_TYPE">error_PODULE_WRONG_PODULE_TYPE</h3>
+<pre>#define error_PODULE_WRONG_PODULE_TYPE 0x50Bu</pre>
+
+<p>Wrong expansion card type</p>
+
+<h3 id="error_PODULE_ROM_BOARD_SYNTAX">error_PODULE_ROM_BOARD_SYNTAX</h3>
+<pre>#define error_PODULE_ROM_BOARD_SYNTAX 0x50Cu</pre>
+
+<p>Syntax: *Configure ROMBoard <expansion card> <device> [<type>], ErrorNumber_Syntax</p>
+
+<h3 id="error_PODULE_BAD_READ">error_PODULE_BAD_READ</h3>
+<pre>#define error_PODULE_BAD_READ 0x50Du</pre>
+
+<p>Unknown bit set in ReadInfo</p>
+
+<h3 id="error_PODULE_BD_SPEED">error_PODULE_BD_SPEED</h3>
+<pre>#define error_PODULE_BD_SPEED 0x50Eu</pre>
+
+<p>Unknown value for speed setting</p>
+
+<h3 id="error_PODULE_NOT_EASI">error_PODULE_NOT_EASI</h3>
+<pre>#define error_PODULE_NOT_EASI 0x50Fu</pre>
+
+<p>This expansion card has no EASI space</p>
+
+<h3 id="error_PODULE_SPEED_NO">error_PODULE_SPEED_NO</h3>
+<pre>#define error_PODULE_SPEED_NO 0x510u</pre>
+
+<p>Requested speed setting not available for this expansion card</p>
+
+<h3 id="error_PODULE_EC_NO_SPD">error_PODULE_EC_NO_SPD</h3>
+<pre>#define error_PODULE_EC_NO_SPD 0x511u</pre>
+
+<p>This expansion card does not suport speed setting</p>
+
+<h3 id="error_PODULE_EC_NO_NET">error_PODULE_EC_NO_NET</h3>
+<pre>#define error_PODULE_EC_NO_NET 0x512u</pre>
+
+<p>This expansion card may not use the Ethernet address</p>
+
+<h3 id="error_PODULE_NDALLAS">error_PODULE_NDALLAS</h3>
+<pre>#define error_PODULE_NDALLAS 0x513u</pre>
+
+<p>This computer can't provide a valid Ethernet address</p>
+
+<h3 id="error_PODULE_NOT_WRITABLE">error_PODULE_NOT_WRITABLE</h3>
+<pre>#define error_PODULE_NOT_WRITABLE 0x580u</pre>
+
+<p>This expansion card doesn't support writable devices</p>
+
+<h3 id="error_PODULE_ADDRESS_RANGE">error_PODULE_ADDRESS_RANGE</h3>
+<pre>#define error_PODULE_ADDRESS_RANGE 0x581u</pre>
+
+<p>Address out of range for expansion card</p>
+
+<h3 id="error_PODULE_DEVICE_NOT_WRITABLE">error_PODULE_DEVICE_NOT_WRITABLE</h3>
+<pre>#define error_PODULE_DEVICE_NOT_WRITABLE 0x582u</pre>
+
+<p>This device not writable</p>
+
+<h3 id="error_PODULE_PODULE_READ_ONLY">error_PODULE_PODULE_READ_ONLY</h3>
+<pre>#define error_PODULE_PODULE_READ_ONLY 0x583u</pre>
+
+<p>Read only device</p>
+
+<h3 id="error_PODULE_ADDRESS_TOO_BIG">error_PODULE_ADDRESS_TOO_BIG</h3>
+<pre>#define error_PODULE_ADDRESS_TOO_BIG 0x584u</pre>
+
+<p>Address too big</p>
+
+<h3 id="xpodule_read_id">xpodule_read_id</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpodule_read_id (<a href="#podule_section">podule_section</a> section,
+      int *ec_id);</pre>
+<p>Reads an expansion card or extension ROM's identity byte</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>section</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>ec_id</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="podule_read_id">podule_read_id</h3>
+<pre>extern int podule_read_id (<a href="#podule_section">podule_section</a> section);</pre>
+<p>Reads an expansion card or extension ROM's identity byte</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>section</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>ec_id</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xpodule_read_header">xpodule_read_header</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpodule_read_header (<a href="#podule_header">podule_header</a> *header,
+      <a href="#podule_section">podule_section</a> section);</pre>
+<p>Reads an expansion card or extension ROM's header</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>header</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>section</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="podule_read_header">podule_read_header</h3>
+<pre>extern void podule_read_header (<a href="#podule_header">podule_header</a> *header,
+      <a href="#podule_section">podule_section</a> section);</pre>
+<p>Reads an expansion card or extension ROM's header</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>header</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>section</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xpodule_enumerate_chunks">xpodule_enumerate_chunks</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpodule_enumerate_chunks (int context,
+      <a href="#podule_section">podule_section</a> section,
+      int *context_out,
+      int *size,
+      byte *os_id,
+      char **module_name);</pre>
+<p>Reads information about a chunk from the chunk directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>section</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>os_id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>module_name</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="podule_enumerate_chunks">podule_enumerate_chunks</h3>
+<pre>extern int podule_enumerate_chunks (int context,
+      <a href="#podule_section">podule_section</a> section,
+      int *size,
+      byte *os_id,
+      char **module_name);</pre>
+<p>Reads information about a chunk from the chunk directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>section</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>os_id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>module_name</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xpodule_read_chunk">xpodule_read_chunk</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpodule_read_chunk (int chunk_no,
+      byte *buffer,
+      <a href="#podule_section">podule_section</a> section);</pre>
+<p>Reads a chunk from an expansion card or extension ROM</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>chunk_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>section</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="podule_read_chunk">podule_read_chunk</h3>
+<pre>extern void podule_read_chunk (int chunk_no,
+      byte *buffer,
+      <a href="#podule_section">podule_section</a> section);</pre>
+<p>Reads a chunk from an expansion card or extension ROM</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>chunk_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>section</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xpodule_read_bytes">xpodule_read_bytes</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpodule_read_bytes (int start_offset,
+      int size,
+      byte *buffer,
+      int slot_no);</pre>
+<p>Reads bytes from within an expansion card's code space</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>start_offset</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>slot_no</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="podule_read_bytes">podule_read_bytes</h3>
+<pre>extern void podule_read_bytes (int start_offset,
+      int size,
+      byte *buffer,
+      int slot_no);</pre>
+<p>Reads bytes from within an expansion card's code space</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>start_offset</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>slot_no</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xpodule_write_bytes">xpodule_write_bytes</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpodule_write_bytes (int start_offset,
+      int size,
+      byte const *buffer,
+      int slot_no);</pre>
+<p>Writes bytes to within an expansion card's code space</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>start_offset</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>slot_no</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="podule_write_bytes">podule_write_bytes</h3>
+<pre>extern void podule_write_bytes (int start_offset,
+      int size,
+      byte const *buffer,
+      int slot_no);</pre>
+<p>Writes bytes to within an expansion card's code space</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>start_offset</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>slot_no</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xpodule_call_loader">xpodule_call_loader</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpodule_call_loader (int arg0,
+      int arg1,
+      int arg2,
+      int slot_no,
+      int *arg0_out,
+      int *arg1_out,
+      int *arg2_out);</pre>
+<p>Calls an expansion card's loader</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>arg0</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>arg1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>arg2</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>slot_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>arg0_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>arg1_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>arg2_out</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="podule_call_loader">podule_call_loader</h3>
+<pre>extern void podule_call_loader (int arg0,
+      int arg1,
+      int arg2,
+      int slot_no,
+      int *arg0_out,
+      int *arg1_out,
+      int *arg2_out);</pre>
+<p>Calls an expansion card's loader</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>arg0</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>arg1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>arg2</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>slot_no</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>arg0_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>arg1_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>arg2_out</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xpodule_raw_read">xpodule_raw_read</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpodule_raw_read (int start_offset,
+      int size,
+      byte *buffer,
+      int slot_no);</pre>
+<p>Reads bytes directly within an expansion card or extension ROM's address space</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>start_offset</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>slot_no</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="podule_raw_read">podule_raw_read</h3>
+<pre>extern void podule_raw_read (int start_offset,
+      int size,
+      byte *buffer,
+      int slot_no);</pre>
+<p>Reads bytes directly within an expansion card or extension ROM's address space</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>start_offset</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>slot_no</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xpodule_raw_write">xpodule_raw_write</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpodule_raw_write (int start_offset,
+      int size,
+      byte const *buffer,
+      int slot_no);</pre>
+<p>Writes bytes directly within an expansion card's workspace</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>start_offset</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>slot_no</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="podule_raw_write">podule_raw_write</h3>
+<pre>extern void podule_raw_write (int start_offset,
+      int size,
+      byte const *buffer,
+      int slot_no);</pre>
+<p>Writes bytes directly within an expansion card's workspace</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>start_offset</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>slot_no</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xpodule_hardware_address">xpodule_hardware_address</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpodule_hardware_address (<a href="#podule_section">podule_section</a> section,
+      int **combined_addr);</pre>
+<p>Returns an expansion card or extension ROM's base address, and the address of an expansion card's CMOS RAM - prefer Podule_ReadInfo</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>section</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>combined_addr</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="podule_hardware_address">podule_hardware_address</h3>
+<pre>extern int *podule_hardware_address (<a href="#podule_section">podule_section</a> section);</pre>
+<p>Returns an expansion card or extension ROM's base address, and the address of an expansion card's CMOS RAM - prefer Podule_ReadInfo</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>section</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>combined_addr</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xpodule_enumerate_chunks_with_info">xpodule_enumerate_chunks_with_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpodule_enumerate_chunks_with_info (int context,
+      <a href="#podule_section">podule_section</a> section,
+      int *context_out,
+      int *size,
+      byte *os_id,
+      char **module_name,
+      char **help_text,
+      int **module_base);</pre>
+<p>Reads information about a chunk from the chunk directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>section</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>os_id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>module_name</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>help_text</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>module_base</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="podule_enumerate_chunks_with_info">podule_enumerate_chunks_with_info</h3>
+<pre>extern int podule_enumerate_chunks_with_info (int context,
+      <a href="#podule_section">podule_section</a> section,
+      int *size,
+      byte *os_id,
+      char **module_name,
+      char **help_text,
+      int **module_base);</pre>
+<p>Reads information about a chunk from the chunk directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>section</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>os_id</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>module_name</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>help_text</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>module_base</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xpodule_hardware_addresses">xpodule_hardware_addresses</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpodule_hardware_addresses (<a href="#podule_section">podule_section</a> section,
+      int **base_addr,
+      int **combined_addr);</pre>
+<p>Returns an expansion card or extension ROM's base address, and the address of an expansion card's CMOS RAM</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>section</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>base_addr</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>combined_addr</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="podule_hardware_addresses">podule_hardware_addresses</h3>
+<pre>extern void podule_hardware_addresses (<a href="#podule_section">podule_section</a> section,
+      int **base_addr,
+      int **combined_addr);</pre>
+<p>Returns an expansion card or extension ROM's base address, and the address of an expansion card's CMOS RAM</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>section</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>base_addr</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>combined_addr</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xpodule_return_number">xpodule_return_number</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpodule_return_number (int *expansion_card_count,
+      int *extension_rom_count);</pre>
+<p>Returns the number of expansion card and extension ROM's</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>expansion_card_count</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>extension_rom_count</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="podule_return_number">podule_return_number</h3>
+<pre>extern void podule_return_number (int *expansion_card_count,
+      int *extension_rom_count);</pre>
+<p>Returns the number of expansion card and extension ROM's</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>expansion_card_count</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>extension_rom_count</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xpodule_read_info">xpodule_read_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpodule_read_info (bits mask,
+      byte *buffer,
+      int size,
+      <a href="#podule_section">podule_section</a> section,
+      int *used);</pre>
+<p>Returns a selection of data specific to a given expansion card</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>mask</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>section</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="podule_read_info">podule_read_info</h3>
+<pre>extern int podule_read_info (bits mask,
+      byte *buffer,
+      int size,
+      <a href="#podule_section">podule_section</a> section);</pre>
+<p>Returns a selection of data specific to a given expansion card</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>mask</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>section</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xpodule_set_speed">xpodule_set_speed</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpodule_set_speed (int speed,
+      <a href="#podule_section">podule_section</a> section,
+      int *old_speed);</pre>
+<p>Changes the speed of access to expansion card hardware</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>speed</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>section</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_speed</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="podule_set_speed">podule_set_speed</h3>
+<pre>extern void podule_set_speed (int speed,
+      <a href="#podule_section">podule_section</a> section,
+      int *old_speed);</pre>
+<p>Changes the speed of access to expansion card hardware</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>speed</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>section</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_speed</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xservice_pre_reset">xservice_pre_reset</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_pre_reset (void);
+</pre><p>Pre-reset </p>
+
+
+<table>
+</table>
+
+<h3 id="service_pre_reset">service_pre_reset</h3>
+<pre>extern void service_pre_reset (void);
+</pre><p>Pre-reset </p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_adfs_podule">xservice_adfs_podule</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_adfs_podule (byte *controller,
+      int *status_location,
+      bits status_bits,
+      int *irq_location,
+      bits irq_bits,
+      osbool *unclaimed,
+      byte **controller_out,
+      int **status_location_out,
+      bits *status_bits_out,
+      int **irq_location_out,
+      bits *irq_bits_out);</pre>
+<p>Issued by ADFS to locate an ST506 expansion card</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>controller</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>status_location</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>status_bits</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>irq_location</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>irq_bits</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>controller_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>status_location_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>status_bits_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>irq_location_out</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>irq_bits_out</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="service_adfs_podule">service_adfs_podule</h3>
+<pre>extern osbool service_adfs_podule (byte *controller,
+      int *status_location,
+      bits status_bits,
+      int *irq_location,
+      bits irq_bits,
+      byte **controller_out,
+      int **status_location_out,
+      bits *status_bits_out,
+      int **irq_location_out,
+      bits *irq_bits_out);</pre>
+<p>Issued by ADFS to locate an ST506 expansion card</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>controller</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>status_location</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>status_bits</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>irq_location</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>irq_bits</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>controller_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>status_location_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>status_bits_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>irq_location_out</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>irq_bits_out</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_adfs_podule_ide">xservice_adfs_podule_ide</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_adfs_podule_ide (byte *controller,
+      int *status_location,
+      bits status_bits,
+      int *irq_location,
+      bits irq_bits,
+      asm_routine read_code,
+      asm_routine write_code,
+      osbool *unclaimed,
+      byte **controller_out,
+      int **status_location_out,
+      bits *status_bits_out,
+      int **irq_location_out,
+      bits *irq_bits_out,
+      asm_routine *read_code_out,
+      asm_routine *write_code_out);</pre>
+<p>Issued by ADFS to locate an IDE expansion card</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>controller</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>status_location</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>status_bits</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>irq_location</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>irq_bits</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>read_code</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>write_code</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>controller_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>status_location_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>status_bits_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>irq_location_out</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>irq_bits_out</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>read_code_out</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>write_code_out</code></td><td/><td><code>R8</code></td></tr>
+</table>
+
+<h3 id="service_adfs_podule_ide">service_adfs_podule_ide</h3>
+<pre>extern osbool service_adfs_podule_ide (byte *controller,
+      int *status_location,
+      bits status_bits,
+      int *irq_location,
+      bits irq_bits,
+      asm_routine read_code,
+      asm_routine write_code,
+      byte **controller_out,
+      int **status_location_out,
+      bits *status_bits_out,
+      int **irq_location_out,
+      bits *irq_bits_out,
+      asm_routine *read_code_out,
+      asm_routine *write_code_out);</pre>
+<p>Issued by ADFS to locate an IDE expansion card</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>controller</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>status_location</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>status_bits</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>irq_location</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>irq_bits</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>read_code</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>write_code</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>controller_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>status_location_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>status_bits_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>irq_location_out</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>irq_bits_out</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>read_code_out</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>write_code_out</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_adfs_podule_ide_dying">xservice_adfs_podule_ide_dying</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_adfs_podule_ide_dying (void);
+</pre><p>IDE expansion card dying</p>
+
+
+<table>
+</table>
+
+<h3 id="service_adfs_podule_ide_dying">service_adfs_podule_ide_dying</h3>
+<pre>extern void service_adfs_podule_ide_dying (void);
+</pre><p>IDE expansion card dying</p>
+
+
+<table>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

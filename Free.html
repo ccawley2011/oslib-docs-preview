@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Free</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Free</h2>
+
+<pre>#include "oslib/free.h"</pre>
+
+<h3 id="xfree_register">xfree_register</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfree_register (<a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> fs_no,
+      asm_routine fn,
+      void *workspace);</pre>
+<p>Provides an interactive free space display for a filing system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fn</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="free_register">free_register</h3>
+<pre>extern void free_register (<a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> fs_no,
+      asm_routine fn,
+      void *workspace);</pre>
+<p>Provides an interactive free space display for a filing system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fn</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xfree_de_register">xfree_de_register</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfree_de_register (<a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> fs_no,
+      asm_routine fn,
+      void *workspace);</pre>
+<p>Removes the filing system from the list of filing systems known by the Free module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fn</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="free_de_register">free_de_register</h3>
+<pre>extern void free_de_register (<a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> fs_no,
+      asm_routine fn,
+      void *workspace);</pre>
+<p>Removes the filing system from the list of filing systems known by the Free module</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fn</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

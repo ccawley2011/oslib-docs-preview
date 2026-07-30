@@ -1,0 +1,490 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; FontDbox</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>FontDbox</h2>
+
+<pre>#include "oslib/fontdbox.h"</pre>
+
+<h3 id="fontdbox_flags">fontdbox_flags</h3>
+<pre>typedef bits fontdbox_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#fontdbox_GENERATE_ABOUT_TO_BE_SHOWN">fontdbox_GENERATE_ABOUT_TO_BE_SHOWN</a></dd>
+<dd><a href="#fontdbox_GENERATE_DIALOGUE_COMPLETED">fontdbox_GENERATE_DIALOGUE_COMPLETED</a></dd>
+<dd><a href="#fontdbox_INCLUDE_SYSTEM_FONT">fontdbox_INCLUDE_SYSTEM_FONT</a></dd>
+</dl>
+
+<h3 id="fontdbox_font">fontdbox_font</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> font;
+      int height;
+      int aspect;
+   }
+   fontdbox_font;</pre>
+
+<h3 id="fontdbox_object">fontdbox_object</h3>
+<pre>typedef struct
+   {  <a href="#fontdbox_flags">fontdbox_flags</a> flags;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> title;
+      int title_limit;
+      <a href="#fontdbox_font">fontdbox_font</a> initial;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> try_string;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> alternative_window_name;
+   }
+   fontdbox_object;</pre>
+
+<p>Structure to describe FontDbox Object for in-memory construction - to be referenced from Toolbox_Template</p>
+
+<h3 id="fontdbox_object_template">fontdbox_object_template</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_RESOURCE_FILE_OBJECT_MEMBERS">toolbox_RESOURCE_FILE_OBJECT_MEMBERS</a>
+      <a href="#fontdbox_flags">fontdbox_flags</a> objectflags;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> title;
+      int title_limit;
+      <a href="#fontdbox_font">fontdbox_font</a> initial;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> try_string;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> alternative_window_name;
+   }
+   fontdbox_object_template;</pre>
+
+<h3 id="fontdbox_full">fontdbox_full</h3>
+<pre>typedef <a href="toolbox.html#toolbox_full">toolbox_full</a> fontdbox_full;</pre>
+
+<h3 id="fontdbox_action_about_to_be_shown">fontdbox_action_about_to_be_shown</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#fontdbox_full">fontdbox_full</a> full;
+      }
+      position;
+   }
+   fontdbox_action_about_to_be_shown;</pre>
+
+<p>Prefer FontDbox_ActionAboutToBeShownBlock</p>
+
+<h3 id="fontdbox_action_about_to_be_shown_block">fontdbox_action_about_to_be_shown_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#fontdbox_full">fontdbox_full</a> full;
+      }
+      position;
+   }
+   fontdbox_action_about_to_be_shown_block;</pre>
+
+<h3 id="fontdbox_action_dialogue_completed_block">fontdbox_action_dialogue_completed_block</h3>
+<pre>typedef <a href="toolbox.html#toolbox_action_header_base">toolbox_action_header_base</a> fontdbox_action_dialogue_completed_block;</pre>
+
+<h3 id="fontdbox_action_apply_font">fontdbox_action_apply_font</h3>
+<pre>typedef struct
+   {  int height;
+      int aspect;
+      char font [204];
+   }
+   fontdbox_action_apply_font;</pre>
+
+<p>Prefer FontDbox_ActionApplyFontBlock</p>
+
+<h3 id="fontdbox_action_apply_font_block">fontdbox_action_apply_font_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      int height;
+      int aspect;
+      char font [204];
+   }
+   fontdbox_action_apply_font_block;</pre>
+
+<h3 id="class_FONT_DBOX">class_FONT_DBOX</h3>
+<pre>#define class_FONT_DBOX ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x82A00u)</pre>
+
+<h3 id="fontdbox_SET_HEIGHT">fontdbox_SET_HEIGHT</h3>
+<pre>#define fontdbox_SET_HEIGHT 0x1u</pre>
+
+<h3 id="fontdbox_SET_ASPECT">fontdbox_SET_ASPECT</h3>
+<pre>#define fontdbox_SET_ASPECT 0x2u</pre>
+
+<h3 id="fontdbox_GENERATE_ABOUT_TO_BE_SHOWN">fontdbox_GENERATE_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define fontdbox_GENERATE_ABOUT_TO_BE_SHOWN ((<a href="#fontdbox_flags">fontdbox_flags</a>) 0x1u)</pre>
+
+<h3 id="fontdbox_GENERATE_DIALOGUE_COMPLETED">fontdbox_GENERATE_DIALOGUE_COMPLETED</h3>
+<pre>#define fontdbox_GENERATE_DIALOGUE_COMPLETED ((<a href="#fontdbox_flags">fontdbox_flags</a>) 0x2u)</pre>
+
+<h3 id="fontdbox_INCLUDE_SYSTEM_FONT">fontdbox_INCLUDE_SYSTEM_FONT</h3>
+<pre>#define fontdbox_INCLUDE_SYSTEM_FONT ((<a href="#fontdbox_flags">fontdbox_flags</a>) 0x4u)</pre>
+
+<h3 id="fontdbox_APPLY">fontdbox_APPLY</h3>
+<pre>#define fontdbox_APPLY ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82A0000u)</pre>
+
+<h3 id="fontdbox_CANCEL">fontdbox_CANCEL</h3>
+<pre>#define fontdbox_CANCEL ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82A0001u)</pre>
+
+<h3 id="fontdbox_TRY">fontdbox_TRY</h3>
+<pre>#define fontdbox_TRY ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82A0002u)</pre>
+
+<h3 id="fontdbox_TRY_STRING">fontdbox_TRY_STRING</h3>
+<pre>#define fontdbox_TRY_STRING ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82A0003u)</pre>
+
+<h3 id="fontdbox_ASPECT_RATIO">fontdbox_ASPECT_RATIO</h3>
+<pre>#define fontdbox_ASPECT_RATIO ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82A0004u)</pre>
+
+<h3 id="fontdbox_HEIGHT">fontdbox_HEIGHT</h3>
+<pre>#define fontdbox_HEIGHT ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82A0005u)</pre>
+
+<h3 id="fontdbox_STANDARD_SIZE0">fontdbox_STANDARD_SIZE0</h3>
+<pre>#define fontdbox_STANDARD_SIZE0 ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82A0006u)</pre>
+
+<h3 id="fontdbox_STANDARD_SIZE1">fontdbox_STANDARD_SIZE1</h3>
+<pre>#define fontdbox_STANDARD_SIZE1 ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82A0007u)</pre>
+
+<h3 id="fontdbox_STANDARD_SIZE2">fontdbox_STANDARD_SIZE2</h3>
+<pre>#define fontdbox_STANDARD_SIZE2 ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82A0008u)</pre>
+
+<h3 id="fontdbox_STANDARD_SIZE3">fontdbox_STANDARD_SIZE3</h3>
+<pre>#define fontdbox_STANDARD_SIZE3 ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82A0009u)</pre>
+
+<h3 id="fontdbox_STANDARD_SIZE4">fontdbox_STANDARD_SIZE4</h3>
+<pre>#define fontdbox_STANDARD_SIZE4 ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82A000Au)</pre>
+
+<h3 id="fontdbox_STANDARD_SIZE5">fontdbox_STANDARD_SIZE5</h3>
+<pre>#define fontdbox_STANDARD_SIZE5 ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82A000Bu)</pre>
+
+<h3 id="fontdbox_STANDARD_SIZE6">fontdbox_STANDARD_SIZE6</h3>
+<pre>#define fontdbox_STANDARD_SIZE6 ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82A000Cu)</pre>
+
+<h3 id="fontdbox_STANDARD_SIZE7">fontdbox_STANDARD_SIZE7</h3>
+<pre>#define fontdbox_STANDARD_SIZE7 ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82A000Du)</pre>
+
+<h3 id="fontdbox_STANDARD_SIZE8">fontdbox_STANDARD_SIZE8</h3>
+<pre>#define fontdbox_STANDARD_SIZE8 ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82A000Eu)</pre>
+
+<h3 id="fontdbox_STANDARD_SIZE9">fontdbox_STANDARD_SIZE9</h3>
+<pre>#define fontdbox_STANDARD_SIZE9 ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82A000Fu)</pre>
+
+<h3 id="fontdbox_STYLE">fontdbox_STYLE</h3>
+<pre>#define fontdbox_STYLE ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82A0010u)</pre>
+
+<h3 id="fontdbox_WEIGHT">fontdbox_WEIGHT</h3>
+<pre>#define fontdbox_WEIGHT ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82A0011u)</pre>
+
+<h3 id="fontdbox_FONT">fontdbox_FONT</h3>
+<pre>#define fontdbox_FONT ((<a href="toolbox.html#toolbox_c">toolbox_c</a>) 0x82A0012u)</pre>
+
+<h3 id="action_FONT_DBOX_ABOUT_TO_BE_SHOWN">action_FONT_DBOX_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define action_FONT_DBOX_ABOUT_TO_BE_SHOWN 0x82A00u</pre>
+
+<h3 id="action_FONT_DBOX_DIALOGUE_COMPLETED">action_FONT_DBOX_DIALOGUE_COMPLETED</h3>
+<pre>#define action_FONT_DBOX_DIALOGUE_COMPLETED 0x82A01u</pre>
+
+<h3 id="action_FONT_DBOX_APPLY_FONT">action_FONT_DBOX_APPLY_FONT</h3>
+<pre>#define action_FONT_DBOX_APPLY_FONT 0x82A02u</pre>
+
+<h3 id="error_FONT_DBOX_TASKS_ACTIVE">error_FONT_DBOX_TASKS_ACTIVE</h3>
+<pre>#define error_FONT_DBOX_TASKS_ACTIVE 0x80AF00u</pre>
+
+<h3 id="error_FONT_DBOX_ALLOC_FAILED">error_FONT_DBOX_ALLOC_FAILED</h3>
+<pre>#define error_FONT_DBOX_ALLOC_FAILED 0x80AF01u</pre>
+
+<h3 id="error_FONT_DBOX_SHORT_BUFFER">error_FONT_DBOX_SHORT_BUFFER</h3>
+<pre>#define error_FONT_DBOX_SHORT_BUFFER 0x80AF02u</pre>
+
+<h3 id="error_FONT_DBOX_NO_SUCH_TASK">error_FONT_DBOX_NO_SUCH_TASK</h3>
+<pre>#define error_FONT_DBOX_NO_SUCH_TASK 0x80AF11u</pre>
+
+<h3 id="error_FONT_DBOX_NO_SUCH_METHOD">error_FONT_DBOX_NO_SUCH_METHOD</h3>
+<pre>#define error_FONT_DBOX_NO_SUCH_METHOD 0x80AF12u</pre>
+
+<h3 id="error_FONT_DBOX_NO_SUCH_MISC_OP_METHOD">error_FONT_DBOX_NO_SUCH_MISC_OP_METHOD</h3>
+<pre>#define error_FONT_DBOX_NO_SUCH_MISC_OP_METHOD 0x80AF13u</pre>
+
+<h3 id="error_FONT_DBOX_NO_SUCH_FONT">error_FONT_DBOX_NO_SUCH_FONT</h3>
+<pre>#define error_FONT_DBOX_NO_SUCH_FONT 0x80AF14u</pre>
+
+<h3 id="error_FONT_DBOX_NO_FONTS">error_FONT_DBOX_NO_FONTS</h3>
+<pre>#define error_FONT_DBOX_NO_FONTS 0x80AF21u</pre>
+
+<h3 id="error_FONT_DBOX_OUT_OF_MESSAGE_SPACE">error_FONT_DBOX_OUT_OF_MESSAGE_SPACE</h3>
+<pre>#define error_FONT_DBOX_OUT_OF_MESSAGE_SPACE 0x80AF31u</pre>
+
+<h3 id="xfontdbox_get_window_id">xfontdbox_get_window_id</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfontdbox_get_window_id (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_dbox,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *window);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>window</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="fontdbox_get_window_id">fontdbox_get_window_id</h3>
+<pre>extern <a href="toolbox.html#toolbox_o">toolbox_o</a> fontdbox_get_window_id (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_dbox);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>window</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xfontdbox_set_font">xfontdbox_set_font</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfontdbox_set_font (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_dbox,
+      char const *font_identifier);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>font_identifier</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="fontdbox_set_font">fontdbox_set_font</h3>
+<pre>extern void fontdbox_set_font (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_dbox,
+      char const *font_identifier);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>font_identifier</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xfontdbox_get_font">xfontdbox_get_font</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfontdbox_get_font (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_dbox,
+      char *buffer,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="fontdbox_get_font">fontdbox_get_font</h3>
+<pre>extern int fontdbox_get_font (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_dbox,
+      char *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xfontdbox_set_size">xfontdbox_set_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfontdbox_set_size (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_dbox,
+      int height,
+      int aspect);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>aspect</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="fontdbox_set_size">fontdbox_set_size</h3>
+<pre>extern void fontdbox_set_size (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_dbox,
+      int height,
+      int aspect);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>aspect</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xfontdbox_get_size">xfontdbox_get_size</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfontdbox_get_size (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_dbox,
+      int *height,
+      int *aspect);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>height</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>aspect</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="fontdbox_get_size">fontdbox_get_size</h3>
+<pre>extern void fontdbox_get_size (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_dbox,
+      int *height,
+      int *aspect);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>height</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>aspect</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xfontdbox_set_try_string">xfontdbox_set_try_string</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfontdbox_set_try_string (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_dbox,
+      char const *try_string);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>try_string</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="fontdbox_set_try_string">fontdbox_set_try_string</h3>
+<pre>extern void fontdbox_set_try_string (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_dbox,
+      char const *try_string);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>try_string</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xfontdbox_get_try_string">xfontdbox_get_try_string</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfontdbox_get_try_string (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_dbox,
+      char *buffer,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="fontdbox_get_try_string">fontdbox_get_try_string</h3>
+<pre>extern int fontdbox_get_try_string (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_dbox,
+      char *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xfontdbox_set_title">xfontdbox_set_title</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfontdbox_set_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_dbox,
+      char const *title);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="fontdbox_set_title">fontdbox_set_title</h3>
+<pre>extern void fontdbox_set_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_dbox,
+      char const *title);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xfontdbox_get_title">xfontdbox_get_title</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfontdbox_get_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_dbox,
+      char *buffer,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="fontdbox_get_title">fontdbox_get_title</h3>
+<pre>extern int fontdbox_get_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_dbox,
+      char *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_dbox</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

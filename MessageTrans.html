@@ -1,0 +1,455 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; MessageTrans</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>MessageTrans</h2>
+
+<pre>#include "oslib/messagetrans.h"</pre>
+
+<h3 id="messagetrans_control_block">messagetrans_control_block</h3>
+<pre>typedef struct
+   {  int cb [4];
+   }
+   messagetrans_control_block;</pre>
+
+<h3 id="messagetrans_file_flags">messagetrans_file_flags</h3>
+<pre>typedef bits messagetrans_file_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#messagetrans_DIRECT_ACCESS">messagetrans_DIRECT_ACCESS</a></dd>
+</dl>
+
+<h3 id="messagetrans_DIRECT_ACCESS">messagetrans_DIRECT_ACCESS</h3>
+<pre>#define messagetrans_DIRECT_ACCESS ((<a href="#messagetrans_file_flags">messagetrans_file_flags</a>) 0x1u)</pre>
+
+<h3 id="error_MESSAGE_TRANS_SYNTAX">error_MESSAGE_TRANS_SYNTAX</h3>
+<pre>#define error_MESSAGE_TRANS_SYNTAX 0xAC0u</pre>
+
+<h3 id="error_MESSAGE_TRANS_FILE_OPEN">error_MESSAGE_TRANS_FILE_OPEN</h3>
+<pre>#define error_MESSAGE_TRANS_FILE_OPEN 0xAC1u</pre>
+
+<h3 id="error_MESSAGE_TRANS_TOKEN_NOT_FOUND">error_MESSAGE_TRANS_TOKEN_NOT_FOUND</h3>
+<pre>#define error_MESSAGE_TRANS_TOKEN_NOT_FOUND 0xAC2u</pre>
+
+<h3 id="error_MESSAGE_TRANS_RECURSE">error_MESSAGE_TRANS_RECURSE</h3>
+<pre>#define error_MESSAGE_TRANS_RECURSE 0xAC3u</pre>
+
+<h3 id="xmessagetrans_file_info">xmessagetrans_file_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmessagetrans_file_info (char const *file_name,
+      <a href="#messagetrans_file_flags">messagetrans_file_flags</a> *flags,
+      int *size);</pre>
+<p>Gives information about a message file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="messagetrans_file_info">messagetrans_file_info</h3>
+<pre>extern void messagetrans_file_info (char const *file_name,
+      <a href="#messagetrans_file_flags">messagetrans_file_flags</a> *flags,
+      int *size);</pre>
+<p>Gives information about a message file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xmessagetrans_open_file">xmessagetrans_open_file</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmessagetrans_open_file (<a href="#messagetrans_control_block">messagetrans_control_block</a> *cb,
+      char const *file_name,
+      char *buffer);</pre>
+<p>Opens a message file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="messagetrans_open_file">messagetrans_open_file</h3>
+<pre>extern void messagetrans_open_file (<a href="#messagetrans_control_block">messagetrans_control_block</a> *cb,
+      char const *file_name,
+      char *buffer);</pre>
+<p>Opens a message file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xmessagetrans_lookup">xmessagetrans_lookup</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmessagetrans_lookup (<a href="#messagetrans_control_block">messagetrans_control_block</a> const *cb,
+      char const *token,
+      char *buffer,
+      int size,
+      char const *arg0,
+      char const *arg1,
+      char const *arg2,
+      char const *arg3,
+      char **result,
+      int *used);</pre>
+<p>Translates a message token into a string</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>token</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>arg0</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>arg1</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>arg2</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>arg3</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>result</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>used</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="messagetrans_lookup">messagetrans_lookup</h3>
+<pre>extern char *messagetrans_lookup (<a href="#messagetrans_control_block">messagetrans_control_block</a> const *cb,
+      char const *token,
+      char *buffer,
+      int size,
+      char const *arg0,
+      char const *arg1,
+      char const *arg2,
+      char const *arg3,
+      int *used);</pre>
+<p>Translates a message token into a string</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>token</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>arg0</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>arg1</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>arg2</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>arg3</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>result</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xmessagetrans_make_menus">xmessagetrans_make_menus</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmessagetrans_make_menus (<a href="#messagetrans_control_block">messagetrans_control_block</a> const *cb,
+      byte const *menus,
+      char *buffer,
+      int size,
+      int *used);</pre>
+<p>Sets up a menu structure from a definition containing references to tokens</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menus</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="messagetrans_make_menus">messagetrans_make_menus</h3>
+<pre>extern int messagetrans_make_menus (<a href="#messagetrans_control_block">messagetrans_control_block</a> const *cb,
+      byte const *menus,
+      char *buffer,
+      int size);</pre>
+<p>Sets up a menu structure from a definition containing references to tokens</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menus</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xmessagetrans_close_file">xmessagetrans_close_file</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmessagetrans_close_file (<a href="#messagetrans_control_block">messagetrans_control_block</a> const *cb);</pre>
+<p>Closes a message file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>cb</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="messagetrans_close_file">messagetrans_close_file</h3>
+<pre>extern void messagetrans_close_file (<a href="#messagetrans_control_block">messagetrans_control_block</a> const *cb);</pre>
+<p>Closes a message file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>cb</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xmessagetrans_enumerate_tokens">xmessagetrans_enumerate_tokens</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmessagetrans_enumerate_tokens (<a href="#messagetrans_control_block">messagetrans_control_block</a> const *cb,
+      char const *token,
+      char *buffer,
+      int size,
+      int context,
+      osbool *more,
+      int *used,
+      int *context_out);</pre>
+<p>Enumerates tokens that match a wildcarded token</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>token</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>more</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>used</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="messagetrans_enumerate_tokens">messagetrans_enumerate_tokens</h3>
+<pre>extern osbool messagetrans_enumerate_tokens (<a href="#messagetrans_control_block">messagetrans_control_block</a> const *cb,
+      char const *token,
+      char *buffer,
+      int size,
+      int context,
+      int *used,
+      int *context_out);</pre>
+<p>Enumerates tokens that match a wildcarded token</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>token</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>more</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xmessagetrans_error_lookup">xmessagetrans_error_lookup</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmessagetrans_error_lookup (<a href="os.html#os_error">os_error</a> const *error,
+      <a href="#messagetrans_control_block">messagetrans_control_block</a> const *cb,
+      <a href="os.html#os_error">os_error</a> *buffer,
+      int size,
+      char const *arg0,
+      char const *arg1,
+      char const *arg2,
+      char const *arg3);</pre>
+<p>Translates a message token within an error block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>error</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>cb</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>arg0</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>arg1</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>arg2</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>arg3</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="messagetrans_error_lookup">messagetrans_error_lookup</h3>
+<pre>extern void messagetrans_error_lookup (<a href="os.html#os_error">os_error</a> const *error,
+      <a href="#messagetrans_control_block">messagetrans_control_block</a> const *cb,
+      <a href="os.html#os_error">os_error</a> *buffer,
+      int size,
+      char const *arg0,
+      char const *arg1,
+      char const *arg2,
+      char const *arg3);</pre>
+<p>Translates a message token within an error block</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>error</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>cb</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>arg0</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>arg1</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>arg2</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>arg3</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xmessagetrans_gs_lookup">xmessagetrans_gs_lookup</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmessagetrans_gs_lookup (<a href="#messagetrans_control_block">messagetrans_control_block</a> const *cb,
+      char const *token,
+      char *buffer,
+      int size,
+      char const *arg0,
+      char const *arg1,
+      char const *arg2,
+      char const *arg3,
+      char **result,
+      int *used);</pre>
+<p>Translates a message token into a string and calls OS_GSTrans</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>token</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>arg0</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>arg1</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>arg2</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>arg3</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>result</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>used</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="messagetrans_gs_lookup">messagetrans_gs_lookup</h3>
+<pre>extern char *messagetrans_gs_lookup (<a href="#messagetrans_control_block">messagetrans_control_block</a> const *cb,
+      char const *token,
+      char *buffer,
+      int size,
+      char const *arg0,
+      char const *arg1,
+      char const *arg2,
+      char const *arg3,
+      int *used);</pre>
+<p>Translates a message token into a string and calls OS_GSTrans</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>cb</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>token</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>arg0</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>arg1</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>arg2</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>arg3</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>result</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xmessagetrans_copy_error">xmessagetrans_copy_error</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmessagetrans_copy_error (<a href="os.html#os_error">os_error</a> const *error,
+      <a href="os.html#os_error">os_error</a> **copy);</pre>
+<p>Copies an error into one of the MessageTrans internal buffers</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>error</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>copy</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="messagetrans_copy_error">messagetrans_copy_error</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *messagetrans_copy_error (<a href="os.html#os_error">os_error</a> const *error);</pre>
+<p>Copies an error into one of the MessageTrans internal buffers</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>error</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>copy</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xmessagetrans_dictionary">xmessagetrans_dictionary</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xmessagetrans_dictionary (byte **dictionary);</pre>
+<p>Returns a pointer to MessageTrans's internal dictionary</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>dictionary</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="messagetrans_dictionary">messagetrans_dictionary</h3>
+<pre>extern byte *messagetrans_dictionary (void);
+</pre><p>Returns a pointer to MessageTrans's internal dictionary</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>dictionary</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xservice_message_file_closed">xservice_message_file_closed</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_message_file_closed (<a href="#messagetrans_control_block">messagetrans_control_block</a> const *cb);</pre>
+<p>Message files have been closed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>cb</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="service_message_file_closed">service_message_file_closed</h3>
+<pre>extern void service_message_file_closed (<a href="#messagetrans_control_block">messagetrans_control_block</a> const *cb);</pre>
+<p>Message files have been closed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>cb</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

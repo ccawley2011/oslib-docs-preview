@@ -1,0 +1,789 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; OSGBPB</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>OSGBPB</h2>
+
+<pre>#include "oslib/osgbpb.h"</pre>
+
+<h3 id="osgbpb_NAME_MEMBERS">osgbpb_NAME_MEMBERS</h3>
+<pre>#define osgbpb_NAME_MEMBERS \
+   byte count;
+</pre>
+
+<h3 id="osgbpb_name_base">osgbpb_name_base</h3>
+<pre>typedef struct
+   {  byte count;
+   }
+   osgbpb_name_base;</pre>
+
+<h3 id="osgbpb_name">osgbpb_name</h3>
+<pre>typedef struct
+   {  byte count;
+      char c [...];
+   }
+   osgbpb_name;</pre>
+
+
+Fields:	c - Counted string<h3 id="osgbpb_disc_name">osgbpb_disc_name</h3>
+<pre>typedef struct
+   {  <a href="#osgbpb_name">osgbpb_name</a> name;
+   }
+   osgbpb_disc_name;</pre>
+
+<h3 id="osgbpb_dir_name">osgbpb_dir_name</h3>
+<pre>typedef struct
+   {  byte reserved;
+      <a href="#osgbpb_name">osgbpb_name</a> name;
+   }
+   osgbpb_dir_name;</pre>
+
+<h3 id="osgbpb_name_list">osgbpb_name_list</h3>
+<pre>typedef struct
+   {  <a href="#osgbpb_name">osgbpb_name</a> names [...];
+   }
+   osgbpb_name_list;</pre>
+
+<h3 id="osgbpb_INFO_MEMBERS">osgbpb_INFO_MEMBERS</h3>
+<pre>#define osgbpb_INFO_MEMBERS \
+   bits load_addr; \
+   bits exec_addr; \
+   int size; \
+   <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr; \
+   <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> obj_type;
+</pre>
+
+<h3 id="osgbpb_info_base">osgbpb_info_base</h3>
+<pre>typedef struct
+   {  bits load_addr;
+      bits exec_addr;
+      int size;
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr;
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> obj_type;
+   }
+   osgbpb_info_base;</pre>
+
+<h3 id="osgbpb_info">osgbpb_info</h3>
+<pre>typedef struct
+   {  bits load_addr;
+      bits exec_addr;
+      int size;
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr;
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> obj_type;
+      char name [...];
+   }
+   osgbpb_info;</pre>
+
+<h3 id="osgbpb_SYSTEM_INFO_MEMBERS">osgbpb_SYSTEM_INFO_MEMBERS</h3>
+<pre>#define osgbpb_SYSTEM_INFO_MEMBERS \
+   bits load_addr; \
+   bits exec_addr; \
+   int size; \
+   <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr; \
+   <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> obj_type; \
+   int sin; \
+   <a href="os.html#os_date_and_time">os_date_and_time</a> stamp;
+</pre>
+
+<h3 id="osgbpb_system_info_base">osgbpb_system_info_base</h3>
+<pre>typedef struct
+   {  bits load_addr;
+      bits exec_addr;
+      int size;
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr;
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> obj_type;
+      int sin;
+      <a href="os.html#os_date_and_time">os_date_and_time</a> stamp;
+   }
+   osgbpb_system_info_base;</pre>
+
+<h3 id="osgbpb_system_info">osgbpb_system_info</h3>
+<pre>typedef struct
+   {  bits load_addr;
+      bits exec_addr;
+      int size;
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr;
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> obj_type;
+      int sin;
+      <a href="os.html#os_date_and_time">os_date_and_time</a> stamp;
+      char name [...];
+   }
+   osgbpb_system_info;</pre>
+
+<h3 id="osgbpb_INFO_STAMPED_MEMBERS">osgbpb_INFO_STAMPED_MEMBERS</h3>
+<pre>#define osgbpb_INFO_STAMPED_MEMBERS \
+   bits load_addr; \
+   bits exec_addr; \
+   int size; \
+   <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr; \
+   <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> obj_type; \
+   bits file_type;
+</pre>
+
+<h3 id="osgbpb_info_stamped_base">osgbpb_info_stamped_base</h3>
+<pre>typedef struct
+   {  bits load_addr;
+      bits exec_addr;
+      int size;
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr;
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> obj_type;
+      bits file_type;
+   }
+   osgbpb_info_stamped_base;</pre>
+
+<h3 id="osgbpb_info_stamped">osgbpb_info_stamped</h3>
+<pre>typedef struct
+   {  bits load_addr;
+      bits exec_addr;
+      int size;
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> attr;
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> obj_type;
+      bits file_type;
+      char name [...];
+   }
+   osgbpb_info_stamped;</pre>
+
+<h3 id="osgbpb_string_list">osgbpb_string_list</h3>
+<pre>typedef struct
+   {  char names [...];
+   }
+   osgbpb_string_list;</pre>
+
+<h3 id="osgbpb_info_list">osgbpb_info_list</h3>
+<pre>typedef struct
+   {  <a href="#osgbpb_info">osgbpb_info</a> info [...];
+   }
+   osgbpb_info_list;</pre>
+
+<h3 id="osgbpb_system_info_list">osgbpb_system_info_list</h3>
+<pre>typedef struct
+   {  <a href="#osgbpb_system_info">osgbpb_system_info</a> info [...];
+   }
+   osgbpb_system_info_list;</pre>
+
+<h3 id="osgbpb_info_stamped_list">osgbpb_info_stamped_list</h3>
+<pre>typedef struct
+   {  <a href="#osgbpb_info_stamped">osgbpb_info_stamped</a> info [...];
+   }
+   osgbpb_info_stamped_list;</pre>
+
+<h3 id="osgbpb_privilege">osgbpb_privilege</h3>
+<pre>typedef byte osgbpb_privilege;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osgbpb_PRIVILEGE_OWNER">osgbpb_PRIVILEGE_OWNER</a></dd>
+<dd><a href="#osgbpb_PRIVILEGE_PUBLIC">osgbpb_PRIVILEGE_PUBLIC</a></dd>
+</dl>
+
+<h3 id="osgbpb_PRIVILEGE_OWNER">osgbpb_PRIVILEGE_OWNER</h3>
+<pre>#define osgbpb_PRIVILEGE_OWNER ((<a href="#osgbpb_privilege">osgbpb_privilege</a>) 0x0u)</pre>
+
+<h3 id="osgbpb_PRIVILEGE_PUBLIC">osgbpb_PRIVILEGE_PUBLIC</h3>
+<pre>#define osgbpb_PRIVILEGE_PUBLIC ((<a href="#osgbpb_privilege">osgbpb_privilege</a>) 0xFFu)</pre>
+
+<h3 id="osgbpb_NO_MORE">osgbpb_NO_MORE</h3>
+<pre>#define osgbpb_NO_MORE (-1)</pre>
+
+<h3 id="xosgbpb_write_at">xosgbpb_write_at</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosgbpb_write_at (<a href="os.html#os_f">os_f</a> file,
+      byte const *data,
+      int size,
+      int ptr,
+      int *unwritten);</pre>
+<p>Writes bytes to an open file at the specified file pointer. Prefer OSGBPB_WriteAtW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>ptr</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unwritten</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osgbpb_write_at">osgbpb_write_at</h3>
+<pre>extern int osgbpb_write_at (<a href="os.html#os_f">os_f</a> file,
+      byte const *data,
+      int size,
+      int ptr);</pre>
+<p>Writes bytes to an open file at the specified file pointer. Prefer OSGBPB_WriteAtW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>ptr</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unwritten</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xosgbpb_write_atw">xosgbpb_write_atw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosgbpb_write_atw (<a href="os.html#os_fw">os_fw</a> file,
+      byte const *data,
+      int size,
+      int ptr,
+      int *unwritten);</pre>
+<p>Writes bytes to an open file at the specified file pointer. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>ptr</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unwritten</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osgbpb_write_atw">osgbpb_write_atw</h3>
+<pre>extern int osgbpb_write_atw (<a href="os.html#os_fw">os_fw</a> file,
+      byte const *data,
+      int size,
+      int ptr);</pre>
+<p>Writes bytes to an open file at the specified file pointer. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>ptr</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unwritten</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xosgbpb_write">xosgbpb_write</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosgbpb_write (<a href="os.html#os_f">os_f</a> file,
+      byte const *data,
+      int size,
+      int *unwritten);</pre>
+<p>Writes bytes to an open file. Prefer OSGBPB_WriteW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unwritten</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osgbpb_write">osgbpb_write</h3>
+<pre>extern int osgbpb_write (<a href="os.html#os_f">os_f</a> file,
+      byte const *data,
+      int size);</pre>
+<p>Writes bytes to an open file. Prefer OSGBPB_WriteW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unwritten</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xosgbpb_writew">xosgbpb_writew</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosgbpb_writew (<a href="os.html#os_fw">os_fw</a> file,
+      byte const *data,
+      int size,
+      int *unwritten);</pre>
+<p>Writes bytes to an open file. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unwritten</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osgbpb_writew">osgbpb_writew</h3>
+<pre>extern int osgbpb_writew (<a href="os.html#os_fw">os_fw</a> file,
+      byte const *data,
+      int size);</pre>
+<p>Writes bytes to an open file. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>data</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unwritten</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xosgbpb_read_at">xosgbpb_read_at</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosgbpb_read_at (<a href="os.html#os_f">os_f</a> file,
+      byte *buffer,
+      int size,
+      int ptr,
+      int *unread);</pre>
+<p>Reads bytes from an open file at the specified file pointer. Prefer OSGBPB_ReadAtW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>ptr</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unread</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osgbpb_read_at">osgbpb_read_at</h3>
+<pre>extern int osgbpb_read_at (<a href="os.html#os_f">os_f</a> file,
+      byte *buffer,
+      int size,
+      int ptr);</pre>
+<p>Reads bytes from an open file at the specified file pointer. Prefer OSGBPB_ReadAtW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>ptr</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unread</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xosgbpb_read_atw">xosgbpb_read_atw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosgbpb_read_atw (<a href="os.html#os_fw">os_fw</a> file,
+      byte *buffer,
+      int size,
+      int ptr,
+      int *unread);</pre>
+<p>Reads bytes from an open file at the specified file pointer. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>ptr</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unread</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osgbpb_read_atw">osgbpb_read_atw</h3>
+<pre>extern int osgbpb_read_atw (<a href="os.html#os_fw">os_fw</a> file,
+      byte *buffer,
+      int size,
+      int ptr);</pre>
+<p>Reads bytes from an open file at the specified file pointer. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>ptr</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unread</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xosgbpb_read">xosgbpb_read</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosgbpb_read (<a href="os.html#os_f">os_f</a> file,
+      byte *buffer,
+      int size,
+      int *unread);</pre>
+<p>Reads bytes from an open file. Prefer OSGBPB_ReadW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unread</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osgbpb_read">osgbpb_read</h3>
+<pre>extern int osgbpb_read (<a href="os.html#os_f">os_f</a> file,
+      byte *buffer,
+      int size);</pre>
+<p>Reads bytes from an open file. Prefer OSGBPB_ReadW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unread</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xosgbpb_readw">xosgbpb_readw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosgbpb_readw (<a href="os.html#os_fw">os_fw</a> file,
+      byte *buffer,
+      int size,
+      int *unread);</pre>
+<p>Reads bytes from an open file. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unread</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="osgbpb_readw">osgbpb_readw</h3>
+<pre>extern int osgbpb_readw (<a href="os.html#os_fw">os_fw</a> file,
+      byte *buffer,
+      int size);</pre>
+<p>Reads bytes from an open file. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unread</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xosgbpb_read_disc_name">xosgbpb_read_disc_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosgbpb_read_disc_name (<a href="#osgbpb_disc_name">osgbpb_disc_name</a> *disc_name);</pre>
+<p>Reads the name and boot option of the disc which contains the CSD - prefer OSFSControl_CanonicalisePath and/or OSFSControl_ReadBootOption</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>disc_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osgbpb_read_disc_name">osgbpb_read_disc_name</h3>
+<pre>extern void osgbpb_read_disc_name (<a href="#osgbpb_disc_name">osgbpb_disc_name</a> *disc_name);</pre>
+<p>Reads the name and boot option of the disc which contains the CSD - prefer OSFSControl_CanonicalisePath and/or OSFSControl_ReadBootOption</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>disc_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosgbpb_read_csd_name">xosgbpb_read_csd_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosgbpb_read_csd_name (<a href="#osgbpb_dir_name">osgbpb_dir_name</a> *csd_name);</pre>
+<p>Reads the name and privilege status of the CSD - prefer OSFSControl_CanonicalisePath</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>csd_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osgbpb_read_csd_name">osgbpb_read_csd_name</h3>
+<pre>extern void osgbpb_read_csd_name (<a href="#osgbpb_dir_name">osgbpb_dir_name</a> *csd_name);</pre>
+<p>Reads the name and privilege status of the CSD - prefer OSFSControl_CanonicalisePath</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>csd_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosgbpb_read_lib_name">xosgbpb_read_lib_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosgbpb_read_lib_name (<a href="#osgbpb_dir_name">osgbpb_dir_name</a> *lib_name);</pre>
+<p>Reads the name and privilege status of the library - prefer OSFSControl_CanonicalisePath</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>lib_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osgbpb_read_lib_name">osgbpb_read_lib_name</h3>
+<pre>extern void osgbpb_read_lib_name (<a href="#osgbpb_dir_name">osgbpb_dir_name</a> *lib_name);</pre>
+<p>Reads the name and privilege status of the library - prefer OSFSControl_CanonicalisePath</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>lib_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosgbpb_csd_entries">xosgbpb_csd_entries</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosgbpb_csd_entries (<a href="#osgbpb_name_list">osgbpb_name_list</a> *name_list,
+      int count,
+      int context,
+      int *unread,
+      int *context_out);</pre>
+<p>Reads entries from the CSD - prefer OSGBPB_DirEntries</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name_list</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unread</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="osgbpb_csd_entries">osgbpb_csd_entries</h3>
+<pre>extern int osgbpb_csd_entries (<a href="#osgbpb_name_list">osgbpb_name_list</a> *name_list,
+      int count,
+      int context,
+      int *unread);</pre>
+<p>Reads entries from the CSD - prefer OSGBPB_DirEntries</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>name_list</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unread</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_out</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xosgbpb_dir_entries">xosgbpb_dir_entries</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosgbpb_dir_entries (char const *dir_name,
+      <a href="#osgbpb_string_list">osgbpb_string_list</a> *name_list,
+      int count,
+      int context,
+      int size,
+      char const *entries,
+      int *read_count,
+      int *context_out);</pre>
+<p>Reads entries from a specified directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>name_list</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>entries</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>read_count</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="osgbpb_dir_entries">osgbpb_dir_entries</h3>
+<pre>extern int osgbpb_dir_entries (char const *dir_name,
+      <a href="#osgbpb_string_list">osgbpb_string_list</a> *name_list,
+      int count,
+      int context,
+      int size,
+      char const *entries,
+      int *read_count);</pre>
+<p>Reads entries from a specified directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>name_list</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>entries</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>read_count</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_out</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xosgbpb_dir_entries_info">xosgbpb_dir_entries_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosgbpb_dir_entries_info (char const *dir_name,
+      <a href="#osgbpb_info_list">osgbpb_info_list</a> *info_list,
+      int count,
+      int context,
+      int size,
+      char const *entries,
+      int *read_count,
+      int *context_out);</pre>
+<p>Reads entries and file information from a specified directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>info_list</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>entries</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>read_count</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="osgbpb_dir_entries_info">osgbpb_dir_entries_info</h3>
+<pre>extern int osgbpb_dir_entries_info (char const *dir_name,
+      <a href="#osgbpb_info_list">osgbpb_info_list</a> *info_list,
+      int count,
+      int context,
+      int size,
+      char const *entries,
+      int *read_count);</pre>
+<p>Reads entries and file information from a specified directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>info_list</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>entries</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>read_count</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_out</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xosgbpb_dir_entries_system_info">xosgbpb_dir_entries_system_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosgbpb_dir_entries_system_info (char const *dir_name,
+      <a href="#osgbpb_system_info_list">osgbpb_system_info_list</a> *info_list,
+      int count,
+      int context,
+      int size,
+      char const *entries,
+      int *read_count,
+      int *context_out);</pre>
+<p>Reads entries and file information (including SIN) from a specified directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>info_list</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>entries</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>read_count</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="osgbpb_dir_entries_system_info">osgbpb_dir_entries_system_info</h3>
+<pre>extern int osgbpb_dir_entries_system_info (char const *dir_name,
+      <a href="#osgbpb_system_info_list">osgbpb_system_info_list</a> *info_list,
+      int count,
+      int context,
+      int size,
+      char const *entries,
+      int *read_count);</pre>
+<p>Reads entries and file information (including SIN) from a specified directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>info_list</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>entries</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>read_count</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_out</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xosgbpb_dir_entries_info_stamped">xosgbpb_dir_entries_info_stamped</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosgbpb_dir_entries_info_stamped (char const *dir_name,
+      <a href="#osgbpb_info_stamped_list">osgbpb_info_stamped_list</a> *info_list,
+      int count,
+      int context,
+      int size,
+      char const *entries,
+      int *read_count,
+      int *context_out);</pre>
+<p>Reads entries and file information (including file type) from a specified directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>info_list</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>entries</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>read_count</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="osgbpb_dir_entries_info_stamped">osgbpb_dir_entries_info_stamped</h3>
+<pre>extern int osgbpb_dir_entries_info_stamped (char const *dir_name,
+      <a href="#osgbpb_info_stamped_list">osgbpb_info_stamped_list</a> *info_list,
+      int count,
+      int context,
+      int size,
+      char const *entries,
+      int *read_count);</pre>
+<p>Reads entries and file information (including file type) from a specified directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>dir_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>info_list</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>entries</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>read_count</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_out</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ZapFontMenu</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ZapFontMenu</h2>
+
+<pre>#include "oslib/zapfontmenu.h"</pre>
+
+<h3 id="zapfontmenu_flags">zapfontmenu_flags</h3>
+<pre>typedef bits zapfontmenu_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#zapfontmenu_GENERATE_ABOUT_TO_BE_SHOWN">zapfontmenu_GENERATE_ABOUT_TO_BE_SHOWN</a></dd>
+<dd><a href="#zapfontmenu_GENERATE_HAS_BEEN_HIDDEN">zapfontmenu_GENERATE_HAS_BEEN_HIDDEN</a></dd>
+<dd><a href="#zapfontmenu_INCLUDE_SYSTEM_FONT">zapfontmenu_INCLUDE_SYSTEM_FONT</a></dd>
+<dd><a href="#zapfontmenu_ENCODING_MENU">zapfontmenu_ENCODING_MENU</a></dd>
+</dl>
+
+<h3 id="zapfontmenu_object">zapfontmenu_object</h3>
+<pre>typedef struct
+   {  <a href="#zapfontmenu_flags">zapfontmenu_flags</a> flags;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> ticked_font;
+   }
+   zapfontmenu_object;</pre>
+
+<p>Structure to describe Object for in-memory construction - referenced from Toolbox_Template</p>
+
+<h3 id="zapfontmenu_object_template">zapfontmenu_object_template</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_RESOURCE_FILE_OBJECT_MEMBERS">toolbox_RESOURCE_FILE_OBJECT_MEMBERS</a>
+      <a href="#zapfontmenu_flags">zapfontmenu_flags</a> objectflags;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> ticked_font;
+   }
+   zapfontmenu_object_template;</pre>
+
+<h3 id="zapfontmenu_full">zapfontmenu_full</h3>
+<pre>typedef <a href="os.html#os_coord">os_coord</a> zapfontmenu_full;</pre>
+
+<h3 id="zapfontmenu_action_about_to_be_shown">zapfontmenu_action_about_to_be_shown</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#zapfontmenu_full">zapfontmenu_full</a> full;
+      }
+      position;
+   }
+   zapfontmenu_action_about_to_be_shown;</pre>
+
+<p>Prefer ZapFontMenu_ActionAboutToBeShownBlock</p>
+
+<h3 id="zapfontmenu_action_about_to_be_shown_block">zapfontmenu_action_about_to_be_shown_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#zapfontmenu_full">zapfontmenu_full</a> full;
+      }
+      position;
+   }
+   zapfontmenu_action_about_to_be_shown_block;</pre>
+
+<h3 id="zapfontmenu_action_has_been_hidden_block">zapfontmenu_action_has_been_hidden_block</h3>
+<pre>typedef <a href="toolbox.html#toolbox_action_header_base">toolbox_action_header_base</a> zapfontmenu_action_has_been_hidden_block;</pre>
+
+<h3 id="zapfontmenu_action_dialogue_completed_block">zapfontmenu_action_dialogue_completed_block</h3>
+<pre>typedef <a href="toolbox.html#toolbox_action_header_base">toolbox_action_header_base</a> zapfontmenu_action_dialogue_completed_block;</pre>
+
+<p>Prefer ZapFontMenu_ActionHasBeenHiddenBlock</p>
+
+<h3 id="zapfontmenu_action_selection">zapfontmenu_action_selection</h3>
+<pre>typedef struct
+   {  char identifier [212];
+   }
+   zapfontmenu_action_selection;</pre>
+
+<p>Prefer ZapFontMenu_ActionSelectionBlock</p>
+
+<h3 id="zapfontmenu_action_selection_block">zapfontmenu_action_selection_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      char identifier [212];
+   }
+   zapfontmenu_action_selection_block;</pre>
+
+<h3 id="class_ZAP_FONT_MENU">class_ZAP_FONT_MENU</h3>
+<pre>#define class_ZAP_FONT_MENU ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x100300u)</pre>
+
+<h3 id="zapfontmenu_GENERATE_ABOUT_TO_BE_SHOWN">zapfontmenu_GENERATE_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define zapfontmenu_GENERATE_ABOUT_TO_BE_SHOWN ((<a href="#zapfontmenu_flags">zapfontmenu_flags</a>) 0x1u)</pre>
+
+<h3 id="zapfontmenu_GENERATE_HAS_BEEN_HIDDEN">zapfontmenu_GENERATE_HAS_BEEN_HIDDEN</h3>
+<pre>#define zapfontmenu_GENERATE_HAS_BEEN_HIDDEN ((<a href="#zapfontmenu_flags">zapfontmenu_flags</a>) 0x2u)</pre>
+
+<h3 id="zapfontmenu_INCLUDE_SYSTEM_FONT">zapfontmenu_INCLUDE_SYSTEM_FONT</h3>
+<pre>#define zapfontmenu_INCLUDE_SYSTEM_FONT ((<a href="#zapfontmenu_flags">zapfontmenu_flags</a>) 0x4u)</pre>
+
+<h3 id="zapfontmenu_ENCODING_MENU">zapfontmenu_ENCODING_MENU</h3>
+<pre>#define zapfontmenu_ENCODING_MENU ((<a href="#zapfontmenu_flags">zapfontmenu_flags</a>) 0x8u)</pre>
+
+<h3 id="zapfontmenu_ENCODING_SELECTION">zapfontmenu_ENCODING_SELECTION</h3>
+<pre>#define zapfontmenu_ENCODING_SELECTION 0x1u</pre>
+
+<h3 id="action_ZAP_FONT_MENU_ABOUT_TO_BE_SHOWN">action_ZAP_FONT_MENU_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define action_ZAP_FONT_MENU_ABOUT_TO_BE_SHOWN 0x100300u</pre>
+
+<h3 id="action_ZAP_FONT_MENU_HAS_BEEN_HIDDEN">action_ZAP_FONT_MENU_HAS_BEEN_HIDDEN</h3>
+<pre>#define action_ZAP_FONT_MENU_HAS_BEEN_HIDDEN 0x100301u</pre>
+
+<h3 id="action_ZAP_FONT_MENU_SELECTION">action_ZAP_FONT_MENU_SELECTION</h3>
+<pre>#define action_ZAP_FONT_MENU_SELECTION 0x100302u</pre>
+
+<h3 id="error_ZAP_FONT_MENU_TASKS_ACTIVE">error_ZAP_FONT_MENU_TASKS_ACTIVE</h3>
+<pre>#define error_ZAP_FONT_MENU_TASKS_ACTIVE 0x81D440u</pre>
+
+<h3 id="error_ZAP_FONT_MENU_ALLOC_FAILED">error_ZAP_FONT_MENU_ALLOC_FAILED</h3>
+<pre>#define error_ZAP_FONT_MENU_ALLOC_FAILED 0x81D441u</pre>
+
+<h3 id="error_ZAP_FONT_MENU_SHORT_BUFFER">error_ZAP_FONT_MENU_SHORT_BUFFER</h3>
+<pre>#define error_ZAP_FONT_MENU_SHORT_BUFFER 0x81D442u</pre>
+
+<h3 id="error_ZAP_FONT_MENU_NO_SUCH_TASK">error_ZAP_FONT_MENU_NO_SUCH_TASK</h3>
+<pre>#define error_ZAP_FONT_MENU_NO_SUCH_TASK 0x81D443u</pre>
+
+<h3 id="error_ZAP_FONT_MENU_NO_SUCH_METHOD">error_ZAP_FONT_MENU_NO_SUCH_METHOD</h3>
+<pre>#define error_ZAP_FONT_MENU_NO_SUCH_METHOD 0x81D444u</pre>
+
+<h3 id="error_ZAP_FONT_MENU_NO_SUCH_MISC_OP_METHOD">error_ZAP_FONT_MENU_NO_SUCH_MISC_OP_METHOD</h3>
+<pre>#define error_ZAP_FONT_MENU_NO_SUCH_MISC_OP_METHOD 0x81D445u</pre>
+
+<h3 id="xzapfontmenu_set_font">xzapfontmenu_set_font</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapfontmenu_set_font (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_menu,
+      char const *font_identifier);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>font_identifier</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="zapfontmenu_set_font">zapfontmenu_set_font</h3>
+<pre>extern void zapfontmenu_set_font (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_menu,
+      char const *font_identifier);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>font_identifier</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xzapfontmenu_get_font">xzapfontmenu_get_font</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapfontmenu_get_font (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_menu,
+      char *buffer,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="zapfontmenu_get_font">zapfontmenu_get_font</h3>
+<pre>extern int zapfontmenu_get_font (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_menu,
+      char *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xzapfontmenu_set_system_available">xzapfontmenu_set_system_available</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapfontmenu_set_system_available (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_menu,
+      osbool available);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>available</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="zapfontmenu_set_system_available">zapfontmenu_set_system_available</h3>
+<pre>extern void zapfontmenu_set_system_available (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_menu,
+      osbool available);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>available</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xzapfontmenu_get_system_available">xzapfontmenu_get_system_available</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xzapfontmenu_get_system_available (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_menu,
+      osbool *available);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>available</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="zapfontmenu_get_system_available">zapfontmenu_get_system_available</h3>
+<pre>extern osbool zapfontmenu_get_system_available (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> font_menu);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>available</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

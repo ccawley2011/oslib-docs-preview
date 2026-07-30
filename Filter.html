@@ -1,0 +1,458 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Filter</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Filter</h2>
+
+<pre>#include "oslib/filter.h"</pre>
+
+<h3 id="filter_NAME_LIMIT">filter_NAME_LIMIT</h3>
+<pre>#define filter_NAME_LIMIT 40</pre>
+
+<h3 id="filter_ALL_TASKS">filter_ALL_TASKS</h3>
+<pre>#define filter_ALL_TASKS ((<a href="wimp.html#wimp_t">wimp_t</a>) 0x0u)</pre>
+
+<h3 id="xfilter_register_pre_filter">xfilter_register_pre_filter</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfilter_register_pre_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle,
+      <a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>Adds a new pre-filter to the list of pre-filters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="filter_register_pre_filter">filter_register_pre_filter</h3>
+<pre>extern void filter_register_pre_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle,
+      <a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>Adds a new pre-filter to the list of pre-filters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xfilter_register_post_filter">xfilter_register_post_filter</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfilter_register_post_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle,
+      <a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="wimp.html#wimp_poll_flags">wimp_poll_flags</a> mask);</pre>
+<p>Adds a new post-filter to the list of post-filters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>mask</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="filter_register_post_filter">filter_register_post_filter</h3>
+<pre>extern void filter_register_post_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle,
+      <a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="wimp.html#wimp_poll_flags">wimp_poll_flags</a> mask);</pre>
+<p>Adds a new post-filter to the list of post-filters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>mask</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xfilter_de_register_pre_filter">xfilter_de_register_pre_filter</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfilter_de_register_pre_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle,
+      <a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>Removes a pre-filter from the list of pre-filters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="filter_de_register_pre_filter">filter_de_register_pre_filter</h3>
+<pre>extern void filter_de_register_pre_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle,
+      <a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>Removes a pre-filter from the list of pre-filters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xfilter_de_register_post_filter">xfilter_de_register_post_filter</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfilter_de_register_post_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle,
+      <a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="wimp.html#wimp_poll_flags">wimp_poll_flags</a> mask);</pre>
+<p>Removes a post-filter from the list of post-filters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>mask</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="filter_de_register_post_filter">filter_de_register_post_filter</h3>
+<pre>extern void filter_de_register_post_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle,
+      <a href="wimp.html#wimp_t">wimp_t</a> task,
+      <a href="wimp.html#wimp_poll_flags">wimp_poll_flags</a> mask);</pre>
+<p>Removes a post-filter from the list of post-filters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>mask</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xfilter_register_rect_filter">xfilter_register_rect_filter</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfilter_register_rect_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle,
+      <a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>Adds a new get-rectangle filter to the list of get-rectangle filters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="filter_register_rect_filter">filter_register_rect_filter</h3>
+<pre>extern void filter_register_rect_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle,
+      <a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>Adds a new get-rectangle filter to the list of get-rectangle filters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xfilter_de_register_rect_filter">xfilter_de_register_rect_filter</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfilter_de_register_rect_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle,
+      <a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>Removes a get-rectangle filter from the list of get-rectangle filters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="filter_de_register_rect_filter">filter_de_register_rect_filter</h3>
+<pre>extern void filter_de_register_rect_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle,
+      <a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>Removes a get-rectangle filter from the list of get-rectangle filters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xfilter_register_copy_filter">xfilter_register_copy_filter</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfilter_register_copy_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle);</pre>
+<p>Adds a new rectangle-copy filter to the list of rectangle-copy filters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="filter_register_copy_filter">filter_register_copy_filter</h3>
+<pre>extern void filter_register_copy_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle);</pre>
+<p>Adds a new rectangle-copy filter to the list of rectangle-copy filters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xfilter_de_register_copy_filter">xfilter_de_register_copy_filter</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfilter_de_register_copy_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle);</pre>
+<p>Removes a rectangle-copy filter from the list of rectangle-copy filters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="filter_de_register_copy_filter">filter_de_register_copy_filter</h3>
+<pre>extern void filter_de_register_copy_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle);</pre>
+<p>Removes a rectangle-copy filter from the list of rectangle-copy filters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xfilter_register_post_rect_filter">xfilter_register_post_rect_filter</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfilter_register_post_rect_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle,
+      <a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>Adds a new post-rectangle filter to the list of post-rectangle filters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="filter_register_post_rect_filter">filter_register_post_rect_filter</h3>
+<pre>extern void filter_register_post_rect_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle,
+      <a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>Adds a new post-rectangle filter to the list of post-rectangle filters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xfilter_de_register_post_rect_filter">xfilter_de_register_post_rect_filter</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfilter_de_register_post_rect_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle,
+      <a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>Removes a post-rectangle filter from the list of post-rectangle filters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="filter_de_register_post_rect_filter">filter_de_register_post_rect_filter</h3>
+<pre>extern void filter_de_register_post_rect_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle,
+      <a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>Removes a post-rectangle filter from the list of post-rectangle filters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xfilter_register_post_icon_filter">xfilter_register_post_icon_filter</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfilter_register_post_icon_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle,
+      <a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>Adds a new post-icon filter to the list of post-icon filters - requires Wimp 3.86+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="filter_register_post_icon_filter">filter_register_post_icon_filter</h3>
+<pre>extern void filter_register_post_icon_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle,
+      <a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>Adds a new post-icon filter to the list of post-icon filters - requires Wimp 3.86+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xfilter_de_register_post_icon_filter">xfilter_de_register_post_icon_filter</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfilter_de_register_post_icon_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle,
+      <a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>Removes a post-icon filter to the list of post-icon filters - requires Wimp 3.86+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="filter_de_register_post_icon_filter">filter_de_register_post_icon_filter</h3>
+<pre>extern void filter_de_register_post_icon_filter (char const *filter_name,
+      asm_routine code,
+      byte *handle,
+      <a href="wimp.html#wimp_t">wimp_t</a> task);</pre>
+<p>Removes a post-icon filter to the list of post-icon filters - requires Wimp 3.86+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filter_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>code</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xservice_filter_manager_installed">xservice_filter_manager_installed</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_filter_manager_installed (int version);</pre>
+<p>Filter Manager starting up</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>version</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="service_filter_manager_installed">service_filter_manager_installed</h3>
+<pre>extern void service_filter_manager_installed (int version);</pre>
+<p>Filter Manager starting up</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>version</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xservice_filter_manager_dying">xservice_filter_manager_dying</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_filter_manager_dying (void);
+</pre><p>Filter Manager dying</p>
+
+
+<table>
+</table>
+
+<h3 id="service_filter_manager_dying">service_filter_manager_dying</h3>
+<pre>extern void service_filter_manager_dying (void);
+</pre><p>Filter Manager dying</p>
+
+
+<table>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

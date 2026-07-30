@@ -1,0 +1,449 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ShareFS</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ShareFS</h2>
+
+<pre>#include "oslib/sharefs.h"</pre>
+
+<h3 id="sharefs_attr">sharefs_attr</h3>
+<pre>typedef bits sharefs_attr;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#sharefs_ATTR_DISC">sharefs_ATTR_DISC</a></dd>
+<dd><a href="#sharefs_ATTR_DISCP">sharefs_ATTR_DISCP</a></dd>
+<dd><a href="#sharefs_ATTR_DISC_RO">sharefs_ATTR_DISC_RO</a></dd>
+<dd><a href="#sharefs_ATTR_HIDDEN">sharefs_ATTR_HIDDEN</a></dd>
+<dd><a href="#sharefs_ATTR_SUBDIR_AUTH">sharefs_ATTR_SUBDIR_AUTH</a></dd>
+<dd><a href="#sharefs_ATTR_CDROM">sharefs_ATTR_CDROM</a></dd>
+<dd><a href="#sharefs_ATTR_CDROM_AUTH">sharefs_ATTR_CDROM_AUTH</a></dd>
+</dl>
+
+<h3 id="sharefs_share_flags">sharefs_share_flags</h3>
+<pre>typedef bits sharefs_share_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#sharefs_SHARE_DISC">sharefs_SHARE_DISC</a></dd>
+<dd><a href="#sharefs_SHARE_DISCP">sharefs_SHARE_DISCP</a></dd>
+<dd><a href="#sharefs_SHARE_DISC_RO">sharefs_SHARE_DISC_RO</a></dd>
+<dd><a href="#sharefs_SHARE_HIDDEN">sharefs_SHARE_HIDDEN</a></dd>
+<dd><a href="#sharefs_SHARE_SUBDIR_AUTH">sharefs_SHARE_SUBDIR_AUTH</a></dd>
+<dd><a href="#sharefs_SHARE_CDROM">sharefs_SHARE_CDROM</a></dd>
+<dd><a href="#sharefs_SHARE_CDROM_AUTH">sharefs_SHARE_CDROM_AUTH</a></dd>
+</dl>
+
+<h3 id="sharefs_stop_flags">sharefs_stop_flags</h3>
+<pre>typedef bits sharefs_stop_flags;</pre>
+
+<h3 id="sharefs_enumerate_flags">sharefs_enumerate_flags</h3>
+<pre>typedef bits sharefs_enumerate_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#sharefs_ENUMERATE_PROTECTED">sharefs_ENUMERATE_PROTECTED</a></dd>
+<dd><a href="#sharefs_ENUMERATE_READ_ONLY">sharefs_ENUMERATE_READ_ONLY</a></dd>
+<dd><a href="#sharefs_ENUMERATE_HIDDEN">sharefs_ENUMERATE_HIDDEN</a></dd>
+<dd><a href="#sharefs_ENUMERATE_SUBDIR">sharefs_ENUMERATE_SUBDIR</a></dd>
+<dd><a href="#sharefs_ENUMERATE_CDROM">sharefs_ENUMERATE_CDROM</a></dd>
+<dd><a href="#sharefs_ENUMERATE_AUTHENTICATED">sharefs_ENUMERATE_AUTHENTICATED</a></dd>
+</dl>
+
+<h3 id="sharefs_identify_share_flags">sharefs_identify_share_flags</h3>
+<pre>typedef bits sharefs_identify_share_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#sharefs_IDENTIFY_SHARE_SHARE_NAME">sharefs_IDENTIFY_SHARE_SHARE_NAME</a></dd>
+</dl>
+
+<h3 id="sharefsmessagefilesharedir_flags">sharefsmessagefilesharedir_flags</h3>
+<pre>typedef bits sharefsmessagefilesharedir_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#sharefsmessagefilesharedirflags_PROTECTED">sharefsmessagefilesharedirflags_PROTECTED</a></dd>
+<dd><a href="#sharefsmessagefilesharedirflags_READ_ONLY">sharefsmessagefilesharedirflags_READ_ONLY</a></dd>
+<dd><a href="#sharefsmessagefilesharedirflags_HIDDEN">sharefsmessagefilesharedirflags_HIDDEN</a></dd>
+<dd><a href="#sharefsmessagefilesharedirflags_AUTHENTICATED">sharefsmessagefilesharedirflags_AUTHENTICATED</a></dd>
+<dd><a href="#sharefsmessagefilesharedirflags_CDROM">sharefsmessagefilesharedirflags_CDROM</a></dd>
+<dd><a href="#sharefsmessagefilesharedirflags_WINDOW_POS_GIVEN">sharefsmessagefilesharedirflags_WINDOW_POS_GIVEN</a></dd>
+</dl>
+
+<h3 id="sharefs_message_file_share_dir">sharefs_message_file_share_dir</h3>
+<pre>typedef struct
+   {  <a href="#sharefsmessagefilesharedir_flags">sharefsmessagefilesharedir_flags</a> flags;
+      int xpos;
+      int ypos;
+      char dir_name [224];
+   }
+   sharefs_message_file_share_dir;</pre>
+
+<h3 id="sharefs_starting_flags">sharefs_starting_flags</h3>
+<pre>typedef bits sharefs_starting_flags;</pre>
+
+<h3 id="sharefs_terminating_flags">sharefs_terminating_flags</h3>
+<pre>typedef bits sharefs_terminating_flags;</pre>
+
+<h3 id="sharefs_ATTR_DISC">sharefs_ATTR_DISC</h3>
+<pre>#define sharefs_ATTR_DISC ((<a href="#sharefs_attr">sharefs_attr</a>) 0x1u)</pre>
+
+<h3 id="sharefs_ATTR_DISCP">sharefs_ATTR_DISCP</h3>
+<pre>#define sharefs_ATTR_DISCP ((<a href="#sharefs_attr">sharefs_attr</a>) 0x2u)</pre>
+
+<h3 id="sharefs_ATTR_DISC_RO">sharefs_ATTR_DISC_RO</h3>
+<pre>#define sharefs_ATTR_DISC_RO ((<a href="#sharefs_attr">sharefs_attr</a>) 0x4u)</pre>
+
+<h3 id="sharefs_ATTR_HIDDEN">sharefs_ATTR_HIDDEN</h3>
+<pre>#define sharefs_ATTR_HIDDEN ((<a href="#sharefs_attr">sharefs_attr</a>) 0x8u)</pre>
+
+<h3 id="sharefs_ATTR_SUBDIR_AUTH">sharefs_ATTR_SUBDIR_AUTH</h3>
+<pre>#define sharefs_ATTR_SUBDIR_AUTH ((<a href="#sharefs_attr">sharefs_attr</a>) 0x10u)</pre>
+
+<h3 id="sharefs_ATTR_CDROM">sharefs_ATTR_CDROM</h3>
+<pre>#define sharefs_ATTR_CDROM ((<a href="#sharefs_attr">sharefs_attr</a>) 0x20u)</pre>
+
+<h3 id="sharefs_ATTR_CDROM_AUTH">sharefs_ATTR_CDROM_AUTH</h3>
+<pre>#define sharefs_ATTR_CDROM_AUTH ((<a href="#sharefs_attr">sharefs_attr</a>) 0x40u)</pre>
+
+<h3 id="sharefs_FILE_TYPE_DISCP">sharefs_FILE_TYPE_DISCP</h3>
+<pre>#define sharefs_FILE_TYPE_DISCP 0xBD9u</pre>
+
+<h3 id="sharefs_FILE_TYPE_DISC">sharefs_FILE_TYPE_DISC</h3>
+<pre>#define sharefs_FILE_TYPE_DISC 0xBDAu</pre>
+
+<h3 id="sharefs_FILE_TYPE_SUBDIR">sharefs_FILE_TYPE_SUBDIR</h3>
+<pre>#define sharefs_FILE_TYPE_SUBDIR 0xFAFu</pre>
+
+<h3 id="sharefs_FILE_TYPE_CDROM">sharefs_FILE_TYPE_CDROM</h3>
+<pre>#define sharefs_FILE_TYPE_CDROM 0xFADu</pre>
+
+<h3 id="sharefs_FILE_TYPE_DISCR">sharefs_FILE_TYPE_DISCR</h3>
+<pre>#define sharefs_FILE_TYPE_DISCR 0xFB4u</pre>
+
+<h3 id="sharefs_FILE_TYPE_NO_DISC">sharefs_FILE_TYPE_NO_DISC</h3>
+<pre>#define sharefs_FILE_TYPE_NO_DISC 0xFB5u</pre>
+
+<h3 id="sharefs_SHARE_DISC">sharefs_SHARE_DISC</h3>
+<pre>#define sharefs_SHARE_DISC ((<a href="#sharefs_share_flags">sharefs_share_flags</a>) 0x0u)</pre>
+
+<h3 id="sharefs_SHARE_DISCP">sharefs_SHARE_DISCP</h3>
+<pre>#define sharefs_SHARE_DISCP ((<a href="#sharefs_share_flags">sharefs_share_flags</a>) 0x1u)</pre>
+
+<p>protected </p>
+
+<h3 id="sharefs_SHARE_DISC_RO">sharefs_SHARE_DISC_RO</h3>
+<pre>#define sharefs_SHARE_DISC_RO ((<a href="#sharefs_share_flags">sharefs_share_flags</a>) 0x2u)</pre>
+
+<p>read-only </p>
+
+<h3 id="sharefs_SHARE_HIDDEN">sharefs_SHARE_HIDDEN</h3>
+<pre>#define sharefs_SHARE_HIDDEN ((<a href="#sharefs_share_flags">sharefs_share_flags</a>) 0x4u)</pre>
+
+<p>hidden </p>
+
+<h3 id="sharefs_SHARE_SUBDIR_AUTH">sharefs_SHARE_SUBDIR_AUTH</h3>
+<pre>#define sharefs_SHARE_SUBDIR_AUTH ((<a href="#sharefs_share_flags">sharefs_share_flags</a>) 0x8u)</pre>
+
+<p>sub directory</p>
+
+<h3 id="sharefs_SHARE_CDROM">sharefs_SHARE_CDROM</h3>
+<pre>#define sharefs_SHARE_CDROM ((<a href="#sharefs_share_flags">sharefs_share_flags</a>) 0x10u)</pre>
+
+<p>CDROM </p>
+
+<h3 id="sharefs_SHARE_CDROM_AUTH">sharefs_SHARE_CDROM_AUTH</h3>
+<pre>#define sharefs_SHARE_CDROM_AUTH ((<a href="#sharefs_share_flags">sharefs_share_flags</a>) 0x20u)</pre>
+
+<p>authentication </p>
+
+<h3 id="sharefs_NO_MORE">sharefs_NO_MORE</h3>
+<pre>#define sharefs_NO_MORE (-1)</pre>
+
+<h3 id="sharefs_ENUMERATE_PROTECTED">sharefs_ENUMERATE_PROTECTED</h3>
+<pre>#define sharefs_ENUMERATE_PROTECTED ((<a href="#sharefs_enumerate_flags">sharefs_enumerate_flags</a>) 0x1u)</pre>
+
+<h3 id="sharefs_ENUMERATE_READ_ONLY">sharefs_ENUMERATE_READ_ONLY</h3>
+<pre>#define sharefs_ENUMERATE_READ_ONLY ((<a href="#sharefs_enumerate_flags">sharefs_enumerate_flags</a>) 0x2u)</pre>
+
+<h3 id="sharefs_ENUMERATE_HIDDEN">sharefs_ENUMERATE_HIDDEN</h3>
+<pre>#define sharefs_ENUMERATE_HIDDEN ((<a href="#sharefs_enumerate_flags">sharefs_enumerate_flags</a>) 0x4u)</pre>
+
+<h3 id="sharefs_ENUMERATE_SUBDIR">sharefs_ENUMERATE_SUBDIR</h3>
+<pre>#define sharefs_ENUMERATE_SUBDIR ((<a href="#sharefs_enumerate_flags">sharefs_enumerate_flags</a>) 0x8u)</pre>
+
+<h3 id="sharefs_ENUMERATE_CDROM">sharefs_ENUMERATE_CDROM</h3>
+<pre>#define sharefs_ENUMERATE_CDROM ((<a href="#sharefs_enumerate_flags">sharefs_enumerate_flags</a>) 0x10u)</pre>
+
+<h3 id="sharefs_ENUMERATE_AUTHENTICATED">sharefs_ENUMERATE_AUTHENTICATED</h3>
+<pre>#define sharefs_ENUMERATE_AUTHENTICATED ((<a href="#sharefs_enumerate_flags">sharefs_enumerate_flags</a>) 0x80000000u)</pre>
+
+<h3 id="sharefs_IDENTIFY_SHARE_SHARE_NAME">sharefs_IDENTIFY_SHARE_SHARE_NAME</h3>
+<pre>#define sharefs_IDENTIFY_SHARE_SHARE_NAME ((<a href="#sharefs_identify_share_flags">sharefs_identify_share_flags</a>) 0x1u)</pre>
+
+<h3 id="message_FILE_SHARE_DIR">message_FILE_SHARE_DIR</h3>
+<pre>#define message_FILE_SHARE_DIR 0x408u</pre>
+
+<h3 id="sharefsmessagefilesharedirflags_PROTECTED">sharefsmessagefilesharedirflags_PROTECTED</h3>
+<pre>#define sharefsmessagefilesharedirflags_PROTECTED ((<a href="#sharefsmessagefilesharedir_flags">sharefsmessagefilesharedir_flags</a>) 0x1u)</pre>
+
+<h3 id="sharefsmessagefilesharedirflags_READ_ONLY">sharefsmessagefilesharedirflags_READ_ONLY</h3>
+<pre>#define sharefsmessagefilesharedirflags_READ_ONLY ((<a href="#sharefsmessagefilesharedir_flags">sharefsmessagefilesharedir_flags</a>) 0x2u)</pre>
+
+<h3 id="sharefsmessagefilesharedirflags_HIDDEN">sharefsmessagefilesharedirflags_HIDDEN</h3>
+<pre>#define sharefsmessagefilesharedirflags_HIDDEN ((<a href="#sharefsmessagefilesharedir_flags">sharefsmessagefilesharedir_flags</a>) 0x4u)</pre>
+
+<h3 id="sharefsmessagefilesharedirflags_AUTHENTICATED">sharefsmessagefilesharedirflags_AUTHENTICATED</h3>
+<pre>#define sharefsmessagefilesharedirflags_AUTHENTICATED ((<a href="#sharefsmessagefilesharedir_flags">sharefsmessagefilesharedir_flags</a>) 0x8u)</pre>
+
+<h3 id="sharefsmessagefilesharedirflags_CDROM">sharefsmessagefilesharedirflags_CDROM</h3>
+<pre>#define sharefsmessagefilesharedirflags_CDROM ((<a href="#sharefsmessagefilesharedir_flags">sharefsmessagefilesharedir_flags</a>) 0x10u)</pre>
+
+<h3 id="sharefsmessagefilesharedirflags_WINDOW_POS_GIVEN">sharefsmessagefilesharedirflags_WINDOW_POS_GIVEN</h3>
+<pre>#define sharefsmessagefilesharedirflags_WINDOW_POS_GIVEN ((<a href="#sharefsmessagefilesharedir_flags">sharefsmessagefilesharedir_flags</a>) 0x40000000u)</pre>
+
+<h3 id="xsharefs_create_share">xsharefs_create_share</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsharefs_create_share (<a href="#sharefs_share_flags">sharefs_share_flags</a> flags,
+      char const *obj_name,
+      char const *dir_path,
+      int authentication);</pre>
+<p>Start sharing a local disc or subdirectory, or change the mode of an existing share</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dir_path</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>authentication</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="sharefs_create_share">sharefs_create_share</h3>
+<pre>extern void sharefs_create_share (<a href="#sharefs_share_flags">sharefs_share_flags</a> flags,
+      char const *obj_name,
+      char const *dir_path,
+      int authentication);</pre>
+<p>Start sharing a local disc or subdirectory, or change the mode of an existing share</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dir_path</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>authentication</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xsharefs_stop_share">xsharefs_stop_share</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsharefs_stop_share (<a href="#sharefs_stop_flags">sharefs_stop_flags</a> flags,
+      char const *obj_name);</pre>
+<p>Stop sharing a local directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="sharefs_stop_share">sharefs_stop_share</h3>
+<pre>extern void sharefs_stop_share (<a href="#sharefs_stop_flags">sharefs_stop_flags</a> flags,
+      char const *obj_name);</pre>
+<p>Stop sharing a local directory</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xsharefs_enumerate_shares">xsharefs_enumerate_shares</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsharefs_enumerate_shares (<a href="#sharefs_enumerate_flags">sharefs_enumerate_flags</a> flags,
+      int context,
+      int authentication,
+      char **obj_name,
+      char **dir_path,
+      <a href="#sharefs_attr">sharefs_attr</a> *attr,
+      int *context_out);</pre>
+<p>Enumerates authenticated or unauthenticated shares currently active on this machine</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>context</code></td><td>start with 0</td><td><code>R4</code></td></tr>
+<tr><td><code>authentication</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dir_path</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="sharefs_enumerate_shares">sharefs_enumerate_shares</h3>
+<pre>extern int sharefs_enumerate_shares (<a href="#sharefs_enumerate_flags">sharefs_enumerate_flags</a> flags,
+      int context,
+      int authentication,
+      char **obj_name,
+      char **dir_path,
+      <a href="#sharefs_attr">sharefs_attr</a> *attr);</pre>
+<p>Enumerates authenticated or unauthenticated shares currently active on this machine</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>context</code></td><td>start with 0</td><td><code>R4</code></td></tr>
+<tr><td><code>authentication</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dir_path</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_out</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+<h3 id="xsharefs_identify_share">xsharefs_identify_share</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xsharefs_identify_share (<a href="#sharefs_identify_share_flags">sharefs_identify_share_flags</a> flags,
+      char const *obj_name_or_dir_path,
+      byte *buf,
+      int buf_size,
+      <a href="#sharefs_attr">sharefs_attr</a> *attr,
+      int *buf_size_out);</pre>
+<p>To identify a share given its name or directory name - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj_name_or_dir_path</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buf</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>buf_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>attr</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buf_size_out</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="sharefs_identify_share">sharefs_identify_share</h3>
+<pre>extern <a href="#sharefs_attr">sharefs_attr</a> sharefs_identify_share (<a href="#sharefs_identify_share_flags">sharefs_identify_share_flags</a> flags,
+      char const *obj_name_or_dir_path,
+      byte *buf,
+      int buf_size,
+      int *buf_size_out);</pre>
+<p>To identify a share given its name or directory name - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>obj_name_or_dir_path</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buf</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>buf_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>buf_size_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>attr</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xservice_share_fs_starting">xservice_share_fs_starting</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_share_fs_starting (<a href="#sharefs_starting_flags">sharefs_starting_flags</a> flags);</pre>
+<p>ShareFS has started up</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="service_share_fs_starting">service_share_fs_starting</h3>
+<pre>extern void service_share_fs_starting (<a href="#sharefs_starting_flags">sharefs_starting_flags</a> flags);</pre>
+<p>ShareFS has started up</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xservice_share_fs_terminating">xservice_share_fs_terminating</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_share_fs_terminating (<a href="#sharefs_terminating_flags">sharefs_terminating_flags</a> flags);</pre>
+<p>ShareFS is terminating</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="service_share_fs_terminating">service_share_fs_terminating</h3>
+<pre>extern void service_share_fs_terminating (<a href="#sharefs_terminating_flags">sharefs_terminating_flags</a> flags);</pre>
+<p>ShareFS is terminating</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xservice_sharing">xservice_sharing</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_sharing (char const *fsname,
+      int state,
+      char const *dir_name,
+      char const *obj_name,
+      int priv_data);</pre>
+<p>Share changed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fsname</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>state</code></td><td>0 object unshared, 1 object shared</td><td><code>R2</code></td></tr>
+<tr><td><code>dir_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>obj_name</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>priv_data</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="service_sharing">service_sharing</h3>
+<pre>extern void service_sharing (char const *fsname,
+      int state,
+      char const *dir_name,
+      char const *obj_name,
+      int priv_data);</pre>
+<p>Share changed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fsname</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>state</code></td><td>0 object unshared, 1 object shared</td><td><code>R2</code></td></tr>
+<tr><td><code>dir_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>obj_name</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>priv_data</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

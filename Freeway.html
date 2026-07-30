@@ -1,0 +1,415 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Freeway</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Freeway</h2>
+
+<pre>#include "oslib/freeway.h"</pre>
+
+<h3 id="freeway_object_type">freeway_object_type</h3>
+<pre>typedef int freeway_object_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#freeway_TYPE_DISC">freeway_TYPE_DISC</a></dd>
+<dd><a href="#freeway_TYPE_PRINTER">freeway_TYPE_PRINTER</a></dd>
+<dd><a href="#freeway_TYPE_HOST">freeway_TYPE_HOST</a></dd>
+</dl>
+
+<h3 id="freeway_interest_flags">freeway_interest_flags</h3>
+<pre>typedef bits freeway_interest_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#freeway_INTEREST_REGISTER">freeway_INTEREST_REGISTER</a></dd>
+<dd><a href="#freeway_INTEREST_DEREGISTER">freeway_INTEREST_DEREGISTER</a></dd>
+<dd><a href="#freeway_INTEREST_UNAUTHENTICATED">freeway_INTEREST_UNAUTHENTICATED</a></dd>
+<dd><a href="#freeway_INTEREST_AUTHENTICATED">freeway_INTEREST_AUTHENTICATED</a></dd>
+</dl>
+
+<h3 id="freeway_object_flags">freeway_object_flags</h3>
+<pre>typedef bits freeway_object_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#freeway_OBJECT_ADD">freeway_OBJECT_ADD</a></dd>
+<dd><a href="#freeway_OBJECT_REMOVE">freeway_OBJECT_REMOVE</a></dd>
+<dd><a href="#freeway_OBJECT_UNAUTHENTICATED">freeway_OBJECT_UNAUTHENTICATED</a></dd>
+<dd><a href="#freeway_OBJECT_AUTHENTICATED">freeway_OBJECT_AUTHENTICATED</a></dd>
+</dl>
+
+<h3 id="freeway_read_flags">freeway_read_flags</h3>
+<pre>typedef bits freeway_read_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#freeway_READ_GIVEN_AUTHENTICATION">freeway_READ_GIVEN_AUTHENTICATION</a></dd>
+</dl>
+
+<h3 id="freeway_enumerate_flags">freeway_enumerate_flags</h3>
+<pre>typedef bits freeway_enumerate_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#freeway_ENUMERATE_AUTHENTICATED">freeway_ENUMERATE_AUTHENTICATED</a></dd>
+</dl>
+
+<h3 id="freeway_starting_flags">freeway_starting_flags</h3>
+<pre>typedef bits freeway_starting_flags;</pre>
+
+<h3 id="freeway_terminating_flags">freeway_terminating_flags</h3>
+<pre>typedef bits freeway_terminating_flags;</pre>
+
+<h3 id="freeway_upcall_reason">freeway_upcall_reason</h3>
+<pre>typedef int freeway_upcall_reason;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#freeway_OBJECT_ADDED">freeway_OBJECT_ADDED</a></dd>
+<dd><a href="#freeway_OBJECT_REMOVED">freeway_OBJECT_REMOVED</a></dd>
+<dd><a href="#freeway_OBJECT_CHANGED">freeway_OBJECT_CHANGED</a></dd>
+<dd><a href="#freeway_OBJECT_DELETED">freeway_OBJECT_DELETED</a></dd>
+</dl>
+
+<h3 id="freeway_TYPE_DISC">freeway_TYPE_DISC</h3>
+<pre>#define freeway_TYPE_DISC ((<a href="#freeway_object_type">freeway_object_type</a>) 0x1u)</pre>
+
+<h3 id="freeway_TYPE_PRINTER">freeway_TYPE_PRINTER</h3>
+<pre>#define freeway_TYPE_PRINTER ((<a href="#freeway_object_type">freeway_object_type</a>) 0x2u)</pre>
+
+<h3 id="freeway_TYPE_HOST">freeway_TYPE_HOST</h3>
+<pre>#define freeway_TYPE_HOST ((<a href="#freeway_object_type">freeway_object_type</a>) 0x5u)</pre>
+
+<h3 id="freeway_INTEREST_REGISTER">freeway_INTEREST_REGISTER</h3>
+<pre>#define freeway_INTEREST_REGISTER ((<a href="#freeway_interest_flags">freeway_interest_flags</a>) 0x0u)</pre>
+
+<h3 id="freeway_INTEREST_DEREGISTER">freeway_INTEREST_DEREGISTER</h3>
+<pre>#define freeway_INTEREST_DEREGISTER ((<a href="#freeway_interest_flags">freeway_interest_flags</a>) 0x1u)</pre>
+
+<h3 id="freeway_INTEREST_UNAUTHENTICATED">freeway_INTEREST_UNAUTHENTICATED</h3>
+<pre>#define freeway_INTEREST_UNAUTHENTICATED ((<a href="#freeway_interest_flags">freeway_interest_flags</a>) 0x0u)</pre>
+
+<h3 id="freeway_INTEREST_AUTHENTICATED">freeway_INTEREST_AUTHENTICATED</h3>
+<pre>#define freeway_INTEREST_AUTHENTICATED ((<a href="#freeway_interest_flags">freeway_interest_flags</a>) 0x2u)</pre>
+
+<h3 id="freeway_OBJECT_ADD">freeway_OBJECT_ADD</h3>
+<pre>#define freeway_OBJECT_ADD ((<a href="#freeway_object_flags">freeway_object_flags</a>) 0x0u)</pre>
+
+<h3 id="freeway_OBJECT_REMOVE">freeway_OBJECT_REMOVE</h3>
+<pre>#define freeway_OBJECT_REMOVE ((<a href="#freeway_object_flags">freeway_object_flags</a>) 0x1u)</pre>
+
+<h3 id="freeway_OBJECT_UNAUTHENTICATED">freeway_OBJECT_UNAUTHENTICATED</h3>
+<pre>#define freeway_OBJECT_UNAUTHENTICATED ((<a href="#freeway_object_flags">freeway_object_flags</a>) 0x0u)</pre>
+
+<h3 id="freeway_OBJECT_AUTHENTICATED">freeway_OBJECT_AUTHENTICATED</h3>
+<pre>#define freeway_OBJECT_AUTHENTICATED ((<a href="#freeway_object_flags">freeway_object_flags</a>) 0x2u)</pre>
+
+<h3 id="freeway_READ_GIVEN_AUTHENTICATION">freeway_READ_GIVEN_AUTHENTICATION</h3>
+<pre>#define freeway_READ_GIVEN_AUTHENTICATION ((<a href="#freeway_read_flags">freeway_read_flags</a>) 0x1u)</pre>
+
+<h3 id="freeway_NO_MORE">freeway_NO_MORE</h3>
+<pre>#define freeway_NO_MORE (-1)</pre>
+
+<h3 id="freeway_ENUMERATE_AUTHENTICATED">freeway_ENUMERATE_AUTHENTICATED</h3>
+<pre>#define freeway_ENUMERATE_AUTHENTICATED ((<a href="#freeway_enumerate_flags">freeway_enumerate_flags</a>) 0x1u)</pre>
+
+<h3 id="freeway_OBJECT_ADDED">freeway_OBJECT_ADDED</h3>
+<pre>#define freeway_OBJECT_ADDED ((<a href="#freeway_upcall_reason">freeway_upcall_reason</a>) 0x0u)</pre>
+
+<h3 id="freeway_OBJECT_REMOVED">freeway_OBJECT_REMOVED</h3>
+<pre>#define freeway_OBJECT_REMOVED ((<a href="#freeway_upcall_reason">freeway_upcall_reason</a>) 0x1u)</pre>
+
+<h3 id="freeway_OBJECT_CHANGED">freeway_OBJECT_CHANGED</h3>
+<pre>#define freeway_OBJECT_CHANGED ((<a href="#freeway_upcall_reason">freeway_upcall_reason</a>) 0x2u)</pre>
+
+<h3 id="freeway_OBJECT_DELETED">freeway_OBJECT_DELETED</h3>
+<pre>#define freeway_OBJECT_DELETED ((<a href="#freeway_upcall_reason">freeway_upcall_reason</a>) 0x3u)</pre>
+
+<h3 id="xfreeway_register">xfreeway_register</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfreeway_register (<a href="#freeway_interest_flags">freeway_interest_flags</a> flags,
+      <a href="#freeway_object_type">freeway_object_type</a> type,
+      int authentication);</pre>
+<p>Registers/deregisters interest in objects of a given Freeway type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>authentication</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="freeway_register">freeway_register</h3>
+<pre>extern void freeway_register (<a href="#freeway_interest_flags">freeway_interest_flags</a> flags,
+      <a href="#freeway_object_type">freeway_object_type</a> type,
+      int authentication);</pre>
+<p>Registers/deregisters interest in objects of a given Freeway type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>authentication</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xfreeway_write">xfreeway_write</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfreeway_write (<a href="#freeway_object_flags">freeway_object_flags</a> flags,
+      <a href="#freeway_object_type">freeway_object_type</a> type,
+      char const *obj_name,
+      int size,
+      char const *desc,
+      int authentication);</pre>
+<p>Adds/removes an object of a given type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>obj_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>desc</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>authentication</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="freeway_write">freeway_write</h3>
+<pre>extern void freeway_write (<a href="#freeway_object_flags">freeway_object_flags</a> flags,
+      <a href="#freeway_object_type">freeway_object_type</a> type,
+      char const *obj_name,
+      int size,
+      char const *desc,
+      int authentication);</pre>
+<p>Adds/removes an object of a given type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>obj_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>desc</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>authentication</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xfreeway_read">xfreeway_read</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfreeway_read (<a href="#freeway_read_flags">freeway_read_flags</a> flags,
+      <a href="#freeway_object_type">freeway_object_type</a> type,
+      char const *obj_name,
+      int size,
+      char *desc,
+      int authentication,
+      int *size_out,
+      bits *ip_addr);</pre>
+<p>Reads attributes of an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>obj_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>desc</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>authentication</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>ip_addr</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="freeway_read">freeway_read</h3>
+<pre>extern int freeway_read (<a href="#freeway_read_flags">freeway_read_flags</a> flags,
+      <a href="#freeway_object_type">freeway_object_type</a> type,
+      char const *obj_name,
+      int size,
+      char *desc,
+      int authentication,
+      bits *ip_addr);</pre>
+<p>Reads attributes of an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>obj_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>desc</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>authentication</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>ip_addr</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>size_out</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xfreeway_enumerate">xfreeway_enumerate</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfreeway_enumerate (<a href="#freeway_enumerate_flags">freeway_enumerate_flags</a> flags,
+      <a href="#freeway_object_type">freeway_object_type</a> type,
+      int obj_name_size,
+      char *obj_name,
+      int desc_size,
+      char *desc,
+      int context,
+      int authentication,
+      int *obj_name_size_out,
+      int *desc_size_out,
+      bits *ip_addr,
+      int *context_out);</pre>
+<p>Enumerates objects of a given type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>obj_name_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>obj_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>desc_size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>desc</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>authentication</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_name_size_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>desc_size_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>ip_addr</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="freeway_enumerate">freeway_enumerate</h3>
+<pre>extern int freeway_enumerate (<a href="#freeway_enumerate_flags">freeway_enumerate_flags</a> flags,
+      <a href="#freeway_object_type">freeway_object_type</a> type,
+      int obj_name_size,
+      char *obj_name,
+      int desc_size,
+      char *desc,
+      int context,
+      int authentication,
+      int *obj_name_size_out,
+      int *desc_size_out,
+      bits *ip_addr);</pre>
+<p>Enumerates objects of a given type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>obj_name_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>obj_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>desc_size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>desc</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>authentication</code></td><td/><td><code>R8</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_name_size_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>desc_size_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>ip_addr</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_out</td><td></td><td><code>R7<code></td></tr>
+</table>
+
+<h3 id="xservice_freeway_starting">xservice_freeway_starting</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_freeway_starting (<a href="#freeway_starting_flags">freeway_starting_flags</a> flags);</pre>
+<p>Freeway is starting up</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="service_freeway_starting">service_freeway_starting</h3>
+<pre>extern void service_freeway_starting (<a href="#freeway_starting_flags">freeway_starting_flags</a> flags);</pre>
+<p>Freeway is starting up</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xservice_freeway_terminating">xservice_freeway_terminating</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_freeway_terminating (<a href="#freeway_terminating_flags">freeway_terminating_flags</a> flags);</pre>
+<p>Freeway is terminating</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="service_freeway_terminating">service_freeway_terminating</h3>
+<pre>extern void service_freeway_terminating (<a href="#freeway_terminating_flags">freeway_terminating_flags</a> flags);</pre>
+<p>Freeway is terminating</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xupcall_freeway">xupcall_freeway</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcall_freeway (<a href="#freeway_upcall_reason">freeway_upcall_reason</a> reason,
+      <a href="#freeway_object_type">freeway_object_type</a> type,
+      char const *obj_name,
+      int desc_size,
+      char const *desc,
+      bits ip_addr);</pre>
+<p>Warns that an object has been added or changed, removed (by the holder), or deleted (by Freeway)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>reason</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>obj_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>desc_size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>desc</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>ip_addr</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="upcall_freeway">upcall_freeway</h3>
+<pre>extern void upcall_freeway (<a href="#freeway_upcall_reason">freeway_upcall_reason</a> reason,
+      <a href="#freeway_object_type">freeway_object_type</a> type,
+      char const *obj_name,
+      int desc_size,
+      char const *desc,
+      bits ip_addr);</pre>
+<p>Warns that an object has been added or changed, removed (by the holder), or deleted (by Freeway)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>reason</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>obj_name</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>desc_size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>desc</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>ip_addr</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; PopUp</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>PopUp</h2>
+
+<pre>#include "oslib/popup.h"</pre>
+
+<h3 id="popup_gadget">popup_gadget</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> menu_name;
+   }
+   popup_gadget;</pre>
+
+<h3 id="popup_object">popup_object</h3>
+<pre>typedef struct
+   {  <a href="#gadget_OBJECT_MEMBERS">gadget_OBJECT_MEMBERS</a>
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> menu_name;
+   }
+   popup_object;</pre>
+
+<h3 id="popup_full">popup_full</h3>
+<pre>typedef <a href="os.html#os_coord">os_coord</a> popup_full;</pre>
+
+<h3 id="popup_action_about_to_be_shown">popup_action_about_to_be_shown</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_o">toolbox_o</a> menu;
+   }
+   popup_action_about_to_be_shown;</pre>
+
+<p>Prefer PopUp_ActionAboutToBeShownBlock</p>
+
+<h3 id="popup_action_about_to_be_shown_block">popup_action_about_to_be_shown_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu;
+   }
+   popup_action_about_to_be_shown_block;</pre>
+
+<h3 id="class_POP_UP">class_POP_UP</h3>
+<pre>#define class_POP_UP ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x2C0u)</pre>
+
+<h3 id="popup_GENERATE_ABOUT_TO_BE_SHOWN">popup_GENERATE_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define popup_GENERATE_ABOUT_TO_BE_SHOWN ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x1u)</pre>
+
+<h3 id="action_POP_UP_ABOUT_TO_BE_SHOWN">action_POP_UP_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define action_POP_UP_ABOUT_TO_BE_SHOWN 0x8288Bu</pre>
+
+<h3 id="xpopup_set_menu">xpopup_set_menu</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpopup_set_menu (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> popup,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>popup</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="popup_set_menu">popup_set_menu</h3>
+<pre>extern void popup_set_menu (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> popup,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> menu);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>popup</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xpopup_get_menu">xpopup_get_menu</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xpopup_get_menu (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> popup,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *menu);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>popup</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>menu</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="popup_get_menu">popup_get_menu</h3>
+<pre>extern <a href="toolbox.html#toolbox_o">toolbox_o</a> popup_get_menu (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> popup);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>popup</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>menu</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

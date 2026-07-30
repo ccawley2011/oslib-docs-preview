@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; PipeFS</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>PipeFS</h2>
+
+<pre>#include "oslib/pipefs.h"</pre>
+
+<h3 id="error_PIPE_FS_NO_BLOCKING">error_PIPE_FS_NO_BLOCKING</h3>
+<pre>#define error_PIPE_FS_NO_BLOCKING 0x12F00u</pre>
+
+<h3 id="xupcall_sleep_no_more">xupcall_sleep_no_more</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xupcall_sleep_no_more (int *pollword);</pre>
+<p>Informs the TaskWindow module that an open pipe has been closed or deleted</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pollword</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="upcall_sleep_no_more">upcall_sleep_no_more</h3>
+<pre>extern void upcall_sleep_no_more (int *pollword);</pre>
+<p>Informs the TaskWindow module that an open pipe has been closed or deleted</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pollword</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

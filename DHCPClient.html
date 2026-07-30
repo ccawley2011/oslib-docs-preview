@@ -1,0 +1,387 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; DHCPClient</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>DHCPClient</h2>
+
+<pre>#include "oslib/dhcpclient.h"</pre>
+
+<h3 id="dhcpclientcontrol_reason">dhcpclientcontrol_reason</h3>
+<pre>typedef int dhcpclientcontrol_reason;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#dhcpclientcontrolreason_ADD">dhcpclientcontrolreason_ADD</a></dd>
+<dd><a href="#dhcpclientcontrolreason_REMOVE">dhcpclientcontrolreason_REMOVE</a></dd>
+<dd><a href="#dhcpclientcontrolreason_RENEW">dhcpclientcontrolreason_RENEW</a></dd>
+</dl>
+
+<h3 id="dhcpclientstate_types">dhcpclientstate_types</h3>
+<pre>typedef int dhcpclientstate_types;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#dhcpclientstatetype_END_OF_LIST">dhcpclientstatetype_END_OF_LIST</a></dd>
+<dd><a href="#dhcpclientstatetype_STATE">dhcpclientstatetype_STATE</a></dd>
+<dd><a href="#dhcpclientstatetype_BOUND_ADDRESS">dhcpclientstatetype_BOUND_ADDRESS</a></dd>
+<dd><a href="#dhcpclientstatetype_SERVER_ADDRESS">dhcpclientstatetype_SERVER_ADDRESS</a></dd>
+<dd><a href="#dhcpclientstatetype_GATEWAY_ADDRESS">dhcpclientstatetype_GATEWAY_ADDRESS</a></dd>
+<dd><a href="#dhcpclientstatetype_LEASE_PERIOD">dhcpclientstatetype_LEASE_PERIOD</a></dd>
+<dd><a href="#dhcpclientstatetype_T1_PERIOD">dhcpclientstatetype_T1_PERIOD</a></dd>
+<dd><a href="#dhcpclientstatetype_T2_PERIOD">dhcpclientstatetype_T2_PERIOD</a></dd>
+<dd><a href="#dhcpclientstatetype_DHCP_START">dhcpclientstatetype_DHCP_START</a></dd>
+<dd><a href="#dhcpclientstatetype_LEASE_START">dhcpclientstatetype_LEASE_START</a></dd>
+<dd><a href="#dhcpclientstatetype_LEASE_END">dhcpclientstatetype_LEASE_END</a></dd>
+<dd><a href="#dhcpclientstatetype_T1_END">dhcpclientstatetype_T1_END</a></dd>
+<dd><a href="#dhcpclientstatetype_T2_END">dhcpclientstatetype_T2_END</a></dd>
+</dl>
+
+<h3 id="dhcpclientstate_state">dhcpclientstate_state</h3>
+<pre>typedef int dhcpclientstate_state;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#dhcpclientstatestate_SLEEPING">dhcpclientstatestate_SLEEPING</a></dd>
+<dd><a href="#dhcpclientstatestate_INIT_REBOOT">dhcpclientstatestate_INIT_REBOOT</a></dd>
+<dd><a href="#dhcpclientstatestate_INIT">dhcpclientstatestate_INIT</a></dd>
+<dd><a href="#dhcpclientstatestate_REBOOTING">dhcpclientstatestate_REBOOTING</a></dd>
+<dd><a href="#dhcpclientstatestate_SELECTING">dhcpclientstatestate_SELECTING</a></dd>
+<dd><a href="#dhcpclientstatestate_REQUESTING">dhcpclientstatestate_REQUESTING</a></dd>
+<dd><a href="#dhcpclientstatestate_BOUND">dhcpclientstatestate_BOUND</a></dd>
+<dd><a href="#dhcpclientstatestate_RENEWING">dhcpclientstatestate_RENEWING</a></dd>
+<dd><a href="#dhcpclientstatestate_REBINDING">dhcpclientstatestate_REBINDING</a></dd>
+</dl>
+
+<h3 id="dhcpclientcontrolreason_ADD">dhcpclientcontrolreason_ADD</h3>
+<pre>#define dhcpclientcontrolreason_ADD ((<a href="#dhcpclientcontrol_reason">dhcpclientcontrol_reason</a>) 0x0u)</pre>
+
+<h3 id="dhcpclientcontrolreason_REMOVE">dhcpclientcontrolreason_REMOVE</h3>
+<pre>#define dhcpclientcontrolreason_REMOVE ((<a href="#dhcpclientcontrol_reason">dhcpclientcontrol_reason</a>) 0x1u)</pre>
+
+<h3 id="dhcpclientcontrolreason_RENEW">dhcpclientcontrolreason_RENEW</h3>
+<pre>#define dhcpclientcontrolreason_RENEW ((<a href="#dhcpclientcontrol_reason">dhcpclientcontrol_reason</a>) 0x2u)</pre>
+
+<h3 id="dhcpclientstatetype_END_OF_LIST">dhcpclientstatetype_END_OF_LIST</h3>
+<pre>#define dhcpclientstatetype_END_OF_LIST ((<a href="#dhcpclientstate_types">dhcpclientstate_types</a>) 0xFFFFFFFFu)</pre>
+
+<h3 id="dhcpclientstatetype_STATE">dhcpclientstatetype_STATE</h3>
+<pre>#define dhcpclientstatetype_STATE ((<a href="#dhcpclientstate_types">dhcpclientstate_types</a>) 0x0u)</pre>
+
+<h3 id="dhcpclientstatetype_BOUND_ADDRESS">dhcpclientstatetype_BOUND_ADDRESS</h3>
+<pre>#define dhcpclientstatetype_BOUND_ADDRESS ((<a href="#dhcpclientstate_types">dhcpclientstate_types</a>) 0x1u)</pre>
+
+<h3 id="dhcpclientstatetype_SERVER_ADDRESS">dhcpclientstatetype_SERVER_ADDRESS</h3>
+<pre>#define dhcpclientstatetype_SERVER_ADDRESS ((<a href="#dhcpclientstate_types">dhcpclientstate_types</a>) 0x2u)</pre>
+
+<h3 id="dhcpclientstatetype_GATEWAY_ADDRESS">dhcpclientstatetype_GATEWAY_ADDRESS</h3>
+<pre>#define dhcpclientstatetype_GATEWAY_ADDRESS ((<a href="#dhcpclientstate_types">dhcpclientstate_types</a>) 0x3u)</pre>
+
+<h3 id="dhcpclientstatetype_LEASE_PERIOD">dhcpclientstatetype_LEASE_PERIOD</h3>
+<pre>#define dhcpclientstatetype_LEASE_PERIOD ((<a href="#dhcpclientstate_types">dhcpclientstate_types</a>) 0x4u)</pre>
+
+<h3 id="dhcpclientstatetype_T1_PERIOD">dhcpclientstatetype_T1_PERIOD</h3>
+<pre>#define dhcpclientstatetype_T1_PERIOD ((<a href="#dhcpclientstate_types">dhcpclientstate_types</a>) 0x5u)</pre>
+
+<h3 id="dhcpclientstatetype_T2_PERIOD">dhcpclientstatetype_T2_PERIOD</h3>
+<pre>#define dhcpclientstatetype_T2_PERIOD ((<a href="#dhcpclientstate_types">dhcpclientstate_types</a>) 0x6u)</pre>
+
+<h3 id="dhcpclientstatetype_DHCP_START">dhcpclientstatetype_DHCP_START</h3>
+<pre>#define dhcpclientstatetype_DHCP_START ((<a href="#dhcpclientstate_types">dhcpclientstate_types</a>) 0x7u)</pre>
+
+<h3 id="dhcpclientstatetype_LEASE_START">dhcpclientstatetype_LEASE_START</h3>
+<pre>#define dhcpclientstatetype_LEASE_START ((<a href="#dhcpclientstate_types">dhcpclientstate_types</a>) 0x8u)</pre>
+
+<h3 id="dhcpclientstatetype_LEASE_END">dhcpclientstatetype_LEASE_END</h3>
+<pre>#define dhcpclientstatetype_LEASE_END ((<a href="#dhcpclientstate_types">dhcpclientstate_types</a>) 0x9u)</pre>
+
+<h3 id="dhcpclientstatetype_T1_END">dhcpclientstatetype_T1_END</h3>
+<pre>#define dhcpclientstatetype_T1_END ((<a href="#dhcpclientstate_types">dhcpclientstate_types</a>) 0xAu)</pre>
+
+<h3 id="dhcpclientstatetype_T2_END">dhcpclientstatetype_T2_END</h3>
+<pre>#define dhcpclientstatetype_T2_END ((<a href="#dhcpclientstate_types">dhcpclientstate_types</a>) 0xBu)</pre>
+
+<h3 id="dhcpclientstatestate_SLEEPING">dhcpclientstatestate_SLEEPING</h3>
+<pre>#define dhcpclientstatestate_SLEEPING ((<a href="#dhcpclientstate_state">dhcpclientstate_state</a>) 0x0u)</pre>
+
+<h3 id="dhcpclientstatestate_INIT_REBOOT">dhcpclientstatestate_INIT_REBOOT</h3>
+<pre>#define dhcpclientstatestate_INIT_REBOOT ((<a href="#dhcpclientstate_state">dhcpclientstate_state</a>) 0x1u)</pre>
+
+<h3 id="dhcpclientstatestate_INIT">dhcpclientstatestate_INIT</h3>
+<pre>#define dhcpclientstatestate_INIT ((<a href="#dhcpclientstate_state">dhcpclientstate_state</a>) 0x2u)</pre>
+
+<h3 id="dhcpclientstatestate_REBOOTING">dhcpclientstatestate_REBOOTING</h3>
+<pre>#define dhcpclientstatestate_REBOOTING ((<a href="#dhcpclientstate_state">dhcpclientstate_state</a>) 0x3u)</pre>
+
+<h3 id="dhcpclientstatestate_SELECTING">dhcpclientstatestate_SELECTING</h3>
+<pre>#define dhcpclientstatestate_SELECTING ((<a href="#dhcpclientstate_state">dhcpclientstate_state</a>) 0x4u)</pre>
+
+<h3 id="dhcpclientstatestate_REQUESTING">dhcpclientstatestate_REQUESTING</h3>
+<pre>#define dhcpclientstatestate_REQUESTING ((<a href="#dhcpclientstate_state">dhcpclientstate_state</a>) 0x5u)</pre>
+
+<h3 id="dhcpclientstatestate_BOUND">dhcpclientstatestate_BOUND</h3>
+<pre>#define dhcpclientstatestate_BOUND ((<a href="#dhcpclientstate_state">dhcpclientstate_state</a>) 0x6u)</pre>
+
+<h3 id="dhcpclientstatestate_RENEWING">dhcpclientstatestate_RENEWING</h3>
+<pre>#define dhcpclientstatestate_RENEWING ((<a href="#dhcpclientstate_state">dhcpclientstate_state</a>) 0x7u)</pre>
+
+<h3 id="dhcpclientstatestate_REBINDING">dhcpclientstatestate_REBINDING</h3>
+<pre>#define dhcpclientstatestate_REBINDING ((<a href="#dhcpclientstate_state">dhcpclientstate_state</a>) 0x8u)</pre>
+
+<h3 id="xdhcpclient_control">xdhcpclient_control</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdhcpclient_control (<a href="#dhcpclientcontrol_reason">dhcpclientcontrol_reason</a> reason,
+      char const *interface_name);</pre>
+<p>Add or remove an interface from the DHCPClient's control</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>reason</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>interface_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="dhcpclient_control">dhcpclient_control</h3>
+<pre>extern void dhcpclient_control (<a href="#dhcpclientcontrol_reason">dhcpclientcontrol_reason</a> reason,
+      char const *interface_name);</pre>
+<p>Add or remove an interface from the DHCPClient's control</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>reason</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>interface_name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xdhcpclient_state">xdhcpclient_state</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdhcpclient_state (char const *interface_name,
+      <a href="#dhcpclientstate_types">dhcpclientstate_types</a> const *type_list,
+      byte const *buf,
+      int buf_size,
+      <a href="#dhcpclientstate_types">dhcpclientstate_types</a> **last_type,
+      byte **buf_end,
+      int *space_left);</pre>
+<p>Read the current DHCP client state for an interface</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>interface_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>type_list</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buf</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>buf_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>last_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buf_end</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>space_left</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="dhcpclient_state">dhcpclient_state</h3>
+<pre>extern void dhcpclient_state (char const *interface_name,
+      <a href="#dhcpclientstate_types">dhcpclientstate_types</a> const *type_list,
+      byte const *buf,
+      int buf_size,
+      <a href="#dhcpclientstate_types">dhcpclientstate_types</a> **last_type,
+      byte **buf_end,
+      int *space_left);</pre>
+<p>Read the current DHCP client state for an interface</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>interface_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>type_list</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buf</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>buf_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>last_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buf_end</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>space_left</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xdhcpclient_enumerate">xdhcpclient_enumerate</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdhcpclient_enumerate (char const *interface_name,
+      char *buf,
+      int buf_size,
+      int *num_state_transitions,
+      char **buf_end,
+      int *space_left);</pre>
+<p>Enumerates the interfaces under DHCPClient control</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>interface_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buf</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buf_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>num_state_transitions</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buf_end</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>space_left</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="dhcpclient_enumerate">dhcpclient_enumerate</h3>
+<pre>extern void dhcpclient_enumerate (char const *interface_name,
+      char *buf,
+      int buf_size,
+      int *num_state_transitions,
+      char **buf_end,
+      int *space_left);</pre>
+<p>Enumerates the interfaces under DHCPClient control</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>interface_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buf</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buf_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>num_state_transitions</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buf_end</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>space_left</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xservice_internet_status4">xservice_internet_status4</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_internet_status4 (char const *interface_name,
+      byte const *dib,
+      byte const *dhcp_reply,
+      int dhcp_reply_size,
+      osbool *unclaimed);</pre>
+<p>BOOTP/DHCP reply is received</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>interface_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dib</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>dhcp_reply</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>dhcp_reply_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="service_internet_status4">service_internet_status4</h3>
+<pre>extern osbool service_internet_status4 (char const *interface_name,
+      byte const *dib,
+      byte const *dhcp_reply,
+      int dhcp_reply_size);</pre>
+<p>BOOTP/DHCP reply is received</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>interface_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dib</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>dhcp_reply</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>dhcp_reply_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_internet_status5">xservice_internet_status5</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_internet_status5 (char const *interface_name,
+      byte const *dib,
+      byte const *dhcpoffer_buf,
+      int dhcpoffer_buf_size,
+      osbool *unclaimed);</pre>
+<p>DHCPClient module receives an offer of an IP address lease which is better than its current best choice (or if it is the first acceptable offer)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>interface_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dib</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>dhcpoffer_buf</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>dhcpoffer_buf_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="service_internet_status5">service_internet_status5</h3>
+<pre>extern osbool service_internet_status5 (char const *interface_name,
+      byte const *dib,
+      byte const *dhcpoffer_buf,
+      int dhcpoffer_buf_size);</pre>
+<p>DHCPClient module receives an offer of an IP address lease which is better than its current best choice (or if it is the first acceptable offer)</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>interface_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>dib</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>dhcpoffer_buf</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>dhcpoffer_buf_size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_internet_status30">xservice_internet_status30</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_internet_status30 (char const *interface_name,
+      int ip_address);</pre>
+<p>DHCPClient module has successfully configured an interface with an address leased from a DHCP server</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>interface_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ip_address</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="service_internet_status30">service_internet_status30</h3>
+<pre>extern void service_internet_status30 (char const *interface_name,
+      int ip_address);</pre>
+<p>DHCPClient module has successfully configured an interface with an address leased from a DHCP server</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>interface_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ip_address</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xservice_internet_service31">xservice_internet_service31</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_internet_service31 (char const *interface_name,
+      int ip_address);</pre>
+<p>DHCPClient module has lost the DHCP server leased address allocated to an interface</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>interface_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ip_address</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="service_internet_service31">service_internet_service31</h3>
+<pre>extern void service_internet_service31 (char const *interface_name,
+      int ip_address);</pre>
+<p>DHCPClient module has lost the DHCP server leased address allocated to an interface</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>interface_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ip_address</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

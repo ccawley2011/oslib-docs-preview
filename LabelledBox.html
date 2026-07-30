@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; LabelledBox</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>LabelledBox</h2>
+
+<pre>#include "oslib/labelledbox.h"</pre>
+
+<h3 id="labelledbox_gadget">labelledbox_gadget</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> label;
+   }
+   labelledbox_gadget;</pre>
+
+<h3 id="labelledbox_object">labelledbox_object</h3>
+<pre>typedef struct
+   {  <a href="#gadget_OBJECT_MEMBERS">gadget_OBJECT_MEMBERS</a>
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> label;
+   }
+   labelledbox_object;</pre>
+
+<h3 id="class_LABELLED_BOX">class_LABELLED_BOX</h3>
+<pre>#define class_LABELLED_BOX ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x100u)</pre>
+
+<h3 id="labelledbox_SPRITE">labelledbox_SPRITE</h3>
+<pre>#define labelledbox_SPRITE ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x1u)</pre>
+
+<h3 id="labelledbox_SPRITE_IS_FILLED">labelledbox_SPRITE_IS_FILLED</h3>
+<pre>#define labelledbox_SPRITE_IS_FILLED ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x2u)</pre>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

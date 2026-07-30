@@ -1,0 +1,376 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ToolAction</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ToolAction</h2>
+
+<pre>#include "oslib/toolaction.h"</pre>
+
+<h3 id="toolaction_gadget">toolaction_gadget</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> off_text;
+      int off_text_limit;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> on_text;
+      int on_text_limit;
+      bits click_action;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> select_show;
+      bits adjust_action;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> adjust_show;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> fade_text;
+      int fade_text_limit;
+   }
+   toolaction_gadget;</pre>
+
+<h3 id="toolaction_object">toolaction_object</h3>
+<pre>typedef struct
+   {  <a href="#gadget_OBJECT_MEMBERS">gadget_OBJECT_MEMBERS</a>
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> off_text;
+      int off_text_limit;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> on_text;
+      int on_text_limit;
+      bits click_action;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> select_show;
+      bits adjust_action;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> adjust_show;
+      <a href="toolbox.html#toolbox_string_reference">toolbox_string_reference</a> fade_text;
+      int fade_text_limit;
+   }
+   toolaction_object;</pre>
+
+<h3 id="toolaction_ident_flags">toolaction_ident_flags</h3>
+<pre>typedef bits toolaction_ident_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#toolaction_IDENT_MASK">toolaction_IDENT_MASK</a></dd>
+<dd><a href="#toolaction_IDENT_OFF">toolaction_IDENT_OFF</a></dd>
+<dd><a href="#toolaction_IDENT_ON">toolaction_IDENT_ON</a></dd>
+<dd><a href="#toolaction_IDENT_FADE">toolaction_IDENT_FADE</a></dd>
+</dl>
+
+<h3 id="class_TOOL_ACTION">class_TOOL_ACTION</h3>
+<pre>#define class_TOOL_ACTION ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x4014u)</pre>
+
+<h3 id="error_TOOL_ACTION_OUT_OF_MEMORY">error_TOOL_ACTION_OUT_OF_MEMORY</h3>
+<pre>#define error_TOOL_ACTION_OUT_OF_MEMORY 0x80E920u</pre>
+
+<h3 id="error_TOOL_ACTION_CANT_CREATE_ICON">error_TOOL_ACTION_CANT_CREATE_ICON</h3>
+<pre>#define error_TOOL_ACTION_CANT_CREATE_ICON 0x80E921u</pre>
+
+<h3 id="error_TOOL_ACTION_CANT_CREATE_OBJECT">error_TOOL_ACTION_CANT_CREATE_OBJECT</h3>
+<pre>#define error_TOOL_ACTION_CANT_CREATE_OBJECT 0x80E922u</pre>
+
+<h3 id="toolaction_GENERATE_SELECT">toolaction_GENERATE_SELECT</h3>
+<pre>#define toolaction_GENERATE_SELECT ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x1u)</pre>
+
+<h3 id="toolaction_IS_TEXT">toolaction_IS_TEXT</h3>
+<pre>#define toolaction_IS_TEXT ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x2u)</pre>
+
+<h3 id="toolaction_ON">toolaction_ON</h3>
+<pre>#define toolaction_ON ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x4u)</pre>
+
+<h3 id="toolaction_AUTO_TOGGLE">toolaction_AUTO_TOGGLE</h3>
+<pre>#define toolaction_AUTO_TOGGLE ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x8u)</pre>
+
+<h3 id="toolaction_NO_PRESSED_SPRITE">toolaction_NO_PRESSED_SPRITE</h3>
+<pre>#define toolaction_NO_PRESSED_SPRITE ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x10u)</pre>
+
+<h3 id="toolaction_AUTO_REPEAT">toolaction_AUTO_REPEAT</h3>
+<pre>#define toolaction_AUTO_REPEAT ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x20u)</pre>
+
+<h3 id="toolaction_SHOW_TRANSIENT">toolaction_SHOW_TRANSIENT</h3>
+<pre>#define toolaction_SHOW_TRANSIENT ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x40u)</pre>
+
+<h3 id="toolaction_SHOW_AS_POP_UP">toolaction_SHOW_AS_POP_UP</h3>
+<pre>#define toolaction_SHOW_AS_POP_UP ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x80u)</pre>
+
+<h3 id="toolaction_HAS_FADE_SPRITE">toolaction_HAS_FADE_SPRITE</h3>
+<pre>#define toolaction_HAS_FADE_SPRITE ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x100u)</pre>
+
+<h3 id="action_TOOL_ACTION_SELECTED">action_TOOL_ACTION_SELECTED</h3>
+<pre>#define action_TOOL_ACTION_SELECTED 0x140140u</pre>
+
+<h3 id="toolaction_SELECTED_ADJUST">toolaction_SELECTED_ADJUST</h3>
+<pre>#define toolaction_SELECTED_ADJUST 0x1u</pre>
+
+<h3 id="toolaction_SELECTED_SELECT">toolaction_SELECTED_SELECT</h3>
+<pre>#define toolaction_SELECTED_SELECT 0x4u</pre>
+
+<h3 id="toolaction_IDENT_MASK">toolaction_IDENT_MASK</h3>
+<pre>#define toolaction_IDENT_MASK ((<a href="#toolaction_ident_flags">toolaction_ident_flags</a>) 0xFu)</pre>
+
+<h3 id="toolaction_IDENT_OFF">toolaction_IDENT_OFF</h3>
+<pre>#define toolaction_IDENT_OFF ((<a href="#toolaction_ident_flags">toolaction_ident_flags</a>) 0x0u)</pre>
+
+<h3 id="toolaction_IDENT_ON">toolaction_IDENT_ON</h3>
+<pre>#define toolaction_IDENT_ON ((<a href="#toolaction_ident_flags">toolaction_ident_flags</a>) 0x1u)</pre>
+
+<h3 id="toolaction_IDENT_FADE">toolaction_IDENT_FADE</h3>
+<pre>#define toolaction_IDENT_FADE ((<a href="#toolaction_ident_flags">toolaction_ident_flags</a>) 0x2u)</pre>
+
+<h3 id="xtoolaction_set_ident">xtoolaction_set_ident</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolaction_set_ident (<a href="#toolaction_ident_flags">toolaction_ident_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> toolaction);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>toolaction</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="toolaction_set_ident">toolaction_set_ident</h3>
+<pre>extern void toolaction_set_ident (<a href="#toolaction_ident_flags">toolaction_ident_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> toolaction);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>toolaction</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xtoolaction_get_ident">xtoolaction_get_ident</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolaction_get_ident (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> toolaction,
+      <a href="#toolaction_ident_flags">toolaction_ident_flags</a> *ident);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>toolaction</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>ident</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="toolaction_get_ident">toolaction_get_ident</h3>
+<pre>extern <a href="#toolaction_ident_flags">toolaction_ident_flags</a> toolaction_get_ident (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> toolaction);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>toolaction</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>ident</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xtoolaction_set_action">xtoolaction_set_action</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolaction_set_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> toolaction,
+      bits select_action,
+      bits adjust_action);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>toolaction</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>select_action</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>adjust_action</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="toolaction_set_action">toolaction_set_action</h3>
+<pre>extern void toolaction_set_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> toolaction,
+      bits select_action,
+      bits adjust_action);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>toolaction</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>select_action</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>adjust_action</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xtoolaction_get_action">xtoolaction_get_action</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolaction_get_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> toolaction,
+      bits *select_action,
+      bits *adjust_action);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>toolaction</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>select_action</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>adjust_action</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="toolaction_get_action">toolaction_get_action</h3>
+<pre>extern void toolaction_get_action (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> toolaction,
+      bits *select_action,
+      bits *adjust_action);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>toolaction</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>select_action</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>adjust_action</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xtoolaction_set_click_show">xtoolaction_set_click_show</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolaction_set_click_show (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> toolaction,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> select_show_object,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> adjust_show_object);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>toolaction</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>select_show_object</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>adjust_show_object</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="toolaction_set_click_show">toolaction_set_click_show</h3>
+<pre>extern void toolaction_set_click_show (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> toolaction,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> select_show_object,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> adjust_show_object);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>toolaction</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>select_show_object</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>adjust_show_object</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xtoolaction_get_click_show">xtoolaction_get_click_show</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolaction_get_click_show (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> toolaction,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *select_show_object,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *adjust_show_object);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>toolaction</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>select_show_object</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>adjust_show_object</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="toolaction_get_click_show">toolaction_get_click_show</h3>
+<pre>extern void toolaction_get_click_show (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> toolaction,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *select_show_object,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> *adjust_show_object);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>toolaction</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>select_show_object</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>adjust_show_object</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xtoolaction_set_state">xtoolaction_set_state</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolaction_set_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> toolaction,
+      osbool on);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>toolaction</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>on</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="toolaction_set_state">toolaction_set_state</h3>
+<pre>extern void toolaction_set_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> toolaction,
+      osbool on);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>toolaction</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>on</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xtoolaction_get_state">xtoolaction_get_state</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtoolaction_get_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> toolaction,
+      osbool *on);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>toolaction</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>on</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="toolaction_get_state">toolaction_get_state</h3>
+<pre>extern osbool toolaction_get_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> toolaction);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>toolaction</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>on</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

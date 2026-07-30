@@ -1,0 +1,793 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; PlugIn</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>PlugIn</h2>
+
+<pre>#include "oslib/plugin.h"</pre>
+
+<h3 id="plugin_p">plugin_p</h3>
+<pre>typedef struct {...} *plugin_p;</pre>
+
+<p>Abstract type for plug-in instance handles</p>
+
+<h3 id="plugin_b">plugin_b</h3>
+<pre>typedef struct {...} *plugin_b;</pre>
+
+<p>Abstract type for browser instance handles</p>
+
+<h3 id="plugin_s">plugin_s</h3>
+<pre>typedef struct {...} *plugin_s;</pre>
+
+<p>Abstract type for plug-in stream instance handles</p>
+
+<h3 id="plugin_bs">plugin_bs</h3>
+<pre>typedef struct {...} *plugin_bs;</pre>
+
+<p>Abstract type for browser stream instance handles</p>
+
+<h3 id="plugin_notify_data">plugin_notify_data</h3>
+<pre>typedef int plugin_notify_data;</pre>
+
+<h3 id="plugin_open_flags">plugin_open_flags</h3>
+<pre>typedef bits plugin_open_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#plugin_OPEN_AS_HELPER">plugin_OPEN_AS_HELPER</a></dd>
+</dl>
+
+<h3 id="plugin_opening_flags">plugin_opening_flags</h3>
+<pre>typedef bits plugin_opening_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#plugin_OPENING_ACCEPTS_INPUT_FOCUS">plugin_OPENING_ACCEPTS_INPUT_FOCUS</a></dd>
+<dd><a href="#plugin_OPENING_WANTS_CODE_FETCHING">plugin_OPENING_WANTS_CODE_FETCHING</a></dd>
+<dd><a href="#plugin_OPENING_WANTS_DATA_FETCHING">plugin_OPENING_WANTS_DATA_FETCHING</a></dd>
+<dd><a href="#plugin_OPENING_WILL_DELETE_PARAMETERS">plugin_OPENING_WILL_DELETE_PARAMETERS</a></dd>
+<dd><a href="#plugin_OPENING_STILL_BUSY">plugin_OPENING_STILL_BUSY</a></dd>
+<dd><a href="#plugin_OPENING_SUPPORTS_EXTENDED_ACTIONS">plugin_OPENING_SUPPORTS_EXTENDED_ACTIONS</a></dd>
+<dd><a href="#plugin_OPENING_HAS_HELPER_WINDOW">plugin_OPENING_HAS_HELPER_WINDOW</a></dd>
+</dl>
+
+<h3 id="plugin_close_flags">plugin_close_flags</h3>
+<pre>typedef bits plugin_close_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#plugin_CLOSE_REQUEST_EXIT">plugin_CLOSE_REQUEST_EXIT</a></dd>
+</dl>
+
+<h3 id="plugin_closed_flags">plugin_closed_flags</h3>
+<pre>typedef bits plugin_closed_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#plugin_CLOSED_WILL_EXIT">plugin_CLOSED_WILL_EXIT</a></dd>
+<dd><a href="#plugin_CLOSED_SELF_INITIATED">plugin_CLOSED_SELF_INITIATED</a></dd>
+<dd><a href="#plugin_CLOSED_WITH_ERROR">plugin_CLOSED_WITH_ERROR</a></dd>
+</dl>
+
+<h3 id="plugin_stream_new_flags">plugin_stream_new_flags</h3>
+<pre>typedef bits plugin_stream_new_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#plugin_STREAM_NEW_TYPE">plugin_STREAM_NEW_TYPE</a></dd>
+<dd><a href="#plugin_STREAM_NEW_SEEKABLE">plugin_STREAM_NEW_SEEKABLE</a></dd>
+</dl>
+
+<h3 id="plugin_stream_write_flags">plugin_stream_write_flags</h3>
+<pre>typedef bits plugin_stream_write_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#plugin_STREAM_WRITE_DATA_TYPE">plugin_STREAM_WRITE_DATA_TYPE</a></dd>
+</dl>
+
+<h3 id="plugin_url_access_flags">plugin_url_access_flags</h3>
+<pre>typedef bits plugin_url_access_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#plugin_URL_ACCESS_NOTIFY_COMPLETION">plugin_URL_ACCESS_NOTIFY_COMPLETION</a></dd>
+<dd><a href="#plugin_URL_ACCESS_USE_POST">plugin_URL_ACCESS_USE_POST</a></dd>
+<dd><a href="#plugin_URL_ACCESS_POST_FILE">plugin_URL_ACCESS_POST_FILE</a></dd>
+</dl>
+
+<h3 id="plugin_busy_flags">plugin_busy_flags</h3>
+<pre>typedef bits plugin_busy_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#plugin_BUSY_IS_BUSY">plugin_BUSY_IS_BUSY</a></dd>
+<dd><a href="#plugin_BUSY_HAS_NEW_STATE">plugin_BUSY_HAS_NEW_STATE</a></dd>
+</dl>
+
+<h3 id="plugin_stream_destroy_reason">plugin_stream_destroy_reason</h3>
+<pre>typedef int plugin_stream_destroy_reason;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#plugin_STREAM_DESTROY_FINISHED">plugin_STREAM_DESTROY_FINISHED</a></dd>
+<dd><a href="#plugin_STREAM_DESTROY_ERROR">plugin_STREAM_DESTROY_ERROR</a></dd>
+<dd><a href="#plugin_STREAM_DESTROY_USER_REQUEST">plugin_STREAM_DESTROY_USER_REQUEST</a></dd>
+</dl>
+
+<h3 id="plugin_notify_reason">plugin_notify_reason</h3>
+<pre>typedef int plugin_notify_reason;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#plugin_NOTIFY_FINISHED">plugin_NOTIFY_FINISHED</a></dd>
+<dd><a href="#plugin_NOTIFY_ERROR">plugin_NOTIFY_ERROR</a></dd>
+<dd><a href="#plugin_NOTIFY_USER_REQUEST">plugin_NOTIFY_USER_REQUEST</a></dd>
+</dl>
+
+<h3 id="plugin_state">plugin_state</h3>
+<pre>typedef int plugin_state;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#plugin_STATE_STOP">plugin_STATE_STOP</a></dd>
+<dd><a href="#plugin_STATE_PLAY">plugin_STATE_PLAY</a></dd>
+<dd><a href="#plugin_STATE_PAUSE">plugin_STATE_PAUSE</a></dd>
+<dd><a href="#plugin_STATE_FAST_FORWARD">plugin_STATE_FAST_FORWARD</a></dd>
+<dd><a href="#plugin_STATE_REWIND">plugin_STATE_REWIND</a></dd>
+<dd><a href="#plugin_STATE_RECORD">plugin_STATE_RECORD</a></dd>
+<dd><a href="#plugin_STATE_MUTE">plugin_STATE_MUTE</a></dd>
+<dd><a href="#plugin_STATE_UN_MUTE">plugin_STATE_UN_MUTE</a></dd>
+</dl>
+
+<h3 id="plugin_message_open">plugin_message_open</h3>
+<pre>typedef struct
+   {  <a href="#plugin_open_flags">plugin_open_flags</a> flags;
+      bits reserved;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="wimp.html#wimp_w">wimp_w</a> parent_window;
+      <a href="os.html#os_box">os_box</a> bbox;
+      bits file_type;
+      <a href="os.html#os_string_value">os_string_value</a> filename;
+   }
+   plugin_message_open;</pre>
+
+<h3 id="plugin_message_opening">plugin_message_opening</h3>
+<pre>typedef struct
+   {  <a href="#plugin_opening_flags">plugin_opening_flags</a> flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+   }
+   plugin_message_opening;</pre>
+
+<h3 id="plugin_message_close">plugin_message_close</h3>
+<pre>typedef struct
+   {  <a href="#plugin_close_flags">plugin_close_flags</a> flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+   }
+   plugin_message_close;</pre>
+
+<h3 id="plugin_message_closed">plugin_message_closed</h3>
+<pre>typedef struct
+   {  bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      bits error_number;
+      char error_text [220];
+   }
+   plugin_message_closed;</pre>
+
+<h3 id="plugin_message_reshape">plugin_message_reshape</h3>
+<pre>typedef struct
+   {  bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="wimp.html#wimp_w">wimp_w</a> parent_window;
+      <a href="os.html#os_box">os_box</a> bbox;
+   }
+   plugin_message_reshape;</pre>
+
+<h3 id="plugin_message_reshape_request">plugin_message_reshape_request</h3>
+<pre>typedef struct
+   {  bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="os.html#os_coord">os_coord</a> size;
+   }
+   plugin_message_reshape_request;</pre>
+
+<h3 id="plugin_message_focus">plugin_message_focus</h3>
+<pre>typedef struct
+   {  bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+   }
+   plugin_message_focus;</pre>
+
+<h3 id="plugin_message_unlock">plugin_message_unlock</h3>
+<pre>typedef struct
+   {  bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="os.html#os_string_value">os_string_value</a> url;
+   }
+   plugin_message_unlock;</pre>
+
+<h3 id="plugin_message_stream_new">plugin_message_stream_new</h3>
+<pre>typedef struct
+   {  <a href="#plugin_stream_new_flags">plugin_stream_new_flags</a> flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="#plugin_s">plugin_s</a> stream;
+      <a href="#plugin_bs">plugin_bs</a> browser_stream;
+      <a href="os.html#os_string_value">os_string_value</a> url;
+      int end;
+      int last_modified_date;
+      <a href="#plugin_notify_data">plugin_notify_data</a> notify_data;
+      <a href="os.html#os_string_value">os_string_value</a> mime_type;
+      <a href="os.html#os_string_value">os_string_value</a> target_window;
+   }
+   plugin_message_stream_new;</pre>
+
+<h3 id="plugin_message_stream_destroy">plugin_message_stream_destroy</h3>
+<pre>typedef struct
+   {  bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="#plugin_s">plugin_s</a> stream;
+      <a href="#plugin_bs">plugin_bs</a> browser_stream;
+      <a href="os.html#os_string_value">os_string_value</a> url;
+      int end;
+      int last_modified_date;
+      <a href="#plugin_notify_data">plugin_notify_data</a> notify_data;
+      <a href="#plugin_stream_destroy_reason">plugin_stream_destroy_reason</a> reason;
+   }
+   plugin_message_stream_destroy;</pre>
+
+<h3 id="plugin_message_stream_write">plugin_message_stream_write</h3>
+<pre>typedef struct
+   {  <a href="#plugin_stream_write_flags">plugin_stream_write_flags</a> flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="#plugin_s">plugin_s</a> stream;
+      <a href="#plugin_bs">plugin_bs</a> browser_stream;
+      <a href="os.html#os_string_value">os_string_value</a> url;
+      int end;
+      int last_modified_date;
+      <a href="#plugin_notify_data">plugin_notify_data</a> notify_data;
+      int offset;
+      int length;
+      byte *data;
+   }
+   plugin_message_stream_write;</pre>
+
+<h3 id="plugin_message_stream_written">plugin_message_stream_written</h3>
+<pre>typedef struct
+   {  bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="#plugin_s">plugin_s</a> stream;
+      <a href="#plugin_bs">plugin_bs</a> browser_stream;
+      <a href="os.html#os_string_value">os_string_value</a> url;
+      int end;
+      int last_modified_date;
+      <a href="#plugin_notify_data">plugin_notify_data</a> notify_data;
+      int length;
+   }
+   plugin_message_stream_written;</pre>
+
+<h3 id="plugin_message_stream_as_file">plugin_message_stream_as_file</h3>
+<pre>typedef struct
+   {  bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="#plugin_s">plugin_s</a> stream;
+      <a href="#plugin_bs">plugin_bs</a> browser_stream;
+      <a href="os.html#os_string_value">os_string_value</a> url;
+      int end;
+      int last_modified_date;
+      <a href="#plugin_notify_data">plugin_notify_data</a> notify_data;
+      <a href="os.html#os_string_value">os_string_value</a> filename;
+   }
+   plugin_message_stream_as_file;</pre>
+
+<h3 id="plugin_message_url_access">plugin_message_url_access</h3>
+<pre>typedef struct
+   {  <a href="#plugin_url_access_flags">plugin_url_access_flags</a> flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="os.html#os_string_value">os_string_value</a> url;
+      <a href="os.html#os_string_value">os_string_value</a> target_window;
+      <a href="#plugin_notify_data">plugin_notify_data</a> notify_data;
+      int length;
+      <a href="os.html#os_string_value">os_string_value</a> filename_or_data;
+   }
+   plugin_message_url_access;</pre>
+
+<h3 id="plugin_message_notify">plugin_message_notify</h3>
+<pre>typedef struct
+   {  bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="os.html#os_string_value">os_string_value</a> url;
+      <a href="#plugin_notify_reason">plugin_notify_reason</a> reason;
+      <a href="#plugin_notify_data">plugin_notify_data</a> notify_data;
+   }
+   plugin_message_notify;</pre>
+
+<h3 id="plugin_message_status">plugin_message_status</h3>
+<pre>typedef struct
+   {  bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="os.html#os_string_value">os_string_value</a> message;
+   }
+   plugin_message_status;</pre>
+
+<h3 id="plugin_message_busy">plugin_message_busy</h3>
+<pre>typedef struct
+   {  <a href="#plugin_busy_flags">plugin_busy_flags</a> flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="#plugin_state">plugin_state</a> new_state;
+   }
+   plugin_message_busy;</pre>
+
+<h3 id="plugin_message_action">plugin_message_action</h3>
+<pre>typedef struct
+   {  bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="#plugin_state">plugin_state</a> new_state;
+   }
+   plugin_message_action;</pre>
+
+<h3 id="plugin_message_abort">plugin_message_abort</h3>
+<pre>typedef struct
+   {  bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+   }
+   plugin_message_abort;</pre>
+
+<h3 id="plugin_full_message_open">plugin_full_message_open</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#plugin_open_flags">plugin_open_flags</a> flags;
+      bits reserved;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="wimp.html#wimp_w">wimp_w</a> parent_window;
+      <a href="os.html#os_box">os_box</a> bbox;
+      bits file_type;
+      <a href="os.html#os_string_value">os_string_value</a> filename;
+   }
+   plugin_full_message_open;</pre>
+
+<h3 id="plugin_full_message_opening">plugin_full_message_opening</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#plugin_opening_flags">plugin_opening_flags</a> flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+   }
+   plugin_full_message_opening;</pre>
+
+<h3 id="plugin_full_message_close">plugin_full_message_close</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#plugin_close_flags">plugin_close_flags</a> flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+   }
+   plugin_full_message_close;</pre>
+
+<h3 id="plugin_full_message_closed">plugin_full_message_closed</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      bits error_number;
+      char error_text [220];
+   }
+   plugin_full_message_closed;</pre>
+
+<h3 id="plugin_full_message_reshape">plugin_full_message_reshape</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="wimp.html#wimp_w">wimp_w</a> parent_window;
+      <a href="os.html#os_box">os_box</a> bbox;
+   }
+   plugin_full_message_reshape;</pre>
+
+<h3 id="plugin_full_message_reshape_request">plugin_full_message_reshape_request</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="os.html#os_coord">os_coord</a> shape;
+   }
+   plugin_full_message_reshape_request;</pre>
+
+<h3 id="plugin_full_message_focus">plugin_full_message_focus</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+   }
+   plugin_full_message_focus;</pre>
+
+<h3 id="plugin_full_message_unlock">plugin_full_message_unlock</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="os.html#os_string_value">os_string_value</a> url;
+   }
+   plugin_full_message_unlock;</pre>
+
+<h3 id="plugin_full_message_stream_new">plugin_full_message_stream_new</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#plugin_stream_new_flags">plugin_stream_new_flags</a> flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="#plugin_s">plugin_s</a> stream;
+      <a href="#plugin_bs">plugin_bs</a> browser_stream;
+      <a href="os.html#os_string_value">os_string_value</a> url;
+      int end;
+      int last_modified_date;
+      <a href="#plugin_notify_data">plugin_notify_data</a> notify_data;
+      <a href="os.html#os_string_value">os_string_value</a> mime_type;
+      <a href="os.html#os_string_value">os_string_value</a> target_window;
+   }
+   plugin_full_message_stream_new;</pre>
+
+<h3 id="plugin_full_message_stream_destroy">plugin_full_message_stream_destroy</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="#plugin_s">plugin_s</a> stream;
+      <a href="#plugin_bs">plugin_bs</a> browser_stream;
+      <a href="os.html#os_string_value">os_string_value</a> url;
+      int end;
+      int last_modified_date;
+      <a href="#plugin_notify_data">plugin_notify_data</a> notify_data;
+      <a href="#plugin_stream_destroy_reason">plugin_stream_destroy_reason</a> reason;
+   }
+   plugin_full_message_stream_destroy;</pre>
+
+<h3 id="plugin_full_message_stream_write">plugin_full_message_stream_write</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#plugin_stream_write_flags">plugin_stream_write_flags</a> flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="#plugin_s">plugin_s</a> stream;
+      <a href="#plugin_bs">plugin_bs</a> browser_stream;
+      <a href="os.html#os_string_value">os_string_value</a> url;
+      int end;
+      int last_modified_date;
+      <a href="#plugin_notify_data">plugin_notify_data</a> notify_data;
+      int offset;
+      int length;
+      byte *data;
+   }
+   plugin_full_message_stream_write;</pre>
+
+<h3 id="plugin_full_message_stream_written">plugin_full_message_stream_written</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="#plugin_s">plugin_s</a> stream;
+      <a href="#plugin_bs">plugin_bs</a> browser_stream;
+      <a href="os.html#os_string_value">os_string_value</a> url;
+      int end;
+      int last_modified_date;
+      <a href="#plugin_notify_data">plugin_notify_data</a> notify_data;
+      int length;
+   }
+   plugin_full_message_stream_written;</pre>
+
+<h3 id="plugin_full_message_stream_as_file">plugin_full_message_stream_as_file</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="#plugin_s">plugin_s</a> stream;
+      <a href="#plugin_bs">plugin_bs</a> browser_stream;
+      <a href="os.html#os_string_value">os_string_value</a> url;
+      int end;
+      int last_modified_date;
+      <a href="#plugin_notify_data">plugin_notify_data</a> notify_data;
+      <a href="os.html#os_string_value">os_string_value</a> filename;
+   }
+   plugin_full_message_stream_as_file;</pre>
+
+<h3 id="plugin_full_message_url_access">plugin_full_message_url_access</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#plugin_url_access_flags">plugin_url_access_flags</a> flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="os.html#os_string_value">os_string_value</a> url;
+      <a href="os.html#os_string_value">os_string_value</a> target_window;
+      <a href="#plugin_notify_data">plugin_notify_data</a> notify_data;
+      int length;
+      <a href="os.html#os_string_value">os_string_value</a> filename_or_data;
+   }
+   plugin_full_message_url_access;</pre>
+
+<h3 id="plugin_full_message_notify">plugin_full_message_notify</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="os.html#os_string_value">os_string_value</a> url;
+      <a href="#plugin_notify_reason">plugin_notify_reason</a> reason;
+      <a href="#plugin_notify_data">plugin_notify_data</a> notify_data;
+   }
+   plugin_full_message_notify;</pre>
+
+<h3 id="plugin_full_message_status">plugin_full_message_status</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="os.html#os_string_value">os_string_value</a> message;
+   }
+   plugin_full_message_status;</pre>
+
+<h3 id="plugin_full_message_busy">plugin_full_message_busy</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#plugin_busy_flags">plugin_busy_flags</a> flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="#plugin_state">plugin_state</a> new_state;
+   }
+   plugin_full_message_busy;</pre>
+
+<h3 id="plugin_full_message_action">plugin_full_message_action</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+      <a href="#plugin_state">plugin_state</a> new_state;
+   }
+   plugin_full_message_action;</pre>
+
+<h3 id="plugin_full_message_abort">plugin_full_message_abort</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      bits flags;
+      <a href="#plugin_p">plugin_p</a> plugin;
+      <a href="#plugin_b">plugin_b</a> browser;
+   }
+   plugin_full_message_abort;</pre>
+
+<h3 id="message_PLUG_IN_OPEN">message_PLUG_IN_OPEN</h3>
+<pre>#define message_PLUG_IN_OPEN 0x4D540u</pre>
+
+<h3 id="message_PLUG_IN_OPENING">message_PLUG_IN_OPENING</h3>
+<pre>#define message_PLUG_IN_OPENING 0x4D541u</pre>
+
+<h3 id="message_PLUG_IN_CLOSE">message_PLUG_IN_CLOSE</h3>
+<pre>#define message_PLUG_IN_CLOSE 0x4D542u</pre>
+
+<h3 id="message_PLUG_IN_CLOSED">message_PLUG_IN_CLOSED</h3>
+<pre>#define message_PLUG_IN_CLOSED 0x4D543u</pre>
+
+<h3 id="message_PLUG_IN_RESHAPE">message_PLUG_IN_RESHAPE</h3>
+<pre>#define message_PLUG_IN_RESHAPE 0x4D544u</pre>
+
+<h3 id="message_PLUG_IN_RESHAPE_REQUEST">message_PLUG_IN_RESHAPE_REQUEST</h3>
+<pre>#define message_PLUG_IN_RESHAPE_REQUEST 0x4D545u</pre>
+
+<h3 id="message_PLUG_IN_FOCUS">message_PLUG_IN_FOCUS</h3>
+<pre>#define message_PLUG_IN_FOCUS 0x4D546u</pre>
+
+<h3 id="message_PLUG_IN_UNLOCK">message_PLUG_IN_UNLOCK</h3>
+<pre>#define message_PLUG_IN_UNLOCK 0x4D547u</pre>
+
+<h3 id="message_PLUG_IN_STREAM_NEW">message_PLUG_IN_STREAM_NEW</h3>
+<pre>#define message_PLUG_IN_STREAM_NEW 0x4D548u</pre>
+
+<h3 id="message_PLUG_IN_STREAM_DESTROY">message_PLUG_IN_STREAM_DESTROY</h3>
+<pre>#define message_PLUG_IN_STREAM_DESTROY 0x4D549u</pre>
+
+<h3 id="message_PLUG_IN_STREAM_WRITE">message_PLUG_IN_STREAM_WRITE</h3>
+<pre>#define message_PLUG_IN_STREAM_WRITE 0x4D54Au</pre>
+
+<h3 id="message_PLUG_IN_STREAM_WRITTEN">message_PLUG_IN_STREAM_WRITTEN</h3>
+<pre>#define message_PLUG_IN_STREAM_WRITTEN 0x4D54Bu</pre>
+
+<h3 id="message_PLUG_IN_STREAM_AS_FILE">message_PLUG_IN_STREAM_AS_FILE</h3>
+<pre>#define message_PLUG_IN_STREAM_AS_FILE 0x4D54Cu</pre>
+
+<h3 id="message_PLUG_IN_URL_ACCESS">message_PLUG_IN_URL_ACCESS</h3>
+<pre>#define message_PLUG_IN_URL_ACCESS 0x4D54Du</pre>
+
+<h3 id="message_PLUG_IN_NOTIFY">message_PLUG_IN_NOTIFY</h3>
+<pre>#define message_PLUG_IN_NOTIFY 0x4D54Eu</pre>
+
+<h3 id="message_PLUG_IN_STATUS">message_PLUG_IN_STATUS</h3>
+<pre>#define message_PLUG_IN_STATUS 0x4D54Fu</pre>
+
+<h3 id="message_PLUG_IN_BUSY">message_PLUG_IN_BUSY</h3>
+<pre>#define message_PLUG_IN_BUSY 0x4D550u</pre>
+
+<h3 id="message_PLUG_IN_ACTION">message_PLUG_IN_ACTION</h3>
+<pre>#define message_PLUG_IN_ACTION 0x4D551u</pre>
+
+<h3 id="message_PLUG_IN_ABORT">message_PLUG_IN_ABORT</h3>
+<pre>#define message_PLUG_IN_ABORT 0x4D552u</pre>
+
+<h3 id="plugin_OPEN_AS_HELPER">plugin_OPEN_AS_HELPER</h3>
+<pre>#define plugin_OPEN_AS_HELPER ((<a href="#plugin_open_flags">plugin_open_flags</a>) 0x1u)</pre>
+
+<h3 id="plugin_OPENING_ACCEPTS_INPUT_FOCUS">plugin_OPENING_ACCEPTS_INPUT_FOCUS</h3>
+<pre>#define plugin_OPENING_ACCEPTS_INPUT_FOCUS ((<a href="#plugin_opening_flags">plugin_opening_flags</a>) 0x1u)</pre>
+
+<h3 id="plugin_OPENING_WANTS_CODE_FETCHING">plugin_OPENING_WANTS_CODE_FETCHING</h3>
+<pre>#define plugin_OPENING_WANTS_CODE_FETCHING ((<a href="#plugin_opening_flags">plugin_opening_flags</a>) 0x2u)</pre>
+
+<h3 id="plugin_OPENING_WANTS_DATA_FETCHING">plugin_OPENING_WANTS_DATA_FETCHING</h3>
+<pre>#define plugin_OPENING_WANTS_DATA_FETCHING ((<a href="#plugin_opening_flags">plugin_opening_flags</a>) 0x4u)</pre>
+
+<h3 id="plugin_OPENING_WILL_DELETE_PARAMETERS">plugin_OPENING_WILL_DELETE_PARAMETERS</h3>
+<pre>#define plugin_OPENING_WILL_DELETE_PARAMETERS ((<a href="#plugin_opening_flags">plugin_opening_flags</a>) 0x8u)</pre>
+
+<h3 id="plugin_OPENING_STILL_BUSY">plugin_OPENING_STILL_BUSY</h3>
+<pre>#define plugin_OPENING_STILL_BUSY ((<a href="#plugin_opening_flags">plugin_opening_flags</a>) 0x10u)</pre>
+
+<h3 id="plugin_OPENING_SUPPORTS_EXTENDED_ACTIONS">plugin_OPENING_SUPPORTS_EXTENDED_ACTIONS</h3>
+<pre>#define plugin_OPENING_SUPPORTS_EXTENDED_ACTIONS ((<a href="#plugin_opening_flags">plugin_opening_flags</a>) 0x20u)</pre>
+
+<h3 id="plugin_OPENING_HAS_HELPER_WINDOW">plugin_OPENING_HAS_HELPER_WINDOW</h3>
+<pre>#define plugin_OPENING_HAS_HELPER_WINDOW ((<a href="#plugin_opening_flags">plugin_opening_flags</a>) 0x40u)</pre>
+
+<h3 id="plugin_CLOSE_REQUEST_EXIT">plugin_CLOSE_REQUEST_EXIT</h3>
+<pre>#define plugin_CLOSE_REQUEST_EXIT ((<a href="#plugin_close_flags">plugin_close_flags</a>) 0x1u)</pre>
+
+<h3 id="plugin_CLOSED_WILL_EXIT">plugin_CLOSED_WILL_EXIT</h3>
+<pre>#define plugin_CLOSED_WILL_EXIT ((<a href="#plugin_closed_flags">plugin_closed_flags</a>) 0x1u)</pre>
+
+<h3 id="plugin_CLOSED_SELF_INITIATED">plugin_CLOSED_SELF_INITIATED</h3>
+<pre>#define plugin_CLOSED_SELF_INITIATED ((<a href="#plugin_closed_flags">plugin_closed_flags</a>) 0x2u)</pre>
+
+<h3 id="plugin_CLOSED_WITH_ERROR">plugin_CLOSED_WITH_ERROR</h3>
+<pre>#define plugin_CLOSED_WITH_ERROR ((<a href="#plugin_closed_flags">plugin_closed_flags</a>) 0x4u)</pre>
+
+<h3 id="plugin_STREAM_NEW_TYPE">plugin_STREAM_NEW_TYPE</h3>
+<pre>#define plugin_STREAM_NEW_TYPE ((<a href="#plugin_stream_new_flags">plugin_stream_new_flags</a>) 0xFu)</pre>
+
+<h3 id="plugin_STREAM_NEW_TYPE_SHIFT">plugin_STREAM_NEW_TYPE_SHIFT</h3>
+<pre>#define plugin_STREAM_NEW_TYPE_SHIFT 0</pre>
+
+<h3 id="plugin_STREAM_NEW_TYPE_NORMAL">plugin_STREAM_NEW_TYPE_NORMAL</h3>
+<pre>#define plugin_STREAM_NEW_TYPE_NORMAL 0</pre>
+
+<h3 id="plugin_STREAM_NEW_TYPE_SEEK_ONLY">plugin_STREAM_NEW_TYPE_SEEK_ONLY</h3>
+<pre>#define plugin_STREAM_NEW_TYPE_SEEK_ONLY 1</pre>
+
+<h3 id="plugin_STREAM_NEW_TYPE_AS_FILE">plugin_STREAM_NEW_TYPE_AS_FILE</h3>
+<pre>#define plugin_STREAM_NEW_TYPE_AS_FILE 2</pre>
+
+<h3 id="plugin_STREAM_NEW_TYPE_AS_FILE_ONLY">plugin_STREAM_NEW_TYPE_AS_FILE_ONLY</h3>
+<pre>#define plugin_STREAM_NEW_TYPE_AS_FILE_ONLY 3</pre>
+
+<h3 id="plugin_STREAM_NEW_SEEKABLE">plugin_STREAM_NEW_SEEKABLE</h3>
+<pre>#define plugin_STREAM_NEW_SEEKABLE ((<a href="#plugin_stream_new_flags">plugin_stream_new_flags</a>) 0x10u)</pre>
+
+<h3 id="plugin_STREAM_WRITE_DATA_TYPE">plugin_STREAM_WRITE_DATA_TYPE</h3>
+<pre>#define plugin_STREAM_WRITE_DATA_TYPE ((<a href="#plugin_stream_write_flags">plugin_stream_write_flags</a>) 0xFu)</pre>
+
+<h3 id="plugin_STREAM_WRITE_DATA_TYPE_SHIFT">plugin_STREAM_WRITE_DATA_TYPE_SHIFT</h3>
+<pre>#define plugin_STREAM_WRITE_DATA_TYPE_SHIFT 0</pre>
+
+<h3 id="plugin_STREAM_WRITE_DATA_TYPE_STRING">plugin_STREAM_WRITE_DATA_TYPE_STRING</h3>
+<pre>#define plugin_STREAM_WRITE_DATA_TYPE_STRING 0</pre>
+
+<h3 id="plugin_STREAM_WRITE_DATA_TYPE_ANCHOR">plugin_STREAM_WRITE_DATA_TYPE_ANCHOR</h3>
+<pre>#define plugin_STREAM_WRITE_DATA_TYPE_ANCHOR 1</pre>
+
+<h3 id="plugin_STREAM_WRITE_DATA_TYPE_FILE_HANDLE">plugin_STREAM_WRITE_DATA_TYPE_FILE_HANDLE</h3>
+<pre>#define plugin_STREAM_WRITE_DATA_TYPE_FILE_HANDLE 2</pre>
+
+<h3 id="plugin_URL_ACCESS_NOTIFY_COMPLETION">plugin_URL_ACCESS_NOTIFY_COMPLETION</h3>
+<pre>#define plugin_URL_ACCESS_NOTIFY_COMPLETION ((<a href="#plugin_url_access_flags">plugin_url_access_flags</a>) 0x1u)</pre>
+
+<h3 id="plugin_URL_ACCESS_USE_POST">plugin_URL_ACCESS_USE_POST</h3>
+<pre>#define plugin_URL_ACCESS_USE_POST ((<a href="#plugin_url_access_flags">plugin_url_access_flags</a>) 0x2u)</pre>
+
+<h3 id="plugin_URL_ACCESS_POST_FILE">plugin_URL_ACCESS_POST_FILE</h3>
+<pre>#define plugin_URL_ACCESS_POST_FILE ((<a href="#plugin_url_access_flags">plugin_url_access_flags</a>) 0x4u)</pre>
+
+<h3 id="plugin_BUSY_IS_BUSY">plugin_BUSY_IS_BUSY</h3>
+<pre>#define plugin_BUSY_IS_BUSY ((<a href="#plugin_busy_flags">plugin_busy_flags</a>) 0x1u)</pre>
+
+<h3 id="plugin_BUSY_HAS_NEW_STATE">plugin_BUSY_HAS_NEW_STATE</h3>
+<pre>#define plugin_BUSY_HAS_NEW_STATE ((<a href="#plugin_busy_flags">plugin_busy_flags</a>) 0x2u)</pre>
+
+<h3 id="plugin_STREAM_DESTROY_FINISHED">plugin_STREAM_DESTROY_FINISHED</h3>
+<pre>#define plugin_STREAM_DESTROY_FINISHED ((<a href="#plugin_stream_destroy_reason">plugin_stream_destroy_reason</a>) 0x0u)</pre>
+
+<h3 id="plugin_STREAM_DESTROY_ERROR">plugin_STREAM_DESTROY_ERROR</h3>
+<pre>#define plugin_STREAM_DESTROY_ERROR ((<a href="#plugin_stream_destroy_reason">plugin_stream_destroy_reason</a>) 0x1u)</pre>
+
+<h3 id="plugin_STREAM_DESTROY_USER_REQUEST">plugin_STREAM_DESTROY_USER_REQUEST</h3>
+<pre>#define plugin_STREAM_DESTROY_USER_REQUEST ((<a href="#plugin_stream_destroy_reason">plugin_stream_destroy_reason</a>) 0x2u)</pre>
+
+<h3 id="plugin_NOTIFY_FINISHED">plugin_NOTIFY_FINISHED</h3>
+<pre>#define plugin_NOTIFY_FINISHED ((<a href="#plugin_notify_reason">plugin_notify_reason</a>) 0x0u)</pre>
+
+<h3 id="plugin_NOTIFY_ERROR">plugin_NOTIFY_ERROR</h3>
+<pre>#define plugin_NOTIFY_ERROR ((<a href="#plugin_notify_reason">plugin_notify_reason</a>) 0x1u)</pre>
+
+<h3 id="plugin_NOTIFY_USER_REQUEST">plugin_NOTIFY_USER_REQUEST</h3>
+<pre>#define plugin_NOTIFY_USER_REQUEST ((<a href="#plugin_notify_reason">plugin_notify_reason</a>) 0x2u)</pre>
+
+<h3 id="plugin_STATE_STOP">plugin_STATE_STOP</h3>
+<pre>#define plugin_STATE_STOP ((<a href="#plugin_state">plugin_state</a>) 0x0u)</pre>
+
+<h3 id="plugin_STATE_PLAY">plugin_STATE_PLAY</h3>
+<pre>#define plugin_STATE_PLAY ((<a href="#plugin_state">plugin_state</a>) 0x1u)</pre>
+
+<h3 id="plugin_STATE_PAUSE">plugin_STATE_PAUSE</h3>
+<pre>#define plugin_STATE_PAUSE ((<a href="#plugin_state">plugin_state</a>) 0x2u)</pre>
+
+<h3 id="plugin_STATE_FAST_FORWARD">plugin_STATE_FAST_FORWARD</h3>
+<pre>#define plugin_STATE_FAST_FORWARD ((<a href="#plugin_state">plugin_state</a>) 0x3u)</pre>
+
+<h3 id="plugin_STATE_REWIND">plugin_STATE_REWIND</h3>
+<pre>#define plugin_STATE_REWIND ((<a href="#plugin_state">plugin_state</a>) 0x4u)</pre>
+
+<h3 id="plugin_STATE_RECORD">plugin_STATE_RECORD</h3>
+<pre>#define plugin_STATE_RECORD ((<a href="#plugin_state">plugin_state</a>) 0x5u)</pre>
+
+<h3 id="plugin_STATE_MUTE">plugin_STATE_MUTE</h3>
+<pre>#define plugin_STATE_MUTE ((<a href="#plugin_state">plugin_state</a>) 0x6u)</pre>
+
+<h3 id="plugin_STATE_UN_MUTE">plugin_STATE_UN_MUTE</h3>
+<pre>#define plugin_STATE_UN_MUTE ((<a href="#plugin_state">plugin_state</a>) 0x7u)</pre>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

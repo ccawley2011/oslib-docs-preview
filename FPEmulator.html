@@ -1,0 +1,450 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; FPEmulator</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>FPEmulator</h2>
+
+<pre>#include "oslib/fpemulator.h"</pre>
+
+<h3 id="fpemulator_context">fpemulator_context</h3>
+<pre>typedef struct {...} *fpemulator_context;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#fpemulator_NO_CONTEXT">fpemulator_NO_CONTEXT</a></dd>
+<dd><a href="#fpemulator_DEFAULT_CONTEXT">fpemulator_DEFAULT_CONTEXT</a></dd>
+<dd><a href="#fpemulator_CURRENT_CONTEXT">fpemulator_CURRENT_CONTEXT</a></dd>
+</dl>
+
+<h3 id="fpemulator_fpsr">fpemulator_fpsr</h3>
+<pre>typedef bits fpemulator_fpsr;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#fpemulator_FPSR_CUMULATIVE_IVO">fpemulator_FPSR_CUMULATIVE_IVO</a></dd>
+<dd><a href="#fpemulator_FPSR_CUMULATIVE_DVZ">fpemulator_FPSR_CUMULATIVE_DVZ</a></dd>
+<dd><a href="#fpemulator_FPSR_CUMULATIVE_UFL">fpemulator_FPSR_CUMULATIVE_UFL</a></dd>
+<dd><a href="#fpemulator_FPSR_CUMULATIVE_INX">fpemulator_FPSR_CUMULATIVE_INX</a></dd>
+<dd><a href="#fpemulator_FPSR_CONTROL_ND">fpemulator_FPSR_CONTROL_ND</a></dd>
+<dd><a href="#fpemulator_FPSR_CONTROL_NE">fpemulator_FPSR_CONTROL_NE</a></dd>
+<dd><a href="#fpemulator_FPSR_CONTROL_SO">fpemulator_FPSR_CONTROL_SO</a></dd>
+<dd><a href="#fpemulator_FPSR_CONTROL_EP">fpemulator_FPSR_CONTROL_EP</a></dd>
+<dd><a href="#fpemulator_FPSR_CONTROL_AC">fpemulator_FPSR_CONTROL_AC</a></dd>
+<dd><a href="#fpemulator_FPSR_ENABLE_IVO">fpemulator_FPSR_ENABLE_IVO</a></dd>
+<dd><a href="#fpemulator_FPSR_ENABLE_DVZ">fpemulator_FPSR_ENABLE_DVZ</a></dd>
+<dd><a href="#fpemulator_FPSR_ENABLE_OFL">fpemulator_FPSR_ENABLE_OFL</a></dd>
+<dd><a href="#fpemulator_FPSR_ENABLE_UFL">fpemulator_FPSR_ENABLE_UFL</a></dd>
+<dd><a href="#fpemulator_FPSR_ENABLE_INX">fpemulator_FPSR_ENABLE_INX</a></dd>
+<dd><a href="#fpemulator_FPSR_SYSTEM_ID">fpemulator_FPSR_SYSTEM_ID</a></dd>
+<dd><a href="#fpemulator_FPSR_SYSTEM_CLASS">fpemulator_FPSR_SYSTEM_CLASS</a></dd>
+</dl>
+
+<h3 id="fpemulator_register_dump">fpemulator_register_dump</h3>
+<pre>typedef struct
+   {  <a href="#fpemulator_fpsr">fpemulator_fpsr</a> fpsr;
+      byte f0 [12];
+      byte f1 [12];
+      byte f2 [12];
+      byte f3 [12];
+      byte f4 [12];
+      byte f5 [12];
+      byte f6 [12];
+      byte f7 [12];
+   }
+   fpemulator_register_dump;</pre>
+
+<h3 id="fpemulator_NO_CONTEXT">fpemulator_NO_CONTEXT</h3>
+<pre>#define fpemulator_NO_CONTEXT ((<a href="#fpemulator_context">fpemulator_context</a>) 0x0u)</pre>
+
+<p>FPEmulator 4.12+</p>
+
+<h3 id="fpemulator_DEFAULT_CONTEXT">fpemulator_DEFAULT_CONTEXT</h3>
+<pre>#define fpemulator_DEFAULT_CONTEXT ((<a href="#fpemulator_context">fpemulator_context</a>) 0xFFFFFFFFu)</pre>
+
+<p>FPEmulator 4.12+</p>
+
+<h3 id="fpemulator_CURRENT_CONTEXT">fpemulator_CURRENT_CONTEXT</h3>
+<pre>#define fpemulator_CURRENT_CONTEXT ((<a href="#fpemulator_context">fpemulator_context</a>) 0xFFFFFFFEu)</pre>
+
+<p>FPEmulator 4.12+</p>
+
+<h3 id="fpemulator_FPSR_CUMULATIVE_IVO">fpemulator_FPSR_CUMULATIVE_IVO</h3>
+<pre>#define fpemulator_FPSR_CUMULATIVE_IVO ((<a href="#fpemulator_fpsr">fpemulator_fpsr</a>) 0x1u)</pre>
+
+<p>Invalid operation cumulative exception flag</p>
+
+<h3 id="fpemulator_FPSR_CUMULATIVE_DVZ">fpemulator_FPSR_CUMULATIVE_DVZ</h3>
+<pre>#define fpemulator_FPSR_CUMULATIVE_DVZ ((<a href="#fpemulator_fpsr">fpemulator_fpsr</a>) 0x2u)</pre>
+
+<p>Division by zero cumulative exception flag</p>
+
+<h3 id="fpemulator_FPSR_CUMULATIVE_OFL">fpemulator_FPSR_CUMULATIVE_OFL</h3>
+<pre>#define fpemulator_FPSR_CUMULATIVE_OFL ((<a href="#fpemulator_fpsr">fpemulator_fpsr</a>) 0x4u)</pre>
+
+<p>Overflow cumulative exception flag</p>
+
+<h3 id="fpemulator_FPSR_CUMULATIVE_UFL">fpemulator_FPSR_CUMULATIVE_UFL</h3>
+<pre>#define fpemulator_FPSR_CUMULATIVE_UFL ((<a href="#fpemulator_fpsr">fpemulator_fpsr</a>) 0x8u)</pre>
+
+<p>Underflow cumulative exception flag</p>
+
+<h3 id="fpemulator_FPSR_CUMULATIVE_INX">fpemulator_FPSR_CUMULATIVE_INX</h3>
+<pre>#define fpemulator_FPSR_CUMULATIVE_INX ((<a href="#fpemulator_fpsr">fpemulator_fpsr</a>) 0x10u)</pre>
+
+<p>Inexact cumulative exception flag</p>
+
+<h3 id="fpemulator_FPSR_CONTROL_ND">fpemulator_FPSR_CONTROL_ND</h3>
+<pre>#define fpemulator_FPSR_CONTROL_ND ((<a href="#fpemulator_fpsr">fpemulator_fpsr</a>) 0x100u)</pre>
+
+<p>No denormalised numbers</p>
+
+<h3 id="fpemulator_FPSR_CONTROL_NE">fpemulator_FPSR_CONTROL_NE</h3>
+<pre>#define fpemulator_FPSR_CONTROL_NE ((<a href="#fpemulator_fpsr">fpemulator_fpsr</a>) 0x200u)</pre>
+
+<p>NaN exception</p>
+
+<h3 id="fpemulator_FPSR_CONTROL_SO">fpemulator_FPSR_CONTROL_SO</h3>
+<pre>#define fpemulator_FPSR_CONTROL_SO ((<a href="#fpemulator_fpsr">fpemulator_fpsr</a>) 0x400u)</pre>
+
+<p>Select synchronous operation of FPA</p>
+
+<h3 id="fpemulator_FPSR_CONTROL_EP">fpemulator_FPSR_CONTROL_EP</h3>
+<pre>#define fpemulator_FPSR_CONTROL_EP ((<a href="#fpemulator_fpsr">fpemulator_fpsr</a>) 0x800u)</pre>
+
+<p>Use expanded packed decimal format</p>
+
+<h3 id="fpemulator_FPSR_CONTROL_AC">fpemulator_FPSR_CONTROL_AC</h3>
+<pre>#define fpemulator_FPSR_CONTROL_AC ((<a href="#fpemulator_fpsr">fpemulator_fpsr</a>) 0x1000u)</pre>
+
+<p>Use alternative definition for C flag on compare operations</p>
+
+<h3 id="fpemulator_FPSR_ENABLE_IVO">fpemulator_FPSR_ENABLE_IVO</h3>
+<pre>#define fpemulator_FPSR_ENABLE_IVO ((<a href="#fpemulator_fpsr">fpemulator_fpsr</a>) 0x10000u)</pre>
+
+<p>Invalid operation trap enable</p>
+
+<h3 id="fpemulator_FPSR_ENABLE_DVZ">fpemulator_FPSR_ENABLE_DVZ</h3>
+<pre>#define fpemulator_FPSR_ENABLE_DVZ ((<a href="#fpemulator_fpsr">fpemulator_fpsr</a>) 0x20000u)</pre>
+
+<p>Division by zero trap enable</p>
+
+<h3 id="fpemulator_FPSR_ENABLE_OFL">fpemulator_FPSR_ENABLE_OFL</h3>
+<pre>#define fpemulator_FPSR_ENABLE_OFL ((<a href="#fpemulator_fpsr">fpemulator_fpsr</a>) 0x40000u)</pre>
+
+<p>Overflow trap enable</p>
+
+<h3 id="fpemulator_FPSR_ENABLE_UFL">fpemulator_FPSR_ENABLE_UFL</h3>
+<pre>#define fpemulator_FPSR_ENABLE_UFL ((<a href="#fpemulator_fpsr">fpemulator_fpsr</a>) 0x80000u)</pre>
+
+<p>Underflow trap enable</p>
+
+<h3 id="fpemulator_FPSR_ENABLE_INX">fpemulator_FPSR_ENABLE_INX</h3>
+<pre>#define fpemulator_FPSR_ENABLE_INX ((<a href="#fpemulator_fpsr">fpemulator_fpsr</a>) 0x100000u)</pre>
+
+<p>Inexact trap enable</p>
+
+<h3 id="fpemulator_FPSR_SYSTEM_ID">fpemulator_FPSR_SYSTEM_ID</h3>
+<pre>#define fpemulator_FPSR_SYSTEM_ID ((<a href="#fpemulator_fpsr">fpemulator_fpsr</a>) 0xFF000000u)</pre>
+
+<p>System ID mask</p>
+
+<h3 id="fpemulator_FPSR_SYSTEM_ID_SHIFT">fpemulator_FPSR_SYSTEM_ID_SHIFT</h3>
+<pre>#define fpemulator_FPSR_SYSTEM_ID_SHIFT 24</pre>
+
+<p>System ID shift</p>
+
+<h3 id="fpemulator_FPSR_SYSTEM_CLASS">fpemulator_FPSR_SYSTEM_CLASS</h3>
+<pre>#define fpemulator_FPSR_SYSTEM_CLASS ((<a href="#fpemulator_fpsr">fpemulator_fpsr</a>) 0x80000000u)</pre>
+
+<p>System class</p>
+
+<h3 id="fpemulator_FPSR_SYSTEM_CLASS_SHIFT">fpemulator_FPSR_SYSTEM_CLASS_SHIFT</h3>
+<pre>#define fpemulator_FPSR_SYSTEM_CLASS_SHIFT 31</pre>
+
+<p>System class shift</p>
+
+<h3 id="fpemulator_SYSTEM_OLD_FPE">fpemulator_SYSTEM_OLD_FPE</h3>
+<pre>#define fpemulator_SYSTEM_OLD_FPE 0</pre>
+
+<p>Old Floating Point Emulator</p>
+
+<h3 id="fpemulator_SYSTEM_FPE400">fpemulator_SYSTEM_FPE400</h3>
+<pre>#define fpemulator_SYSTEM_FPE400 1</pre>
+
+<p>New Floating Point Emulator</p>
+
+<h3 id="fpemulator_SYSTEM_FPPC">fpemulator_SYSTEM_FPPC</h3>
+<pre>#define fpemulator_SYSTEM_FPPC 128</pre>
+
+<p>Floating Point Protocol Convertor with WE32206</p>
+
+<h3 id="fpemulator_SYSTEM_FPA">fpemulator_SYSTEM_FPA</h3>
+<pre>#define fpemulator_SYSTEM_FPA 129</pre>
+
+<p>ARM Floating Point Accelerator</p>
+
+<h3 id="fpemulator_CLASS_SOFTWARE">fpemulator_CLASS_SOFTWARE</h3>
+<pre>#define fpemulator_CLASS_SOFTWARE 0</pre>
+
+<h3 id="fpemulator_CLASS_HARDWARE">fpemulator_CLASS_HARDWARE</h3>
+<pre>#define fpemulator_CLASS_HARDWARE 1</pre>
+
+<h3 id="xfpemulator_version">xfpemulator_version</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfpemulator_version (int *version);</pre>
+<p>Returns the version number of the Floating Point Emulator</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>version</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="fpemulator_version">fpemulator_version</h3>
+<pre>extern int fpemulator_version (void);
+</pre><p>Returns the version number of the Floating Point Emulator</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>version</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xfpemulator_deactivate_context">xfpemulator_deactivate_context</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfpemulator_deactivate_context (<a href="#fpemulator_context">fpemulator_context</a> *old_context);</pre>
+<p>Deactivates the the current floating point context - FPEmulator 4.12+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_context</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="fpemulator_deactivate_context">fpemulator_deactivate_context</h3>
+<pre>extern <a href="#fpemulator_context">fpemulator_context</a> fpemulator_deactivate_context (void);
+</pre><p>Deactivates the the current floating point context - FPEmulator 4.12+</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_context</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xfpemulator_activate_context">xfpemulator_activate_context</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfpemulator_activate_context (<a href="#fpemulator_context">fpemulator_context</a> new_context);</pre>
+<p>Activates a floating point context - FPEmulator 4.12+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>new_context</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="fpemulator_activate_context">fpemulator_activate_context</h3>
+<pre>extern void fpemulator_activate_context (<a href="#fpemulator_context">fpemulator_context</a> new_context);</pre>
+<p>Activates a floating point context - FPEmulator 4.12+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>new_context</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xfpemulator_changed_context">xfpemulator_changed_context</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfpemulator_changed_context (<a href="#fpemulator_context">fpemulator_context</a> new_context,
+      <a href="#fpemulator_context">fpemulator_context</a> *old_context);</pre>
+<p>Change the currrent floating point context - FPEmulator 4.12+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>new_context</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_context</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="fpemulator_changed_context">fpemulator_changed_context</h3>
+<pre>extern <a href="#fpemulator_context">fpemulator_context</a> fpemulator_changed_context (<a href="#fpemulator_context">fpemulator_context</a> new_context);</pre>
+<p>Change the currrent floating point context - FPEmulator 4.12+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>new_context</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>old_context</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xfpemulator_context_length">xfpemulator_context_length</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfpemulator_context_length (int *context_length);</pre>
+<p>Returns the size of a floating point context - FPEmulator 4.12+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>context_length</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="fpemulator_context_length">fpemulator_context_length</h3>
+<pre>extern int fpemulator_context_length (void);
+</pre><p>Returns the size of a floating point context - FPEmulator 4.12+</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_length</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xfpemulator_init_context">xfpemulator_init_context</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfpemulator_init_context (<a href="#fpemulator_context">fpemulator_context</a> context);</pre>
+<p>Initialises a floating point context - FPEmulator 4.12+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="fpemulator_init_context">fpemulator_init_context</h3>
+<pre>extern void fpemulator_init_context (<a href="#fpemulator_context">fpemulator_context</a> context);</pre>
+<p>Initialises a floating point context - FPEmulator 4.12+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xfpemulator_exception_dump">xfpemulator_exception_dump</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfpemulator_exception_dump (<a href="#fpemulator_register_dump">fpemulator_register_dump</a> **register_dump);</pre>
+<p>Returns the address of the floating point register dump - FPEmulator 4.12+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>register_dump</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="fpemulator_exception_dump">fpemulator_exception_dump</h3>
+<pre>extern <a href="#fpemulator_register_dump">fpemulator_register_dump</a> *fpemulator_exception_dump (void);
+</pre><p>Returns the address of the floating point register dump - FPEmulator 4.12+</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>register_dump</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xfpemulator_abort">xfpemulator_abort</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfpemulator_abort (<a href="#fpemulator_context">fpemulator_context</a> context,
+      int r12_value,
+      int pc_value,
+      byte **frame);</pre>
+<p>Aborts any incomplete floating point processing - FPEmulator 4.12+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>r12_value</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>pc_value</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>frame</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="fpemulator_abort">fpemulator_abort</h3>
+<pre>extern byte *fpemulator_abort (<a href="#fpemulator_context">fpemulator_context</a> context,
+      int r12_value,
+      int pc_value);</pre>
+<p>Aborts any incomplete floating point processing - FPEmulator 4.12+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>r12_value</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>pc_value</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>frame</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xfpemulator_load_context">xfpemulator_load_context</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfpemulator_load_context (<a href="#fpemulator_context">fpemulator_context</a> context,
+      <a href="#fpemulator_register_dump">fpemulator_register_dump</a> const *register_dump);</pre>
+<p>Loads a floating point context - FPEmulator 4.12+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>register_dump</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="fpemulator_load_context">fpemulator_load_context</h3>
+<pre>extern void fpemulator_load_context (<a href="#fpemulator_context">fpemulator_context</a> context,
+      <a href="#fpemulator_register_dump">fpemulator_register_dump</a> const *register_dump);</pre>
+<p>Loads a floating point context - FPEmulator 4.12+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>register_dump</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xfpemulator_save_context">xfpemulator_save_context</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfpemulator_save_context (<a href="#fpemulator_context">fpemulator_context</a> context,
+      <a href="#fpemulator_register_dump">fpemulator_register_dump</a> *register_dump,
+      int pc_value,
+      osbool *has_exception);</pre>
+<p>Saves the contents of a floating point context - FPEmulator 4.12+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>register_dump</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>pc_value</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>has_exception</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="fpemulator_save_context">fpemulator_save_context</h3>
+<pre>extern osbool fpemulator_save_context (<a href="#fpemulator_context">fpemulator_context</a> context,
+      <a href="#fpemulator_register_dump">fpemulator_register_dump</a> *register_dump,
+      int pc_value);</pre>
+<p>Saves the contents of a floating point context - FPEmulator 4.12+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>register_dump</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>pc_value</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>has_exception</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

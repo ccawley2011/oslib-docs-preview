@@ -1,0 +1,710 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Draw</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Draw</h2>
+
+<pre>#include "oslib/draw.h"</pre>
+
+<h3 id="draw_tag">draw_tag</h3>
+<pre>typedef byte draw_tag;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#draw_END_PATH">draw_END_PATH</a></dd>
+<dd><a href="#draw_CONTINUATION">draw_CONTINUATION</a></dd>
+<dd><a href="#draw_MOVE_TO">draw_MOVE_TO</a></dd>
+<dd><a href="#draw_SPECIAL_MOVE_TO">draw_SPECIAL_MOVE_TO</a></dd>
+<dd><a href="#draw_CLOSE_GAP">draw_CLOSE_GAP</a></dd>
+<dd><a href="#draw_CLOSE_LINE">draw_CLOSE_LINE</a></dd>
+<dd><a href="#draw_BEZIER_TO">draw_BEZIER_TO</a></dd>
+<dd><a href="#draw_GAP_TO">draw_GAP_TO</a></dd>
+<dd><a href="#draw_LINE_TO">draw_LINE_TO</a></dd>
+</dl>
+
+<h3 id="draw_fill_style">draw_fill_style</h3>
+<pre>typedef bits draw_fill_style;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#draw_FILL_NONZERO">draw_FILL_NONZERO</a></dd>
+<dd><a href="#draw_FILL_NEGATIVE">draw_FILL_NEGATIVE</a></dd>
+<dd><a href="#draw_FILL_EVEN_ODD">draw_FILL_EVEN_ODD</a></dd>
+<dd><a href="#draw_FILL_POSITIVE">draw_FILL_POSITIVE</a></dd>
+<dd><a href="#draw_FILL_WINDING_RULE">draw_FILL_WINDING_RULE</a></dd>
+<dd><a href="#draw_FILL_FULL_EXTERIOR">draw_FILL_FULL_EXTERIOR</a></dd>
+<dd><a href="#draw_FILL_EXTERIOR_BOUNDARY">draw_FILL_EXTERIOR_BOUNDARY</a></dd>
+<dd><a href="#draw_FILL_INTERIOR_BOUNDARY">draw_FILL_INTERIOR_BOUNDARY</a></dd>
+<dd><a href="#draw_FILL_FULL_INTERIOR">draw_FILL_FULL_INTERIOR</a></dd>
+<dd><a href="#draw_FILL_OUTPUT_BBOX">draw_FILL_OUTPUT_BBOX</a></dd>
+<dd><a href="#draw_FILL32_BIT_CLEAN">draw_FILL32_BIT_CLEAN</a></dd>
+<dd><a href="#draw_FILL_CLOSE_OPEN_SUBPATHS">draw_FILL_CLOSE_OPEN_SUBPATHS</a></dd>
+<dd><a href="#draw_FILL_FLATTEN">draw_FILL_FLATTEN</a></dd>
+<dd><a href="#draw_FILL_THICKEN">draw_FILL_THICKEN</a></dd>
+<dd><a href="#draw_FILL_REFLATTEN">draw_FILL_REFLATTEN</a></dd>
+<dd><a href="#draw_FILL_FLOAT">draw_FILL_FLOAT</a></dd>
+</dl>
+
+<h3 id="draw_join_style">draw_join_style</h3>
+<pre>typedef byte draw_join_style;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#draw_JOIN_MITRED">draw_JOIN_MITRED</a></dd>
+<dd><a href="#draw_JOIN_ROUND">draw_JOIN_ROUND</a></dd>
+<dd><a href="#draw_JOIN_BEVELLED">draw_JOIN_BEVELLED</a></dd>
+</dl>
+
+<h3 id="draw_cap_style">draw_cap_style</h3>
+<pre>typedef byte draw_cap_style;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#draw_CAP_BUTT">draw_CAP_BUTT</a></dd>
+<dd><a href="#draw_CAP_ROUND">draw_CAP_ROUND</a></dd>
+<dd><a href="#draw_CAP_SQUARE">draw_CAP_SQUARE</a></dd>
+<dd><a href="#draw_CAP_TRIANGULAR">draw_CAP_TRIANGULAR</a></dd>
+</dl>
+
+<h3 id="draw_output_path">draw_output_path</h3>
+<pre>typedef <a href="#draw_path">draw_path</a> *draw_output_path;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#draw_SPECIAL_IN_SITU">draw_SPECIAL_IN_SITU</a></dd>
+<dd><a href="#draw_SPECIAL_FILL">draw_SPECIAL_FILL</a></dd>
+<dd><a href="#draw_SPECIAL_FILL_BY_SUBPATHS">draw_SPECIAL_FILL_BY_SUBPATHS</a></dd>
+<dd><a href="#draw_SPECIAL_COUNT">draw_SPECIAL_COUNT</a></dd>
+<dd><a href="#draw_SPECIAL_BBOX">draw_SPECIAL_BBOX</a></dd>
+</dl>
+
+<h3 id="draw_path_element">draw_path_element</h3>
+<pre>typedef struct
+   {  <a href="#draw_tag">draw_tag</a> tag;
+      byte reserved [3];
+      union
+      {  int end_path;
+         <a href="#draw_path_element">draw_path_element</a> *continuation;
+         <a href="os.html#os_coord">os_coord</a> move_to;
+         <a href="os.html#os_coord">os_coord</a> special_move_to;
+         <a href="os.html#os_coord">os_coord</a> bezier_to [3];
+         <a href="os.html#os_coord">os_coord</a> gap_to;
+         <a href="os.html#os_coord">os_coord</a> line_to;
+         byte reserved [24];
+      }
+      data;
+   }
+   draw_path_element;</pre>
+
+<h3 id="draw_line_style">draw_line_style</h3>
+<pre>typedef struct
+   {  <a href="#draw_join_style">draw_join_style</a> join_style;
+      <a href="#draw_cap_style">draw_cap_style</a> end_cap_style;
+      <a href="#draw_cap_style">draw_cap_style</a> start_cap_style;
+      byte reserved;
+      int mitre_limit;
+      short start_cap_width;
+      short start_cap_length;
+      short end_cap_width;
+      short end_cap_length;
+   }
+   draw_line_style;</pre>
+
+<h3 id="draw_DASH_PATTERN_MEMBERS">draw_DASH_PATTERN_MEMBERS</h3>
+<pre>#define draw_DASH_PATTERN_MEMBERS \
+   int start; \
+   int element_count;
+</pre>
+
+<h3 id="draw_dash_pattern_base">draw_dash_pattern_base</h3>
+<pre>typedef struct
+   {  int start;
+      int element_count;
+   }
+   draw_dash_pattern_base;</pre>
+
+<h3 id="draw_dash_pattern">draw_dash_pattern</h3>
+<pre>typedef struct
+   {  int start;
+      int element_count;
+      int elements [...];
+   }
+   draw_dash_pattern;</pre>
+
+<h3 id="draw_path">draw_path</h3>
+<pre>typedef struct
+   {  <a href="#draw_path_element">draw_path_element</a> elements [1];
+   }
+   draw_path;</pre>
+
+<h3 id="draw_clip_descriptor">draw_clip_descriptor</h3>
+<pre>typedef struct
+   {  <a href="#draw_path">draw_path</a> *path;
+      <a href="#draw_fill_style">draw_fill_style</a> fill_style;
+      <a href="os.html#os_trfm">os_trfm</a> trfm;
+   }
+   draw_clip_descriptor;</pre>
+
+<h3 id="drawv_reason">drawv_reason</h3>
+<pre>typedef int drawv_reason;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#drawv_PROCESS_PATH">drawv_PROCESS_PATH</a></dd>
+<dd><a href="#drawv_FILL">drawv_FILL</a></dd>
+<dd><a href="#drawv_STROKE">drawv_STROKE</a></dd>
+<dd><a href="#drawv_STROKE_PATH">drawv_STROKE_PATH</a></dd>
+<dd><a href="#drawv_FLATTEN_PATH">drawv_FLATTEN_PATH</a></dd>
+<dd><a href="#drawv_TRANSFORM_PATH">drawv_TRANSFORM_PATH</a></dd>
+<dd><a href="#drawv_FILL_CLIPPED">drawv_FILL_CLIPPED</a></dd>
+<dd><a href="#drawv_STROKE_CLIPPED">drawv_STROKE_CLIPPED</a></dd>
+</dl>
+
+<h3 id="draw_OS_UNIT">draw_OS_UNIT</h3>
+<pre>#define draw_OS_UNIT 256</pre>
+
+<p>1 OS unit in draw units</p>
+
+<h3 id="draw_INCH">draw_INCH</h3>
+<pre>#define draw_INCH 46080</pre>
+
+<p>1in in draw units</p>
+
+<h3 id="draw_POINT">draw_POINT</h3>
+<pre>#define draw_POINT 640</pre>
+
+<p>1pt in draw units</p>
+
+<h3 id="draw_END_PATH">draw_END_PATH</h3>
+<pre>#define draw_END_PATH ((<a href="#draw_tag">draw_tag</a>) 0x0u)</pre>
+
+<h3 id="draw_CONTINUATION">draw_CONTINUATION</h3>
+<pre>#define draw_CONTINUATION ((<a href="#draw_tag">draw_tag</a>) 0x1u)</pre>
+
+<h3 id="draw_MOVE_TO">draw_MOVE_TO</h3>
+<pre>#define draw_MOVE_TO ((<a href="#draw_tag">draw_tag</a>) 0x2u)</pre>
+
+<h3 id="draw_SPECIAL_MOVE_TO">draw_SPECIAL_MOVE_TO</h3>
+<pre>#define draw_SPECIAL_MOVE_TO ((<a href="#draw_tag">draw_tag</a>) 0x3u)</pre>
+
+<h3 id="draw_CLOSE_GAP">draw_CLOSE_GAP</h3>
+<pre>#define draw_CLOSE_GAP ((<a href="#draw_tag">draw_tag</a>) 0x4u)</pre>
+
+<h3 id="draw_CLOSE_LINE">draw_CLOSE_LINE</h3>
+<pre>#define draw_CLOSE_LINE ((<a href="#draw_tag">draw_tag</a>) 0x5u)</pre>
+
+<h3 id="draw_BEZIER_TO">draw_BEZIER_TO</h3>
+<pre>#define draw_BEZIER_TO ((<a href="#draw_tag">draw_tag</a>) 0x6u)</pre>
+
+<h3 id="draw_GAP_TO">draw_GAP_TO</h3>
+<pre>#define draw_GAP_TO ((<a href="#draw_tag">draw_tag</a>) 0x7u)</pre>
+
+<h3 id="draw_LINE_TO">draw_LINE_TO</h3>
+<pre>#define draw_LINE_TO ((<a href="#draw_tag">draw_tag</a>) 0x8u)</pre>
+
+<h3 id="draw_FILL_NONZERO">draw_FILL_NONZERO</h3>
+<pre>#define draw_FILL_NONZERO ((<a href="#draw_fill_style">draw_fill_style</a>) 0x0u)</pre>
+
+<h3 id="draw_FILL_NEGATIVE">draw_FILL_NEGATIVE</h3>
+<pre>#define draw_FILL_NEGATIVE ((<a href="#draw_fill_style">draw_fill_style</a>) 0x1u)</pre>
+
+<h3 id="draw_FILL_EVEN_ODD">draw_FILL_EVEN_ODD</h3>
+<pre>#define draw_FILL_EVEN_ODD ((<a href="#draw_fill_style">draw_fill_style</a>) 0x2u)</pre>
+
+<h3 id="draw_FILL_POSITIVE">draw_FILL_POSITIVE</h3>
+<pre>#define draw_FILL_POSITIVE ((<a href="#draw_fill_style">draw_fill_style</a>) 0x3u)</pre>
+
+<h3 id="draw_FILL_WINDING_RULE_SHIFT">draw_FILL_WINDING_RULE_SHIFT</h3>
+<pre>#define draw_FILL_WINDING_RULE_SHIFT 0</pre>
+
+<h3 id="draw_FILL_WINDING_RULE">draw_FILL_WINDING_RULE</h3>
+<pre>#define draw_FILL_WINDING_RULE ((<a href="#draw_fill_style">draw_fill_style</a>) 0x3u)</pre>
+
+<h3 id="draw_FILL_FULL_EXTERIOR">draw_FILL_FULL_EXTERIOR</h3>
+<pre>#define draw_FILL_FULL_EXTERIOR ((<a href="#draw_fill_style">draw_fill_style</a>) 0x4u)</pre>
+
+<h3 id="draw_FILL_EXTERIOR_BOUNDARY">draw_FILL_EXTERIOR_BOUNDARY</h3>
+<pre>#define draw_FILL_EXTERIOR_BOUNDARY ((<a href="#draw_fill_style">draw_fill_style</a>) 0x8u)</pre>
+
+<h3 id="draw_FILL_INTERIOR_BOUNDARY">draw_FILL_INTERIOR_BOUNDARY</h3>
+<pre>#define draw_FILL_INTERIOR_BOUNDARY ((<a href="#draw_fill_style">draw_fill_style</a>) 0x10u)</pre>
+
+<h3 id="draw_FILL_FULL_INTERIOR">draw_FILL_FULL_INTERIOR</h3>
+<pre>#define draw_FILL_FULL_INTERIOR ((<a href="#draw_fill_style">draw_fill_style</a>) 0x20u)</pre>
+
+<h3 id="draw_FILL_OUTPUT_BBOX">draw_FILL_OUTPUT_BBOX</h3>
+<pre>#define draw_FILL_OUTPUT_BBOX ((<a href="#draw_fill_style">draw_fill_style</a>) 0x2000000u)</pre>
+
+<p>RISC OS 5+</p>
+
+<h3 id="draw_FILL32_BIT_CLEAN">draw_FILL32_BIT_CLEAN</h3>
+<pre>#define draw_FILL32_BIT_CLEAN ((<a href="#draw_fill_style">draw_fill_style</a>) 0x4000000u)</pre>
+
+<p>RISC OS 5+</p>
+
+<h3 id="draw_FILL_CLOSE_OPEN_SUBPATHS">draw_FILL_CLOSE_OPEN_SUBPATHS</h3>
+<pre>#define draw_FILL_CLOSE_OPEN_SUBPATHS ((<a href="#draw_fill_style">draw_fill_style</a>) 0x8000000u)</pre>
+
+<h3 id="draw_FILL_FLATTEN">draw_FILL_FLATTEN</h3>
+<pre>#define draw_FILL_FLATTEN ((<a href="#draw_fill_style">draw_fill_style</a>) 0x10000000u)</pre>
+
+<h3 id="draw_FILL_THICKEN">draw_FILL_THICKEN</h3>
+<pre>#define draw_FILL_THICKEN ((<a href="#draw_fill_style">draw_fill_style</a>) 0x20000000u)</pre>
+
+<h3 id="draw_FILL_REFLATTEN">draw_FILL_REFLATTEN</h3>
+<pre>#define draw_FILL_REFLATTEN ((<a href="#draw_fill_style">draw_fill_style</a>) 0x40000000u)</pre>
+
+<h3 id="draw_FILL_FLOAT">draw_FILL_FLOAT</h3>
+<pre>#define draw_FILL_FLOAT ((<a href="#draw_fill_style">draw_fill_style</a>) 0x80000000u)</pre>
+
+<h3 id="draw_JOIN_MITRED">draw_JOIN_MITRED</h3>
+<pre>#define draw_JOIN_MITRED ((<a href="#draw_join_style">draw_join_style</a>) 0x0u)</pre>
+
+<h3 id="draw_JOIN_ROUND">draw_JOIN_ROUND</h3>
+<pre>#define draw_JOIN_ROUND ((<a href="#draw_join_style">draw_join_style</a>) 0x1u)</pre>
+
+<h3 id="draw_JOIN_BEVELLED">draw_JOIN_BEVELLED</h3>
+<pre>#define draw_JOIN_BEVELLED ((<a href="#draw_join_style">draw_join_style</a>) 0x2u)</pre>
+
+<h3 id="draw_CAP_BUTT">draw_CAP_BUTT</h3>
+<pre>#define draw_CAP_BUTT ((<a href="#draw_cap_style">draw_cap_style</a>) 0x0u)</pre>
+
+<h3 id="draw_CAP_ROUND">draw_CAP_ROUND</h3>
+<pre>#define draw_CAP_ROUND ((<a href="#draw_cap_style">draw_cap_style</a>) 0x1u)</pre>
+
+<h3 id="draw_CAP_SQUARE">draw_CAP_SQUARE</h3>
+<pre>#define draw_CAP_SQUARE ((<a href="#draw_cap_style">draw_cap_style</a>) 0x2u)</pre>
+
+<h3 id="draw_CAP_TRIANGULAR">draw_CAP_TRIANGULAR</h3>
+<pre>#define draw_CAP_TRIANGULAR ((<a href="#draw_cap_style">draw_cap_style</a>) 0x3u)</pre>
+
+<h3 id="draw_SPECIAL_IN_SITU">draw_SPECIAL_IN_SITU</h3>
+<pre>#define draw_SPECIAL_IN_SITU ((<a href="#draw_output_path">draw_output_path</a>) 0x0u)</pre>
+
+<h3 id="draw_SPECIAL_FILL">draw_SPECIAL_FILL</h3>
+<pre>#define draw_SPECIAL_FILL ((<a href="#draw_output_path">draw_output_path</a>) 0x1u)</pre>
+
+<h3 id="draw_SPECIAL_FILL_BY_SUBPATHS">draw_SPECIAL_FILL_BY_SUBPATHS</h3>
+<pre>#define draw_SPECIAL_FILL_BY_SUBPATHS ((<a href="#draw_output_path">draw_output_path</a>) 0x2u)</pre>
+
+<h3 id="draw_SPECIAL_COUNT">draw_SPECIAL_COUNT</h3>
+<pre>#define draw_SPECIAL_COUNT ((<a href="#draw_output_path">draw_output_path</a>) 0x3u)</pre>
+
+<h3 id="draw_SPECIAL_BBOX">draw_SPECIAL_BBOX</h3>
+<pre>#define draw_SPECIAL_BBOX ((<a href="#draw_output_path">draw_output_path</a>) 0x80000000u)</pre>
+
+<h3 id="error_DRAW_NO_DRAW_IN_IRQ_MODE">error_DRAW_NO_DRAW_IN_IRQ_MODE</h3>
+<pre>#define error_DRAW_NO_DRAW_IN_IRQ_MODE 0x980u</pre>
+
+<h3 id="error_DRAW_BAD_DRAW_REASON_CODE">error_DRAW_BAD_DRAW_REASON_CODE</h3>
+<pre>#define error_DRAW_BAD_DRAW_REASON_CODE 0x981u</pre>
+
+<h3 id="error_DRAW_RESERVED_DRAW_BITS">error_DRAW_RESERVED_DRAW_BITS</h3>
+<pre>#define error_DRAW_RESERVED_DRAW_BITS 0x982u</pre>
+
+<h3 id="error_DRAW_INVALID_DRAW_ADDRESS">error_DRAW_INVALID_DRAW_ADDRESS</h3>
+<pre>#define error_DRAW_INVALID_DRAW_ADDRESS 0x983u</pre>
+
+<h3 id="error_DRAW_BAD_PATH_ELEMENT">error_DRAW_BAD_PATH_ELEMENT</h3>
+<pre>#define error_DRAW_BAD_PATH_ELEMENT 0x984u</pre>
+
+<h3 id="error_DRAW_BAD_PATH_SEQUENCE">error_DRAW_BAD_PATH_SEQUENCE</h3>
+<pre>#define error_DRAW_BAD_PATH_SEQUENCE 0x985u</pre>
+
+<h3 id="error_DRAW_MAY_EXPAND_PATH">error_DRAW_MAY_EXPAND_PATH</h3>
+<pre>#define error_DRAW_MAY_EXPAND_PATH 0x986u</pre>
+
+<h3 id="error_DRAW_PATH_FULL">error_DRAW_PATH_FULL</h3>
+<pre>#define error_DRAW_PATH_FULL 0x987u</pre>
+
+<h3 id="error_DRAW_PATH_NOT_FLAT">error_DRAW_PATH_NOT_FLAT</h3>
+<pre>#define error_DRAW_PATH_NOT_FLAT 0x988u</pre>
+
+<h3 id="error_DRAW_BAD_CAPS_OR_JOINS">error_DRAW_BAD_CAPS_OR_JOINS</h3>
+<pre>#define error_DRAW_BAD_CAPS_OR_JOINS 0x989u</pre>
+
+<h3 id="error_DRAW_TRANSFORM_OVERFLOW">error_DRAW_TRANSFORM_OVERFLOW</h3>
+<pre>#define error_DRAW_TRANSFORM_OVERFLOW 0x98Au</pre>
+
+<h3 id="error_DRAW_DRAW_NEEDS_GRAPHICS_MODE">error_DRAW_DRAW_NEEDS_GRAPHICS_MODE</h3>
+<pre>#define error_DRAW_DRAW_NEEDS_GRAPHICS_MODE 0x98Bu</pre>
+
+<h3 id="error_DRAW_UNIMPLEMENTED_DRAW">error_DRAW_UNIMPLEMENTED_DRAW</h3>
+<pre>#define error_DRAW_UNIMPLEMENTED_DRAW 0x9FFu</pre>
+
+<h3 id="drawv_PROCESS_PATH">drawv_PROCESS_PATH</h3>
+<pre>#define drawv_PROCESS_PATH ((<a href="#drawv_reason">drawv_reason</a>) 0x0u)</pre>
+
+<h3 id="drawv_FILL">drawv_FILL</h3>
+<pre>#define drawv_FILL ((<a href="#drawv_reason">drawv_reason</a>) 0x2u)</pre>
+
+<h3 id="drawv_STROKE">drawv_STROKE</h3>
+<pre>#define drawv_STROKE ((<a href="#drawv_reason">drawv_reason</a>) 0x4u)</pre>
+
+<h3 id="drawv_STROKE_PATH">drawv_STROKE_PATH</h3>
+<pre>#define drawv_STROKE_PATH ((<a href="#drawv_reason">drawv_reason</a>) 0x6u)</pre>
+
+<h3 id="drawv_FLATTEN_PATH">drawv_FLATTEN_PATH</h3>
+<pre>#define drawv_FLATTEN_PATH ((<a href="#drawv_reason">drawv_reason</a>) 0x8u)</pre>
+
+<h3 id="drawv_TRANSFORM_PATH">drawv_TRANSFORM_PATH</h3>
+<pre>#define drawv_TRANSFORM_PATH ((<a href="#drawv_reason">drawv_reason</a>) 0xAu)</pre>
+
+<h3 id="drawv_FILL_CLIPPED">drawv_FILL_CLIPPED</h3>
+<pre>#define drawv_FILL_CLIPPED ((<a href="#drawv_reason">drawv_reason</a>) 0xCu)</pre>
+
+<h3 id="drawv_STROKE_CLIPPED">drawv_STROKE_CLIPPED</h3>
+<pre>#define drawv_STROKE_CLIPPED ((<a href="#drawv_reason">drawv_reason</a>) 0xEu)</pre>
+
+<h3 id="xdraw_process_path">xdraw_process_path</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdraw_process_path (<a href="#draw_path">draw_path</a> const *path,
+      <a href="#draw_fill_style">draw_fill_style</a> fill_style,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      int flatness,
+      int thickness,
+      <a href="#draw_line_style">draw_line_style</a> const *line_style,
+      <a href="#draw_dash_pattern">draw_dash_pattern</a> const *dash_pattern,
+      <a href="#draw_output_path">draw_output_path</a> processed_path,
+      byte **end_or_used);</pre>
+<p>Main Draw SWI</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fill_style</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flatness</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>thickness</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>line_style</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>dash_pattern</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>processed_path</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end_or_used</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="draw_process_path">draw_process_path</h3>
+<pre>extern byte *draw_process_path (<a href="#draw_path">draw_path</a> const *path,
+      <a href="#draw_fill_style">draw_fill_style</a> fill_style,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      int flatness,
+      int thickness,
+      <a href="#draw_line_style">draw_line_style</a> const *line_style,
+      <a href="#draw_dash_pattern">draw_dash_pattern</a> const *dash_pattern,
+      <a href="#draw_output_path">draw_output_path</a> processed_path);</pre>
+<p>Main Draw SWI</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fill_style</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flatness</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>thickness</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>line_style</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>dash_pattern</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>processed_path</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>end_or_used</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xdraw_fill">xdraw_fill</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdraw_fill (<a href="#draw_path">draw_path</a> const *path,
+      <a href="#draw_fill_style">draw_fill_style</a> fill_style,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      int flatness);</pre>
+<p>Processes a path and sends it to the VDU, filling the interior portion</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fill_style</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flatness</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="draw_fill">draw_fill</h3>
+<pre>extern void draw_fill (<a href="#draw_path">draw_path</a> const *path,
+      <a href="#draw_fill_style">draw_fill_style</a> fill_style,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      int flatness);</pre>
+<p>Processes a path and sends it to the VDU, filling the interior portion</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fill_style</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flatness</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xdraw_stroke">xdraw_stroke</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdraw_stroke (<a href="#draw_path">draw_path</a> const *path,
+      <a href="#draw_fill_style">draw_fill_style</a> fill_style,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      int flatness,
+      int thickness,
+      <a href="#draw_line_style">draw_line_style</a> const *line_style,
+      <a href="#draw_dash_pattern">draw_dash_pattern</a> const *dash_pattern);</pre>
+<p>Processes a path and sends it to the VDU</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fill_style</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flatness</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>thickness</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>line_style</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>dash_pattern</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="draw_stroke">draw_stroke</h3>
+<pre>extern void draw_stroke (<a href="#draw_path">draw_path</a> const *path,
+      <a href="#draw_fill_style">draw_fill_style</a> fill_style,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      int flatness,
+      int thickness,
+      <a href="#draw_line_style">draw_line_style</a> const *line_style,
+      <a href="#draw_dash_pattern">draw_dash_pattern</a> const *dash_pattern);</pre>
+<p>Processes a path and sends it to the VDU</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fill_style</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flatness</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>thickness</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>line_style</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>dash_pattern</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xdraw_stroke_path">xdraw_stroke_path</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdraw_stroke_path (<a href="#draw_path">draw_path</a> const *path,
+      <a href="#draw_path">draw_path</a> *stroked_path,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      int flatness,
+      int thickness,
+      <a href="#draw_line_style">draw_line_style</a> const *line_style,
+      <a href="#draw_dash_pattern">draw_dash_pattern</a> const *dash_pattern,
+      byte **end_or_used);</pre>
+<p>Processes a path and writes its output to another path</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>stroked_path</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flatness</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>thickness</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>line_style</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>dash_pattern</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end_or_used</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="draw_stroke_path">draw_stroke_path</h3>
+<pre>extern byte *draw_stroke_path (<a href="#draw_path">draw_path</a> const *path,
+      <a href="#draw_path">draw_path</a> *stroked_path,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      int flatness,
+      int thickness,
+      <a href="#draw_line_style">draw_line_style</a> const *line_style,
+      <a href="#draw_dash_pattern">draw_dash_pattern</a> const *dash_pattern);</pre>
+<p>Processes a path and writes its output to another path</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>stroked_path</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flatness</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>thickness</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>line_style</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>dash_pattern</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>end_or_used</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xdraw_flatten_path">xdraw_flatten_path</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdraw_flatten_path (<a href="#draw_path">draw_path</a> const *path,
+      <a href="#draw_path">draw_path</a> *flattened_path,
+      int flatness,
+      byte **end_or_used);</pre>
+<p>Flattens a path and writes its output to another path</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flattened_path</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>flatness</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end_or_used</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="draw_flatten_path">draw_flatten_path</h3>
+<pre>extern byte *draw_flatten_path (<a href="#draw_path">draw_path</a> const *path,
+      <a href="#draw_path">draw_path</a> *flattened_path,
+      int flatness);</pre>
+<p>Flattens a path and writes its output to another path</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flattened_path</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>flatness</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>end_or_used</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xdraw_transform_path">xdraw_transform_path</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdraw_transform_path (<a href="#draw_path">draw_path</a> const *path,
+      <a href="#draw_path">draw_path</a> *transformed_path,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      byte **end_or_used);</pre>
+<p>Transforms a path and writes its output to another path</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>transformed_path</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end_or_used</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="draw_transform_path">draw_transform_path</h3>
+<pre>extern byte *draw_transform_path (<a href="#draw_path">draw_path</a> const *path,
+      <a href="#draw_path">draw_path</a> *transformed_path,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm);</pre>
+<p>Transforms a path and writes its output to another path</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>transformed_path</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>end_or_used</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xdraw_fill_clipped">xdraw_fill_clipped</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdraw_fill_clipped (<a href="#draw_path">draw_path</a> const *path,
+      <a href="#draw_fill_style">draw_fill_style</a> fill_style,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      int flatness,
+      <a href="#draw_clip_descriptor">draw_clip_descriptor</a> const *clip_descriptor);</pre>
+<p>Processes a path and sends it to the VDU, filling the interior portion and clipping against the clip descriptor - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fill_style</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flatness</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>clip_descriptor</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="draw_fill_clipped">draw_fill_clipped</h3>
+<pre>extern void draw_fill_clipped (<a href="#draw_path">draw_path</a> const *path,
+      <a href="#draw_fill_style">draw_fill_style</a> fill_style,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      int flatness,
+      <a href="#draw_clip_descriptor">draw_clip_descriptor</a> const *clip_descriptor);</pre>
+<p>Processes a path and sends it to the VDU, filling the interior portion and clipping against the clip descriptor - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fill_style</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flatness</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>clip_descriptor</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xdraw_stroke_clipped">xdraw_stroke_clipped</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xdraw_stroke_clipped (<a href="#draw_path">draw_path</a> const *path,
+      <a href="#draw_fill_style">draw_fill_style</a> fill_style,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      int flatness,
+      int thickness,
+      <a href="#draw_line_style">draw_line_style</a> const *line_style,
+      <a href="#draw_dash_pattern">draw_dash_pattern</a> const *dash_pattern,
+      <a href="#draw_clip_descriptor">draw_clip_descriptor</a> const *clip_descriptor);</pre>
+<p>Processes a path and sends it to the VDU after clipping against the clip descriptor - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fill_style</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flatness</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>thickness</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>line_style</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>dash_pattern</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>clip_descriptor</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="draw_stroke_clipped">draw_stroke_clipped</h3>
+<pre>extern void draw_stroke_clipped (<a href="#draw_path">draw_path</a> const *path,
+      <a href="#draw_fill_style">draw_fill_style</a> fill_style,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      int flatness,
+      int thickness,
+      <a href="#draw_line_style">draw_line_style</a> const *line_style,
+      <a href="#draw_dash_pattern">draw_dash_pattern</a> const *dash_pattern,
+      <a href="#draw_clip_descriptor">draw_clip_descriptor</a> const *clip_descriptor);</pre>
+<p>Processes a path and sends it to the VDU after clipping against the clip descriptor - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fill_style</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flatness</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>thickness</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>line_style</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>dash_pattern</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>clip_descriptor</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; StrongHelp</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>StrongHelp</h2>
+
+<pre>#include "oslib/stronghelp.h"</pre>
+
+<h3 id="stronghelp_message_command">stronghelp_message_command</h3>
+<pre>typedef struct
+   {  char command [236];
+   }
+   stronghelp_message_command;</pre>
+
+<h3 id="stronghelp_message_command_failed">stronghelp_message_command_failed</h3>
+<pre>typedef struct
+   {  char command [236];
+   }
+   stronghelp_message_command_failed;</pre>
+
+<h3 id="stronghelp_full_message_command">stronghelp_full_message_command</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      char command [236];
+   }
+   stronghelp_full_message_command;</pre>
+
+<h3 id="stronghelp_full_message_command_failed">stronghelp_full_message_command_failed</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      char command [236];
+   }
+   stronghelp_full_message_command_failed;</pre>
+
+<h3 id="message_STRONG_HELP_COMMAND">message_STRONG_HELP_COMMAND</h3>
+<pre>#define message_STRONG_HELP_COMMAND 0x43B00u</pre>
+
+<h3 id="message_STRONG_HELP_COMMAND_FAILED">message_STRONG_HELP_COMMAND_FAILED</h3>
+<pre>#define message_STRONG_HELP_COMMAND_FAILED 0x43B01u</pre>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,2446 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Font</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Font</h2>
+
+<pre>#include "oslib/font.h"</pre>
+
+<h3 id="font_string_flags">font_string_flags</h3>
+<pre>typedef bits font_string_flags;</pre>
+
+<p>Flags for painting and scanning strings</p>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#font_JUSTIFY">font_JUSTIFY</a></dd>
+<dd><a href="#font_RUBOUT">font_RUBOUT</a></dd>
+<dd><a href="#font_OS_UNITS">font_OS_UNITS</a></dd>
+<dd><a href="#font_GIVEN_BLOCK">font_GIVEN_BLOCK</a></dd>
+<dd><a href="#font_GIVEN_TRFM">font_GIVEN_TRFM</a></dd>
+<dd><a href="#font_GIVEN_LENGTH">font_GIVEN_LENGTH</a></dd>
+<dd><a href="#font_GIVEN_FONT">font_GIVEN_FONT</a></dd>
+<dd><a href="#font_KERN">font_KERN</a></dd>
+<dd><a href="#font_RIGHT_TO_LEFT">font_RIGHT_TO_LEFT</a></dd>
+<dd><a href="#font_BLEND_FONT">font_BLEND_FONT</a></dd>
+<dd><a href="#font_GIVEN16_BIT">font_GIVEN16_BIT</a></dd>
+<dd><a href="#font_GIVEN32_BIT">font_GIVEN32_BIT</a></dd>
+<dd><a href="#font_RETURN_CARET_POS">font_RETURN_CARET_POS</a></dd>
+<dd><a href="#font_RETURN_BBOX">font_RETURN_BBOX</a></dd>
+<dd><a href="#font_RETURN_MATRIX">font_RETURN_MATRIX</a></dd>
+<dd><a href="#font_RETURN_SPLIT_COUNT">font_RETURN_SPLIT_COUNT</a></dd>
+</dl>
+
+<h3 id="font_output_flags">font_output_flags</h3>
+<pre>typedef bits font_output_flags;</pre>
+
+<p>Flags for outputting DrawFile objects to a buffer</p>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#font_NO_OUTPUT">font_NO_OUTPUT</a></dd>
+<dd><a href="#font_ADD_HINTS">font_ADD_HINTS</a></dd>
+<dd><a href="#font_OUTPUT_SKELETON">font_OUTPUT_SKELETON</a></dd>
+<dd><a href="#font_CONVERT_BITMAP">font_CONVERT_BITMAP</a></dd>
+<dd><a href="#font_ERROR_IF_BITMAP">font_ERROR_IF_BITMAP</a></dd>
+</dl>
+
+<h3 id="font_f">font_f</h3>
+<pre>typedef byte font_f;</pre>
+
+<p>Font handle, for design fulfilment, 8 bits</p>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#font_SYSTEM">font_SYSTEM</a></dd>
+<dd><a href="#font_CURRENT">font_CURRENT</a></dd>
+</dl>
+
+<h3 id="font_paint_block">font_paint_block</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_coord">os_coord</a> space;
+      <a href="os.html#os_coord">os_coord</a> letter;
+      <a href="os.html#os_box">os_box</a> rubout;
+   }
+   font_paint_block;</pre>
+
+<h3 id="font_scan_block">font_scan_block</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_coord">os_coord</a> space;
+      <a href="os.html#os_coord">os_coord</a> letter;
+      int split_char;
+      <a href="os.html#os_box">os_box</a> bbox;
+   }
+   font_scan_block;</pre>
+
+<h3 id="font_thresholds">font_thresholds</h3>
+<pre>typedef struct
+   {  byte t [...];
+   }
+   font_thresholds;</pre>
+
+<h3 id="font_colour_table">font_colour_table</h3>
+<pre>typedef struct
+   {  byte c [...];
+   }
+   font_colour_table;</pre>
+
+<h3 id="font_bitmap_type">font_bitmap_type</h3>
+<pre>typedef bits font_bitmap_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#font_BITMAP_DEEP">font_BITMAP_DEEP</a></dd>
+<dd><a href="#font_BITMAP_HORIZONTAL_SUB_PIXEL">font_BITMAP_HORIZONTAL_SUB_PIXEL</a></dd>
+<dd><a href="#font_BITMAP_VERTICAL_SUB_PIXEL">font_BITMAP_VERTICAL_SUB_PIXEL</a></dd>
+<dd><a href="#font_BITMAP_DELETE">font_BITMAP_DELETE</a></dd>
+</dl>
+
+<h3 id="font_characteristic_flags">font_characteristic_flags</h3>
+<pre>typedef bits font_characteristic_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#font_CHARACTERISTIC_OLD_FORMAT">font_CHARACTERISTIC_OLD_FORMAT</a></dd>
+<dd><a href="#font_CHARACTERISTIC_ROM">font_CHARACTERISTIC_ROM</a></dd>
+<dd><a href="#font_CHARACTERISTIC_MONOCHROME">font_CHARACTERISTIC_MONOCHROME</a></dd>
+<dd><a href="#font_CHARACTERISTIC_FILL_RULE_NON_ZERO">font_CHARACTERISTIC_FILL_RULE_NON_ZERO</a></dd>
+</dl>
+
+<h3 id="font_list_context">font_list_context</h3>
+<pre>typedef int font_list_context;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#font_RETURN_FONT_NAME">font_RETURN_FONT_NAME</a></dd>
+<dd><a href="#font_RETURN_LOCAL_FONT_NAME">font_RETURN_LOCAL_FONT_NAME</a></dd>
+<dd><a href="#font_USE_CARRIAGE_RETURN">font_USE_CARRIAGE_RETURN</a></dd>
+<dd><a href="#font_RETURN_FONT_MENU">font_RETURN_FONT_MENU</a></dd>
+<dd><a href="#font_ALLOW_SYSTEM_FONT">font_ALLOW_SYSTEM_FONT</a></dd>
+<dd><a href="#font_GIVEN_TICK">font_GIVEN_TICK</a></dd>
+<dd><a href="#font_RETURN_ENCODING_MENU">font_RETURN_ENCODING_MENU</a></dd>
+</dl>
+
+<h3 id="font_kern_flags">font_kern_flags</h3>
+<pre>typedef bits font_kern_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#font_KERN_NO_BBOXES">font_KERN_NO_BBOXES</a></dd>
+<dd><a href="#font_KERN_NO_XOFFSETS">font_KERN_NO_XOFFSETS</a></dd>
+<dd><a href="#font_KERN_NO_YOFFSETS">font_KERN_NO_YOFFSETS</a></dd>
+<dd><a href="#font_KERN_SHORT_PAIRS">font_KERN_SHORT_PAIRS</a></dd>
+</dl>
+
+<h3 id="font_metric_flags">font_metric_flags</h3>
+<pre>typedef bits font_metric_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#font_METRICS_KERN_YONLY">font_METRICS_KERN_YONLY</a></dd>
+<dd><a href="#font_METRICS_KERN_XONLY">font_METRICS_KERN_XONLY</a></dd>
+<dd><a href="#font_METRICS_MANY_KERN_PAIRS">font_METRICS_MANY_KERN_PAIRS</a></dd>
+</dl>
+
+<h3 id="font_bbox_info">font_bbox_info</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> bboxes [256];
+   }
+   font_bbox_info;</pre>
+
+<h3 id="font_width_info">font_width_info</h3>
+<pre>typedef struct
+   {  int widths [256];
+   }
+   font_width_info;</pre>
+
+<h3 id="font_misc_info">font_misc_info</h3>
+<pre>typedef struct
+   {  short x0;
+      short y0;
+      short x1;
+      short y1;
+      short xkern;
+      short ykern;
+      short italic_correction;
+      byte underline_position;
+      byte underline_thickness;
+      short cap_height;
+      short xheight;
+      short descender;
+      short ascender;
+      int reserved;
+   }
+   font_misc_info;</pre>
+
+<h3 id="font_metrics_misc_info">font_metrics_misc_info</h3>
+<pre>typedef struct
+   {  int x0;
+      int y0;
+      int x1;
+      int y1;
+      int xkern;
+      int ykern;
+      int italic_correction;
+      byte underline_position;
+      byte underline_thickness;
+      byte reserved_0;
+      byte reserved_1;
+      int cap_height;
+      int xheight;
+      int descender;
+      int ascender;
+      int reserved;
+   }
+   font_metrics_misc_info;</pre>
+
+<h3 id="font_short_kern_pair">font_short_kern_pair</h3>
+<pre>typedef bits font_short_kern_pair;</pre>
+
+<h3 id="font_long_kern_pair">font_long_kern_pair</h3>
+<pre>typedef struct
+   {  int c;
+      int xkern;
+      int ykern;
+   }
+   font_long_kern_pair;</pre>
+
+<h3 id="font_kern_info">font_kern_info</h3>
+<pre>typedef union
+   {  struct
+      {  int table [256];
+         int size;
+         <a href="#font_kern_flags">font_kern_flags</a> flags;
+         <a href="#font_long_kern_pair">font_long_kern_pair</a> pairs [...];
+      }
+      long_info;
+      struct
+      {  int table [256];
+         int size;
+         <a href="#font_kern_flags">font_kern_flags</a> flags;
+         <a href="#font_short_kern_pair">font_short_kern_pair</a> pairs [...];
+      }
+      short_info;
+   }
+   font_kern_info;</pre>
+
+<h3 id="font_short_kern_pair_ucs">font_short_kern_pair_ucs</h3>
+<pre>typedef struct
+   {  char c1;
+      char c2;
+      short kern;
+   }
+   font_short_kern_pair_ucs;</pre>
+
+<h3 id="font_long_kern_pair_ucs">font_long_kern_pair_ucs</h3>
+<pre>typedef struct
+   {  short c1;
+      short c2;
+      short xkern;
+      short ykern;
+   }
+   font_long_kern_pair_ucs;</pre>
+
+<h3 id="font_kern_info_ucs">font_kern_info_ucs</h3>
+<pre>typedef union
+   {  struct
+      {  int table [256];
+         int size;
+         <a href="#font_kern_flags">font_kern_flags</a> flags;
+         <a href="#font_long_kern_pair_ucs">font_long_kern_pair_ucs</a> pairs [...];
+      }
+      long_info;
+      struct
+      {  int table [256];
+         int size;
+         <a href="#font_kern_flags">font_kern_flags</a> flags;
+         <a href="#font_short_kern_pair_ucs">font_short_kern_pair_ucs</a> pairs [...];
+      }
+      short_info;
+   }
+   font_kern_info_ucs;</pre>
+
+<h3 id="font_decode_flags">font_decode_flags</h3>
+<pre>typedef bits font_decode_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#font_GIVEN_ENCODING_MENU">font_GIVEN_ENCODING_MENU</a></dd>
+</dl>
+
+<h3 id="font_OS_UNIT">font_OS_UNIT</h3>
+<pre>#define font_OS_UNIT 400</pre>
+
+<p>1 OS unit in millipoints</p>
+
+<h3 id="font_INCH">font_INCH</h3>
+<pre>#define font_INCH 72000</pre>
+
+<p>1in in millipoints</p>
+
+<h3 id="font_POINT">font_POINT</h3>
+<pre>#define font_POINT 1000</pre>
+
+<p>1pt in millipoints</p>
+
+<h3 id="font_COMMAND_NULL">font_COMMAND_NULL</h3>
+<pre>#define font_COMMAND_NULL ((char) '\x00')</pre>
+
+<h3 id="font_COMMAND_XMOVE">font_COMMAND_XMOVE</h3>
+<pre>#define font_COMMAND_XMOVE ((char) '\x09')</pre>
+
+<h3 id="font_COMMAND_LINEFEED">font_COMMAND_LINEFEED</h3>
+<pre>#define font_COMMAND_LINEFEED ((char) '\x0A')</pre>
+
+<h3 id="font_COMMAND_YMOVE">font_COMMAND_YMOVE</h3>
+<pre>#define font_COMMAND_YMOVE ((char) '\x0B')</pre>
+
+<h3 id="font_COMMAND_RETURN">font_COMMAND_RETURN</h3>
+<pre>#define font_COMMAND_RETURN ((char) '\x0D')</pre>
+
+<h3 id="font_COMMAND_GCOL">font_COMMAND_GCOL</h3>
+<pre>#define font_COMMAND_GCOL ((char) '\x11')</pre>
+
+<h3 id="font_COMMAND_COLOURS">font_COMMAND_COLOURS</h3>
+<pre>#define font_COMMAND_COLOURS ((char) '\x12')</pre>
+
+<h3 id="font_COMMAND_TRUE_COLOURS">font_COMMAND_TRUE_COLOURS</h3>
+<pre>#define font_COMMAND_TRUE_COLOURS ((char) '\x13')</pre>
+
+<h3 id="font_COMMAND_COMMENT">font_COMMAND_COMMENT</h3>
+<pre>#define font_COMMAND_COMMENT ((char) '\x15')</pre>
+
+<h3 id="font_COMMAND_UNDERLINE">font_COMMAND_UNDERLINE</h3>
+<pre>#define font_COMMAND_UNDERLINE ((char) '\x19')</pre>
+
+<h3 id="font_COMMAND_FONT">font_COMMAND_FONT</h3>
+<pre>#define font_COMMAND_FONT ((char) '\x1A')</pre>
+
+<h3 id="font_COMMAND_HOM_TRFM">font_COMMAND_HOM_TRFM</h3>
+<pre>#define font_COMMAND_HOM_TRFM ((char) '\x1B')</pre>
+
+<h3 id="font_COMMAND_TRFM">font_COMMAND_TRFM</h3>
+<pre>#define font_COMMAND_TRFM ((char) '\x1C')</pre>
+
+<h3 id="font_JUSTIFY">font_JUSTIFY</h3>
+<pre>#define font_JUSTIFY ((<a href="#font_string_flags">font_string_flags</a>) 0x1u)</pre>
+
+<p>Use when painting</p>
+
+<h3 id="font_RUBOUT">font_RUBOUT</h3>
+<pre>#define font_RUBOUT ((<a href="#font_string_flags">font_string_flags</a>) 0x2u)</pre>
+
+<p>Use when painting</p>
+
+<h3 id="font_OS_UNITS">font_OS_UNITS</h3>
+<pre>#define font_OS_UNITS ((<a href="#font_string_flags">font_string_flags</a>) 0x10u)</pre>
+
+<p>Use when painting, scanning, caret or charbbox</p>
+
+<h3 id="font_GIVEN_BLOCK">font_GIVEN_BLOCK</h3>
+<pre>#define font_GIVEN_BLOCK ((<a href="#font_string_flags">font_string_flags</a>) 0x20u)</pre>
+
+<p>Use when painting or scanning</p>
+
+<h3 id="font_GIVEN_TRFM">font_GIVEN_TRFM</h3>
+<pre>#define font_GIVEN_TRFM ((<a href="#font_string_flags">font_string_flags</a>) 0x40u)</pre>
+
+<p>Use when painting or scanning</p>
+
+<h3 id="font_GIVEN_LENGTH">font_GIVEN_LENGTH</h3>
+<pre>#define font_GIVEN_LENGTH ((<a href="#font_string_flags">font_string_flags</a>) 0x80u)</pre>
+
+<p>Use when painting or scanning</p>
+
+<h3 id="font_GIVEN_FONT">font_GIVEN_FONT</h3>
+<pre>#define font_GIVEN_FONT ((<a href="#font_string_flags">font_string_flags</a>) 0x100u)</pre>
+
+<p>Use when painting or scanning</p>
+
+<h3 id="font_KERN">font_KERN</h3>
+<pre>#define font_KERN ((<a href="#font_string_flags">font_string_flags</a>) 0x200u)</pre>
+
+<p>Use when painting or scanning</p>
+
+<h3 id="font_RIGHT_TO_LEFT">font_RIGHT_TO_LEFT</h3>
+<pre>#define font_RIGHT_TO_LEFT ((<a href="#font_string_flags">font_string_flags</a>) 0x400u)</pre>
+
+<p>Use when painting or scanning</p>
+
+<h3 id="font_BLEND_FONT">font_BLEND_FONT</h3>
+<pre>#define font_BLEND_FONT ((<a href="#font_string_flags">font_string_flags</a>) 0x800u)</pre>
+
+<p>Use when painting or scanning</p>
+
+<h3 id="font_GIVEN16_BIT">font_GIVEN16_BIT</h3>
+<pre>#define font_GIVEN16_BIT ((<a href="#font_string_flags">font_string_flags</a>) 0x1000u)</pre>
+
+<p>Use when painting or scanning - RISC OS 5+</p>
+
+<h3 id="font_GIVEN32_BIT">font_GIVEN32_BIT</h3>
+<pre>#define font_GIVEN32_BIT ((<a href="#font_string_flags">font_string_flags</a>) 0x2000u)</pre>
+
+<p>Use when painting or scanning - RISC OS 5+</p>
+
+<h3 id="font_RETURN_CARET_POS">font_RETURN_CARET_POS</h3>
+<pre>#define font_RETURN_CARET_POS ((<a href="#font_string_flags">font_string_flags</a>) 0x20000u)</pre>
+
+<p>Use when scanning</p>
+
+<h3 id="font_RETURN_BBOX">font_RETURN_BBOX</h3>
+<pre>#define font_RETURN_BBOX ((<a href="#font_string_flags">font_string_flags</a>) 0x40000u)</pre>
+
+<p>Use when scanning</p>
+
+<h3 id="font_RETURN_MATRIX">font_RETURN_MATRIX</h3>
+<pre>#define font_RETURN_MATRIX ((<a href="#font_string_flags">font_string_flags</a>) 0x80000u)</pre>
+
+<p>Use when scanning</p>
+
+<h3 id="font_RETURN_SPLIT_COUNT">font_RETURN_SPLIT_COUNT</h3>
+<pre>#define font_RETURN_SPLIT_COUNT ((<a href="#font_string_flags">font_string_flags</a>) 0x100000u)</pre>
+
+<p>Use when scanning</p>
+
+<h3 id="font_NO_OUTPUT">font_NO_OUTPUT</h3>
+<pre>#define font_NO_OUTPUT ((<a href="#font_output_flags">font_output_flags</a>) 0x1u)</pre>
+
+<h3 id="font_ADD_HINTS">font_ADD_HINTS</h3>
+<pre>#define font_ADD_HINTS ((<a href="#font_output_flags">font_output_flags</a>) 0x2u)</pre>
+
+<h3 id="font_OUTPUT_SKELETON">font_OUTPUT_SKELETON</h3>
+<pre>#define font_OUTPUT_SKELETON ((<a href="#font_output_flags">font_output_flags</a>) 0x4u)</pre>
+
+<p>Not currently implemented</p>
+
+<h3 id="font_CONVERT_BITMAP">font_CONVERT_BITMAP</h3>
+<pre>#define font_CONVERT_BITMAP ((<a href="#font_output_flags">font_output_flags</a>) 0x8u)</pre>
+
+<p>Not currently implemented</p>
+
+<h3 id="font_ERROR_IF_BITMAP">font_ERROR_IF_BITMAP</h3>
+<pre>#define font_ERROR_IF_BITMAP ((<a href="#font_output_flags">font_output_flags</a>) 0x10u)</pre>
+
+<h3 id="error_FONT_NO_ROOM">error_FONT_NO_ROOM</h3>
+<pre>#define error_FONT_NO_ROOM 0x200u</pre>
+
+<p>Not enough memory for Font cache</p>
+
+<h3 id="error_FONT_CACHE_FULL">error_FONT_CACHE_FULL</h3>
+<pre>#define error_FONT_CACHE_FULL 0x201u</pre>
+
+<p>Font cache full</p>
+
+<h3 id="error_FONT_NO_CACHE">error_FONT_NO_CACHE</h3>
+<pre>#define error_FONT_NO_CACHE 0x202u</pre>
+
+<p>No font cache present</p>
+
+<h3 id="error_FONT_TOO_LONG">error_FONT_TOO_LONG</h3>
+<pre>#define error_FONT_TOO_LONG 0x203u</pre>
+
+<p>String too long</p>
+
+<h3 id="error_FONT64K">error_FONT64K</h3>
+<pre>#define error_FONT64K 0x204u</pre>
+
+<p>Font definition too large</p>
+
+<h3 id="error_FONT_PAL_TOO_BIG">error_FONT_PAL_TOO_BIG</h3>
+<pre>#define error_FONT_PAL_TOO_BIG 0x205u</pre>
+
+<p>Undefined font colour</p>
+
+<h3 id="error_FONT_BAD_TRAN_BITS">error_FONT_BAD_TRAN_BITS</h3>
+<pre>#define error_FONT_BAD_TRAN_BITS 0x206u</pre>
+
+<p>Invalid data passed to Font_SetTransfer</p>
+
+<h3 id="error_FONT_NOT_ENOUGH_BITS">error_FONT_NOT_ENOUGH_BITS</h3>
+<pre>#define error_FONT_NOT_ENOUGH_BITS 0x207u</pre>
+
+<p>Invalid font colour</p>
+
+<h3 id="error_FONT_NO_FONT">error_FONT_NO_FONT</h3>
+<pre>#define error_FONT_NO_FONT 0x208u</pre>
+
+<p>Undefined font handle</p>
+
+<h3 id="error_FONT_NO_PIXELS">error_FONT_NO_PIXELS</h3>
+<pre>#define error_FONT_NO_PIXELS 0x209u</pre>
+
+<p>No pixel data for this font</p>
+
+<h3 id="error_FONT_BAD_FONT_NUMBER">error_FONT_BAD_FONT_NUMBER</h3>
+<pre>#define error_FONT_BAD_FONT_NUMBER 0x20Au</pre>
+
+<p>Font handle out of range</p>
+
+<h3 id="error_FONT_NOT_FOUND">error_FONT_NOT_FOUND</h3>
+<pre>#define error_FONT_NOT_FOUND 0x20Bu</pre>
+
+<p>%0 font not found</p>
+
+<h3 id="error_FONT_BAD_FONT_FILE">error_FONT_BAD_FONT_FILE</h3>
+<pre>#define error_FONT_BAD_FONT_FILE 0x20Cu</pre>
+
+<p>Illegal font file</p>
+
+<h3 id="error_FONT_NO_HANDLES">error_FONT_NO_HANDLES</h3>
+<pre>#define error_FONT_NO_HANDLES 0x20Du</pre>
+
+<p>No more font handles</p>
+
+<h3 id="error_FONT_BAD_COUNTER">error_FONT_BAD_COUNTER</h3>
+<pre>#define error_FONT_BAD_COUNTER 0x20Eu</pre>
+
+<p>Fonts must be read sequentially</p>
+
+<h3 id="error_FONT_BAD_CTRL_CHAR">error_FONT_BAD_CTRL_CHAR</h3>
+<pre>#define error_FONT_BAD_CTRL_CHAR 0x20Fu</pre>
+
+<p>Illegal control character in font string</p>
+
+<h3 id="error_FONTS_IN_USE">error_FONTS_IN_USE</h3>
+<pre>#define error_FONTS_IN_USE 0x210u</pre>
+
+<p>Font manager in use</p>
+
+<h3 id="error_FONT_BAD_SEGMENT">error_FONT_BAD_SEGMENT</h3>
+<pre>#define error_FONT_BAD_SEGMENT 0x211u</pre>
+
+<p>Illegal line segment in outline font</p>
+
+<h3 id="error_FONT_BAD_PREFIX">error_FONT_BAD_PREFIX</h3>
+<pre>#define error_FONT_BAD_PREFIX 0x212u</pre>
+
+<p>%1 (while scanning Font$Path)</p>
+
+<h3 id="error_FONT_RESERVED">error_FONT_RESERVED</h3>
+<pre>#define error_FONT_RESERVED 0x213u</pre>
+
+<p>Reserved fields must be zero</p>
+
+<h3 id="error_FONT_BAD_CHAR_CODE">error_FONT_BAD_CHAR_CODE</h3>
+<pre>#define error_FONT_BAD_CHAR_CODE 0x214u</pre>
+
+<p>Character code out of range</p>
+
+<h3 id="error_FONT_NO_BITMAPS">error_FONT_NO_BITMAPS</h3>
+<pre>#define error_FONT_NO_BITMAPS 0x215u</pre>
+
+<p>ROM font directory cannot contain bitmaps</p>
+
+<h3 id="error_FONT_NO_BITMAPS2">error_FONT_NO_BITMAPS2</h3>
+<pre>#define error_FONT_NO_BITMAPS2 0x216u</pre>
+
+<p>Can't convert bitmap characters into outlines</p>
+
+<h3 id="error_FONT_BAD_FONT_CACHE_FILE">error_FONT_BAD_FONT_CACHE_FILE</h3>
+<pre>#define error_FONT_BAD_FONT_CACHE_FILE 0x217u</pre>
+
+<p>Invalid font cache file</p>
+
+<h3 id="error_FONT_FIELD_NOT_FOUND">error_FONT_FIELD_NOT_FOUND</h3>
+<pre>#define error_FONT_FIELD_NOT_FOUND 0x218u</pre>
+
+<p>%0 field not present in font string</p>
+
+<h3 id="error_FONT_BAD_MATRIX">error_FONT_BAD_MATRIX</h3>
+<pre>#define error_FONT_BAD_MATRIX 0x219u</pre>
+
+<p>Invalid matrix passed to Font Manager</p>
+
+<h3 id="error_FONT_OVERFLOW">error_FONT_OVERFLOW</h3>
+<pre>#define error_FONT_OVERFLOW 0x21Au</pre>
+
+<p>Number too big</p>
+
+<h3 id="error_FONT_DIVBY0">error_FONT_DIVBY0</h3>
+<pre>#define error_FONT_DIVBY0 0x21Bu</pre>
+
+<p>Division by zero</p>
+
+<h3 id="error_FONT_BAD_READ_METRICS">error_FONT_BAD_READ_METRICS</h3>
+<pre>#define error_FONT_BAD_READ_METRICS 0x21Cu</pre>
+
+<p>Font_ReadFontMetrics not allowed on a transformed font</p>
+
+<h3 id="error_FONT_BAD_RGB">error_FONT_BAD_RGB</h3>
+<pre>#define error_FONT_BAD_RGB 0x21Du</pre>
+
+<p>Undefined RGB font colours</p>
+
+<h3 id="error_FONT_ENCODING_NOT_FOUND">error_FONT_ENCODING_NOT_FOUND</h3>
+<pre>#define error_FONT_ENCODING_NOT_FOUND 0x21Eu</pre>
+
+<p>%0 encoding not found</p>
+
+<h3 id="error_FONT_MUST_HAVE_SLASH">error_FONT_MUST_HAVE_SLASH</h3>
+<pre>#define error_FONT_MUST_HAVE_SLASH 0x21Fu</pre>
+
+<p>Identifier '%1' should be preceded by '/' in encoding '%0'</p>
+
+<h3 id="error_FONT_BAD_ENCODING_SIZE">error_FONT_BAD_ENCODING_SIZE</h3>
+<pre>#define error_FONT_BAD_ENCODING_SIZE 0x220u</pre>
+
+<p>Max total size of input and output encoding files is 16k</p>
+
+<h3 id="error_FONT_TOO_MANY_IDS">error_FONT_TOO_MANY_IDS</h3>
+<pre>#define error_FONT_TOO_MANY_IDS 0x221u</pre>
+
+<p>Too many identifiers in %0 encoding</p>
+
+<h3 id="error_FONT_TOO_FEW_IDS">error_FONT_TOO_FEW_IDS</h3>
+<pre>#define error_FONT_TOO_FEW_IDS 0x222u</pre>
+
+<p>Not enough identifiers in %0 encoding</p>
+
+<h3 id="error_FONT_NO_BASE_ENCODING">error_FONT_NO_BASE_ENCODING</h3>
+<pre>#define error_FONT_NO_BASE_ENCODING 0x223u</pre>
+
+<p>Base encoding %0 not found</p>
+
+<h3 id="error_FONT_IDENTIFIER_NOT_FOUND">error_FONT_IDENTIFIER_NOT_FOUND</h3>
+<pre>#define error_FONT_IDENTIFIER_NOT_FOUND 0x224u</pre>
+
+<p>Identifier %1 not found in encoding %0</p>
+
+<h3 id="error_FONT_TOO_MANY_CHUNKS">error_FONT_TOO_MANY_CHUNKS</h3>
+<pre>#define error_FONT_TOO_MANY_CHUNKS 0x225u</pre>
+
+<p>Too many characters in %0</p>
+
+<h3 id="error_FONT_BAD_FONT_FILE2">error_FONT_BAD_FONT_FILE2</h3>
+<pre>#define error_FONT_BAD_FONT_FILE2 0x226u</pre>
+
+<p>Illegal font file in %0</p>
+
+<h3 id="error_FONT_DATA_NOT_FOUND">error_FONT_DATA_NOT_FOUND</h3>
+<pre>#define error_FONT_DATA_NOT_FOUND 0x20Bu</pre>
+
+<p>Font data not found</p>
+
+<h3 id="error_FONT_DATA_NOT_FOUND2">error_FONT_DATA_NOT_FOUND2</h3>
+<pre>#define error_FONT_DATA_NOT_FOUND2 0x20Bu</pre>
+
+<p>No suitable font data for %0</p>
+
+<h3 id="font_NAME_LIMIT">font_NAME_LIMIT</h3>
+<pre>#define font_NAME_LIMIT 40</pre>
+
+<h3 id="font_SYSTEM">font_SYSTEM</h3>
+<pre>#define font_SYSTEM ((<a href="#font_f">font_f</a>) 0x0u)</pre>
+
+<p>Value used as system font or no font</p>
+
+<h3 id="font_CURRENT">font_CURRENT</h3>
+<pre>#define font_CURRENT ((<a href="#font_f">font_f</a>) 0x0u)</pre>
+
+<p>Value for scanning</p>
+
+<h3 id="font_BITMAP_DEEP">font_BITMAP_DEEP</h3>
+<pre>#define font_BITMAP_DEEP ((<a href="#font_bitmap_type">font_bitmap_type</a>) 0x1u)</pre>
+
+<h3 id="font_BITMAP_HORIZONTAL_SUB_PIXEL">font_BITMAP_HORIZONTAL_SUB_PIXEL</h3>
+<pre>#define font_BITMAP_HORIZONTAL_SUB_PIXEL ((<a href="#font_bitmap_type">font_bitmap_type</a>) 0x2u)</pre>
+
+<h3 id="font_BITMAP_VERTICAL_SUB_PIXEL">font_BITMAP_VERTICAL_SUB_PIXEL</h3>
+<pre>#define font_BITMAP_VERTICAL_SUB_PIXEL ((<a href="#font_bitmap_type">font_bitmap_type</a>) 0x4u)</pre>
+
+<h3 id="font_BITMAP_DELETE">font_BITMAP_DELETE</h3>
+<pre>#define font_BITMAP_DELETE ((<a href="#font_bitmap_type">font_bitmap_type</a>) 0x8u)</pre>
+
+<h3 id="font_CHARACTERISTIC_OLD_FORMAT">font_CHARACTERISTIC_OLD_FORMAT</h3>
+<pre>#define font_CHARACTERISTIC_OLD_FORMAT ((<a href="#font_characteristic_flags">font_characteristic_flags</a>) 0x1u)</pre>
+
+<h3 id="font_CHARACTERISTIC_ROM">font_CHARACTERISTIC_ROM</h3>
+<pre>#define font_CHARACTERISTIC_ROM ((<a href="#font_characteristic_flags">font_characteristic_flags</a>) 0x2u)</pre>
+
+<h3 id="font_CHARACTERISTIC_MONOCHROME">font_CHARACTERISTIC_MONOCHROME</h3>
+<pre>#define font_CHARACTERISTIC_MONOCHROME ((<a href="#font_characteristic_flags">font_characteristic_flags</a>) 0x100u)</pre>
+
+<h3 id="font_CHARACTERISTIC_FILL_RULE_NON_ZERO">font_CHARACTERISTIC_FILL_RULE_NON_ZERO</h3>
+<pre>#define font_CHARACTERISTIC_FILL_RULE_NON_ZERO ((<a href="#font_characteristic_flags">font_characteristic_flags</a>) 0x200u)</pre>
+
+<h3 id="font_RETURN_FONT_NAME">font_RETURN_FONT_NAME</h3>
+<pre>#define font_RETURN_FONT_NAME ((<a href="#font_list_context">font_list_context</a>) 0x10000u)</pre>
+
+<h3 id="font_RETURN_LOCAL_FONT_NAME">font_RETURN_LOCAL_FONT_NAME</h3>
+<pre>#define font_RETURN_LOCAL_FONT_NAME ((<a href="#font_list_context">font_list_context</a>) 0x20000u)</pre>
+
+<h3 id="font_USE_CARRIAGE_RETURN">font_USE_CARRIAGE_RETURN</h3>
+<pre>#define font_USE_CARRIAGE_RETURN ((<a href="#font_list_context">font_list_context</a>) 0x40000u)</pre>
+
+<h3 id="font_RETURN_FONT_MENU">font_RETURN_FONT_MENU</h3>
+<pre>#define font_RETURN_FONT_MENU ((<a href="#font_list_context">font_list_context</a>) 0x80000u)</pre>
+
+<h3 id="font_ALLOW_SYSTEM_FONT">font_ALLOW_SYSTEM_FONT</h3>
+<pre>#define font_ALLOW_SYSTEM_FONT ((<a href="#font_list_context">font_list_context</a>) 0x100000u)</pre>
+
+<h3 id="font_GIVEN_TICK">font_GIVEN_TICK</h3>
+<pre>#define font_GIVEN_TICK ((<a href="#font_list_context">font_list_context</a>) 0x200000u)</pre>
+
+<h3 id="font_RETURN_ENCODING_MENU">font_RETURN_ENCODING_MENU</h3>
+<pre>#define font_RETURN_ENCODING_MENU ((<a href="#font_list_context">font_list_context</a>) 0x480000u)</pre>
+
+<h3 id="font_TICK_NONE">font_TICK_NONE</h3>
+<pre>#define font_TICK_NONE ((char *) 0x0u)</pre>
+
+<h3 id="font_TICK_SYSTEM_FONT">font_TICK_SYSTEM_FONT</h3>
+<pre>#define font_TICK_SYSTEM_FONT ((char *) 0x1u)</pre>
+
+<h3 id="font_KERN_NO_BBOXES">font_KERN_NO_BBOXES</h3>
+<pre>#define font_KERN_NO_BBOXES ((<a href="#font_kern_flags">font_kern_flags</a>) 0x1u)</pre>
+
+<h3 id="font_KERN_NO_XOFFSETS">font_KERN_NO_XOFFSETS</h3>
+<pre>#define font_KERN_NO_XOFFSETS ((<a href="#font_kern_flags">font_kern_flags</a>) 0x2u)</pre>
+
+<h3 id="font_KERN_NO_YOFFSETS">font_KERN_NO_YOFFSETS</h3>
+<pre>#define font_KERN_NO_YOFFSETS ((<a href="#font_kern_flags">font_kern_flags</a>) 0x4u)</pre>
+
+<h3 id="font_KERN_SHORT_PAIRS">font_KERN_SHORT_PAIRS</h3>
+<pre>#define font_KERN_SHORT_PAIRS ((<a href="#font_kern_flags">font_kern_flags</a>) 0x80000000u)</pre>
+
+<h3 id="font_METRICS_KERN_YONLY">font_METRICS_KERN_YONLY</h3>
+<pre>#define font_METRICS_KERN_YONLY ((<a href="#font_metric_flags">font_metric_flags</a>) 0x2u)</pre>
+
+<h3 id="font_METRICS_KERN_XONLY">font_METRICS_KERN_XONLY</h3>
+<pre>#define font_METRICS_KERN_XONLY ((<a href="#font_metric_flags">font_metric_flags</a>) 0x4u)</pre>
+
+<h3 id="font_METRICS_MANY_KERN_PAIRS">font_METRICS_MANY_KERN_PAIRS</h3>
+<pre>#define font_METRICS_MANY_KERN_PAIRS ((<a href="#font_metric_flags">font_metric_flags</a>) 0x8u)</pre>
+
+<h3 id="font_GIVEN_ENCODING_MENU">font_GIVEN_ENCODING_MENU</h3>
+<pre>#define font_GIVEN_ENCODING_MENU ((<a href="#font_decode_flags">font_decode_flags</a>) 0x1u)</pre>
+
+<h3 id="xfont_cache_addr">xfont_cache_addr</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_cache_addr (int *version,
+      int *cache_size,
+      int *cache_used);</pre>
+<p>Gets the version number, font cache size and amount used</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>version</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>cache_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>cache_used</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="font_cache_addr">font_cache_addr</h3>
+<pre>extern void font_cache_addr (int *version,
+      int *cache_size,
+      int *cache_used);</pre>
+<p>Gets the version number, font cache size and amount used</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>version</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>cache_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>cache_used</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xfont_find_font">xfont_find_font</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_find_font (char const *font_name,
+      int xsize,
+      int ysize,
+      int xres,
+      int yres,
+      <a href="#font_f">font_f</a> *font,
+      int *xres_out,
+      int *yres_out);</pre>
+<p>Gets the handle for a font</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>xsize</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ysize</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xres</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>yres</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>xres_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>yres_out</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="font_find_font">font_find_font</h3>
+<pre>extern <a href="#font_f">font_f</a> font_find_font (char const *font_name,
+      int xsize,
+      int ysize,
+      int xres,
+      int yres,
+      int *xres_out,
+      int *yres_out);</pre>
+<p>Gets the handle for a font</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>xsize</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ysize</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xres</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>yres</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>xres_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>yres_out</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>font</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xfont_lose_font">xfont_lose_font</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_lose_font (<a href="#font_f">font_f</a> font);</pre>
+<p>Finishes use of a font</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="font_lose_font">font_lose_font</h3>
+<pre>extern void font_lose_font (<a href="#font_f">font_f</a> font);</pre>
+<p>Finishes use of a font</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xfont_read_defn">xfont_read_defn</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_read_defn (<a href="#font_f">font_f</a> font,
+      byte *font_id,
+      int *xsize,
+      int *ysize,
+      int *xres,
+      int *yres,
+      int *age,
+      int *usage_count);</pre>
+<p>Reads details about a font</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td>Font handle</td><td><code>R0</code></td></tr>
+<tr><td><code>font_id</code></td><td>Buffer to hold font identifier</td><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>xsize</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ysize</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xres</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>yres</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>age</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>usage_count</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="font_read_defn">font_read_defn</h3>
+<pre>extern void font_read_defn (<a href="#font_f">font_f</a> font,
+      byte *font_id,
+      int *xsize,
+      int *ysize,
+      int *xres,
+      int *yres,
+      int *age,
+      int *usage_count);</pre>
+<p>Reads details about a font</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td>Font handle</td><td><code>R0</code></td></tr>
+<tr><td><code>font_id</code></td><td>Buffer to hold font identifier</td><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>xsize</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ysize</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xres</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>yres</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>age</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>usage_count</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xfont_read_full_defn">xfont_read_full_defn</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_read_full_defn (<a href="#font_f">font_f</a> font,
+      byte *font_id,
+      int *xsize,
+      int *ysize,
+      int *xres,
+      int *yres,
+      int *age,
+      int *usage_count);</pre>
+<p>Reads details about a font including full font identifer (with qualifiers) by calling Font_ReadDefn with R3 = 'FULL'</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td>Font handle</td><td><code>R0</code></td></tr>
+<tr><td><code>font_id</code></td><td>Buffer to hold font identifier (may not be 0)</td><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>xsize</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ysize</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xres</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>yres</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>age</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>usage_count</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="font_read_full_defn">font_read_full_defn</h3>
+<pre>extern void font_read_full_defn (<a href="#font_f">font_f</a> font,
+      byte *font_id,
+      int *xsize,
+      int *ysize,
+      int *xres,
+      int *yres,
+      int *age,
+      int *usage_count);</pre>
+<p>Reads details about a font including full font identifer (with qualifiers) by calling Font_ReadDefn with R3 = 'FULL'</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td>Font handle</td><td><code>R0</code></td></tr>
+<tr><td><code>font_id</code></td><td>Buffer to hold font identifier (may not be 0)</td><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>xsize</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ysize</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xres</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>yres</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>age</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>usage_count</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xfont_read_identifier">xfont_read_identifier</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_read_identifier (<a href="#font_f">font_f</a> font,
+      byte *buffer,
+      int *used);</pre>
+<p>Reads the full font identifier (with qualifiers) by calling Font_ReadDefn with R3 = 'FULL'</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td>if 0, then required buffer size is returned in R2</td><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="font_read_identifier">font_read_identifier</h3>
+<pre>extern int font_read_identifier (<a href="#font_f">font_f</a> font,
+      byte *buffer);</pre>
+<p>Reads the full font identifier (with qualifiers) by calling Font_ReadDefn with R3 = 'FULL'</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td>if 0, then required buffer size is returned in R2</td><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xfont_read_info">xfont_read_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_read_info (<a href="#font_f">font_f</a> font,
+      int *x0,
+      int *y0,
+      int *x1,
+      int *y1);</pre>
+<p>Gets the font bounding box</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>x0</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y0</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x1</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y1</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="font_read_info">font_read_info</h3>
+<pre>extern void font_read_info (<a href="#font_f">font_f</a> font,
+      int *x0,
+      int *y0,
+      int *x1,
+      int *y1);</pre>
+<p>Gets the font bounding box</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>x0</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y0</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x1</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y1</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xfont_string_width">xfont_string_width</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_string_width (char const *s,
+      int xmax,
+      int ymax,
+      int split,
+      int length,
+      char **split_point,
+      int *x,
+      int *y,
+      int *length_out,
+      int *index_out);</pre>
+<p>Calculates how wide a string would be in the current font - prefer Font_ScanString</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>xmax</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ymax</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>split</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>split_point</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>length_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>index_out</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="font_string_width">font_string_width</h3>
+<pre>extern void font_string_width (char const *s,
+      int xmax,
+      int ymax,
+      int split,
+      int length,
+      char **split_point,
+      int *x,
+      int *y,
+      int *length_out,
+      int *index_out);</pre>
+<p>Calculates how wide a string would be in the current font - prefer Font_ScanString</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>xmax</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ymax</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>split</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>split_point</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>length_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>index_out</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xfont_paint">xfont_paint</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_paint (<a href="#font_f">font_f</a> font,
+      char const *string,
+      <a href="#font_string_flags">font_string_flags</a> flags,
+      int xpos,
+      int ypos,
+      <a href="#font_paint_block">font_paint_block</a> const *block,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      int length);</pre>
+<p>Writes a string to the screen</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>string</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>xpos</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>ypos</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="font_paint">font_paint</h3>
+<pre>extern void font_paint (<a href="#font_f">font_f</a> font,
+      char const *string,
+      <a href="#font_string_flags">font_string_flags</a> flags,
+      int xpos,
+      int ypos,
+      <a href="#font_paint_block">font_paint_block</a> const *block,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      int length);</pre>
+<p>Writes a string to the screen</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>string</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>xpos</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>ypos</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xfont_caret">xfont_caret</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_caret (<a href="os.html#os_colour_number">os_colour_number</a> colour_number,
+      int height,
+      <a href="#font_string_flags">font_string_flags</a> unit_flags,
+      int x,
+      int y);</pre>
+<p>Defines text cursor for Font Manager</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour_number</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>unit_flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="font_caret">font_caret</h3>
+<pre>extern void font_caret (<a href="os.html#os_colour_number">os_colour_number</a> colour_number,
+      int height,
+      <a href="#font_string_flags">font_string_flags</a> unit_flags,
+      int x,
+      int y);</pre>
+<p>Defines text cursor for Font Manager</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour_number</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>height</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>unit_flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xfont_convertto_os">xfont_convertto_os</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_convertto_os (int x,
+      int y,
+      int *x_out,
+      int *y_out);</pre>
+<p>Converts internal coordinates to OS coordinates</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>x</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>x_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y_out</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="font_convertto_os">font_convertto_os</h3>
+<pre>extern void font_convertto_os (int x,
+      int y,
+      int *x_out,
+      int *y_out);</pre>
+<p>Converts internal coordinates to OS coordinates</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>x</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>x_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y_out</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xfont_converttopoints">xfont_converttopoints</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_converttopoints (int x,
+      int y,
+      int *x_out,
+      int *y_out);</pre>
+<p>Converts OS coordinates to internal coordinates</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>x</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>x_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y_out</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="font_converttopoints">font_converttopoints</h3>
+<pre>extern void font_converttopoints (int x,
+      int y,
+      int *x_out,
+      int *y_out);</pre>
+<p>Converts OS coordinates to internal coordinates</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>x</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>x_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y_out</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xfont_set_font">xfont_set_font</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_set_font (<a href="#font_f">font_f</a> font);</pre>
+<p>Selects the font to be subsequently used</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="font_set_font">font_set_font</h3>
+<pre>extern void font_set_font (<a href="#font_f">font_f</a> font);</pre>
+<p>Selects the font to be subsequently used</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xfont_current_font">xfont_current_font</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_current_font (<a href="#font_f">font_f</a> *font,
+      <a href="os.html#os_gcol">os_gcol</a> *bg_hint,
+      <a href="os.html#os_gcol">os_gcol</a> *fill,
+      int *offset);</pre>
+<p>Gets the current font handle and colours</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>bg_hint</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fill</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="font_current_font">font_current_font</h3>
+<pre>extern <a href="#font_f">font_f</a> font_current_font (<a href="os.html#os_gcol">os_gcol</a> *bg_hint,
+      <a href="os.html#os_gcol">os_gcol</a> *fill,
+      int *offset);</pre>
+<p>Gets the current font handle and colours</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>bg_hint</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fill</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>font</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xfont_future_font">xfont_future_font</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_future_font (<a href="#font_f">font_f</a> *font,
+      <a href="os.html#os_gcol">os_gcol</a> *bg_hint,
+      <a href="os.html#os_gcol">os_gcol</a> *fill,
+      int *offset);</pre>
+<p>Checks font characteristics after Font_StringWidth</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>bg_hint</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fill</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="font_future_font">font_future_font</h3>
+<pre>extern <a href="#font_f">font_f</a> font_future_font (<a href="os.html#os_gcol">os_gcol</a> *bg_hint,
+      <a href="os.html#os_gcol">os_gcol</a> *fill,
+      int *offset);</pre>
+<p>Checks font characteristics after Font_StringWidth</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>bg_hint</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fill</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>font</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xfont_find_caret">xfont_find_caret</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_find_caret (char const *s,
+      int x,
+      int y,
+      char **split_point,
+      int *x_out,
+      int *y_out,
+      int *length_out,
+      int *index_out);</pre>
+<p>Finds where the caret is in a string</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>split_point</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>x_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>y_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>length_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>index_out</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="font_find_caret">font_find_caret</h3>
+<pre>extern void font_find_caret (char const *s,
+      int x,
+      int y,
+      char **split_point,
+      int *x_out,
+      int *y_out,
+      int *length_out,
+      int *index_out);</pre>
+<p>Finds where the caret is in a string</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>split_point</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>x_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>y_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>length_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>index_out</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xfont_char_bbox">xfont_char_bbox</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_char_bbox (<a href="#font_f">font_f</a> font,
+      char c,
+      <a href="#font_string_flags">font_string_flags</a> unit_flags,
+      int *x0,
+      int *y0,
+      int *x1,
+      int *y1);</pre>
+<p>Gets the bounding box of a character</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>c</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>unit_flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>x0</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y0</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x1</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y1</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="font_char_bbox">font_char_bbox</h3>
+<pre>extern void font_char_bbox (<a href="#font_f">font_f</a> font,
+      char c,
+      <a href="#font_string_flags">font_string_flags</a> unit_flags,
+      int *x0,
+      int *y0,
+      int *x1,
+      int *y1);</pre>
+<p>Gets the bounding box of a character</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>c</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>unit_flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>x0</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y0</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x1</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y1</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xfont_read_scale_factor">xfont_read_scale_factor</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_read_scale_factor (int *xfactor,
+      int *yfactor);</pre>
+<p>Reads the internal to OS conversion factor</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>xfactor</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>yfactor</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="font_read_scale_factor">font_read_scale_factor</h3>
+<pre>extern void font_read_scale_factor (int *xfactor,
+      int *yfactor);</pre>
+<p>Reads the internal to OS conversion factor</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>xfactor</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>yfactor</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xfont_set_scale_factor">xfont_set_scale_factor</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_set_scale_factor (int xfactor,
+      int yfactor);</pre>
+<p>Sets the internal to OS conversion factor</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>xfactor</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>yfactor</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="font_set_scale_factor">font_set_scale_factor</h3>
+<pre>extern void font_set_scale_factor (int xfactor,
+      int yfactor);</pre>
+<p>Sets the internal to OS conversion factor</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>xfactor</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>yfactor</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xfont_list_fonts">xfont_list_fonts</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_list_fonts (byte *buffer1,
+      <a href="#font_list_context">font_list_context</a> context,
+      int size1,
+      byte *buffer2,
+      int size2,
+      char const *tick_font,
+      <a href="#font_list_context">font_list_context</a> *context_out,
+      int *used1,
+      int *used2);</pre>
+<p>Scans for fonts, returning their identifiers one at a time; or or builds a menu of fonts</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size1</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer2</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size2</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>tick_font</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>used1</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>used2</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="font_list_fonts">font_list_fonts</h3>
+<pre>extern <a href="#font_list_context">font_list_context</a> font_list_fonts (byte *buffer1,
+      <a href="#font_list_context">font_list_context</a> context,
+      int size1,
+      byte *buffer2,
+      int size2,
+      char const *tick_font,
+      int *used1,
+      int *used2);</pre>
+<p>Scans for fonts, returning their identifiers one at a time; or or builds a menu of fonts</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>context</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size1</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>buffer2</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>size2</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>tick_font</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used1</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>used2</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_out</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xfont_set_font_colours">xfont_set_font_colours</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_set_font_colours (<a href="#font_f">font_f</a> font,
+      <a href="os.html#os_gcol">os_gcol</a> bg_hint,
+      <a href="os.html#os_gcol">os_gcol</a> fill,
+      int offset);</pre>
+<p>Changes the current colours and (optionally) the current font - prefer ColourTrans_SetFontColours</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>bg_hint</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fill</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="font_set_font_colours">font_set_font_colours</h3>
+<pre>extern void font_set_font_colours (<a href="#font_f">font_f</a> font,
+      <a href="os.html#os_gcol">os_gcol</a> bg_hint,
+      <a href="os.html#os_gcol">os_gcol</a> fill,
+      int offset);</pre>
+<p>Changes the current colours and (optionally) the current font - prefer ColourTrans_SetFontColours</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>bg_hint</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fill</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xfont_set_palette">xfont_set_palette</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_set_palette (<a href="os.html#os_gcol">os_gcol</a> bg_hint,
+      <a href="os.html#os_gcol">os_gcol</a> fill,
+      int offset,
+      <a href="os.html#os_colour">os_colour</a> bg_hint_out,
+      <a href="os.html#os_colour">os_colour</a> fill_out);</pre>
+<p>Defines the anti-alias palette</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>bg_hint</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fill</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bg_hint_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>fill_out</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="font_set_palette">font_set_palette</h3>
+<pre>extern void font_set_palette (<a href="os.html#os_gcol">os_gcol</a> bg_hint,
+      <a href="os.html#os_gcol">os_gcol</a> fill,
+      int offset,
+      <a href="os.html#os_colour">os_colour</a> bg_hint_out,
+      <a href="os.html#os_colour">os_colour</a> fill_out);</pre>
+<p>Defines the anti-alias palette</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>bg_hint</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fill</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bg_hint_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>fill_out</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xfont_set_true_palette">xfont_set_true_palette</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_set_true_palette (<a href="os.html#os_gcol">os_gcol</a> bg_hint,
+      <a href="os.html#os_gcol">os_gcol</a> fill,
+      int offset,
+      <a href="os.html#os_colour">os_colour</a> bg_hint_out,
+      <a href="os.html#os_colour">os_colour</a> fill_out);</pre>
+<p>Defines the anti-alias palette with true colour values</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>bg_hint</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fill</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bg_hint_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>fill_out</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="font_set_true_palette">font_set_true_palette</h3>
+<pre>extern void font_set_true_palette (<a href="os.html#os_gcol">os_gcol</a> bg_hint,
+      <a href="os.html#os_gcol">os_gcol</a> fill,
+      int offset,
+      <a href="os.html#os_colour">os_colour</a> bg_hint_out,
+      <a href="os.html#os_colour">os_colour</a> fill_out);</pre>
+<p>Defines the anti-alias palette with true colour values</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>bg_hint</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fill</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bg_hint_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>fill_out</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xfont_read_thresholds">xfont_read_thresholds</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_read_thresholds (<a href="#font_thresholds">font_thresholds</a> *buffer);</pre>
+<p>Reads the list of threshold values for painting</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="font_read_thresholds">font_read_thresholds</h3>
+<pre>extern void font_read_thresholds (<a href="#font_thresholds">font_thresholds</a> *buffer);</pre>
+<p>Reads the list of threshold values for painting</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xfont_set_thresholds">xfont_set_thresholds</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_set_thresholds (<a href="#font_thresholds">font_thresholds</a> const *thresholds);</pre>
+<p>Defines the list of threshold values for painting</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>thresholds</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="font_set_thresholds">font_set_thresholds</h3>
+<pre>extern void font_set_thresholds (<a href="#font_thresholds">font_thresholds</a> const *thresholds);</pre>
+<p>Defines the list of threshold values for painting</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>thresholds</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xfont_find_caretj">xfont_find_caretj</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_find_caretj (char const *s,
+      int x,
+      int y,
+      int xjust,
+      int yjust,
+      char **split_point,
+      int *x_out,
+      int *y_out,
+      int *length_out,
+      int *index_out);</pre>
+<p>Finds where the caret is in a justified string</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xjust</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>yjust</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>split_point</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>x_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>y_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>length_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>index_out</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="font_find_caretj">font_find_caretj</h3>
+<pre>extern void font_find_caretj (char const *s,
+      int x,
+      int y,
+      int xjust,
+      int yjust,
+      char **split_point,
+      int *x_out,
+      int *y_out,
+      int *length_out,
+      int *index_out);</pre>
+<p>Finds where the caret is in a justified string</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xjust</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>yjust</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>split_point</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>x_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>y_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>length_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>index_out</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xfont_string_bbox">xfont_string_bbox</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_string_bbox (char const *s,
+      int *x0,
+      int *y0,
+      int *x1,
+      int *y1);</pre>
+<p>Measures the size of a string - prefer Font_ScanString</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>x0</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y0</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x1</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y1</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="font_string_bbox">font_string_bbox</h3>
+<pre>extern void font_string_bbox (char const *s,
+      int *x0,
+      int *y0,
+      int *x1,
+      int *y1);</pre>
+<p>Measures the size of a string - prefer Font_ScanString</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>s</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>x0</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>y0</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x1</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y1</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xfont_read_colour_table">xfont_read_colour_table</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_read_colour_table (<a href="#font_colour_table">font_colour_table</a> const *colour_table);</pre>
+<p>Reads the anti-alias colour table</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour_table</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="font_read_colour_table">font_read_colour_table</h3>
+<pre>extern void font_read_colour_table (<a href="#font_colour_table">font_colour_table</a> const *colour_table);</pre>
+<p>Reads the anti-alias colour table</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour_table</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xfont_make_bitmap">xfont_make_bitmap</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_make_bitmap (char const *font_name,
+      int xsize,
+      int ysize,
+      int xres,
+      int yres,
+      <a href="#font_bitmap_type">font_bitmap_type</a> flags);</pre>
+<p>Make a font bitmap file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>xsize</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ysize</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xres</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>yres</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="font_make_bitmap">font_make_bitmap</h3>
+<pre>extern void font_make_bitmap (char const *font_name,
+      int xsize,
+      int ysize,
+      int xres,
+      int yres,
+      <a href="#font_bitmap_type">font_bitmap_type</a> flags);</pre>
+<p>Make a font bitmap file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>xsize</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ysize</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xres</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>yres</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xfont_un_cache_file">xfont_un_cache_file</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_un_cache_file (char const *file_name,
+      osbool recache);</pre>
+<p>Deletes font cache information, or recaches it</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>recache</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="font_un_cache_file">font_un_cache_file</h3>
+<pre>extern void font_un_cache_file (char const *file_name,
+      osbool recache);</pre>
+<p>Deletes font cache information, or recaches it</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>recache</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xfont_set_font_max">xfont_set_font_max</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_set_font_max (int font_max,
+      int font_max1,
+      int font_max2,
+      int font_max3,
+      int font_max4,
+      int font_max5);</pre>
+<p>Sets the FontMax values</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font_max</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_max1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>font_max2</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>font_max3</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>font_max4</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>font_max5</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="font_set_font_max">font_set_font_max</h3>
+<pre>extern void font_set_font_max (int font_max,
+      int font_max1,
+      int font_max2,
+      int font_max3,
+      int font_max4,
+      int font_max5);</pre>
+<p>Sets the FontMax values</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font_max</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_max1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>font_max2</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>font_max3</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>font_max4</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>font_max5</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xfont_read_font_max">xfont_read_font_max</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_read_font_max (int *font_max,
+      int *font_max1,
+      int *font_max2,
+      int *font_max3,
+      int *font_max4,
+      int *font_max5);</pre>
+<p>Reads the FontMax values</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>font_max</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_max1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>font_max2</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>font_max3</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>font_max4</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>font_max5</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="font_read_font_max">font_read_font_max</h3>
+<pre>extern void font_read_font_max (int *font_max,
+      int *font_max1,
+      int *font_max2,
+      int *font_max3,
+      int *font_max4,
+      int *font_max5);</pre>
+<p>Reads the FontMax values</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>font_max</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>font_max1</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>font_max2</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>font_max3</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>font_max4</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>font_max5</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xfont_read_font_prefix">xfont_read_font_prefix</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_read_font_prefix (<a href="#font_f">font_f</a> font,
+      char *buffer,
+      int size,
+      char **end);</pre>
+<p>Finds the directory prefix for a given font handle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="font_read_font_prefix">font_read_font_prefix</h3>
+<pre>extern char *font_read_font_prefix (<a href="#font_f">font_f</a> font,
+      char *buffer,
+      int size);</pre>
+<p>Finds the directory prefix for a given font handle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>end</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xfont_switch_output_to_buffer">xfont_switch_output_to_buffer</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_switch_output_to_buffer (<a href="#font_output_flags">font_output_flags</a> flags,
+      byte *buffer,
+      char **end);</pre>
+<p>Switches output to a buffer, creating a Draw file structure</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="font_switch_output_to_buffer">font_switch_output_to_buffer</h3>
+<pre>extern char *font_switch_output_to_buffer (<a href="#font_output_flags">font_output_flags</a> flags,
+      byte *buffer);</pre>
+<p>Switches output to a buffer, creating a Draw file structure</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>end</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xfont_switch_output_to_buffer_flags">xfont_switch_output_to_buffer_flags</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_switch_output_to_buffer_flags (<a href="#font_output_flags">font_output_flags</a> *flags);</pre>
+<p>Returns the current output switch flags</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="font_switch_output_to_buffer_flags">font_switch_output_to_buffer_flags</h3>
+<pre>extern <a href="#font_output_flags">font_output_flags</a> font_switch_output_to_buffer_flags (void);
+</pre><p>Returns the current output switch flags</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>flags</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xfont_read_font_metrics">xfont_read_font_metrics</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_read_font_metrics (<a href="#font_f">font_f</a> font,
+      <a href="#font_bbox_info">font_bbox_info</a> *bbox_info,
+      <a href="#font_width_info">font_width_info</a> *xwidth_info,
+      <a href="#font_width_info">font_width_info</a> *ywidth_info,
+      <a href="#font_metrics_misc_info">font_metrics_misc_info</a> *misc_info,
+      <a href="#font_kern_info">font_kern_info</a> *kern_info,
+      <a href="#font_metric_flags">font_metric_flags</a> *flags,
+      int *bbox_info_size,
+      int *xwidth_info_size,
+      int *ywidth_info_size,
+      int *misc_info_size,
+      int *kern_info_size);</pre>
+<p>Reads the full metrics information held in a font's IntMetrics file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>bbox_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>xwidth_info</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ywidth_info</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>misc_info</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>kern_info</code></td><td>ignored in RISC OS 5+</td><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>bbox_info_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>xwidth_info_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ywidth_info_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>misc_info_size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>kern_info_size</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="font_read_font_metrics">font_read_font_metrics</h3>
+<pre>extern void font_read_font_metrics (<a href="#font_f">font_f</a> font,
+      <a href="#font_bbox_info">font_bbox_info</a> *bbox_info,
+      <a href="#font_width_info">font_width_info</a> *xwidth_info,
+      <a href="#font_width_info">font_width_info</a> *ywidth_info,
+      <a href="#font_metrics_misc_info">font_metrics_misc_info</a> *misc_info,
+      <a href="#font_kern_info">font_kern_info</a> *kern_info,
+      <a href="#font_metric_flags">font_metric_flags</a> *flags,
+      int *bbox_info_size,
+      int *xwidth_info_size,
+      int *ywidth_info_size,
+      int *misc_info_size,
+      int *kern_info_size);</pre>
+<p>Reads the full metrics information held in a font's IntMetrics file</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>bbox_info</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>xwidth_info</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ywidth_info</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>misc_info</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>kern_info</code></td><td>ignored in RISC OS 5+</td><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>bbox_info_size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>xwidth_info_size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ywidth_info_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>misc_info_size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>kern_info_size</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xfont_read_font_metrics_ucs">xfont_read_font_metrics_ucs</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_read_font_metrics_ucs (<a href="#font_f">font_f</a> font,
+      <a href="#font_metrics_misc_info">font_metrics_misc_info</a> *misc_info,
+      <a href="#font_kern_info_ucs">font_kern_info_ucs</a> *kern_info,
+      <a href="#font_metric_flags">font_metric_flags</a> *flags,
+      int *misc_info_size,
+      int *kern_info_size);</pre>
+<p>Reads the full metrics information held in a font's IntMetrics file for UCS fonts - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>misc_info</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>kern_info</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>misc_info_size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>kern_info_size</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="font_read_font_metrics_ucs">font_read_font_metrics_ucs</h3>
+<pre>extern void font_read_font_metrics_ucs (<a href="#font_f">font_f</a> font,
+      <a href="#font_metrics_misc_info">font_metrics_misc_info</a> *misc_info,
+      <a href="#font_kern_info_ucs">font_kern_info_ucs</a> *kern_info,
+      <a href="#font_metric_flags">font_metric_flags</a> *flags,
+      int *misc_info_size,
+      int *kern_info_size);</pre>
+<p>Reads the full metrics information held in a font's IntMetrics file for UCS fonts - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>misc_info</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>kern_info</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>misc_info_size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>kern_info_size</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xfont_decode_menu">xfont_decode_menu</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_decode_menu (<a href="#font_decode_flags">font_decode_flags</a> flags,
+      byte const *menu,
+      byte const *block,
+      byte *buffer,
+      int size,
+      int **next_selection,
+      int *used);</pre>
+<p>Decode a selection made from a font menu</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_selection</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="font_decode_menu">font_decode_menu</h3>
+<pre>extern void font_decode_menu (<a href="#font_decode_flags">font_decode_flags</a> flags,
+      byte const *menu,
+      byte const *block,
+      byte *buffer,
+      int size,
+      int **next_selection,
+      int *used);</pre>
+<p>Decode a selection made from a font menu</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_selection</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xfont_scan_string">xfont_scan_string</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_scan_string (<a href="#font_f">font_f</a> font,
+      char const *s,
+      <a href="#font_string_flags">font_string_flags</a> flags,
+      int x,
+      int y,
+      <a href="#font_scan_block">font_scan_block</a> *block,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      int length,
+      char **split_point,
+      int *x_out,
+      int *y_out,
+      int *num_split_chars);</pre>
+<p>Returns information on a string</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>s</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>split_point</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>x_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>num_split_chars</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="font_scan_string">font_scan_string</h3>
+<pre>extern void font_scan_string (<a href="#font_f">font_f</a> font,
+      char const *s,
+      <a href="#font_string_flags">font_string_flags</a> flags,
+      int x,
+      int y,
+      <a href="#font_scan_block">font_scan_block</a> *block,
+      <a href="os.html#os_trfm">os_trfm</a> const *trfm,
+      int length,
+      char **split_point,
+      int *x_out,
+      int *y_out,
+      int *num_split_chars);</pre>
+<p>Returns information on a string</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>s</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>x</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>block</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>trfm</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>split_point</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>x_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>y_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>num_split_chars</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="xfont_current_rgb">xfont_current_rgb</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_current_rgb (<a href="#font_f">font_f</a> *font,
+      <a href="os.html#os_colour">os_colour</a> *bg_hint,
+      <a href="os.html#os_colour">os_colour</a> *fill,
+      int *offset);</pre>
+<p>Reads the settings of colours after calling Font_Paint</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>bg_hint</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fill</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="font_current_rgb">font_current_rgb</h3>
+<pre>extern <a href="#font_f">font_f</a> font_current_rgb (<a href="os.html#os_colour">os_colour</a> *bg_hint,
+      <a href="os.html#os_colour">os_colour</a> *fill,
+      int *offset);</pre>
+<p>Reads the settings of colours after calling Font_Paint</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>bg_hint</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fill</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>font</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xfont_future_rgb">xfont_future_rgb</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_future_rgb (<a href="#font_f">font_f</a> *font,
+      <a href="os.html#os_colour">os_colour</a> *bg_hint,
+      <a href="os.html#os_colour">os_colour</a> *fill,
+      int *offset);</pre>
+<p>Reads the settings of colours after calling various Font... SWIs</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>bg_hint</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fill</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="font_future_rgb">font_future_rgb</h3>
+<pre>extern <a href="#font_f">font_f</a> font_future_rgb (<a href="os.html#os_colour">os_colour</a> *bg_hint,
+      <a href="os.html#os_colour">os_colour</a> *fill,
+      int *offset);</pre>
+<p>Reads the settings of colours after calling various Font... SWIs</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>bg_hint</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>fill</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>offset</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>font</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xfont_read_encoding_filename">xfont_read_encoding_filename</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_read_encoding_filename (<a href="#font_f">font_f</a> font,
+      char *buffer,
+      int size,
+      char **end);</pre>
+<p>Returns the file name of the encoding file used for a given font handle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="font_read_encoding_filename">font_read_encoding_filename</h3>
+<pre>extern char *font_read_encoding_filename (<a href="#font_f">font_f</a> font,
+      char *buffer,
+      int size);</pre>
+<p>Returns the file name of the encoding file used for a given font handle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>end</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xfont_find_field">xfont_find_field</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_find_field (char const *identifier,
+      char qualifier,
+      char **field,
+      osbool *found);</pre>
+<p>Returns a pointer to a specified field within a font identifier</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>identifier</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>qualifier</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>field</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>found</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="font_find_field">font_find_field</h3>
+<pre>extern osbool font_find_field (char const *identifier,
+      char qualifier,
+      char **field);</pre>
+<p>Returns a pointer to a specified field within a font identifier</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>identifier</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>qualifier</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>field</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>found</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xfont_apply_fields">xfont_apply_fields</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_apply_fields (char const *identifier,
+      char const *fields,
+      char *buffer,
+      int size,
+      int *spare);</pre>
+<p>Merges a new set of fields with those already in a given font identifier</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>identifier</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fields</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>spare</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="font_apply_fields">font_apply_fields</h3>
+<pre>extern int font_apply_fields (char const *identifier,
+      char const *fields,
+      char *buffer,
+      int size);</pre>
+<p>Merges a new set of fields with those already in a given font identifier</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>identifier</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fields</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>spare</td><td></td><td><code>R3<code></td></tr>
+</table>
+
+<h3 id="xfont_lookup_font">xfont_lookup_font</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_lookup_font (<a href="#font_f">font_f</a> font,
+      <a href="#font_characteristic_flags">font_characteristic_flags</a> *flags);</pre>
+<p>Returns information about a given font</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="font_lookup_font">font_lookup_font</h3>
+<pre>extern <a href="#font_characteristic_flags">font_characteristic_flags</a> font_lookup_font (<a href="#font_f">font_f</a> font);</pre>
+<p>Returns information about a given font</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>flags</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xfont_enumerate_characters">xfont_enumerate_characters</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfont_enumerate_characters (<a href="#font_f">font_f</a> font,
+      int character,
+      int *next_character,
+      int *internal_character_code);</pre>
+<p>Enumerate mapped characters - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>character</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_character</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>internal_character_code</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="font_enumerate_characters">font_enumerate_characters</h3>
+<pre>extern void font_enumerate_characters (<a href="#font_f">font_f</a> font,
+      int character,
+      int *next_character,
+      int *internal_character_code);</pre>
+<p>Enumerate mapped characters - RISC OS 5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>font</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>character</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>next_character</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>internal_character_code</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xservice_fonts_changed">xservice_fonts_changed</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_fonts_changed (void);
+</pre><p>New Font$Path detected</p>
+
+
+<table>
+</table>
+
+<h3 id="service_fonts_changed">service_fonts_changed</h3>
+<pre>extern void service_fonts_changed (void);
+</pre><p>New Font$Path detected</p>
+
+
+<table>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ClipboardHolder</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ClipboardHolder</h2>
+
+<pre>#include "oslib/clipboardholder.h"</pre>
+
+<h3 id="clipboardholderpaste_status_flags">clipboardholderpaste_status_flags</h3>
+<pre>typedef bits clipboardholderpaste_status_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#clipboardholderpastestatus_DELIVERABLE_TO_MEMORY">clipboardholderpastestatus_DELIVERABLE_TO_MEMORY</a></dd>
+<dd><a href="#clipboardholderpastestatus_DELIVERABLE_TO_FILE">clipboardholderpastestatus_DELIVERABLE_TO_FILE</a></dd>
+<dd><a href="#clipboardholderpastestatus_NEEDS_PROTOCOL">clipboardholderpastestatus_NEEDS_PROTOCOL</a></dd>
+</dl>
+
+<h3 id="clipboardholderpastestatus_DELIVERABLE_TO_MEMORY">clipboardholderpastestatus_DELIVERABLE_TO_MEMORY</h3>
+<pre>#define clipboardholderpastestatus_DELIVERABLE_TO_MEMORY ((<a href="#clipboardholderpaste_status_flags">clipboardholderpaste_status_flags</a>) 0x1u)</pre>
+
+<h3 id="clipboardholderpastestatus_DELIVERABLE_TO_FILE">clipboardholderpastestatus_DELIVERABLE_TO_FILE</h3>
+<pre>#define clipboardholderpastestatus_DELIVERABLE_TO_FILE ((<a href="#clipboardholderpaste_status_flags">clipboardholderpaste_status_flags</a>) 0x2u)</pre>
+
+<h3 id="clipboardholderpastestatus_NEEDS_PROTOCOL">clipboardholderpastestatus_NEEDS_PROTOCOL</h3>
+<pre>#define clipboardholderpastestatus_NEEDS_PROTOCOL ((<a href="#clipboardholderpaste_status_flags">clipboardholderpaste_status_flags</a>) 0x4u)</pre>
+
+<h3 id="xclipboardholdercopy_from_memory">xclipboardholdercopy_from_memory</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xclipboardholdercopy_from_memory (int filetype,
+      byte const *src,
+      int length);</pre>
+<p>Copies data from memory to the clipboard - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filetype</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>src</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="clipboardholdercopy_from_memory">clipboardholdercopy_from_memory</h3>
+<pre>extern void clipboardholdercopy_from_memory (int filetype,
+      byte const *src,
+      int length);</pre>
+<p>Copies data from memory to the clipboard - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filetype</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>src</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xclipboardholdercopy_from_file">xclipboardholdercopy_from_file</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xclipboardholdercopy_from_file (int filetype,
+      char const *filename);</pre>
+<p>Copies data from file to the clipboard - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filetype</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="clipboardholdercopy_from_file">clipboardholdercopy_from_file</h3>
+<pre>extern void clipboardholdercopy_from_file (int filetype,
+      char const *filename);</pre>
+<p>Copies data from file to the clipboard - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>filetype</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xclipboardholderpaste_get_state">xclipboardholderpaste_get_state</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xclipboardholderpaste_get_state (int pref_filetype,
+      <a href="#clipboardholderpaste_status_flags">clipboardholderpaste_status_flags</a> *status,
+      int *filetype);</pre>
+<p>Get status and filetype - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pref_filetype</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>filetype</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="clipboardholderpaste_get_state">clipboardholderpaste_get_state</h3>
+<pre>extern <a href="#clipboardholderpaste_status_flags">clipboardholderpaste_status_flags</a> clipboardholderpaste_get_state (int pref_filetype,
+      int *filetype);</pre>
+<p>Get status and filetype - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pref_filetype</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>filetype</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xclipboardholderpaste_to_memory">xclipboardholderpaste_to_memory</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xclipboardholderpaste_to_memory (int pref_filetype,
+      <a href="wimp.html#wimp_w">wimp_w</a> window_handle,
+      int handle,
+      <a href="#clipboardholderpaste_status_flags">clipboardholderpaste_status_flags</a> *status,
+      int *filetype,
+      byte **src,
+      int *length);</pre>
+<p>Request data to 'paste' from the clipboard to memory - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pref_filetype</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>window_handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>filetype</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>src</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="clipboardholderpaste_to_memory">clipboardholderpaste_to_memory</h3>
+<pre>extern <a href="#clipboardholderpaste_status_flags">clipboardholderpaste_status_flags</a> clipboardholderpaste_to_memory (int pref_filetype,
+      <a href="wimp.html#wimp_w">wimp_w</a> window_handle,
+      int handle,
+      int *filetype,
+      byte **src,
+      int *length);</pre>
+<p>Request data to 'paste' from the clipboard to memory - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pref_filetype</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>window_handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>filetype</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>src</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xclipboardholderpaste_to_file">xclipboardholderpaste_to_file</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xclipboardholderpaste_to_file (int pref_filetype,
+      <a href="wimp.html#wimp_w">wimp_w</a> window_handle,
+      int handle,
+      <a href="#clipboardholderpaste_status_flags">clipboardholderpaste_status_flags</a> *status,
+      int *filetype,
+      char **filename);</pre>
+<p>Request data to 'paste' from the clipboard to file - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pref_filetype</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>window_handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>filetype</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="clipboardholderpaste_to_file">clipboardholderpaste_to_file</h3>
+<pre>extern <a href="#clipboardholderpaste_status_flags">clipboardholderpaste_status_flags</a> clipboardholderpaste_to_file (int pref_filetype,
+      <a href="wimp.html#wimp_w">wimp_w</a> window_handle,
+      int handle,
+      int *filetype,
+      char **filename);</pre>
+<p>Request data to 'paste' from the clipboard to file - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>pref_filetype</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>window_handle</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>filetype</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

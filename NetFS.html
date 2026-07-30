@@ -1,0 +1,2054 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; NetFS</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>NetFS</h2>
+
+<pre>#include "oslib/netfs.h"</pre>
+
+<h3 id="netfs_fs_op">netfs_fs_op</h3>
+<pre>typedef byte netfs_fs_op;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#netfs_FS_OP_CLI">netfs_FS_OP_CLI</a></dd>
+<dd><a href="#netfs_FS_OP_SAVE">netfs_FS_OP_SAVE</a></dd>
+<dd><a href="#netfs_FS_OP_LOAD">netfs_FS_OP_LOAD</a></dd>
+<dd><a href="#netfs_FS_OP_CAT">netfs_FS_OP_CAT</a></dd>
+<dd><a href="#netfs_FS_OP_LOAD_AS">netfs_FS_OP_LOAD_AS</a></dd>
+<dd><a href="#netfs_FS_OP_OPEN">netfs_FS_OP_OPEN</a></dd>
+<dd><a href="#netfs_FS_OP_CLOSE">netfs_FS_OP_CLOSE</a></dd>
+<dd><a href="#netfs_FS_OP_BGET">netfs_FS_OP_BGET</a></dd>
+<dd><a href="#netfs_FS_OP_BPUT">netfs_FS_OP_BPUT</a></dd>
+<dd><a href="#netfs_FS_OP_GBPB_READ">netfs_FS_OP_GBPB_READ</a></dd>
+<dd><a href="#netfs_FS_OP_GBPB_WRITE">netfs_FS_OP_GBPB_WRITE</a></dd>
+<dd><a href="#netfs_FS_OP_READ_ARGS">netfs_FS_OP_READ_ARGS</a></dd>
+<dd><a href="#netfs_FS_OP_SET_ARGS">netfs_FS_OP_SET_ARGS</a></dd>
+<dd><a href="#netfs_FS_OP_READ_DISC_INFO">netfs_FS_OP_READ_DISC_INFO</a></dd>
+<dd><a href="#netfs_FS_OP_READ_LOGON_INFO">netfs_FS_OP_READ_LOGON_INFO</a></dd>
+<dd><a href="#netfs_FS_OP_READ_DATE_AND_TIME">netfs_FS_OP_READ_DATE_AND_TIME</a></dd>
+<dd><a href="#netfs_FS_OP_READ_EOF_STATUS">netfs_FS_OP_READ_EOF_STATUS</a></dd>
+<dd><a href="#netfs_FS_OP_READ_OBJECT">netfs_FS_OP_READ_OBJECT</a></dd>
+<dd><a href="#netfs_FS_OP_SET_OBJECT">netfs_FS_OP_SET_OBJECT</a></dd>
+<dd><a href="#netfs_FS_OP_DELETE_OBJECT">netfs_FS_OP_DELETE_OBJECT</a></dd>
+<dd><a href="#netfs_FS_OP_READ_ENV">netfs_FS_OP_READ_ENV</a></dd>
+<dd><a href="#netfs_FS_OP_OPT">netfs_FS_OP_OPT</a></dd>
+<dd><a href="#netfs_FS_OP_LOGOFF">netfs_FS_OP_LOGOFF</a></dd>
+<dd><a href="#netfs_FS_OP_READ_USER_INFO">netfs_FS_OP_READ_USER_INFO</a></dd>
+<dd><a href="#netfs_FS_OP_READ_VERSION">netfs_FS_OP_READ_VERSION</a></dd>
+<dd><a href="#netfs_FS_OP_READ_FREE">netfs_FS_OP_READ_FREE</a></dd>
+<dd><a href="#netfs_FS_OP_CREATE_DIR">netfs_FS_OP_CREATE_DIR</a></dd>
+<dd><a href="#netfs_FS_OP_SET_DATE_AND_TIME">netfs_FS_OP_SET_DATE_AND_TIME</a></dd>
+<dd><a href="#netfs_FS_OP_CREATE">netfs_FS_OP_CREATE</a></dd>
+<dd><a href="#netfs_FS_OP_READ_USER_FREE">netfs_FS_OP_READ_USER_FREE</a></dd>
+<dd><a href="#netfs_FS_OP_SET_USER_FREE">netfs_FS_OP_SET_USER_FREE</a></dd>
+<dd><a href="#netfs_FS_OP_READ_USER_NAME">netfs_FS_OP_READ_USER_NAME</a></dd>
+<dd><a href="#netfs_FS_OP_READ_LOGON_INFO_EXTENDED">netfs_FS_OP_READ_LOGON_INFO_EXTENDED</a></dd>
+<dd><a href="#netfs_FS_OP_READ_USER_INFO_EXTENDED">netfs_FS_OP_READ_USER_INFO_EXTENDED</a></dd>
+<dd><a href="#netfs_FS_OP_MANAGER_OP">netfs_FS_OP_MANAGER_OP</a></dd>
+</dl>
+
+<h3 id="netfs_fs_op_ex_type">netfs_fs_op_ex_type</h3>
+<pre>typedef byte netfs_fs_op_ex_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#netfs_FS_OP_EX">netfs_FS_OP_EX</a></dd>
+<dd><a href="#netfs_FS_OP_EX_TEXT">netfs_FS_OP_EX_TEXT</a></dd>
+<dd><a href="#netfs_FS_OP_EX_TITLE">netfs_FS_OP_EX_TITLE</a></dd>
+<dd><a href="#netfs_FS_OP_EX_TITLE_TEXT">netfs_FS_OP_EX_TITLE_TEXT</a></dd>
+</dl>
+
+<h3 id="netfs_fs_op_args_type">netfs_fs_op_args_type</h3>
+<pre>typedef byte netfs_fs_op_args_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#netfs_FS_OP_ARGS_PTR">netfs_FS_OP_ARGS_PTR</a></dd>
+<dd><a href="#netfs_FS_OP_ARGS_EXT">netfs_FS_OP_ARGS_EXT</a></dd>
+<dd><a href="#netfs_FS_OP_ARGS_SIZE">netfs_FS_OP_ARGS_SIZE</a></dd>
+</dl>
+
+<h3 id="netfs_fs_op_read_object_type">netfs_fs_op_read_object_type</h3>
+<pre>typedef byte netfs_fs_op_read_object_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#netfs_FS_OP_READ_OBJECT_STAMP">netfs_FS_OP_READ_OBJECT_STAMP</a></dd>
+<dd><a href="#netfs_FS_OP_READ_OBJECT_LOAD_AND_EXEC_ADDR">netfs_FS_OP_READ_OBJECT_LOAD_AND_EXEC_ADDR</a></dd>
+<dd><a href="#netfs_FS_OP_READ_OBJECT_SIZE">netfs_FS_OP_READ_OBJECT_SIZE</a></dd>
+<dd><a href="#netfs_FS_OP_READ_OBJECT_ATTR">netfs_FS_OP_READ_OBJECT_ATTR</a></dd>
+<dd><a href="#netfs_FS_OP_READ_OBJECT_ALL_INFO">netfs_FS_OP_READ_OBJECT_ALL_INFO</a></dd>
+<dd><a href="#netfs_FS_OP_READ_OBJECT_ATTR_AND_CYCLE_NO">netfs_FS_OP_READ_OBJECT_ATTR_AND_CYCLE_NO</a></dd>
+<dd><a href="#netfs_FS_OP_READ_OBJECT_SIN">netfs_FS_OP_READ_OBJECT_SIN</a></dd>
+</dl>
+
+<h3 id="netfs_fs_op_set_object_type">netfs_fs_op_set_object_type</h3>
+<pre>typedef byte netfs_fs_op_set_object_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#netfs_FS_OP_SET_OBJECT_LOAD_EXEC_AND_ATTR">netfs_FS_OP_SET_OBJECT_LOAD_EXEC_AND_ATTR</a></dd>
+<dd><a href="#netfs_FS_OP_SET_OBJECT_LOAD_ADDR">netfs_FS_OP_SET_OBJECT_LOAD_ADDR</a></dd>
+<dd><a href="#netfs_FS_OP_SET_OBJECT_EXEC_ADDR">netfs_FS_OP_SET_OBJECT_EXEC_ADDR</a></dd>
+<dd><a href="#netfs_FS_OP_SET_OBJECT_ATTR">netfs_FS_OP_SET_OBJECT_ATTR</a></dd>
+<dd><a href="#netfs_FS_OP_SET_OBJECT_STAMP">netfs_FS_OP_SET_OBJECT_STAMP</a></dd>
+</dl>
+
+<h3 id="netfs_fs_op_manager_op_type">netfs_fs_op_manager_op_type</h3>
+<pre>typedef byte netfs_fs_op_manager_op_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#netfs_FS_OP_MANAGER_OP_READ_PASSWORD_COUNT">netfs_FS_OP_MANAGER_OP_READ_PASSWORD_COUNT</a></dd>
+<dd><a href="#netfs_FS_OP_MANAGER_OP_READ_PASSWORD">netfs_FS_OP_MANAGER_OP_READ_PASSWORD</a></dd>
+<dd><a href="#netfs_FS_OP_MANAGER_OP_WRITE_PASSWORD">netfs_FS_OP_MANAGER_OP_WRITE_PASSWORD</a></dd>
+<dd><a href="#netfs_FS_OP_MANAGER_OP_ADD_USER">netfs_FS_OP_MANAGER_OP_ADD_USER</a></dd>
+<dd><a href="#netfs_FS_OP_MANAGER_OP_REMOVE_USER">netfs_FS_OP_MANAGER_OP_REMOVE_USER</a></dd>
+<dd><a href="#netfs_FS_OP_MANAGER_OP_SET_PRIVILEGE">netfs_FS_OP_MANAGER_OP_SET_PRIVILEGE</a></dd>
+<dd><a href="#netfs_FS_OP_MANAGER_OP_LOGOFF_USER">netfs_FS_OP_MANAGER_OP_LOGOFF_USER</a></dd>
+<dd><a href="#netfs_FS_OP_MANAGER_OP_SHUTDOWN">netfs_FS_OP_MANAGER_OP_SHUTDOWN</a></dd>
+</dl>
+
+<h3 id="netfs_cli_request">netfs_cli_request</h3>
+<pre>typedef struct
+   {  char command [256];
+   }
+   netfs_cli_request;</pre>
+
+<h3 id="netfs_save_request">netfs_save_request</h3>
+<pre>typedef struct
+   {  bits load_addr;
+      bits exec_addr;
+      byte size [3];
+      char file_name [256];
+   }
+   netfs_save_request;</pre>
+
+<h3 id="netfs_save_reply">netfs_save_reply</h3>
+<pre>typedef struct
+   {  byte port;
+      byte block_limit [2];
+      char leaf_name [10];
+   }
+   netfs_save_reply;</pre>
+
+<h3 id="netfs_save_final_reply">netfs_save_final_reply</h3>
+<pre>typedef struct
+   {  byte attr;
+      byte date [2];
+   }
+   netfs_save_final_reply;</pre>
+
+<h3 id="netfs_load_request">netfs_load_request</h3>
+<pre>typedef struct
+   {  char file_name [256];
+   }
+   netfs_load_request;</pre>
+
+<h3 id="netfs_load_reply">netfs_load_reply</h3>
+<pre>typedef struct
+   {  bits load_addr;
+      bits exec_addr;
+      byte size [3];
+      byte attr;
+      byte date [2];
+      char file_name [256];
+   }
+   netfs_load_reply;</pre>
+
+<h3 id="netfs_ex_request">netfs_ex_request</h3>
+<pre>typedef struct
+   {  <a href="#netfs_fs_op_ex_type">netfs_fs_op_ex_type</a> ex_type;
+      byte entry;
+      byte count;
+      char dir_name [256];
+   }
+   netfs_ex_request;</pre>
+
+<h3 id="netfs_cat_request">netfs_cat_request</h3>
+<pre>typedef struct
+   {  char dir_name [256];
+   }
+   netfs_cat_request;</pre>
+
+<h3 id="netfs_cat_reply">netfs_cat_reply</h3>
+<pre>typedef struct
+   {  char leaf_name [10];
+      char reserved1;
+      char owner;
+      byte reserved2 [3];
+      char disc_name [16];
+   }
+   netfs_cat_reply;</pre>
+
+<h3 id="netfs_open_request">netfs_open_request</h3>
+<pre>typedef struct
+   {  byte error_if_absent;
+      byte read_only;
+      char file_name [256];
+   }
+   netfs_open_request;</pre>
+
+<h3 id="netfs_open_reply">netfs_open_reply</h3>
+<pre>typedef struct
+   {  byte handle;
+      char leaf_name [10];
+   }
+   netfs_open_reply;</pre>
+
+<h3 id="netfs_close_request">netfs_close_request</h3>
+<pre>typedef struct
+   {  byte handle;
+   }
+   netfs_close_request;</pre>
+
+<h3 id="netfs_bget_request">netfs_bget_request</h3>
+<pre>typedef struct
+   {  byte handle;
+   }
+   netfs_bget_request;</pre>
+
+<h3 id="netfs_bget_reply">netfs_bget_reply</h3>
+<pre>typedef struct
+   {  byte b;
+      byte terminator;
+   }
+   netfs_bget_reply;</pre>
+
+<h3 id="netfs_bput_request">netfs_bput_request</h3>
+<pre>typedef struct
+   {  byte handle;
+      byte b;
+   }
+   netfs_bput_request;</pre>
+
+<h3 id="netfs_gbpb_request">netfs_gbpb_request</h3>
+<pre>typedef struct
+   {  byte handle;
+      byte read_next;
+      byte size [3];
+      byte ptr [3];
+   }
+   netfs_gbpb_request;</pre>
+
+<h3 id="netfs_gbpb_reply">netfs_gbpb_reply</h3>
+<pre>typedef struct
+   {  byte final_block;
+      byte size [3];
+   }
+   netfs_gbpb_reply;</pre>
+
+<h3 id="netfs_read_args_request">netfs_read_args_request</h3>
+<pre>typedef struct
+   {  <a href="#netfs_fs_op_args_type">netfs_fs_op_args_type</a> args_type;
+   }
+   netfs_read_args_request;</pre>
+
+<h3 id="netfs_read_args_reply">netfs_read_args_reply</h3>
+<pre>typedef struct
+   {  byte arg [3];
+   }
+   netfs_read_args_reply;</pre>
+
+<h3 id="netfs_set_args_request">netfs_set_args_request</h3>
+<pre>typedef struct
+   {  <a href="#netfs_fs_op_args_type">netfs_fs_op_args_type</a> args_type;
+      byte arg [3];
+   }
+   netfs_set_args_request;</pre>
+
+<h3 id="netfs_read_disc_info_request">netfs_read_disc_info_request</h3>
+<pre>typedef struct
+   {  byte first;
+      byte count;
+   }
+   netfs_read_disc_info_request;</pre>
+
+<h3 id="netfs_disc_info">netfs_disc_info</h3>
+<pre>typedef struct
+   {  byte phys_no;
+      char disc_name [16];
+   }
+   netfs_disc_info;</pre>
+
+<h3 id="netfs_READ_DISC_INFO_REPLY_MEMBERS">netfs_READ_DISC_INFO_REPLY_MEMBERS</h3>
+<pre>#define netfs_READ_DISC_INFO_REPLY_MEMBERS \
+   byte count;
+</pre>
+
+<h3 id="netfs_read_disc_info_reply_base">netfs_read_disc_info_reply_base</h3>
+<pre>typedef struct
+   {  byte count;
+   }
+   netfs_read_disc_info_reply_base;</pre>
+
+<h3 id="netfs_read_disc_info_reply">netfs_read_disc_info_reply</h3>
+<pre>typedef struct
+   {  byte count;
+      <a href="#netfs_disc_info">netfs_disc_info</a> info [...];
+   }
+   netfs_read_disc_info_reply;</pre>
+
+<h3 id="netfs_read_logon_info_request">netfs_read_logon_info_request</h3>
+<pre>typedef struct
+   {  byte first;
+      byte count;
+   }
+   netfs_read_logon_info_request;</pre>
+
+<h3 id="netfs_logon_info">netfs_logon_info</h3>
+<pre>typedef struct
+   {  byte station;
+      byte net;
+      byte user_name [22];
+      byte privilege;
+   }
+   netfs_logon_info;</pre>
+
+<p>Structure repeats</p>
+
+
+Fields:	user_name - User name terminated by 13
+ 	privilege - Privilege byte immediately follows user_name<h3 id="netfs_READ_LOGON_INFO_REPLY_MEMBERS">netfs_READ_LOGON_INFO_REPLY_MEMBERS</h3>
+<pre>#define netfs_READ_LOGON_INFO_REPLY_MEMBERS \
+   byte count;
+</pre>
+
+<h3 id="netfs_read_logon_info_reply_base">netfs_read_logon_info_reply_base</h3>
+<pre>typedef struct
+   {  byte count;
+   }
+   netfs_read_logon_info_reply_base;</pre>
+
+<h3 id="netfs_read_logon_info_reply">netfs_read_logon_info_reply</h3>
+<pre>typedef struct
+   {  byte count;
+      <a href="#netfs_logon_info">netfs_logon_info</a> info [...];
+   }
+   netfs_read_logon_info_reply;</pre>
+
+<h3 id="netfs_read_date_and_time_reply">netfs_read_date_and_time_reply</h3>
+<pre>typedef struct
+   {  byte date [2];
+      byte hr;
+      byte min;
+      byte s;
+   }
+   netfs_read_date_and_time_reply;</pre>
+
+<h3 id="netfs_read_eof_status_request">netfs_read_eof_status_request</h3>
+<pre>typedef struct
+   {  byte handle;
+   }
+   netfs_read_eof_status_request;</pre>
+
+<h3 id="netfs_read_eof_status_reply">netfs_read_eof_status_reply</h3>
+<pre>typedef struct
+   {  byte eof_status;
+   }
+   netfs_read_eof_status_reply;</pre>
+
+<h3 id="netfs_read_object_request">netfs_read_object_request</h3>
+<pre>typedef struct
+   {  <a href="#netfs_fs_op_read_object_type">netfs_fs_op_read_object_type</a> read_type;
+      char file_name [256];
+   }
+   netfs_read_object_request;</pre>
+
+<h3 id="netfs_delete_object_request">netfs_delete_object_request</h3>
+<pre>typedef struct
+   {  char file_name [256];
+   }
+   netfs_delete_object_request;</pre>
+
+<h3 id="netfs_delete_object_reply">netfs_delete_object_reply</h3>
+<pre>typedef struct
+   {  bits load_addr;
+      bits exec_addr;
+      byte size [3];
+      byte attr;
+   }
+   netfs_delete_object_reply;</pre>
+
+<h3 id="netfs_read_env_reply">netfs_read_env_reply</h3>
+<pre>typedef struct
+   {  byte len;
+      char disc_name [16];
+      char csd_name [10];
+      char lib_name [10];
+   }
+   netfs_read_env_reply;</pre>
+
+<h3 id="netfs_opt_request">netfs_opt_request</h3>
+<pre>typedef struct
+   {  byte opt;
+   }
+   netfs_opt_request;</pre>
+
+<h3 id="netfs_read_user_info_request">netfs_read_user_info_request</h3>
+<pre>typedef struct
+   {  char user_name [22];
+   }
+   netfs_read_user_info_request;</pre>
+
+<h3 id="netfs_read_user_info_reply">netfs_read_user_info_reply</h3>
+<pre>typedef struct
+   {  byte privilege;
+      byte station;
+      byte net;
+   }
+   netfs_read_user_info_reply;</pre>
+
+<h3 id="netfs_read_version_reply">netfs_read_version_reply</h3>
+<pre>typedef struct
+   {  char type [10];
+      char version [4];
+   }
+   netfs_read_version_reply;</pre>
+
+<h3 id="netfs_read_free_request">netfs_read_free_request</h3>
+<pre>typedef struct
+   {  char disc_name [16];
+   }
+   netfs_read_free_request;</pre>
+
+<h3 id="netfs_read_free_reply">netfs_read_free_reply</h3>
+<pre>typedef struct
+   {  byte free_sector_count [3];
+      byte sector_count [3];
+   }
+   netfs_read_free_reply;</pre>
+
+<h3 id="netfs_create_dir_request">netfs_create_dir_request</h3>
+<pre>typedef struct
+   {  byte sector_count;
+      char dir_name [256];
+   }
+   netfs_create_dir_request;</pre>
+
+<h3 id="netfs_set_date_and_time_request">netfs_set_date_and_time_request</h3>
+<pre>typedef struct
+   {  byte date [2];
+      byte hr;
+      byte min;
+      byte s;
+   }
+   netfs_set_date_and_time_request;</pre>
+
+<h3 id="netfs_create_request">netfs_create_request</h3>
+<pre>typedef struct
+   {  bits load_addr;
+      bits exec_addr;
+      byte size [3];
+      char file_name [256];
+   }
+   netfs_create_request;</pre>
+
+<h3 id="netfs_create_reply">netfs_create_reply</h3>
+<pre>typedef struct
+   {  byte attr;
+      byte date [2];
+   }
+   netfs_create_reply;</pre>
+
+<h3 id="netfs_read_user_free_request">netfs_read_user_free_request</h3>
+<pre>typedef struct
+   {  char user_name [22];
+   }
+   netfs_read_user_free_request;</pre>
+
+<h3 id="netfs_read_user_free_reply">netfs_read_user_free_reply</h3>
+<pre>typedef struct
+   {  byte user_free [3];
+   }
+   netfs_read_user_free_reply;</pre>
+
+<h3 id="netfs_set_user_free_request">netfs_set_user_free_request</h3>
+<pre>typedef struct
+   {  byte user_free [3];
+      char user_name [22];
+   }
+   netfs_set_user_free_request;</pre>
+
+<h3 id="netfs_read_user_name_reply">netfs_read_user_name_reply</h3>
+<pre>typedef struct
+   {  char user_name [22];
+   }
+   netfs_read_user_name_reply;</pre>
+
+<h3 id="netfs_logon_info_extended">netfs_logon_info_extended</h3>
+<pre>typedef struct
+   {  byte station;
+      byte net;
+      byte task;
+      byte user_name [22];
+      byte privilege;
+   }
+   netfs_logon_info_extended;</pre>
+
+<h3 id="netfs_read_logon_info_extended_request">netfs_read_logon_info_extended_request</h3>
+<pre>typedef struct
+   {  byte first;
+      byte count;
+   }
+   netfs_read_logon_info_extended_request;</pre>
+
+<h3 id="netfs_READ_LOGON_INFO_EXTENDED_REPLY_MEMBERS">netfs_READ_LOGON_INFO_EXTENDED_REPLY_MEMBERS</h3>
+<pre>#define netfs_READ_LOGON_INFO_EXTENDED_REPLY_MEMBERS \
+   byte count;
+</pre>
+
+<h3 id="netfs_read_logon_info_extended_reply_base">netfs_read_logon_info_extended_reply_base</h3>
+<pre>typedef struct
+   {  byte count;
+   }
+   netfs_read_logon_info_extended_reply_base;</pre>
+
+<h3 id="netfs_read_logon_info_extended_reply">netfs_read_logon_info_extended_reply</h3>
+<pre>typedef struct
+   {  byte count;
+      <a href="#netfs_logon_info_extended">netfs_logon_info_extended</a> info [...];
+   }
+   netfs_read_logon_info_extended_reply;</pre>
+
+<h3 id="netfs_read_user_info_extended_request">netfs_read_user_info_extended_request</h3>
+<pre>typedef struct
+   {  char user_name;
+   }
+   netfs_read_user_info_extended_request;</pre>
+
+<h3 id="netfs_read_user_info_extended_reply">netfs_read_user_info_extended_reply</h3>
+<pre>typedef struct
+   {  byte privilege;
+      byte station;
+      byte net;
+      byte task;
+   }
+   netfs_read_user_info_extended_reply;</pre>
+
+<h3 id="netfs_cli_info_reply">netfs_cli_info_reply</h3>
+<pre>typedef struct
+   {  char file_name [10];
+      char reserved1;
+      char load_addr [9];
+      char exec_addr [9];
+      char reserved2 [2];
+      char length [7];
+      char reserved3 [2];
+      char access [7];
+      char reserved4 [4];
+      char date [9];
+      char sin [6];
+      byte terminator;
+   }
+   netfs_cli_info_reply;</pre>
+
+<h3 id="netfs_clii_am_reply">netfs_clii_am_reply</h3>
+<pre>typedef struct
+   {  byte urd;
+      byte csd;
+      byte lib;
+      byte opt;
+   }
+   netfs_clii_am_reply;</pre>
+
+<h3 id="netfs_clis_disc_reply">netfs_clis_disc_reply</h3>
+<pre>typedef struct
+   {  byte urd;
+      byte csd;
+      byte lib;
+   }
+   netfs_clis_disc_reply;</pre>
+
+<h3 id="netfs_cli_dir_reply">netfs_cli_dir_reply</h3>
+<pre>typedef struct
+   {  byte csd;
+   }
+   netfs_cli_dir_reply;</pre>
+
+<h3 id="netfs_cli_unknown_reply">netfs_cli_unknown_reply</h3>
+<pre>typedef struct
+   {  char command [256];
+   }
+   netfs_cli_unknown_reply;</pre>
+
+<h3 id="netfs_cli_lib_reply">netfs_cli_lib_reply</h3>
+<pre>typedef struct
+   {  byte lib;
+   }
+   netfs_cli_lib_reply;</pre>
+
+<h3 id="netfs_ex_reply">netfs_ex_reply</h3>
+<pre>typedef struct
+   {  byte ex_count;
+      byte dir_count;
+      char name [10];
+      bits load_addr;
+      bits exec_addr;
+      byte attr;
+      byte date [2];
+      byte sin [3];
+      byte size [3];
+   }
+   netfs_ex_reply;</pre>
+
+<h3 id="netfs_ex_text_reply">netfs_ex_text_reply</h3>
+<pre>typedef struct
+   {  byte ex_count;
+      byte dir_count;
+      char text [1];
+   }
+   netfs_ex_text_reply;</pre>
+
+<h3 id="netfs_ex_title_reply">netfs_ex_title_reply</h3>
+<pre>typedef struct
+   {  byte ex_count;
+      byte dir_count;
+      byte len;
+      char name [10];
+   }
+   netfs_ex_title_reply;</pre>
+
+<h3 id="netfs_ex_title_text_reply">netfs_ex_title_text_reply</h3>
+<pre>typedef struct
+   {  byte ex_count;
+      byte dir_count;
+      char text [1];
+   }
+   netfs_ex_title_text_reply;</pre>
+
+<h3 id="netfs_read_object_stamp_reply">netfs_read_object_stamp_reply</h3>
+<pre>typedef struct
+   {  byte date [2];
+   }
+   netfs_read_object_stamp_reply;</pre>
+
+<h3 id="netfs_read_object_load_and_exec_addr_reply">netfs_read_object_load_and_exec_addr_reply</h3>
+<pre>typedef struct
+   {  bits load_addr;
+      bits exec_addr;
+   }
+   netfs_read_object_load_and_exec_addr_reply;</pre>
+
+<h3 id="netfs_read_object_size_reply">netfs_read_object_size_reply</h3>
+<pre>typedef struct
+   {  byte size [3];
+   }
+   netfs_read_object_size_reply;</pre>
+
+<h3 id="netfs_read_object_attr_reply">netfs_read_object_attr_reply</h3>
+<pre>typedef struct
+   {  byte attr;
+   }
+   netfs_read_object_attr_reply;</pre>
+
+<h3 id="netfs_read_object_all_info_reply">netfs_read_object_all_info_reply</h3>
+<pre>typedef struct
+   {  bits load_addr;
+      bits exec_addr;
+      byte size [3];
+      byte attr;
+      byte date [2];
+      byte access [2];
+   }
+   netfs_read_object_all_info_reply;</pre>
+
+<h3 id="netfs_read_object_attr_and_cycle_no_reply">netfs_read_object_attr_and_cycle_no_reply</h3>
+<pre>typedef struct
+   {  byte reserved [2];
+      byte len;
+      byte dir_name [10];
+      byte access;
+      byte count;
+   }
+   netfs_read_object_attr_and_cycle_no_reply;</pre>
+
+<h3 id="netfs_read_object_sin_reply">netfs_read_object_sin_reply</h3>
+<pre>typedef struct
+   {  byte obj_type;
+      byte sin [6];
+   }
+   netfs_read_object_sin_reply;</pre>
+
+<h3 id="netfs_set_object_load_exec_and_attr_request">netfs_set_object_load_exec_and_attr_request</h3>
+<pre>typedef struct
+   {  <a href="#netfs_fs_op_set_object_type">netfs_fs_op_set_object_type</a> set_type;
+      bits load_addr;
+      bits exec_addr;
+      byte attr;
+   }
+   netfs_set_object_load_exec_and_attr_request;</pre>
+
+<h3 id="netfs_set_object_load_addr_request">netfs_set_object_load_addr_request</h3>
+<pre>typedef struct
+   {  <a href="#netfs_fs_op_set_object_type">netfs_fs_op_set_object_type</a> set_type;
+      bits load_addr;
+   }
+   netfs_set_object_load_addr_request;</pre>
+
+<h3 id="netfs_set_object_exec_addr_request">netfs_set_object_exec_addr_request</h3>
+<pre>typedef struct
+   {  <a href="#netfs_fs_op_set_object_type">netfs_fs_op_set_object_type</a> set_type;
+      bits exec_addr;
+   }
+   netfs_set_object_exec_addr_request;</pre>
+
+<h3 id="netfs_set_object_attr_request">netfs_set_object_attr_request</h3>
+<pre>typedef struct
+   {  <a href="#netfs_fs_op_set_object_type">netfs_fs_op_set_object_type</a> set_type;
+      byte attr;
+   }
+   netfs_set_object_attr_request;</pre>
+
+<h3 id="netfs_set_object_stamp_request">netfs_set_object_stamp_request</h3>
+<pre>typedef struct
+   {  <a href="#netfs_fs_op_set_object_type">netfs_fs_op_set_object_type</a> set_type;
+      byte date [2];
+   }
+   netfs_set_object_stamp_request;</pre>
+
+<h3 id="netfs_manager_op_read_password_count_request">netfs_manager_op_read_password_count_request</h3>
+<pre>typedef struct
+   {  <a href="#netfs_fs_op_manager_op_type">netfs_fs_op_manager_op_type</a> req_no;
+   }
+   netfs_manager_op_read_password_count_request;</pre>
+
+<h3 id="netfs_manager_op_read_password_count_reply">netfs_manager_op_read_password_count_reply</h3>
+<pre>typedef struct
+   {  int user_count;
+   }
+   netfs_manager_op_read_password_count_reply;</pre>
+
+<h3 id="netfs_manager_op_read_password_request">netfs_manager_op_read_password_request</h3>
+<pre>typedef struct
+   {  <a href="#netfs_fs_op_manager_op_type">netfs_fs_op_manager_op_type</a> req_no;
+      byte user_no [2];
+   }
+   netfs_manager_op_read_password_request;</pre>
+
+<h3 id="netfs_manager_op_read_password_reply">netfs_manager_op_read_password_reply</h3>
+<pre>typedef struct
+   {  int index;
+      byte privilege;
+      byte opt;
+      char reserved [4];
+      byte station;
+      byte net;
+      byte logon_permitted;
+      char user_name [22];
+      char password [23];
+      char urd_name [10];
+   }
+   netfs_manager_op_read_password_reply;</pre>
+
+<h3 id="netfs_manager_op_write_password_request">netfs_manager_op_write_password_request</h3>
+<pre>typedef struct
+   {  <a href="#netfs_fs_op_manager_op_type">netfs_fs_op_manager_op_type</a> req_no;
+      char reserved1 [4];
+      byte privilege;
+      byte opt;
+      byte reserved2 [6];
+      byte logon_permitted;
+      char user_name [22];
+      char password [23];
+      char urd_name [10];
+   }
+   netfs_manager_op_write_password_request;</pre>
+
+<h3 id="netfs_manager_op_add_user_request">netfs_manager_op_add_user_request</h3>
+<pre>typedef struct
+   {  <a href="#netfs_fs_op_manager_op_type">netfs_fs_op_manager_op_type</a> req_no;
+      char user_name [22];
+   }
+   netfs_manager_op_add_user_request;</pre>
+
+<h3 id="netfs_manager_op_remove_user_request">netfs_manager_op_remove_user_request</h3>
+<pre>typedef struct
+   {  <a href="#netfs_fs_op_manager_op_type">netfs_fs_op_manager_op_type</a> req_no;
+      char user_name [22];
+   }
+   netfs_manager_op_remove_user_request;</pre>
+
+<h3 id="netfs_manager_op_set_privilege_request">netfs_manager_op_set_privilege_request</h3>
+<pre>typedef struct
+   {  <a href="#netfs_fs_op_manager_op_type">netfs_fs_op_manager_op_type</a> req_no;
+      char user_name [22];
+      byte privilege;
+   }
+   netfs_manager_op_set_privilege_request;</pre>
+
+<h3 id="netfs_manager_op_logoff_user_request">netfs_manager_op_logoff_user_request</h3>
+<pre>typedef struct
+   {  <a href="#netfs_fs_op_manager_op_type">netfs_fs_op_manager_op_type</a> req_no;
+      char user_name [22];
+   }
+   netfs_manager_op_logoff_user_request;</pre>
+
+<h3 id="netfs_cli">netfs_cli</h3>
+<pre>typedef union
+   {  <a href="#netfs_cli_request">netfs_cli_request</a> request;
+      <a href="#netfs_cli_info_reply">netfs_cli_info_reply</a> info_reply;
+      <a href="#netfs_clii_am_reply">netfs_clii_am_reply</a> i_am_reply;
+      <a href="#netfs_clis_disc_reply">netfs_clis_disc_reply</a> s_disc_reply;
+      <a href="#netfs_cli_dir_reply">netfs_cli_dir_reply</a> dir_reply;
+      <a href="#netfs_cli_unknown_reply">netfs_cli_unknown_reply</a> unknown_reply;
+      <a href="#netfs_cli_lib_reply">netfs_cli_lib_reply</a> lib_reply;
+   }
+   netfs_cli;</pre>
+
+<h3 id="netfs_save">netfs_save</h3>
+<pre>typedef union
+   {  <a href="#netfs_save_request">netfs_save_request</a> request;
+      <a href="#netfs_save_reply">netfs_save_reply</a> reply;
+      <a href="#netfs_save_final_reply">netfs_save_final_reply</a> final_reply;
+   }
+   netfs_save;</pre>
+
+<h3 id="netfs_load">netfs_load</h3>
+<pre>typedef union
+   {  <a href="#netfs_load_request">netfs_load_request</a> request;
+      <a href="#netfs_load_reply">netfs_load_reply</a> reply;
+   }
+   netfs_load;</pre>
+
+<h3 id="netfs_ex">netfs_ex</h3>
+<pre>typedef union
+   {  <a href="#netfs_ex_request">netfs_ex_request</a> request;
+      <a href="#netfs_ex_reply">netfs_ex_reply</a> reply;
+      <a href="#netfs_ex_text_reply">netfs_ex_text_reply</a> text_reply;
+      <a href="#netfs_ex_title_reply">netfs_ex_title_reply</a> title_reply;
+      <a href="#netfs_ex_title_text_reply">netfs_ex_title_text_reply</a> title_text_reply;
+   }
+   netfs_ex;</pre>
+
+<h3 id="netfs_cat">netfs_cat</h3>
+<pre>typedef union
+   {  <a href="#netfs_cat_request">netfs_cat_request</a> request;
+      <a href="#netfs_cat_reply">netfs_cat_reply</a> reply;
+   }
+   netfs_cat;</pre>
+
+<h3 id="netfs_open">netfs_open</h3>
+<pre>typedef union
+   {  <a href="#netfs_open_request">netfs_open_request</a> request;
+      <a href="#netfs_open_reply">netfs_open_reply</a> reply;
+   }
+   netfs_open;</pre>
+
+<h3 id="netfs_close">netfs_close</h3>
+<pre>typedef union
+   {  <a href="#netfs_close_request">netfs_close_request</a> request;
+   }
+   netfs_close;</pre>
+
+<h3 id="netfs_bget">netfs_bget</h3>
+<pre>typedef union
+   {  <a href="#netfs_bget_request">netfs_bget_request</a> request;
+      <a href="#netfs_bget_reply">netfs_bget_reply</a> reply;
+   }
+   netfs_bget;</pre>
+
+<h3 id="netfs_bput">netfs_bput</h3>
+<pre>typedef union
+   {  <a href="#netfs_bput_request">netfs_bput_request</a> request;
+   }
+   netfs_bput;</pre>
+
+<h3 id="netfs_gbpb">netfs_gbpb</h3>
+<pre>typedef union
+   {  <a href="#netfs_gbpb_request">netfs_gbpb_request</a> request;
+      <a href="#netfs_gbpb_reply">netfs_gbpb_reply</a> reply;
+   }
+   netfs_gbpb;</pre>
+
+<h3 id="netfs_read_args">netfs_read_args</h3>
+<pre>typedef union
+   {  <a href="#netfs_read_args_request">netfs_read_args_request</a> request;
+      <a href="#netfs_read_args_reply">netfs_read_args_reply</a> reply;
+   }
+   netfs_read_args;</pre>
+
+<h3 id="netfs_set_args">netfs_set_args</h3>
+<pre>typedef union
+   {  <a href="#netfs_set_args_request">netfs_set_args_request</a> request;
+   }
+   netfs_set_args;</pre>
+
+<h3 id="netfs_read_disc_info">netfs_read_disc_info</h3>
+<pre>typedef union
+   {  <a href="#netfs_read_disc_info_request">netfs_read_disc_info_request</a> request;
+      <a href="#netfs_read_disc_info_reply">netfs_read_disc_info_reply</a> reply;
+   }
+   netfs_read_disc_info;</pre>
+
+<h3 id="netfs_read_logon_info">netfs_read_logon_info</h3>
+<pre>typedef union
+   {  <a href="#netfs_read_logon_info_request">netfs_read_logon_info_request</a> request;
+      <a href="#netfs_read_logon_info_reply">netfs_read_logon_info_reply</a> reply;
+   }
+   netfs_read_logon_info;</pre>
+
+<h3 id="netfs_read_date_and_time">netfs_read_date_and_time</h3>
+<pre>typedef union
+   {  <a href="#netfs_read_date_and_time_reply">netfs_read_date_and_time_reply</a> reply;
+   }
+   netfs_read_date_and_time;</pre>
+
+<h3 id="netfs_read_eof_status">netfs_read_eof_status</h3>
+<pre>typedef union
+   {  <a href="#netfs_read_eof_status_request">netfs_read_eof_status_request</a> request;
+      <a href="#netfs_read_eof_status_reply">netfs_read_eof_status_reply</a> reply;
+   }
+   netfs_read_eof_status;</pre>
+
+<h3 id="netfs_read_object">netfs_read_object</h3>
+<pre>typedef union
+   {  <a href="#netfs_read_object_request">netfs_read_object_request</a> request;
+      <a href="#netfs_read_object_stamp_reply">netfs_read_object_stamp_reply</a> stamp_reply;
+      <a href="#netfs_read_object_load_and_exec_addr_reply">netfs_read_object_load_and_exec_addr_reply</a> load_and_exec_addr_reply;
+      <a href="#netfs_read_object_size_reply">netfs_read_object_size_reply</a> size_reply;
+      <a href="#netfs_read_object_attr_reply">netfs_read_object_attr_reply</a> attr_reply;
+      <a href="#netfs_read_object_all_info_reply">netfs_read_object_all_info_reply</a> all_info_reply;
+      <a href="#netfs_read_object_attr_and_cycle_no_reply">netfs_read_object_attr_and_cycle_no_reply</a> attr_and_cycle_no_reply;
+      <a href="#netfs_read_object_sin_reply">netfs_read_object_sin_reply</a> sin_reply;
+   }
+   netfs_read_object;</pre>
+
+<h3 id="netfs_set_object">netfs_set_object</h3>
+<pre>typedef union
+   {  <a href="#netfs_set_object_load_exec_and_attr_request">netfs_set_object_load_exec_and_attr_request</a> load_exec_and_attr_request;
+      <a href="#netfs_set_object_load_addr_request">netfs_set_object_load_addr_request</a> load_addr_request;
+      <a href="#netfs_set_object_exec_addr_request">netfs_set_object_exec_addr_request</a> exec_addr_request;
+      <a href="#netfs_set_object_attr_request">netfs_set_object_attr_request</a> attr_request;
+      <a href="#netfs_set_object_stamp_request">netfs_set_object_stamp_request</a> stamp_request;
+   }
+   netfs_set_object;</pre>
+
+<h3 id="netfs_delete_object">netfs_delete_object</h3>
+<pre>typedef union
+   {  <a href="#netfs_delete_object_request">netfs_delete_object_request</a> request;
+      <a href="#netfs_delete_object_reply">netfs_delete_object_reply</a> reply;
+   }
+   netfs_delete_object;</pre>
+
+<h3 id="netfs_read_env">netfs_read_env</h3>
+<pre>typedef union
+   {  <a href="#netfs_read_env_reply">netfs_read_env_reply</a> reply;
+   }
+   netfs_read_env;</pre>
+
+<h3 id="netfs_opt">netfs_opt</h3>
+<pre>typedef union
+   {  <a href="#netfs_opt_request">netfs_opt_request</a> request;
+   }
+   netfs_opt;</pre>
+
+<h3 id="netfs_read_user_info">netfs_read_user_info</h3>
+<pre>typedef union
+   {  <a href="#netfs_read_user_info_request">netfs_read_user_info_request</a> request;
+      <a href="#netfs_read_user_info_reply">netfs_read_user_info_reply</a> reply;
+   }
+   netfs_read_user_info;</pre>
+
+<h3 id="netfs_read_version">netfs_read_version</h3>
+<pre>typedef union
+   {  <a href="#netfs_read_version_reply">netfs_read_version_reply</a> reply;
+   }
+   netfs_read_version;</pre>
+
+<h3 id="netfs_read_free">netfs_read_free</h3>
+<pre>typedef union
+   {  <a href="#netfs_read_free_request">netfs_read_free_request</a> request;
+      <a href="#netfs_read_free_reply">netfs_read_free_reply</a> reply;
+   }
+   netfs_read_free;</pre>
+
+<h3 id="netfs_create_dir">netfs_create_dir</h3>
+<pre>typedef union
+   {  <a href="#netfs_create_dir_request">netfs_create_dir_request</a> request;
+   }
+   netfs_create_dir;</pre>
+
+<h3 id="netfs_set_date_and_time">netfs_set_date_and_time</h3>
+<pre>typedef union
+   {  <a href="#netfs_set_date_and_time_request">netfs_set_date_and_time_request</a> request;
+   }
+   netfs_set_date_and_time;</pre>
+
+<h3 id="netfs_create">netfs_create</h3>
+<pre>typedef union
+   {  <a href="#netfs_create_request">netfs_create_request</a> request;
+      <a href="#netfs_create_reply">netfs_create_reply</a> reply;
+   }
+   netfs_create;</pre>
+
+<h3 id="netfs_read_user_free">netfs_read_user_free</h3>
+<pre>typedef union
+   {  <a href="#netfs_read_user_free_request">netfs_read_user_free_request</a> request;
+      <a href="#netfs_read_user_free_reply">netfs_read_user_free_reply</a> reply;
+   }
+   netfs_read_user_free;</pre>
+
+<h3 id="netfs_set_user_free">netfs_set_user_free</h3>
+<pre>typedef union
+   {  <a href="#netfs_set_user_free_request">netfs_set_user_free_request</a> request;
+   }
+   netfs_set_user_free;</pre>
+
+<h3 id="netfs_read_user_name">netfs_read_user_name</h3>
+<pre>typedef union
+   {  <a href="#netfs_read_user_name_reply">netfs_read_user_name_reply</a> reply;
+   }
+   netfs_read_user_name;</pre>
+
+<h3 id="netfs_read_logon_info_extended">netfs_read_logon_info_extended</h3>
+<pre>typedef union
+   {  <a href="#netfs_read_logon_info_extended_request">netfs_read_logon_info_extended_request</a> request;
+      <a href="#netfs_read_logon_info_extended_reply">netfs_read_logon_info_extended_reply</a> reply;
+   }
+   netfs_read_logon_info_extended;</pre>
+
+<h3 id="netfs_read_user_info_extended">netfs_read_user_info_extended</h3>
+<pre>typedef union
+   {  <a href="#netfs_read_user_info_extended_request">netfs_read_user_info_extended_request</a> request;
+      <a href="#netfs_read_user_info_extended_reply">netfs_read_user_info_extended_reply</a> reply;
+   }
+   netfs_read_user_info_extended;</pre>
+
+<h3 id="netfs_manager_op_read_password_count">netfs_manager_op_read_password_count</h3>
+<pre>typedef union
+   {  <a href="#netfs_manager_op_read_password_count_request">netfs_manager_op_read_password_count_request</a> request;
+      <a href="#netfs_manager_op_read_password_count_reply">netfs_manager_op_read_password_count_reply</a> reply;
+   }
+   netfs_manager_op_read_password_count;</pre>
+
+<h3 id="netfs_manager_op_read_password">netfs_manager_op_read_password</h3>
+<pre>typedef union
+   {  <a href="#netfs_manager_op_read_password_request">netfs_manager_op_read_password_request</a> request;
+      <a href="#netfs_manager_op_read_password_reply">netfs_manager_op_read_password_reply</a> reply;
+   }
+   netfs_manager_op_read_password;</pre>
+
+<h3 id="netfs_manager_op_write_password">netfs_manager_op_write_password</h3>
+<pre>typedef union
+   {  <a href="#netfs_manager_op_write_password_request">netfs_manager_op_write_password_request</a> request;
+   }
+   netfs_manager_op_write_password;</pre>
+
+<h3 id="netfs_manager_op_add_user">netfs_manager_op_add_user</h3>
+<pre>typedef union
+   {  <a href="#netfs_manager_op_add_user_request">netfs_manager_op_add_user_request</a> request;
+   }
+   netfs_manager_op_add_user;</pre>
+
+<h3 id="netfs_manager_op_remove_user">netfs_manager_op_remove_user</h3>
+<pre>typedef union
+   {  <a href="#netfs_manager_op_remove_user_request">netfs_manager_op_remove_user_request</a> request;
+   }
+   netfs_manager_op_remove_user;</pre>
+
+<h3 id="netfs_manager_op_set_privilege">netfs_manager_op_set_privilege</h3>
+<pre>typedef union
+   {  <a href="#netfs_manager_op_set_privilege_request">netfs_manager_op_set_privilege_request</a> request;
+   }
+   netfs_manager_op_set_privilege;</pre>
+
+<h3 id="netfs_manager_op_logoff_user">netfs_manager_op_logoff_user</h3>
+<pre>typedef union
+   {  <a href="#netfs_manager_op_logoff_user_request">netfs_manager_op_logoff_user_request</a> request;
+   }
+   netfs_manager_op_logoff_user;</pre>
+
+<h3 id="netfs_op">netfs_op</h3>
+<pre>typedef union
+   {  <a href="#netfs_cli">netfs_cli</a> cli;
+      <a href="#netfs_save">netfs_save</a> save;
+      <a href="#netfs_load">netfs_load</a> load;
+      <a href="#netfs_ex">netfs_ex</a> ex;
+      <a href="#netfs_cat">netfs_cat</a> cat;
+      <a href="#netfs_open">netfs_open</a> open;
+      <a href="#netfs_close">netfs_close</a> close;
+      <a href="#netfs_bget">netfs_bget</a> bget;
+      <a href="#netfs_bput">netfs_bput</a> bput;
+      <a href="#netfs_gbpb">netfs_gbpb</a> gbpb;
+      <a href="#netfs_read_args">netfs_read_args</a> read_args;
+      <a href="#netfs_set_args">netfs_set_args</a> set_args;
+      <a href="#netfs_read_disc_info">netfs_read_disc_info</a> read_disc_info;
+      <a href="#netfs_read_logon_info">netfs_read_logon_info</a> read_logon_info;
+      <a href="#netfs_read_date_and_time">netfs_read_date_and_time</a> read_date_and_time;
+      <a href="#netfs_read_eof_status">netfs_read_eof_status</a> read_eof_status;
+      <a href="#netfs_read_object">netfs_read_object</a> read_object;
+      <a href="#netfs_set_object">netfs_set_object</a> set_object;
+      <a href="#netfs_delete_object">netfs_delete_object</a> delete_object;
+      <a href="#netfs_read_env">netfs_read_env</a> read_env;
+      <a href="#netfs_opt">netfs_opt</a> opt;
+      <a href="#netfs_read_user_info">netfs_read_user_info</a> read_user_info;
+      <a href="#netfs_read_version">netfs_read_version</a> read_version;
+      <a href="#netfs_read_free">netfs_read_free</a> read_free;
+      <a href="#netfs_create_dir">netfs_create_dir</a> create_dir;
+      <a href="#netfs_set_date_and_time">netfs_set_date_and_time</a> set_date_and_time;
+      <a href="#netfs_create">netfs_create</a> create;
+      <a href="#netfs_read_user_free">netfs_read_user_free</a> read_user_free;
+      <a href="#netfs_set_user_free">netfs_set_user_free</a> set_user_free;
+      <a href="#netfs_read_user_name">netfs_read_user_name</a> read_user_name;
+      <a href="#netfs_read_logon_info_extended">netfs_read_logon_info_extended</a> read_logon_info_extended;
+      <a href="#netfs_read_user_info_extended">netfs_read_user_info_extended</a> read_user_info_extended;
+      <a href="#netfs_manager_op_read_password_count">netfs_manager_op_read_password_count</a> manager_op_read_password_count;
+      <a href="#netfs_manager_op_read_password">netfs_manager_op_read_password</a> manager_op_read_password;
+      <a href="#netfs_manager_op_write_password">netfs_manager_op_write_password</a> manager_op_write_password;
+      <a href="#netfs_manager_op_add_user">netfs_manager_op_add_user</a> manager_op_add_user;
+      <a href="#netfs_manager_op_remove_user">netfs_manager_op_remove_user</a> manager_op_remove_user;
+      <a href="#netfs_manager_op_set_privilege">netfs_manager_op_set_privilege</a> manager_op_set_privilege;
+      <a href="#netfs_manager_op_logoff_user">netfs_manager_op_logoff_user</a> manager_op_logoff_user;
+   }
+   netfs_op;</pre>
+
+<h3 id="netfs_file_server">netfs_file_server</h3>
+<pre>typedef struct
+   {  byte station_no;
+      byte net_no;
+      byte drive;
+      char disc_name [16];
+      byte reserved;
+   }
+   netfs_file_server;</pre>
+
+<h3 id="netfs_date_and_time">netfs_date_and_time</h3>
+<pre>typedef byte netfs_date_and_time [5];</pre>
+
+<h3 id="netfs_file_server_context">netfs_file_server_context</h3>
+<pre>typedef struct
+   {  byte station_no;
+      byte net_no;
+      byte reserved1;
+      char disc_name [16];
+      byte reserved2;
+      char user_name [22];
+      byte reserved3;
+      byte reserved4;
+   }
+   netfs_file_server_context;</pre>
+
+<h3 id="netfs_LEAF_NAME_LIMIT">netfs_LEAF_NAME_LIMIT</h3>
+<pre>#define netfs_LEAF_NAME_LIMIT 10</pre>
+
+<h3 id="netfs_DISC_NAME_LIMIT">netfs_DISC_NAME_LIMIT</h3>
+<pre>#define netfs_DISC_NAME_LIMIT 16</pre>
+
+<h3 id="netfs_USER_NAME_LIMIT">netfs_USER_NAME_LIMIT</h3>
+<pre>#define netfs_USER_NAME_LIMIT 22</pre>
+
+<h3 id="netfs_PASSWORD_LIMIT">netfs_PASSWORD_LIMIT</h3>
+<pre>#define netfs_PASSWORD_LIMIT 23</pre>
+
+<h3 id="netfs_FILE_NAME_LIMIT">netfs_FILE_NAME_LIMIT</h3>
+<pre>#define netfs_FILE_NAME_LIMIT 256</pre>
+
+<h3 id="netfs_CLI_LIMIT">netfs_CLI_LIMIT</h3>
+<pre>#define netfs_CLI_LIMIT 256</pre>
+
+<h3 id="error_NET_FS_BAD_NAME">error_NET_FS_BAD_NAME</h3>
+<pre>#define error_NET_FS_BAD_NAME 0x10500u</pre>
+
+<p>Bad file server name</p>
+
+<h3 id="error_NET_FS_BAD_COMMAND_CODE">error_NET_FS_BAD_COMMAND_CODE</h3>
+<pre>#define error_NET_FS_BAD_COMMAND_CODE 0x10501u</pre>
+
+<p>Bad file server command code</p>
+
+<h3 id="error_NET_FS_UNEXPECTED_COMMAND_CODE">error_NET_FS_UNEXPECTED_COMMAND_CODE</h3>
+<pre>#define error_NET_FS_UNEXPECTED_COMMAND_CODE 0x10502u</pre>
+
+<p>Unexpected file server command code</p>
+
+<h3 id="error_NET_FS_UNKNOWN_FUNCTION_CODE">error_NET_FS_UNKNOWN_FUNCTION_CODE</h3>
+<pre>#define error_NET_FS_UNKNOWN_FUNCTION_CODE 0x10503u</pre>
+
+<p>Unknown function code</p>
+
+<h3 id="error_NET_FS_UNKNOWN_STATION_NAME">error_NET_FS_UNKNOWN_STATION_NAME</h3>
+<pre>#define error_NET_FS_UNKNOWN_STATION_NAME 0x10504u</pre>
+
+<p>Unknown station name</p>
+
+<h3 id="error_NET_FS_UNKNOWN_STATION_NUMBER">error_NET_FS_UNKNOWN_STATION_NUMBER</h3>
+<pre>#define error_NET_FS_UNKNOWN_STATION_NUMBER 0x10505u</pre>
+
+<p>Unknown station number</p>
+
+<h3 id="error_NET_FS_STATION_NOT_FOUND">error_NET_FS_STATION_NOT_FOUND</h3>
+<pre>#define error_NET_FS_STATION_NOT_FOUND 0x10506u</pre>
+
+<p>Station name not found</p>
+
+<h3 id="error_NET_FS_FILE_SERVER_NAME_TOO_LONG">error_NET_FS_FILE_SERVER_NAME_TOO_LONG</h3>
+<pre>#define error_NET_FS_FILE_SERVER_NAME_TOO_LONG 0x10507u</pre>
+
+<p>File server name too long</p>
+
+<h3 id="error_NET_FS_BAD_FILE_SERVER_DATE">error_NET_FS_BAD_FILE_SERVER_DATE</h3>
+<pre>#define error_NET_FS_BAD_FILE_SERVER_DATE 0x10508u</pre>
+
+<p>Bad date</p>
+
+<h3 id="error_NET_FS_NET_FS_INTERNAL_ERROR">error_NET_FS_NET_FS_INTERNAL_ERROR</h3>
+<pre>#define error_NET_FS_NET_FS_INTERNAL_ERROR 0x10509u</pre>
+
+<p>Fatal internal error</p>
+
+<h3 id="error_NET_FS_FILE_SERVER_NOT_CAPABLE">error_NET_FS_FILE_SERVER_NOT_CAPABLE</h3>
+<pre>#define error_NET_FS_FILE_SERVER_NOT_CAPABLE 0x1050Au</pre>
+
+<p>Not possible on this file server</p>
+
+<h3 id="error_NET_FS_BROADCAST_SERVER_DEAD">error_NET_FS_BROADCAST_SERVER_DEAD</h3>
+<pre>#define error_NET_FS_BROADCAST_SERVER_DEAD 0x1050Bu</pre>
+
+<p>Broadcast server not responding</p>
+
+<h3 id="error_NET_FS_FILE_SERVER_ONLY24_BIT">error_NET_FS_FILE_SERVER_ONLY24_BIT</h3>
+<pre>#define error_NET_FS_FILE_SERVER_ONLY24_BIT 0x1050Cu</pre>
+
+<p>File too big</p>
+
+<h3 id="error_NET_UTILS_WRONG_VERSION">error_NET_UTILS_WRONG_VERSION</h3>
+<pre>#define error_NET_UTILS_WRONG_VERSION 0x1053Au</pre>
+
+<p>NetFS isn't version 5.78</p>
+
+<h3 id="error_NET_UTILS_NET_FS_NO_GO">error_NET_UTILS_NET_FS_NO_GO</h3>
+<pre>#define error_NET_UTILS_NET_FS_NO_GO 0x1053Bu</pre>
+
+<p>NetFS isn't running as a filing system</p>
+
+<h3 id="error_NET_UTILS_IS_THREADED">error_NET_UTILS_IS_THREADED</h3>
+<pre>#define error_NET_UTILS_IS_THREADED 0x1053Cu</pre>
+
+<p>You can't kill NetUtils</p>
+
+<h3 id="error_NET_FS_SET_FREE_SYNTAX">error_NET_FS_SET_FREE_SYNTAX</h3>
+<pre>#define error_NET_FS_SET_FREE_SYNTAX 0x10540u</pre>
+
+<p>Syntax: *SetFree <Username> <FreeSpace (in hex)>, ErrorNumber_Syntax</p>
+
+<h3 id="error_NET_FS_FS_CLI_SYNTAX">error_NET_FS_FS_CLI_SYNTAX</h3>
+<pre>#define error_NET_FS_FS_CLI_SYNTAX 0x10541u</pre>
+
+<p>Syntax: *FSCLI <string>, ErrorNumber_Syntax</p>
+
+<h3 id="netfs_FS_OP_CLI">netfs_FS_OP_CLI</h3>
+<pre>#define netfs_FS_OP_CLI ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x0u)</pre>
+
+<h3 id="netfs_FS_OP_SAVE">netfs_FS_OP_SAVE</h3>
+<pre>#define netfs_FS_OP_SAVE ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x1u)</pre>
+
+<h3 id="netfs_FS_OP_LOAD">netfs_FS_OP_LOAD</h3>
+<pre>#define netfs_FS_OP_LOAD ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x2u)</pre>
+
+<h3 id="netfs_FS_OP_EX">netfs_FS_OP_EX</h3>
+<pre>#define netfs_FS_OP_EX ((<a href="#netfs_fs_op_ex_type">netfs_fs_op_ex_type</a>) 0x0u)</pre>
+
+<h3 id="netfs_FS_OP_CAT">netfs_FS_OP_CAT</h3>
+<pre>#define netfs_FS_OP_CAT ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x4u)</pre>
+
+<h3 id="netfs_FS_OP_LOAD_AS">netfs_FS_OP_LOAD_AS</h3>
+<pre>#define netfs_FS_OP_LOAD_AS ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x5u)</pre>
+
+<h3 id="netfs_FS_OP_OPEN">netfs_FS_OP_OPEN</h3>
+<pre>#define netfs_FS_OP_OPEN ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x6u)</pre>
+
+<h3 id="netfs_FS_OP_CLOSE">netfs_FS_OP_CLOSE</h3>
+<pre>#define netfs_FS_OP_CLOSE ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x7u)</pre>
+
+<h3 id="netfs_FS_OP_BGET">netfs_FS_OP_BGET</h3>
+<pre>#define netfs_FS_OP_BGET ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x8u)</pre>
+
+<h3 id="netfs_FS_OP_BPUT">netfs_FS_OP_BPUT</h3>
+<pre>#define netfs_FS_OP_BPUT ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x9u)</pre>
+
+<h3 id="netfs_FS_OP_GBPB_READ">netfs_FS_OP_GBPB_READ</h3>
+<pre>#define netfs_FS_OP_GBPB_READ ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0xAu)</pre>
+
+<h3 id="netfs_FS_OP_GBPB_WRITE">netfs_FS_OP_GBPB_WRITE</h3>
+<pre>#define netfs_FS_OP_GBPB_WRITE ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0xBu)</pre>
+
+<h3 id="netfs_FS_OP_READ_ARGS">netfs_FS_OP_READ_ARGS</h3>
+<pre>#define netfs_FS_OP_READ_ARGS ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0xCu)</pre>
+
+<h3 id="netfs_FS_OP_SET_ARGS">netfs_FS_OP_SET_ARGS</h3>
+<pre>#define netfs_FS_OP_SET_ARGS ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0xDu)</pre>
+
+<h3 id="netfs_FS_OP_READ_DISC_INFO">netfs_FS_OP_READ_DISC_INFO</h3>
+<pre>#define netfs_FS_OP_READ_DISC_INFO ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0xEu)</pre>
+
+<h3 id="netfs_FS_OP_READ_LOGON_INFO">netfs_FS_OP_READ_LOGON_INFO</h3>
+<pre>#define netfs_FS_OP_READ_LOGON_INFO ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0xFu)</pre>
+
+<h3 id="netfs_FS_OP_READ_DATE_AND_TIME">netfs_FS_OP_READ_DATE_AND_TIME</h3>
+<pre>#define netfs_FS_OP_READ_DATE_AND_TIME ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x10u)</pre>
+
+<h3 id="netfs_FS_OP_READ_EOF_STATUS">netfs_FS_OP_READ_EOF_STATUS</h3>
+<pre>#define netfs_FS_OP_READ_EOF_STATUS ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x11u)</pre>
+
+<h3 id="netfs_FS_OP_READ_OBJECT">netfs_FS_OP_READ_OBJECT</h3>
+<pre>#define netfs_FS_OP_READ_OBJECT ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x12u)</pre>
+
+<h3 id="netfs_FS_OP_SET_OBJECT">netfs_FS_OP_SET_OBJECT</h3>
+<pre>#define netfs_FS_OP_SET_OBJECT ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x13u)</pre>
+
+<h3 id="netfs_FS_OP_DELETE_OBJECT">netfs_FS_OP_DELETE_OBJECT</h3>
+<pre>#define netfs_FS_OP_DELETE_OBJECT ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x14u)</pre>
+
+<h3 id="netfs_FS_OP_READ_ENV">netfs_FS_OP_READ_ENV</h3>
+<pre>#define netfs_FS_OP_READ_ENV ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x15u)</pre>
+
+<h3 id="netfs_FS_OP_OPT">netfs_FS_OP_OPT</h3>
+<pre>#define netfs_FS_OP_OPT ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x16u)</pre>
+
+<h3 id="netfs_FS_OP_LOGOFF">netfs_FS_OP_LOGOFF</h3>
+<pre>#define netfs_FS_OP_LOGOFF ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x17u)</pre>
+
+<h3 id="netfs_FS_OP_READ_USER_INFO">netfs_FS_OP_READ_USER_INFO</h3>
+<pre>#define netfs_FS_OP_READ_USER_INFO ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x18u)</pre>
+
+<h3 id="netfs_FS_OP_READ_VERSION">netfs_FS_OP_READ_VERSION</h3>
+<pre>#define netfs_FS_OP_READ_VERSION ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x19u)</pre>
+
+<h3 id="netfs_FS_OP_READ_FREE">netfs_FS_OP_READ_FREE</h3>
+<pre>#define netfs_FS_OP_READ_FREE ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x1Au)</pre>
+
+<h3 id="netfs_FS_OP_CREATE_DIR">netfs_FS_OP_CREATE_DIR</h3>
+<pre>#define netfs_FS_OP_CREATE_DIR ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x1Bu)</pre>
+
+<h3 id="netfs_FS_OP_SET_DATE_AND_TIME">netfs_FS_OP_SET_DATE_AND_TIME</h3>
+<pre>#define netfs_FS_OP_SET_DATE_AND_TIME ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x1Cu)</pre>
+
+<h3 id="netfs_FS_OP_CREATE">netfs_FS_OP_CREATE</h3>
+<pre>#define netfs_FS_OP_CREATE ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x1Du)</pre>
+
+<h3 id="netfs_FS_OP_READ_USER_FREE">netfs_FS_OP_READ_USER_FREE</h3>
+<pre>#define netfs_FS_OP_READ_USER_FREE ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x1Eu)</pre>
+
+<h3 id="netfs_FS_OP_SET_USER_FREE">netfs_FS_OP_SET_USER_FREE</h3>
+<pre>#define netfs_FS_OP_SET_USER_FREE ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x1Fu)</pre>
+
+<h3 id="netfs_FS_OP_READ_USER_NAME">netfs_FS_OP_READ_USER_NAME</h3>
+<pre>#define netfs_FS_OP_READ_USER_NAME ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x20u)</pre>
+
+<h3 id="netfs_FS_OP_READ_LOGON_INFO_EXTENDED">netfs_FS_OP_READ_LOGON_INFO_EXTENDED</h3>
+<pre>#define netfs_FS_OP_READ_LOGON_INFO_EXTENDED ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x21u)</pre>
+
+<h3 id="netfs_FS_OP_READ_USER_INFO_EXTENDED">netfs_FS_OP_READ_USER_INFO_EXTENDED</h3>
+<pre>#define netfs_FS_OP_READ_USER_INFO_EXTENDED ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x22u)</pre>
+
+<h3 id="netfs_FS_OP_MANAGER_OP">netfs_FS_OP_MANAGER_OP</h3>
+<pre>#define netfs_FS_OP_MANAGER_OP ((<a href="#netfs_fs_op">netfs_fs_op</a>) 0x24u)</pre>
+
+<h3 id="netfs_FS_OP_CLI_COMPLETE">netfs_FS_OP_CLI_COMPLETE</h3>
+<pre>#define netfs_FS_OP_CLI_COMPLETE ((byte) 0)</pre>
+
+<h3 id="netfs_FS_OP_CLI_INFO">netfs_FS_OP_CLI_INFO</h3>
+<pre>#define netfs_FS_OP_CLI_INFO ((byte) 4)</pre>
+
+<h3 id="netfs_FS_OP_CLII_AM">netfs_FS_OP_CLII_AM</h3>
+<pre>#define netfs_FS_OP_CLII_AM ((byte) 5)</pre>
+
+<h3 id="netfs_FS_OP_CLIS_DISC">netfs_FS_OP_CLIS_DISC</h3>
+<pre>#define netfs_FS_OP_CLIS_DISC ((byte) 6)</pre>
+
+<h3 id="netfs_FS_OP_CLI_DIR">netfs_FS_OP_CLI_DIR</h3>
+<pre>#define netfs_FS_OP_CLI_DIR ((byte) 7)</pre>
+
+<h3 id="netfs_FS_OP_CLI_UNKNOWN">netfs_FS_OP_CLI_UNKNOWN</h3>
+<pre>#define netfs_FS_OP_CLI_UNKNOWN ((byte) 8)</pre>
+
+<h3 id="netfs_FS_OP_CLI_LIB">netfs_FS_OP_CLI_LIB</h3>
+<pre>#define netfs_FS_OP_CLI_LIB ((byte) 9)</pre>
+
+<h3 id="netfs_FS_OP_CLI_DISC_INFO">netfs_FS_OP_CLI_DISC_INFO</h3>
+<pre>#define netfs_FS_OP_CLI_DISC_INFO ((byte) 10)</pre>
+
+<h3 id="netfs_FS_OP_CLI_USER_INFO">netfs_FS_OP_CLI_USER_INFO</h3>
+<pre>#define netfs_FS_OP_CLI_USER_INFO ((byte) 11)</pre>
+
+<h3 id="netfs_FS_OP_EX_TEXT">netfs_FS_OP_EX_TEXT</h3>
+<pre>#define netfs_FS_OP_EX_TEXT ((<a href="#netfs_fs_op_ex_type">netfs_fs_op_ex_type</a>) 0x1u)</pre>
+
+<h3 id="netfs_FS_OP_EX_TITLE">netfs_FS_OP_EX_TITLE</h3>
+<pre>#define netfs_FS_OP_EX_TITLE ((<a href="#netfs_fs_op_ex_type">netfs_fs_op_ex_type</a>) 0x2u)</pre>
+
+<h3 id="netfs_FS_OP_EX_TITLE_TEXT">netfs_FS_OP_EX_TITLE_TEXT</h3>
+<pre>#define netfs_FS_OP_EX_TITLE_TEXT ((<a href="#netfs_fs_op_ex_type">netfs_fs_op_ex_type</a>) 0x3u)</pre>
+
+<h3 id="netfs_FS_OP_ARGS_PTR">netfs_FS_OP_ARGS_PTR</h3>
+<pre>#define netfs_FS_OP_ARGS_PTR ((<a href="#netfs_fs_op_args_type">netfs_fs_op_args_type</a>) 0x0u)</pre>
+
+<h3 id="netfs_FS_OP_ARGS_EXT">netfs_FS_OP_ARGS_EXT</h3>
+<pre>#define netfs_FS_OP_ARGS_EXT ((<a href="#netfs_fs_op_args_type">netfs_fs_op_args_type</a>) 0x1u)</pre>
+
+<h3 id="netfs_FS_OP_ARGS_SIZE">netfs_FS_OP_ARGS_SIZE</h3>
+<pre>#define netfs_FS_OP_ARGS_SIZE ((<a href="#netfs_fs_op_args_type">netfs_fs_op_args_type</a>) 0x2u)</pre>
+
+<h3 id="netfs_FS_OP_READ_OBJECT_STAMP">netfs_FS_OP_READ_OBJECT_STAMP</h3>
+<pre>#define netfs_FS_OP_READ_OBJECT_STAMP ((<a href="#netfs_fs_op_read_object_type">netfs_fs_op_read_object_type</a>) 0x1u)</pre>
+
+<h3 id="netfs_FS_OP_READ_OBJECT_LOAD_AND_EXEC_ADDR">netfs_FS_OP_READ_OBJECT_LOAD_AND_EXEC_ADDR</h3>
+<pre>#define netfs_FS_OP_READ_OBJECT_LOAD_AND_EXEC_ADDR ((<a href="#netfs_fs_op_read_object_type">netfs_fs_op_read_object_type</a>) 0x2u)</pre>
+
+<h3 id="netfs_FS_OP_READ_OBJECT_SIZE">netfs_FS_OP_READ_OBJECT_SIZE</h3>
+<pre>#define netfs_FS_OP_READ_OBJECT_SIZE ((<a href="#netfs_fs_op_read_object_type">netfs_fs_op_read_object_type</a>) 0x3u)</pre>
+
+<h3 id="netfs_FS_OP_READ_OBJECT_ATTR">netfs_FS_OP_READ_OBJECT_ATTR</h3>
+<pre>#define netfs_FS_OP_READ_OBJECT_ATTR ((<a href="#netfs_fs_op_read_object_type">netfs_fs_op_read_object_type</a>) 0x4u)</pre>
+
+<h3 id="netfs_FS_OP_READ_OBJECT_ALL_INFO">netfs_FS_OP_READ_OBJECT_ALL_INFO</h3>
+<pre>#define netfs_FS_OP_READ_OBJECT_ALL_INFO ((<a href="#netfs_fs_op_read_object_type">netfs_fs_op_read_object_type</a>) 0x5u)</pre>
+
+<h3 id="netfs_FS_OP_READ_OBJECT_ATTR_AND_CYCLE_NO">netfs_FS_OP_READ_OBJECT_ATTR_AND_CYCLE_NO</h3>
+<pre>#define netfs_FS_OP_READ_OBJECT_ATTR_AND_CYCLE_NO ((<a href="#netfs_fs_op_read_object_type">netfs_fs_op_read_object_type</a>) 0x6u)</pre>
+
+<h3 id="netfs_FS_OP_READ_OBJECT_SIN">netfs_FS_OP_READ_OBJECT_SIN</h3>
+<pre>#define netfs_FS_OP_READ_OBJECT_SIN ((<a href="#netfs_fs_op_read_object_type">netfs_fs_op_read_object_type</a>) 0x7u)</pre>
+
+<h3 id="netfs_FS_OP_SET_OBJECT_LOAD_EXEC_AND_ATTR">netfs_FS_OP_SET_OBJECT_LOAD_EXEC_AND_ATTR</h3>
+<pre>#define netfs_FS_OP_SET_OBJECT_LOAD_EXEC_AND_ATTR ((<a href="#netfs_fs_op_set_object_type">netfs_fs_op_set_object_type</a>) 0x1u)</pre>
+
+<h3 id="netfs_FS_OP_SET_OBJECT_LOAD_ADDR">netfs_FS_OP_SET_OBJECT_LOAD_ADDR</h3>
+<pre>#define netfs_FS_OP_SET_OBJECT_LOAD_ADDR ((<a href="#netfs_fs_op_set_object_type">netfs_fs_op_set_object_type</a>) 0x2u)</pre>
+
+<h3 id="netfs_FS_OP_SET_OBJECT_EXEC_ADDR">netfs_FS_OP_SET_OBJECT_EXEC_ADDR</h3>
+<pre>#define netfs_FS_OP_SET_OBJECT_EXEC_ADDR ((<a href="#netfs_fs_op_set_object_type">netfs_fs_op_set_object_type</a>) 0x3u)</pre>
+
+<h3 id="netfs_FS_OP_SET_OBJECT_ATTR">netfs_FS_OP_SET_OBJECT_ATTR</h3>
+<pre>#define netfs_FS_OP_SET_OBJECT_ATTR ((<a href="#netfs_fs_op_set_object_type">netfs_fs_op_set_object_type</a>) 0x4u)</pre>
+
+<h3 id="netfs_FS_OP_SET_OBJECT_STAMP">netfs_FS_OP_SET_OBJECT_STAMP</h3>
+<pre>#define netfs_FS_OP_SET_OBJECT_STAMP ((<a href="#netfs_fs_op_set_object_type">netfs_fs_op_set_object_type</a>) 0x5u)</pre>
+
+<h3 id="netfs_FS_OP_MANAGER_OP_READ_PASSWORD_COUNT">netfs_FS_OP_MANAGER_OP_READ_PASSWORD_COUNT</h3>
+<pre>#define netfs_FS_OP_MANAGER_OP_READ_PASSWORD_COUNT ((<a href="#netfs_fs_op_manager_op_type">netfs_fs_op_manager_op_type</a>) 0x0u)</pre>
+
+<h3 id="netfs_FS_OP_MANAGER_OP_READ_PASSWORD">netfs_FS_OP_MANAGER_OP_READ_PASSWORD</h3>
+<pre>#define netfs_FS_OP_MANAGER_OP_READ_PASSWORD ((<a href="#netfs_fs_op_manager_op_type">netfs_fs_op_manager_op_type</a>) 0x1u)</pre>
+
+<h3 id="netfs_FS_OP_MANAGER_OP_WRITE_PASSWORD">netfs_FS_OP_MANAGER_OP_WRITE_PASSWORD</h3>
+<pre>#define netfs_FS_OP_MANAGER_OP_WRITE_PASSWORD ((<a href="#netfs_fs_op_manager_op_type">netfs_fs_op_manager_op_type</a>) 0x2u)</pre>
+
+<h3 id="netfs_FS_OP_MANAGER_OP_ADD_USER">netfs_FS_OP_MANAGER_OP_ADD_USER</h3>
+<pre>#define netfs_FS_OP_MANAGER_OP_ADD_USER ((<a href="#netfs_fs_op_manager_op_type">netfs_fs_op_manager_op_type</a>) 0x3u)</pre>
+
+<h3 id="netfs_FS_OP_MANAGER_OP_REMOVE_USER">netfs_FS_OP_MANAGER_OP_REMOVE_USER</h3>
+<pre>#define netfs_FS_OP_MANAGER_OP_REMOVE_USER ((<a href="#netfs_fs_op_manager_op_type">netfs_fs_op_manager_op_type</a>) 0x4u)</pre>
+
+<h3 id="netfs_FS_OP_MANAGER_OP_SET_PRIVILEGE">netfs_FS_OP_MANAGER_OP_SET_PRIVILEGE</h3>
+<pre>#define netfs_FS_OP_MANAGER_OP_SET_PRIVILEGE ((<a href="#netfs_fs_op_manager_op_type">netfs_fs_op_manager_op_type</a>) 0x5u)</pre>
+
+<h3 id="netfs_FS_OP_MANAGER_OP_LOGOFF_USER">netfs_FS_OP_MANAGER_OP_LOGOFF_USER</h3>
+<pre>#define netfs_FS_OP_MANAGER_OP_LOGOFF_USER ((<a href="#netfs_fs_op_manager_op_type">netfs_fs_op_manager_op_type</a>) 0x6u)</pre>
+
+<h3 id="netfs_FS_OP_MANAGER_OP_SHUTDOWN">netfs_FS_OP_MANAGER_OP_SHUTDOWN</h3>
+<pre>#define netfs_FS_OP_MANAGER_OP_SHUTDOWN ((<a href="#netfs_fs_op_manager_op_type">netfs_fs_op_manager_op_type</a>) 0x7u)</pre>
+
+<h3 id="netfs_NO_MORE">netfs_NO_MORE</h3>
+<pre>#define netfs_NO_MORE (-1)</pre>
+
+<h3 id="xnetfs_read_fs_number">xnetfs_read_fs_number</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetfs_read_fs_number (byte *station_no,
+      byte *net_no);</pre>
+<p>Returns the full station number of your current file server</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>station_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net_no</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="netfs_read_fs_number">netfs_read_fs_number</h3>
+<pre>extern void netfs_read_fs_number (byte *station_no,
+      byte *net_no);</pre>
+<p>Returns the full station number of your current file server</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>station_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net_no</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xnetfs_set_fs_number">xnetfs_set_fs_number</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetfs_set_fs_number (byte station_no,
+      byte net_no);</pre>
+<p>Sets the full station number used as the current file server</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>station_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net_no</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="netfs_set_fs_number">netfs_set_fs_number</h3>
+<pre>extern void netfs_set_fs_number (byte station_no,
+      byte net_no);</pre>
+<p>Sets the full station number used as the current file server</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>station_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net_no</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xnetfs_read_fs_name">xnetfs_read_fs_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetfs_read_fs_name (char *buffer,
+      int size,
+      char **end);</pre>
+<p>Reads the name of your current file server</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="netfs_read_fs_name">netfs_read_fs_name</h3>
+<pre>extern char *netfs_read_fs_name (char *buffer,
+      int size);</pre>
+<p>Reads the name of your current file server</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>end</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xnetfs_set_fs_name">xnetfs_set_fs_name</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetfs_set_fs_name (char const *fs_name);</pre>
+<p>Sets by name the file server used as your current one</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_name</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="netfs_set_fs_name">netfs_set_fs_name</h3>
+<pre>extern void netfs_set_fs_name (char const *fs_name);</pre>
+<p>Sets by name the file server used as your current one</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_name</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xnetfs_read_fs_timeouts">xnetfs_read_fs_timeouts</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetfs_read_fs_timeouts (int *transmit_count,
+      int *transmit_delay,
+      int *peek_count,
+      int *peek_delay,
+      int *receive_delay,
+      int *broadcast_delay);</pre>
+<p>Reads the current values for timeouts used by NetFS</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>transmit_count</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>transmit_delay</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>peek_count</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>peek_delay</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>receive_delay</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>broadcast_delay</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="netfs_read_fs_timeouts">netfs_read_fs_timeouts</h3>
+<pre>extern void netfs_read_fs_timeouts (int *transmit_count,
+      int *transmit_delay,
+      int *peek_count,
+      int *peek_delay,
+      int *receive_delay,
+      int *broadcast_delay);</pre>
+<p>Reads the current values for timeouts used by NetFS</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>transmit_count</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>transmit_delay</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>peek_count</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>peek_delay</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>receive_delay</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>broadcast_delay</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xnetfs_set_fs_timeouts">xnetfs_set_fs_timeouts</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetfs_set_fs_timeouts (int transmit_count,
+      int transmit_delay,
+      int peek_count,
+      int peek_delay,
+      int receive_delay,
+      int broadcast_delay);</pre>
+<p>Sets the current values for timeouts used by NetFS</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>transmit_count</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>transmit_delay</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>peek_count</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>peek_delay</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>receive_delay</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>broadcast_delay</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="netfs_set_fs_timeouts">netfs_set_fs_timeouts</h3>
+<pre>extern void netfs_set_fs_timeouts (int transmit_count,
+      int transmit_delay,
+      int peek_count,
+      int peek_delay,
+      int receive_delay,
+      int broadcast_delay);</pre>
+<p>Sets the current values for timeouts used by NetFS</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>transmit_count</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>transmit_delay</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>peek_count</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>peek_delay</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>receive_delay</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>broadcast_delay</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xnetfs_do_fs_op">xnetfs_do_fs_op</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetfs_do_fs_op (<a href="#netfs_fs_op">netfs_fs_op</a> fs_op,
+      <a href="#netfs_op">netfs_op</a> *op,
+      int tx_count,
+      int size,
+      int *status,
+      int *rx_count);</pre>
+<p>Commands the current file server to perform an operation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_op</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>op</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>tx_count</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>rx_count</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="netfs_do_fs_op">netfs_do_fs_op</h3>
+<pre>extern int netfs_do_fs_op (<a href="#netfs_fs_op">netfs_fs_op</a> fs_op,
+      <a href="#netfs_op">netfs_op</a> *op,
+      int tx_count,
+      int size,
+      int *rx_count);</pre>
+<p>Commands the current file server to perform an operation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_op</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>op</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>tx_count</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>rx_count</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xnetfs_enumerate_fs_list">xnetfs_enumerate_fs_list</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetfs_enumerate_fs_list (int context,
+      <a href="#netfs_file_server">netfs_file_server</a> *file_server,
+      int size,
+      int server_limit,
+      int *context_out,
+      int *server_count);</pre>
+<p>Lists all file servers of which the NetFS software currently knows</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_server</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>server_limit</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>server_count</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="netfs_enumerate_fs_list">netfs_enumerate_fs_list</h3>
+<pre>extern int netfs_enumerate_fs_list (int context,
+      <a href="#netfs_file_server">netfs_file_server</a> *file_server,
+      int size,
+      int server_limit,
+      int *server_count);</pre>
+<p>Lists all file servers of which the NetFS software currently knows</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_server</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>server_limit</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>server_count</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xnetfs_enumerate_fs">xnetfs_enumerate_fs</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetfs_enumerate_fs (int context,
+      <a href="#netfs_file_server">netfs_file_server</a> *file_server,
+      int size,
+      int server_limit,
+      int *context_out,
+      int *server_count);</pre>
+<p>Lists all file servers to which the NetFS software is currently logged on</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_server</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>server_limit</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>server_count</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="netfs_enumerate_fs">netfs_enumerate_fs</h3>
+<pre>extern int netfs_enumerate_fs (int context,
+      <a href="#netfs_file_server">netfs_file_server</a> *file_server,
+      int size,
+      int server_limit,
+      int *server_count);</pre>
+<p>Lists all file servers to which the NetFS software is currently logged on</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_server</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>server_limit</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>server_count</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xnetfs_convert_date">xnetfs_convert_date</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetfs_convert_date (<a href="#netfs_date_and_time">netfs_date_and_time</a> const *n,
+      <a href="os.html#os_date_and_time">os_date_and_time</a> *o);</pre>
+<p>Converts a file server time and date to a RISC OS time and date</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>n</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>o</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="netfs_convert_date">netfs_convert_date</h3>
+<pre>extern void netfs_convert_date (<a href="#netfs_date_and_time">netfs_date_and_time</a> const *n,
+      <a href="os.html#os_date_and_time">os_date_and_time</a> *o);</pre>
+<p>Converts a file server time and date to a RISC OS time and date</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>n</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>o</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xnetfs_do_fs_op_to_given_fs">xnetfs_do_fs_op_to_given_fs</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetfs_do_fs_op_to_given_fs (<a href="#netfs_fs_op">netfs_fs_op</a> fs_op,
+      <a href="#netfs_op">netfs_op</a> *op,
+      int tx_count,
+      int size,
+      byte station,
+      byte net,
+      int *status,
+      int *rx_count);</pre>
+<p>Commands a given file server to perform an operation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_op</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>op</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>tx_count</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>rx_count</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="netfs_do_fs_op_to_given_fs">netfs_do_fs_op_to_given_fs</h3>
+<pre>extern int netfs_do_fs_op_to_given_fs (<a href="#netfs_fs_op">netfs_fs_op</a> fs_op,
+      <a href="#netfs_op">netfs_op</a> *op,
+      int tx_count,
+      int size,
+      byte station,
+      byte net,
+      int *rx_count);</pre>
+<p>Commands a given file server to perform an operation</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_op</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>op</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>tx_count</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>station</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>net</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>rx_count</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xnetfs_update_fs_list">xnetfs_update_fs_list</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetfs_update_fs_list (byte station_no,
+      byte net_no);</pre>
+<p>Adds names of discs to the list of names held by NetFS</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>station_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net_no</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="netfs_update_fs_list">netfs_update_fs_list</h3>
+<pre>extern void netfs_update_fs_list (byte station_no,
+      byte net_no);</pre>
+<p>Adds names of discs to the list of names held by NetFS</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>station_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>net_no</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xnetfs_enumerate_fs_contexts">xnetfs_enumerate_fs_contexts</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetfs_enumerate_fs_contexts (int context,
+      <a href="#netfs_file_server_context">netfs_file_server_context</a> *file_server_context,
+      int size,
+      int server_limit,
+      int *context_out,
+      int *server_count);</pre>
+<p>Lists all the entries in the list of file servers to which NetFS is currently logged on</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_server_context</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>server_limit</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>context_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>server_count</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="netfs_enumerate_fs_contexts">netfs_enumerate_fs_contexts</h3>
+<pre>extern int netfs_enumerate_fs_contexts (int context,
+      <a href="#netfs_file_server_context">netfs_file_server_context</a> *file_server_context,
+      int size,
+      int server_limit,
+      int *server_count);</pre>
+<p>Lists all the entries in the list of file servers to which NetFS is currently logged on</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>context</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file_server_context</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>server_limit</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>server_count</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>context_out</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xnetfs_read_user_id">xnetfs_read_user_id</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetfs_read_user_id (char *buffer,
+      int size,
+      char **end);</pre>
+<p>Returns the current user id if logged on to the current file server</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>end</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="netfs_read_user_id">netfs_read_user_id</h3>
+<pre>extern char *netfs_read_user_id (char *buffer,
+      int size);</pre>
+<p>Returns the current user id if logged on to the current file server</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>end</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xnetfs_get_object_uid">xnetfs_get_object_uid</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetfs_get_object_uid (char const *path_name,
+      char const *special,
+      <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> *obj_type,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr,
+      int *uid0,
+      int *uid1);</pre>
+<p>Gets a unique identifier for an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>obj_type</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>uid0</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>uid1</code></td><td/><td><code>R7</code></td></tr>
+</table>
+
+<h3 id="netfs_get_object_uid">netfs_get_object_uid</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_object_type">fileswitch_object_type</a> netfs_get_object_uid (char const *path_name,
+      char const *special,
+      bits *load_addr,
+      bits *exec_addr,
+      int *size,
+      <a href="fileswitch.html#fileswitch_attr">fileswitch_attr</a> *attr,
+      int *uid0,
+      int *uid1);</pre>
+<p>Gets a unique identifier for an object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>path_name</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>special</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>attr</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>uid0</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>uid1</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>obj_type</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xnetfs_enable_cache">xnetfs_enable_cache</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xnetfs_enable_cache (void);
+</pre><p>Enables a suspended event task</p>
+
+
+<table>
+</table>
+
+<h3 id="netfs_enable_cache">netfs_enable_cache</h3>
+<pre>extern void netfs_enable_cache (void);
+</pre><p>Enables a suspended event task</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_net_fs">xservice_net_fs</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_net_fs (void);
+</pre><p>Either a *Logon, a *Bye, a *SDisc or a *Mount has occurred</p>
+
+
+<table>
+</table>
+
+<h3 id="service_net_fs">service_net_fs</h3>
+<pre>extern void service_net_fs (void);
+</pre><p>Either a *Logon, a *Bye, a *SDisc or a *Mount has occurred</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_net_fs_dying">xservice_net_fs_dying</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_net_fs_dying (void);
+</pre><p>NetFS is dying</p>
+
+
+<table>
+</table>
+
+<h3 id="service_net_fs_dying">service_net_fs_dying</h3>
+<pre>extern void service_net_fs_dying (void);
+</pre><p>NetFS is dying</p>
+
+
+<table>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

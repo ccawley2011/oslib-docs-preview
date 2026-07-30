@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ExtEdit</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ExtEdit</h2>
+
+<pre>#include "oslib/extedit.h"</pre>
+
+<h3 id="extedit_data_type">extedit_data_type</h3>
+<pre>typedef bits extedit_data_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#extedit_FILE_TYPE">extedit_FILE_TYPE</a></dd>
+<dd><a href="#extedit_SUB_TYPE">extedit_SUB_TYPE</a></dd>
+</dl>
+
+<h3 id="extedit_job_handle">extedit_job_handle</h3>
+<pre>typedef bits extedit_job_handle;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#extedit_CLIENT_HANDLE">extedit_CLIENT_HANDLE</a></dd>
+<dd><a href="#extedit_EDITOR_HANDLE">extedit_EDITOR_HANDLE</a></dd>
+</dl>
+
+<h3 id="extedit_flags">extedit_flags</h3>
+<pre>typedef bits extedit_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#extedit_CONTINUE_EDITING">extedit_CONTINUE_EDITING</a></dd>
+<dd><a href="#extedit_SELECTION_ONLY">extedit_SELECTION_ONLY</a></dd>
+<dd><a href="#extedit_READ_ONLY">extedit_READ_ONLY</a></dd>
+<dd><a href="#extedit_IMMEDIATE_EXECUTION">extedit_IMMEDIATE_EXECUTION</a></dd>
+<dd><a href="#extedit_ADJUST_SELECTION">extedit_ADJUST_SELECTION</a></dd>
+</dl>
+
+<h3 id="extedit_message_rq">extedit_message_rq</h3>
+<pre>typedef struct
+   {  <a href="#extedit_data_type">extedit_data_type</a> data_type;
+      <a href="#extedit_job_handle">extedit_job_handle</a> job_handle;
+      <a href="#extedit_flags">extedit_flags</a> flags;
+      char parent_name [20];
+      char leaf_name [204];
+   }
+   extedit_message_rq;</pre>
+
+<h3 id="extedit_message_ack">extedit_message_ack</h3>
+<pre>typedef struct
+   {  <a href="#extedit_data_type">extedit_data_type</a> data_type;
+      <a href="#extedit_job_handle">extedit_job_handle</a> job_handle;
+      <a href="#extedit_flags">extedit_flags</a> flags;
+   }
+   extedit_message_ack;</pre>
+
+<h3 id="extedit_message_return">extedit_message_return</h3>
+<pre>typedef struct
+   {  <a href="#extedit_data_type">extedit_data_type</a> data_type;
+      <a href="#extedit_job_handle">extedit_job_handle</a> job_handle;
+      <a href="#extedit_flags">extedit_flags</a> flags;
+   }
+   extedit_message_return;</pre>
+
+<h3 id="extedit_message_abort">extedit_message_abort</h3>
+<pre>typedef struct
+   {  byte reserved [4];
+      <a href="#extedit_job_handle">extedit_job_handle</a> job_handle;
+   }
+   extedit_message_abort;</pre>
+
+<h3 id="extedit_message_data_save">extedit_message_data_save</h3>
+<pre>typedef struct
+   {  <a href="#extedit_job_handle">extedit_job_handle</a> job_handle;
+      byte reserved [12];
+      int est_size;
+      bits file_type;
+      char file_name [212];
+   }
+   extedit_message_data_save;</pre>
+
+<h3 id="extedit_message_cursor">extedit_message_cursor</h3>
+<pre>typedef struct
+   {  byte reserved [4];
+      <a href="#extedit_job_handle">extedit_job_handle</a> job_handle;
+      <a href="#extedit_flags">extedit_flags</a> flags;
+      int new_cursor_pos;
+      int new_sos_pos;
+      int new_eos_pos;
+      int old_cursor_pos;
+      int old_sos_pos;
+      int old_eos_pos;
+   }
+   extedit_message_cursor;</pre>
+
+<h3 id="message_EXT_EDIT_RQ">message_EXT_EDIT_RQ</h3>
+<pre>#define message_EXT_EDIT_RQ 0x45D80u</pre>
+
+<h3 id="message_EXT_EDIT_ACK">message_EXT_EDIT_ACK</h3>
+<pre>#define message_EXT_EDIT_ACK 0x45D81u</pre>
+
+<h3 id="message_EXT_EDIT_RETURN">message_EXT_EDIT_RETURN</h3>
+<pre>#define message_EXT_EDIT_RETURN 0x45D82u</pre>
+
+<h3 id="message_EXT_EDIT_ABORT">message_EXT_EDIT_ABORT</h3>
+<pre>#define message_EXT_EDIT_ABORT 0x45D83u</pre>
+
+<h3 id="message_EXT_EDIT_DATA_SAVE">message_EXT_EDIT_DATA_SAVE</h3>
+<pre>#define message_EXT_EDIT_DATA_SAVE 0x45D84u</pre>
+
+<h3 id="message_EXT_EDIT_CURSOR">message_EXT_EDIT_CURSOR</h3>
+<pre>#define message_EXT_EDIT_CURSOR 0x45D85u</pre>
+
+<h3 id="extedit_FILE_TYPE">extedit_FILE_TYPE</h3>
+<pre>#define extedit_FILE_TYPE ((<a href="#extedit_data_type">extedit_data_type</a>) 0xFFFFu)</pre>
+
+<h3 id="extedit_SUB_TYPE">extedit_SUB_TYPE</h3>
+<pre>#define extedit_SUB_TYPE ((<a href="#extedit_data_type">extedit_data_type</a>) 0xFFFF0000u)</pre>
+
+<h3 id="extedit_SUB_TYPE_SHIFT">extedit_SUB_TYPE_SHIFT</h3>
+<pre>#define extedit_SUB_TYPE_SHIFT 16</pre>
+
+<h3 id="extedit_CLIENT_HANDLE">extedit_CLIENT_HANDLE</h3>
+<pre>#define extedit_CLIENT_HANDLE ((<a href="#extedit_job_handle">extedit_job_handle</a>) 0xFFFFu)</pre>
+
+<h3 id="extedit_EDITOR_HANDLE">extedit_EDITOR_HANDLE</h3>
+<pre>#define extedit_EDITOR_HANDLE ((<a href="#extedit_job_handle">extedit_job_handle</a>) 0xFFFF0000u)</pre>
+
+<h3 id="extedit_EDITOR_HANDLE_SHIFT">extedit_EDITOR_HANDLE_SHIFT</h3>
+<pre>#define extedit_EDITOR_HANDLE_SHIFT 16</pre>
+
+<h3 id="extedit_CONTINUE_EDITING">extedit_CONTINUE_EDITING</h3>
+<pre>#define extedit_CONTINUE_EDITING ((<a href="#extedit_flags">extedit_flags</a>) 0x1u)</pre>
+
+<h3 id="extedit_SELECTION_ONLY">extedit_SELECTION_ONLY</h3>
+<pre>#define extedit_SELECTION_ONLY ((<a href="#extedit_flags">extedit_flags</a>) 0x2u)</pre>
+
+<h3 id="extedit_READ_ONLY">extedit_READ_ONLY</h3>
+<pre>#define extedit_READ_ONLY ((<a href="#extedit_flags">extedit_flags</a>) 0x4u)</pre>
+
+<h3 id="extedit_IMMEDIATE_EXECUTION">extedit_IMMEDIATE_EXECUTION</h3>
+<pre>#define extedit_IMMEDIATE_EXECUTION ((<a href="#extedit_flags">extedit_flags</a>) 0x8u)</pre>
+
+<h3 id="extedit_ADJUST_SELECTION">extedit_ADJUST_SELECTION</h3>
+<pre>#define extedit_ADJUST_SELECTION ((<a href="#extedit_flags">extedit_flags</a>) 0x10u)</pre>
+
+<h3 id="extedit_BEFORE_START">extedit_BEFORE_START</h3>
+<pre>#define extedit_BEFORE_START 0</pre>
+
+<h3 id="extedit_AFTER_END">extedit_AFTER_END</h3>
+<pre>#define extedit_AFTER_END (-2)</pre>
+
+<h3 id="extedit_NO_CHANGE">extedit_NO_CHANGE</h3>
+<pre>#define extedit_NO_CHANGE (-1)</pre>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

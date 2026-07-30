@@ -1,0 +1,420 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Filer</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Filer</h2>
+
+<pre>#include "oslib/filer.h"</pre>
+
+<h3 id="filer_control">filer_control</h3>
+<pre>typedef int filer_control;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#filer_CONTROL_ACKNOWLEDGE">filer_CONTROL_ACKNOWLEDGE</a></dd>
+<dd><a href="#filer_CONTROL_VERBOSE_ON">filer_CONTROL_VERBOSE_ON</a></dd>
+<dd><a href="#filer_CONTROL_VERBOSE_OFF">filer_CONTROL_VERBOSE_OFF</a></dd>
+</dl>
+
+<h3 id="filer_message_open_dir">filer_message_open_dir</h3>
+<pre>typedef struct
+   {  <a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> fs_no;
+      byte reserved [3];
+      bits flags;
+      char dir_name [228];
+   }
+   filer_message_open_dir;</pre>
+
+<h3 id="filer_message_open_dir_at">filer_message_open_dir_at</h3>
+<pre>typedef struct
+   {  <a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> fs_no;
+      byte reserved [3];
+      bits flags;
+      <a href="os.html#os_coord">os_coord</a> at;
+      int width;
+      int height;
+      byte display;
+      char dir_name [211];
+   }
+   filer_message_open_dir_at;</pre>
+
+<h3 id="filer_message_selection_dir">filer_message_selection_dir</h3>
+<pre>typedef struct
+   {  char dir_name [236];
+   }
+   filer_message_selection_dir;</pre>
+
+<h3 id="filer_message_add_selection">filer_message_add_selection</h3>
+<pre>typedef struct
+   {  char leaf_list [236];
+   }
+   filer_message_add_selection;</pre>
+
+<h3 id="filer_message_action">filer_message_action</h3>
+<pre>typedef struct
+   {  <a href="#fileraction_operation">fileraction_operation</a> operation;
+      <a href="#fileraction_flags">fileraction_flags</a> options;
+      union
+      {  char destination_dir_name [228];
+         struct
+         {  short access;
+            short mask;
+         }
+         access;
+         bits file_type;
+         char find_leaf [228];
+      }
+      data;
+   }
+   filer_message_action;</pre>
+
+<h3 id="filer_message_control_action">filer_message_control_action</h3>
+<pre>typedef struct
+   {  <a href="#filer_control">filer_control</a> control;
+   }
+   filer_message_control_action;</pre>
+
+<h3 id="filer_message_selection">filer_message_selection</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_box">os_box</a> bbox;
+      int width;
+      int height;
+      bits display;
+      int col0;
+      int row0;
+      int col1;
+      int row1;
+   }
+   filer_message_selection;</pre>
+
+<h3 id="filer_message_device_dir">filer_message_device_dir</h3>
+<pre>typedef struct
+   {  char path_name [236];
+   }
+   filer_message_device_dir;</pre>
+
+<h3 id="filer_full_message_open_dir">filer_full_message_open_dir</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> fs_no;
+      byte reserved [3];
+      bits flags;
+      char dir_name [228];
+   }
+   filer_full_message_open_dir;</pre>
+
+<h3 id="filer_full_message_open_dir_at">filer_full_message_open_dir_at</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> fs_no;
+      byte reserved [3];
+      bits flags;
+      <a href="os.html#os_coord">os_coord</a> at;
+      int width;
+      int height;
+      byte display;
+      char dir_name [211];
+   }
+   filer_full_message_open_dir_at;</pre>
+
+<h3 id="filer_full_message_selection_dir">filer_full_message_selection_dir</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      char dir_name [236];
+   }
+   filer_full_message_selection_dir;</pre>
+
+<h3 id="filer_full_message_add_selection">filer_full_message_add_selection</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      char leaf_list [236];
+   }
+   filer_full_message_add_selection;</pre>
+
+<h3 id="filer_full_message_action">filer_full_message_action</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#fileraction_operation">fileraction_operation</a> operation;
+      <a href="#fileraction_flags">fileraction_flags</a> options;
+      union
+      {  char destination_dir_name [228];
+         struct
+         {  short access;
+            short mask;
+         }
+         access;
+         bits file_type;
+         char find_leaf [228];
+      }
+      data;
+   }
+   filer_full_message_action;</pre>
+
+<h3 id="filer_full_message_control_action">filer_full_message_control_action</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#filer_control">filer_control</a> control;
+   }
+   filer_full_message_control_action;</pre>
+
+<h3 id="filer_full_message_selection">filer_full_message_selection</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="os.html#os_box">os_box</a> bbox;
+      int width;
+      int height;
+      bits display;
+      int col0;
+      int row0;
+      int col1;
+      int row1;
+   }
+   filer_full_message_selection;</pre>
+
+<h3 id="filer_full_message_device_dir">filer_full_message_device_dir</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      char path_name [236];
+   }
+   filer_full_message_device_dir;</pre>
+
+<h3 id="filer_format">filer_format</h3>
+<pre>typedef struct
+   {  <a href="#filer_format">filer_format</a> *next;
+      char *menu_text;
+      char *help_text;
+      int disc_format_swi;
+      int disc_format_handle;
+      int layout_structure_swi;
+      int layout_structure_handle;
+      bits flags;
+   }
+   filer_format;</pre>
+
+<h3 id="error_FILER_NO_RECURSION">error_FILER_NO_RECURSION</h3>
+<pre>#define error_FILER_NO_RECURSION 0xB80u</pre>
+
+<h3 id="error_FILER_NO_TEMPLATE">error_FILER_NO_TEMPLATE</h3>
+<pre>#define error_FILER_NO_TEMPLATE 0xB81u</pre>
+
+<h3 id="error_FILER_FAILED_SAVE">error_FILER_FAILED_SAVE</h3>
+<pre>#define error_FILER_FAILED_SAVE 0xB82u</pre>
+
+<h3 id="error_FILER_BAD_PATH">error_FILER_BAD_PATH</h3>
+<pre>#define error_FILER_BAD_PATH 0xB83u</pre>
+
+<h3 id="message_FILER_OPEN_DIR">message_FILER_OPEN_DIR</h3>
+<pre>#define message_FILER_OPEN_DIR 0x400u</pre>
+
+<h3 id="message_FILER_CLOSE_DIR">message_FILER_CLOSE_DIR</h3>
+<pre>#define message_FILER_CLOSE_DIR 0x401u</pre>
+
+<h3 id="message_FILER_OPEN_DIR_AT">message_FILER_OPEN_DIR_AT</h3>
+<pre>#define message_FILER_OPEN_DIR_AT 0x402u</pre>
+
+<h3 id="message_FILER_SELECTION_DIR">message_FILER_SELECTION_DIR</h3>
+<pre>#define message_FILER_SELECTION_DIR 0x403u</pre>
+
+<h3 id="message_FILER_ADD_SELECTION">message_FILER_ADD_SELECTION</h3>
+<pre>#define message_FILER_ADD_SELECTION 0x404u</pre>
+
+<h3 id="message_FILER_ACTION">message_FILER_ACTION</h3>
+<pre>#define message_FILER_ACTION 0x405u</pre>
+
+<h3 id="message_FILER_CONTROL_ACTION">message_FILER_CONTROL_ACTION</h3>
+<pre>#define message_FILER_CONTROL_ACTION 0x406u</pre>
+
+<h3 id="message_FILER_SELECTION">message_FILER_SELECTION</h3>
+<pre>#define message_FILER_SELECTION 0x407u</pre>
+
+<h3 id="message_FILER_DEVICE_DIR">message_FILER_DEVICE_DIR</h3>
+<pre>#define message_FILER_DEVICE_DIR 0x408u</pre>
+
+<p>RISC OS 4+</p>
+
+<h3 id="filer_FORMAT_NATIVE">filer_FORMAT_NATIVE</h3>
+<pre>#define filer_FORMAT_NATIVE 0x1u</pre>
+
+<h3 id="filer_DIR_NONCANONICAL">filer_DIR_NONCANONICAL</h3>
+<pre>#define filer_DIR_NONCANONICAL 0x1u</pre>
+
+<h3 id="filer_DISPLAY_LARGE_ICONS">filer_DISPLAY_LARGE_ICONS</h3>
+<pre>#define filer_DISPLAY_LARGE_ICONS 0x0u</pre>
+
+<h3 id="filer_DISPLAY_SMALL_ICONS">filer_DISPLAY_SMALL_ICONS</h3>
+<pre>#define filer_DISPLAY_SMALL_ICONS 0x1u</pre>
+
+<h3 id="filer_DISPLAY_FULL_INFO">filer_DISPLAY_FULL_INFO</h3>
+<pre>#define filer_DISPLAY_FULL_INFO 0x2u</pre>
+
+<h3 id="filer_DISPLAY">filer_DISPLAY</h3>
+<pre>#define filer_DISPLAY 0x3u</pre>
+
+<h3 id="filer_DISPLAY_SHIFT">filer_DISPLAY_SHIFT</h3>
+<pre>#define filer_DISPLAY_SHIFT 0</pre>
+
+<h3 id="filer_SORT_BY_NAME">filer_SORT_BY_NAME</h3>
+<pre>#define filer_SORT_BY_NAME 0x0u</pre>
+
+<h3 id="filer_SORT_BY_SIZE">filer_SORT_BY_SIZE</h3>
+<pre>#define filer_SORT_BY_SIZE 0x1u</pre>
+
+<h3 id="filer_SORT_BY_TYPE">filer_SORT_BY_TYPE</h3>
+<pre>#define filer_SORT_BY_TYPE 0x2u</pre>
+
+<h3 id="filer_SORT_BY_DATE">filer_SORT_BY_DATE</h3>
+<pre>#define filer_SORT_BY_DATE 0x3u</pre>
+
+<h3 id="filer_SORT">filer_SORT</h3>
+<pre>#define filer_SORT 0xCu</pre>
+
+<h3 id="filer_SORT_SHIFT">filer_SORT_SHIFT</h3>
+<pre>#define filer_SORT_SHIFT 2</pre>
+
+<h3 id="filer_GIVEN_DISPLAY">filer_GIVEN_DISPLAY</h3>
+<pre>#define filer_GIVEN_DISPLAY 0x10u</pre>
+
+<h3 id="filer_GIVEN_SORT">filer_GIVEN_SORT</h3>
+<pre>#define filer_GIVEN_SORT 0x20u</pre>
+
+<h3 id="filer_CONTROL_ACKNOWLEDGE">filer_CONTROL_ACKNOWLEDGE</h3>
+<pre>#define filer_CONTROL_ACKNOWLEDGE ((<a href="#filer_control">filer_control</a>) 0x0u)</pre>
+
+<h3 id="filer_CONTROL_VERBOSE_ON">filer_CONTROL_VERBOSE_ON</h3>
+<pre>#define filer_CONTROL_VERBOSE_ON ((<a href="#filer_control">filer_control</a>) 0x1u)</pre>
+
+<h3 id="filer_CONTROL_VERBOSE_OFF">filer_CONTROL_VERBOSE_OFF</h3>
+<pre>#define filer_CONTROL_VERBOSE_OFF ((<a href="#filer_control">filer_control</a>) 0x2u)</pre>
+
+<h3 id="xservice_start_filer">xservice_start_filer</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_start_filer (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      char **command,
+      osbool *unclaimed);</pre>
+<p>Request to filing-system-specific desktop filers to start up</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>command</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="service_start_filer">service_start_filer</h3>
+<pre>extern osbool service_start_filer (<a href="wimp.html#wimp_t">wimp_t</a> task,
+      char **command);</pre>
+<p>Request to filing-system-specific desktop filers to start up</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>command</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_started_filer">xservice_started_filer</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_started_filer (void);
+</pre><p>Request to filing-system-specific desktop filers to set task_handle variable to 0</p>
+
+
+<table>
+</table>
+
+<h3 id="service_started_filer">service_started_filer</h3>
+<pre>extern void service_started_filer (void);
+</pre><p>Request to filing-system-specific desktop filers to set task_handle variable to 0</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_filer_dying">xservice_filer_dying</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_filer_dying (void);
+</pre><p>Notification that the Filer module is about to close down</p>
+
+
+<table>
+</table>
+
+<h3 id="service_filer_dying">service_filer_dying</h3>
+<pre>extern void service_filer_dying (void);
+</pre><p>Notification that the Filer module is about to close down</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_enumerate_formats">xservice_enumerate_formats</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_enumerate_formats (<a href="#filer_format">filer_format</a> *format_list,
+      <a href="#filer_format">filer_format</a> **format_list_out);</pre>
+<p>Enumerate available disc formats</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>format_list</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>format_list_out</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="service_enumerate_formats">service_enumerate_formats</h3>
+<pre>extern void service_enumerate_formats (<a href="#filer_format">filer_format</a> *format_list,
+      <a href="#filer_format">filer_format</a> **format_list_out);</pre>
+<p>Enumerate available disc formats</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>format_list</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>format_list_out</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xservice_disc_dismounted">xservice_disc_dismounted</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_disc_dismounted (char const *disc_name);</pre>
+<p>Disc dismounted</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>disc_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="service_disc_dismounted">service_disc_dismounted</h3>
+<pre>extern void service_disc_dismounted (char const *disc_name);</pre>
+<p>Disc dismounted</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>disc_name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

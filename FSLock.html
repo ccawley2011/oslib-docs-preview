@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; FSLock</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>FSLock</h2>
+
+<pre>#include "oslib/fslock.h"</pre>
+
+<h3 id="fslock_lock_status">fslock_lock_status</h3>
+<pre>typedef int fslock_lock_status;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#fslock_STATUS_UNLOCKED">fslock_STATUS_UNLOCKED</a></dd>
+<dd><a href="#fslock_STATUS_PROTECTED">fslock_STATUS_PROTECTED</a></dd>
+<dd><a href="#fslock_STATUS_LOCKED">fslock_STATUS_LOCKED</a></dd>
+</dl>
+
+<h3 id="fslock_STATUS_UNLOCKED">fslock_STATUS_UNLOCKED</h3>
+<pre>#define fslock_STATUS_UNLOCKED ((<a href="#fslock_lock_status">fslock_lock_status</a>) 0x0u)</pre>
+
+<h3 id="fslock_STATUS_PROTECTED">fslock_STATUS_PROTECTED</h3>
+<pre>#define fslock_STATUS_PROTECTED ((<a href="#fslock_lock_status">fslock_lock_status</a>) 0x1u)</pre>
+
+<h3 id="fslock_STATUS_LOCKED">fslock_STATUS_LOCKED</h3>
+<pre>#define fslock_STATUS_LOCKED ((<a href="#fslock_lock_status">fslock_lock_status</a>) 0x2u)</pre>
+
+<h3 id="error_FS_LOCK_UNKNOWN_SWI">error_FS_LOCK_UNKNOWN_SWI</h3>
+<pre>#define error_FS_LOCK_UNKNOWN_SWI 0x806500u</pre>
+
+<h3 id="error_FS_LOCK_LOCKED">error_FS_LOCK_LOCKED</h3>
+<pre>#define error_FS_LOCK_LOCKED 0x806501u</pre>
+
+<h3 id="error_FS_LOCK_UNKNOWN_FS">error_FS_LOCK_UNKNOWN_FS</h3>
+<pre>#define error_FS_LOCK_UNKNOWN_FS 0x806502u</pre>
+
+<h3 id="error_FS_LOCK_FS_NOT_LOCKABLE">error_FS_LOCK_FS_NOT_LOCKABLE</h3>
+<pre>#define error_FS_LOCK_FS_NOT_LOCKABLE 0x806503u</pre>
+
+<h3 id="error_FS_LOCK_NO_LOCKED_FS">error_FS_LOCK_NO_LOCKED_FS</h3>
+<pre>#define error_FS_LOCK_NO_LOCKED_FS 0x806504u</pre>
+
+<h3 id="error_FS_LOCK_PROTECTED_DISC">error_FS_LOCK_PROTECTED_DISC</h3>
+<pre>#define error_FS_LOCK_PROTECTED_DISC 0x806505u</pre>
+
+<h3 id="error_FS_LOCK_KILLED">error_FS_LOCK_KILLED</h3>
+<pre>#define error_FS_LOCK_KILLED 0x806506u</pre>
+
+<h3 id="xfslock_version">xfslock_version</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfslock_version (int *version,
+      void **workspace);</pre>
+<p>Returns information describing the FSLock module - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>version</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="fslock_version">fslock_version</h3>
+<pre>extern int fslock_version (void **workspace);</pre>
+<p>Returns information describing the FSLock module - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>version</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xfslock_status">xfslock_status</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfslock_status (<a href="#fslock_lock_status">fslock_lock_status</a> *lock_status,
+      <a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> *fs_no);</pre>
+<p>Returns the current lock status, and the locked filing system's number - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>lock_status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fs_no</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="fslock_status">fslock_status</h3>
+<pre>extern <a href="#fslock_lock_status">fslock_lock_status</a> fslock_status (<a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> *fs_no);</pre>
+<p>Returns the current lock status, and the locked filing system's number - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>fs_no</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>lock_status</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xfslock_change_status">xfslock_change_status</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xfslock_change_status (<a href="#fslock_lock_status">fslock_lock_status</a> new_lock_status,
+      char const *password,
+      char const *new_password,
+      <a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> new_fs_no);</pre>
+<p>Changes one or more of the lock status, the password and the locked filing system - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>new_lock_status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>password</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>new_password</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>new_fs_no</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="fslock_change_status">fslock_change_status</h3>
+<pre>extern void fslock_change_status (<a href="#fslock_lock_status">fslock_lock_status</a> new_lock_status,
+      char const *password,
+      char const *new_password,
+      <a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> new_fs_no);</pre>
+<p>Changes one or more of the lock status, the password and the locked filing system - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>new_lock_status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>password</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>new_password</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>new_fs_no</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

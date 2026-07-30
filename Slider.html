@@ -1,0 +1,346 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Slider</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Slider</h2>
+
+<pre>#include "oslib/slider.h"</pre>
+
+<h3 id="slider_gadget">slider_gadget</h3>
+<pre>typedef struct
+   {  int lower_bound;
+      int upper_bound;
+      int step_size;
+      int initial_value;
+   }
+   slider_gadget;</pre>
+
+<h3 id="slider_object">slider_object</h3>
+<pre>typedef struct
+   {  <a href="#gadget_OBJECT_MEMBERS">gadget_OBJECT_MEMBERS</a>
+      int lower_bound;
+      int upper_bound;
+      int step_size;
+      int initial_value;
+   }
+   slider_object;</pre>
+
+<h3 id="slider_action_value_changed">slider_action_value_changed</h3>
+<pre>typedef struct
+   {  int value;
+   }
+   slider_action_value_changed;</pre>
+
+<h3 id="slider_action_value_changed_block">slider_action_value_changed_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      int value;
+   }
+   slider_action_value_changed_block;</pre>
+
+<h3 id="slider_bounds_flags">slider_bounds_flags</h3>
+<pre>typedef bits slider_bounds_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#slider_BOUND_LOWER">slider_BOUND_LOWER</a></dd>
+<dd><a href="#slider_BOUND_UPPER">slider_BOUND_UPPER</a></dd>
+<dd><a href="#slider_BOUND_STEP">slider_BOUND_STEP</a></dd>
+</dl>
+
+<h3 id="class_SLIDER">class_SLIDER</h3>
+<pre>#define class_SLIDER ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x240u)</pre>
+
+<h3 id="slider_GENERATE_VALUE_CHANGED">slider_GENERATE_VALUE_CHANGED</h3>
+<pre>#define slider_GENERATE_VALUE_CHANGED ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x1u)</pre>
+
+<h3 id="slider_GENERATE_VALUE_CHANGED_BY_DRAGGING">slider_GENERATE_VALUE_CHANGED_BY_DRAGGING</h3>
+<pre>#define slider_GENERATE_VALUE_CHANGED_BY_DRAGGING ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x2u)</pre>
+
+<h3 id="slider_GENERATE_SET_VALUE_CHANGED">slider_GENERATE_SET_VALUE_CHANGED</h3>
+<pre>#define slider_GENERATE_SET_VALUE_CHANGED ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x4u)</pre>
+
+<h3 id="slider_VERTICAL">slider_VERTICAL</h3>
+<pre>#define slider_VERTICAL ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x8u)</pre>
+
+<h3 id="slider_DRAGGABLE">slider_DRAGGABLE</h3>
+<pre>#define slider_DRAGGABLE ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0x10u)</pre>
+
+<h3 id="slider_KNOB_COLOUR">slider_KNOB_COLOUR</h3>
+<pre>#define slider_KNOB_COLOUR ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0xF000u)</pre>
+
+<h3 id="slider_KNOB_COLOUR_SHIFT">slider_KNOB_COLOUR_SHIFT</h3>
+<pre>#define slider_KNOB_COLOUR_SHIFT 12</pre>
+
+<h3 id="slider_WELL_COLOUR">slider_WELL_COLOUR</h3>
+<pre>#define slider_WELL_COLOUR ((<a href="gadget.html#gadget_flags">gadget_flags</a>) 0xF0000u)</pre>
+
+<h3 id="slider_WELL_COLOUR_SHIFT">slider_WELL_COLOUR_SHIFT</h3>
+<pre>#define slider_WELL_COLOUR_SHIFT 16</pre>
+
+<h3 id="action_SLIDER_VALUE_CHANGED">action_SLIDER_VALUE_CHANGED</h3>
+<pre>#define action_SLIDER_VALUE_CHANGED 0x82886u</pre>
+
+<h3 id="slider_VALUE_CHANGING">slider_VALUE_CHANGING</h3>
+<pre>#define slider_VALUE_CHANGING 0x1u</pre>
+
+<h3 id="slider_VALUE_CHANGED_BY_DRAGGING">slider_VALUE_CHANGED_BY_DRAGGING</h3>
+<pre>#define slider_VALUE_CHANGED_BY_DRAGGING 0x2u</pre>
+
+<h3 id="slider_VALUE_CHANGED">slider_VALUE_CHANGED</h3>
+<pre>#define slider_VALUE_CHANGED 0x4u</pre>
+
+<h3 id="slider_BOUND_LOWER">slider_BOUND_LOWER</h3>
+<pre>#define slider_BOUND_LOWER ((<a href="#slider_bounds_flags">slider_bounds_flags</a>) 0x1u)</pre>
+
+<h3 id="slider_BOUND_UPPER">slider_BOUND_UPPER</h3>
+<pre>#define slider_BOUND_UPPER ((<a href="#slider_bounds_flags">slider_bounds_flags</a>) 0x2u)</pre>
+
+<h3 id="slider_BOUND_STEP">slider_BOUND_STEP</h3>
+<pre>#define slider_BOUND_STEP ((<a href="#slider_bounds_flags">slider_bounds_flags</a>) 0x4u)</pre>
+
+<h3 id="xslider_set_value">xslider_set_value</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xslider_set_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> slider,
+      int value);</pre>
+<p>Sets the value of a slider</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>slider</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>value</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="slider_set_value">slider_set_value</h3>
+<pre>extern void slider_set_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> slider,
+      int value);</pre>
+<p>Sets the value of a slider</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>slider</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>value</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xslider_get_value">xslider_get_value</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xslider_get_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> slider,
+      int *value);</pre>
+<p>Gets the value of a slider</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>slider</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>value</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="slider_get_value">slider_get_value</h3>
+<pre>extern int slider_get_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> slider);</pre>
+<p>Gets the value of a slider</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>slider</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>value</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xslider_set_bounds">xslider_set_bounds</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xslider_set_bounds (<a href="#slider_bounds_flags">slider_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> slider,
+      int lower_bound,
+      int upper_bound,
+      int step_size);</pre>
+<p>Sets the bounding values and step size of a slider</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>slider</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>lower_bound</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>upper_bound</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>step_size</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="slider_set_bounds">slider_set_bounds</h3>
+<pre>extern void slider_set_bounds (<a href="#slider_bounds_flags">slider_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> slider,
+      int lower_bound,
+      int upper_bound,
+      int step_size);</pre>
+<p>Sets the bounding values and step size of a slider</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>slider</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>lower_bound</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>upper_bound</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>step_size</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xslider_get_bounds">xslider_get_bounds</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xslider_get_bounds (<a href="#slider_bounds_flags">slider_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> slider,
+      int *lower_bound,
+      int *upper_bound,
+      int *step_size);</pre>
+<p>Gets the bounding values and step size of a slider</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>slider</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>lower_bound</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>upper_bound</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>step_size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="slider_get_bounds">slider_get_bounds</h3>
+<pre>extern void slider_get_bounds (<a href="#slider_bounds_flags">slider_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> slider,
+      int *lower_bound,
+      int *upper_bound,
+      int *step_size);</pre>
+<p>Gets the bounding values and step size of a slider</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>slider</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>lower_bound</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>upper_bound</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>step_size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xslider_set_colour">xslider_set_colour</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xslider_set_colour (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> slider,
+      <a href="wimp.html#wimp_colour">wimp_colour</a> bar_colour,
+      <a href="wimp.html#wimp_colour">wimp_colour</a> background_colour);</pre>
+<p>Sets the desktop colours used in a slider</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>slider</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bar_colour</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>background_colour</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="slider_set_colour">slider_set_colour</h3>
+<pre>extern void slider_set_colour (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> slider,
+      <a href="wimp.html#wimp_colour">wimp_colour</a> bar_colour,
+      <a href="wimp.html#wimp_colour">wimp_colour</a> background_colour);</pre>
+<p>Sets the desktop colours used in a slider</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>slider</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>bar_colour</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>background_colour</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xslider_get_colour">xslider_get_colour</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xslider_get_colour (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> slider,
+      <a href="wimp.html#wimp_colour">wimp_colour</a> *bar_colour,
+      <a href="wimp.html#wimp_colour">wimp_colour</a> *background_colour);</pre>
+<p>Gets the desktop colours used in a slider</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>slider</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>bar_colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>background_colour</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="slider_get_colour">slider_get_colour</h3>
+<pre>extern void slider_get_colour (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> slider,
+      <a href="wimp.html#wimp_colour">wimp_colour</a> *bar_colour,
+      <a href="wimp.html#wimp_colour">wimp_colour</a> *background_colour);</pre>
+<p>Gets the desktop colours used in a slider</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>slider</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>bar_colour</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>background_colour</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

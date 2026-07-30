@@ -1,0 +1,480 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ImageFileConvert</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ImageFileConvert</h2>
+
+<pre>#include "oslib/imagefileconvert.h"</pre>
+
+<h3 id="imagefileconvertconvert_flags">imagefileconvertconvert_flags</h3>
+<pre>typedef bits imagefileconvertconvert_flags;</pre>
+
+<h3 id="imagefileconvertconvert_type">imagefileconvertconvert_type</h3>
+<pre>typedef bits imagefileconvertconvert_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#imagefileconvertconverttype_START_ENUMERATION">imagefileconvertconverttype_START_ENUMERATION</a></dd>
+</dl>
+
+<h3 id="imagefileconvert_op_type">imagefileconvert_op_type</h3>
+<pre>typedef bits imagefileconvert_op_type;</pre>
+
+<h3 id="imagefileconvertreadinfo_flags">imagefileconvertreadinfo_flags</h3>
+<pre>typedef bits imagefileconvertreadinfo_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#imagefileconvertreadinfoflags_PALETTE">imagefileconvertreadinfoflags_PALETTE</a></dd>
+<dd><a href="#imagefileconvertreadinfoflags_COLOUR">imagefileconvertreadinfoflags_COLOUR</a></dd>
+<dd><a href="#imagefileconvertreadinfoflags_ALPHA_OR_MASK">imagefileconvertreadinfoflags_ALPHA_OR_MASK</a></dd>
+<dd><a href="#imagefileconvertreadinfoflagsinterlace_NO">imagefileconvertreadinfoflagsinterlace_NO</a></dd>
+<dd><a href="#imagefileconvertreadinfoflagsinterlace_ADAM7">imagefileconvertreadinfoflagsinterlace_ADAM7</a></dd>
+<dd><a href="#imagefileconvertreadinfoflagsinterlace_VERTICAL">imagefileconvertreadinfoflagsinterlace_VERTICAL</a></dd>
+</dl>
+
+<h3 id="imagefileconvertregister_flags">imagefileconvertregister_flags</h3>
+<pre>typedef bits imagefileconvertregister_flags;</pre>
+
+<h3 id="imagefileconvert_definition">imagefileconvert_definition</h3>
+<pre>typedef struct
+   {  int api_version;
+      int flags;
+      <a href="#imagefileconvertconvert_type">imagefileconvertconvert_type</a> type;
+      char *name;
+      int ws_value;
+      asm_routine do_convert;
+      asm_routine do_miscop;
+   }
+   imagefileconvert_definition;</pre>
+
+<h3 id="imagefileconvertderegister_flags">imagefileconvertderegister_flags</h3>
+<pre>typedef bits imagefileconvertderegister_flags;</pre>
+
+<h3 id="imagefileconvertenumerateconverters_flags">imagefileconvertenumerateconverters_flags</h3>
+<pre>typedef bits imagefileconvertenumerateconverters_flags;</pre>
+
+<h3 id="imagefileconvertconverterinfo_flags">imagefileconvertconverterinfo_flags</h3>
+<pre>typedef bits imagefileconvertconverterinfo_flags;</pre>
+
+<h3 id="imagefileconvertconvertflags_OUT_OPTION_SHIFT">imagefileconvertconvertflags_OUT_OPTION_SHIFT</h3>
+<pre>#define imagefileconvertconvertflags_OUT_OPTION_SHIFT 0</pre>
+
+<h3 id="imagefileconvertconvertflags_IN_OPTION_SHIFT">imagefileconvertconvertflags_IN_OPTION_SHIFT</h3>
+<pre>#define imagefileconvertconvertflags_IN_OPTION_SHIFT 8</pre>
+
+<h3 id="imagefileconvertconvertflags_IN_OUT_OPTION_SHIFT">imagefileconvertconvertflags_IN_OUT_OPTION_SHIFT</h3>
+<pre>#define imagefileconvertconvertflags_IN_OUT_OPTION_SHIFT 16</pre>
+
+<h3 id="imagefileconvertconvertflagsoutsprite_SPRITE">imagefileconvertconvertflagsoutsprite_SPRITE</h3>
+<pre>#define imagefileconvertconvertflagsoutsprite_SPRITE ((<a href="#imagefileconvert_flags">imagefileconvert_flags</a>) 0x1u)</pre>
+
+<h3 id="imagefileconvertconvertflagsoutjpeg_MONOCHROME">imagefileconvertconvertflagsoutjpeg_MONOCHROME</h3>
+<pre>#define imagefileconvertconvertflagsoutjpeg_MONOCHROME ((<a href="#imagefileconvert_flags">imagefileconvert_flags</a>) 0x1u)</pre>
+
+<h3 id="imagefileconvertconvertflagsoutjpeg_QUALITY_SHIFT">imagefileconvertconvertflagsoutjpeg_QUALITY_SHIFT</h3>
+<pre>#define imagefileconvertconvertflagsoutjpeg_QUALITY_SHIFT 1</pre>
+
+<h3 id="imagefileconvertconverttype_DEST_FILE_TYPE_SHIFT">imagefileconvertconverttype_DEST_FILE_TYPE_SHIFT</h3>
+<pre>#define imagefileconvertconverttype_DEST_FILE_TYPE_SHIFT 0</pre>
+
+<h3 id="imagefileconvertconverttype_SRC_FILE_TYPE_SHIFT">imagefileconvertconverttype_SRC_FILE_TYPE_SHIFT</h3>
+<pre>#define imagefileconvertconverttype_SRC_FILE_TYPE_SHIFT 16</pre>
+
+<h3 id="imagefileconvertconverttype_START_ENUMERATION">imagefileconvertconverttype_START_ENUMERATION</h3>
+<pre>#define imagefileconvertconverttype_START_ENUMERATION ((<a href="#imagefileconvertconvert_type">imagefileconvertconvert_type</a>) 0xFFFFFFFFu)</pre>
+
+<p>can be used in ImageFileConvert_EnumerateConverters</p>
+
+<h3 id="imagefileconvertreadinfoflags_PALETTE">imagefileconvertreadinfoflags_PALETTE</h3>
+<pre>#define imagefileconvertreadinfoflags_PALETTE ((<a href="#imagefileconvertreadinfo_flags">imagefileconvertreadinfo_flags</a>) 0x1u)</pre>
+
+<h3 id="imagefileconvertreadinfoflags_COLOUR">imagefileconvertreadinfoflags_COLOUR</h3>
+<pre>#define imagefileconvertreadinfoflags_COLOUR ((<a href="#imagefileconvertreadinfo_flags">imagefileconvertreadinfo_flags</a>) 0x2u)</pre>
+
+<h3 id="imagefileconvertreadinfoflags_ALPHA_OR_MASK">imagefileconvertreadinfoflags_ALPHA_OR_MASK</h3>
+<pre>#define imagefileconvertreadinfoflags_ALPHA_OR_MASK ((<a href="#imagefileconvertreadinfo_flags">imagefileconvertreadinfo_flags</a>) 0x4u)</pre>
+
+<h3 id="imagefileconvertreadinfoflags_INTERLACE_SHIFT">imagefileconvertreadinfoflags_INTERLACE_SHIFT</h3>
+<pre>#define imagefileconvertreadinfoflags_INTERLACE_SHIFT 3</pre>
+
+<h3 id="imagefileconvertreadinfoflags_INTERLACE_MASK">imagefileconvertreadinfoflags_INTERLACE_MASK</h3>
+<pre>#define imagefileconvertreadinfoflags_INTERLACE_MASK 7</pre>
+
+<h3 id="imagefileconvertreadinfoflagsinterlace_NO">imagefileconvertreadinfoflagsinterlace_NO</h3>
+<pre>#define imagefileconvertreadinfoflagsinterlace_NO ((<a href="#imagefileconvertreadinfo_flags">imagefileconvertreadinfo_flags</a>) 0x0u)</pre>
+
+<h3 id="imagefileconvertreadinfoflagsinterlace_ADAM7">imagefileconvertreadinfoflagsinterlace_ADAM7</h3>
+<pre>#define imagefileconvertreadinfoflagsinterlace_ADAM7 ((<a href="#imagefileconvertreadinfo_flags">imagefileconvertreadinfo_flags</a>) 0x1u)</pre>
+
+<h3 id="imagefileconvertreadinfoflagsinterlace_VERTICAL">imagefileconvertreadinfoflagsinterlace_VERTICAL</h3>
+<pre>#define imagefileconvertreadinfoflagsinterlace_VERTICAL ((<a href="#imagefileconvertreadinfo_flags">imagefileconvertreadinfo_flags</a>) 0x2u)</pre>
+
+<h3 id="ximagefileconvert_convert">ximagefileconvert_convert</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *ximagefileconvert_convert (<a href="#imagefileconvertconvert_flags">imagefileconvertconvert_flags</a> flags,
+      <a href="#imagefileconvertconvert_type">imagefileconvertconvert_type</a> conversion_type,
+      void const *img_in,
+      int img_in_size,
+      void *img_out,
+      int img_out_size_in,
+      <a href="os.html#os_colour">os_colour</a> background,
+      int param0,
+      int param1,
+      int param2,
+      int *img_out_size_out);</pre>
+<p>To convert an image from one format to another</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>conversion_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>img_in</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>img_in_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>img_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>img_out_size_in</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>background</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>param0</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>param1</code></td><td/><td><code>R8</code></td></tr>
+<tr><td><code>param2</code></td><td/><td><code>R9</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>img_out_size_out</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="imagefileconvert_convert">imagefileconvert_convert</h3>
+<pre>extern void imagefileconvert_convert (<a href="#imagefileconvertconvert_flags">imagefileconvertconvert_flags</a> flags,
+      <a href="#imagefileconvertconvert_type">imagefileconvertconvert_type</a> conversion_type,
+      void const *img_in,
+      int img_in_size,
+      void *img_out,
+      int img_out_size_in,
+      <a href="os.html#os_colour">os_colour</a> background,
+      int param0,
+      int param1,
+      int param2,
+      int *img_out_size_out);</pre>
+<p>To convert an image from one format to another</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>conversion_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>img_in</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>img_in_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>img_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>img_out_size_in</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>background</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>param0</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>param1</code></td><td/><td><code>R8</code></td></tr>
+<tr><td><code>param2</code></td><td/><td><code>R9</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>img_out_size_out</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="ximagefileconvert_misc_op">ximagefileconvert_misc_op</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *ximagefileconvert_misc_op (<a href="#imagefileconvertconvert_flags">imagefileconvertconvert_flags</a> flags,
+      <a href="#imagefileconvertconvert_type">imagefileconvertconvert_type</a> conversion_type,
+      void const *img_in,
+      int img_in_size,
+      <a href="#imagefileconvert_op_type">imagefileconvert_op_type</a> operation,
+      int param0_in,
+      int param1_in,
+      int param2_in,
+      int param3_in,
+      int param4_in,
+      int *param0_out,
+      int *param1_out,
+      int *param2_out,
+      int *param3_out,
+      int *param4_out,
+      int *param5_out,
+      int *param6_out,
+      int *param7_out,
+      int *param8_out,
+      int *param9_out);</pre>
+<p>Provide miscellaneous operations to obtain information about the conversion process</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>conversion_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>img_in</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>img_in_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>operation</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>param0_in</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>param1_in</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>param2_in</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>param3_in</code></td><td/><td><code>R8</code></td></tr>
+<tr><td><code>param4_in</code></td><td/><td><code>R9</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>param0_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>param1_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>param2_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>param3_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>param4_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>param5_out</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>param6_out</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>param7_out</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>param8_out</code></td><td/><td><code>R8</code></td></tr>
+<tr><td><code>param9_out</code></td><td/><td><code>R9</code></td></tr>
+</table>
+
+<h3 id="imagefileconvert_misc_op">imagefileconvert_misc_op</h3>
+<pre>extern void imagefileconvert_misc_op (<a href="#imagefileconvertconvert_flags">imagefileconvertconvert_flags</a> flags,
+      <a href="#imagefileconvertconvert_type">imagefileconvertconvert_type</a> conversion_type,
+      void const *img_in,
+      int img_in_size,
+      <a href="#imagefileconvert_op_type">imagefileconvert_op_type</a> operation,
+      int param0_in,
+      int param1_in,
+      int param2_in,
+      int param3_in,
+      int param4_in,
+      int *param0_out,
+      int *param1_out,
+      int *param2_out,
+      int *param3_out,
+      int *param4_out,
+      int *param5_out,
+      int *param6_out,
+      int *param7_out,
+      int *param8_out,
+      int *param9_out);</pre>
+<p>Provide miscellaneous operations to obtain information about the conversion process</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>conversion_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>img_in</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>img_in_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>operation</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>param0_in</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>param1_in</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>param2_in</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>param3_in</code></td><td/><td><code>R8</code></td></tr>
+<tr><td><code>param4_in</code></td><td/><td><code>R9</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>param0_out</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>param1_out</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>param2_out</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>param3_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>param4_out</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>param5_out</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>param6_out</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>param7_out</code></td><td/><td><code>R7</code></td></tr>
+<tr><td><code>param8_out</code></td><td/><td><code>R8</code></td></tr>
+<tr><td><code>param9_out</code></td><td/><td><code>R9</code></td></tr>
+</table>
+
+<h3 id="ximagefileconvert_read_info">ximagefileconvert_read_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *ximagefileconvert_read_info (<a href="#imagefileconvertconvert_flags">imagefileconvertconvert_flags</a> flags_in,
+      <a href="#imagefileconvertconvert_type">imagefileconvertconvert_type</a> conversion_type,
+      void const *img_in,
+      int img_in_size,
+      int *width,
+      int *height,
+      int *bps,
+      <a href="#imagefileconvertreadinfo_flags">imagefileconvertreadinfo_flags</a> *flags_out,
+      int *xdpi,
+      int *ydpi);</pre>
+<p>Reads information about the image which is common to most bitmap-type operations.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags_in</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>conversion_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>img_in</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>img_in_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>width</code></td><td>in pixels</td><td><code>R0</code></td></tr>
+<tr><td><code>height</code></td><td>in pixels</td><td><code>R1</code></td></tr>
+<tr><td><code>bps</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xdpi</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>ydpi</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="imagefileconvert_read_info">imagefileconvert_read_info</h3>
+<pre>extern void imagefileconvert_read_info (<a href="#imagefileconvertconvert_flags">imagefileconvertconvert_flags</a> flags_in,
+      <a href="#imagefileconvertconvert_type">imagefileconvertconvert_type</a> conversion_type,
+      void const *img_in,
+      int img_in_size,
+      int *width,
+      int *height,
+      int *bps,
+      <a href="#imagefileconvertreadinfo_flags">imagefileconvertreadinfo_flags</a> *flags_out,
+      int *xdpi,
+      int *ydpi);</pre>
+<p>Reads information about the image which is common to most bitmap-type operations.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags_in</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>conversion_type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>img_in</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>img_in_size</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>width</code></td><td>in pixels</td><td><code>R0</code></td></tr>
+<tr><td><code>height</code></td><td>in pixels</td><td><code>R1</code></td></tr>
+<tr><td><code>bps</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>flags_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>xdpi</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>ydpi</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="ximagefileconvert_register">ximagefileconvert_register</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *ximagefileconvert_register (<a href="#imagefileconvertregister_flags">imagefileconvertregister_flags</a> flags,
+      <a href="#imagefileconvert_definition">imagefileconvert_definition</a> const *def,
+      int *api_version);</pre>
+<p>Register a new converter</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>def</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>api_version</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="imagefileconvert_register">imagefileconvert_register</h3>
+<pre>extern void imagefileconvert_register (<a href="#imagefileconvertregister_flags">imagefileconvertregister_flags</a> flags,
+      <a href="#imagefileconvert_definition">imagefileconvert_definition</a> const *def,
+      int *api_version);</pre>
+<p>Register a new converter</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>def</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>api_version</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="ximagefileconvert_deregister">ximagefileconvert_deregister</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *ximagefileconvert_deregister (<a href="#imagefileconvertderegister_flags">imagefileconvertderegister_flags</a> flags,
+      <a href="#imagefileconvertconvert_type">imagefileconvertconvert_type</a> type,
+      char const *name);</pre>
+<p>Deregister a converter</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="imagefileconvert_deregister">imagefileconvert_deregister</h3>
+<pre>extern void imagefileconvert_deregister (<a href="#imagefileconvertderegister_flags">imagefileconvertderegister_flags</a> flags,
+      <a href="#imagefileconvertconvert_type">imagefileconvertconvert_type</a> type,
+      char const *name);</pre>
+<p>Deregister a converter</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>type</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>name</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="ximagefileconvert_enumerate_converters">ximagefileconvert_enumerate_converters</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *ximagefileconvert_enumerate_converters (<a href="#imagefileconvertenumerateconverters_flags">imagefileconvertenumerateconverters_flags</a> flags,
+      <a href="#imagefileconvertconvert_type">imagefileconvertconvert_type</a> pair_in,
+      <a href="#imagefileconvert_definition">imagefileconvert_definition</a> **def,
+      <a href="#imagefileconvertconvert_type">imagefileconvertconvert_type</a> *pair_out);</pre>
+<p>Enumerate the currently registered converters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>pair_in</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>def</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>pair_out</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="imagefileconvert_enumerate_converters">imagefileconvert_enumerate_converters</h3>
+<pre>extern void imagefileconvert_enumerate_converters (<a href="#imagefileconvertenumerateconverters_flags">imagefileconvertenumerateconverters_flags</a> flags,
+      <a href="#imagefileconvertconvert_type">imagefileconvertconvert_type</a> pair_in,
+      <a href="#imagefileconvert_definition">imagefileconvert_definition</a> **def,
+      <a href="#imagefileconvertconvert_type">imagefileconvertconvert_type</a> *pair_out);</pre>
+<p>Enumerate the currently registered converters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>pair_in</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>def</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>pair_out</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="ximagefileconvert_converter_info">ximagefileconvert_converter_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *ximagefileconvert_converter_info (<a href="#imagefileconvertconverterinfo_flags">imagefileconvertconverterinfo_flags</a> flags,
+      <a href="#imagefileconvertconvert_type">imagefileconvertconvert_type</a> pair,
+      <a href="#imagefileconvert_definition">imagefileconvert_definition</a> **def,
+      char **name);</pre>
+<p>Read information on a conversion</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>pair</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>def</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="imagefileconvert_converter_info">imagefileconvert_converter_info</h3>
+<pre>extern void imagefileconvert_converter_info (<a href="#imagefileconvertconverterinfo_flags">imagefileconvertconverterinfo_flags</a> flags,
+      <a href="#imagefileconvertconvert_type">imagefileconvertconvert_type</a> pair,
+      <a href="#imagefileconvert_definition">imagefileconvert_definition</a> **def,
+      char **name);</pre>
+<p>Read information on a conversion</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>pair</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>def</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>name</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ColourMenu</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ColourMenu</h2>
+
+<pre>#include "oslib/colourmenu.h"</pre>
+
+<h3 id="colourmenu_flags">colourmenu_flags</h3>
+<pre>typedef bits colourmenu_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#colourmenu_GENERATE_ABOUT_TO_BE_SHOWN">colourmenu_GENERATE_ABOUT_TO_BE_SHOWN</a></dd>
+<dd><a href="#colourmenu_GENERATE_DIALOGUE_COMPLETED">colourmenu_GENERATE_DIALOGUE_COMPLETED</a></dd>
+<dd><a href="#colourmenu_GENERATE_HAS_BEEN_HIDDEN">colourmenu_GENERATE_HAS_BEEN_HIDDEN</a></dd>
+<dd><a href="#colourmenu_NONE_ENTRY">colourmenu_NONE_ENTRY</a></dd>
+</dl>
+
+<h3 id="colourmenu_colour">colourmenu_colour</h3>
+<pre>typedef int colourmenu_colour;</pre>
+
+<p>A Wimp colour number, or a special value</p>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#colourmenu_TRANSPARENT">colourmenu_TRANSPARENT</a></dd>
+<dd><a href="#colourmenu_NONE">colourmenu_NONE</a></dd>
+</dl>
+
+<h3 id="colourmenu_object">colourmenu_object</h3>
+<pre>typedef struct
+   {  <a href="#colourmenu_flags">colourmenu_flags</a> flags;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> title;
+      int title_limit;
+      <a href="#colourmenu_colour">colourmenu_colour</a> colour;
+   }
+   colourmenu_object;</pre>
+
+<p>Structure to describe Object for in-memory construction - to be referenced from Toolbox_Template</p>
+
+<h3 id="colourmenu_object_template">colourmenu_object_template</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_RESOURCE_FILE_OBJECT_MEMBERS">toolbox_RESOURCE_FILE_OBJECT_MEMBERS</a>
+      <a href="#colourmenu_flags">colourmenu_flags</a> objectflags;
+      <a href="toolbox.html#toolbox_msg_reference">toolbox_msg_reference</a> title;
+      int title_limit;
+      <a href="#colourmenu_colour">colourmenu_colour</a> colour;
+   }
+   colourmenu_object_template;</pre>
+
+<h3 id="colourmenu_full">colourmenu_full</h3>
+<pre>typedef <a href="os.html#os_coord">os_coord</a> colourmenu_full;</pre>
+
+<h3 id="colourmenu_action_about_to_be_shown">colourmenu_action_about_to_be_shown</h3>
+<pre>typedef struct
+   {  <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#colourmenu_full">colourmenu_full</a> full;
+      }
+      position;
+   }
+   colourmenu_action_about_to_be_shown;</pre>
+
+<p>Prefer ColourMenu_ActionAboutToBeShownBlock</p>
+
+<h3 id="colourmenu_action_about_to_be_shown_block">colourmenu_action_about_to_be_shown_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      <a href="toolbox.html#toolbox_position_tag">toolbox_position_tag</a> tag;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> top_left;
+         <a href="#colourmenu_full">colourmenu_full</a> full;
+      }
+      position;
+   }
+   colourmenu_action_about_to_be_shown_block;</pre>
+
+<h3 id="colourmenu_action_has_been_hidden_block">colourmenu_action_has_been_hidden_block</h3>
+<pre>typedef <a href="toolbox.html#toolbox_action_header_base">toolbox_action_header_base</a> colourmenu_action_has_been_hidden_block;</pre>
+
+<p>Prefer ColourMenu_ActionDialogueCompletedBlock</p>
+
+<h3 id="colourmenu_action_dialogue_completed_block">colourmenu_action_dialogue_completed_block</h3>
+<pre>typedef <a href="toolbox.html#toolbox_action_header_base">toolbox_action_header_base</a> colourmenu_action_dialogue_completed_block;</pre>
+
+<h3 id="colourmenu_action_selection">colourmenu_action_selection</h3>
+<pre>typedef struct
+   {  <a href="#colourmenu_colour">colourmenu_colour</a> colour;
+   }
+   colourmenu_action_selection;</pre>
+
+<h3 id="colourmenu_action_selection_block">colourmenu_action_selection_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      <a href="#colourmenu_colour">colourmenu_colour</a> colour;
+   }
+   colourmenu_action_selection_block;</pre>
+
+<h3 id="class_COLOUR_MENU">class_COLOUR_MENU</h3>
+<pre>#define class_COLOUR_MENU ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x82980u)</pre>
+
+<h3 id="colourmenu_GENERATE_ABOUT_TO_BE_SHOWN">colourmenu_GENERATE_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define colourmenu_GENERATE_ABOUT_TO_BE_SHOWN ((<a href="#colourmenu_flags">colourmenu_flags</a>) 0x1u)</pre>
+
+<h3 id="colourmenu_GENERATE_DIALOGUE_COMPLETED">colourmenu_GENERATE_DIALOGUE_COMPLETED</h3>
+<pre>#define colourmenu_GENERATE_DIALOGUE_COMPLETED ((<a href="#colourmenu_flags">colourmenu_flags</a>) 0x2u)</pre>
+
+<h3 id="colourmenu_GENERATE_HAS_BEEN_HIDDEN">colourmenu_GENERATE_HAS_BEEN_HIDDEN</h3>
+<pre>#define colourmenu_GENERATE_HAS_BEEN_HIDDEN ((<a href="#colourmenu_flags">colourmenu_flags</a>) 0x2u)</pre>
+
+<h3 id="colourmenu_NONE_ENTRY">colourmenu_NONE_ENTRY</h3>
+<pre>#define colourmenu_NONE_ENTRY ((<a href="#colourmenu_flags">colourmenu_flags</a>) 0x4u)</pre>
+
+<h3 id="colourmenu_TRANSPARENT">colourmenu_TRANSPARENT</h3>
+<pre>#define colourmenu_TRANSPARENT ((<a href="#colourmenu_colour">colourmenu_colour</a>) 0x10u)</pre>
+
+<h3 id="colourmenu_NONE">colourmenu_NONE</h3>
+<pre>#define colourmenu_NONE ((<a href="#colourmenu_colour">colourmenu_colour</a>) 0xFFFFFFFFu)</pre>
+
+<h3 id="action_COLOUR_MENU_ABOUT_TO_BE_SHOWN">action_COLOUR_MENU_ABOUT_TO_BE_SHOWN</h3>
+<pre>#define action_COLOUR_MENU_ABOUT_TO_BE_SHOWN 0x82980u</pre>
+
+<h3 id="action_COLOUR_MENU_DIALOGUE_COMPLETED">action_COLOUR_MENU_DIALOGUE_COMPLETED</h3>
+<pre>#define action_COLOUR_MENU_DIALOGUE_COMPLETED 0x82981u</pre>
+
+<h3 id="action_COLOUR_MENU_HAS_BEEN_HIDDEN">action_COLOUR_MENU_HAS_BEEN_HIDDEN</h3>
+<pre>#define action_COLOUR_MENU_HAS_BEEN_HIDDEN 0x82981u</pre>
+
+<h3 id="action_COLOUR_MENU_SELECTION">action_COLOUR_MENU_SELECTION</h3>
+<pre>#define action_COLOUR_MENU_SELECTION 0x82982u</pre>
+
+<h3 id="error_COLOUR_MENU_TASKS_ACTIVE">error_COLOUR_MENU_TASKS_ACTIVE</h3>
+<pre>#define error_COLOUR_MENU_TASKS_ACTIVE 0x80B000u</pre>
+
+<h3 id="error_COLOUR_MENU_ALLOC_FAILED">error_COLOUR_MENU_ALLOC_FAILED</h3>
+<pre>#define error_COLOUR_MENU_ALLOC_FAILED 0x80B001u</pre>
+
+<h3 id="error_COLOUR_MENU_SHORT_BUFFER">error_COLOUR_MENU_SHORT_BUFFER</h3>
+<pre>#define error_COLOUR_MENU_SHORT_BUFFER 0x80B002u</pre>
+
+<h3 id="error_COLOUR_MENU_NO_SUCH_TASK">error_COLOUR_MENU_NO_SUCH_TASK</h3>
+<pre>#define error_COLOUR_MENU_NO_SUCH_TASK 0x80B011u</pre>
+
+<h3 id="error_COLOUR_MENU_NO_SUCH_METHOD">error_COLOUR_MENU_NO_SUCH_METHOD</h3>
+<pre>#define error_COLOUR_MENU_NO_SUCH_METHOD 0x80B012u</pre>
+
+<h3 id="error_COLOUR_MENU_NO_SUCH_MISC_OP_METHOD">error_COLOUR_MENU_NO_SUCH_MISC_OP_METHOD</h3>
+<pre>#define error_COLOUR_MENU_NO_SUCH_MISC_OP_METHOD 0x80B013u</pre>
+
+<h3 id="xcolourmenu_set_colour">xcolourmenu_set_colour</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourmenu_set_colour (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_menu,
+      <a href="#colourmenu_colour">colourmenu_colour</a> colour);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>colour</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="colourmenu_set_colour">colourmenu_set_colour</h3>
+<pre>extern void colourmenu_set_colour (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_menu,
+      <a href="#colourmenu_colour">colourmenu_colour</a> colour);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>colour</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xcolourmenu_get_colour">xcolourmenu_get_colour</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourmenu_get_colour (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_menu,
+      <a href="#colourmenu_colour">colourmenu_colour</a> *colour);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="colourmenu_get_colour">colourmenu_get_colour</h3>
+<pre>extern <a href="#colourmenu_colour">colourmenu_colour</a> colourmenu_get_colour (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_menu);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>colour</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcolourmenu_set_none_available">xcolourmenu_set_none_available</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourmenu_set_none_available (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_menu,
+      osbool none_available);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>none_available</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="colourmenu_set_none_available">colourmenu_set_none_available</h3>
+<pre>extern void colourmenu_set_none_available (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_menu,
+      osbool none_available);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>none_available</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xcolourmenu_get_none_available">xcolourmenu_get_none_available</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourmenu_get_none_available (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_menu,
+      osbool *none_available);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>none_available</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="colourmenu_get_none_available">colourmenu_get_none_available</h3>
+<pre>extern osbool colourmenu_get_none_available (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_menu);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>none_available</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcolourmenu_set_title">xcolourmenu_set_title</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourmenu_set_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_menu,
+      char const *title);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="colourmenu_set_title">colourmenu_set_title</h3>
+<pre>extern void colourmenu_set_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_menu,
+      char const *title);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>title</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xcolourmenu_get_title">xcolourmenu_get_title</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourmenu_get_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_menu,
+      char *buffer,
+      int size,
+      int *used);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="colourmenu_get_title">colourmenu_get_title</h3>
+<pre>extern int colourmenu_get_title (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> colour_menu,
+      char *buffer,
+      int size);</pre>
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour_menu</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R4<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

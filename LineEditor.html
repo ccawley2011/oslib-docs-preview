@@ -1,0 +1,602 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; LineEditor</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>LineEditor</h2>
+
+<pre>#include "oslib/lineeditor.h"</pre>
+
+<h3 id="lineeditor_h">lineeditor_h</h3>
+<pre>typedef struct {...} *lineeditor_h;</pre>
+
+<h3 id="lineeditor_length">lineeditor_length</h3>
+<pre>typedef int lineeditor_length;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#lineeditor_UNKNOWN">lineeditor_UNKNOWN</a></dd>
+<dd><a href="#lineeditor_NO_EDIT">lineeditor_NO_EDIT</a></dd>
+</dl>
+
+<h3 id="lineeditor_pos">lineeditor_pos</h3>
+<pre>typedef int lineeditor_pos;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#lineeditor_END">lineeditor_END</a></dd>
+<dd><a href="#lineeditor_PREVIOUS_WRAP">lineeditor_PREVIOUS_WRAP</a></dd>
+<dd><a href="#lineeditor_PREVIOUS_NO_WRAP">lineeditor_PREVIOUS_NO_WRAP</a></dd>
+<dd><a href="#lineeditor_NEXT_NO_WRAP">lineeditor_NEXT_NO_WRAP</a></dd>
+<dd><a href="#lineeditor_NEXT_WRAP">lineeditor_NEXT_WRAP</a></dd>
+</dl>
+
+<h3 id="lineeditor_cursors">lineeditor_cursors</h3>
+<pre>typedef int lineeditor_cursors;</pre>
+
+<h3 id="lineeditorsetoptions_flags">lineeditorsetoptions_flags</h3>
+<pre>typedef bits lineeditorsetoptions_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#lineeditor_LOCAL_TASKWINDOWS">lineeditor_LOCAL_TASKWINDOWS</a></dd>
+<dd><a href="#lineeditor_LOCAL_APPEND_DOTS">lineeditor_LOCAL_APPEND_DOTS</a></dd>
+<dd><a href="#lineeditor_LOCAL_OVERTYPE">lineeditor_LOCAL_OVERTYPE</a></dd>
+<dd><a href="#lineeditor_LOCAL_KEEP_DUPLICATES">lineeditor_LOCAL_KEEP_DUPLICATES</a></dd>
+<dd><a href="#lineeditor_LOCAL_NO_TILDE">lineeditor_LOCAL_NO_TILDE</a></dd>
+<dd><a href="#lineeditor_LOCAL_NO_EVENTS">lineeditor_LOCAL_NO_EVENTS</a></dd>
+<dd><a href="#lineeditor_LOCAL_NO_CIRCUMFLEX">lineeditor_LOCAL_NO_CIRCUMFLEX</a></dd>
+</dl>
+
+<h3 id="lineeditor_UNKNOWN">lineeditor_UNKNOWN</h3>
+<pre>#define lineeditor_UNKNOWN ((<a href="#lineeditor_length">lineeditor_length</a>) 0xFFFFFFFEu)</pre>
+
+<h3 id="lineeditor_NO_EDIT">lineeditor_NO_EDIT</h3>
+<pre>#define lineeditor_NO_EDIT ((<a href="#lineeditor_length">lineeditor_length</a>) 0xFFFFFFFFu)</pre>
+
+<h3 id="lineeditor_END">lineeditor_END</h3>
+<pre>#define lineeditor_END ((<a href="#lineeditor_pos">lineeditor_pos</a>) 0x7FFFFFFFu)</pre>
+
+<h3 id="lineeditor_PREVIOUS_WRAP">lineeditor_PREVIOUS_WRAP</h3>
+<pre>#define lineeditor_PREVIOUS_WRAP ((<a href="#lineeditor_pos">lineeditor_pos</a>) 0x80000000u)</pre>
+
+<h3 id="lineeditor_PREVIOUS_NO_WRAP">lineeditor_PREVIOUS_NO_WRAP</h3>
+<pre>#define lineeditor_PREVIOUS_NO_WRAP ((<a href="#lineeditor_pos">lineeditor_pos</a>) 0x80000001u)</pre>
+
+<h3 id="lineeditor_NEXT_NO_WRAP">lineeditor_NEXT_NO_WRAP</h3>
+<pre>#define lineeditor_NEXT_NO_WRAP ((<a href="#lineeditor_pos">lineeditor_pos</a>) 0x80000003u)</pre>
+
+<h3 id="lineeditor_NEXT_WRAP">lineeditor_NEXT_WRAP</h3>
+<pre>#define lineeditor_NEXT_WRAP ((<a href="#lineeditor_pos">lineeditor_pos</a>) 0x80000002u)</pre>
+
+<h3 id="lineeditor_BLOCK">lineeditor_BLOCK</h3>
+<pre>#define lineeditor_BLOCK ((<a href="#lineeditorcursors">lineeditorcursors</a>) 0x0u)</pre>
+
+<h3 id="lineeditor_UNDERLINE">lineeditor_UNDERLINE</h3>
+<pre>#define lineeditor_UNDERLINE ((<a href="#lineeditorcursors">lineeditorcursors</a>) 0x1u)</pre>
+
+<h3 id="lineeditor_STEADY">lineeditor_STEADY</h3>
+<pre>#define lineeditor_STEADY ((<a href="#lineeditorcursors">lineeditorcursors</a>) 0x0u)</pre>
+
+<h3 id="lineeditor_FLASHING">lineeditor_FLASHING</h3>
+<pre>#define lineeditor_FLASHING ((<a href="#lineeditorcursors">lineeditorcursors</a>) 0x2u)</pre>
+
+<h3 id="lineeditor_NORMAL_SHIFT">lineeditor_NORMAL_SHIFT</h3>
+<pre>#define lineeditor_NORMAL_SHIFT 0</pre>
+
+<h3 id="lineeditor_OVERTYPE_SHIFT">lineeditor_OVERTYPE_SHIFT</h3>
+<pre>#define lineeditor_OVERTYPE_SHIFT 8</pre>
+
+<h3 id="lineeditor_LOCAL_TASKWINDOWS">lineeditor_LOCAL_TASKWINDOWS</h3>
+<pre>#define lineeditor_LOCAL_TASKWINDOWS ((<a href="#lineeditorsetoptions_flags">lineeditorsetoptions_flags</a>) 0x1u)</pre>
+
+<h3 id="lineeditor_LOCAL_APPEND_DOTS">lineeditor_LOCAL_APPEND_DOTS</h3>
+<pre>#define lineeditor_LOCAL_APPEND_DOTS ((<a href="#lineeditorsetoptions_flags">lineeditorsetoptions_flags</a>) 0x2u)</pre>
+
+<h3 id="lineeditor_LOCAL_OVERTYPE">lineeditor_LOCAL_OVERTYPE</h3>
+<pre>#define lineeditor_LOCAL_OVERTYPE ((<a href="#lineeditorsetoptions_flags">lineeditorsetoptions_flags</a>) 0x4u)</pre>
+
+<h3 id="lineeditor_LOCAL_KEEP_DUPLICATES">lineeditor_LOCAL_KEEP_DUPLICATES</h3>
+<pre>#define lineeditor_LOCAL_KEEP_DUPLICATES ((<a href="#lineeditorsetoptions_flags">lineeditorsetoptions_flags</a>) 0x8u)</pre>
+
+<h3 id="lineeditor_LOCAL_NO_TILDE">lineeditor_LOCAL_NO_TILDE</h3>
+<pre>#define lineeditor_LOCAL_NO_TILDE ((<a href="#lineeditorsetoptions_flags">lineeditorsetoptions_flags</a>) 0x10u)</pre>
+
+<h3 id="lineeditor_LOCAL_NO_EVENTS">lineeditor_LOCAL_NO_EVENTS</h3>
+<pre>#define lineeditor_LOCAL_NO_EVENTS ((<a href="#lineeditorsetoptions_flags">lineeditorsetoptions_flags</a>) 0x20u)</pre>
+
+<h3 id="lineeditor_LOCAL_NO_CIRCUMFLEX">lineeditor_LOCAL_NO_CIRCUMFLEX</h3>
+<pre>#define lineeditor_LOCAL_NO_CIRCUMFLEX ((<a href="#lineeditorsetoptions_flags">lineeditorsetoptions_flags</a>) 0x40u)</pre>
+
+<h3 id="xlineeditor_set_options">xlineeditor_set_options</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xlineeditor_set_options (int size,
+      <a href="#lineeditorsetoptions_flags">lineeditorsetoptions_flags</a> flags,
+      int min,
+      int max,
+      <a href="#lineeditor_cursors">lineeditor_cursors</a> cursors);</pre>
+<p>Sets the options used by LineEditoritor</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>min</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>max</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>cursors</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="lineeditor_set_options">lineeditor_set_options</h3>
+<pre>extern void lineeditor_set_options (int size,
+      <a href="#lineeditorsetoptions_flags">lineeditorsetoptions_flags</a> flags,
+      int min,
+      int max,
+      <a href="#lineeditor_cursors">lineeditor_cursors</a> cursors);</pre>
+<p>Sets the options used by LineEditoritor</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>min</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>max</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>cursors</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xlineeditor_get_options">xlineeditor_get_options</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xlineeditor_get_options (int *size,
+      <a href="#lineeditorsetoptions_flags">lineeditorsetoptions_flags</a> *flags,
+      int *min,
+      int *max,
+      <a href="#lineeditor_cursors">lineeditor_cursors</a> *cursors);</pre>
+<p>Reads the options used by LineEditoritor</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>min</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>max</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>cursors</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="lineeditor_get_options">lineeditor_get_options</h3>
+<pre>extern void lineeditor_get_options (int *size,
+      <a href="#lineeditorsetoptions_flags">lineeditorsetoptions_flags</a> *flags,
+      int *min,
+      int *max,
+      <a href="#lineeditor_cursors">lineeditor_cursors</a> *cursors);</pre>
+<p>Reads the options used by LineEditoritor</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>min</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>max</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>cursors</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xlineeditor_create_buffer">xlineeditor_create_buffer</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xlineeditor_create_buffer (int size,
+      <a href="wimp.html#wimp_t">wimp_t</a> task,
+      bits expansion,
+      <a href="#lineeditor_h">lineeditor_h</a> *handle);</pre>
+<p>Creates a new private history buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>expansion</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="lineeditor_create_buffer">lineeditor_create_buffer</h3>
+<pre>extern <a href="#lineeditor_h">lineeditor_h</a> lineeditor_create_buffer (int size,
+      <a href="wimp.html#wimp_t">wimp_t</a> task,
+      bits expansion);</pre>
+<p>Creates a new private history buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>task</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>expansion</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>handle</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xlineeditor_delete_buffer">xlineeditor_delete_buffer</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xlineeditor_delete_buffer (<a href="#lineeditor_h">lineeditor_h</a> handle);</pre>
+<p>Releases a private history buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="lineeditor_delete_buffer">lineeditor_delete_buffer</h3>
+<pre>extern void lineeditor_delete_buffer (<a href="#lineeditor_h">lineeditor_h</a> handle);</pre>
+<p>Releases a private history buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xlineeditor_set_pos">xlineeditor_set_pos</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xlineeditor_set_pos (<a href="#lineeditor_h">lineeditor_h</a> handle,
+      <a href="#lineeditor_pos">lineeditor_pos</a> position);</pre>
+<p>Sets the position in the private history buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>position</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="lineeditor_set_pos">lineeditor_set_pos</h3>
+<pre>extern void lineeditor_set_pos (<a href="#lineeditor_h">lineeditor_h</a> handle,
+      <a href="#lineeditor_pos">lineeditor_pos</a> position);</pre>
+<p>Sets the position in the private history buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>position</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xlineeditor_get_pos">xlineeditor_get_pos</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xlineeditor_get_pos (<a href="#lineeditor_h">lineeditor_h</a> handle,
+      <a href="#lineeditor_pos">lineeditor_pos</a> *position);</pre>
+<p>Reads the current position in the history buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>position</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="lineeditor_get_pos">lineeditor_get_pos</h3>
+<pre>extern <a href="#lineeditor_pos">lineeditor_pos</a> lineeditor_get_pos (<a href="#lineeditor_h">lineeditor_h</a> handle);</pre>
+<p>Reads the current position in the history buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>position</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xlineeditor_get_line">xlineeditor_get_line</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xlineeditor_get_line (<a href="#lineeditor_h">lineeditor_h</a> handle,
+      char *buffer,
+      int length,
+      int *used);</pre>
+<p>Reads a line from the history buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="lineeditor_get_line">lineeditor_get_line</h3>
+<pre>extern int lineeditor_get_line (<a href="#lineeditor_h">lineeditor_h</a> handle,
+      char *buffer,
+      int length);</pre>
+<p>Reads a line from the history buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>length</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>used</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xlineeditor_append_line">xlineeditor_append_line</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xlineeditor_append_line (<a href="#lineeditor_h">lineeditor_h</a> handle,
+      char const *line);</pre>
+<p>Adds a line to the history buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>line</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="lineeditor_append_line">lineeditor_append_line</h3>
+<pre>extern void lineeditor_append_line (<a href="#lineeditor_h">lineeditor_h</a> handle,
+      char const *line);</pre>
+<p>Adds a line to the history buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>line</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xlineeditor_delete_line">xlineeditor_delete_line</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xlineeditor_delete_line (<a href="#lineeditor_h">lineeditor_h</a> handle);</pre>
+<p>Removes the last line from the history buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="lineeditor_delete_line">lineeditor_delete_line</h3>
+<pre>extern void lineeditor_delete_line (<a href="#lineeditor_h">lineeditor_h</a> handle);</pre>
+<p>Removes the last line from the history buffer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>handle</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xlineeditor_read_info">xlineeditor_read_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xlineeditor_read_info (<a href="wimp.html#wimp_t">wimp_t</a> task_handle,
+      <a href="#lineeditor_length">lineeditor_length</a> *length,
+      int *pos);</pre>
+<p>Reads information about current LineEditoritor edits</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task_handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>length</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>pos</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="lineeditor_read_info">lineeditor_read_info</h3>
+<pre>extern int lineeditor_read_info (<a href="wimp.html#wimp_t">wimp_t</a> task_handle,
+      <a href="#lineeditor_length">lineeditor_length</a> *length);</pre>
+<p>Reads information about current LineEditoritor edits</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>task_handle</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>length</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>pos</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xlineeditor_read_line">xlineeditor_read_line</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xlineeditor_read_line (char *buffer,
+      int size,
+      char min_char,
+      char max_char,
+      <a href="#lineeditor_h">lineeditor_h</a> handle,
+      int *used,
+      bits *psr);</pre>
+<p>Reads a line of input with history</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>min_char</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>max_char</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="lineeditor_read_line">lineeditor_read_line</h3>
+<pre>extern bits lineeditor_read_line (char *buffer,
+      int size,
+      char min_char,
+      char max_char,
+      <a href="#lineeditor_h">lineeditor_h</a> handle,
+      int *used);</pre>
+<p>Reads a line of input with history</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>min_char</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>max_char</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td colspan="3">processor status register</td></tr>
+</table>
+
+<h3 id="xlineeditor_read_line_given_echo">xlineeditor_read_line_given_echo</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xlineeditor_read_line_given_echo (char *buffer,
+      int size,
+      char min_char,
+      char max_char,
+      char echo,
+      <a href="#lineeditor_h">lineeditor_h</a> handle,
+      int *used,
+      bits *psr);</pre>
+<p>Reads a line of input with history, using the given echo character</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>min_char</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>max_char</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>echo</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="lineeditor_read_line_given_echo">lineeditor_read_line_given_echo</h3>
+<pre>extern bits lineeditor_read_line_given_echo (char *buffer,
+      int size,
+      char min_char,
+      char max_char,
+      char echo,
+      <a href="#lineeditor_h">lineeditor_h</a> handle,
+      int *used);</pre>
+<p>Reads a line of input with history, using the given echo character</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>min_char</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>max_char</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>echo</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td colspan="3">processor status register</td></tr>
+</table>
+
+<h3 id="xlineeditor_read_line_suppress_invalid">xlineeditor_read_line_suppress_invalid</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xlineeditor_read_line_suppress_invalid (char *buffer,
+      int size,
+      char min_char,
+      char max_char,
+      <a href="#lineeditor_h">lineeditor_h</a> handle,
+      int *used,
+      bits *psr);</pre>
+<p>Reads a line of input with history, not echoing invalid characters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>min_char</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>max_char</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="lineeditor_read_line_suppress_invalid">lineeditor_read_line_suppress_invalid</h3>
+<pre>extern bits lineeditor_read_line_suppress_invalid (char *buffer,
+      int size,
+      char min_char,
+      char max_char,
+      <a href="#lineeditor_h">lineeditor_h</a> handle,
+      int *used);</pre>
+<p>Reads a line of input with history, not echoing invalid characters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>min_char</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>max_char</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td colspan="3">processor status register</td></tr>
+</table>
+
+<h3 id="xlineeditor_read_line_given_echo_suppress_invalid">xlineeditor_read_line_given_echo_suppress_invalid</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xlineeditor_read_line_given_echo_suppress_invalid (char *buffer,
+      int size,
+      char min_char,
+      char max_char,
+      char echo,
+      <a href="#lineeditor_h">lineeditor_h</a> handle,
+      int *used,
+      bits *psr);</pre>
+<p>Reads a line of input with history, using the given echo character and not echoing invalid characters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>min_char</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>max_char</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>echo</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="lineeditor_read_line_given_echo_suppress_invalid">lineeditor_read_line_given_echo_suppress_invalid</h3>
+<pre>extern bits lineeditor_read_line_given_echo_suppress_invalid (char *buffer,
+      int size,
+      char min_char,
+      char max_char,
+      char echo,
+      <a href="#lineeditor_h">lineeditor_h</a> handle,
+      int *used);</pre>
+<p>Reads a line of input with history, using the given echo character and not echoing invalid characters</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>min_char</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>max_char</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>echo</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>handle</code></td><td/><td><code>R6</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>used</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td colspan="3">processor status register</td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,816 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Scrollbar</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Scrollbar</h2>
+
+<pre>#include "oslib/scrollbar.h"</pre>
+
+<h3 id="scrollbar_gadget">scrollbar_gadget</h3>
+<pre>typedef struct
+   {  int type;
+      int event;
+      int lower_bound;
+      int upper_bound;
+      int value;
+      int visible_length;
+      int line_increment;
+      int page_increment;
+   }
+   scrollbar_gadget;</pre>
+
+<h3 id="scrollbar_object">scrollbar_object</h3>
+<pre>typedef struct
+   {  <a href="#gadget_OBJECT_MEMBERS">gadget_OBJECT_MEMBERS</a>
+      int type;
+      int event;
+      int lower_bound;
+      int upper_bound;
+      int value;
+      int visible_length;
+      int line_increment;
+      int page_increment;
+   }
+   scrollbar_object;</pre>
+
+<h3 id="scrollbar_position_changed">scrollbar_position_changed</h3>
+<pre>typedef struct
+   {  bits new_position;
+      int direction;
+   }
+   scrollbar_position_changed;</pre>
+
+<p>Deprecated - use Scrollbar_ActionPositionChanged</p>
+
+<h3 id="scrollbar_action_position_changed">scrollbar_action_position_changed</h3>
+<pre>typedef struct
+   {  bits new_position;
+      int direction;
+   }
+   scrollbar_action_position_changed;</pre>
+
+<p>Prefer Scrollbar_ActionPositionChangedBlock</p>
+
+<h3 id="scrollbar_action_position_changed_block">scrollbar_action_position_changed_block</h3>
+<pre>typedef struct
+   {  <a href="#toolbox_ACTION_HEADER_MEMBERS">toolbox_ACTION_HEADER_MEMBERS</a>
+      bits new_position;
+      int direction;
+   }
+   scrollbar_action_position_changed_block;</pre>
+
+<h3 id="scrollbar_state">scrollbar_state</h3>
+<pre>typedef bits scrollbar_state;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#scrollbar_HAS_VERTICAL_SCROLLBAR">scrollbar_HAS_VERTICAL_SCROLLBAR</a></dd>
+<dd><a href="#scrollbar_HAS_HORIZONTAL_SCROLLBAR">scrollbar_HAS_HORIZONTAL_SCROLLBAR</a></dd>
+</dl>
+
+<h3 id="scrollbar_bounds_flags">scrollbar_bounds_flags</h3>
+<pre>typedef bits scrollbar_bounds_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#scrollbar_BOUNDS_LOWER">scrollbar_BOUNDS_LOWER</a></dd>
+<dd><a href="#scrollbar_BOUNDS_UPPER">scrollbar_BOUNDS_UPPER</a></dd>
+<dd><a href="#scrollbar_BOUNDS_VISIBLE_LENGTH">scrollbar_BOUNDS_VISIBLE_LENGTH</a></dd>
+</dl>
+
+<h3 id="scrollbar_increments_flags">scrollbar_increments_flags</h3>
+<pre>typedef bits scrollbar_increments_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#scrollbar_INCREMENTS_LINE">scrollbar_INCREMENTS_LINE</a></dd>
+<dd><a href="#scrollbar_INCREMENTS_PAGE">scrollbar_INCREMENTS_PAGE</a></dd>
+</dl>
+
+<h3 id="class_SCROLLBAR">class_SCROLLBAR</h3>
+<pre>#define class_SCROLLBAR ((<a href="toolbox.html#toolbox_class">toolbox_class</a>) 0x401Bu)</pre>
+
+<h3 id="action_SCROLLBAR_POSITION_CHANGED">action_SCROLLBAR_POSITION_CHANGED</h3>
+<pre>#define action_SCROLLBAR_POSITION_CHANGED 0x140183u</pre>
+
+<h3 id="scrollbar_HAS_VERTICAL_SCROLLBAR">scrollbar_HAS_VERTICAL_SCROLLBAR</h3>
+<pre>#define scrollbar_HAS_VERTICAL_SCROLLBAR ((<a href="#scrollbar_state">scrollbar_state</a>) 0x1u)</pre>
+
+<h3 id="scrollbar_HAS_HORIZONTAL_SCROLLBAR">scrollbar_HAS_HORIZONTAL_SCROLLBAR</h3>
+<pre>#define scrollbar_HAS_HORIZONTAL_SCROLLBAR ((<a href="#scrollbar_state">scrollbar_state</a>) 0x2u)</pre>
+
+<h3 id="scrollbar_BOUNDS_LOWER">scrollbar_BOUNDS_LOWER</h3>
+<pre>#define scrollbar_BOUNDS_LOWER ((<a href="#scrollbar_bounds_flags">scrollbar_bounds_flags</a>) 0x1u)</pre>
+
+<h3 id="scrollbar_BOUNDS_UPPER">scrollbar_BOUNDS_UPPER</h3>
+<pre>#define scrollbar_BOUNDS_UPPER ((<a href="#scrollbar_bounds_flags">scrollbar_bounds_flags</a>) 0x2u)</pre>
+
+<h3 id="scrollbar_BOUNDS_VISIBLE_LENGTH">scrollbar_BOUNDS_VISIBLE_LENGTH</h3>
+<pre>#define scrollbar_BOUNDS_VISIBLE_LENGTH ((<a href="#scrollbar_bounds_flags">scrollbar_bounds_flags</a>) 0x4u)</pre>
+
+<h3 id="scrollbar_INCREMENTS_LINE">scrollbar_INCREMENTS_LINE</h3>
+<pre>#define scrollbar_INCREMENTS_LINE ((<a href="#scrollbar_increments_flags">scrollbar_increments_flags</a>) 0x1u)</pre>
+
+<h3 id="scrollbar_INCREMENTS_PAGE">scrollbar_INCREMENTS_PAGE</h3>
+<pre>#define scrollbar_INCREMENTS_PAGE ((<a href="#scrollbar_increments_flags">scrollbar_increments_flags</a>) 0x2u)</pre>
+
+<h3 id="xscrollbar_get_state">xscrollbar_get_state</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrollbar_get_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      <a href="#scrollbar_state">scrollbar_state</a> *state);</pre>
+<p>Reads the state of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>state</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="scrollbar_get_state">scrollbar_get_state</h3>
+<pre>extern <a href="#scrollbar_state">scrollbar_state</a> scrollbar_get_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar);</pre>
+<p>Reads the state of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>state</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xscrollbar_set_state">xscrollbar_set_state</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrollbar_set_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      <a href="#scrollbar_state">scrollbar_state</a> state);</pre>
+<p>Sets the state of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>state</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="scrollbar_set_state">scrollbar_set_state</h3>
+<pre>extern void scrollbar_set_state (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      <a href="#scrollbar_state">scrollbar_state</a> state);</pre>
+<p>Sets the state of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>state</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xscrollbar_set_bounds">xscrollbar_set_bounds</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrollbar_set_bounds (<a href="#scrollbar_bounds_flags">scrollbar_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int lower_bound,
+      int upper_bound,
+      int visible_length);</pre>
+<p>Sets the bounds of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>lower_bound</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>upper_bound</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>visible_length</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="scrollbar_set_bounds">scrollbar_set_bounds</h3>
+<pre>extern void scrollbar_set_bounds (<a href="#scrollbar_bounds_flags">scrollbar_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int lower_bound,
+      int upper_bound,
+      int visible_length);</pre>
+<p>Sets the bounds of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>lower_bound</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>upper_bound</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>visible_length</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xscrollbar_set_lower_bound">xscrollbar_set_lower_bound</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrollbar_set_lower_bound (<a href="#scrollbar_bounds_flags">scrollbar_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int lower_bound);</pre>
+<p>Set the lower bound of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>lower_bound</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="scrollbar_set_lower_bound">scrollbar_set_lower_bound</h3>
+<pre>extern void scrollbar_set_lower_bound (<a href="#scrollbar_bounds_flags">scrollbar_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int lower_bound);</pre>
+<p>Set the lower bound of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>lower_bound</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xscrollbar_set_upper_bound">xscrollbar_set_upper_bound</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrollbar_set_upper_bound (<a href="#scrollbar_bounds_flags">scrollbar_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int upper_bound);</pre>
+<p>Sets the upper bound of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>upper_bound</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="scrollbar_set_upper_bound">scrollbar_set_upper_bound</h3>
+<pre>extern void scrollbar_set_upper_bound (<a href="#scrollbar_bounds_flags">scrollbar_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int upper_bound);</pre>
+<p>Sets the upper bound of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>upper_bound</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xscrollbar_set_visible_length">xscrollbar_set_visible_length</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrollbar_set_visible_length (<a href="#scrollbar_bounds_flags">scrollbar_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int visible_length);</pre>
+<p>Sets the visible length of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>visible_length</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="scrollbar_set_visible_length">scrollbar_set_visible_length</h3>
+<pre>extern void scrollbar_set_visible_length (<a href="#scrollbar_bounds_flags">scrollbar_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int visible_length);</pre>
+<p>Sets the visible length of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>visible_length</code></td><td/><td><code>R6</code></td></tr>
+</table>
+
+<h3 id="xscrollbar_get_bounds">xscrollbar_get_bounds</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrollbar_get_bounds (<a href="#scrollbar_bounds_flags">scrollbar_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int *lower_bound,
+      int *upper_bound,
+      int *visible_length);</pre>
+<p>Gets the bounds of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>lower_bound</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>upper_bound</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>visible_length</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="scrollbar_get_bounds">scrollbar_get_bounds</h3>
+<pre>extern void scrollbar_get_bounds (<a href="#scrollbar_bounds_flags">scrollbar_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int *lower_bound,
+      int *upper_bound,
+      int *visible_length);</pre>
+<p>Gets the bounds of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>lower_bound</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>upper_bound</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>visible_length</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xscrollbar_get_lower_bound">xscrollbar_get_lower_bound</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrollbar_get_lower_bound (<a href="#scrollbar_bounds_flags">scrollbar_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int *lower_bound);</pre>
+<p>Gets the lower bound of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>lower_bound</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="scrollbar_get_lower_bound">scrollbar_get_lower_bound</h3>
+<pre>extern int scrollbar_get_lower_bound (<a href="#scrollbar_bounds_flags">scrollbar_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar);</pre>
+<p>Gets the lower bound of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>lower_bound</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xscrollbar_get_upper_bound">xscrollbar_get_upper_bound</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrollbar_get_upper_bound (<a href="#scrollbar_bounds_flags">scrollbar_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int *upper_bound);</pre>
+<p>Gets the upper bound of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>upper_bound</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="scrollbar_get_upper_bound">scrollbar_get_upper_bound</h3>
+<pre>extern int scrollbar_get_upper_bound (<a href="#scrollbar_bounds_flags">scrollbar_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar);</pre>
+<p>Gets the upper bound of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>upper_bound</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xscrollbar_get_visible_length">xscrollbar_get_visible_length</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrollbar_get_visible_length (<a href="#scrollbar_bounds_flags">scrollbar_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int *visible_length);</pre>
+<p>Gets the visible length of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>visible_length</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="scrollbar_get_visible_length">scrollbar_get_visible_length</h3>
+<pre>extern int scrollbar_get_visible_length (<a href="#scrollbar_bounds_flags">scrollbar_bounds_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar);</pre>
+<p>Gets the visible length of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>visible_length</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xscrollbar_set_value">xscrollbar_set_value</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrollbar_set_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int value);</pre>
+<p>Sets the value of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>value</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="scrollbar_set_value">scrollbar_set_value</h3>
+<pre>extern void scrollbar_set_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int value);</pre>
+<p>Sets the value of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>value</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xscrollbar_get_value">xscrollbar_get_value</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrollbar_get_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int *value);</pre>
+<p>Gets the value of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>value</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="scrollbar_get_value">scrollbar_get_value</h3>
+<pre>extern int scrollbar_get_value (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar);</pre>
+<p>Gets the value of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>value</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xscrollbar_set_increments">xscrollbar_set_increments</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrollbar_set_increments (<a href="#scrollbar_increments_flags">scrollbar_increments_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int line_increment,
+      int page_increment);</pre>
+<p>Sets the increments of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>line_increment</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>page_increment</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="scrollbar_set_increments">scrollbar_set_increments</h3>
+<pre>extern void scrollbar_set_increments (<a href="#scrollbar_increments_flags">scrollbar_increments_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int line_increment,
+      int page_increment);</pre>
+<p>Sets the increments of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>line_increment</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>page_increment</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xscrollbar_set_line_increment">xscrollbar_set_line_increment</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrollbar_set_line_increment (<a href="#scrollbar_increments_flags">scrollbar_increments_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int line_increment);</pre>
+<p>Sets the line increment of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>line_increment</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="scrollbar_set_line_increment">scrollbar_set_line_increment</h3>
+<pre>extern void scrollbar_set_line_increment (<a href="#scrollbar_increments_flags">scrollbar_increments_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int line_increment);</pre>
+<p>Sets the line increment of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>line_increment</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xscrollbar_set_page_increment">xscrollbar_set_page_increment</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrollbar_set_page_increment (<a href="#scrollbar_increments_flags">scrollbar_increments_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int page_increment);</pre>
+<p>Sets the page increment of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>page_increment</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="scrollbar_set_page_increment">scrollbar_set_page_increment</h3>
+<pre>extern void scrollbar_set_page_increment (<a href="#scrollbar_increments_flags">scrollbar_increments_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int page_increment);</pre>
+<p>Sets the page increment of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>page_increment</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="xscrollbar_get_increments">xscrollbar_get_increments</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrollbar_get_increments (<a href="#scrollbar_increments_flags">scrollbar_increments_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int *line_increment,
+      int *page_increment);</pre>
+<p>Gets the increments of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>line_increment</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>page_increment</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="scrollbar_get_increments">scrollbar_get_increments</h3>
+<pre>extern void scrollbar_get_increments (<a href="#scrollbar_increments_flags">scrollbar_increments_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int *line_increment,
+      int *page_increment);</pre>
+<p>Gets the increments of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>line_increment</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>page_increment</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xscrollbar_get_line_increment">xscrollbar_get_line_increment</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrollbar_get_line_increment (<a href="#scrollbar_increments_flags">scrollbar_increments_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int *line_increment);</pre>
+<p>Gets the line increment of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>line_increment</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="scrollbar_get_line_increment">scrollbar_get_line_increment</h3>
+<pre>extern int scrollbar_get_line_increment (<a href="#scrollbar_increments_flags">scrollbar_increments_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar);</pre>
+<p>Gets the line increment of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>line_increment</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xscrollbar_get_page_increment">xscrollbar_get_page_increment</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrollbar_get_page_increment (<a href="#scrollbar_increments_flags">scrollbar_increments_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      int *page_increment);</pre>
+<p>Gets the page increment of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>page_increment</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="scrollbar_get_page_increment">scrollbar_get_page_increment</h3>
+<pre>extern int scrollbar_get_page_increment (<a href="#scrollbar_increments_flags">scrollbar_increments_flags</a> flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar);</pre>
+<p>Gets the page increment of the Scrollbar</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>page_increment</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xscrollbar_set_event">xscrollbar_set_event</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrollbar_set_event (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      bits event_code);</pre>
+<p>Sets the toolbox event for when a Scrollbar changes position</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>event_code</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="scrollbar_set_event">scrollbar_set_event</h3>
+<pre>extern void scrollbar_set_event (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      bits event_code);</pre>
+<p>Sets the toolbox event for when a Scrollbar changes position</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>event_code</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="xscrollbar_get_event">xscrollbar_get_event</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscrollbar_get_event (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar,
+      bits *event_code);</pre>
+<p>Gets the toolbox event for when a Scrollbar changes position</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>event_code</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="scrollbar_get_event">scrollbar_get_event</h3>
+<pre>extern bits scrollbar_get_event (bits flags,
+      <a href="toolbox.html#toolbox_o">toolbox_o</a> window,
+      <a href="toolbox.html#toolbox_c">toolbox_c</a> scroll_bar);</pre>
+<p>Gets the toolbox event for when a Scrollbar changes position</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>window</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>scroll_bar</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>event_code</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; TimerManager</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>TimerManager</h2>
+
+<pre>#include "oslib/timermanager.h"</pre>
+
+<h3 id="timermanagerreturnnumber_flags">timermanagerreturnnumber_flags</h3>
+<pre>typedef bits timermanagerreturnnumber_flags;</pre>
+
+<h3 id="timermanager_measurement_format">timermanager_measurement_format</h3>
+<pre>typedef bits timermanager_measurement_format;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#timermanagermeasurementformat_SCALE_EMIN9">timermanagermeasurementformat_SCALE_EMIN9</a></dd>
+<dd><a href="#timermanagermeasurementformat_SCALE_EMIN6">timermanagermeasurementformat_SCALE_EMIN6</a></dd>
+<dd><a href="#timermanagermeasurementformat_SCALE_EMIN3">timermanagermeasurementformat_SCALE_EMIN3</a></dd>
+<dd><a href="#timermanagermeasurementformat_SCALE_E0">timermanagermeasurementformat_SCALE_E0</a></dd>
+<dd><a href="#timermanagermeasurementformat_SCALE_EPOS3">timermanagermeasurementformat_SCALE_EPOS3</a></dd>
+<dd><a href="#timermanagermeasurementformat_SCALE_EPOS6">timermanagermeasurementformat_SCALE_EPOS6</a></dd>
+<dd><a href="#timermanagermeasurementformat_SCALE_EPOS9">timermanagermeasurementformat_SCALE_EPOS9</a></dd>
+<dd><a href="#timermanagermeasurementformat_TYPE_NATIVE_TICKS">timermanagermeasurementformat_TYPE_NATIVE_TICKS</a></dd>
+<dd><a href="#timermanagermeasurementformat_TYPE_FREQUENCY">timermanagermeasurementformat_TYPE_FREQUENCY</a></dd>
+<dd><a href="#timermanagermeasurementformat_TYPE_PERIOD">timermanagermeasurementformat_TYPE_PERIOD</a></dd>
+</dl>
+
+<h3 id="timermanagerrelease_flags">timermanagerrelease_flags</h3>
+<pre>typedef bits timermanagerrelease_flags;</pre>
+
+<h3 id="timermanagermeasurementformat_IN_UNIT_SCALER_SHIFT">timermanagermeasurementformat_IN_UNIT_SCALER_SHIFT</h3>
+<pre>#define timermanagermeasurementformat_IN_UNIT_SCALER_SHIFT 0</pre>
+
+<h3 id="timermanagermeasurementformat_IN_UNIT_SCALER_MASK">timermanagermeasurementformat_IN_UNIT_SCALER_MASK</h3>
+<pre>#define timermanagermeasurementformat_IN_UNIT_SCALER_MASK 7</pre>
+
+<h3 id="timermanagermeasurementformat_IN_TYPE_SHIFT">timermanagermeasurementformat_IN_TYPE_SHIFT</h3>
+<pre>#define timermanagermeasurementformat_IN_TYPE_SHIFT 4</pre>
+
+<h3 id="timermanagermeasurementformat_IN_TYPE_MASK">timermanagermeasurementformat_IN_TYPE_MASK</h3>
+<pre>#define timermanagermeasurementformat_IN_TYPE_MASK 3</pre>
+
+<h3 id="timermanagermeasurementformat_OUT_UNIT_SCALER_SHIFT">timermanagermeasurementformat_OUT_UNIT_SCALER_SHIFT</h3>
+<pre>#define timermanagermeasurementformat_OUT_UNIT_SCALER_SHIFT 0</pre>
+
+<h3 id="timermanagermeasurementformat_OUT_UNIT_SCALER_MASK">timermanagermeasurementformat_OUT_UNIT_SCALER_MASK</h3>
+<pre>#define timermanagermeasurementformat_OUT_UNIT_SCALER_MASK 7</pre>
+
+<h3 id="timermanagermeasurementformat_OUT_TYPE_SHIFT">timermanagermeasurementformat_OUT_TYPE_SHIFT</h3>
+<pre>#define timermanagermeasurementformat_OUT_TYPE_SHIFT 4</pre>
+
+<h3 id="timermanagermeasurementformat_OUT_TYPE_MASK">timermanagermeasurementformat_OUT_TYPE_MASK</h3>
+<pre>#define timermanagermeasurementformat_OUT_TYPE_MASK 3</pre>
+
+<h3 id="timermanagermeasurementformat_SCALE_EMIN9">timermanagermeasurementformat_SCALE_EMIN9</h3>
+<pre>#define timermanagermeasurementformat_SCALE_EMIN9 ((<a href="#timermanager_measurement_format">timermanager_measurement_format</a>) 0x0u)</pre>
+
+<p>scaled by 1/1000000000</p>
+
+<h3 id="timermanagermeasurementformat_SCALE_EMIN6">timermanagermeasurementformat_SCALE_EMIN6</h3>
+<pre>#define timermanagermeasurementformat_SCALE_EMIN6 ((<a href="#timermanager_measurement_format">timermanager_measurement_format</a>) 0x1u)</pre>
+
+<p>scaled by 1/1000000</p>
+
+<h3 id="timermanagermeasurementformat_SCALE_EMIN3">timermanagermeasurementformat_SCALE_EMIN3</h3>
+<pre>#define timermanagermeasurementformat_SCALE_EMIN3 ((<a href="#timermanager_measurement_format">timermanager_measurement_format</a>) 0x3u)</pre>
+
+<p>scaled by 1/1000</p>
+
+<h3 id="timermanagermeasurementformat_SCALE_E0">timermanagermeasurementformat_SCALE_E0</h3>
+<pre>#define timermanagermeasurementformat_SCALE_E0 ((<a href="#timermanager_measurement_format">timermanager_measurement_format</a>) 0x4u)</pre>
+
+<p>scaled by 1</p>
+
+<h3 id="timermanagermeasurementformat_SCALE_EPOS3">timermanagermeasurementformat_SCALE_EPOS3</h3>
+<pre>#define timermanagermeasurementformat_SCALE_EPOS3 ((<a href="#timermanager_measurement_format">timermanager_measurement_format</a>) 0x5u)</pre>
+
+<p>scaled by 1000</p>
+
+<h3 id="timermanagermeasurementformat_SCALE_EPOS6">timermanagermeasurementformat_SCALE_EPOS6</h3>
+<pre>#define timermanagermeasurementformat_SCALE_EPOS6 ((<a href="#timermanager_measurement_format">timermanager_measurement_format</a>) 0x6u)</pre>
+
+<p>scaled by 1000000</p>
+
+<h3 id="timermanagermeasurementformat_SCALE_EPOS9">timermanagermeasurementformat_SCALE_EPOS9</h3>
+<pre>#define timermanagermeasurementformat_SCALE_EPOS9 ((<a href="#timermanager_measurement_format">timermanager_measurement_format</a>) 0x7u)</pre>
+
+<p>scaled by 1000000000</p>
+
+<h3 id="timermanagermeasurementformat_TYPE_NATIVE_TICKS">timermanagermeasurementformat_TYPE_NATIVE_TICKS</h3>
+<pre>#define timermanagermeasurementformat_TYPE_NATIVE_TICKS ((<a href="#timermanager_measurement_format">timermanager_measurement_format</a>) 0x0u)</pre>
+
+<h3 id="timermanagermeasurementformat_TYPE_FREQUENCY">timermanagermeasurementformat_TYPE_FREQUENCY</h3>
+<pre>#define timermanagermeasurementformat_TYPE_FREQUENCY ((<a href="#timermanager_measurement_format">timermanager_measurement_format</a>) 0x1u)</pre>
+
+<h3 id="timermanagermeasurementformat_TYPE_PERIOD">timermanagermeasurementformat_TYPE_PERIOD</h3>
+<pre>#define timermanagermeasurementformat_TYPE_PERIOD ((<a href="#timermanager_measurement_format">timermanager_measurement_format</a>) 0x2u)</pre>
+
+<h3 id="xtimermanager_return_number">xtimermanager_return_number</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtimermanager_return_number (<a href="#timermanagerreturnnumber_flags">timermanagerreturnnumber_flags</a> flags,
+      int *num_timers);</pre>
+<p>Find the number of timers available to the operating system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>num_timers</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="timermanager_return_number">timermanager_return_number</h3>
+<pre>extern int timermanager_return_number (<a href="#timermanagerreturnnumber_flags">timermanagerreturnnumber_flags</a> flags);</pre>
+<p>Find the number of timers available to the operating system</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>num_timers</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xtimermanager_claim">xtimermanager_claim</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtimermanager_claim (<a href="#timermanager_measurement_format">timermanager_measurement_format</a> flags,
+      int timer_number,
+      int timer_value,
+      asm_routine interrupt_call,
+      int ws_ptr,
+      <a href="#timermanager_measurement_format">timermanager_measurement_format</a> *timer_rate);</pre>
+<p>Claim a timer for dedicated use by a client</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>timer_number</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>timer_value</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>interrupt_call</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>ws_ptr</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>timer_rate</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="timermanager_claim">timermanager_claim</h3>
+<pre>extern <a href="#timermanager_measurement_format">timermanager_measurement_format</a> timermanager_claim (<a href="#timermanager_measurement_format">timermanager_measurement_format</a> flags,
+      int timer_number,
+      int timer_value,
+      asm_routine interrupt_call,
+      int ws_ptr);</pre>
+<p>Claim a timer for dedicated use by a client</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>timer_number</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>timer_value</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>interrupt_call</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>ws_ptr</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>timer_rate</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xtimermanager_release">xtimermanager_release</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtimermanager_release (<a href="#timermanagerrelease_flags">timermanagerrelease_flags</a> flags,
+      int timer_number);</pre>
+<p>Release a previously claimed timer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>timer_number</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="timermanager_release">timermanager_release</h3>
+<pre>extern void timermanager_release (<a href="#timermanagerrelease_flags">timermanagerrelease_flags</a> flags,
+      int timer_number);</pre>
+<p>Release a previously claimed timer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>timer_number</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xtimermanager_set_rate">xtimermanager_set_rate</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtimermanager_set_rate (<a href="#timermanager_measurement_format">timermanager_measurement_format</a> flags,
+      int timer_number,
+      int timer_value,
+      <a href="#timermanager_measurement_format">timermanager_measurement_format</a> *timer_rate);</pre>
+<p>Change the rate used by a timer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>timer_number</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>timer_value</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>timer_rate</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="timermanager_set_rate">timermanager_set_rate</h3>
+<pre>extern <a href="#timermanager_measurement_format">timermanager_measurement_format</a> timermanager_set_rate (<a href="#timermanager_measurement_format">timermanager_measurement_format</a> flags,
+      int timer_number,
+      int timer_value);</pre>
+<p>Change the rate used by a timer</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>timer_number</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>timer_value</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>timer_rate</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xtimermanager_convert">xtimermanager_convert</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xtimermanager_convert (<a href="#timermanager_measurement_format">timermanager_measurement_format</a> flags,
+      int timer_number,
+      int timer_value,
+      <a href="#timermanager_measurement_format">timermanager_measurement_format</a> *timer_rate);</pre>
+<p>Convert between timer rate formats</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>timer_number</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>timer_value</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>timer_rate</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="timermanager_convert">timermanager_convert</h3>
+<pre>extern <a href="#timermanager_measurement_format">timermanager_measurement_format</a> timermanager_convert (<a href="#timermanager_measurement_format">timermanager_measurement_format</a> flags,
+      int timer_number,
+      int timer_value);</pre>
+<p>Convert between timer rate formats</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>timer_number</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>timer_value</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>timer_rate</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

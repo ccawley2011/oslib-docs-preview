@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ScreenModes</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ScreenModes</h2>
+
+<pre>#include "oslib/screenmodes.h"</pre>
+
+<h3 id="xscreenmodesreadinfo_monitor_title">xscreenmodesreadinfo_monitor_title</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscreenmodesreadinfo_monitor_title (char **title);</pre>
+<p>Reads the current monitor title - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>title</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="screenmodesreadinfo_monitor_title">screenmodesreadinfo_monitor_title</h3>
+<pre>extern char *screenmodesreadinfo_monitor_title (void);
+</pre><p>Reads the current monitor title - RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>title</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xscreenmodesreadinfo_dpms_state">xscreenmodesreadinfo_dpms_state</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xscreenmodesreadinfo_dpms_state (int *dpms_state);</pre>
+<p>Read the DPMS state as configured by the currently selected MDF - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>dpms_state</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="screenmodesreadinfo_dpms_state">screenmodesreadinfo_dpms_state</h3>
+<pre>extern void screenmodesreadinfo_dpms_state (int *dpms_state);</pre>
+<p>Read the DPMS state as configured by the currently selected MDF - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>dpms_state</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

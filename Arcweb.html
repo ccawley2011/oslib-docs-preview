@@ -1,0 +1,700 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Arcweb</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Arcweb</h2>
+
+<pre>#include "oslib/arcweb.h"</pre>
+
+<h3 id="arcweb_h">arcweb_h</h3>
+<pre>typedef struct {...} *arcweb_h;</pre>
+
+<p>Abstract type for Arcweb request handles</p>
+
+<h3 id="arcweb_url">arcweb_url</h3>
+<pre>typedef union
+   {  <a href="os.html#os_fw">os_fw</a> url_file_w;
+      char url [200];
+   }
+   arcweb_url;</pre>
+
+
+Fields:	url_file_w - 32-bit file handle<h3 id="arcweb_expiry">arcweb_expiry</h3>
+<pre>typedef struct
+   {  int use_given_expiry;
+      int use_default_expiry;
+      <a href="os.html#os_date_and_time">os_date_and_time</a> date;
+      char reserved [3];
+      int response_code;
+      char mime_type [208];
+   }
+   arcweb_expiry;</pre>
+
+<h3 id="arcweb_message_fetch_request">arcweb_message_fetch_request</h3>
+<pre>typedef struct
+   {  <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      int source_file;
+      <a href="#arcweb_url">arcweb_url</a> url;
+   }
+   arcweb_message_fetch_request;</pre>
+
+<h3 id="arcweb_message_fetch_done">arcweb_message_fetch_done</h3>
+<pre>typedef struct
+   {  <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      union
+      {  <a href="#arcweb_expiry">arcweb_expiry</a> expiry;
+         char error [228];
+      }
+      result;
+   }
+   arcweb_message_fetch_done;</pre>
+
+<h3 id="arcweb_message_render_request">arcweb_message_render_request</h3>
+<pre>typedef struct
+   {  <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      int source_file;
+      int temporary_file;
+      int diagram_file;
+      int link_file;
+      int file_header_size;
+      char file_header [208];
+   }
+   arcweb_message_render_request;</pre>
+
+<h3 id="arcweb_message_render_done">arcweb_message_render_done</h3>
+<pre>typedef struct
+   {  <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> size;
+         char error [228];
+      }
+      result;
+   }
+   arcweb_message_render_done;</pre>
+
+<h3 id="arcweb_message_post_request">arcweb_message_post_request</h3>
+<pre>typedef struct
+   {  <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      int source_file;
+      int form_file;
+      <a href="#arcweb_url">arcweb_url</a> url;
+   }
+   arcweb_message_post_request;</pre>
+
+<h3 id="arcweb_message_post_done">arcweb_message_post_done</h3>
+<pre>typedef struct
+   {  <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      union
+      {  <a href="#arcweb_expiry">arcweb_expiry</a> expiry;
+         char error [228];
+      }
+      result;
+   }
+   arcweb_message_post_done;</pre>
+
+<h3 id="arcweb_message_email_request">arcweb_message_email_request</h3>
+<pre>typedef struct
+   {  <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      int form_file;
+   }
+   arcweb_message_email_request;</pre>
+
+<h3 id="arcweb_message_email_done">arcweb_message_email_done</h3>
+<pre>typedef struct
+   {  <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      char error [228];
+   }
+   arcweb_message_email_done;</pre>
+
+<h3 id="arcweb_message_image_size">arcweb_message_image_size</h3>
+<pre>typedef struct
+   {  <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      int renderer_handle;
+      <a href="os.html#os_coord">os_coord</a> size;
+   }
+   arcweb_message_image_size;</pre>
+
+<h3 id="arcweb_message_image_complete">arcweb_message_image_complete</h3>
+<pre>typedef struct
+   {  <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      int renderer_handle;
+   }
+   arcweb_message_image_complete;</pre>
+
+<h3 id="arcweb_message_xfer_control">arcweb_message_xfer_control</h3>
+<pre>typedef struct
+   {  <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      int source_file;
+      <a href="#arcweb_url">arcweb_url</a> url;
+   }
+   arcweb_message_xfer_control;</pre>
+
+<h3 id="arcweb_message_xfer_control_ack">arcweb_message_xfer_control_ack</h3>
+<pre>typedef struct
+   {  <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      char error [228];
+   }
+   arcweb_message_xfer_control_ack;</pre>
+
+<h3 id="arcweb_message_expire">arcweb_message_expire</h3>
+<pre>typedef struct
+   {  <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      <a href="#arcweb_url">arcweb_url</a> url;
+   }
+   arcweb_message_expire;</pre>
+
+<h3 id="arcweb_message_abort_request">arcweb_message_abort_request</h3>
+<pre>typedef struct
+   {  <a href="#arcweb_h">arcweb_h</a> handle;
+      int reserved;
+      char reason [228];
+   }
+   arcweb_message_abort_request;</pre>
+
+<h3 id="arcweb_message_transfer_status">arcweb_message_transfer_status</h3>
+<pre>typedef struct
+   {  <a href="#arcweb_h">arcweb_h</a> handle;
+      int reserved;
+      bits flags;
+      int transmit_total;
+      int transmit_current;
+      int receive_total;
+      int receive_current;
+      char message [208];
+   }
+   arcweb_message_transfer_status;</pre>
+
+<h3 id="arcweb_message_configure">arcweb_message_configure</h3>
+<pre>typedef struct
+   {  int reserved [2];
+      char application [228];
+   }
+   arcweb_message_configure;</pre>
+
+<h3 id="arcweb_message_external_launch">arcweb_message_external_launch</h3>
+<pre>typedef struct
+   {  <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      <a href="#arcweb_url">arcweb_url</a> url;
+   }
+   arcweb_message_external_launch;</pre>
+
+<h3 id="arcweb_message_launch_done">arcweb_message_launch_done</h3>
+<pre>typedef struct
+   {  <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      char error [228];
+   }
+   arcweb_message_launch_done;</pre>
+
+<h3 id="arcweb_message_web_browser">arcweb_message_web_browser</h3>
+<pre>typedef struct
+   {  int reserved [2];
+      char browser [228];
+   }
+   arcweb_message_web_browser;</pre>
+
+<h3 id="arcweb_message_colour_selection">arcweb_message_colour_selection</h3>
+<pre>typedef struct
+   {  int reserved [2];
+      <a href="os.html#os_colour">os_colour</a> background;
+      <a href="os.html#os_colour">os_colour</a> normal;
+      <a href="os.html#os_colour">os_colour</a> link;
+      <a href="os.html#os_colour">os_colour</a> vlink;
+      <a href="os.html#os_colour">os_colour</a> alink;
+      <a href="os.html#os_colour">os_colour</a> no_images;
+   }
+   arcweb_message_colour_selection;</pre>
+
+<h3 id="arcweb_message_permanent_move">arcweb_message_permanent_move</h3>
+<pre>typedef struct
+   {  int reserved [2];
+      char *from;
+      int from_size;
+      char *to;
+      int to_size;
+   }
+   arcweb_message_permanent_move;</pre>
+
+<h3 id="arcweb_full_message_fetch_request">arcweb_full_message_fetch_request</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      int source_file;
+      <a href="#arcweb_url">arcweb_url</a> url;
+   }
+   arcweb_full_message_fetch_request;</pre>
+
+<h3 id="arcweb_full_message_fetch_done">arcweb_full_message_fetch_done</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      union
+      {  <a href="#arcweb_expiry">arcweb_expiry</a> expiry;
+         char error [228];
+      }
+      result;
+   }
+   arcweb_full_message_fetch_done;</pre>
+
+<h3 id="arcweb_full_message_render_request">arcweb_full_message_render_request</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      int source_file;
+      int temporary_file;
+      int diagram_file;
+      int link_file;
+      int file_header_size;
+      char file_header [208];
+   }
+   arcweb_full_message_render_request;</pre>
+
+<h3 id="arcweb_full_message_render_done">arcweb_full_message_render_done</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      union
+      {  <a href="os.html#os_coord">os_coord</a> size;
+         char error [228];
+      }
+      result;
+   }
+   arcweb_full_message_render_done;</pre>
+
+<h3 id="arcweb_full_message_post_request">arcweb_full_message_post_request</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      int source_file;
+      int form_file;
+      <a href="#arcweb_url">arcweb_url</a> url;
+   }
+   arcweb_full_message_post_request;</pre>
+
+<h3 id="arcweb_full_message_post_done">arcweb_full_message_post_done</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      union
+      {  <a href="#arcweb_expiry">arcweb_expiry</a> expiry;
+         char error [228];
+      }
+      result;
+   }
+   arcweb_full_message_post_done;</pre>
+
+<h3 id="arcweb_full_message_email_request">arcweb_full_message_email_request</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      int form_file;
+   }
+   arcweb_full_message_email_request;</pre>
+
+<h3 id="arcweb_full_message_email_done">arcweb_full_message_email_done</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      char error [228];
+   }
+   arcweb_full_message_email_done;</pre>
+
+<h3 id="arcweb_full_message_image_size">arcweb_full_message_image_size</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      int renderer_handle;
+      <a href="os.html#os_coord">os_coord</a> image_coords;
+   }
+   arcweb_full_message_image_size;</pre>
+
+<h3 id="arcweb_full_message_image_complete">arcweb_full_message_image_complete</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      int renderer_handle;
+   }
+   arcweb_full_message_image_complete;</pre>
+
+<h3 id="arcweb_full_message_xfer_control">arcweb_full_message_xfer_control</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      int source_file;
+      <a href="#arcweb_url">arcweb_url</a> url;
+   }
+   arcweb_full_message_xfer_control;</pre>
+
+<h3 id="arcweb_full_message_xfer_control_ack">arcweb_full_message_xfer_control_ack</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      char error [228];
+   }
+   arcweb_full_message_xfer_control_ack;</pre>
+
+<h3 id="arcweb_full_message_expire">arcweb_full_message_expire</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      <a href="#arcweb_url">arcweb_url</a> url;
+   }
+   arcweb_full_message_expire;</pre>
+
+<h3 id="arcweb_full_message_abort_request">arcweb_full_message_abort_request</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#arcweb_h">arcweb_h</a> handle;
+      int reserved;
+      char reason [228];
+   }
+   arcweb_full_message_abort_request;</pre>
+
+<h3 id="arcweb_full_message_transfer_status">arcweb_full_message_transfer_status</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#arcweb_h">arcweb_h</a> handle;
+      int reserved;
+      bits flags;
+      int transmit_total;
+      int transmit_current;
+      int receive_total;
+      int receive_current;
+      char message [208];
+   }
+   arcweb_full_message_transfer_status;</pre>
+
+<h3 id="arcweb_full_message_configure">arcweb_full_message_configure</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      int reserved [2];
+      char application [228];
+   }
+   arcweb_full_message_configure;</pre>
+
+<h3 id="arcweb_full_message_external_launch">arcweb_full_message_external_launch</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      <a href="#arcweb_url">arcweb_url</a> url;
+   }
+   arcweb_full_message_external_launch;</pre>
+
+<h3 id="arcweb_full_message_launch_done">arcweb_full_message_launch_done</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#arcweb_h">arcweb_h</a> handle;
+      bits flags;
+      char error [228];
+   }
+   arcweb_full_message_launch_done;</pre>
+
+<h3 id="arcweb_full_message_web_browser">arcweb_full_message_web_browser</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      int reserved [2];
+      char browser [228];
+   }
+   arcweb_full_message_web_browser;</pre>
+
+<h3 id="arcweb_full_message_colour_selection">arcweb_full_message_colour_selection</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      int reserved [2];
+      <a href="os.html#os_colour">os_colour</a> background;
+      <a href="os.html#os_colour">os_colour</a> normal;
+      <a href="os.html#os_colour">os_colour</a> link;
+      <a href="os.html#os_colour">os_colour</a> vlink;
+      <a href="os.html#os_colour">os_colour</a> alink;
+      <a href="os.html#os_colour">os_colour</a> no_images;
+   }
+   arcweb_full_message_colour_selection;</pre>
+
+<h3 id="arcweb_full_message_permanent_move">arcweb_full_message_permanent_move</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      int reserved [2];
+      char *from;
+      int from_size;
+      char *to;
+      int to_size;
+   }
+   arcweb_full_message_permanent_move;</pre>
+
+<h3 id="message_ARCWEB_FETCH_REQUEST">message_ARCWEB_FETCH_REQUEST</h3>
+<pre>#define message_ARCWEB_FETCH_REQUEST 0x4A240u</pre>
+
+<h3 id="message_ARCWEB_FETCH_DONE">message_ARCWEB_FETCH_DONE</h3>
+<pre>#define message_ARCWEB_FETCH_DONE 0x4A241u</pre>
+
+<h3 id="message_ARCWEB_RENDER_REQUEST">message_ARCWEB_RENDER_REQUEST</h3>
+<pre>#define message_ARCWEB_RENDER_REQUEST 0x4A242u</pre>
+
+<h3 id="message_ARCWEB_RENDER_DONE">message_ARCWEB_RENDER_DONE</h3>
+<pre>#define message_ARCWEB_RENDER_DONE 0x4A243u</pre>
+
+<h3 id="message_ARCWEB_POST_REQUEST">message_ARCWEB_POST_REQUEST</h3>
+<pre>#define message_ARCWEB_POST_REQUEST 0x4A244u</pre>
+
+<h3 id="message_ARCWEB_POST_DONE">message_ARCWEB_POST_DONE</h3>
+<pre>#define message_ARCWEB_POST_DONE 0x4A245u</pre>
+
+<h3 id="message_ARCWEB_EMAIL_REQUEST">message_ARCWEB_EMAIL_REQUEST</h3>
+<pre>#define message_ARCWEB_EMAIL_REQUEST 0x4A246u</pre>
+
+<h3 id="message_ARCWEB_EMAIL_DONE">message_ARCWEB_EMAIL_DONE</h3>
+<pre>#define message_ARCWEB_EMAIL_DONE 0x4A247u</pre>
+
+<h3 id="message_ARCWEB_IMAGE_SIZE">message_ARCWEB_IMAGE_SIZE</h3>
+<pre>#define message_ARCWEB_IMAGE_SIZE 0x4A250u</pre>
+
+<h3 id="message_ARCWEB_IMAGE_COMPLETE">message_ARCWEB_IMAGE_COMPLETE</h3>
+<pre>#define message_ARCWEB_IMAGE_COMPLETE 0x4A251u</pre>
+
+<h3 id="message_ARCWEB_XFER_CONTROL">message_ARCWEB_XFER_CONTROL</h3>
+<pre>#define message_ARCWEB_XFER_CONTROL 0x4A252u</pre>
+
+<h3 id="message_ARCWEB_XFER_CONTROL_ACK">message_ARCWEB_XFER_CONTROL_ACK</h3>
+<pre>#define message_ARCWEB_XFER_CONTROL_ACK 0x4A253u</pre>
+
+<h3 id="message_ARCWEB_QUIT">message_ARCWEB_QUIT</h3>
+<pre>#define message_ARCWEB_QUIT 0x4A260u</pre>
+
+<h3 id="message_ARCWEB_EXPIRE">message_ARCWEB_EXPIRE</h3>
+<pre>#define message_ARCWEB_EXPIRE 0x4A261u</pre>
+
+<h3 id="message_ARCWEB_ABORT_REQUEST">message_ARCWEB_ABORT_REQUEST</h3>
+<pre>#define message_ARCWEB_ABORT_REQUEST 0x4A262u</pre>
+
+<h3 id="message_ARCWEB_TRANSFER_STATUS">message_ARCWEB_TRANSFER_STATUS</h3>
+<pre>#define message_ARCWEB_TRANSFER_STATUS 0x4A263u</pre>
+
+<h3 id="message_ARCWEB_CONFIGURE">message_ARCWEB_CONFIGURE</h3>
+<pre>#define message_ARCWEB_CONFIGURE 0x4A264u</pre>
+
+<h3 id="message_ARCWEB_EXTERNAL_LAUNCH">message_ARCWEB_EXTERNAL_LAUNCH</h3>
+<pre>#define message_ARCWEB_EXTERNAL_LAUNCH 0x4A265u</pre>
+
+<h3 id="message_ARCWEB_LAUNCH_DONE">message_ARCWEB_LAUNCH_DONE</h3>
+<pre>#define message_ARCWEB_LAUNCH_DONE 0x4A266u</pre>
+
+<h3 id="message_ARCWEB_WEB_BROWSER">message_ARCWEB_WEB_BROWSER</h3>
+<pre>#define message_ARCWEB_WEB_BROWSER 0x4A267u</pre>
+
+<h3 id="message_ARCWEB_COLOUR_SELECTED">message_ARCWEB_COLOUR_SELECTED</h3>
+<pre>#define message_ARCWEB_COLOUR_SELECTED 0x4A268u</pre>
+
+<h3 id="message_ARCWEB_PERMANENT_MOVE">message_ARCWEB_PERMANENT_MOVE</h3>
+<pre>#define message_ARCWEB_PERMANENT_MOVE 0x4A269u</pre>
+
+<h3 id="arcweb_DOCUMENT_FETCH">arcweb_DOCUMENT_FETCH</h3>
+<pre>#define arcweb_DOCUMENT_FETCH 0x1u</pre>
+
+<h3 id="arcweb_LOCAL_LAUNCH">arcweb_LOCAL_LAUNCH</h3>
+<pre>#define arcweb_LOCAL_LAUNCH 0x2u</pre>
+
+<h3 id="arcweb_FAST_IMAGES">arcweb_FAST_IMAGES</h3>
+<pre>#define arcweb_FAST_IMAGES 0x4u</pre>
+
+<h3 id="arcweb_POST_WAS_PUT">arcweb_POST_WAS_PUT</h3>
+<pre>#define arcweb_POST_WAS_PUT 0x8u</pre>
+
+<h3 id="arcweb_IMAGES_DISABLED">arcweb_IMAGES_DISABLED</h3>
+<pre>#define arcweb_IMAGES_DISABLED 0x10u</pre>
+
+<h3 id="arcweb_XFER_CONTROL">arcweb_XFER_CONTROL</h3>
+<pre>#define arcweb_XFER_CONTROL 0x20u</pre>
+
+<h3 id="arcweb_REFERER_AVAILABLE">arcweb_REFERER_AVAILABLE</h3>
+<pre>#define arcweb_REFERER_AVAILABLE 0x80u</pre>
+
+<h3 id="arcweb_FORCING_IMAGES">arcweb_FORCING_IMAGES</h3>
+<pre>#define arcweb_FORCING_IMAGES 0x100u</pre>
+
+<h3 id="arcweb_PUT">arcweb_PUT</h3>
+<pre>#define arcweb_PUT 0x200u</pre>
+
+<h3 id="arcweb_MAKE_DIRECTORY">arcweb_MAKE_DIRECTORY</h3>
+<pre>#define arcweb_MAKE_DIRECTORY 0x400u</pre>
+
+<h3 id="arcweb_REMOVE_DIRECTORY">arcweb_REMOVE_DIRECTORY</h3>
+<pre>#define arcweb_REMOVE_DIRECTORY 0x800u</pre>
+
+<h3 id="arcweb_REMOVE">arcweb_REMOVE</h3>
+<pre>#define arcweb_REMOVE 0x1000u</pre>
+
+<h3 id="arcweb_RENAME">arcweb_RENAME</h3>
+<pre>#define arcweb_RENAME 0x2000u</pre>
+
+<h3 id="arcweb_EXTENDED_TYPE">arcweb_EXTENDED_TYPE</h3>
+<pre>#define arcweb_EXTENDED_TYPE 0x10000u</pre>
+
+<h3 id="arcweb_TYPE_MASK">arcweb_TYPE_MASK</h3>
+<pre>#define arcweb_TYPE_MASK 0x1FFFFu</pre>
+
+<h3 id="arcweb_LOAD_TO_DISC">arcweb_LOAD_TO_DISC</h3>
+<pre>#define arcweb_LOAD_TO_DISC 0x80000u</pre>
+
+<h3 id="arcweb_RELOAD">arcweb_RELOAD</h3>
+<pre>#define arcweb_RELOAD 0x100000u</pre>
+
+<h3 id="arcweb_EMAIL_COMPLETE">arcweb_EMAIL_COMPLETE</h3>
+<pre>#define arcweb_EMAIL_COMPLETE 0x200000u</pre>
+
+<h3 id="arcweb_EXTENDED_URL">arcweb_EXTENDED_URL</h3>
+<pre>#define arcweb_EXTENDED_URL 0x400000u</pre>
+
+<h3 id="arcweb_INHIBIT_DISPLAY">arcweb_INHIBIT_DISPLAY</h3>
+<pre>#define arcweb_INHIBIT_DISPLAY 0x800000u</pre>
+
+<h3 id="arcweb_ERROR_HANDLED">arcweb_ERROR_HANDLED</h3>
+<pre>#define arcweb_ERROR_HANDLED 0x1000000u</pre>
+
+<h3 id="arcweb_IMAGE_FETCH">arcweb_IMAGE_FETCH</h3>
+<pre>#define arcweb_IMAGE_FETCH 0x2000000u</pre>
+
+<h3 id="arcweb_CLOSE_PREVIOUS">arcweb_CLOSE_PREVIOUS</h3>
+<pre>#define arcweb_CLOSE_PREVIOUS 0x4000000u</pre>
+
+<h3 id="arcweb_URL_CHANGED">arcweb_URL_CHANGED</h3>
+<pre>#define arcweb_URL_CHANGED 0x8000000u</pre>
+
+<h3 id="arcweb_WANT_SYMLINK">arcweb_WANT_SYMLINK</h3>
+<pre>#define arcweb_WANT_SYMLINK 0x10000000u</pre>
+
+<h3 id="arcweb_INHIBIT_RENDER">arcweb_INHIBIT_RENDER</h3>
+<pre>#define arcweb_INHIBIT_RENDER 0x20000000u</pre>
+
+<h3 id="arcweb_TYPE_KNOWN">arcweb_TYPE_KNOWN</h3>
+<pre>#define arcweb_TYPE_KNOWN 0x40000000u</pre>
+
+<h3 id="arcweb_ERROR">arcweb_ERROR</h3>
+<pre>#define arcweb_ERROR 0x80000000u</pre>
+
+<h3 id="arcweb_PLAIN_TEXT">arcweb_PLAIN_TEXT</h3>
+<pre>#define arcweb_PLAIN_TEXT 0x10000u</pre>
+
+<h3 id="arcweb_HTML">arcweb_HTML</h3>
+<pre>#define arcweb_HTML 0x10001u</pre>
+
+<h3 id="arcweb_IMAGE">arcweb_IMAGE</h3>
+<pre>#define arcweb_IMAGE 0x10002u</pre>
+
+<h3 id="arcweb_AUDIO">arcweb_AUDIO</h3>
+<pre>#define arcweb_AUDIO 0x10003u</pre>
+
+<h3 id="arcweb_VIDEO">arcweb_VIDEO</h3>
+<pre>#define arcweb_VIDEO 0x10004u</pre>
+
+<h3 id="arcweb_BINARY">arcweb_BINARY</h3>
+<pre>#define arcweb_BINARY 0x10005u</pre>
+
+<h3 id="arcweb_IMAGE_JPEG">arcweb_IMAGE_JPEG</h3>
+<pre>#define arcweb_IMAGE_JPEG 0x10100u</pre>
+
+<h3 id="arcweb_IMAGE_GIF">arcweb_IMAGE_GIF</h3>
+<pre>#define arcweb_IMAGE_GIF 0x10101u</pre>
+
+<h3 id="arcweb_IMAGE_JFIF">arcweb_IMAGE_JFIF</h3>
+<pre>#define arcweb_IMAGE_JFIF 0x10102u</pre>
+
+<h3 id="arcweb_IMAGE_BMP">arcweb_IMAGE_BMP</h3>
+<pre>#define arcweb_IMAGE_BMP 0x10103u</pre>
+
+<h3 id="arcweb_IMAGE_XBM">arcweb_IMAGE_XBM</h3>
+<pre>#define arcweb_IMAGE_XBM 0x10104u</pre>
+
+<h3 id="arcweb_IMAGE_CLEAR">arcweb_IMAGE_CLEAR</h3>
+<pre>#define arcweb_IMAGE_CLEAR 0x10105u</pre>
+
+<h3 id="arcweb_IMAGE_TIFF">arcweb_IMAGE_TIFF</h3>
+<pre>#define arcweb_IMAGE_TIFF 0x10106u</pre>
+
+<h3 id="arcweb_IMAGE_PNG">arcweb_IMAGE_PNG</h3>
+<pre>#define arcweb_IMAGE_PNG 0x10107u</pre>
+
+<h3 id="arcweb_VIDEO_MPEG">arcweb_VIDEO_MPEG</h3>
+<pre>#define arcweb_VIDEO_MPEG 0x10200u</pre>
+
+<h3 id="arcweb_VIDEO_ARMOVIE">arcweb_VIDEO_ARMOVIE</h3>
+<pre>#define arcweb_VIDEO_ARMOVIE 0x10201u</pre>
+
+<h3 id="arcweb_AUDIO_MISC">arcweb_AUDIO_MISC</h3>
+<pre>#define arcweb_AUDIO_MISC 0x10300u</pre>
+
+<h3 id="arcweb_AUDIO_SIMPLE">arcweb_AUDIO_SIMPLE</h3>
+<pre>#define arcweb_AUDIO_SIMPLE 0x10301u</pre>
+
+<h3 id="arcweb_AUDIO_AIFF">arcweb_AUDIO_AIFF</h3>
+<pre>#define arcweb_AUDIO_AIFF 0x10302u</pre>
+
+<h3 id="arcweb_UNKNOWN">arcweb_UNKNOWN</h3>
+<pre>#define arcweb_UNKNOWN 0x1FFFFu</pre>
+
+<h3 id="arcweb_XMIT_RUNNING">arcweb_XMIT_RUNNING</h3>
+<pre>#define arcweb_XMIT_RUNNING 0x1u</pre>
+
+<h3 id="arcweb_RECV_RUNNING">arcweb_RECV_RUNNING</h3>
+<pre>#define arcweb_RECV_RUNNING 0x2u</pre>
+
+<h3 id="arcweb_XMIT_COMPLETE">arcweb_XMIT_COMPLETE</h3>
+<pre>#define arcweb_XMIT_COMPLETE 0x4u</pre>
+
+<h3 id="arcweb_RECV_COMPLETE">arcweb_RECV_COMPLETE</h3>
+<pre>#define arcweb_RECV_COMPLETE 0x8u</pre>
+
+<h3 id="arcweb_MISC_RUNNING">arcweb_MISC_RUNNING</h3>
+<pre>#define arcweb_MISC_RUNNING 0x10u</pre>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

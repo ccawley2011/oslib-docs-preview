@@ -1,0 +1,1090 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; FileSwitch</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>FileSwitch</h2>
+
+<pre>#include "oslib/fileswitch.h"</pre>
+
+<h3 id="fileswitch_fs_no">fileswitch_fs_no</h3>
+<pre>typedef byte fileswitch_fs_no;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#fileswitch_FS_NUMBER_NONE">fileswitch_FS_NUMBER_NONE</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_ROMFS">fileswitch_FS_NUMBER_ROMFS</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_NETFS">fileswitch_FS_NUMBER_NETFS</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_ADFS">fileswitch_FS_NUMBER_ADFS</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_NETPRINT">fileswitch_FS_NUMBER_NETPRINT</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_NULL">fileswitch_FS_NUMBER_NULL</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_PRINTER">fileswitch_FS_NUMBER_PRINTER</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_SERIAL">fileswitch_FS_NUMBER_SERIAL</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_VDU">fileswitch_FS_NUMBER_VDU</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_RAWVDU">fileswitch_FS_NUMBER_RAWVDU</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_KBD">fileswitch_FS_NUMBER_KBD</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_RAWKBD">fileswitch_FS_NUMBER_RAWKBD</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_DESKFS">fileswitch_FS_NUMBER_DESKFS</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_RAMFS">fileswitch_FS_NUMBER_RAMFS</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_RISCIXFS">fileswitch_FS_NUMBER_RISCIXFS</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_STREAMER">fileswitch_FS_NUMBER_STREAMER</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_SCSIFS">fileswitch_FS_NUMBER_SCSIFS</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_DIGITISER">fileswitch_FS_NUMBER_DIGITISER</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_SCANNER">fileswitch_FS_NUMBER_SCANNER</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_MULTIFS">fileswitch_FS_NUMBER_MULTIFS</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_NFS">fileswitch_FS_NUMBER_NFS</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_CDFS">fileswitch_FS_NUMBER_CDFS</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_DOSFS">fileswitch_FS_NUMBER_DOSFS</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_RESOURCEFS">fileswitch_FS_NUMBER_RESOURCEFS</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_PIPEFS">fileswitch_FS_NUMBER_PIPEFS</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_DEVICEFS">fileswitch_FS_NUMBER_DEVICEFS</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_PARALLEL">fileswitch_FS_NUMBER_PARALLEL</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_SPARKFS">fileswitch_FS_NUMBER_SPARKFS</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_PCCARDFS">fileswitch_FS_NUMBER_PCCARDFS</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_MEMFS">fileswitch_FS_NUMBER_MEMFS</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_SHAREFS">fileswitch_FS_NUMBER_SHAREFS</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_LANMAN">fileswitch_FS_NUMBER_LANMAN</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_OMNIPRINT">fileswitch_FS_NUMBER_OMNIPRINT</a></dd>
+<dd><a href="#fileswitch_FS_NUMBER_RSDFS">fileswitch_FS_NUMBER_RSDFS</a></dd>
+</dl>
+
+<h3 id="fileswitch_fs_info">fileswitch_fs_info</h3>
+<pre>typedef bits fileswitch_fs_info;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#fileswitch_FS_NUMBER">fileswitch_FS_NUMBER</a></dd>
+<dd><a href="#fileswitch_FS_OPEN_FILE_LIMIT">fileswitch_FS_OPEN_FILE_LIMIT</a></dd>
+<dd><a href="#fileswitch_FS_READ_ONLY">fileswitch_FS_READ_ONLY</a></dd>
+<dd><a href="#fileswitch_HAS_EXTRA_FLAGS">fileswitch_HAS_EXTRA_FLAGS</a></dd>
+<dd><a href="#fileswitch_NO_FILE_ENTRIES">fileswitch_NO_FILE_ENTRIES</a></dd>
+<dd><a href="#fileswitch_NO_SAVE_ENTRY">fileswitch_NO_SAVE_ENTRY</a></dd>
+<dd><a href="#fileswitch_NO_LOAD_ENTRY">fileswitch_NO_LOAD_ENTRY</a></dd>
+<dd><a href="#fileswitch_IMPLICIT_DIRECTORIES">fileswitch_IMPLICIT_DIRECTORIES</a></dd>
+<dd><a href="#fileswitch_NEEDS_URD_AND_LIB">fileswitch_NEEDS_URD_AND_LIB</a></dd>
+<dd><a href="#fileswitch_SUPPORTS_IMAGE">fileswitch_SUPPORTS_IMAGE</a></dd>
+<dd><a href="#fileswitch_RESERVED">fileswitch_RESERVED</a></dd>
+<dd><a href="#fileswitch_SUPPORTS_FILE_INFO">fileswitch_SUPPORTS_FILE_INFO</a></dd>
+<dd><a href="#fileswitch_SUPPORTS_STAMP_NAMED">fileswitch_SUPPORTS_STAMP_NAMED</a></dd>
+<dd><a href="#fileswitch_NEEDS_FLUSH">fileswitch_NEEDS_FLUSH</a></dd>
+<dd><a href="#fileswitch_NEEDS_CREATE">fileswitch_NEEDS_CREATE</a></dd>
+<dd><a href="#fileswitch_SUPPORTS_EMPTY_NAMES">fileswitch_SUPPORTS_EMPTY_NAMES</a></dd>
+<dd><a href="#fileswitch_INTERACTIVE">fileswitch_INTERACTIVE</a></dd>
+<dd><a href="#fileswitch_SUPPORTS_SPECIAL">fileswitch_SUPPORTS_SPECIAL</a></dd>
+</dl>
+
+<h3 id="fileswitch_fs_extra_info">fileswitch_fs_extra_info</h3>
+<pre>typedef bits fileswitch_fs_extra_info;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#fileswitch_SUPPORTS_DIR_CHANGE">fileswitch_SUPPORTS_DIR_CHANGE</a></dd>
+<dd><a href="#fileswitch_NEEDS_CAT">fileswitch_NEEDS_CAT</a></dd>
+<dd><a href="#fileswitch_NEEDS_EX">fileswitch_NEEDS_EX</a></dd>
+<dd><a href="#fileswitch_SUPPORTS_IO_CTL">fileswitch_SUPPORTS_IO_CTL</a></dd>
+</dl>
+
+<h3 id="fileswitch_object_type">fileswitch_object_type</h3>
+<pre>typedef int fileswitch_object_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#fileswitch_NOT_FOUND">fileswitch_NOT_FOUND</a></dd>
+<dd><a href="#fileswitch_IS_FILE">fileswitch_IS_FILE</a></dd>
+<dd><a href="#fileswitch_IS_DIR">fileswitch_IS_DIR</a></dd>
+<dd><a href="#fileswitch_IS_IMAGE">fileswitch_IS_IMAGE</a></dd>
+</dl>
+
+<h3 id="fileswitch_attr">fileswitch_attr</h3>
+<pre>typedef bits fileswitch_attr;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#fileswitch_ATTR_OWNER_READ">fileswitch_ATTR_OWNER_READ</a></dd>
+<dd><a href="#fileswitch_ATTR_OWNER_WRITE">fileswitch_ATTR_OWNER_WRITE</a></dd>
+<dd><a href="#fileswitch_ATTR_OWNER_SPECIAL">fileswitch_ATTR_OWNER_SPECIAL</a></dd>
+<dd><a href="#fileswitch_ATTR_OWNER_LOCKED">fileswitch_ATTR_OWNER_LOCKED</a></dd>
+<dd><a href="#fileswitch_ATTR_WORLD_READ">fileswitch_ATTR_WORLD_READ</a></dd>
+<dd><a href="#fileswitch_ATTR_WORLD_WRITE">fileswitch_ATTR_WORLD_WRITE</a></dd>
+<dd><a href="#fileswitch_ATTR_WORLD_SPECIAL">fileswitch_ATTR_WORLD_SPECIAL</a></dd>
+<dd><a href="#fileswitch_ATTR_WORLD_LOCKED">fileswitch_ATTR_WORLD_LOCKED</a></dd>
+</dl>
+
+<h3 id="fileswitch_info_words">fileswitch_info_words</h3>
+<pre>typedef union
+   {  <a href="os.html#os_date_and_time">os_date_and_time</a> date_and_time;
+      struct
+      {  bits exec_addr;
+         bits load_addr;
+      }
+      addrs;
+   }
+   fileswitch_info_words;</pre>
+
+<h3 id="error_FILE_SWITCH_NO_CLAIM">error_FILE_SWITCH_NO_CLAIM</h3>
+<pre>#define error_FILE_SWITCH_NO_CLAIM 0x400u</pre>
+
+<p>Unable to claim FileSwitch workspace</p>
+
+<h3 id="error_BAD_FS_CONTROL_REASON">error_BAD_FS_CONTROL_REASON</h3>
+<pre>#define error_BAD_FS_CONTROL_REASON 0x401u</pre>
+
+<p>Bad FSControl call</p>
+
+<h3 id="error_BAD_OS_FILE_REASON">error_BAD_OS_FILE_REASON</h3>
+<pre>#define error_BAD_OS_FILE_REASON 0x402u</pre>
+
+<p>Bad OSFile call</p>
+
+<h3 id="error_BAD_OS_ARGS_REASON">error_BAD_OS_ARGS_REASON</h3>
+<pre>#define error_BAD_OS_ARGS_REASON 0x403u</pre>
+
+<p>Bad OSArgs call</p>
+
+<h3 id="error_BAD_OSGBPB_REASON">error_BAD_OSGBPB_REASON</h3>
+<pre>#define error_BAD_OSGBPB_REASON 0x404u</pre>
+
+<p>Bad OSGBPB call</p>
+
+<h3 id="error_BAD_MODE_FOR_OS_FIND">error_BAD_MODE_FOR_OS_FIND</h3>
+<pre>#define error_BAD_MODE_FOR_OS_FIND 0x405u</pre>
+
+<p>Bad mode for OSFind</p>
+
+<h3 id="error_NO_ROOM_FOR_TRANSIENT">error_NO_ROOM_FOR_TRANSIENT</h3>
+<pre>#define error_NO_ROOM_FOR_TRANSIENT 0x406u</pre>
+
+<p>No room to run transient</p>
+
+<h3 id="error_EXEC_ADDR_NOT_IN_CODE">error_EXEC_ADDR_NOT_IN_CODE</h3>
+<pre>#define error_EXEC_ADDR_NOT_IN_CODE 0x407u</pre>
+
+<p>Execution address not within code</p>
+
+<h3 id="error_EXEC_ADDR_TOO_LOW">error_EXEC_ADDR_TOO_LOW</h3>
+<pre>#define error_EXEC_ADDR_TOO_LOW 0x408u</pre>
+
+<p>Code runs too low</p>
+
+<h3 id="error_UNKNOWN_ACTION_TYPE">error_UNKNOWN_ACTION_TYPE</h3>
+<pre>#define error_UNKNOWN_ACTION_TYPE 0x409u</pre>
+
+<p>No run action for this file type</p>
+
+<h3 id="error_TOO_MANY_LEVELS">error_TOO_MANY_LEVELS</h3>
+<pre>#define error_TOO_MANY_LEVELS 0x40Au</pre>
+
+<p>Too many levels</p>
+
+<h3 id="error_NO_SELECTED_FILING_SYSTEM">error_NO_SELECTED_FILING_SYSTEM</h3>
+<pre>#define error_NO_SELECTED_FILING_SYSTEM 0x40Bu</pre>
+
+<p>No selected filing system</p>
+
+<h3 id="error_CANT_REMOVE_FS_BY_NUMBER">error_CANT_REMOVE_FS_BY_NUMBER</h3>
+<pre>#define error_CANT_REMOVE_FS_BY_NUMBER 0x40Cu</pre>
+
+<p>Can't remove filing system by number</p>
+
+<h3 id="error_UNALIGNED_FS_ENTRY">error_UNALIGNED_FS_ENTRY</h3>
+<pre>#define error_UNALIGNED_FS_ENTRY 0x40Du</pre>
+
+<p>Unaligned filing system entry point</p>
+
+<h3 id="error_UNSUPPORTED_FS_ENTRY">error_UNSUPPORTED_FS_ENTRY</h3>
+<pre>#define error_UNSUPPORTED_FS_ENTRY 0x40Eu</pre>
+
+<p>Filing system does not support this operation</p>
+
+<h3 id="error_FS_NOT_SPECIAL">error_FS_NOT_SPECIAL</h3>
+<pre>#define error_FS_NOT_SPECIAL 0x40Fu</pre>
+
+<p>Filing system does not support special fields</p>
+
+<h3 id="error_CORE_NOT_READABLE">error_CORE_NOT_READABLE</h3>
+<pre>#define error_CORE_NOT_READABLE 0x410u</pre>
+
+<p>No readable memory at this address</p>
+
+<h3 id="error_CORE_NOT_WRITEABLE">error_CORE_NOT_WRITEABLE</h3>
+<pre>#define error_CORE_NOT_WRITEABLE 0x411u</pre>
+
+<p>No writable memory at this address</p>
+
+<h3 id="error_BAD_BUFFER_SIZE_FOR_STREAM">error_BAD_BUFFER_SIZE_FOR_STREAM</h3>
+<pre>#define error_BAD_BUFFER_SIZE_FOR_STREAM 0x412u</pre>
+
+<p>Bad buffer size</p>
+
+<h3 id="error_NOT_OPEN_FOR_READING">error_NOT_OPEN_FOR_READING</h3>
+<pre>#define error_NOT_OPEN_FOR_READING 0x413u</pre>
+
+<p>Not open for reading</p>
+
+<h3 id="error_NOT_ENOUGH_STACK_FOR_FS_ENTRY">error_NOT_ENOUGH_STACK_FOR_FS_ENTRY</h3>
+<pre>#define error_NOT_ENOUGH_STACK_FOR_FS_ENTRY 0x414u</pre>
+
+<p>Not enough stack to call filing system</p>
+
+<h3 id="error_NOTHING_TO_COPY">error_NOTHING_TO_COPY</h3>
+<pre>#define error_NOTHING_TO_COPY 0x415u</pre>
+
+<p>Nothing to copy</p>
+
+<h3 id="error_NOTHING_TO_DELETE">error_NOTHING_TO_DELETE</h3>
+<pre>#define error_NOTHING_TO_DELETE 0x416u</pre>
+
+<p>Nothing to delete</p>
+
+<h3 id="error_FILE_SWITCH_CANT_BE_KILLED_WHILST_THREADED">error_FILE_SWITCH_CANT_BE_KILLED_WHILST_THREADED</h3>
+<pre>#define error_FILE_SWITCH_CANT_BE_KILLED_WHILST_THREADED 0x417u</pre>
+
+<p>FileSwitch can not be killed whilst it is threaded</p>
+
+<h3 id="error_INVALID_ERROR_BLOCK">error_INVALID_ERROR_BLOCK</h3>
+<pre>#define error_INVALID_ERROR_BLOCK 0x418u</pre>
+
+<p>Invalid error block</p>
+
+<h3 id="error_FS_FILE_TOO_BIG">error_FS_FILE_TOO_BIG</h3>
+<pre>#define error_FS_FILE_TOO_BIG 0x419u</pre>
+
+<p>File too big , Clashed with ROMFS FileTooBig</p>
+
+<h3 id="error_CANT_RM_FASTER_FILE_SWITCH">error_CANT_RM_FASTER_FILE_SWITCH</h3>
+<pre>#define error_CANT_RM_FASTER_FILE_SWITCH 0x41Au</pre>
+
+<p>Can't RMFaster FileSwitch</p>
+
+<h3 id="error_INCONSISTENT_HANDLE_SET">error_INCONSISTENT_HANDLE_SET</h3>
+<pre>#define error_INCONSISTENT_HANDLE_SET 0x41Bu</pre>
+
+<p>Inconsistent handle set</p>
+
+<h3 id="error_IS_AFILE">error_IS_AFILE</h3>
+<pre>#define error_IS_AFILE 0x41Cu</pre>
+
+<p>Object is a file</p>
+
+<h3 id="error_BAD_FILE_TYPE">error_BAD_FILE_TYPE</h3>
+<pre>#define error_BAD_FILE_TYPE 0x41Du</pre>
+
+<p>Bad file type</p>
+
+<h3 id="error_LIBRARY_SOMEWHERE_ELSE">error_LIBRARY_SOMEWHERE_ELSE</h3>
+<pre>#define error_LIBRARY_SOMEWHERE_ELSE 0x41Eu</pre>
+
+<p>The library is somewhere else</p>
+
+<h3 id="error_PATH_IS_SELF_CONTRADICTORY">error_PATH_IS_SELF_CONTRADICTORY</h3>
+<pre>#define error_PATH_IS_SELF_CONTRADICTORY 0x41Fu</pre>
+
+<p>Path is self contradictory</p>
+
+<h3 id="error_WASNT_DOLLAR_AFTER_DISC">error_WASNT_DOLLAR_AFTER_DISC</h3>
+<pre>#define error_WASNT_DOLLAR_AFTER_DISC 0x420u</pre>
+
+<p>Disc was specified, but absolute wasn't $</p>
+
+<h3 id="error_NOT_ENOUGH_MEMORY_FOR_WILDCARD_RESOLUTION">error_NOT_ENOUGH_MEMORY_FOR_WILDCARD_RESOLUTION</h3>
+<pre>#define error_NOT_ENOUGH_MEMORY_FOR_WILDCARD_RESOLUTION 0x421u</pre>
+
+<p>Not enough memory for wildcard resolution</p>
+
+<h3 id="error_NOT_ENOUGH_STACK_FOR_WILDCARD_RESOLUTION">error_NOT_ENOUGH_STACK_FOR_WILDCARD_RESOLUTION</h3>
+<pre>#define error_NOT_ENOUGH_STACK_FOR_WILDCARD_RESOLUTION 0x422u</pre>
+
+<p>Not enough stack for wildcard resolution</p>
+
+<h3 id="error_DIR_WANTED_FILE_FOUND">error_DIR_WANTED_FILE_FOUND</h3>
+<pre>#define error_DIR_WANTED_FILE_FOUND 0x423u</pre>
+
+<p>Directory wanted, but file found</p>
+
+<h3 id="error_NOT_FOUND">error_NOT_FOUND</h3>
+<pre>#define error_NOT_FOUND 0x424u</pre>
+
+<p>File Not found</p>
+
+<h3 id="error_MULTIPART_PATH_USED">error_MULTIPART_PATH_USED</h3>
+<pre>#define error_MULTIPART_PATH_USED 0x425u</pre>
+
+<p>Path variable had multiple entries and was used for a write operation</p>
+
+<h3 id="error_RECURSIVE_PATH">error_RECURSIVE_PATH</h3>
+<pre>#define error_RECURSIVE_PATH 0x426u</pre>
+
+<p>One of the path variables used refers to itself</p>
+
+<h3 id="error_MULTI_FS_DOES_NOT_SUPPORT_GBPB11">error_MULTI_FS_DOES_NOT_SUPPORT_GBPB11</h3>
+<pre>#define error_MULTI_FS_DOES_NOT_SUPPORT_GBPB11 0x427u</pre>
+
+<p>The OS_GBPB 11 call is not supported by image filing systems</p>
+
+<h3 id="error_FILE_SWITCH_DATA_LOST">error_FILE_SWITCH_DATA_LOST</h3>
+<pre>#define error_FILE_SWITCH_DATA_LOST 0x428u</pre>
+
+<p>Data lost, &4AC , Consistent with ADFS</p>
+
+<h3 id="error_TOO_MANY_ERROR_LOOKUPS">error_TOO_MANY_ERROR_LOOKUPS</h3>
+<pre>#define error_TOO_MANY_ERROR_LOOKUPS 0x429u</pre>
+
+<p>Too many error lookups happening at once - recursion assumed</p>
+
+<h3 id="error_MESSAGE_FILE_BUSY">error_MESSAGE_FILE_BUSY</h3>
+<pre>#define error_MESSAGE_FILE_BUSY 0x42Au</pre>
+
+<p>FileSwitch message file busy</p>
+
+<h3 id="error_PARTITION_BUSY">error_PARTITION_BUSY</h3>
+<pre>#define error_PARTITION_BUSY 0x42Bu</pre>
+
+<p>Partition not ready</p>
+
+<h3 id="fileswitch_FS_NUMBER_NONE">fileswitch_FS_NUMBER_NONE</h3>
+<pre>#define fileswitch_FS_NUMBER_NONE ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x0u)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_ROMFS">fileswitch_FS_NUMBER_ROMFS</h3>
+<pre>#define fileswitch_FS_NUMBER_ROMFS ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x3u)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_NETFS">fileswitch_FS_NUMBER_NETFS</h3>
+<pre>#define fileswitch_FS_NUMBER_NETFS ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x5u)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_ADFS">fileswitch_FS_NUMBER_ADFS</h3>
+<pre>#define fileswitch_FS_NUMBER_ADFS ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x8u)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_NETPRINT">fileswitch_FS_NUMBER_NETPRINT</h3>
+<pre>#define fileswitch_FS_NUMBER_NETPRINT ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0xCu)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_NULL">fileswitch_FS_NUMBER_NULL</h3>
+<pre>#define fileswitch_FS_NUMBER_NULL ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0xDu)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_PRINTER">fileswitch_FS_NUMBER_PRINTER</h3>
+<pre>#define fileswitch_FS_NUMBER_PRINTER ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0xEu)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_SERIAL">fileswitch_FS_NUMBER_SERIAL</h3>
+<pre>#define fileswitch_FS_NUMBER_SERIAL ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0xFu)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_VDU">fileswitch_FS_NUMBER_VDU</h3>
+<pre>#define fileswitch_FS_NUMBER_VDU ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x11u)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_RAWVDU">fileswitch_FS_NUMBER_RAWVDU</h3>
+<pre>#define fileswitch_FS_NUMBER_RAWVDU ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x12u)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_KBD">fileswitch_FS_NUMBER_KBD</h3>
+<pre>#define fileswitch_FS_NUMBER_KBD ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x13u)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_RAWKBD">fileswitch_FS_NUMBER_RAWKBD</h3>
+<pre>#define fileswitch_FS_NUMBER_RAWKBD ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x14u)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_DESKFS">fileswitch_FS_NUMBER_DESKFS</h3>
+<pre>#define fileswitch_FS_NUMBER_DESKFS ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x15u)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_RAMFS">fileswitch_FS_NUMBER_RAMFS</h3>
+<pre>#define fileswitch_FS_NUMBER_RAMFS ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x17u)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_RISCIXFS">fileswitch_FS_NUMBER_RISCIXFS</h3>
+<pre>#define fileswitch_FS_NUMBER_RISCIXFS ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x18u)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_STREAMER">fileswitch_FS_NUMBER_STREAMER</h3>
+<pre>#define fileswitch_FS_NUMBER_STREAMER ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x19u)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_SCSIFS">fileswitch_FS_NUMBER_SCSIFS</h3>
+<pre>#define fileswitch_FS_NUMBER_SCSIFS ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x1Au)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_DIGITISER">fileswitch_FS_NUMBER_DIGITISER</h3>
+<pre>#define fileswitch_FS_NUMBER_DIGITISER ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x1Bu)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_SCANNER">fileswitch_FS_NUMBER_SCANNER</h3>
+<pre>#define fileswitch_FS_NUMBER_SCANNER ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x1Cu)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_MULTIFS">fileswitch_FS_NUMBER_MULTIFS</h3>
+<pre>#define fileswitch_FS_NUMBER_MULTIFS ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x1Du)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_NFS">fileswitch_FS_NUMBER_NFS</h3>
+<pre>#define fileswitch_FS_NUMBER_NFS ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x21u)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_CDFS">fileswitch_FS_NUMBER_CDFS</h3>
+<pre>#define fileswitch_FS_NUMBER_CDFS ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x25u)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_DOSFS">fileswitch_FS_NUMBER_DOSFS</h3>
+<pre>#define fileswitch_FS_NUMBER_DOSFS ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x2Bu)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_RESOURCEFS">fileswitch_FS_NUMBER_RESOURCEFS</h3>
+<pre>#define fileswitch_FS_NUMBER_RESOURCEFS ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x2Eu)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_PIPEFS">fileswitch_FS_NUMBER_PIPEFS</h3>
+<pre>#define fileswitch_FS_NUMBER_PIPEFS ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x2Fu)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_DEVICEFS">fileswitch_FS_NUMBER_DEVICEFS</h3>
+<pre>#define fileswitch_FS_NUMBER_DEVICEFS ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x35u)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_PARALLEL">fileswitch_FS_NUMBER_PARALLEL</h3>
+<pre>#define fileswitch_FS_NUMBER_PARALLEL ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x36u)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_SPARKFS">fileswitch_FS_NUMBER_SPARKFS</h3>
+<pre>#define fileswitch_FS_NUMBER_SPARKFS ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x42u)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_PCCARDFS">fileswitch_FS_NUMBER_PCCARDFS</h3>
+<pre>#define fileswitch_FS_NUMBER_PCCARDFS ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x59u)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_MEMFS">fileswitch_FS_NUMBER_MEMFS</h3>
+<pre>#define fileswitch_FS_NUMBER_MEMFS ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x5Bu)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_SHAREFS">fileswitch_FS_NUMBER_SHAREFS</h3>
+<pre>#define fileswitch_FS_NUMBER_SHAREFS ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x63u)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_LANMAN">fileswitch_FS_NUMBER_LANMAN</h3>
+<pre>#define fileswitch_FS_NUMBER_LANMAN ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x66u)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_OMNIPRINT">fileswitch_FS_NUMBER_OMNIPRINT</h3>
+<pre>#define fileswitch_FS_NUMBER_OMNIPRINT ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x68u)</pre>
+
+<h3 id="fileswitch_FS_NUMBER_RSDFS">fileswitch_FS_NUMBER_RSDFS</h3>
+<pre>#define fileswitch_FS_NUMBER_RSDFS ((<a href="#fileswitch_fs_no">fileswitch_fs_no</a>) 0x6Cu)</pre>
+
+<h3 id="fileswitch_FS_NUMBER">fileswitch_FS_NUMBER</h3>
+<pre>#define fileswitch_FS_NUMBER ((<a href="#fileswitch_fs_info">fileswitch_fs_info</a>) 0xFFu)</pre>
+
+<h3 id="fileswitch_FS_OPEN_FILE_LIMIT">fileswitch_FS_OPEN_FILE_LIMIT</h3>
+<pre>#define fileswitch_FS_OPEN_FILE_LIMIT ((<a href="#fileswitch_fs_info">fileswitch_fs_info</a>) 0xFF00u)</pre>
+
+<h3 id="fileswitch_FS_READ_ONLY">fileswitch_FS_READ_ONLY</h3>
+<pre>#define fileswitch_FS_READ_ONLY ((<a href="#fileswitch_fs_info">fileswitch_fs_info</a>) 0x10000u)</pre>
+
+<h3 id="fileswitch_HAS_EXTRA_FLAGS">fileswitch_HAS_EXTRA_FLAGS</h3>
+<pre>#define fileswitch_HAS_EXTRA_FLAGS ((<a href="#fileswitch_fs_info">fileswitch_fs_info</a>) 0x20000u)</pre>
+
+<h3 id="fileswitch_NO_FILE_ENTRIES">fileswitch_NO_FILE_ENTRIES</h3>
+<pre>#define fileswitch_NO_FILE_ENTRIES ((<a href="#fileswitch_fs_info">fileswitch_fs_info</a>) 0x40000u)</pre>
+
+<h3 id="fileswitch_NO_SAVE_ENTRY">fileswitch_NO_SAVE_ENTRY</h3>
+<pre>#define fileswitch_NO_SAVE_ENTRY ((<a href="#fileswitch_fs_info">fileswitch_fs_info</a>) 0x80000u)</pre>
+
+<h3 id="fileswitch_NO_LOAD_ENTRY">fileswitch_NO_LOAD_ENTRY</h3>
+<pre>#define fileswitch_NO_LOAD_ENTRY ((<a href="#fileswitch_fs_info">fileswitch_fs_info</a>) 0x100000u)</pre>
+
+<h3 id="fileswitch_IMPLICIT_DIRECTORIES">fileswitch_IMPLICIT_DIRECTORIES</h3>
+<pre>#define fileswitch_IMPLICIT_DIRECTORIES ((<a href="#fileswitch_fs_info">fileswitch_fs_info</a>) 0x200000u)</pre>
+
+<h3 id="fileswitch_NEEDS_URD_AND_LIB">fileswitch_NEEDS_URD_AND_LIB</h3>
+<pre>#define fileswitch_NEEDS_URD_AND_LIB ((<a href="#fileswitch_fs_info">fileswitch_fs_info</a>) 0x400000u)</pre>
+
+<h3 id="fileswitch_SUPPORTS_IMAGE">fileswitch_SUPPORTS_IMAGE</h3>
+<pre>#define fileswitch_SUPPORTS_IMAGE ((<a href="#fileswitch_fs_info">fileswitch_fs_info</a>) 0x800000u)</pre>
+
+<h3 id="fileswitch_RESERVED">fileswitch_RESERVED</h3>
+<pre>#define fileswitch_RESERVED ((<a href="#fileswitch_fs_info">fileswitch_fs_info</a>) 0x1000000u)</pre>
+
+<h3 id="fileswitch_SUPPORTS_FILE_INFO">fileswitch_SUPPORTS_FILE_INFO</h3>
+<pre>#define fileswitch_SUPPORTS_FILE_INFO ((<a href="#fileswitch_fs_info">fileswitch_fs_info</a>) 0x2000000u)</pre>
+
+<h3 id="fileswitch_SUPPORTS_STAMP_NAMED">fileswitch_SUPPORTS_STAMP_NAMED</h3>
+<pre>#define fileswitch_SUPPORTS_STAMP_NAMED ((<a href="#fileswitch_fs_info">fileswitch_fs_info</a>) 0x4000000u)</pre>
+
+<h3 id="fileswitch_NEEDS_FLUSH">fileswitch_NEEDS_FLUSH</h3>
+<pre>#define fileswitch_NEEDS_FLUSH ((<a href="#fileswitch_fs_info">fileswitch_fs_info</a>) 0x8000000u)</pre>
+
+<h3 id="fileswitch_NEEDS_CREATE">fileswitch_NEEDS_CREATE</h3>
+<pre>#define fileswitch_NEEDS_CREATE ((<a href="#fileswitch_fs_info">fileswitch_fs_info</a>) 0x10000000u)</pre>
+
+<h3 id="fileswitch_SUPPORTS_EMPTY_NAMES">fileswitch_SUPPORTS_EMPTY_NAMES</h3>
+<pre>#define fileswitch_SUPPORTS_EMPTY_NAMES ((<a href="#fileswitch_fs_info">fileswitch_fs_info</a>) 0x20000000u)</pre>
+
+<h3 id="fileswitch_INTERACTIVE">fileswitch_INTERACTIVE</h3>
+<pre>#define fileswitch_INTERACTIVE ((<a href="#fileswitch_fs_info">fileswitch_fs_info</a>) 0x40000000u)</pre>
+
+<h3 id="fileswitch_SUPPORTS_SPECIAL">fileswitch_SUPPORTS_SPECIAL</h3>
+<pre>#define fileswitch_SUPPORTS_SPECIAL ((<a href="#fileswitch_fs_info">fileswitch_fs_info</a>) 0x80000000u)</pre>
+
+<h3 id="fileswitch_SUPPORTS_DIR_CHANGE">fileswitch_SUPPORTS_DIR_CHANGE</h3>
+<pre>#define fileswitch_SUPPORTS_DIR_CHANGE ((<a href="#fileswitch_fs_extra_info">fileswitch_fs_extra_info</a>) 0x1u)</pre>
+
+<h3 id="fileswitch_NEEDS_CAT">fileswitch_NEEDS_CAT</h3>
+<pre>#define fileswitch_NEEDS_CAT ((<a href="#fileswitch_fs_extra_info">fileswitch_fs_extra_info</a>) 0x2u)</pre>
+
+<h3 id="fileswitch_NEEDS_EX">fileswitch_NEEDS_EX</h3>
+<pre>#define fileswitch_NEEDS_EX ((<a href="#fileswitch_fs_extra_info">fileswitch_fs_extra_info</a>) 0x4u)</pre>
+
+<h3 id="fileswitch_SUPPORTS_IO_CTL">fileswitch_SUPPORTS_IO_CTL</h3>
+<pre>#define fileswitch_SUPPORTS_IO_CTL ((<a href="#fileswitch_fs_extra_info">fileswitch_fs_extra_info</a>) 0x8u)</pre>
+
+<p>RISC OS 4+</p>
+
+<h3 id="fileswitch_NOT_FOUND">fileswitch_NOT_FOUND</h3>
+<pre>#define fileswitch_NOT_FOUND ((<a href="#fileswitch_object_type">fileswitch_object_type</a>) 0x0u)</pre>
+
+<h3 id="fileswitch_IS_FILE">fileswitch_IS_FILE</h3>
+<pre>#define fileswitch_IS_FILE ((<a href="#fileswitch_object_type">fileswitch_object_type</a>) 0x1u)</pre>
+
+<h3 id="fileswitch_IS_DIR">fileswitch_IS_DIR</h3>
+<pre>#define fileswitch_IS_DIR ((<a href="#fileswitch_object_type">fileswitch_object_type</a>) 0x2u)</pre>
+
+<h3 id="fileswitch_IS_IMAGE">fileswitch_IS_IMAGE</h3>
+<pre>#define fileswitch_IS_IMAGE ((<a href="#fileswitch_object_type">fileswitch_object_type</a>) 0x3u)</pre>
+
+<h3 id="fileswitch_ATTR_OWNER_READ">fileswitch_ATTR_OWNER_READ</h3>
+<pre>#define fileswitch_ATTR_OWNER_READ ((<a href="#fileswitch_attr">fileswitch_attr</a>) 0x1u)</pre>
+
+<h3 id="fileswitch_ATTR_OWNER_WRITE">fileswitch_ATTR_OWNER_WRITE</h3>
+<pre>#define fileswitch_ATTR_OWNER_WRITE ((<a href="#fileswitch_attr">fileswitch_attr</a>) 0x2u)</pre>
+
+<h3 id="fileswitch_ATTR_OWNER_SPECIAL">fileswitch_ATTR_OWNER_SPECIAL</h3>
+<pre>#define fileswitch_ATTR_OWNER_SPECIAL ((<a href="#fileswitch_attr">fileswitch_attr</a>) 0x4u)</pre>
+
+<h3 id="fileswitch_ATTR_OWNER_LOCKED">fileswitch_ATTR_OWNER_LOCKED</h3>
+<pre>#define fileswitch_ATTR_OWNER_LOCKED ((<a href="#fileswitch_attr">fileswitch_attr</a>) 0x8u)</pre>
+
+<h3 id="fileswitch_ATTR_WORLD_READ">fileswitch_ATTR_WORLD_READ</h3>
+<pre>#define fileswitch_ATTR_WORLD_READ ((<a href="#fileswitch_attr">fileswitch_attr</a>) 0x10u)</pre>
+
+<h3 id="fileswitch_ATTR_WORLD_WRITE">fileswitch_ATTR_WORLD_WRITE</h3>
+<pre>#define fileswitch_ATTR_WORLD_WRITE ((<a href="#fileswitch_attr">fileswitch_attr</a>) 0x20u)</pre>
+
+<h3 id="fileswitch_ATTR_WORLD_SPECIAL">fileswitch_ATTR_WORLD_SPECIAL</h3>
+<pre>#define fileswitch_ATTR_WORLD_SPECIAL ((<a href="#fileswitch_attr">fileswitch_attr</a>) 0x40u)</pre>
+
+<h3 id="fileswitch_ATTR_WORLD_LOCKED">fileswitch_ATTR_WORLD_LOCKED</h3>
+<pre>#define fileswitch_ATTR_WORLD_LOCKED ((<a href="#fileswitch_attr">fileswitch_attr</a>) 0x80u)</pre>
+
+<h3 id="error_NOT_SUPPORTED">error_NOT_SUPPORTED</h3>
+<pre>#define error_NOT_SUPPORTED 0xF8u</pre>
+
+<p>Bad operation on ...:</p>
+
+<h3 id="error_FS_WRITE_ONLY">error_FS_WRITE_ONLY</h3>
+<pre>#define error_FS_WRITE_ONLY 0xFAu</pre>
+
+<p>...: is a write only filing system</p>
+
+<h3 id="error_FS_READ_ONLY">error_FS_READ_ONLY</h3>
+<pre>#define error_FS_READ_ONLY 0xFCu</pre>
+
+<p>...: is a read only filing system</p>
+
+<h3 id="xbgetv">xbgetv</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xbgetv (<a href="os.html#os_f">os_f</a> file,
+      char *c,
+      bits *psr);</pre>
+<p>Calls BGetV vector directly - prefer GBetVW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="bgetv">bgetv</h3>
+<pre>extern bits bgetv (<a href="os.html#os_f">os_f</a> file,
+      char *c);</pre>
+<p>Calls BGetV vector directly - prefer GBetVW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td colspan="3">processor status register</td></tr>
+</table>
+
+<h3 id="xbgetvw">xbgetvw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xbgetvw (<a href="os.html#os_fw">os_fw</a> file,
+      char *c,
+      bits *psr);</pre>
+<p>Calls BGetV vector directly. Uses 32-bit file handle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="bgetvw">bgetvw</h3>
+<pre>extern bits bgetvw (<a href="os.html#os_fw">os_fw</a> file,
+      char *c);</pre>
+<p>Calls BGetV vector directly. Uses 32-bit file handle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td colspan="3">processor status register</td></tr>
+</table>
+
+<h3 id="xbputv">xbputv</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xbputv (char c,
+      <a href="os.html#os_f">os_f</a> file);</pre>
+<p>Calls BPutV vector directly - prefer BPutVW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="bputv">bputv</h3>
+<pre>extern void bputv (char c,
+      <a href="os.html#os_f">os_f</a> file);</pre>
+<p>Calls BPutV vector directly - prefer BPutVW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xbputvw">xbputvw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xbputvw (char c,
+      <a href="os.html#os_fw">os_fw</a> file);</pre>
+<p>Calls BPutV vector directly. Uses 32-bit file handle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="bputvw">bputvw</h3>
+<pre>extern void bputvw (char c,
+      <a href="os.html#os_fw">os_fw</a> file);</pre>
+<p>Calls BPutV vector directly. Uses 32-bit file handle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xos_bget">xos_bget</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xos_bget (<a href="os.html#os_f">os_f</a> file,
+      char *c,
+      bits *psr);</pre>
+<p>Reads a byte from an open file - prefer OS_BGetW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="os_bget">os_bget</h3>
+<pre>extern bits os_bget (<a href="os.html#os_f">os_f</a> file,
+      char *c);</pre>
+<p>Reads a byte from an open file - prefer OS_BGetW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td colspan="3">processor status register</td></tr>
+</table>
+
+<h3 id="xos_bgetw">xos_bgetw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xos_bgetw (<a href="os.html#os_fw">os_fw</a> file,
+      char *c,
+      bits *psr);</pre>
+<p>Reads a byte from an open file. Uses 32-bit file handle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="os_bgetw">os_bgetw</h3>
+<pre>extern bits os_bgetw (<a href="os.html#os_fw">os_fw</a> file,
+      char *c);</pre>
+<p>Reads a byte from an open file. Uses 32-bit file handle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td colspan="3">processor status register</td></tr>
+</table>
+
+<h3 id="xos_bput">xos_bput</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xos_bput (char c,
+      <a href="os.html#os_f">os_f</a> file);</pre>
+<p>Writes a byte to an open file - prefer OS_BPutW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="os_bput">os_bput</h3>
+<pre>extern void os_bput (char c,
+      <a href="os.html#os_f">os_f</a> file);</pre>
+<p>Writes a byte to an open file - prefer OS_BPutW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xos_bputw">xos_bputw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xos_bputw (char c,
+      <a href="os.html#os_fw">os_fw</a> file);</pre>
+<p>Writes a byte to an open file. Uses 32-bit file handle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="os_bputw">os_bputw</h3>
+<pre>extern void os_bputw (char c,
+      <a href="os.html#os_fw">os_fw</a> file);</pre>
+<p>Writes a byte to an open file. Uses 32-bit file handle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xservice_start_up_fs">xservice_start_up_fs</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_start_up_fs (<a href="#fileswitch_fs_no">fileswitch_fs_no</a> fs_no);</pre>
+<p>Start up filing system - not RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_no</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="service_start_up_fs">service_start_up_fs</h3>
+<pre>extern void service_start_up_fs (<a href="#fileswitch_fs_no">fileswitch_fs_no</a> fs_no);</pre>
+<p>Start up filing system - not RISC OS 3.5+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>fs_no</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xservice_fs_redeclare">xservice_fs_redeclare</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_fs_redeclare (void);
+</pre><p>Filing system reinitialise</p>
+
+
+<table>
+</table>
+
+<h3 id="service_fs_redeclare">service_fs_redeclare</h3>
+<pre>extern void service_fs_redeclare (void);
+</pre><p>Filing system reinitialise</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_close_file">xservice_close_file</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_close_file (char const *file_name,
+      int count,
+      int *count_out);</pre>
+<p>Close an object, and any children of that object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>count_out</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="service_close_file">service_close_file</h3>
+<pre>extern void service_close_file (char const *file_name,
+      int count,
+      int *count_out);</pre>
+<p>Close an object, and any children of that object</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file_name</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>count</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>count_out</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="xservice_uk_compression_unsqueeze">xservice_uk_compression_unsqueeze</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_uk_compression_unsqueeze (bits load_addr,
+      int size,
+      bits exec_addr,
+      char const *filename,
+      osbool *unclaimed,
+      int *size_out,
+      bits *new_exec_addr);</pre>
+<p>Application data gets loaded, unsqueeze stage - RISC OS 3.7+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>new_exec_addr</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="service_uk_compression_unsqueeze">service_uk_compression_unsqueeze</h3>
+<pre>extern osbool service_uk_compression_unsqueeze (bits load_addr,
+      int size,
+      bits exec_addr,
+      char const *filename,
+      int *size_out,
+      bits *new_exec_addr);</pre>
+<p>Application data gets loaded, unsqueeze stage - RISC OS 3.7+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>new_exec_addr</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_uk_compression_patch">xservice_uk_compression_patch</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_uk_compression_patch (bits load_addr,
+      int size,
+      bits exec_addr,
+      char const *filename,
+      osbool *unclaimed,
+      int *size_out,
+      bits *new_exec_addr);</pre>
+<p>Application data gets loaded, patch stage - RISC OS 3.7+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>new_exec_addr</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="service_uk_compression_patch">service_uk_compression_patch</h3>
+<pre>extern osbool service_uk_compression_patch (bits load_addr,
+      int size,
+      bits exec_addr,
+      char const *filename,
+      int *size_out,
+      bits *new_exec_addr);</pre>
+<p>Application data gets loaded, patch stage - RISC OS 3.7+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>load_addr</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>new_exec_addr</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_uk_compression_non_aif">xservice_uk_compression_non_aif</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_uk_compression_non_aif (int size,
+      bits exec_addr,
+      char const *filename,
+      byte const *header,
+      char const *args,
+      osbool *unclaimed,
+      int *size_out,
+      bits *new_exec_addr);</pre>
+<p>Application data gets loaded, non-AIF header detected - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>header</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>args</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>new_exec_addr</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="service_uk_compression_non_aif">service_uk_compression_non_aif</h3>
+<pre>extern osbool service_uk_compression_non_aif (int size,
+      bits exec_addr,
+      char const *filename,
+      byte const *header,
+      char const *args,
+      int *size_out,
+      bits *new_exec_addr);</pre>
+<p>Application data gets loaded, non-AIF header detected - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>header</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>args</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>new_exec_addr</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_uk_compression26_bit_on32_bit">xservice_uk_compression26_bit_on32_bit</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_uk_compression26_bit_on32_bit (int size,
+      bits exec_addr,
+      char const *filename,
+      byte const *header,
+      char const *args,
+      osbool *unclaimed,
+      int *size_out,
+      bits *new_exec_addr);</pre>
+<p>Application data gets loaded, 26bit on 32bit execution detected - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>header</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>args</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>new_exec_addr</code></td><td/><td><code>R4</code></td></tr>
+</table>
+
+<h3 id="service_uk_compression26_bit_on32_bit">service_uk_compression26_bit_on32_bit</h3>
+<pre>extern osbool service_uk_compression26_bit_on32_bit (int size,
+      bits exec_addr,
+      char const *filename,
+      byte const *header,
+      char const *args,
+      int *size_out,
+      bits *new_exec_addr);</pre>
+<p>Application data gets loaded, 26bit on 32bit execution detected - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R5</code></td></tr>
+<tr><td><code>header</code></td><td/><td><code>R6</code></td></tr>
+<tr><td><code>args</code></td><td/><td><code>R7</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>size_out</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>new_exec_addr</code></td><td/><td><code>R4</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xservice_uk_compression_debugger">xservice_uk_compression_debugger</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_uk_compression_debugger (int size,
+      bits exec_addr,
+      char const *filename,
+      osbool *unclaimed);</pre>
+<p>Application data gets loaded, debugger stage - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="service_uk_compression_debugger">service_uk_compression_debugger</h3>
+<pre>extern osbool service_uk_compression_debugger (int size,
+      bits exec_addr,
+      char const *filename);</pre>
+<p>Application data gets loaded, debugger stage - RISC OS 6</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>size</code></td><td/><td><code>R3</code></td></tr>
+<tr><td><code>exec_addr</code></td><td/><td><code>R4</code></td></tr>
+<tr><td><code>filename</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

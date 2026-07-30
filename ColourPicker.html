@@ -1,0 +1,844 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ColourPicker</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ColourPicker</h2>
+
+<pre>#include "oslib/colourpicker.h"</pre>
+
+<h3 id="colourpicker_d">colourpicker_d</h3>
+<pre>typedef struct {...} *colourpicker_d;</pre>
+
+<h3 id="colourpicker_COLOUR_MEMBERS">colourpicker_COLOUR_MEMBERS</h3>
+<pre>#define colourpicker_COLOUR_MEMBERS \
+   <a href="os.html#os_colour">os_colour</a> colour; \
+   int size;
+</pre>
+
+<h3 id="colourpicker_colour_base">colourpicker_colour_base</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_colour">os_colour</a> colour;
+      int size;
+   }
+   colourpicker_colour_base;</pre>
+
+
+Fields:	size - Size of the 'info' array<h3 id="colourpicker_colour">colourpicker_colour</h3>
+<pre>typedef struct
+   {  <a href="os.html#os_colour">os_colour</a> colour;
+      int size;
+      int info [...];
+   }
+   colourpicker_colour;</pre>
+
+
+Fields:	size - Size of the 'info' array<h3 id="colourpicker_dialogue_flags">colourpicker_dialogue_flags</h3>
+<pre>typedef bits colourpicker_dialogue_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#colourpicker_DIALOGUE_OFFERS_TRANSPARENT">colourpicker_DIALOGUE_OFFERS_TRANSPARENT</a></dd>
+<dd><a href="#colourpicker_DIALOGUE_TRANSPARENT">colourpicker_DIALOGUE_TRANSPARENT</a></dd>
+<dd><a href="#colourpicker_DIALOGUE_TYPE">colourpicker_DIALOGUE_TYPE</a></dd>
+<dd><a href="#colourpicker_DIALOGUE_IGNORE_HELP">colourpicker_DIALOGUE_IGNORE_HELP</a></dd>
+<dd><a href="#colourpicker_DIALOGUE_IGNORE_KEY_PRESSED">colourpicker_DIALOGUE_IGNORE_KEY_PRESSED</a></dd>
+</dl>
+
+<h3 id="colourpicker_DIALOGUE_MEMBERS">colourpicker_DIALOGUE_MEMBERS</h3>
+<pre>#define colourpicker_DIALOGUE_MEMBERS \
+   <a href="#colourpicker_dialogue_flags">colourpicker_dialogue_flags</a> flags; \
+   char *title; \
+   <a href="os.html#os_box">os_box</a> visible; \
+   int xscroll; \
+   int yscroll; \
+   <a href="os.html#os_colour">os_colour</a> colour; \
+   int size;
+</pre>
+
+<h3 id="colourpicker_dialogue_base">colourpicker_dialogue_base</h3>
+<pre>typedef struct
+   {  <a href="#colourpicker_dialogue_flags">colourpicker_dialogue_flags</a> flags;
+      char *title;
+      <a href="os.html#os_box">os_box</a> visible;
+      int xscroll;
+      int yscroll;
+      <a href="os.html#os_colour">os_colour</a> colour;
+      int size;
+   }
+   colourpicker_dialogue_base;</pre>
+
+
+Fields:	size - Size of the 'info' array<h3 id="colourpicker_dialogue">colourpicker_dialogue</h3>
+<pre>typedef struct
+   {  <a href="#colourpicker_dialogue_flags">colourpicker_dialogue_flags</a> flags;
+      char *title;
+      <a href="os.html#os_box">os_box</a> visible;
+      int xscroll;
+      int yscroll;
+      <a href="os.html#os_colour">os_colour</a> colour;
+      int size;
+      int info [...];
+   }
+   colourpicker_dialogue;</pre>
+
+
+Fields:	size - Size of the 'info' array<h3 id="colourpicker_model_flags">colourpicker_model_flags</h3>
+<pre>typedef bits colourpicker_model_flags;</pre>
+
+<h3 id="colourpicker_model">colourpicker_model</h3>
+<pre>typedef struct
+   {  <a href="#colourpicker_model_flags">colourpicker_model_flags</a> flags;
+      char *name;
+      char *description;
+      int info_size;
+      <a href="os.html#os_coord">os_coord</a> pane_size;
+      asm_routine entries [8];
+   }
+   colourpicker_model;</pre>
+
+<h3 id="colourpicker_colour_flags">colourpicker_colour_flags</h3>
+<pre>typedef bits colourpicker_colour_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#colourpicker_COLOUR_TRANSPARENT">colourpicker_COLOUR_TRANSPARENT</a></dd>
+<dd><a href="#colourpicker_COLOUR_DRAGGING">colourpicker_COLOUR_DRAGGING</a></dd>
+</dl>
+
+<h3 id="colourpicker_MESSAGE_COLOUR_CHOICE_MEMBERS">colourpicker_MESSAGE_COLOUR_CHOICE_MEMBERS</h3>
+<pre>#define colourpicker_MESSAGE_COLOUR_CHOICE_MEMBERS \
+   <a href="#colourpicker_d">colourpicker_d</a> d; \
+   <a href="#colourpicker_colour_flags">colourpicker_colour_flags</a> flags; \
+   <a href="os.html#os_colour">os_colour</a> colour; \
+   int size;
+</pre>
+
+<h3 id="colourpicker_message_colour_choice_base">colourpicker_message_colour_choice_base</h3>
+<pre>typedef struct
+   {  <a href="#colourpicker_d">colourpicker_d</a> d;
+      <a href="#colourpicker_colour_flags">colourpicker_colour_flags</a> flags;
+      <a href="os.html#os_colour">os_colour</a> colour;
+      int size;
+   }
+   colourpicker_message_colour_choice_base;</pre>
+
+
+Fields:	size - Size of the 'info' array<h3 id="colourpicker_message_colour_choice">colourpicker_message_colour_choice</h3>
+<pre>typedef struct
+   {  <a href="#colourpicker_d">colourpicker_d</a> d;
+      <a href="#colourpicker_colour_flags">colourpicker_colour_flags</a> flags;
+      <a href="os.html#os_colour">os_colour</a> colour;
+      int size;
+      int info [...];
+   }
+   colourpicker_message_colour_choice;</pre>
+
+
+Fields:	size - Size of the 'info' array<h3 id="colourpicker_MESSAGE_COLOUR_CHANGED_MEMBERS">colourpicker_MESSAGE_COLOUR_CHANGED_MEMBERS</h3>
+<pre>#define colourpicker_MESSAGE_COLOUR_CHANGED_MEMBERS \
+   <a href="#colourpicker_d">colourpicker_d</a> d; \
+   <a href="#colourpicker_colour_flags">colourpicker_colour_flags</a> flags; \
+   <a href="os.html#os_colour">os_colour</a> colour; \
+   int size;
+</pre>
+
+<h3 id="colourpicker_message_colour_changed_base">colourpicker_message_colour_changed_base</h3>
+<pre>typedef struct
+   {  <a href="#colourpicker_d">colourpicker_d</a> d;
+      <a href="#colourpicker_colour_flags">colourpicker_colour_flags</a> flags;
+      <a href="os.html#os_colour">os_colour</a> colour;
+      int size;
+   }
+   colourpicker_message_colour_changed_base;</pre>
+
+
+Fields:	size - Size of the 'info' array<h3 id="colourpicker_message_colour_changed">colourpicker_message_colour_changed</h3>
+<pre>typedef struct
+   {  <a href="#colourpicker_d">colourpicker_d</a> d;
+      <a href="#colourpicker_colour_flags">colourpicker_colour_flags</a> flags;
+      <a href="os.html#os_colour">os_colour</a> colour;
+      int size;
+      int info [...];
+   }
+   colourpicker_message_colour_changed;</pre>
+
+
+Fields:	size - Size of the 'info' array<h3 id="colourpicker_message_open_parent_request">colourpicker_message_open_parent_request</h3>
+<pre>typedef struct
+   {  <a href="#colourpicker_d">colourpicker_d</a> d;
+   }
+   colourpicker_message_open_parent_request;</pre>
+
+<h3 id="colourpicker_message_close_dialogue_request">colourpicker_message_close_dialogue_request</h3>
+<pre>typedef struct
+   {  <a href="#colourpicker_d">colourpicker_d</a> d;
+   }
+   colourpicker_message_close_dialogue_request;</pre>
+
+<h3 id="colourpicker_message_reset_colour_request">colourpicker_message_reset_colour_request</h3>
+<pre>typedef struct
+   {  <a href="#colourpicker_d">colourpicker_d</a> d;
+   }
+   colourpicker_message_reset_colour_request;</pre>
+
+<h3 id="colourpicker_FULL_MESSAGE_COLOUR_CHOICE_MEMBERS">colourpicker_FULL_MESSAGE_COLOUR_CHOICE_MEMBERS</h3>
+<pre>#define colourpicker_FULL_MESSAGE_COLOUR_CHOICE_MEMBERS \
+   wimp_MESSAGE_HEADER_MEMBERS \
+   <a href="#colourpicker_d">colourpicker_d</a> d; \
+   <a href="#colourpicker_colour_flags">colourpicker_colour_flags</a> flags; \
+   <a href="os.html#os_colour">os_colour</a> colour; \
+   int array_size;
+</pre>
+
+<h3 id="colourpicker_full_message_colour_choice_base">colourpicker_full_message_colour_choice_base</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#colourpicker_d">colourpicker_d</a> d;
+      <a href="#colourpicker_colour_flags">colourpicker_colour_flags</a> flags;
+      <a href="os.html#os_colour">os_colour</a> colour;
+      int array_size;
+   }
+   colourpicker_full_message_colour_choice_base;</pre>
+
+
+Fields:	array_size - Size of the 'info' array<h3 id="colourpicker_full_message_colour_choice">colourpicker_full_message_colour_choice</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#colourpicker_d">colourpicker_d</a> d;
+      <a href="#colourpicker_colour_flags">colourpicker_colour_flags</a> flags;
+      <a href="os.html#os_colour">os_colour</a> colour;
+      int array_size;
+      int info [...];
+   }
+   colourpicker_full_message_colour_choice;</pre>
+
+
+Fields:	array_size - Size of the 'info' array<h3 id="colourpicker_FULL_MESSAGE_COLOUR_CHANGED_MEMBERS">colourpicker_FULL_MESSAGE_COLOUR_CHANGED_MEMBERS</h3>
+<pre>#define colourpicker_FULL_MESSAGE_COLOUR_CHANGED_MEMBERS \
+   wimp_MESSAGE_HEADER_MEMBERS \
+   <a href="#colourpicker_d">colourpicker_d</a> d; \
+   <a href="#colourpicker_colour_flags">colourpicker_colour_flags</a> flags; \
+   <a href="os.html#os_colour">os_colour</a> colour; \
+   int array_size;
+</pre>
+
+<h3 id="colourpicker_full_message_colour_changed_base">colourpicker_full_message_colour_changed_base</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#colourpicker_d">colourpicker_d</a> d;
+      <a href="#colourpicker_colour_flags">colourpicker_colour_flags</a> flags;
+      <a href="os.html#os_colour">os_colour</a> colour;
+      int array_size;
+   }
+   colourpicker_full_message_colour_changed_base;</pre>
+
+
+Fields:	array_size - Size of the 'info' array<h3 id="colourpicker_full_message_colour_changed">colourpicker_full_message_colour_changed</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#colourpicker_d">colourpicker_d</a> d;
+      <a href="#colourpicker_colour_flags">colourpicker_colour_flags</a> flags;
+      <a href="os.html#os_colour">os_colour</a> colour;
+      int array_size;
+      int info [...];
+   }
+   colourpicker_full_message_colour_changed;</pre>
+
+
+Fields:	array_size - Size of the 'info' array<h3 id="colourpicker_full_message_open_parent_request">colourpicker_full_message_open_parent_request</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#colourpicker_d">colourpicker_d</a> d;
+   }
+   colourpicker_full_message_open_parent_request;</pre>
+
+<h3 id="colourpicker_full_message_close_dialogue_request">colourpicker_full_message_close_dialogue_request</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#colourpicker_d">colourpicker_d</a> d;
+   }
+   colourpicker_full_message_close_dialogue_request;</pre>
+
+<h3 id="colourpicker_full_message_reset_colour_request">colourpicker_full_message_reset_colour_request</h3>
+<pre>typedef struct
+   {  <a href="#wimp_MESSAGE_HEADER_MEMBERS">wimp_MESSAGE_HEADER_MEMBERS</a>
+      <a href="#colourpicker_d">colourpicker_d</a> d;
+   }
+   colourpicker_full_message_reset_colour_request;</pre>
+
+<h3 id="colourpicker_open_flags">colourpicker_open_flags</h3>
+<pre>typedef bits colourpicker_open_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#colourpicker_OPEN_TRANSIENT">colourpicker_OPEN_TRANSIENT</a></dd>
+<dd><a href="#colourpicker_OPEN_SUB_MENU">colourpicker_OPEN_SUB_MENU</a></dd>
+<dd><a href="#colourpicker_OPEN_TOOLBOX">colourpicker_OPEN_TOOLBOX</a></dd>
+</dl>
+
+<h3 id="colourpicker_close_flags">colourpicker_close_flags</h3>
+<pre>typedef bits colourpicker_close_flags;</pre>
+
+<h3 id="colourpicker_update_flags">colourpicker_update_flags</h3>
+<pre>typedef bits colourpicker_update_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#colourpicker_UPDATE_OFFERS_TRANSPARENT">colourpicker_UPDATE_OFFERS_TRANSPARENT</a></dd>
+<dd><a href="#colourpicker_UPDATE_TRANSPARENT">colourpicker_UPDATE_TRANSPARENT</a></dd>
+<dd><a href="#colourpicker_UPDATE_TYPE">colourpicker_UPDATE_TYPE</a></dd>
+<dd><a href="#colourpicker_UPDATE_VISIBLE">colourpicker_UPDATE_VISIBLE</a></dd>
+<dd><a href="#colourpicker_UPDATE_SCROLL">colourpicker_UPDATE_SCROLL</a></dd>
+<dd><a href="#colourpicker_UPDATE_TITLE">colourpicker_UPDATE_TITLE</a></dd>
+<dd><a href="#colourpicker_UPDATE_COLOUR">colourpicker_UPDATE_COLOUR</a></dd>
+<dd><a href="#colourpicker_UPDATE_MODEL">colourpicker_UPDATE_MODEL</a></dd>
+<dd><a href="#colourpicker_UPDATE_IGNORE_HELP">colourpicker_UPDATE_IGNORE_HELP</a></dd>
+<dd><a href="#colourpicker_UPDATE_IGNORE_KEY_PRESSED">colourpicker_UPDATE_IGNORE_KEY_PRESSED</a></dd>
+</dl>
+
+<h3 id="colourpicker_read_flags">colourpicker_read_flags</h3>
+<pre>typedef bits colourpicker_read_flags;</pre>
+
+<h3 id="colourpicker_set_flags">colourpicker_set_flags</h3>
+<pre>typedef bits colourpicker_set_flags;</pre>
+
+<h3 id="colourpicker_help_flags">colourpicker_help_flags</h3>
+<pre>typedef bits colourpicker_help_flags;</pre>
+
+<h3 id="error_COLOUR_PICKER_UNINIT">error_COLOUR_PICKER_UNINIT</h3>
+<pre>#define error_COLOUR_PICKER_UNINIT 0x20D00u</pre>
+
+<h3 id="error_COLOUR_PICKER_BAD_MODEL">error_COLOUR_PICKER_BAD_MODEL</h3>
+<pre>#define error_COLOUR_PICKER_BAD_MODEL 0x20D01u</pre>
+
+<h3 id="error_COLOUR_PICKER_BAD_HANDLE">error_COLOUR_PICKER_BAD_HANDLE</h3>
+<pre>#define error_COLOUR_PICKER_BAD_HANDLE 0x20D02u</pre>
+
+<h3 id="error_COLOUR_PICKER_BAD_FLAGS">error_COLOUR_PICKER_BAD_FLAGS</h3>
+<pre>#define error_COLOUR_PICKER_BAD_FLAGS 0x20D03u</pre>
+
+<h3 id="error_COLOUR_PICKER_IN_USE">error_COLOUR_PICKER_IN_USE</h3>
+<pre>#define error_COLOUR_PICKER_IN_USE 0x20D04u</pre>
+
+<h3 id="error_COLOUR_PICKER_MODEL_IN_USE">error_COLOUR_PICKER_MODEL_IN_USE</h3>
+<pre>#define error_COLOUR_PICKER_MODEL_IN_USE 0x20D05u</pre>
+
+<h3 id="error_COLOUR_PICKER_BAD_REASON">error_COLOUR_PICKER_BAD_REASON</h3>
+<pre>#define error_COLOUR_PICKER_BAD_REASON 0x20D06u</pre>
+
+<h3 id="colourpicker_ENTRY_DIALOGUE_STARTING">colourpicker_ENTRY_DIALOGUE_STARTING</h3>
+<pre>#define colourpicker_ENTRY_DIALOGUE_STARTING 0</pre>
+
+<h3 id="colourpicker_ENTRY_DIALOGUE_FINISHING">colourpicker_ENTRY_DIALOGUE_FINISHING</h3>
+<pre>#define colourpicker_ENTRY_DIALOGUE_FINISHING 1</pre>
+
+<h3 id="colourpicker_ENTRY_REDRAW_AREA">colourpicker_ENTRY_REDRAW_AREA</h3>
+<pre>#define colourpicker_ENTRY_REDRAW_AREA 2</pre>
+
+<h3 id="colourpicker_ENTRY_UPDATE_AREA">colourpicker_ENTRY_UPDATE_AREA</h3>
+<pre>#define colourpicker_ENTRY_UPDATE_AREA 3</pre>
+
+<h3 id="colourpicker_ENTRY_READ_VALUES">colourpicker_ENTRY_READ_VALUES</h3>
+<pre>#define colourpicker_ENTRY_READ_VALUES 4</pre>
+
+<h3 id="colourpicker_ENTRY_SET_VALUES">colourpicker_ENTRY_SET_VALUES</h3>
+<pre>#define colourpicker_ENTRY_SET_VALUES 5</pre>
+
+<h3 id="colourpicker_ENTRY_PROCESS_EVENT">colourpicker_ENTRY_PROCESS_EVENT</h3>
+<pre>#define colourpicker_ENTRY_PROCESS_EVENT 6</pre>
+
+<h3 id="colourpicker_ENTRY_SET_COLOUR">colourpicker_ENTRY_SET_COLOUR</h3>
+<pre>#define colourpicker_ENTRY_SET_COLOUR 7</pre>
+
+<h3 id="colourpicker_ENTRY_LIMIT">colourpicker_ENTRY_LIMIT</h3>
+<pre>#define colourpicker_ENTRY_LIMIT 8</pre>
+
+<h3 id="colourpicker_DIALOGUE_OFFERS_TRANSPARENT">colourpicker_DIALOGUE_OFFERS_TRANSPARENT</h3>
+<pre>#define colourpicker_DIALOGUE_OFFERS_TRANSPARENT ((<a href="#colourpicker_dialogue_flags">colourpicker_dialogue_flags</a>) 0x1u)</pre>
+
+<h3 id="colourpicker_DIALOGUE_TRANSPARENT">colourpicker_DIALOGUE_TRANSPARENT</h3>
+<pre>#define colourpicker_DIALOGUE_TRANSPARENT ((<a href="#colourpicker_dialogue_flags">colourpicker_dialogue_flags</a>) 0x2u)</pre>
+
+<h3 id="colourpicker_DIALOGUE_TYPE">colourpicker_DIALOGUE_TYPE</h3>
+<pre>#define colourpicker_DIALOGUE_TYPE ((<a href="#colourpicker_dialogue_flags">colourpicker_dialogue_flags</a>) 0xCu)</pre>
+
+<h3 id="colourpicker_DIALOGUE_TYPE_SHIFT">colourpicker_DIALOGUE_TYPE_SHIFT</h3>
+<pre>#define colourpicker_DIALOGUE_TYPE_SHIFT 2</pre>
+
+<h3 id="colourpicker_DIALOGUE_TYPE_NEVER">colourpicker_DIALOGUE_TYPE_NEVER</h3>
+<pre>#define colourpicker_DIALOGUE_TYPE_NEVER 0x0u</pre>
+
+<h3 id="colourpicker_DIALOGUE_TYPE_CLICK">colourpicker_DIALOGUE_TYPE_CLICK</h3>
+<pre>#define colourpicker_DIALOGUE_TYPE_CLICK 0x1u</pre>
+
+<h3 id="colourpicker_DIALOGUE_TYPE_CLICK_DRAG">colourpicker_DIALOGUE_TYPE_CLICK_DRAG</h3>
+<pre>#define colourpicker_DIALOGUE_TYPE_CLICK_DRAG 0x2u</pre>
+
+<h3 id="colourpicker_DIALOGUE_IGNORE_HELP">colourpicker_DIALOGUE_IGNORE_HELP</h3>
+<pre>#define colourpicker_DIALOGUE_IGNORE_HELP ((<a href="#colourpicker_dialogue_flags">colourpicker_dialogue_flags</a>) 0x10u)</pre>
+
+<h3 id="colourpicker_DIALOGUE_IGNORE_KEY_PRESSED">colourpicker_DIALOGUE_IGNORE_KEY_PRESSED</h3>
+<pre>#define colourpicker_DIALOGUE_IGNORE_KEY_PRESSED ((<a href="#colourpicker_dialogue_flags">colourpicker_dialogue_flags</a>) 0x20u)</pre>
+
+<h3 id="colourpicker_MODEL_SIZE_RGB">colourpicker_MODEL_SIZE_RGB</h3>
+<pre>#define colourpicker_MODEL_SIZE_RGB 16</pre>
+
+<h3 id="colourpicker_MODEL_SIZE_CMYK">colourpicker_MODEL_SIZE_CMYK</h3>
+<pre>#define colourpicker_MODEL_SIZE_CMYK 20</pre>
+
+<h3 id="colourpicker_MODEL_SIZE_HSV">colourpicker_MODEL_SIZE_HSV</h3>
+<pre>#define colourpicker_MODEL_SIZE_HSV 16</pre>
+
+<h3 id="colourpicker_MODEL_RGB">colourpicker_MODEL_RGB</h3>
+<pre>#define colourpicker_MODEL_RGB 0</pre>
+
+<h3 id="colourpicker_MODEL_CMYK">colourpicker_MODEL_CMYK</h3>
+<pre>#define colourpicker_MODEL_CMYK 1</pre>
+
+<h3 id="colourpicker_MODEL_HSV">colourpicker_MODEL_HSV</h3>
+<pre>#define colourpicker_MODEL_HSV 2</pre>
+
+<h3 id="message_COLOUR_PICKER_COLOUR_CHOICE">message_COLOUR_PICKER_COLOUR_CHOICE</h3>
+<pre>#define message_COLOUR_PICKER_COLOUR_CHOICE 0x47700u</pre>
+
+<h3 id="message_COLOUR_PICKER_COLOUR_CHANGED">message_COLOUR_PICKER_COLOUR_CHANGED</h3>
+<pre>#define message_COLOUR_PICKER_COLOUR_CHANGED 0x47701u</pre>
+
+<h3 id="message_COLOUR_PICKER_CLOSE_DIALOGUE_REQUEST">message_COLOUR_PICKER_CLOSE_DIALOGUE_REQUEST</h3>
+<pre>#define message_COLOUR_PICKER_CLOSE_DIALOGUE_REQUEST 0x47702u</pre>
+
+<h3 id="message_COLOUR_PICKER_OPEN_PARENT_REQUEST">message_COLOUR_PICKER_OPEN_PARENT_REQUEST</h3>
+<pre>#define message_COLOUR_PICKER_OPEN_PARENT_REQUEST 0x47703u</pre>
+
+<h3 id="message_COLOUR_PICKER_RESET_COLOUR_REQUEST">message_COLOUR_PICKER_RESET_COLOUR_REQUEST</h3>
+<pre>#define message_COLOUR_PICKER_RESET_COLOUR_REQUEST 0x47704u</pre>
+
+<h3 id="colourpicker_COLOUR_TRANSPARENT">colourpicker_COLOUR_TRANSPARENT</h3>
+<pre>#define colourpicker_COLOUR_TRANSPARENT ((<a href="#colourpicker_colour_flags">colourpicker_colour_flags</a>) 0x1u)</pre>
+
+<h3 id="colourpicker_COLOUR_DRAGGING">colourpicker_COLOUR_DRAGGING</h3>
+<pre>#define colourpicker_COLOUR_DRAGGING ((<a href="#colourpicker_colour_flags">colourpicker_colour_flags</a>) 0x2u)</pre>
+
+<h3 id="colourpicker_OPEN_TRANSIENT">colourpicker_OPEN_TRANSIENT</h3>
+<pre>#define colourpicker_OPEN_TRANSIENT ((<a href="#colourpicker_open_flags">colourpicker_open_flags</a>) 0x1u)</pre>
+
+<h3 id="colourpicker_OPEN_SUB_MENU">colourpicker_OPEN_SUB_MENU</h3>
+<pre>#define colourpicker_OPEN_SUB_MENU ((<a href="#colourpicker_open_flags">colourpicker_open_flags</a>) 0x2u)</pre>
+
+<p>If transient</p>
+
+<h3 id="colourpicker_OPEN_TOOLBOX">colourpicker_OPEN_TOOLBOX</h3>
+<pre>#define colourpicker_OPEN_TOOLBOX ((<a href="#colourpicker_open_flags">colourpicker_open_flags</a>) 0x2u)</pre>
+
+<p>If permanent</p>
+
+<h3 id="colourpicker_UPDATE_OFFERS_TRANSPARENT">colourpicker_UPDATE_OFFERS_TRANSPARENT</h3>
+<pre>#define colourpicker_UPDATE_OFFERS_TRANSPARENT ((<a href="#colourpicker_update_flags">colourpicker_update_flags</a>) 0x1u)</pre>
+
+<h3 id="colourpicker_UPDATE_TRANSPARENT">colourpicker_UPDATE_TRANSPARENT</h3>
+<pre>#define colourpicker_UPDATE_TRANSPARENT ((<a href="#colourpicker_update_flags">colourpicker_update_flags</a>) 0x2u)</pre>
+
+<h3 id="colourpicker_UPDATE_TYPE">colourpicker_UPDATE_TYPE</h3>
+<pre>#define colourpicker_UPDATE_TYPE ((<a href="#colourpicker_update_flags">colourpicker_update_flags</a>) 0x4u)</pre>
+
+<h3 id="colourpicker_UPDATE_VISIBLE">colourpicker_UPDATE_VISIBLE</h3>
+<pre>#define colourpicker_UPDATE_VISIBLE ((<a href="#colourpicker_update_flags">colourpicker_update_flags</a>) 0x8u)</pre>
+
+<h3 id="colourpicker_UPDATE_SCROLL">colourpicker_UPDATE_SCROLL</h3>
+<pre>#define colourpicker_UPDATE_SCROLL ((<a href="#colourpicker_update_flags">colourpicker_update_flags</a>) 0x10u)</pre>
+
+<h3 id="colourpicker_UPDATE_TITLE">colourpicker_UPDATE_TITLE</h3>
+<pre>#define colourpicker_UPDATE_TITLE ((<a href="#colourpicker_update_flags">colourpicker_update_flags</a>) 0x20u)</pre>
+
+<h3 id="colourpicker_UPDATE_COLOUR">colourpicker_UPDATE_COLOUR</h3>
+<pre>#define colourpicker_UPDATE_COLOUR ((<a href="#colourpicker_update_flags">colourpicker_update_flags</a>) 0x40u)</pre>
+
+<h3 id="colourpicker_UPDATE_MODEL">colourpicker_UPDATE_MODEL</h3>
+<pre>#define colourpicker_UPDATE_MODEL ((<a href="#colourpicker_update_flags">colourpicker_update_flags</a>) 0x80u)</pre>
+
+<h3 id="colourpicker_UPDATE_IGNORE_HELP">colourpicker_UPDATE_IGNORE_HELP</h3>
+<pre>#define colourpicker_UPDATE_IGNORE_HELP ((<a href="#colourpicker_update_flags">colourpicker_update_flags</a>) 0x100u)</pre>
+
+<h3 id="colourpicker_UPDATE_IGNORE_KEY_PRESSED">colourpicker_UPDATE_IGNORE_KEY_PRESSED</h3>
+<pre>#define colourpicker_UPDATE_IGNORE_KEY_PRESSED ((<a href="#colourpicker_update_flags">colourpicker_update_flags</a>) 0x200u)</pre>
+
+<h3 id="xcolourpicker_register_model">xcolourpicker_register_model</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourpicker_register_model (int model_no,
+      <a href="#colourpicker_model">colourpicker_model</a> const *model,
+      void *workspace);</pre>
+<p>For internal use only</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>model_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>model</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourpicker_register_model">colourpicker_register_model</h3>
+<pre>extern void colourpicker_register_model (int model_no,
+      <a href="#colourpicker_model">colourpicker_model</a> const *model,
+      void *workspace);</pre>
+<p>For internal use only</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>model_no</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>model</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xcolourpicker_deregister_model">xcolourpicker_deregister_model</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourpicker_deregister_model (int model_no);</pre>
+<p>For internal use only</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>model_no</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="colourpicker_deregister_model">colourpicker_deregister_model</h3>
+<pre>extern void colourpicker_deregister_model (int model_no);</pre>
+<p>For internal use only</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>model_no</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="xcolourpicker_open_dialogue">xcolourpicker_open_dialogue</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourpicker_open_dialogue (<a href="#colourpicker_open_flags">colourpicker_open_flags</a> flags,
+      <a href="#colourpicker_dialogue">colourpicker_dialogue</a> const *dialogue,
+      <a href="#colourpicker_d">colourpicker_d</a> *d,
+      <a href="wimp.html#wimp_w">wimp_w</a> *w);</pre>
+<p>Creates and opens a colour picker dialogue</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>dialogue</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>d</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>w</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="colourpicker_open_dialogue">colourpicker_open_dialogue</h3>
+<pre>extern <a href="#colourpicker_d">colourpicker_d</a> colourpicker_open_dialogue (<a href="#colourpicker_open_flags">colourpicker_open_flags</a> flags,
+      <a href="#colourpicker_dialogue">colourpicker_dialogue</a> const *dialogue,
+      <a href="wimp.html#wimp_w">wimp_w</a> *w);</pre>
+<p>Creates and opens a colour picker dialogue</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>dialogue</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>w</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>d</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xcolourpicker_close_dialogue">xcolourpicker_close_dialogue</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourpicker_close_dialogue (<a href="#colourpicker_close_flags">colourpicker_close_flags</a> flags,
+      <a href="#colourpicker_d">colourpicker_d</a> d);</pre>
+<p>Closes a colour picker dialogue which is in progress</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>d</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="colourpicker_close_dialogue">colourpicker_close_dialogue</h3>
+<pre>extern void colourpicker_close_dialogue (<a href="#colourpicker_close_flags">colourpicker_close_flags</a> flags,
+      <a href="#colourpicker_d">colourpicker_d</a> d);</pre>
+<p>Closes a colour picker dialogue which is in progress</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>d</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xcolourpicker_update_dialogue">xcolourpicker_update_dialogue</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourpicker_update_dialogue (<a href="#colourpicker_update_flags">colourpicker_update_flags</a> flags,
+      <a href="#colourpicker_d">colourpicker_d</a> d,
+      <a href="#colourpicker_dialogue">colourpicker_dialogue</a> const *dialogue);</pre>
+<p>Updates some or all of the contents of a colour picker dialogue</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>d</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dialogue</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourpicker_update_dialogue">colourpicker_update_dialogue</h3>
+<pre>extern void colourpicker_update_dialogue (<a href="#colourpicker_update_flags">colourpicker_update_flags</a> flags,
+      <a href="#colourpicker_d">colourpicker_d</a> d,
+      <a href="#colourpicker_dialogue">colourpicker_dialogue</a> const *dialogue);</pre>
+<p>Updates some or all of the contents of a colour picker dialogue</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>d</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dialogue</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xcolourpicker_read_dialogue">xcolourpicker_read_dialogue</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourpicker_read_dialogue (<a href="#colourpicker_read_flags">colourpicker_read_flags</a> flags,
+      <a href="#colourpicker_d">colourpicker_d</a> d,
+      <a href="#colourpicker_dialogue">colourpicker_dialogue</a> *dialogue,
+      <a href="wimp.html#wimp_w">wimp_w</a> *w,
+      int *size);</pre>
+<p>Reads the current state of a colour picker dialogue without changing it</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>d</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dialogue</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>w</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourpicker_read_dialogue">colourpicker_read_dialogue</h3>
+<pre>extern void colourpicker_read_dialogue (<a href="#colourpicker_read_flags">colourpicker_read_flags</a> flags,
+      <a href="#colourpicker_d">colourpicker_d</a> d,
+      <a href="#colourpicker_dialogue">colourpicker_dialogue</a> *dialogue,
+      <a href="wimp.html#wimp_w">wimp_w</a> *w,
+      int *size);</pre>
+<p>Reads the current state of a colour picker dialogue without changing it</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>d</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>dialogue</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>w</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xcolourpicker_set_colour">xcolourpicker_set_colour</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourpicker_set_colour (<a href="#colourpicker_set_flags">colourpicker_set_flags</a> flags,
+      <a href="#colourpicker_colour">colourpicker_colour</a> const *colour);</pre>
+<p>Reserved for future expansion</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="colourpicker_set_colour">colourpicker_set_colour</h3>
+<pre>extern void colourpicker_set_colour (<a href="#colourpicker_set_flags">colourpicker_set_flags</a> flags,
+      <a href="#colourpicker_colour">colourpicker_colour</a> const *colour);</pre>
+<p>Reserved for future expansion</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>colour</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xcolourpicker_help_reply">xcolourpicker_help_reply</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourpicker_help_reply (<a href="#colourpicker_help_flags">colourpicker_help_flags</a> flags,
+      <a href="wimp.html#wimp_message">wimp_message</a> const *help_request);</pre>
+<p>Makes a colour picker respond to a Message_HelpRequest with its own help text</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>help_request</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="colourpicker_help_reply">colourpicker_help_reply</h3>
+<pre>extern void colourpicker_help_reply (<a href="#colourpicker_help_flags">colourpicker_help_flags</a> flags,
+      <a href="wimp.html#wimp_message">wimp_message</a> const *help_request);</pre>
+<p>Makes a colour picker respond to a Message_HelpRequest with its own help text</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>help_request</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xcolourpickermodelswi_colour_changed">xcolourpickermodelswi_colour_changed</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourpickermodelswi_colour_changed (<a href="#colourpicker_colour">colourpicker_colour</a> const *colour);</pre>
+<p>Informs the front end to send a message to the client, if required</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="colourpickermodelswi_colour_changed">colourpickermodelswi_colour_changed</h3>
+<pre>extern void colourpickermodelswi_colour_changed (<a href="#colourpicker_colour">colourpicker_colour</a> const *colour);</pre>
+<p>Informs the front end to send a message to the client, if required</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xcolourpickermodelswi_colour_changed_by_dragging">xcolourpickermodelswi_colour_changed_by_dragging</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourpickermodelswi_colour_changed_by_dragging (<a href="#colourpicker_colour">colourpicker_colour</a> const *colour);</pre>
+<p>Informs the front end to send a dragging message to the client, if required</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="colourpickermodelswi_colour_changed_by_dragging">colourpickermodelswi_colour_changed_by_dragging</h3>
+<pre>extern void colourpickermodelswi_colour_changed_by_dragging (<a href="#colourpicker_colour">colourpicker_colour</a> const *colour);</pre>
+<p>Informs the front end to send a dragging message to the client, if required</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>colour</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xcolourpickermodelswi_claim_event">xcolourpickermodelswi_claim_event</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourpickermodelswi_claim_event (int event,
+      <a href="#colourpicker_colour">colourpicker_colour</a> const *colour);</pre>
+<p>Informs the front end that the back end wants an event type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>event</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>colour</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourpickermodelswi_claim_event">colourpickermodelswi_claim_event</h3>
+<pre>extern void colourpickermodelswi_claim_event (int event,
+      <a href="#colourpicker_colour">colourpicker_colour</a> const *colour);</pre>
+<p>Informs the front end that the back end wants an event type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>event</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>colour</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xcolourpickermodelswi_release_event">xcolourpickermodelswi_release_event</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourpickermodelswi_release_event (int event,
+      <a href="#colourpicker_colour">colourpicker_colour</a> const *colour);</pre>
+<p>Informs the front end that the back end no longer wants an event type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>event</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>colour</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourpickermodelswi_release_event">colourpickermodelswi_release_event</h3>
+<pre>extern void colourpickermodelswi_release_event (int event,
+      <a href="#colourpicker_colour">colourpicker_colour</a> const *colour);</pre>
+<p>Informs the front end that the back end no longer wants an event type</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>event</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>colour</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xcolourpickermodelswi_process_key">xcolourpickermodelswi_process_key</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xcolourpickermodelswi_process_key (int c,
+      <a href="#colourpicker_colour">colourpicker_colour</a> const *colour);</pre>
+<p>Passes an unhandled key press on to the front end</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>colour</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="colourpickermodelswi_process_key">colourpickermodelswi_process_key</h3>
+<pre>extern void colourpickermodelswi_process_key (int c,
+      <a href="#colourpicker_colour">colourpicker_colour</a> const *colour);</pre>
+<p>Passes an unhandled key press on to the front end</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>c</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>colour</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xservice_colour_picker_loaded">xservice_colour_picker_loaded</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_colour_picker_loaded (asm_routine loaded_service,
+      void *workspace);</pre>
+<p>For internal use only</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>loaded_service</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="service_colour_picker_loaded">service_colour_picker_loaded</h3>
+<pre>extern void service_colour_picker_loaded (asm_routine loaded_service,
+      void *workspace);</pre>
+<p>For internal use only</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>loaded_service</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>workspace</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

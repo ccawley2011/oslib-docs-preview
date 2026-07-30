@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; ScreenBlanker</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>ScreenBlanker</h2>
+
+<pre>#include "oslib/screenblanker.h"</pre>
+
+<h3 id="xservice_screen_blanked">xservice_screen_blanked</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_screen_blanked (void);
+</pre><p>Screen blanked by screen blanker</p>
+
+
+<table>
+</table>
+
+<h3 id="service_screen_blanked">service_screen_blanked</h3>
+<pre>extern void service_screen_blanked (void);
+</pre><p>Screen blanked by screen blanker</p>
+
+
+<table>
+</table>
+
+<h3 id="xservice_screen_restored">xservice_screen_restored</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_screen_restored (int x);</pre>
+<p>Screen restored by screen blanker</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>x</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="service_screen_restored">service_screen_restored</h3>
+<pre>extern void service_screen_restored (int x);</pre>
+<p>Screen restored by screen blanker</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>x</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

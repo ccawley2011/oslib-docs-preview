@@ -1,0 +1,771 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; OSArgs</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>OSArgs</h2>
+
+<pre>#include "oslib/osargs.h"</pre>
+
+<h3 id="osargs_stream_status">osargs_stream_status</h3>
+<pre>typedef bits osargs_stream_status;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osargs_STREAM_INTERACTIVE">osargs_STREAM_INTERACTIVE</a></dd>
+<dd><a href="#osargs_STREAM_SUPPORTS_GBPB">osargs_STREAM_SUPPORTS_GBPB</a></dd>
+<dd><a href="#osargs_STREAM_DIR">osargs_STREAM_DIR</a></dd>
+<dd><a href="#osargs_STREAM_READABLE">osargs_STREAM_READABLE</a></dd>
+<dd><a href="#osargs_STREAM_WRITABLE">osargs_STREAM_WRITABLE</a></dd>
+<dd><a href="#osargs_STREAM_WRITTEN">osargs_STREAM_WRITTEN</a></dd>
+<dd><a href="#osargs_STREAM_EOF_ERROR_ON_NEXT_READ">osargs_STREAM_EOF_ERROR_ON_NEXT_READ</a></dd>
+<dd><a href="#osargs_STREAM_UNBUFFERED">osargs_STREAM_UNBUFFERED</a></dd>
+<dd><a href="#osargs_STREAM_UNALLOCATED">osargs_STREAM_UNALLOCATED</a></dd>
+<dd><a href="#osargs_STREAM_CRITICAL">osargs_STREAM_CRITICAL</a></dd>
+<dd><a href="#osargs_STREAM_DATA_LOST">osargs_STREAM_DATA_LOST</a></dd>
+<dd><a href="#osargs_STREAM_IMAGE_FILE_BUSY">osargs_STREAM_IMAGE_FILE_BUSY</a></dd>
+</dl>
+
+<h3 id="osargs_io_ctl_operation">osargs_io_ctl_operation</h3>
+<pre>typedef bits osargs_io_ctl_operation;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#osargs_IO_CTL_REASON">osargs_IO_CTL_REASON</a></dd>
+<dd><a href="#osargs_IO_CTL_GROUP">osargs_IO_CTL_GROUP</a></dd>
+<dd><a href="#osargs_IO_CTL_READ_VALUE">osargs_IO_CTL_READ_VALUE</a></dd>
+<dd><a href="#osargs_IO_CTL_WRITE_VALUE">osargs_IO_CTL_WRITE_VALUE</a></dd>
+<dd><a href="#osargs_IO_CTL_BAUD_RATE">osargs_IO_CTL_BAUD_RATE</a></dd>
+<dd><a href="#osargs_IO_CTL_DATA_FORMAT">osargs_IO_CTL_DATA_FORMAT</a></dd>
+<dd><a href="#osargs_IO_CTL_HANDSHAKING">osargs_IO_CTL_HANDSHAKING</a></dd>
+<dd><a href="#osargs_IO_CTL_BUFFER_SIZE">osargs_IO_CTL_BUFFER_SIZE</a></dd>
+<dd><a href="#osargs_IO_CTL_BUFFER_THRESHOLDS">osargs_IO_CTL_BUFFER_THRESHOLDS</a></dd>
+<dd><a href="#osargs_IO_CTL_CONTROL_LINES">osargs_IO_CTL_CONTROL_LINES</a></dd>
+<dd><a href="#osargs_IO_CTL_FIFO_TRIGGER_LEVEL">osargs_IO_CTL_FIFO_TRIGGER_LEVEL</a></dd>
+<dd><a href="#osargs_IO_CTL_SUPPORTED_BAUD_RATE_COUNT">osargs_IO_CTL_SUPPORTED_BAUD_RATE_COUNT</a></dd>
+<dd><a href="#osargs_IO_CTL_SUPPORTED_BAUD_RATE">osargs_IO_CTL_SUPPORTED_BAUD_RATE</a></dd>
+</dl>
+
+<h3 id="osargs_io_ctl_parameters">osargs_io_ctl_parameters</h3>
+<pre>typedef struct
+   {  <a href="#osargs_io_ctl_operation">osargs_io_ctl_operation</a> operation;
+      int value;
+   }
+   osargs_io_ctl_parameters;</pre>
+
+<h3 id="osargs_STREAM_INTERACTIVE">osargs_STREAM_INTERACTIVE</h3>
+<pre>#define osargs_STREAM_INTERACTIVE ((<a href="#osargs_stream_status">osargs_stream_status</a>) 0x8u)</pre>
+
+<h3 id="osargs_STREAM_SUPPORTS_GBPB">osargs_STREAM_SUPPORTS_GBPB</h3>
+<pre>#define osargs_STREAM_SUPPORTS_GBPB ((<a href="#osargs_stream_status">osargs_stream_status</a>) 0x10u)</pre>
+
+<h3 id="osargs_STREAM_DIR">osargs_STREAM_DIR</h3>
+<pre>#define osargs_STREAM_DIR ((<a href="#osargs_stream_status">osargs_stream_status</a>) 0x20u)</pre>
+
+<h3 id="osargs_STREAM_READABLE">osargs_STREAM_READABLE</h3>
+<pre>#define osargs_STREAM_READABLE ((<a href="#osargs_stream_status">osargs_stream_status</a>) 0x40u)</pre>
+
+<h3 id="osargs_STREAM_WRITABLE">osargs_STREAM_WRITABLE</h3>
+<pre>#define osargs_STREAM_WRITABLE ((<a href="#osargs_stream_status">osargs_stream_status</a>) 0x80u)</pre>
+
+<h3 id="osargs_STREAM_WRITTEN">osargs_STREAM_WRITTEN</h3>
+<pre>#define osargs_STREAM_WRITTEN ((<a href="#osargs_stream_status">osargs_stream_status</a>) 0x100u)</pre>
+
+<h3 id="osargs_STREAM_EOF_ERROR_ON_NEXT_READ">osargs_STREAM_EOF_ERROR_ON_NEXT_READ</h3>
+<pre>#define osargs_STREAM_EOF_ERROR_ON_NEXT_READ ((<a href="#osargs_stream_status">osargs_stream_status</a>) 0x200u)</pre>
+
+<h3 id="osargs_STREAM_UNBUFFERED">osargs_STREAM_UNBUFFERED</h3>
+<pre>#define osargs_STREAM_UNBUFFERED ((<a href="#osargs_stream_status">osargs_stream_status</a>) 0x400u)</pre>
+
+<h3 id="osargs_STREAM_UNALLOCATED">osargs_STREAM_UNALLOCATED</h3>
+<pre>#define osargs_STREAM_UNALLOCATED ((<a href="#osargs_stream_status">osargs_stream_status</a>) 0x800u)</pre>
+
+<h3 id="osargs_STREAM_CRITICAL">osargs_STREAM_CRITICAL</h3>
+<pre>#define osargs_STREAM_CRITICAL ((<a href="#osargs_stream_status">osargs_stream_status</a>) 0x1000u)</pre>
+
+<h3 id="osargs_STREAM_DATA_LOST">osargs_STREAM_DATA_LOST</h3>
+<pre>#define osargs_STREAM_DATA_LOST ((<a href="#osargs_stream_status">osargs_stream_status</a>) 0x2000u)</pre>
+
+<h3 id="osargs_STREAM_IMAGE_FILE_BUSY">osargs_STREAM_IMAGE_FILE_BUSY</h3>
+<pre>#define osargs_STREAM_IMAGE_FILE_BUSY ((<a href="#osargs_stream_status">osargs_stream_status</a>) 0x4000u)</pre>
+
+<h3 id="osargs_IO_CTL_REASON">osargs_IO_CTL_REASON</h3>
+<pre>#define osargs_IO_CTL_REASON ((<a href="#osargs_io_ctl_operation">osargs_io_ctl_operation</a>) 0xFFFFu)</pre>
+
+<h3 id="osargs_IO_CTL_REASON_SHIFT">osargs_IO_CTL_REASON_SHIFT</h3>
+<pre>#define osargs_IO_CTL_REASON_SHIFT 0</pre>
+
+<h3 id="osargs_IO_CTL_GROUP">osargs_IO_CTL_GROUP</h3>
+<pre>#define osargs_IO_CTL_GROUP ((<a href="#osargs_io_ctl_operation">osargs_io_ctl_operation</a>) 0xFF0000u)</pre>
+
+<h3 id="osargs_IO_CTL_GROUP_SHIFT">osargs_IO_CTL_GROUP_SHIFT</h3>
+<pre>#define osargs_IO_CTL_GROUP_SHIFT 16</pre>
+
+<h3 id="osargs_IO_CTL_READ_VALUE">osargs_IO_CTL_READ_VALUE</h3>
+<pre>#define osargs_IO_CTL_READ_VALUE ((<a href="#osargs_io_ctl_operation">osargs_io_ctl_operation</a>) 0x40000000u)</pre>
+
+<h3 id="osargs_IO_CTL_WRITE_VALUE">osargs_IO_CTL_WRITE_VALUE</h3>
+<pre>#define osargs_IO_CTL_WRITE_VALUE ((<a href="#osargs_io_ctl_operation">osargs_io_ctl_operation</a>) 0x80000000u)</pre>
+
+<h3 id="osargs_IO_CTL_BAUD_RATE">osargs_IO_CTL_BAUD_RATE</h3>
+<pre>#define osargs_IO_CTL_BAUD_RATE ((<a href="#osargs_io_ctl_operation">osargs_io_ctl_operation</a>) 0x1u)</pre>
+
+<h3 id="osargs_IO_CTL_DATA_FORMAT">osargs_IO_CTL_DATA_FORMAT</h3>
+<pre>#define osargs_IO_CTL_DATA_FORMAT ((<a href="#osargs_io_ctl_operation">osargs_io_ctl_operation</a>) 0x2u)</pre>
+
+<h3 id="osargs_IO_CTL_HANDSHAKING">osargs_IO_CTL_HANDSHAKING</h3>
+<pre>#define osargs_IO_CTL_HANDSHAKING ((<a href="#osargs_io_ctl_operation">osargs_io_ctl_operation</a>) 0x3u)</pre>
+
+<h3 id="osargs_IO_CTL_BUFFER_SIZE">osargs_IO_CTL_BUFFER_SIZE</h3>
+<pre>#define osargs_IO_CTL_BUFFER_SIZE ((<a href="#osargs_io_ctl_operation">osargs_io_ctl_operation</a>) 0x4u)</pre>
+
+<h3 id="osargs_IO_CTL_BUFFER_THRESHOLDS">osargs_IO_CTL_BUFFER_THRESHOLDS</h3>
+<pre>#define osargs_IO_CTL_BUFFER_THRESHOLDS ((<a href="#osargs_io_ctl_operation">osargs_io_ctl_operation</a>) 0x5u)</pre>
+
+<h3 id="osargs_IO_CTL_CONTROL_LINES">osargs_IO_CTL_CONTROL_LINES</h3>
+<pre>#define osargs_IO_CTL_CONTROL_LINES ((<a href="#osargs_io_ctl_operation">osargs_io_ctl_operation</a>) 0x6u)</pre>
+
+<h3 id="osargs_IO_CTL_FIFO_TRIGGER_LEVEL">osargs_IO_CTL_FIFO_TRIGGER_LEVEL</h3>
+<pre>#define osargs_IO_CTL_FIFO_TRIGGER_LEVEL ((<a href="#osargs_io_ctl_operation">osargs_io_ctl_operation</a>) 0x7u)</pre>
+
+<h3 id="osargs_IO_CTL_SUPPORTED_BAUD_RATE_COUNT">osargs_IO_CTL_SUPPORTED_BAUD_RATE_COUNT</h3>
+<pre>#define osargs_IO_CTL_SUPPORTED_BAUD_RATE_COUNT ((<a href="#osargs_io_ctl_operation">osargs_io_ctl_operation</a>) 0x8u)</pre>
+
+<h3 id="osargs_IO_CTL_SUPPORTED_BAUD_RATE">osargs_IO_CTL_SUPPORTED_BAUD_RATE</h3>
+<pre>#define osargs_IO_CTL_SUPPORTED_BAUD_RATE ((<a href="#osargs_io_ctl_operation">osargs_io_ctl_operation</a>) 0x9u)</pre>
+
+<h3 id="xosargs_read_ptr">xosargs_read_ptr</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_read_ptr (<a href="os.html#os_f">os_f</a> file,
+      int *ptr);</pre>
+<p>Reads a file's sequential file pointer. Prefer OSArgs_ReadPtrW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>ptr</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osargs_read_ptr">osargs_read_ptr</h3>
+<pre>extern int osargs_read_ptr (<a href="os.html#os_f">os_f</a> file);</pre>
+<p>Reads a file's sequential file pointer. Prefer OSArgs_ReadPtrW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>ptr</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosargs_read_ptrw">xosargs_read_ptrw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_read_ptrw (<a href="os.html#os_fw">os_fw</a> file,
+      int *ptr);</pre>
+<p>Reads a file's sequential file pointer. Uses 32-bit file handle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>ptr</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osargs_read_ptrw">osargs_read_ptrw</h3>
+<pre>extern int osargs_read_ptrw (<a href="os.html#os_fw">os_fw</a> file);</pre>
+<p>Reads a file's sequential file pointer. Uses 32-bit file handle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>ptr</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosargs_read_temporary_fs">xosargs_read_temporary_fs</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_read_temporary_fs (<a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> *temp_fs_no);</pre>
+<p>Reads the temporary filing system number</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>temp_fs_no</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="osargs_read_temporary_fs">osargs_read_temporary_fs</h3>
+<pre>extern <a href="fileswitch.html#fileswitch_fs_no">fileswitch_fs_no</a> osargs_read_temporary_fs (void);
+</pre><p>Reads the temporary filing system number</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>temp_fs_no</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xosargs_set_ptr">xosargs_set_ptr</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_set_ptr (<a href="os.html#os_f">os_f</a> file,
+      int ptr);</pre>
+<p>Writes an open file's sequential file pointer Prefer OSArgs_SetPtrW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ptr</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osargs_set_ptr">osargs_set_ptr</h3>
+<pre>extern void osargs_set_ptr (<a href="os.html#os_f">os_f</a> file,
+      int ptr);</pre>
+<p>Writes an open file's sequential file pointer Prefer OSArgs_SetPtrW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ptr</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosargs_set_ptrw">xosargs_set_ptrw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_set_ptrw (<a href="os.html#os_fw">os_fw</a> file,
+      int ptr);</pre>
+<p>Writes an open file's sequential file pointer. Uses 32-bit file handle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ptr</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osargs_set_ptrw">osargs_set_ptrw</h3>
+<pre>extern void osargs_set_ptrw (<a href="os.html#os_fw">os_fw</a> file,
+      int ptr);</pre>
+<p>Writes an open file's sequential file pointer. Uses 32-bit file handle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ptr</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosargs_read_ext">xosargs_read_ext</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_read_ext (<a href="os.html#os_f">os_f</a> file,
+      int *ext);</pre>
+<p>Reads an open file's extent. Prefer OSArgs_ReadExtW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>ext</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osargs_read_ext">osargs_read_ext</h3>
+<pre>extern int osargs_read_ext (<a href="os.html#os_f">os_f</a> file);</pre>
+<p>Reads an open file's extent. Prefer OSArgs_ReadExtW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>ext</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosargs_read_extw">xosargs_read_extw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_read_extw (<a href="os.html#os_fw">os_fw</a> file,
+      int *ext);</pre>
+<p>Reads an open file's extent. Uses 32-bit file handle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>ext</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osargs_read_extw">osargs_read_extw</h3>
+<pre>extern int osargs_read_extw (<a href="os.html#os_fw">os_fw</a> file);</pre>
+<p>Reads an open file's extent. Uses 32-bit file handle</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>ext</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosargs_set_ext">xosargs_set_ext</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_set_ext (<a href="os.html#os_f">os_f</a> file,
+      int ext);</pre>
+<p>Writes an open file's extent. Prefer OSArgs_SetExtW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ext</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osargs_set_ext">osargs_set_ext</h3>
+<pre>extern void osargs_set_ext (<a href="os.html#os_f">os_f</a> file,
+      int ext);</pre>
+<p>Writes an open file's extent. Prefer OSArgs_SetExtW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ext</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosargs_set_extw">xosargs_set_extw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_set_extw (<a href="os.html#os_fw">os_fw</a> file,
+      int ext);</pre>
+<p>Writes an open file's extent. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ext</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osargs_set_extw">osargs_set_extw</h3>
+<pre>extern void osargs_set_extw (<a href="os.html#os_fw">os_fw</a> file,
+      int ext);</pre>
+<p>Writes an open file's extent. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ext</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosargs_read_allocation">xosargs_read_allocation</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_read_allocation (<a href="os.html#os_f">os_f</a> file,
+      int *allocation);</pre>
+<p>Reads an open file's allocated size. Prefer OSArgs_ReadAllocationW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>allocation</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osargs_read_allocation">osargs_read_allocation</h3>
+<pre>extern int osargs_read_allocation (<a href="os.html#os_f">os_f</a> file);</pre>
+<p>Reads an open file's allocated size. Prefer OSArgs_ReadAllocationW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>allocation</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosargs_read_allocationw">xosargs_read_allocationw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_read_allocationw (<a href="os.html#os_fw">os_fw</a> file,
+      int *allocation);</pre>
+<p>Reads an open file's allocated size. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>allocation</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osargs_read_allocationw">osargs_read_allocationw</h3>
+<pre>extern int osargs_read_allocationw (<a href="os.html#os_fw">os_fw</a> file);</pre>
+<p>Reads an open file's allocated size. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>allocation</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosargs_read_eof_status">xosargs_read_eof_status</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_read_eof_status (<a href="os.html#os_f">os_f</a> file,
+      osbool *eof_status);</pre>
+<p>Reads an open file's end-of-file (EOF) status. Prefer OSArgs_ReadEOFStatusW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>eof_status</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osargs_read_eof_status">osargs_read_eof_status</h3>
+<pre>extern osbool osargs_read_eof_status (<a href="os.html#os_f">os_f</a> file);</pre>
+<p>Reads an open file's end-of-file (EOF) status. Prefer OSArgs_ReadEOFStatusW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>eof_status</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosargs_read_eof_statusw">xosargs_read_eof_statusw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_read_eof_statusw (<a href="os.html#os_fw">os_fw</a> file,
+      osbool *eof_status);</pre>
+<p>Reads an open file's end-of-file (EOF) status. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>eof_status</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osargs_read_eof_statusw">osargs_read_eof_statusw</h3>
+<pre>extern osbool osargs_read_eof_statusw (<a href="os.html#os_fw">os_fw</a> file);</pre>
+<p>Reads an open file's end-of-file (EOF) status. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>eof_status</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosargs_set_allocation">xosargs_set_allocation</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_set_allocation (<a href="os.html#os_f">os_f</a> file,
+      int allocation,
+      int *allocation_out);</pre>
+<p>Ensures an open file's size. Prefer OSArgs_SetAllocationW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>allocation</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>allocation_out</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osargs_set_allocation">osargs_set_allocation</h3>
+<pre>extern int osargs_set_allocation (<a href="os.html#os_f">os_f</a> file,
+      int allocation);</pre>
+<p>Ensures an open file's size. Prefer OSArgs_SetAllocationW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>allocation</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>allocation_out</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosargs_set_allocationw">xosargs_set_allocationw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_set_allocationw (<a href="os.html#os_fw">os_fw</a> file,
+      int allocation,
+      int *allocation_out);</pre>
+<p>Ensures an open file's size. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>allocation</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>allocation_out</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osargs_set_allocationw">osargs_set_allocationw</h3>
+<pre>extern int osargs_set_allocationw (<a href="os.html#os_fw">os_fw</a> file,
+      int allocation);</pre>
+<p>Ensures an open file's size. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>allocation</code></td><td/><td><code>R2</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>allocation_out</td><td></td><td><code>R2<code></td></tr>
+</table>
+
+<h3 id="xosargs_read_path">xosargs_read_path</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_read_path (<a href="os.html#os_f">os_f</a> file,
+      char *buffer,
+      int size,
+      int *spare);</pre>
+<p>Converts a file handle to a canonical name. Prefer OSArgs_ReadPathW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>spare</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osargs_read_path">osargs_read_path</h3>
+<pre>extern int osargs_read_path (<a href="os.html#os_f">os_f</a> file,
+      char *buffer,
+      int size);</pre>
+<p>Converts a file handle to a canonical name. Prefer OSArgs_ReadPathW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>spare</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xosargs_read_pathw">xosargs_read_pathw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_read_pathw (<a href="os.html#os_fw">os_fw</a> file,
+      char *buffer,
+      int size,
+      int *spare);</pre>
+<p>Converts a file handle to a canonical name. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>spare</code></td><td/><td><code>R5</code></td></tr>
+</table>
+
+<h3 id="osargs_read_pathw">osargs_read_pathw</h3>
+<pre>extern int osargs_read_pathw (<a href="os.html#os_fw">os_fw</a> file,
+      char *buffer,
+      int size);</pre>
+<p>Converts a file handle to a canonical name. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>buffer</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>size</code></td><td/><td><code>R5</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>spare</td><td></td><td><code>R5<code></td></tr>
+</table>
+
+<h3 id="xosargs_image_stamped">xosargs_image_stamped</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_image_stamped (<a href="os.html#os_f">os_f</a> file,
+      int image_stamp);</pre>
+<p>Used by an image filing system to inform of a change to an image stamp. Prefer OSArgs_ImageStampedW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>image_stamp</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osargs_image_stamped">osargs_image_stamped</h3>
+<pre>extern void osargs_image_stamped (<a href="os.html#os_f">os_f</a> file,
+      int image_stamp);</pre>
+<p>Used by an image filing system to inform of a change to an image stamp. Prefer OSArgs_ImageStampedW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>image_stamp</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosargs_image_stampedw">xosargs_image_stampedw</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_image_stampedw (<a href="os.html#os_fw">os_fw</a> file,
+      int image_stamp);</pre>
+<p>Used by an image filing system to inform of a change to an image stamp. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>image_stamp</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osargs_image_stampedw">osargs_image_stampedw</h3>
+<pre>extern void osargs_image_stampedw (<a href="os.html#os_fw">os_fw</a> file,
+      int image_stamp);</pre>
+<p>Used by an image filing system to inform of a change to an image stamp. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>image_stamp</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosargs_io_ctl">xosargs_io_ctl</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_io_ctl (<a href="os.html#os_f">os_f</a> file,
+      <a href="#osargs_io_ctl_parameters">osargs_io_ctl_parameters</a> *parameters);</pre>
+<p>Passes an I/O control command to a device driver - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>parameters</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osargs_io_ctl">osargs_io_ctl</h3>
+<pre>extern void osargs_io_ctl (<a href="os.html#os_f">os_f</a> file,
+      <a href="#osargs_io_ctl_parameters">osargs_io_ctl_parameters</a> *parameters);</pre>
+<p>Passes an I/O control command to a device driver - RISC OS 4+</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>parameters</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosargs_read_info">xosargs_read_info</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_read_info (<a href="os.html#os_f">os_f</a> file,
+      <a href="#osargs_stream_status">osargs_stream_status</a> *stream_status,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> *fs_info);</pre>
+<p>Reads information on a file handle. Prefer OSArgs_ReadInfoW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>stream_status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osargs_read_info">osargs_read_info</h3>
+<pre>extern void osargs_read_info (<a href="os.html#os_f">os_f</a> file,
+      <a href="#osargs_stream_status">osargs_stream_status</a> *stream_status,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> *fs_info);</pre>
+<p>Reads information on a file handle. Prefer OSArgs_ReadInfoW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>stream_status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosargs_read_infow">xosargs_read_infow</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_read_infow (<a href="os.html#os_fw">os_fw</a> file,
+      <a href="#osargs_stream_status">osargs_stream_status</a> *stream_status,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> *fs_info);</pre>
+<p>Reads information on a file handle. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>stream_status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="osargs_read_infow">osargs_read_infow</h3>
+<pre>extern void osargs_read_infow (<a href="os.html#os_fw">os_fw</a> file,
+      <a href="#osargs_stream_status">osargs_stream_status</a> *stream_status,
+      <a href="fileswitch.html#fileswitch_fs_info">fileswitch_fs_info</a> *fs_info);</pre>
+<p>Reads information on a file handle. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>stream_status</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>fs_info</code></td><td/><td><code>R2</code></td></tr>
+</table>
+
+<h3 id="xosargs_ensure">xosargs_ensure</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_ensure (<a href="os.html#os_f">os_f</a> file);</pre>
+<p>Ensures data has been written to a file, or to all files on the temporary filing system. Prefer OSArgs_EnsureW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osargs_ensure">osargs_ensure</h3>
+<pre>extern void osargs_ensure (<a href="os.html#os_f">os_f</a> file);</pre>
+<p>Ensures data has been written to a file, or to all files on the temporary filing system. Prefer OSArgs_EnsureW</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xosargs_ensurew">xosargs_ensurew</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xosargs_ensurew (<a href="os.html#os_fw">os_fw</a> file);</pre>
+<p>Ensures data has been written to a file, or to all files on the temporary filing system. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="osargs_ensurew">osargs_ensurew</h3>
+<pre>extern void osargs_ensurew (<a href="os.html#os_fw">os_fw</a> file);</pre>
+<p>Ensures data has been written to a file, or to all files on the temporary filing system. Uses 32-bit file handle.</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>file</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>

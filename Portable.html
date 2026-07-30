@@ -1,0 +1,659 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>OSLib &ndash; Portable</title>
+<link rel="stylesheet" type="text/css" href="http://ro-oslib.sourceforge.net/oslib.css">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+
+<body>
+
+<div id="heading">
+<h1><a href="http://ro-oslib.sourceforge.net/">OSLib &ndash; Open source API for RISC OS development</a></h1>
+</div>
+
+<div id="content">
+
+<div id="content-main">
+
+<h2>Portable</h2>
+
+<pre>#include "oslib/portable.h"</pre>
+
+<h3 id="portable_control_flags">portable_control_flags</h3>
+<pre>typedef bits portable_control_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#portable_CONTROL_ECONET_POWER_ENABLED">portable_CONTROL_ECONET_POWER_ENABLED</a></dd>
+<dd><a href="#portable_CONTROL_LCD_POWER_ENABLED">portable_CONTROL_LCD_POWER_ENABLED</a></dd>
+<dd><a href="#portable_CONTROL_EXTERNAL_VIDEO_ENABLED">portable_CONTROL_EXTERNAL_VIDEO_ENABLED</a></dd>
+<dd><a href="#portable_CONTROL_SERIAL_ENABLED">portable_CONTROL_SERIAL_ENABLED</a></dd>
+<dd><a href="#portable_CONTROL_DUAL_PANEL_ENABLED">portable_CONTROL_DUAL_PANEL_ENABLED</a></dd>
+<dd><a href="#portable_CONTROL_VIDEO_CLOCK">portable_CONTROL_VIDEO_CLOCK</a></dd>
+<dd><a href="#portable_CONTROL_INVERT_VIDEO_CLOCK">portable_CONTROL_INVERT_VIDEO_CLOCK</a></dd>
+<dd><a href="#portable_CONTROL_BACK_LIGHT_ENABLED">portable_CONTROL_BACK_LIGHT_ENABLED</a></dd>
+<dd><a href="#portable_CONTROL_EXTRA_DISPLAY_LINES">portable_CONTROL_EXTRA_DISPLAY_LINES</a></dd>
+<dd><a href="#portable_CONTROL_EXTRA_DUAL_PANEL_DRAM">portable_CONTROL_EXTRA_DUAL_PANEL_DRAM</a></dd>
+<dd><a href="#portable_CONTROL_SOUND_POWER_ENABLED">portable_CONTROL_SOUND_POWER_ENABLED</a></dd>
+<dd><a href="#portable_CONTROL_PCMCIA_ENABLED">portable_CONTROL_PCMCIA_ENABLED</a></dd>
+<dd><a href="#portable_CONTROL_PARALLEL_ENABLED">portable_CONTROL_PARALLEL_ENABLED</a></dd>
+<dd><a href="#portable_CONTROL_FDC_ENABLED">portable_CONTROL_FDC_ENABLED</a></dd>
+<dd><a href="#portable_CONTROL_IDE_ENABLED">portable_CONTROL_IDE_ENABLED</a></dd>
+<dd><a href="#portable_CONTROL_LCD_VIDEO_INVERTED">portable_CONTROL_LCD_VIDEO_INVERTED</a></dd>
+<dd><a href="#portable_CONTROL_TRACKERBALL_ENABLED">portable_CONTROL_TRACKERBALL_ENABLED</a></dd>
+<dd><a href="#portable_CONTROL_MOUSE_ENABLED">portable_CONTROL_MOUSE_ENABLED</a></dd>
+</dl>
+
+<h3 id="portable_bmu_variable">portable_bmu_variable</h3>
+<pre>typedef int portable_bmu_variable;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#portable_BMU_VARIABLE_VERSION">portable_BMU_VARIABLE_VERSION</a></dd>
+<dd><a href="#portable_BMU_VARIABLE_NOMINAL_CHARGE">portable_BMU_VARIABLE_NOMINAL_CHARGE</a></dd>
+<dd><a href="#portable_BMU_VARIABLE_MEASURED_CHARGE">portable_BMU_VARIABLE_MEASURED_CHARGE</a></dd>
+<dd><a href="#portable_BMU_VARIABLE_USED_CHARGE">portable_BMU_VARIABLE_USED_CHARGE</a></dd>
+<dd><a href="#portable_BMU_VARIABLE_USABLE_CHARGE">portable_BMU_VARIABLE_USABLE_CHARGE</a></dd>
+<dd><a href="#portable_BMU_VARIABLE_CHARGE_ESTIMATE">portable_BMU_VARIABLE_CHARGE_ESTIMATE</a></dd>
+<dd><a href="#portable_BMU_VARIABLE_INST_VOLTAGE">portable_BMU_VARIABLE_INST_VOLTAGE</a></dd>
+<dd><a href="#portable_BMU_VARIABLE_INST_CURRENT">portable_BMU_VARIABLE_INST_CURRENT</a></dd>
+<dd><a href="#portable_BMU_VARIABLE_INST_TEMPERATURE">portable_BMU_VARIABLE_INST_TEMPERATURE</a></dd>
+<dd><a href="#portable_BMU_VARIABLE_FLAGS">portable_BMU_VARIABLE_FLAGS</a></dd>
+<dd><a href="#portable_BMU_VARIABLE_CHARGE_RATE">portable_BMU_VARIABLE_CHARGE_RATE</a></dd>
+<dd><a href="#portable_BMU_VARIABLE_BATTERY_TIME_REMAINING">portable_BMU_VARIABLE_BATTERY_TIME_REMAINING</a></dd>
+<dd><a href="#portable_BMU_VARIABLE_BATTERY_TIME_MAX">portable_BMU_VARIABLE_BATTERY_TIME_MAX</a></dd>
+<dd><a href="#portable_BMU_VARIABLE_BATTERY_PERCENTAGE">portable_BMU_VARIABLE_BATTERY_PERCENTAGE</a></dd>
+<dd><a href="#portable_BMU_VARIABLE_BATTERY_CHARGE_TIME_REMAINING">portable_BMU_VARIABLE_BATTERY_CHARGE_TIME_REMAINING</a></dd>
+<dd><a href="#portable_BMU_VARIABLE_CHARGE_COUNT">portable_BMU_VARIABLE_CHARGE_COUNT</a></dd>
+<dd><a href="#portable_BMU_VARIABLE_SMOOTHED_VOLTAGE">portable_BMU_VARIABLE_SMOOTHED_VOLTAGE</a></dd>
+<dd><a href="#portable_BMU_VARIABLE_SMOOTHED_CURRENT">portable_BMU_VARIABLE_SMOOTHED_CURRENT</a></dd>
+<dd><a href="#portable_BMU_VARIABLE_SMOOTHED_NOMINAL_CAPACITY">portable_BMU_VARIABLE_SMOOTHED_NOMINAL_CAPACITY</a></dd>
+<dd><a href="#portable_BMU_VARIABLE_SMOOTHED_COMPENSATED_CAPACITY">portable_BMU_VARIABLE_SMOOTHED_COMPENSATED_CAPACITY</a></dd>
+</dl>
+
+<h3 id="portable_bmu_flags">portable_bmu_flags</h3>
+<pre>typedef bits portable_bmu_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#portable_BMU_AT_THRESHOLD3">portable_BMU_AT_THRESHOLD3</a></dd>
+<dd><a href="#portable_BMU_BATTERY_CHARGED">portable_BMU_BATTERY_CHARGED</a></dd>
+<dd><a href="#portable_BMU_LID_OPEN">portable_BMU_LID_OPEN</a></dd>
+<dd><a href="#portable_BMU_AT_THRESHOLD2">portable_BMU_AT_THRESHOLD2</a></dd>
+<dd><a href="#portable_BMU_BATTERY_FLAT">portable_BMU_BATTERY_FLAT</a></dd>
+<dd><a href="#portable_BMU_AT_THRESHOLD1">portable_BMU_AT_THRESHOLD1</a></dd>
+<dd><a href="#portable_BMU_BATTERY_LOW">portable_BMU_BATTERY_LOW</a></dd>
+<dd><a href="#portable_BMU_CHARGING_FAULT">portable_BMU_CHARGING_FAULT</a></dd>
+<dd><a href="#portable_BMU_CHARGE_STATE_KNOWN">portable_BMU_CHARGE_STATE_KNOWN</a></dd>
+<dd><a href="#portable_BMU_BATTERY_PRESENT">portable_BMU_BATTERY_PRESENT</a></dd>
+<dd><a href="#portable_BMU_CHARGER_CONNECTED">portable_BMU_CHARGER_CONNECTED</a></dd>
+<dd><a href="#portable_BMU_BATTERY_CHARGING">portable_BMU_BATTERY_CHARGING</a></dd>
+<dd><a href="#portable_BMU_BATTERY_FAILING">portable_BMU_BATTERY_FAILING</a></dd>
+</dl>
+
+<h3 id="portable_processor_speed">portable_processor_speed</h3>
+<pre>typedef bits portable_processor_speed;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#portable_SPEED_FAST">portable_SPEED_FAST</a></dd>
+<dd><a href="#portable_SPEED_SLOW">portable_SPEED_SLOW</a></dd>
+</dl>
+
+<h3 id="portable_bmu_command">portable_bmu_command</h3>
+<pre>typedef int portable_bmu_command;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#portable_BMU_POWER_OFF">portable_BMU_POWER_OFF</a></dd>
+<dd><a href="#portable_BMU_SET_AUTOSTART">portable_BMU_SET_AUTOSTART</a></dd>
+<dd><a href="#portable_BMU_DISCONNECT_CHARGER">portable_BMU_DISCONNECT_CHARGER</a></dd>
+<dd><a href="#portable_BMU_CONNECT_CHARGER">portable_BMU_CONNECT_CHARGER</a></dd>
+<dd><a href="#portable_DISABLE_BMU_EVENT">portable_DISABLE_BMU_EVENT</a></dd>
+<dd><a href="#portable_ENABLE_BMU_EVENT">portable_ENABLE_BMU_EVENT</a></dd>
+</dl>
+
+<h3 id="portable_features">portable_features</h3>
+<pre>typedef bits portable_features;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#portable_SUPPORTS_SPEED">portable_SUPPORTS_SPEED</a></dd>
+<dd><a href="#portable_SUPPORTS_IDLE">portable_SUPPORTS_IDLE</a></dd>
+<dd><a href="#portable_SUPPORTS_STOP">portable_SUPPORTS_STOP</a></dd>
+</dl>
+
+<h3 id="portable_restart_type">portable_restart_type</h3>
+<pre>typedef int portable_restart_type;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#portable_RESTART_KEYBOARD">portable_RESTART_KEYBOARD</a></dd>
+<dd><a href="#portable_RESTART_CLOCK">portable_RESTART_CLOCK</a></dd>
+</dl>
+
+<h3 id="portable_status_flags">portable_status_flags</h3>
+<pre>typedef bits portable_status_flags;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#portable_STATUS_DOCK_STATION_PRESENT">portable_STATUS_DOCK_STATION_PRESENT</a></dd>
+<dd><a href="#portable_STATUS_FLOPPY_CONNECTED">portable_STATUS_FLOPPY_CONNECTED</a></dd>
+<dd><a href="#portable_STATUS_TRACKERBALL_CONNECTED">portable_STATUS_TRACKERBALL_CONNECTED</a></dd>
+<dd><a href="#portable_STATUS_LCD_IN_USE">portable_STATUS_LCD_IN_USE</a></dd>
+</dl>
+
+<h3 id="portable_state">portable_state</h3>
+<pre>typedef int portable_state;</pre>
+
+<dl>
+<dt>Values:</dt>
+<dd><a href="#portable_POWER_DOWN">portable_POWER_DOWN</a></dd>
+<dd><a href="#portable_POWER_UP">portable_POWER_UP</a></dd>
+<dd><a href="#portable_POWER_TIDY_UP">portable_POWER_TIDY_UP</a></dd>
+<dd><a href="#portable_POWER_ABOUT_TO_FREEZE">portable_POWER_ABOUT_TO_FREEZE</a></dd>
+<dd><a href="#portable_POWER_AWAKENED">portable_POWER_AWAKENED</a></dd>
+<dd><a href="#portable_POWER_WISHES_TO_FREEZE">portable_POWER_WISHES_TO_FREEZE</a></dd>
+</dl>
+
+<h3 id="portable_PORT_ECONET">portable_PORT_ECONET</h3>
+<pre>#define portable_PORT_ECONET 0x1u</pre>
+
+<h3 id="portable_PORT_SERIAL">portable_PORT_SERIAL</h3>
+<pre>#define portable_PORT_SERIAL 0x8u</pre>
+
+<h3 id="portable_PORT_FDC">portable_PORT_FDC</h3>
+<pre>#define portable_PORT_FDC 0x4000u</pre>
+
+<h3 id="portable_CONTROL_ECONET_POWER_ENABLED">portable_CONTROL_ECONET_POWER_ENABLED</h3>
+<pre>#define portable_CONTROL_ECONET_POWER_ENABLED ((<a href="#portable_control_flags">portable_control_flags</a>) 0x1u)</pre>
+
+<h3 id="portable_CONTROL_LCD_POWER_ENABLED">portable_CONTROL_LCD_POWER_ENABLED</h3>
+<pre>#define portable_CONTROL_LCD_POWER_ENABLED ((<a href="#portable_control_flags">portable_control_flags</a>) 0x2u)</pre>
+
+<h3 id="portable_CONTROL_EXTERNAL_VIDEO_ENABLED">portable_CONTROL_EXTERNAL_VIDEO_ENABLED</h3>
+<pre>#define portable_CONTROL_EXTERNAL_VIDEO_ENABLED ((<a href="#portable_control_flags">portable_control_flags</a>) 0x4u)</pre>
+
+<h3 id="portable_CONTROL_SERIAL_ENABLED">portable_CONTROL_SERIAL_ENABLED</h3>
+<pre>#define portable_CONTROL_SERIAL_ENABLED ((<a href="#portable_control_flags">portable_control_flags</a>) 0x8u)</pre>
+
+<h3 id="portable_CONTROL_DUAL_PANEL_ENABLED">portable_CONTROL_DUAL_PANEL_ENABLED</h3>
+<pre>#define portable_CONTROL_DUAL_PANEL_ENABLED ((<a href="#portable_control_flags">portable_control_flags</a>) 0x10u)</pre>
+
+<h3 id="portable_CONTROL_VIDEO_CLOCK">portable_CONTROL_VIDEO_CLOCK</h3>
+<pre>#define portable_CONTROL_VIDEO_CLOCK ((<a href="#portable_control_flags">portable_control_flags</a>) 0x30u)</pre>
+
+<h3 id="portable_CONTROL_VIDEO_CLOCK_SHIFT">portable_CONTROL_VIDEO_CLOCK_SHIFT</h3>
+<pre>#define portable_CONTROL_VIDEO_CLOCK_SHIFT 5</pre>
+
+<h3 id="portable_CONTROL_VIDEO_CLOCK_EXTERNAL">portable_CONTROL_VIDEO_CLOCK_EXTERNAL</h3>
+<pre>#define portable_CONTROL_VIDEO_CLOCK_EXTERNAL 0</pre>
+
+<h3 id="portable_CONTROL_VIDEO_CLOCK_DIVIDED_CRYSTAL">portable_CONTROL_VIDEO_CLOCK_DIVIDED_CRYSTAL</h3>
+<pre>#define portable_CONTROL_VIDEO_CLOCK_DIVIDED_CRYSTAL 1</pre>
+
+<h3 id="portable_CONTROL_VIDEO_CLOCK_CRYSTAL">portable_CONTROL_VIDEO_CLOCK_CRYSTAL</h3>
+<pre>#define portable_CONTROL_VIDEO_CLOCK_CRYSTAL 2</pre>
+
+<h3 id="portable_CONTROL_INVERT_VIDEO_CLOCK">portable_CONTROL_INVERT_VIDEO_CLOCK</h3>
+<pre>#define portable_CONTROL_INVERT_VIDEO_CLOCK ((<a href="#portable_control_flags">portable_control_flags</a>) 0x80u)</pre>
+
+<h3 id="portable_CONTROL_BACK_LIGHT_ENABLED">portable_CONTROL_BACK_LIGHT_ENABLED</h3>
+<pre>#define portable_CONTROL_BACK_LIGHT_ENABLED ((<a href="#portable_control_flags">portable_control_flags</a>) 0x100u)</pre>
+
+<h3 id="portable_CONTROL_EXTRA_DISPLAY_LINES">portable_CONTROL_EXTRA_DISPLAY_LINES</h3>
+<pre>#define portable_CONTROL_EXTRA_DISPLAY_LINES ((<a href="#portable_control_flags">portable_control_flags</a>) 0x200u)</pre>
+
+<h3 id="portable_CONTROL_EXTRA_DUAL_PANEL_DRAM">portable_CONTROL_EXTRA_DUAL_PANEL_DRAM</h3>
+<pre>#define portable_CONTROL_EXTRA_DUAL_PANEL_DRAM ((<a href="#portable_control_flags">portable_control_flags</a>) 0x400u)</pre>
+
+<h3 id="portable_CONTROL_SOUND_POWER_ENABLED">portable_CONTROL_SOUND_POWER_ENABLED</h3>
+<pre>#define portable_CONTROL_SOUND_POWER_ENABLED ((<a href="#portable_control_flags">portable_control_flags</a>) 0x800u)</pre>
+
+<h3 id="portable_CONTROL_PCMCIA_ENABLED">portable_CONTROL_PCMCIA_ENABLED</h3>
+<pre>#define portable_CONTROL_PCMCIA_ENABLED ((<a href="#portable_control_flags">portable_control_flags</a>) 0x1000u)</pre>
+
+<h3 id="portable_CONTROL_PARALLEL_ENABLED">portable_CONTROL_PARALLEL_ENABLED</h3>
+<pre>#define portable_CONTROL_PARALLEL_ENABLED ((<a href="#portable_control_flags">portable_control_flags</a>) 0x2000u)</pre>
+
+<h3 id="portable_CONTROL_FDC_ENABLED">portable_CONTROL_FDC_ENABLED</h3>
+<pre>#define portable_CONTROL_FDC_ENABLED ((<a href="#portable_control_flags">portable_control_flags</a>) 0x4000u)</pre>
+
+<h3 id="portable_CONTROL_IDE_ENABLED">portable_CONTROL_IDE_ENABLED</h3>
+<pre>#define portable_CONTROL_IDE_ENABLED ((<a href="#portable_control_flags">portable_control_flags</a>) 0x8000u)</pre>
+
+<h3 id="portable_CONTROL_LCD_VIDEO_INVERTED">portable_CONTROL_LCD_VIDEO_INVERTED</h3>
+<pre>#define portable_CONTROL_LCD_VIDEO_INVERTED ((<a href="#portable_control_flags">portable_control_flags</a>) 0x10000u)</pre>
+
+<h3 id="portable_CONTROL_TRACKERBALL_ENABLED">portable_CONTROL_TRACKERBALL_ENABLED</h3>
+<pre>#define portable_CONTROL_TRACKERBALL_ENABLED ((<a href="#portable_control_flags">portable_control_flags</a>) 0x20000u)</pre>
+
+<h3 id="portable_CONTROL_MOUSE_ENABLED">portable_CONTROL_MOUSE_ENABLED</h3>
+<pre>#define portable_CONTROL_MOUSE_ENABLED ((<a href="#portable_control_flags">portable_control_flags</a>) 0x40000u)</pre>
+
+<h3 id="portable_BMU_VARIABLE_VERSION">portable_BMU_VARIABLE_VERSION</h3>
+<pre>#define portable_BMU_VARIABLE_VERSION ((<a href="#portable_bmu_variable">portable_bmu_variable</a>) 0x0u)</pre>
+
+<h3 id="portable_BMU_VARIABLE_NOMINAL_CHARGE">portable_BMU_VARIABLE_NOMINAL_CHARGE</h3>
+<pre>#define portable_BMU_VARIABLE_NOMINAL_CHARGE ((<a href="#portable_bmu_variable">portable_bmu_variable</a>) 0x1u)</pre>
+
+<h3 id="portable_BMU_VARIABLE_MEASURED_CHARGE">portable_BMU_VARIABLE_MEASURED_CHARGE</h3>
+<pre>#define portable_BMU_VARIABLE_MEASURED_CHARGE ((<a href="#portable_bmu_variable">portable_bmu_variable</a>) 0x2u)</pre>
+
+<h3 id="portable_BMU_VARIABLE_USED_CHARGE">portable_BMU_VARIABLE_USED_CHARGE</h3>
+<pre>#define portable_BMU_VARIABLE_USED_CHARGE ((<a href="#portable_bmu_variable">portable_bmu_variable</a>) 0x3u)</pre>
+
+<h3 id="portable_BMU_VARIABLE_USABLE_CHARGE">portable_BMU_VARIABLE_USABLE_CHARGE</h3>
+<pre>#define portable_BMU_VARIABLE_USABLE_CHARGE ((<a href="#portable_bmu_variable">portable_bmu_variable</a>) 0x4u)</pre>
+
+<h3 id="portable_BMU_VARIABLE_CHARGE_ESTIMATE">portable_BMU_VARIABLE_CHARGE_ESTIMATE</h3>
+<pre>#define portable_BMU_VARIABLE_CHARGE_ESTIMATE ((<a href="#portable_bmu_variable">portable_bmu_variable</a>) 0x6u)</pre>
+
+<h3 id="portable_BMU_VARIABLE_INST_VOLTAGE">portable_BMU_VARIABLE_INST_VOLTAGE</h3>
+<pre>#define portable_BMU_VARIABLE_INST_VOLTAGE ((<a href="#portable_bmu_variable">portable_bmu_variable</a>) 0x7u)</pre>
+
+<h3 id="portable_BMU_VARIABLE_INST_CURRENT">portable_BMU_VARIABLE_INST_CURRENT</h3>
+<pre>#define portable_BMU_VARIABLE_INST_CURRENT ((<a href="#portable_bmu_variable">portable_bmu_variable</a>) 0x8u)</pre>
+
+<h3 id="portable_BMU_VARIABLE_INST_TEMPERATURE">portable_BMU_VARIABLE_INST_TEMPERATURE</h3>
+<pre>#define portable_BMU_VARIABLE_INST_TEMPERATURE ((<a href="#portable_bmu_variable">portable_bmu_variable</a>) 0x9u)</pre>
+
+<h3 id="portable_BMU_VARIABLE_FLAGS">portable_BMU_VARIABLE_FLAGS</h3>
+<pre>#define portable_BMU_VARIABLE_FLAGS ((<a href="#portable_bmu_variable">portable_bmu_variable</a>) 0xAu)</pre>
+
+<h3 id="portable_BMU_VARIABLE_CHARGE_RATE">portable_BMU_VARIABLE_CHARGE_RATE</h3>
+<pre>#define portable_BMU_VARIABLE_CHARGE_RATE ((<a href="#portable_bmu_variable">portable_bmu_variable</a>) 0xBu)</pre>
+
+<h3 id="portable_BMU_VARIABLE_BATTERY_TIME_REMAINING">portable_BMU_VARIABLE_BATTERY_TIME_REMAINING</h3>
+<pre>#define portable_BMU_VARIABLE_BATTERY_TIME_REMAINING ((<a href="#portable_bmu_variable">portable_bmu_variable</a>) 0x15u)</pre>
+
+<h3 id="portable_BMU_VARIABLE_BATTERY_TIME_MAX">portable_BMU_VARIABLE_BATTERY_TIME_MAX</h3>
+<pre>#define portable_BMU_VARIABLE_BATTERY_TIME_MAX ((<a href="#portable_bmu_variable">portable_bmu_variable</a>) 0x16u)</pre>
+
+<h3 id="portable_BMU_VARIABLE_BATTERY_PERCENTAGE">portable_BMU_VARIABLE_BATTERY_PERCENTAGE</h3>
+<pre>#define portable_BMU_VARIABLE_BATTERY_PERCENTAGE ((<a href="#portable_bmu_variable">portable_bmu_variable</a>) 0x17u)</pre>
+
+<h3 id="portable_BMU_VARIABLE_BATTERY_CHARGE_TIME_REMAINING">portable_BMU_VARIABLE_BATTERY_CHARGE_TIME_REMAINING</h3>
+<pre>#define portable_BMU_VARIABLE_BATTERY_CHARGE_TIME_REMAINING ((<a href="#portable_bmu_variable">portable_bmu_variable</a>) 0x18u)</pre>
+
+<h3 id="portable_BMU_VARIABLE_CHARGE_COUNT">portable_BMU_VARIABLE_CHARGE_COUNT</h3>
+<pre>#define portable_BMU_VARIABLE_CHARGE_COUNT ((<a href="#portable_bmu_variable">portable_bmu_variable</a>) 0x19u)</pre>
+
+<h3 id="portable_BMU_VARIABLE_SMOOTHED_VOLTAGE">portable_BMU_VARIABLE_SMOOTHED_VOLTAGE</h3>
+<pre>#define portable_BMU_VARIABLE_SMOOTHED_VOLTAGE ((<a href="#portable_bmu_variable">portable_bmu_variable</a>) 0x1Au)</pre>
+
+<h3 id="portable_BMU_VARIABLE_SMOOTHED_CURRENT">portable_BMU_VARIABLE_SMOOTHED_CURRENT</h3>
+<pre>#define portable_BMU_VARIABLE_SMOOTHED_CURRENT ((<a href="#portable_bmu_variable">portable_bmu_variable</a>) 0x1Bu)</pre>
+
+<h3 id="portable_BMU_VARIABLE_SMOOTHED_NOMINAL_CAPACITY">portable_BMU_VARIABLE_SMOOTHED_NOMINAL_CAPACITY</h3>
+<pre>#define portable_BMU_VARIABLE_SMOOTHED_NOMINAL_CAPACITY ((<a href="#portable_bmu_variable">portable_bmu_variable</a>) 0x1Cu)</pre>
+
+<h3 id="portable_BMU_VARIABLE_SMOOTHED_COMPENSATED_CAPACITY">portable_BMU_VARIABLE_SMOOTHED_COMPENSATED_CAPACITY</h3>
+<pre>#define portable_BMU_VARIABLE_SMOOTHED_COMPENSATED_CAPACITY ((<a href="#portable_bmu_variable">portable_bmu_variable</a>) 0x1Du)</pre>
+
+<h3 id="portable_BMU_AT_THRESHOLD3">portable_BMU_AT_THRESHOLD3</h3>
+<pre>#define portable_BMU_AT_THRESHOLD3 ((<a href="#portable_bmu_flags">portable_bmu_flags</a>) 0x1u)</pre>
+
+<h3 id="portable_BMU_BATTERY_CHARGED">portable_BMU_BATTERY_CHARGED</h3>
+<pre>#define portable_BMU_BATTERY_CHARGED ((<a href="#portable_bmu_flags">portable_bmu_flags</a>) 0x1u)</pre>
+
+<h3 id="portable_BMU_LID_OPEN">portable_BMU_LID_OPEN</h3>
+<pre>#define portable_BMU_LID_OPEN ((<a href="#portable_bmu_flags">portable_bmu_flags</a>) 0x2u)</pre>
+
+<h3 id="portable_BMU_AT_THRESHOLD2">portable_BMU_AT_THRESHOLD2</h3>
+<pre>#define portable_BMU_AT_THRESHOLD2 ((<a href="#portable_bmu_flags">portable_bmu_flags</a>) 0x4u)</pre>
+
+<h3 id="portable_BMU_BATTERY_FLAT">portable_BMU_BATTERY_FLAT</h3>
+<pre>#define portable_BMU_BATTERY_FLAT ((<a href="#portable_bmu_flags">portable_bmu_flags</a>) 0x4u)</pre>
+
+<h3 id="portable_BMU_AT_THRESHOLD1">portable_BMU_AT_THRESHOLD1</h3>
+<pre>#define portable_BMU_AT_THRESHOLD1 ((<a href="#portable_bmu_flags">portable_bmu_flags</a>) 0x8u)</pre>
+
+<h3 id="portable_BMU_BATTERY_LOW">portable_BMU_BATTERY_LOW</h3>
+<pre>#define portable_BMU_BATTERY_LOW ((<a href="#portable_bmu_flags">portable_bmu_flags</a>) 0x8u)</pre>
+
+<h3 id="portable_BMU_CHARGING_FAULT">portable_BMU_CHARGING_FAULT</h3>
+<pre>#define portable_BMU_CHARGING_FAULT ((<a href="#portable_bmu_flags">portable_bmu_flags</a>) 0x10u)</pre>
+
+<h3 id="portable_BMU_CHARGE_STATE_KNOWN">portable_BMU_CHARGE_STATE_KNOWN</h3>
+<pre>#define portable_BMU_CHARGE_STATE_KNOWN ((<a href="#portable_bmu_flags">portable_bmu_flags</a>) 0x20u)</pre>
+
+<h3 id="portable_BMU_BATTERY_PRESENT">portable_BMU_BATTERY_PRESENT</h3>
+<pre>#define portable_BMU_BATTERY_PRESENT ((<a href="#portable_bmu_flags">portable_bmu_flags</a>) 0x40u)</pre>
+
+<h3 id="portable_BMU_CHARGER_CONNECTED">portable_BMU_CHARGER_CONNECTED</h3>
+<pre>#define portable_BMU_CHARGER_CONNECTED ((<a href="#portable_bmu_flags">portable_bmu_flags</a>) 0x80u)</pre>
+
+<h3 id="portable_BMU_BATTERY_CHARGING">portable_BMU_BATTERY_CHARGING</h3>
+<pre>#define portable_BMU_BATTERY_CHARGING ((<a href="#portable_bmu_flags">portable_bmu_flags</a>) 0x100u)</pre>
+
+<h3 id="portable_BMU_BATTERY_FAILING">portable_BMU_BATTERY_FAILING</h3>
+<pre>#define portable_BMU_BATTERY_FAILING ((<a href="#portable_bmu_flags">portable_bmu_flags</a>) 0x200u)</pre>
+
+<h3 id="portable_SPEED_FAST">portable_SPEED_FAST</h3>
+<pre>#define portable_SPEED_FAST ((<a href="#portable_processor_speed">portable_processor_speed</a>) 0x0u)</pre>
+
+<h3 id="portable_SPEED_SLOW">portable_SPEED_SLOW</h3>
+<pre>#define portable_SPEED_SLOW ((<a href="#portable_processor_speed">portable_processor_speed</a>) 0x1u)</pre>
+
+<h3 id="portable_BMU_POWER_OFF">portable_BMU_POWER_OFF</h3>
+<pre>#define portable_BMU_POWER_OFF ((<a href="#portable_bmu_command">portable_bmu_command</a>) 0x1u)</pre>
+
+<h3 id="portable_BMU_SET_AUTOSTART">portable_BMU_SET_AUTOSTART</h3>
+<pre>#define portable_BMU_SET_AUTOSTART ((<a href="#portable_bmu_command">portable_bmu_command</a>) 0x4u)</pre>
+
+<h3 id="portable_BMU_DISCONNECT_CHARGER">portable_BMU_DISCONNECT_CHARGER</h3>
+<pre>#define portable_BMU_DISCONNECT_CHARGER ((<a href="#portable_bmu_command">portable_bmu_command</a>) 0x5u)</pre>
+
+<h3 id="portable_BMU_CONNECT_CHARGER">portable_BMU_CONNECT_CHARGER</h3>
+<pre>#define portable_BMU_CONNECT_CHARGER ((<a href="#portable_bmu_command">portable_bmu_command</a>) 0x6u)</pre>
+
+<h3 id="portable_DISABLE_BMU_EVENT">portable_DISABLE_BMU_EVENT</h3>
+<pre>#define portable_DISABLE_BMU_EVENT ((<a href="#portable_bmu_command">portable_bmu_command</a>) 0x7u)</pre>
+
+<h3 id="portable_ENABLE_BMU_EVENT">portable_ENABLE_BMU_EVENT</h3>
+<pre>#define portable_ENABLE_BMU_EVENT ((<a href="#portable_bmu_command">portable_bmu_command</a>) 0x8u)</pre>
+
+<h3 id="portable_SUPPORTS_SPEED">portable_SUPPORTS_SPEED</h3>
+<pre>#define portable_SUPPORTS_SPEED ((<a href="#portable_features">portable_features</a>) 0x1u)</pre>
+
+<h3 id="portable_SUPPORTS_IDLE">portable_SUPPORTS_IDLE</h3>
+<pre>#define portable_SUPPORTS_IDLE ((<a href="#portable_features">portable_features</a>) 0x10u)</pre>
+
+<h3 id="portable_SUPPORTS_STOP">portable_SUPPORTS_STOP</h3>
+<pre>#define portable_SUPPORTS_STOP ((<a href="#portable_features">portable_features</a>) 0x20u)</pre>
+
+<h3 id="portable_RESTART_KEYBOARD">portable_RESTART_KEYBOARD</h3>
+<pre>#define portable_RESTART_KEYBOARD ((<a href="#portable_restart_type">portable_restart_type</a>) 0x1u)</pre>
+
+<h3 id="portable_RESTART_CLOCK">portable_RESTART_CLOCK</h3>
+<pre>#define portable_RESTART_CLOCK ((<a href="#portable_restart_type">portable_restart_type</a>) 0x2u)</pre>
+
+<h3 id="portable_STATUS_DOCK_STATION_PRESENT">portable_STATUS_DOCK_STATION_PRESENT</h3>
+<pre>#define portable_STATUS_DOCK_STATION_PRESENT ((<a href="#portable_status_flags">portable_status_flags</a>) 0x1u)</pre>
+
+<h3 id="portable_STATUS_FLOPPY_CONNECTED">portable_STATUS_FLOPPY_CONNECTED</h3>
+<pre>#define portable_STATUS_FLOPPY_CONNECTED ((<a href="#portable_status_flags">portable_status_flags</a>) 0x2u)</pre>
+
+<h3 id="portable_STATUS_TRACKERBALL_CONNECTED">portable_STATUS_TRACKERBALL_CONNECTED</h3>
+<pre>#define portable_STATUS_TRACKERBALL_CONNECTED ((<a href="#portable_status_flags">portable_status_flags</a>) 0x4u)</pre>
+
+<h3 id="portable_STATUS_LCD_IN_USE">portable_STATUS_LCD_IN_USE</h3>
+<pre>#define portable_STATUS_LCD_IN_USE ((<a href="#portable_status_flags">portable_status_flags</a>) 0x8u)</pre>
+
+<h3 id="portable_POWER_DOWN">portable_POWER_DOWN</h3>
+<pre>#define portable_POWER_DOWN ((<a href="#portable_state">portable_state</a>) 0x0u)</pre>
+
+<h3 id="portable_POWER_UP">portable_POWER_UP</h3>
+<pre>#define portable_POWER_UP ((<a href="#portable_state">portable_state</a>) 0x1u)</pre>
+
+<h3 id="portable_POWER_TIDY_UP">portable_POWER_TIDY_UP</h3>
+<pre>#define portable_POWER_TIDY_UP ((<a href="#portable_state">portable_state</a>) 0x2u)</pre>
+
+<h3 id="portable_POWER_ABOUT_TO_FREEZE">portable_POWER_ABOUT_TO_FREEZE</h3>
+<pre>#define portable_POWER_ABOUT_TO_FREEZE ((<a href="#portable_state">portable_state</a>) 0x3u)</pre>
+
+<h3 id="portable_POWER_AWAKENED">portable_POWER_AWAKENED</h3>
+<pre>#define portable_POWER_AWAKENED ((<a href="#portable_state">portable_state</a>) 0x4u)</pre>
+
+<h3 id="portable_POWER_WISHES_TO_FREEZE">portable_POWER_WISHES_TO_FREEZE</h3>
+<pre>#define portable_POWER_WISHES_TO_FREEZE ((<a href="#portable_state">portable_state</a>) 0x5u)</pre>
+
+<h3 id="xportable_speed">xportable_speed</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xportable_speed (bits eor_mask,
+      bits and_mask,
+      <a href="#portable_processor_speed">portable_processor_speed</a> *old_speed,
+      <a href="#portable_processor_speed">portable_processor_speed</a> *new_speed);</pre>
+<p>Controls the processor speed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>eor_mask</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>and_mask</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_speed</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>new_speed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="portable_speed">portable_speed</h3>
+<pre>extern void portable_speed (bits eor_mask,
+      bits and_mask,
+      <a href="#portable_processor_speed">portable_processor_speed</a> *old_speed,
+      <a href="#portable_processor_speed">portable_processor_speed</a> *new_speed);</pre>
+<p>Controls the processor speed</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>eor_mask</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>and_mask</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_speed</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>new_speed</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xportable_control">xportable_control</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xportable_control (bits eor_mask,
+      bits and_mask,
+      <a href="#portable_control_flags">portable_control_flags</a> *old_control,
+      <a href="#portable_control_flags">portable_control_flags</a> *new_control);</pre>
+<p>Controls various power control and miscellaneous bits</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>eor_mask</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>and_mask</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_control</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>new_control</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="portable_control">portable_control</h3>
+<pre>extern void portable_control (bits eor_mask,
+      bits and_mask,
+      <a href="#portable_control_flags">portable_control_flags</a> *old_control,
+      <a href="#portable_control_flags">portable_control_flags</a> *new_control);</pre>
+<p>Controls various power control and miscellaneous bits</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>eor_mask</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>and_mask</code></td><td/><td><code>R1</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>old_control</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>new_control</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xportable_read_bmu_variable">xportable_read_bmu_variable</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xportable_read_bmu_variable (<a href="#portable_bmu_variable">portable_bmu_variable</a> var,
+      int *value);</pre>
+<p>Reads Battery Management Unit variables</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>var</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>value</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="portable_read_bmu_variable">portable_read_bmu_variable</h3>
+<pre>extern int portable_read_bmu_variable (<a href="#portable_bmu_variable">portable_bmu_variable</a> var);</pre>
+<p>Reads Battery Management Unit variables</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>var</code></td><td/><td><code>R0</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>value</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xportable_write_bmu_variable">xportable_write_bmu_variable</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xportable_write_bmu_variable (<a href="#portable_bmu_variable">portable_bmu_variable</a> var,
+      int value);</pre>
+<p>Writes Battery Management Unit variables</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>var</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>value</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="portable_write_bmu_variable">portable_write_bmu_variable</h3>
+<pre>extern void portable_write_bmu_variable (<a href="#portable_bmu_variable">portable_bmu_variable</a> var,
+      int value);</pre>
+<p>Writes Battery Management Unit variables</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>var</code></td><td/><td><code>R0</code></td></tr>
+<tr><td><code>value</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="xportable_read_features">xportable_read_features</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xportable_read_features (<a href="#portable_features">portable_features</a> *features);</pre>
+<p>Returns a bitmap of power save features</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>features</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="portable_read_features">portable_read_features</h3>
+<pre>extern <a href="#portable_features">portable_features</a> portable_read_features (void);
+</pre><p>Returns a bitmap of power save features</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>features</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xportable_idle">xportable_idle</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xportable_idle (void);
+</pre><p>Places the system into idle mode</p>
+
+
+<table>
+</table>
+
+<h3 id="portable_idle">portable_idle</h3>
+<pre>extern void portable_idle (void);
+</pre><p>Places the system into idle mode</p>
+
+
+<table>
+</table>
+
+<h3 id="xportable_stop">xportable_stop</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xportable_stop (<a href="#portable_restart_type">portable_restart_type</a> *restart);</pre>
+<p>Places the system into stop mode</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>restart</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="portable_stop">portable_stop</h3>
+<pre>extern <a href="#portable_restart_type">portable_restart_type</a> portable_stop (void);
+</pre><p>Places the system into stop mode</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>restart</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xportable_status">xportable_status</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xportable_status (<a href="#portable_status_flags">portable_status_flags</a> *flags);</pre>
+<p>Reads the status of the portable module</p>
+
+
+<table>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R0</code></td></tr>
+</table>
+
+<h3 id="portable_status">portable_status</h3>
+<pre>extern <a href="#portable_status_flags">portable_status_flags</a> portable_status (void);
+</pre><p>Reads the status of the portable module</p>
+
+
+<table>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>flags</td><td></td><td><code>R0<code></td></tr>
+</table>
+
+<h3 id="xservice_portable">xservice_portable</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xservice_portable (<a href="#portable_state">portable_state</a> state,
+      bits ports,
+      osbool *unclaimed,
+      bits *ports_to_change);</pre>
+<p>Power down or up</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>state</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ports</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>unclaimed</code></td><td/><td><code>R1</code></td></tr>
+<tr><td><code>ports_to_change</code></td><td/><td><code>R3</code></td></tr>
+</table>
+
+<h3 id="service_portable">service_portable</h3>
+<pre>extern osbool service_portable (<a href="#portable_state">portable_state</a> state,
+      bits ports,
+      bits *ports_to_change);</pre>
+<p>Power down or up</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>state</code></td><td/><td><code>R2</code></td></tr>
+<tr><td><code>ports</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Exit:</th></tr>
+<tr><td><code>ports_to_change</code></td><td/><td><code>R3</code></td></tr>
+<tr><th colspan="3">Returns:</th></tr>
+<tr><td><code>unclaimed</td><td></td><td><code>R1<code></td></tr>
+</table>
+
+<h3 id="xevent_portable_bmu">xevent_portable_bmu</h3>
+<pre>extern <a href="os.html#os_error">os_error</a> *xevent_portable_bmu (<a href="#portable_bmu_flags">portable_bmu_flags</a> flags);</pre>
+<p>Portable Battery Management Unit event</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+<h3 id="event_portable_bmu">event_portable_bmu</h3>
+<pre>extern void event_portable_bmu (<a href="#portable_bmu_flags">portable_bmu_flags</a> flags);</pre>
+<p>Portable Battery Management Unit event</p>
+
+
+<table>
+<tr><th colspan="3">Entry:</th></tr>
+<tr><td><code>flags</code></td><td/><td><code>R1</code></td></tr>
+</table>
+
+</div>
+
+<div id="footer">
+<p>Brought to you by the <a href="http://ro-oslib.sourceforge.net/contact.html#team">OSLib team</a>.</p>
+
+<p>The OSLib project is <a href="http://sourceforge.net/projects/ro-oslib/">hosted by SourceForge</a>.</p>
+</div>
+
+</body>
+</html>
